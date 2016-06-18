@@ -25,98 +25,161 @@ class Login extends CI_Controller {
             'user_status' => ''                     
 
         );
-
-
+        
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
-            /*$blockinst[] = 362014;
-            for($i = 0; $i<count($blockinst); $i++)
-            {
-            if($blockinst[$i] == $_POST['username'])
-            {
-            $data = array(
-            'user_status' => 4                     
-            );
-            $this->load->view('login/login.php',$data); 
-            return false; 
-            }
 
-            }*/
-            // DebugBreak();
+             $this->load->model('login_model'); 
+        $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
             $this->load->model('login_model'); 
             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
-
+            $isgroup = -1;
             if($logedIn != false)
             {  
-               $grp =  $logedIn['tbl_inst']['allowed_mGrp'];
-                if($logedIn['flusers']['edu_lvl'] == 2)
-                {
-                    $data = array(
-                        'user_status' => 1                     
-                    );
-                    $this->load->view('login/login.php',$data);
-                }
-                else if($logedIn['flusers']['status'] == 0)
+
+
+                if($logedIn['flusers']['status'] == 0)
                 {
                     $data = array(
                         'user_status' => 3                     
                     );
                     $this->load->view('login/login.php',$data);
-                }
-               else if(($logedIn['tbl_inst']['allowed_mGrp'] == NULL || $logedIn['tbl_inst']['allowed_mGrp'] == 0 || $logedIn['tbl_inst']['allowed_mGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2 )
+                }  
+
+                if($logedIn['tbl_inst']['edu_lvl'] == 1)
                 {
+                    /* if(($logedIn['tbl_inst']['allowed_mGrp'] == NULL || $logedIn['tbl_inst']['allowed_mGrp'] == 0 || $logedIn['tbl_inst']['allowed_mGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
+                    {
+                    $isgroup =1;
                     $data = array(
-                        'user_status' => 7                     
+                    'user_status' => 7                     
                     );
                     $this->load->view('login/login.php',$data);
-                }
-                else
-                {
-                    $this->load->model('RollNoSlip_model');
-                    $isdeaf = 0;
+                    }          */
 
-                    if($logedIn['tbl_inst']['IsGovernment'] ==1)
-                    {
-                        $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,5,7,8';
-                    }
-                     else if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
+                    if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
                         $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
                     }
-                    
+
+
+                }
+                else if($logedIn['tbl_inst']['edu_lvl'] == 2)
+                {
+                    if(($logedIn['tbl_inst']['allowed_iGrp'] == NULL || $logedIn['tbl_inst']['allowed_iGrp'] == 0 || $logedIn['tbl_inst']['allowed_iGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
+                    {
+                        $isgroup =1;
+                        $data = array(
+                            'user_status' => 7                     
+                        );
+                        $this->load->view('login/login.php',$data);
+                    }
+                }
+                else if($logedIn['tbl_inst']['edu_lvl'] == 3)
+                {
+                    if(($logedIn['tbl_inst']['allowed_iGrp'] == NULL || $logedIn['tbl_inst']['allowed_iGrp'] == 0 || $logedIn['tbl_inst']['allowed_iGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2 )
+                    {
+
+                        $isgroup =1;
+                        $data = array(
+                            'user_status' => 7                     
+                        );
+                        $this->load->view('login/login.php',$data);
+                    }
+                    if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
+                    {
+                        $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
+                    }
+
+
+
+                }
+                if($isgroup ==-1)
+                {
+                    $this->load->model('RollNoSlip_model');
+                    $isdeaf = 0;
+                    if($logedIn['tbl_inst']['edu_lvl'] == 1)
+                    {
+                        if($logedIn['tbl_inst']['IsGovernment'] ==1)
+                        {
+                            $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,5,7,8';
+                            $logedIn['tbl_inst']['allowed_iGrp'] = '';
+                        }  
+                    }
+                    else if($logedIn['tbl_inst']['edu_lvl'] == 2)
+                    {
+                        if($logedIn['tbl_inst']['IsGovernment'] ==1)
+                        {
+                            $logedIn['tbl_inst']['allowed_mGrp'] = '';
+                            $logedIn['tbl_inst']['allowed_iGrp'] = '1,2,3,4,5,6';
+                        }
+
+                    }
+                    else if($logedIn['tbl_inst']['edu_lvl'] == 3)
+                    {
+                        if($logedIn['tbl_inst']['IsGovernment'] ==1)
+                        {
+                            $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,5,7,8';
+                            $logedIn['tbl_inst']['allowed_iGrp'] = '1,2,3,4,5,6';
+                        }
+
+                    }
                     $isfeeding = -1;
-                     $lastdate = SINGLE_LAST_DATE;
-                    if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
+                    $isinterfeeding = -1;
+                    $lastdate = SINGLE_LAST_DATE;
+                    //DebugBreak();
+                    if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
                     {
-                        $isfeeding = 1    ;
-                    }
-                    else if($logedIn['tbl_inst']['feedingDate'] != null)
+                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                        {
+                            $isfeeding = 1    ;
+                        }
+                        else if($logedIn['tbl_inst']['feedingDate'] != null)
+                        {
+                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
+                            if(date('Y-m-d')<=$lastdate)
+                            {
+
+                                $isfeeding = 1; 
+                            }
+                            else 
+                            {    $lastdate = SINGLE_LAST_DATE;
+                                $isfeeding = -1;
+                            }
+                        }
+
+                    }  
+                    if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
-                        $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
-                        if(date('Y-m-d')<=$lastdate)
+                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE11))>=date('Y-m-d'))
                         {
-                           $isfeeding = 1; 
+                            $isinterfeeding = 1    ;
                         }
-                        else 
+                        else if($logedIn['tbl_inst']['feedingDate'] != null)
                         {
-                            $lastdate = SINGLE_LAST_DATE;
-                           $isfeeding = -1;
+                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
+                            if(date('Y-m-d')<=$lastdate)
+                            {
+
+                                $isinterfeeding = 1; 
+                            }
+                            else 
+                            {
+                                $isinterfeeding = -1;
+                            }
                         }
                     }
-                    
-                    
-                    
-                    
-                    
-                    
+
+
                     //DebugBreak();
                     $sess_array = array(
                         'Inst_Id' => $logedIn['flusers']['inst_cd'] ,
-                        'edu_lvl' => $logedIn['flusers']['edu_lvl'],
+                        'edu_lvl' => $logedIn['tbl_inst']['edu_lvl'],
                         'inst_Name' => $logedIn['flusers']['inst_name'],
                         'gender' => $logedIn['tbl_inst']['Gender'],
                         'isrural' => $logedIn['tbl_inst']['IsRural'],
                         'grp_cd' => $logedIn['tbl_inst']['allowed_mGrp'],
+                        'grp_cdi' => $logedIn['tbl_inst']['allowed_iGrp'],
                         'isgovt' => $logedIn['tbl_inst']['IsGovernment'],
                         'email' => $logedIn['tbl_inst']['email'],
                         'phone' => $logedIn['tbl_inst']['LandLine'],
@@ -127,28 +190,24 @@ class Login extends CI_Controller {
                         'emis' => $logedIn['tbl_inst']['emis_code'],
                         'isInserted' => $logedIn['isInserted'],
                         'isdeaf' => $isdeaf,
-                        'isboardoperator' => 0 ,
-                        'isfeedingallow' => $isfeeding ,
-                        'lastdate' => $lastdate 
+                        'isboardoperator' => 0  ,
+                        'isfeedingallow' => $isfeeding   ,
+                        'isinterfeeding' => $isinterfeeding ,
+                        'lastdate' => $lastdate   
                     );
                     $this->load->library('session');
-                  /* $newdata = array(
-                        'Inst_Id'  =>'',
-                        'edu_lvl' => '',
-                        'inst_Name' => FALSE,
-                    );
-                    $this->session->unset_userdata('logged_in');
-                    $this->session->sess_destroy();*/
-                    
                     $this->session->set_userdata('logged_in', $sess_array); 
-                    redirect('Registration/','refresh');
-
-
+                    // redirect('Registration/','refresh');
+                    // redirect('Admission_matric/','refresh');
+                    if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
+                    {
+                        redirect('Registration/','refresh');
+                    }
+                    else  if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
+                    {
+                        redirect('Registration_11th/','refresh');  
+                    }
                 }
-
-
-
-
             }
             else
             {  
@@ -167,16 +226,16 @@ class Login extends CI_Controller {
     }
     public function biselogin()
     {
-       // DebugBreak();
+        // DebugBreak();
         $this->load->helper('url');
         $data = array(
             'user_status' => ''                     
 
         );
-        
-        
-            if(@$_POST['username'] != '' && @$_POST['password'] != '')
-            {   
+
+
+        if(@$_POST['username'] != '' && @$_POST['password'] != '')
+        {   
             if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303)
             {
 
@@ -212,13 +271,13 @@ class Login extends CI_Controller {
                     'user_status' => '7'                     
 
                 );
-                 $this->load->view('login/biselogin.php',$data);
+                $this->load->view('login/biselogin.php',$data);
             }
-            
+
         }
         else
         {
-           
+
             $this->load->view('login/biselogin.php',$data);
         }
 
@@ -227,36 +286,36 @@ class Login extends CI_Controller {
     function logout()
     {
         $this->load->helper('url');
-       
-       // DebugBreak();
-       $this->load->library('session');
-       $Logged_In_Array = $this->session->all_userdata();
-       $userinfo = @$Logged_In_Array['logged_in'];
-       if($userinfo['isboardoperator']==1){
-           $this->session->unset_userdata('logged_in');
-           $this->session->unset_userdata('user_id');
-           $this->session->unset_userdata('username');
-           $this->session->unset_userdata('logged_in_front');
-           $this->session->unset_userdata('user_id_front');
-           $this->session->unset_userdata('username_front');
-           
-           $this->session->sess_destroy();    
-           redirect('login/biselogin','refresh');
-       }
-       else{
-             $this->session->unset_userdata('logged_in');
-           $this->session->unset_userdata('user_id');
-           $this->session->unset_userdata('username');
-           $this->session->unset_userdata('logged_in_front');
-           $this->session->unset_userdata('user_id_front');
-           $this->session->unset_userdata('username_front');
-         
-           $this->session->sess_destroy();
-           redirect('login','refresh');
-       }
-        
-        
-       
+
+        // DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = @$Logged_In_Array['logged_in'];
+        if($userinfo['isboardoperator']==1){
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('username');
+            $this->session->unset_userdata('logged_in_front');
+            $this->session->unset_userdata('user_id_front');
+            $this->session->unset_userdata('username_front');
+
+            $this->session->sess_destroy();    
+            redirect('login/biselogin','refresh');
+        }
+        else{
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('username');
+            $this->session->unset_userdata('logged_in_front');
+            $this->session->unset_userdata('user_id_front');
+            $this->session->unset_userdata('username_front');
+
+            $this->session->sess_destroy();
+            redirect('login','refresh');
+        }
+
+
+
     }
 
 }

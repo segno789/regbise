@@ -860,93 +860,97 @@
                 <div class="widget no-margin">
                   <div class="widget-header">
                     <div class="title">
-                      Batch List 11th Registration<a data-original-title="" id="notifications">s</a>
+                      Proof Reading 9th Registration<a data-original-title="" id="notifications">s</a>
                     </div>
-                   
+                    <span class="tools">
+                      <a data-original-title="" class="fs1" aria-hidden="true" data-icon=""></a>
+                    </span>
                   </div>
                   <div class="widget-body">
-                    <h4>
-                  View All Batched Forms:
-                  </h4>
-                  <hr>
-                  <div id="dt_example" class="example_alt_pagination">
-                            <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%;">
-                                            Sr.No.
-                                        </th>
-                                        <th style="width:7%">
-                                            Batch Id.
-                                        </th>
-                                        <th style="width:15%">
-                                            Total Forms In Batch
-                                        </th>
-                                        <th style="width:15%">
-                                            Total Registration Fee
-                                        </th>
-                                        <th style="width:13%" class="hidden-phone">
-                                            Total Processing Fee
-                                        </th>
-                                        <th style="width:20%" class="hidden-phone">
-                                            Total Amount
-                                        </th>
-                                         <th style="width:25%" class="hidden-phone">
-                                            Downloads
-                                        </th>
-                                      
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                   // DebugBreak();
-                                    
-                                    if($info!= false)
-                                    {
-                                    $n=0;  
-                                    $grp_name='';                             
-                                    foreach($Inst_Cd = $info as $key=>$vals):
-                                    $n++;
-                                    //$formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
-                                    echo '<tr  >
-                                    <td>'.$n.'</td>
-                                    <td>'.$vals['Batch_ID'].'</td>
-                                    <td>'.$vals["COUNT"].'</td>
-                                    <td>'.$vals["Total_RegistrationFee"].'</td>
-                                    <td>'.$vals["Total_ProcessingFee"].'</td> 
-                                    <td style="font-weight: bold;font-size: 16px;">'.$vals["Amount"].'</td>
-                                    <td><button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ReturnForm('.$vals['Batch_ID'].')">Return Form</button>
-                                    <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="RevenueForm('.$vals['Batch_ID'].')">Revenue Form</button>';
-                                    if($vals['flag']==0){
-                                     echo '<button type="button" class="btn btn-danger" value="'.$vals['Batch_ID'].'" onclick="ReleaseForm('.$vals['Batch_ID'].')">Release Batch</button>';   
-                                    }
-                                     echo '
-                                    </td>';
-                                    endforeach;
-                                    
-                                    //DebugBreak();
-                                 
-                                    }
-                                    ?>
-
-
-
-                                </tbody>
-                            </table>
-                            <div class="clearfix"></div>
-                        </div>
-                   
-                    <hr>
-                     <div class="control-group">
-                     <div class="controls controls-row">
-                     <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetter.pdf" class="link offset5 blink_text" style="font-size: x-large;" target="_blank" >Download Farwarding letter.<br> </a>
-                     </div>
-                     </div>
-                     
-                      
-                      <label class="label label-important label-bullet" style="font-size: large;">
-                    Note: Batch List Prints Will Be Used For Registration.
-                    </label>
+                    
+                    <div class="alert alert-block alert-error fade in">
+                      <button data-dismiss="alert" class="close" type="button">
+                        ×
+                      </button>
+                      <h4 class="alert-heading">
+                        Error!
+                      </h4>
+                      <p>
+                        Methodologies eyeballs incentivize models. Platforms web-enabled cultivate dynamic synergies: technologies content
+                      </p>
+                      <p>
+                        <a data-original-title="" href="#" class="btn btn-danger">
+                          Submit
+                        </a>
+                        
+                        <a data-original-title="" href="#" class="btn">
+                          Cancel
+                        </a>
+                      </p>
+                    </div>
+                    <div class="alert alert-block alert-warning fade in">
+                      <button data-dismiss="alert" class="close" type="button">
+                        ×
+                      </button>
+                      <h4 class="alert-heading">
+                        Warning!
+                      </h4>
+                      <p>
+                        Methodologies eyeballs incentivize models. Platforms web-enabled cultivate dynamic synergies: technologies content deploy ROI communities
+                      </p>
+                      <p>
+                        <a data-original-title="" href="#" class="btn btn-warning">
+                          Submit
+                        </a>
+                        
+                        <a data-original-title="" href="#" class="btn">
+                          Cancel
+                        </a>
+                      </p>
+                    </div>
+                    <div class="alert alert-block alert-success fade in">
+                      <button data-dismiss="alert" class="close" type="button">
+                        ×
+                      </button>
+                      <h4 class="alert-heading">
+                        Success!
+                      </h4>
+                      <p>
+                        Methodologies eyeballs incentivize models. Platforms web-enabled cultivate dynamic synergies: technologies deploy communities methodologies sticky
+                      </p>
+                      <p>
+                        <a data-original-title="" href="#" class="btn btn-success">
+                          Submit
+                        </a>
+                        
+                        <a data-original-title="" href="#" class="btn">
+                          Cancel
+                        </a>
+                      </p>
+                    </div>
+                    
+                    <div class="alert alert-block alert-info fade in no-margin">
+                      <button data-dismiss="alert" class="close" type="button">
+                        ×
+                      </button>
+                      <h4 class="alert-heading">
+                        Info!
+                      </h4>
+                      <p>
+                        Eyeballs incentivize models. Platforms web-enabled cultivate dynamic synergies: technologies content deploy ROI communities methodologies sticky
+                      </p>
+                      <p>
+                        <a data-original-title="" href="#" class="btn btn-info">
+                          Submit
+                        </a>
+                        
+                        <a data-original-title="" href="#" class="btn">
+                          Cancel
+                        </a>
+                      </p>
+                    </div>
+                    
+                    
                   </div>
                 </div>
               </div>
@@ -1464,3 +1468,4 @@
         </div>
           </div>
         </div>
+        

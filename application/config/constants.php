@@ -43,9 +43,28 @@ define('SINGLE_LAST_DATE', '2016-06-07');
 define('DOUBLE_LAST_DATE', '2016-06-13');
 
 
+define('IMAGE_PATH11', 'uploads/2016/colleges');
+define('IMAGE_PATH211', 'uploads/2016_backup/');
+define('BARCODE_PATH11', 'uploads/assets/pdfs/');
+define('SINGLE_LAST_DATE11', '2016-06-07');
+define('DOUBLE_LAST_DATE11', '2016-06-12');
+
 //================ Ninth Correction variables ========================
 define('Correction_Last_Date','2016-10-31');
 define('Corr_ApplicationNo','30000');
 define('CORR_IMAGE_PATH', 'uploads/correction/');
+
+
+define('return_pdf_isPicture','1');
+define('CURRENT_SESS','2016-2018'); 
+define('TITLE','Online 9th Registration'); 
+
+
+   
+
+
+
+
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

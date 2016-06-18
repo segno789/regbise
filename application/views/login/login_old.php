@@ -29,7 +29,7 @@
                     <div class="inHeaderLogin">
                         <a href="" title="BISE Gujranwala" rel="home"><img style="margin-top: 9px;text-align:left;width:150px;float: left;margin-left: 14px;" src="<?php echo base_url(); ?>assets/img/icon.png" alt="Logo BISE GRW"></a>
                         <!--Intimation-->
-                        <p style="color: wheat;text-align: center;font-size: 23px;margin-left: 28px;float: left;  margin-top:35px;">Board of Intermediate & Secondary Education, Gujranwala </br></br> <?= TITLE?> Session <?php echo CURRENT_SESS;?></p>
+                        <p style="color: wheat;text-align: center;font-size: 23px;margin-left: 28px;float: left;  margin-top:35px;">Board of Intermediate & Secondary Education, Gujranwala </br></br> Online 9th Registration Session 2016-2018</p>
                     </div>
                 </div> 
                 <div class="row-fluid" >
