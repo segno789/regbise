@@ -1492,6 +1492,22 @@ if(isset($files)){
        // });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
+     function download_Branch_corr_form(formrno)
+    {
+        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+        var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_challan_Form/'+formrno;
+            } else {
+                // user clicked "cancel"
+
+            }
+        });
+        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+    }
      function Corr_App_Delete(Appno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"

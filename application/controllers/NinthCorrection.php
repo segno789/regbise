@@ -196,7 +196,7 @@ class NinthCorrection extends CI_Controller {
 
 
     }
-    public function EditForms()
+   public function EditForms()
     {
         //  DebugBreak();
         $this->load->library('session');
@@ -274,6 +274,45 @@ class NinthCorrection extends CI_Controller {
 
 
     }
+    public function Branch_Applied()
+    {
+         // DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '7',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        // $this->load->model('Registration_model');
+        $this->load->model('NinthCorrection_model');
+        //  $error['grp_cd'] = $user['grp_cd'];
+        $RegStdData = array('data'=>$this->NinthCorrection_model->EditEnrolement_Branch());
+        $RegStdData['msg_status'] = $error_msg;
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('NinthCorrection/Branch_corr.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
     public function Print_challan_Form()
     {
 
@@ -286,6 +325,10 @@ class NinthCorrection extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('NinthCorrection_model');
 
+        
+        
+      
+        
 
         //$grp_cd = $this->uri->segment(3);
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
@@ -354,10 +397,9 @@ class NinthCorrection extends CI_Controller {
         // }
         //$totalfee
         $turn=1;     
-        $pdf=new PDF_Rotate("P","in","A4");     
+        $pdf=new PDF_Rotate("P","in","A4");
         $pdf->SetTitle("Challan Form | Application Correction Form");
         $pdf->SetMargins(0.5,0.5,0.5);
-        $pdf->AliasNbPages();
         $pdf->AddPage();
         $generatingpdf=false;
         $challanCopy=array(1=>"Depositor Copy",  2=>"Registration Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
@@ -384,9 +426,9 @@ class NinthCorrection extends CI_Controller {
         //  $pdf->SetDrawColor(0,0,0);
          $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
         //  $image =  $this->set_barcode($temp);
-         //DebugBreak();       
+         //DebugBreak();
        $temp =  $this->set_barcode($temp);
-         
+       
         $yy = 0.05;
         $dyy = 0.1;
         $corcnt = 0;
@@ -427,7 +469,11 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetXY($w+1.2,$y+$dy);
             $pdf->SetFont('Arial','I',7);
             $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
-
+            
+            $pdf->SetXY($w+1.4,$y+$dy+0.15);
+            $pdf->SetFont('Arial','I',7);
+            $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.corr_bank_chall_class, 0.25, "L");
+            
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(0.5,$y+$dy-0.04);
@@ -461,8 +507,9 @@ class NinthCorrection extends CI_Controller {
             $pdf->Cell(0.5,0.25,$result[0]['Pre_Name'].'    '.$sodo.$result[0]['Pre_FName'],0,2,'L');
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
-            $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0.5,0.3,"Address: ".$result[0]['addr'],0,2,'L');
+            $pdf->SetFont('Arial','I',6.5);
+           // DebugBreak();
+            $pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             $pdf->SetFont('Arial','B',9);
             $pdf->Cell(0.5,0.3,"Amount in Words: ".$feeInWords,0,2,'L');
 
@@ -1128,7 +1175,7 @@ class NinthCorrection extends CI_Controller {
 
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(1.7,0.4);
-            $pdf->Cell(0, 0.25, " CORRECTION FORM FOR SSC/MATRIC SESSION 2016-2018", 0.25, "C");
+            $pdf->Cell(0, 0.25, " CORRECTION FORM FOR CLASS ".corr_bank_chall_class." SESSION 2016-2018", 0.25, "C");
             //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
             //--------------- Proof Read
             $ProofReed = "Application No. ".$data['AppNo'];
@@ -1161,7 +1208,7 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(0.2,1.28+$Y);
             $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'PERSONAL INFORMATION',1,0,'L',1);
+            $pdf->Cell(8,0.3,'NATURE OF CORRECTION ',1,0,'L',1);
             //------------- Personal Infor Box
             //====================================================================================================================
 
@@ -1548,13 +1595,15 @@ if($data['FnameFee']>0)
             } 
             
             $pdf->SetFont('Arial','UI',10);  
-            $pdf->SetXY(5.6,  10.2+$y);
+            $pdf->SetXY(0.5,  10.2+$y);
             $date = strtotime($data['edate']); 
             $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');
 
+            $pdf->SetXY(4.6,  10.2+$y);
+             $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
             //date_format($$data['EDate'], 'd/m/Y H:i:s');
 
-            $pdf->SetXY(5.6,  10.5+$y);
+            $pdf->SetXY(0.5,  10.5+$y);
             $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
 
             //======================================================================================
@@ -1564,7 +1613,7 @@ if($data['FnameFee']>0)
     }
     public function Corr_App_Delete($AppNo)
     {
-         //DebugBreak();
+        // DebugBreak();
         $this->load->model('NinthCorrection_model');
         $RegStdData = array('data'=>$this->NinthCorrection_model->Delete_Corr_App($AppNo));
         $this->load->library('session');
