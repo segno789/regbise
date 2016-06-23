@@ -1492,8 +1492,7 @@ if(isset($files)){
        // });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
-    //download_Branch_corr_form
-       function download_Branch_corr_form(formrno)
+     function download_Branch_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Apply for Correction to this Form ?"
