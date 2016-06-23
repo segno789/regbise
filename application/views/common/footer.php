@@ -54,16 +54,15 @@ if(isset($files)){
     /*    }*/
 
     function readURL(input) {
-    debugger;
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    reader.onload = function (e) {
-    $('#corr_image').attr('src', e.target.result);
-    }
+            reader.onload = function (e) {
+                $('#corr_image').attr('src', e.target.result);
+            }
 
-    reader.readAsDataURL(input.files[0]);
-    }
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 
     /*$("#corr_image").change(function(){
@@ -184,85 +183,85 @@ if(isset($files)){
 
     });
     $("#btnsubmitUpdateEnrol").click(function(){
-    
+
         // alert('hello');
-        
+
         //alert(c1);
-         var corr_cand_name = $("#corr_cand_name").val();
+        var corr_cand_name = $("#corr_cand_name").val();
         var corr_father_name = $("#corr_father_name").val();
         var corr_dob = $("#corr_dob").val();
         var corr_bay_form = $("#corr_bay_form").val();
         var corr_father_cnic = $("#corr_father_cnic").val();
-         var corr_std_group = $("#corr_std_group option:selected").text();
-         var corr_std_group_val = $("#corr_std_group option:selected").val();
-           var std_group = $("#std_group option:selected").text();
-           
+        var corr_std_group = $("#corr_std_group option:selected").text();
+        var corr_std_group_val = $("#corr_std_group option:selected").val();
+        var std_group = $("#std_group option:selected").text();
+
         var check_checkbox = 0;
         var corr_type = 0;
-            if ($("#c0").prop('checked')==true){ 
+        if ($("#c0").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 1;
-            }if ($("#c1").prop('checked')==true){ 
+        }if ($("#c1").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 2;
-            }if ($("#c2").prop('checked')==true){ 
+        }if ($("#c2").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 3;
-            }if ($("#c3").prop('checked')==true){ 
+        }if ($("#c3").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 4;
-            }if ($("#c4").prop('checked')==true){ 
+        }if ($("#c4").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 5;
-            }if ($("#c5").prop('checked')==true){ 
+        }if ($("#c5").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 6;
-            }if ($("#c6").prop('checked')==true){ 
+        }if ($("#c6").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 7;
-            }if ($("#c7").prop('checked')==true){ 
+        }if ($("#c7").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 8;
-            }
-       
-            if(corr_type == 1 && corr_cand_name=='')
-            {
+        }
+
+        if(corr_type == 1 && corr_cand_name=='')
+        {
             alertify.error("Please write correct Name!");
             $("#corr_cand_name").focus();
             return false;
-            }
-           if(corr_type == 2 && corr_father_name=='')
-            {
+        }
+        if(corr_type == 2 && corr_father_name=='')
+        {
             alertify.error("Please write correct Father's Name!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 3 && corr_dob=='')
-            {
+        }
+        if(corr_type == 3 && corr_dob=='')
+        {
             alertify.error("Please write correct Date of Birth!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 4 && corr_bay_form=='')
-            {
+        }
+        if(corr_type == 4 && corr_bay_form=='')
+        {
             alertify.error("Please write correct Bay-Form No.!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 5 && corr_father_cnic=='')
-            {
+        }
+        if(corr_type == 5 && corr_father_cnic=='')
+        {
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
             return false;
-            }
+        }
         var sub1 = $("#sub1 option:selected").text();
         var sub2 = $("#sub2 option:selected").text();
         var sub3 = $("#sub3 option:selected").text();
@@ -288,117 +287,117 @@ if(isset($files)){
         var sub7_match =0;
         var sub8_match =0;
         debugger;
-            if(corr_type == 6 )
+        if(corr_type == 6 )
+        {
+            //&& corr_std_group_val==0
+            if((corr_std_group== std_group))
             {
-                //&& corr_std_group_val==0
-                if((corr_std_group== std_group))
+                if(sub1==corr_sub1)
                 {
-                    if(sub1==corr_sub1)
-                    {
-                       sub1_match=1 
-                    }
-                    if(sub2==corr_sub2)
-                    {
-                       sub2_match=1 
-                    }
-                    if(sub3==corr_sub3)
-                    {
-                       sub3_match=1 
-                    }
-                    if(sub4==corr_sub4)
-                    {
-                       sub4_match=1 
-                    }
-                    if(sub5==corr_sub5)
-                    {
-                       sub5_match=1 
-                    }
-                    if(sub6==corr_sub6)
-                    {
-                       sub6_match=1 
-                    }
-                    if(sub7==corr_sub7)
-                    {
-                       sub7_match=1 
-                    }
-                    if(sub8==corr_sub8)
-                    {
-                       sub8_match=1 
-                    }
-                    if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
-                    {
-                         alertify.error("Please select correct Group/Subject First!");
-                         $("#corr_cand_name").focus();
-                         return false;
-                    }
-                    
+                    sub1_match=1 
                 }
-           
+                if(sub2==corr_sub2)
+                {
+                    sub2_match=1 
+                }
+                if(sub3==corr_sub3)
+                {
+                    sub3_match=1 
+                }
+                if(sub4==corr_sub4)
+                {
+                    sub4_match=1 
+                }
+                if(sub5==corr_sub5)
+                {
+                    sub5_match=1 
+                }
+                if(sub6==corr_sub6)
+                {
+                    sub6_match=1 
+                }
+                if(sub7==corr_sub7)
+                {
+                    sub7_match=1 
+                }
+                if(sub8==corr_sub8)
+                {
+                    sub8_match=1 
+                }
+                if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
+                {
+                    alertify.error("Please select correct Group/Subject First!");
+                    $("#corr_cand_name").focus();
+                    return false;
+                }
+
             }
-           
+
+        }
+
         //do something
-         
-              
-    
-   
+
+
+
+
         //if()
         var formno = $("#lblFormNo").text();
-       
-      
-       
-       
+
+
+
+
         var corr_pic_src = $("#corr_previewImg").attr('src');
-      //  alert(corr_pic_src);
-      $('#div_confirmation').html('');
+        //  alert(corr_pic_src);
+        $('#div_confirmation').html('');
         $('#div_confirmation').append(' <h3 class="welcome_note">View Your Correction Application Form</h3><br>  <div class="widget">                    <div class="widget-header" id="lblFormNo">                        <div class="title">   <h3>                      Form No.   <?php                                       echo @$data[0]['formNo'];                                       ?>                       </h3> </div>                    </div>                    <div class="widget-body"><div class="control-group">                                <h4 class="span4">Personal Information :</h4>                                <div class="controls controls-row">                                                                                                    </div>                            </div> '); 
-        
-        
+
+
         var chkBoxArray = [];
         $('.corr_check_box:checked').each(function() {
             chkBoxArray.push($(this).val());
-               if($(this).val() == '7')
+            if($(this).val() == '7')
             {
-               $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img id="corr_previewImg" name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')
+                $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img id="corr_previewImg" name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')
             }
             if($(this).val() == '1')
             {
                 $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2 " >                                    Candidate Name :                                </label>                          <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;    font-size: 10px;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?>  >                                <label class="control-label span1 "> TO </label>     <input class="span2" id="corr_cand_name" name="corr_cand_name" style="text-transform: uppercase; " readonly="readonly" type="text" value="'+corr_cand_name+'" >                                </div>                            </div>');
-                             
+
             }
-              if($(this).val() == '2')
+            if($(this).val() == '2')
             {
-                  $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_name" type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_name" type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '3')
+            if($(this).val() == '3')
             {
                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Date of Birth:(dd-mm-yyyy)<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="dob" name="dob" placeholder="DOB" style="text-transform: uppercase;     font-size: 10px;" type="text"  value="<?php  $source = @$data['0']['Dob']; @$date = new DateTime(@$source); echo @$date->format('d-m-Y'); ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_dob" type="text"  style="text-transform: uppercase; " name="corr_dob" readonly="readonly" value="'+corr_dob+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '4')
+            if($(this).val() == '4')
             {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_cnic" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_cnic" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '5')
+            if($(this).val() == '5')
             {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_name" type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_name" type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '6')
+            if($(this).val() == '6')
             {
                 $('#div_confirmation').append(' <div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          <div class="control-group">                                <label class="control-label span2" >                                    Subject 8 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="sub8" name="sub8" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub8+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_sub8" type="text"  style="text-transform: uppercase; " name="corr_sub8" value="'+corr_sub8+'" disabled="disabled"  maxlength="60">                                </div>                            </div>             ');
             }
-           
-            
+
+
         });
-         $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
-         $("#btnsubmitConfirmation").click(function(){
-       // alert('called');
-        $("#corr_form").submit();
-    })
-         $.fancybox("#div_confirmation");
+        $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
+        $("#btnsubmitConfirmation").click(function(){
+            // alert('called');
+            $("#corr_form").submit();
+        })
+        $.fancybox("#div_confirmation");
         // alert(chkBoxArray);
         //  $.fancybox("#div_confirmation");
         // $("#div_confirmation").fancybox();
     })
-    
+
 </script>
 <script type="">
     function isValidEmailAddress(emailAddress) {
@@ -609,20 +608,20 @@ if(isset($files)){
             $('.mPageloader').hide();
         }
     }
-     function CancelAlert_confirmation_form()
-                            {
-                                var msg = "Are You Sure You want to Cancel this Form ?"
-                                alertify.confirm(msg, function (e) {
-                                    if (e) {
-                                        // user clicked "ok"
-                                        parent.$.fancybox.close();
-                                       // window.location.href ='<?php echo base_url(); ?>index.php/Registration/EditForms';
-                                    } else {
-                                        // user clicked "cancel"
+    function CancelAlert_confirmation_form()
+    {
+        var msg = "Are You Sure You want to Cancel this Form ?"
+        alertify.confirm(msg, function (e) {
+            if (e) {
+                // user clicked "ok"
+                parent.$.fancybox.close();
+                // window.location.href ='<?php echo base_url(); ?>index.php/Registration/EditForms';
+            } else {
+                // user clicked "cancel"
 
-                                    }
-                                });
-                            }
+            }
+        });
+    }
 </script>
 
 <script type="">
@@ -1035,7 +1034,7 @@ if(isset($files)){
         $("#sub3").empty();
         var Religion = $("input[name=religion]:checked").val();
         //console.log(Religion);
-      //  console.log(Religion);
+        //  console.log(Religion);
         if(Religion == "1")
         {
 
@@ -1460,39 +1459,39 @@ if(isset($files)){
         });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
-        function download_corr_form(formrno)
+    function download_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
         //alertify.confirm(msg, function (e) {
 
-         //   if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_correction_Form_Final/'+formrno;
+        //   if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_correction_Form_Final/'+formrno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
         //    }
-      //  });
+        //  });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
-     function download_challan_form(formrno)
+    function download_challan_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        //  alertify.confirm(msg, function (e) {
 
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_challan_Form/'+formrno;
+        //     if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_challan_Form/'+formrno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
-          //  }
-       // });
+        //  }
+        // });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
-     function download_Branch_corr_form(formrno)
+    function download_Branch_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Apply for Correction to this Form ?"
@@ -1508,20 +1507,20 @@ if(isset($files)){
         });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
-     function Corr_App_Delete(Appno)
+    function Corr_App_Delete(Appno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        //  alertify.confirm(msg, function (e) {
 
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Corr_App_Delete/'+Appno;
+        //     if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Corr_App_Delete/'+Appno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
-          //  }
-       // });
+        //  }
+        // });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
     function downloadslip9th(rno)

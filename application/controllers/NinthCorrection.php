@@ -196,7 +196,7 @@ class NinthCorrection extends CI_Controller {
 
 
     }
-   public function EditForms()
+    public function EditForms()
     {
         //  DebugBreak();
         $this->load->library('session');
@@ -276,7 +276,7 @@ class NinthCorrection extends CI_Controller {
     }
     public function Branch_Applied()
     {
-         // DebugBreak();
+        // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -325,10 +325,10 @@ class NinthCorrection extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('NinthCorrection_model');
 
-        
-        
-      
-        
+
+
+
+
 
         //$grp_cd = $this->uri->segment(3);
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
@@ -340,54 +340,54 @@ class NinthCorrection extends CI_Controller {
 
 
         $this->load->library('PDF_Rotate');
-        
+
 
         // $pdf = new PDF_Rotate('P','in',"A4");
         //for each type of correction total 7 types of corrections are now
         $ctid=1;  //correction type of id starts from one and multiples by 2 for next type of correction id
-     //   $displayfeetitle=array(1=>'Name Correction', 2=>'Father Name Correction', 3=>'DOB Correction', 4=>'FNIC Correction', 5=>'B-Form Correction', 6=>'Picture Change', 7=>'Group Change', 8=>'Subject Change');
-       // $feestructure = array();
+        //   $displayfeetitle=array(1=>'Name Correction', 2=>'Father Name Correction', 3=>'DOB Correction', 4=>'FNIC Correction', 5=>'B-Form Correction', 6=>'Picture Change', 7=>'Group Change', 8=>'Subject Change');
+        // $feestructure = array();
         //  for($i=1;$i<=8;$i++){
         //$feetitle =  $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
-       // DebugBreak();
+        // DebugBreak();
         if($result[0]['NameFee'] > 0)
         {
-        $feestructure[]    =  $result[0]['NameFee'];    
-        $displayfeetitle[] =  'Name Correction';    
+            $feestructure[]    =  $result[0]['NameFee'];    
+            $displayfeetitle[] =  'Name Correction';    
         }
         if($result[0]['FnameFee'] > 0 ){
-       $feestructure[]     = $result[0]['FnameFee'];   
-         $displayfeetitle[] =  'Father Name Correction';   
+            $feestructure[]     = $result[0]['FnameFee'];   
+            $displayfeetitle[] =  'Father Name Correction';   
         }
         if($result[0]['DobFee'] > 0)
         {
-        $feestructure[]=$result[0]['DobFee']; 
-        $displayfeetitle[] =  'DOB Correction';   
+            $feestructure[]=$result[0]['DobFee']; 
+            $displayfeetitle[] =  'DOB Correction';   
         }
         if($result[0]['FnicFee']>0)
         {
-       $feestructure[]=$result[0]['FnicFee'];    
-        $displayfeetitle[] =  'FNIC Correction';
+            $feestructure[]=$result[0]['FnicFee'];    
+            $displayfeetitle[] =  'FNIC Correction';
         }
         if($result[0]['BFormFee']>0)
         {
-       $feestructure[]=$result[0]['BFormFee'];   
-        $displayfeetitle[] =  'B-Form Correction'; 
+            $feestructure[]=$result[0]['BFormFee'];   
+            $displayfeetitle[] =  'B-Form Correction'; 
         }
         if($result[0]['PicFee']>0)
         {
-       $feestructure[]=$result[0]['PicFee'];   
-        $displayfeetitle[] =  'Picture Change'; 
+            $feestructure[]=$result[0]['PicFee'];   
+            $displayfeetitle[] =  'Picture Change'; 
         }
         if($result[0]['GroupFee']>0)
         {
-        $feestructure[]=$result[0]['GroupFee'];  
-        $displayfeetitle[] =  'Group Change';  
+            $feestructure[]=$result[0]['GroupFee'];  
+            $displayfeetitle[] =  'Group Change';  
         }
         if($result[0]['SubjectFee']>0)
         {
-        $feestructure[]=$result[0]['SubjectFee'];    
-        $displayfeetitle[] =  'Subject Change';
+            $feestructure[]=$result[0]['SubjectFee'];    
+            $displayfeetitle[] =  'Subject Change';
         }
         /*$feestructure[16]=$result[0]['BFormFee'];
         $feestructure[32]=$result[0]['PicFee'];
@@ -398,6 +398,7 @@ class NinthCorrection extends CI_Controller {
         //$totalfee
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
+        $pdf->AliasNbPages();
         $pdf->SetTitle("Challan Form | Application Correction Form");
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
@@ -416,7 +417,7 @@ class NinthCorrection extends CI_Controller {
             $rule_fee   =  $this->NinthCorrection_model->getreulefee(2); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
         }
-       
+
         $obj    = new NumbertoWord();
         $obj->toWords($result[0]['TotalFee'],"Only.","");
         // $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
@@ -424,28 +425,28 @@ class NinthCorrection extends CI_Controller {
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-         $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
+        $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
         //  $image =  $this->set_barcode($temp);
-         //DebugBreak();
-       $temp =  $this->set_barcode($temp);
-       
+        //DebugBreak();
+        $temp =  $this->set_barcode($temp);
+
         $yy = 0.05;
         $dyy = 0.1;
         $corcnt = 0;
         for ($j=1;$j<=4;$j++) 
         {
 
-             $corcnt = 0;
+            $corcnt = 0;
             $yy = 0.04;
             if($turn==1){$dyy=0.1;} else {
                 if($turn==2){$dyy=2.65;} else  if($turn==3) {$dyy=5.2; } else {$dyy=7.75 ; $turn=0;}
             }
             $pdf->SetFont('Arial','BI',11);
             $pdf->SetXY(1.0,$yy+$dyy);
-           //   DebugBreak();
+            //   DebugBreak();
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
             $pdf->Image(base_url()."assets/img/logo.jpg",0.30,$yy+$dyy, 0.50,0.50, "JPG", "http://www.bisegrw.com");
-          //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
+            //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
             $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
@@ -469,19 +470,19 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetXY($w+1.2,$y+$dy);
             $pdf->SetFont('Arial','I',7);
             $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
-            
+
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','I',7);
             $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.corr_bank_chall_class, 0.25, "L");
-            
+
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(0.5,$y+$dy-0.04);
+            $pdf->SetXY(0.5,$y+$dy-0.01);
             $pdf->SetFillColor(0,0,0);
             $pdf->Cell(1.5,0.2,'',1,0,'C',1);
             $pdf->SetFillColor(255,255,255);
             $pdf->SetTextColor(255,255,255);
-            $pdf->SetXY(0.5,$y+$dy-0.04);
+            $pdf->SetXY(0.5,$y+$dy-0.01);
             $pdf->Cell(0, 0.25, "Due Date: ".$challanDueDate, 0.25, "C");
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('Arial','BI',8);
@@ -508,7 +509,7 @@ class NinthCorrection extends CI_Controller {
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
-           // DebugBreak();
+            // DebugBreak();
             $pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             $pdf->SetFont('Arial','B',9);
             $pdf->Cell(0.5,0.3,"Amount in Words: ".$feeInWords,0,2,'L');
@@ -517,45 +518,45 @@ class NinthCorrection extends CI_Controller {
             $y += 0.2;
 
             //------------- Fee Statement
-          //  DebugBreak();
+            //  DebugBreak();
             $ctid=1;
             $multiply=1;
-            
-        /*    foreach ($feestructure as $value) {
-               //  $value = $value * 2;
-               
-                    $pdf->SetFont('Arial','',9);
-                    $pdf->SetXY(0.5,$y+$dy);
-                    $pdf->Cell( 0.5,0.5,$displayfeetitle[$ctid],0,'L');
-                    $pdf->SetFont('Arial','B',10);
-                    $pdf->SetXY(3,$y+$dy);
-                    $pdf->Cell(0.8,0.5,$feestructure[$ctid],0,'C');
-                    $ctid *= 2;
-                    $y += 0.18;
-                }*/
-               // DebugBreak();
-                $total =  count($feestructure);
+
+            /*    foreach ($feestructure as $value) {
+            //  $value = $value * 2;
+
+            $pdf->SetFont('Arial','',9);
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell( 0.5,0.5,$displayfeetitle[$ctid],0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(3,$y+$dy);
+            $pdf->Cell(0.8,0.5,$feestructure[$ctid],0,'C');
+            $ctid *= 2;
+            $y += 0.18;
+            }*/
+            // DebugBreak();
+            $total =  count($feestructure);
             for ($k = 0; $k<count($feestructure); $k++){
 
-               
-                    $pdf->SetFont('Arial','',9);
-                    $pdf->SetXY(0.5,$y+$dy);
-                    
-                    //$feestructure = array(1=>0, 2=>0, 4=>0, 8=>0, 16=>0, 32=>0, 64=>0, 128=>0);
-                    $pdf->Cell( 0.5,0.5,$displayfeetitle[$k],0,'L');
-                    $pdf->SetFont('Arial','B',10);
-                    $pdf->SetXY(3,$y+$dy);
-                    $pdf->Cell(0.8,0.5,$feestructure[$k],0,'C');
-                    $y += 0.18;
-                     $corcnt = $k;
-                    
-                   
-                   
-                 
+
+                $pdf->SetFont('Arial','',9);
+                $pdf->SetXY(0.5,$y+$dy);
+
+                //$feestructure = array(1=>0, 2=>0, 4=>0, 8=>0, 16=>0, 32=>0, 64=>0, 128=>0);
+                $pdf->Cell( 0.5,0.5,$displayfeetitle[$k],0,'L');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(3,$y+$dy);
+                $pdf->Cell(0.8,0.5,$feestructure[$k],0,'C');
+                $y += 0.18;
+                $corcnt = $k;
+
+
+
+
             }
 
             //------------- Total Amount
-            
+
 
             if($corcnt ==0){
                 $y += 1.0;
@@ -727,7 +728,6 @@ class NinthCorrection extends CI_Controller {
 
         // DebugBreak();
         // ======================= Name checkbox ======================
-
         if (isset($_POST['c'])){
 
             foreach($_POST['c'] as $value){
@@ -818,7 +818,7 @@ class NinthCorrection extends CI_Controller {
                         $corr_sub6 =  $_POST['corr_sub6']; 
                         $corr_sub7 =  $_POST['corr_sub7'];
                         $corr_sub8 =  $_POST['corr_sub8'];
-                      
+
                     }
                     else
                     {
@@ -917,11 +917,11 @@ class NinthCorrection extends CI_Controller {
             }          // =================== loop Ending
         }   //===============Array isset Ending
         $target_path = CORR_IMAGE_PATH.$Inst_Id.'/';
-         
+
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if($isPic ==1)
         {
-            $this->load->library('upload', $config);
+
             if (!file_exists($target_path)){
 
                 mkdir($target_path);
@@ -939,16 +939,16 @@ class NinthCorrection extends CI_Controller {
 
             $filepath = $target_path. $config['file_name']  ;    
             $filename =    $config['file_name']  ;    
-
+            $this->load->library('upload', $config);
             $check = getimagesize($_FILES["corr_image"]["tmp_name"]);
             $this->upload->initialize($config);
-//DebugBreak();
+            //DebugBreak();
             if($check !== false) {
                 $file_size = round($_FILES['corr_image']['size']/1024, 2);
                 if($file_size<=20 && $file_size>=4)
                 {
 
-                    if ( !$this->upload->do_upload('image',True))
+                    if ( !$this->upload->do_upload('corr_image',True))
                     {
                         if($this->upload->error_msg[0] != "")
                         {
@@ -961,7 +961,7 @@ class NinthCorrection extends CI_Controller {
                         }
 
                     }
-                
+                }
                 else
                 {
                     $allinputdata['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
@@ -970,20 +970,17 @@ class NinthCorrection extends CI_Controller {
                     redirect('NinthCorrection/Correction_EditForm/'.$formno);
 
                 }
-
-
             }
-        }
-        else{
-            //$check = getimagesize($filepath);
-           //  if($check === false)
-            // {
-                 $allinputdata['excep'] = 'Please Upload Your Picture';
-                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                 redirect('NinthCorrection/Correction_EditForm/'.$formno);
-                 return;
-             //}
-        }
+            else{
+                //$check = getimagesize($filepath);
+                //  if($check === false)
+                // {
+                $allinputdata['excep'] = 'Please Upload Your Picture';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('NinthCorrection/Correction_EditForm/'.$formno);
+                return;
+                //}
+            }
 
         }
         /*
@@ -1090,7 +1087,7 @@ class NinthCorrection extends CI_Controller {
     }
     private function set_barcode($code)
     {
-      //  DebugBreak()  ;
+        //  DebugBreak()  ;
         //load library
         $this->load->library('zend');
         //load in folder Zend
@@ -1114,13 +1111,13 @@ class NinthCorrection extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('NinthCorrection_model');
-            
-           // $start_formno = $this->uri->segment(3);
-         //   $end_formno = $this->uri->segment(5);
-            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'AppNo'=>$AppNo);
-            $result = array('data'=>$this->NinthCorrection_model->Print_corr_Form_Final($fetch_data));
-            //Print_Form_Formnowise
-     
+
+        // $start_formno = $this->uri->segment(3);
+        //   $end_formno = $this->uri->segment(5);
+        $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'AppNo'=>$AppNo);
+        $result = array('data'=>$this->NinthCorrection_model->Print_corr_Form_Final($fetch_data));
+        //Print_Form_Formnowise
+
 
         if(empty($result['data'])){
             $this->session->set_flashdata('error', $Condition);
@@ -1136,10 +1133,10 @@ class NinthCorrection extends CI_Controller {
         $pdf = new PDF_Rotate('P','in',"A4");
         //      $this->load->library('PDFF');
         //        $pdf=new PDFF('P','in',"A4");  
-         $pdf->AliasNbPages();
+        $pdf->AliasNbPages();
         $pdf->SetMargins(0.5,0.5,0.5);
         //$grp_cd = $this->uri->segment(3);
-       
+
         $pdf->SetTitle('Print Registration Correction From');
 
         $fontSize = 10;
@@ -1152,7 +1149,7 @@ class NinthCorrection extends CI_Controller {
 
         $type     = 'code128';
         $black    = '000000'; // color in hex
-         //DebugBreak();
+        //DebugBreak();
         $result = $result['data'];
         //if(!empty($result)):
         foreach ($result as $key=>$data) 
@@ -1196,15 +1193,15 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetXY(0.2,0.75+$Y);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
-           
+
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(1.75,0.92+$Y);
-           // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
+            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
             $pdf->MultiCell(6,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
 
             //------ Picture Box on Centre      
-           $Y = $Y+0.1;
-           $x = 1.05;
+            $Y = $Y+0.1;
+            $x = 1.05;
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(0.2,1.28+$Y);
             $pdf->SetFillColor(240,240,240);
@@ -1214,130 +1211,130 @@ class NinthCorrection extends CI_Controller {
 
             if($data['Picfee']>0)
             {
-                
-                $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(1.8,1.45+$Y);
-            $pdf->Cell( 0.5,0.5,"Previous Picture:",0,'L');
-            
-             $pdf->SetXY(1.8, $Y +1.79);
-            $pdf->Cell(1.25,1.4,'',1,0,'C',0);
-           
-            $pdf->Image(IMAGE_PATH.$user['Inst_Id'].'/'.$data["PicPath"],1.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
-            $pdf->SetFont('Arial','',10);
 
-            $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(4.8,1.45+$Y);
-            $pdf->Cell( 0.5,0.5,"New Picture:",0,'L');
-            
-            $pdf->SetXY(4.8, $Y +1.79);
-            $pdf->Cell(1.25,1.4,'',1,0,'C',0);
-           
-            $pdf->Image(CORR_IMAGE_PATH.$user['Inst_Id'].'/'.$data["PicPath"],4.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
-            $pdf->SetFont('Arial','',10);
-               $Y = 2.0; 
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(1.8,1.45+$Y);
+                $pdf->Cell( 0.5,0.5,"Previous Picture:",0,'L');
+
+                $pdf->SetXY(1.8, $Y +1.79);
+                $pdf->Cell(1.25,1.4,'',1,0,'C',0);
+
+                $pdf->Image(IMAGE_PATH.$user['Inst_Id'].'/'.$data["PicPath"],1.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
+                $pdf->SetFont('Arial','',10);
+
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(4.8,1.45+$Y);
+                $pdf->Cell( 0.5,0.5,"New Picture:",0,'L');
+
+                $pdf->SetXY(4.8, $Y +1.79);
+                $pdf->Cell(1.25,1.4,'',1,0,'C',0);
+
+                $pdf->Image(CORR_IMAGE_PATH.$user['Inst_Id'].'/'.$data["PicPath"],4.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
+                $pdf->SetFont('Arial','',10);
+                $Y = 2.0; 
             }
-          //  $Y = $Y+0.1;
-            
-            
-            
+            //  $Y = $Y+0.1;
+
+
+
             //--------------------------- 1st line 
             if($data['NameFee']> 0)
             {
                 $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(0.5,1.65+$Y);
-            $pdf->Cell( 0.5,0.5,"Previous Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.5,1.65+$Y);
-            $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
-            
-            $pdf->SetXY(3.5+$x,1.65+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"New Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(4.3+$x,1.65+$Y);
-            $pdf->Cell(0.5,0.5, strtoupper(@$data["N_name"]),0,'L');
-                
+                $pdf->SetXY(0.5,1.65+$Y);
+                $pdf->Cell( 0.5,0.5,"Previous Name:",0,'L');
+                $pdf->SetFont('Arial','B',9);
+                $pdf->SetXY(1.5,1.65+$Y);
+                $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
+
+                $pdf->SetXY(3.5+$x,1.65+$Y);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"New Name:",0,'L');
+                $pdf->SetFont('Arial','B',9);
+                $pdf->SetXY(4.3+$x,1.65+$Y);
+                $pdf->Cell(0.5,0.5, strtoupper(@$data["N_name"]),0,'L');
+
             }
-            
 
-// //--------------------------- FATHER NAME 
-if($data['FnameFee']>0)
+
+            // //--------------------------- FATHER NAME 
+            if($data['FnameFee']>0)
             {
-            $pdf->SetXY(0.5,$Y+2);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Previous Father's Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(2.1,$Y+2);
-           $pdf->Cell(0.5,0.5,@$data["Fname"],0,'L');            
+                $pdf->SetXY(0.5,$Y+2);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"Previous Father's Name:",0,'L');
+                $pdf->SetFont('Arial','B',9);
+                $pdf->SetXY(2.1,$Y+2);
+                $pdf->Cell(0.5,0.5,@$data["Fname"],0,'L');            
 
-            $pdf->SetXY(3.5+$x,$Y+2);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"New Father's Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(4.8+$x,$Y+2);
-           $pdf->Cell(0.5,0.5,@$data["N_Fname"],0,'L');    
+                $pdf->SetXY(3.5+$x,$Y+2);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"New Father's Name:",0,'L');
+                $pdf->SetFont('Arial','B',9);
+                $pdf->SetXY(4.8+$x,$Y+2);
+                $pdf->Cell(0.5,0.5,@$data["N_Fname"],0,'L');    
             }    
             //--------------------------- 3rd line 
             if($data['DobFee']>0)
             {
-            $pdf->SetXY(0.5,$Y+ 2.35);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Previous Date Of Birth:",0,'L');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(2.1,2.35+$Y);
+                $pdf->SetXY(0.5,$Y+ 2.35);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"Previous Date Of Birth:",0,'L');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(2.1,2.35+$Y);
 
-            $pdf->Cell(0.5,0.5,date('d-m-Y', strtotime($data['Dob'])),0,'L');     
-            //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
+                $pdf->Cell(0.5,0.5,date('d-m-Y', strtotime($data['Dob'])),0,'L');     
+                //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
 
-            $pdf->SetXY(3.5+$x,2.35+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"New Date of Birth:",0,'L');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(4.8+$x,2.35+$Y);
-            $pdf->Cell(0.5,0.5,date('d-m-Y', strtotime(@$data['N_Dob'])),0,'L');            
+                $pdf->SetXY(3.5+$x,2.35+$Y);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"New Date of Birth:",0,'L');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(4.8+$x,2.35+$Y);
+                $pdf->Cell(0.5,0.5,date('d-m-Y', strtotime(@$data['N_Dob'])),0,'L');            
             }
             //--------------------------- BAY FORM NO line 
-             if($data['Bformfee']>0)
+            if($data['Bformfee']>0)
             {
-            $pdf->SetXY(0.5,$Y+2.70);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Previous Bay Form No:",0,'L');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(2.1,$Y+2.70);
-            $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
+                $pdf->SetXY(0.5,$Y+2.70);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"Previous Bay Form No:",0,'L');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(2.1,$Y+2.70);
+                $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');
 
 
-            $pdf->SetXY(3.5+$x,$Y+2.70);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell(0.5,0.5,"New Bay Form No",0,'R');
-           // $pdf->Cell(0.5,0.5,"Father CNIC:",0,'R');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(4.8+$x,$Y+2.70);
-            $pdf->Cell(0.5,0.5,@$data["N_BForm"],0,'L');
-           // $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
+                $pdf->SetXY(3.5+$x,$Y+2.70);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell(0.5,0.5,"New Bay Form No",0,'R');
+                // $pdf->Cell(0.5,0.5,"Father CNIC:",0,'R');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(4.8+$x,$Y+2.70);
+                $pdf->Cell(0.5,0.5,@$data["N_BForm"],0,'L');
+                // $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
             }
             //---------------------------  
             if($data['FnicFee']>0)
             {
-            $pdf->SetXY(0.5,$Y+3.05);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Previous Father CNIC:",0,'L');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(2.1,$Y+3.05);
-            $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
+                $pdf->SetXY(0.5,$Y+3.05);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell( 0.5,0.5,"Previous Father CNIC:",0,'L');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(2.1,$Y+3.05);
+                $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');
 
-            $pdf->SetXY(3.5+$x,$Y+3.05);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell(0.5,0.5,"New Father CNIC:",0,'R');
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(4.8+$x,$Y+3.05);
-            $pdf->Cell(0.5,0.5,@$data["N_FNIC"],0,'L');
-            //$pdf->Cell(0.5,0.5,@$data["N_FNIC"],0,'L');
+                $pdf->SetXY(3.5+$x,$Y+3.05);
+                $pdf->SetFont('Arial','',10);
+                $pdf->Cell(0.5,0.5,"New Father CNIC:",0,'R');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(4.8+$x,$Y+3.05);
+                $pdf->Cell(0.5,0.5,@$data["N_FNIC"],0,'L');
+                //$pdf->Cell(0.5,0.5,@$data["N_FNIC"],0,'L');
             }
             //--------------------------- Gender Nationality 
-               
+
             //--------------------------- id mark and Medium 
-           /* $pdf->SetXY(0.5,$Y+3.40);
+            /* $pdf->SetXY(0.5,$Y+3.40);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Ident Mark:",0,'L');
             $pdf->SetFont('Arial','B',10);
@@ -1391,9 +1388,9 @@ if($data['FnameFee']>0)
                     $grp_name = 'DEAF AND DUMB';
                     break;
                 default:
-                    $grp_name = "NO GROUP SELECTED";
+                $grp_name = "NO GROUP SELECTED";
             }
-             $N_grp_name = $data["N_Reggrp"];
+            $N_grp_name = $data["N_Reggrp"];
             switch ($N_grp_name) {
                 case '1':
                     $N_grp_name = 'SCIENCE WITH BIOLOGY';
@@ -1413,194 +1410,194 @@ if($data['FnameFee']>0)
                 default:
                     $N_grp_name = "NO GROUP SELECTED";
             }
-             $y = $sY - 0.2;
+            $y = $sY - 0.2;
             if($data['groupFee'] > 0)
             {
-                
-            
-            $pdf->SetXY(0.5,6.45+$sY);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"Previous Subjects with Group:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(2.0,6.45+$sY);
-            $pdf->Cell(0.5,0.5, ($grp_name),0,'L');
-            
-            
-            $pdf->SetXY(4.5,6.45+$sY);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Cell( 0.5,0.5,"New Subjects with Group:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(5.78,6.45+$sY);
-            $pdf->Cell(0.5,0.5, ($N_grp_name),0,'L');
+
+
+                $pdf->SetXY(0.5,6.45+$sY);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"Previous Subjects with Group:",0,'L');
+                $pdf->SetFont('Arial','B',9);
+                $pdf->SetXY(2.0,6.45+$sY);
+                $pdf->Cell(0.5,0.5, ($grp_name),0,'L');
+
+
+                $pdf->SetXY(4.5,6.45+$sY);
+                $pdf->SetFont('Arial','',8);
+                $pdf->Cell( 0.5,0.5,"New Subjects with Group:",0,'L');
+                $pdf->SetFont('Arial','B',9);
+                $pdf->SetXY(5.78,6.45+$sY);
+                $pdf->Cell(0.5,0.5, ($N_grp_name),0,'L');
             }
             if($data['SubjectFee'] > 0)
-           {
-            $x = 1.5;
-            //--------------------------- Subjects
-            if( $data['groupFee'] == 0)
             {
-            $pdf->SetXY(0.5,6.40+$sY);
-            $pdf->SetFont('Arial','B',12);
-            $pdf->Cell( 0.5,0.5,"Previous Subjects:",0,'L');
-            $pdf->SetFont('Arial','',10);
-            
-            $pdf->SetXY(4.5,6.40+$sY);
-            $pdf->SetFont('Arial','B',12);
-            $pdf->Cell( 0.5,0.5,"New Subjects:",0,'L');
-            $pdf->SetFont('Arial','B',9);  
-            }
-           
-            
-            //DebugBreak();
-            //------------- sub 1 & 5
-            $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(0.5,7.05+$y);
-            $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
-            
-            $pdf->SetXY(3+$x,7.05+$y);
-            $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
-            
-            /*$pdf->SetXY(3+$x,7.05+$y);
-            $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
-            //------------- sub 2 & 6
-            $pdf->SetXY(0.5,7.35+$y);
-            $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
-            $pdf->SetXY(3+$x,7.35+$y);
-            $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');
-            /*$pdf->SetXY(3+$x,7.35+$y);
-            $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
-            //------------- sub 3 & 7
-            $pdf->SetXY(0.5,7.70+$y);
-            $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
-            $pdf->SetXY(3+$x,7.70+$y);
-            $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R'); 
-            /*$pdf->SetXY(3+$x,7.70+$y);
-            $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
-            //------------- sub 4 & 8
-            $pdf->SetXY(0.5,8.05+$y);
-            $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-            $pdf->SetXY(3+$x,8.05+$y);
-            $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');
-            //-----------------
-            
-            $pdf->SetXY(0.5,8.40+$y);
-            $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
-            
-            $pdf->SetXY(3+$x,8.40+$y);
-            $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');
-            
-            //-------------------------
-            $pdf->SetXY(0.5,8.75+$y);
-            $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
-            
-            $pdf->SetXY(3+$x,8.75+$y);
-            $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R');
-            
-            //------------------------
-            
-            $pdf->SetXY(0.5,9.10+$y);
-            $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
-            
-            $pdf->SetXY(3+$x,9.10+$y);
-            $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');
-            
-            //------------------------------
-            
-            $pdf->SetXY(0.5,9.45+$y);
-            $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-            
-            $pdf->SetXY(3+$x,9.45+$y);
-            $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
+                $x = 1.5;
+                //--------------------------- Subjects
+                if( $data['groupFee'] == 0)
+                {
+                    $pdf->SetXY(0.5,6.40+$sY);
+                    $pdf->SetFont('Arial','B',12);
+                    $pdf->Cell( 0.5,0.5,"Previous Subjects:",0,'L');
+                    $pdf->SetFont('Arial','',10);
+
+                    $pdf->SetXY(4.5,6.40+$sY);
+                    $pdf->SetFont('Arial','B',12);
+                    $pdf->Cell( 0.5,0.5,"New Subjects:",0,'L');
+                    $pdf->SetFont('Arial','B',9);  
+                }
+
+
+                //DebugBreak();
+                //------------- sub 1 & 5
+                $pdf->SetFont('Arial','',8);
+                $pdf->SetXY(0.5,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+
+                $pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
+
+                /*$pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
+                //------------- sub 2 & 6
+                $pdf->SetXY(0.5,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+                $pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');
+                /*$pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
+                //------------- sub 3 & 7
+                $pdf->SetXY(0.5,7.70+$y);
+                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+                $pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R'); 
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
+                //------------- sub 4 & 8
+                $pdf->SetXY(0.5,8.05+$y);
+                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+                $pdf->SetXY(3+$x,8.05+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');
+                //-----------------
+
+                $pdf->SetXY(0.5,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+
+                $pdf->SetXY(3+$x,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');
+
+                //-------------------------
+                $pdf->SetXY(0.5,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+
+                $pdf->SetXY(3+$x,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R');
+
+                //------------------------
+
+                $pdf->SetXY(0.5,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+
+                $pdf->SetXY(3+$x,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');
+
+                //------------------------------
+
+                $pdf->SetXY(0.5,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+
+                $pdf->SetXY(3+$x,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
             }
             if( $data["N_Reggrp"] == 2 && $data['groupFee'] > 0)
             {
-               
-            $x = 1.5;
-            //--------------------------- Subjects
-            if( $data['groupFee'] == 0)
-            {
-            $pdf->SetXY(0.5,6.40+$sY);
-            $pdf->SetFont('Arial','B',12);
-            $pdf->Cell( 0.5,0.5,"Previous Subjects:",0,'L');
-            $pdf->SetFont('Arial','',10);
-            
-            $pdf->SetXY(4.5,6.40+$sY);
-            $pdf->SetFont('Arial','B',12);
-            $pdf->Cell( 0.5,0.5,"New Subjects:",0,'L');
-            $pdf->SetFont('Arial','B',9);  
-            }
-           
-            
-           // DebugBreak();
-            //------------- sub 1 & 5
-            $pdf->SetFont('Arial','B',9);  
-            $pdf->SetFont('Arial','',8);
-            $pdf->SetXY(0.5,7.05+$y);
-            $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
-            
-            $pdf->SetXY(3+$x,7.05+$y);
-            $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
-            
-            /*$pdf->SetXY(3+$x,7.05+$y);
-            $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
-            //------------- sub 2 & 6
-            $pdf->SetXY(0.5,7.35+$y);
-            $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
-            $pdf->SetXY(3+$x,7.35+$y);
-            $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');
-            /*$pdf->SetXY(3+$x,7.35+$y);
-            $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
-            //------------- sub 3 & 7
-            $pdf->SetXY(0.5,7.70+$y);
-            $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
-            $pdf->SetXY(3+$x,7.70+$y);
-            $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R'); 
-            /*$pdf->SetXY(3+$x,7.70+$y);
-            $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
-            //------------- sub 4 & 8
-            $pdf->SetXY(0.5,8.05+$y);
-            $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-            $pdf->SetXY(3+$x,8.05+$y);
-            $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');
-            //-----------------
-            
-            $pdf->SetXY(0.5,8.40+$y);
-            $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
-            
-            $pdf->SetXY(3+$x,8.40+$y);
-            $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');
-            
-            //-------------------------
-            $pdf->SetXY(0.5,8.75+$y);
-            $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
-            
-            $pdf->SetXY(3+$x,8.75+$y);
-            $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R');
-            
-            //------------------------
-            
-            $pdf->SetXY(0.5,9.10+$y);
-            $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
-            
-            $pdf->SetXY(3+$x,9.10+$y);
-            $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');
-            
-            //------------------------------
-            
-            $pdf->SetXY(0.5,9.45+$y);
-            $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-            
-            $pdf->SetXY(3+$x,9.45+$y);
-            $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
+
+                $x = 1.5;
+                //--------------------------- Subjects
+                if( $data['groupFee'] == 0)
+                {
+                    $pdf->SetXY(0.5,6.40+$sY);
+                    $pdf->SetFont('Arial','B',12);
+                    $pdf->Cell( 0.5,0.5,"Previous Subjects:",0,'L');
+                    $pdf->SetFont('Arial','',10);
+
+                    $pdf->SetXY(4.5,6.40+$sY);
+                    $pdf->SetFont('Arial','B',12);
+                    $pdf->Cell( 0.5,0.5,"New Subjects:",0,'L');
+                    $pdf->SetFont('Arial','B',9);  
+                }
+
+
+                // DebugBreak();
+                //------------- sub 1 & 5
+                $pdf->SetFont('Arial','B',9);  
+                $pdf->SetFont('Arial','',8);
+                $pdf->SetXY(0.5,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+
+                $pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
+
+                /*$pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
+                //------------- sub 2 & 6
+                $pdf->SetXY(0.5,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+                $pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');
+                /*$pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
+                //------------- sub 3 & 7
+                $pdf->SetXY(0.5,7.70+$y);
+                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+                $pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R'); 
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
+                //------------- sub 4 & 8
+                $pdf->SetXY(0.5,8.05+$y);
+                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+                $pdf->SetXY(3+$x,8.05+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');
+                //-----------------
+
+                $pdf->SetXY(0.5,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+
+                $pdf->SetXY(3+$x,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');
+
+                //-------------------------
+                $pdf->SetXY(0.5,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+
+                $pdf->SetXY(3+$x,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R');
+
+                //------------------------
+
+                $pdf->SetXY(0.5,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+
+                $pdf->SetXY(3+$x,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');
+
+                //------------------------------
+
+                $pdf->SetXY(0.5,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+
+                $pdf->SetXY(3+$x,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
             } 
-            
+
             $pdf->SetFont('Arial','UI',10);  
             $pdf->SetXY(0.5,  10.2+$y);
             $date = strtotime($data['edate']); 
             $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');
 
             $pdf->SetXY(4.6,  10.2+$y);
-             $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
+            $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
             //date_format($$data['EDate'], 'd/m/Y H:i:s');
 
             $pdf->SetXY(0.5,  10.5+$y);
