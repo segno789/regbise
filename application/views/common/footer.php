@@ -1,13 +1,11 @@
-
 <footer>
     <p>
         &copy; BiseAdmin 2015
     </p>
 </footer>
 
-
 <!--Add the following script at the bottom of the web page (before </body></html>)-->
-
+<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=93646887"></script>
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -28,377 +26,17 @@ if(isset($files)){
 }
 ?> 
 <script type="">
-
-
-
-
-    /*function showMyImage(fileInput) {
-    debugger;
-    var files = fileInput.files;
-    for (var i = 0; i < files.length; i++) {           
-    var file = files[i];
-    var imageType = "jpg"// /image.*/;     
-    /* if (!file.type.match(imageType)) {
-    continue;
-    }           
-    var img=document.getElementById("corr_image");            
-    img.file = file;    
-    var reader = new FileReader();
-    reader.onload = (function(aImg) { 
-    return function(e) { 
-    aImg.src = e.target.result; 
-    }; 
-    })(img);
-    reader.readAsDataURL(file);
-    }    */
-    /*    }*/
-
-    function readURL(input) {
-    debugger;
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-    $('#corr_image').attr('src', e.target.result);
-    }
-
-    reader.readAsDataURL(input.files[0]);
-    }
-    }
-
-    /*$("#corr_image").change(function(){
-    readURL(this);
-    });*/
-    /*function Checkfiles_corr()
-    {
-    var fup = document.getElementById('corr_image');
-    var fileName = fup.value;
-    // alert('File Name is = '+ fileName);
-    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-    if(ext == "jpg" )
-    {
-    //$("#corr_previewImg")
-    $('#corr_previewImg').attr('src', );
-    return true;
-    } 
-    else
-    {
-    alert("Upload  .jpg images only");
-    fup.value = null;
-    fup.focus();
-    return false;
-    }
-    }*/
     $(document).ready(function () {
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
-            "bAutoWidth" : false,
             "cache": false
         });
         $('#data-tablereg').dataTable({
             "sPaginationType": "full_numbers",
-            "bAutoWidth" : false,
             "cache": false
         });
-
-        $("#c0").click(function(){
-
-            if($(this).is(":checked")){
-                $("#corr_cand_name").show();
-            } else {
-                $("#corr_cand_name").hide();            
-                $("#corr_cand_name").val('');            
-            }
-        });
-        $("#c1").click(function(){
-
-            if($(this).is(":checked")){
-                $("#corr_father_name").show();
-            } else {
-                $("#corr_father_name").hide();            
-                $("#corr_father_name").val('');            
-            }
-        });
-        $("#c2").click(function(){
-            if($(this).is(":checked")){
-                $("#corr_dob").show();
-            } else {
-                $("#corr_dob").hide();            
-                $("#corr_dob").val('');            
-            }
-        });
-        $("#c3").click(function(){
-            if($(this).is(":checked")){
-                $("#corr_bay_form").show();
-            } else {
-                $("#corr_bay_form").hide();            
-                $("#corr_bay_form").val('');            
-            }
-        });
-        $("#c4").click(function(){
-            if($(this).is(":checked")){
-                $("#corr_father_cnic").show();
-            } else {
-                $("#corr_father_cnic").hide();            
-                $("#corr_father_cnic").val('');            
-            }
-        });
-        $("#c5").click(function(){
-            if($(this).is(":checked")){
-                $("#corr_std_group").show();
-                $("#corr_lbl_choose_sub").show();
-                $("#corr_sub1").show();
-                $("#corr_sub2").show();
-                $("#corr_sub3").show();
-                $("#corr_sub4").show();
-                $("#corr_sub5").show();
-                $("#corr_sub6").show();
-                $("#corr_sub7").show();
-                $("#corr_sub8").show();
-
-
-            } else {
-                $("#corr_std_group").hide();
-                $("#corr_lbl_choose_sub").hide();
-                $("#corr_sub1").hide();
-                $("#corr_sub2").hide();
-                $("#corr_sub3").hide();
-                $("#corr_sub4").hide();
-                $("#corr_sub5").hide();
-                $("#corr_sub6").hide();
-                $("#corr_sub7").hide();
-                $("#corr_sub8").hide();
-            }
-        });
-        $("#c7").click(function(){
-            if($(this).is(":checked")){
-                $("#corr_image").show();
-                $("#corr_previewImg").show(); 
-            } else {
-                document.getElementById("corr_previewImg").src = "<?php echo base_url() ?>assets/img/profile.png";
-                document.getElementById("corr_image").value = "";
-                $("#corr_image").hide();
-                $("#corr_previewImg").hide(); 
-            }
-        });
-
     });
-    $("#btnsubmitUpdateEnrol").click(function(){
-    
-        // alert('hello');
-        
-        //alert(c1);
-         var corr_cand_name = $("#corr_cand_name").val();
-        var corr_father_name = $("#corr_father_name").val();
-        var corr_dob = $("#corr_dob").val();
-        var corr_bay_form = $("#corr_bay_form").val();
-        var corr_father_cnic = $("#corr_father_cnic").val();
-         var corr_std_group = $("#corr_std_group option:selected").text();
-         var corr_std_group_val = $("#corr_std_group option:selected").val();
-           var std_group = $("#std_group option:selected").text();
-           
-        var check_checkbox = 0;
-        var corr_type = 0;
-            if ($("#c0").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 1;
-            }if ($("#c1").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 2;
-            }if ($("#c2").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 3;
-            }if ($("#c3").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 4;
-            }if ($("#c4").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 5;
-            }if ($("#c5").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 6;
-            }if ($("#c6").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 7;
-            }if ($("#c7").prop('checked')==true){ 
-            //    alert('at lease one checked');
-            check_checkbox =1;
-            corr_type = 8;
-            }
-       
-            if(corr_type == 1 && corr_cand_name=='')
-            {
-            alertify.error("Please write correct Name!");
-            $("#corr_cand_name").focus();
-            return false;
-            }
-           if(corr_type == 2 && corr_father_name=='')
-            {
-            alertify.error("Please write correct Father's Name!");
-            $("#corr_cand_name").focus();
-            return false;
-            }
-            if(corr_type == 3 && corr_dob=='')
-            {
-            alertify.error("Please write correct Date of Birth!");
-            $("#corr_cand_name").focus();
-            return false;
-            }
-            if(corr_type == 4 && corr_bay_form=='')
-            {
-            alertify.error("Please write correct Bay-Form No.!");
-            $("#corr_cand_name").focus();
-            return false;
-            }
-            if(corr_type == 5 && corr_father_cnic=='')
-            {
-            alertify.error("Please write correct Father CNIC!");
-            $("#corr_cand_name").focus();
-            return false;
-            }
-        var sub1 = $("#sub1 option:selected").text();
-        var sub2 = $("#sub2 option:selected").text();
-        var sub3 = $("#sub3 option:selected").text();
-        var sub4 = $("#sub4 option:selected").text();
-        var sub5 = $("#sub5 option:selected").text();
-        var sub6 = $("#sub6 option:selected").text();
-        var sub7 = $("#sub7 option:selected").text();
-        var sub8 = $("#sub8 option:selected").text();
-        var corr_sub1 = $("#corr_sub1 option:selected").text();
-        var corr_sub2 = $("#corr_sub2 option:selected").text();
-        var corr_sub3 = $("#corr_sub3 option:selected").text();
-        var corr_sub4 = $("#corr_sub4 option:selected").text();
-        var corr_sub5 = $("#corr_sub5 option:selected").text();
-        var corr_sub6 = $("#corr_sub6 option:selected").text();
-        var corr_sub7 = $("#corr_sub7 option:selected").text();
-        var corr_sub8 = $("#corr_sub8 option:selected").text();
-        var sub1_match =0;
-        var sub2_match =0;
-        var sub3_match =0;
-        var sub4_match =0;
-        var sub5_match =0;
-        var sub6_match =0;
-        var sub7_match =0;
-        var sub8_match =0;
-        debugger;
-            if(corr_type == 6 )
-            {
-                //&& corr_std_group_val==0
-                if((corr_std_group== std_group))
-                {
-                    if(sub1==corr_sub1)
-                    {
-                       sub1_match=1 
-                    }
-                    if(sub2==corr_sub2)
-                    {
-                       sub2_match=1 
-                    }
-                    if(sub3==corr_sub3)
-                    {
-                       sub3_match=1 
-                    }
-                    if(sub4==corr_sub4)
-                    {
-                       sub4_match=1 
-                    }
-                    if(sub5==corr_sub5)
-                    {
-                       sub5_match=1 
-                    }
-                    if(sub6==corr_sub6)
-                    {
-                       sub6_match=1 
-                    }
-                    if(sub7==corr_sub7)
-                    {
-                       sub7_match=1 
-                    }
-                    if(sub8==corr_sub8)
-                    {
-                       sub8_match=1 
-                    }
-                    if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
-                    {
-                         alertify.error("Please select correct Group/Subject First!");
-                         $("#corr_cand_name").focus();
-                         return false;
-                    }
-                    
-                }
-           
-            }
-           
-        //do something
-         
-              
-    
-   
-        //if()
-        var formno = $("#lblFormNo").text();
-       
-      
-       
-       
-        var corr_pic_src = $("#corr_previewImg").attr('src');
-      //  alert(corr_pic_src);
-      $('#div_confirmation').html('');
-        $('#div_confirmation').append(' <h3 class="welcome_note">View Your Correction Application Form</h3><br>  <div class="widget">                    <div class="widget-header" id="lblFormNo">                        <div class="title">   <h3>                      Form No.   <?php                                       echo @$data[0]['formNo'];                                       ?>                       </h3> </div>                    </div>                    <div class="widget-body"><div class="control-group">                                <h4 class="span4">Personal Information :</h4>                                <div class="controls controls-row">                                                                                                    </div>                            </div> '); 
-        
-        
-        var chkBoxArray = [];
-        $('.corr_check_box:checked').each(function() {
-            chkBoxArray.push($(this).val());
-               if($(this).val() == '7')
-            {
-               $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img id="corr_previewImg" name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')
-            }
-            if($(this).val() == '1')
-            {
-                $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2 " >                                    Candidate Name :                                </label>                          <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;    font-size: 10px;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?>  >                                <label class="control-label span1 "> TO </label>     <input class="span2" id="corr_cand_name" name="corr_cand_name" style="text-transform: uppercase; " readonly="readonly" type="text" value="'+corr_cand_name+'" >                                </div>                            </div>');
-                             
-            }
-              if($(this).val() == '2')
-            {
-                  $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_name" type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
-            }
-              if($(this).val() == '3')
-            {
-                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Date of Birth:(dd-mm-yyyy)<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="dob" name="dob" placeholder="DOB" style="text-transform: uppercase;     font-size: 10px;" type="text"  value="<?php  $source = @$data['0']['Dob']; @$date = new DateTime(@$source); echo @$date->format('d-m-Y'); ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_dob" type="text"  style="text-transform: uppercase; " name="corr_dob" readonly="readonly" value="'+corr_dob+'"  maxlength="60">                                </div>                            </div>  '); 
-            }
-              if($(this).val() == '4')
-            {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_cnic" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
-            }
-              if($(this).val() == '5')
-            {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" id="corr_father_name" type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
-            }
-              if($(this).val() == '6')
-            {
-                $('#div_confirmation').append(' <div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_std_group" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          <div class="control-group">                                <label class="control-label span2" >                                    Subject 8 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="sub8" name="sub8" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub8+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" id="corr_sub8" type="text"  style="text-transform: uppercase; " name="corr_sub8" value="'+corr_sub8+'" disabled="disabled"  maxlength="60">                                </div>                            </div>             ');
-            }
-           
-            
-        });
-         $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
-         $("#btnsubmitConfirmation").click(function(){
-       // alert('called');
-        $("#corr_form").submit();
-    })
-         $.fancybox("#div_confirmation");
-        // alert(chkBoxArray);
-        //  $.fancybox("#div_confirmation");
-        // $("#div_confirmation").fancybox();
-    })
-    
+
 </script>
 <script type="">
     function isValidEmailAddress(emailAddress) {
@@ -407,6 +45,7 @@ if(isset($files)){
     };
     function Incomplete_inst_info_INSERT()
     {
+        
         var emis ="<?php  echo @$field_status['emis']; ?>";
         var email = "<?php  echo @$field_status['email']; ?>";
         var phone = "<?php echo @$field_status['phone']; ?>";
@@ -609,26 +248,11 @@ if(isset($files)){
             $('.mPageloader').hide();
         }
     }
-     function CancelAlert_confirmation_form()
-                            {
-                                var msg = "Are You Sure You want to Cancel this Form ?"
-                                alertify.confirm(msg, function (e) {
-                                    if (e) {
-                                        // user clicked "ok"
-                                        parent.$.fancybox.close();
-                                       // window.location.href ='<?php echo base_url(); ?>index.php/Registration/EditForms';
-                                    } else {
-                                        // user clicked "cancel"
-
-                                    }
-                                });
-                            }
 </script>
 
 <script type="">
-    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
-    $( "#corr_dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
-    $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date(),maxDate:new Date(),minDate: -60 }).val();
+    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
+    $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date() }).val();
     var myOptions = {
         val1 : 'text1',
         val2 : 'text2'
@@ -643,12 +267,12 @@ if(isset($files)){
     }
     var sub3_Muslim = 
     {
-        3 :'ISLAMIYAT (COMPULSORY)'
+        3 :'Islamyat Compulsory'
     }
     var sub3_Non_Muslim = 
     {
         51 : 'ETHICS',
-        3  :'ISLAMIYAT (COMPULSORY)'
+        3  :'Islamyat Compulsory'
     }
     var sub5_Hum = 
     {
@@ -661,17 +285,15 @@ if(isset($files)){
     var sub7_Hum = 
     {
         0 : 'NOT SELECTED',
-        18:'ART/ART & MODEL DRAWING',
         37: 'EDUCATION',
         26: 'CIVICS',
-        30: 'CLOTHING & TEXTILES',
         25: 'ECONOMICS',
         14: 'PHYSIOLOGY & HYGIENE',
         24: 'GEOGRAPHY',
         21: 'HISTORY OF PAKISTAN',
         35: 'ENGLISH LITERATURE',
         34: 'URDU LITERATURE',
-        19: 'ISLAMIC STUDIES',
+        19: 'ADVANCED ISLAMIC STUDIES',
         87: 'ENVIRONMENTAL STUDIES',
         33: 'COMMERCIAL GEOGRAPHY',
         22: 'ARABIC',
@@ -681,29 +303,27 @@ if(isset($files)){
         83: 'POULTRY FARMING',
         40: 'HEALTH & PHYSICAL EDUCATION',
         78: 'COMPUTER SCIENCE',
-        15: 'GEOMETRICAL & TECHNICAL DRAWING',
-        43: 'ELECTRICAL WIRING',
-        48: 'WOOD WORK (FURNITURE MAKING)',
-        90: 'COMPUTER HARDWARE',
-        83: 'POULTRY FARMING',
-        89: 'FISH FARMING',
-        91: 'BEAUTICIAN',
-        74: 'WEAVING'
+        15 : 'GEOMETRICAL & TECHNICAL DRAWING',
+        43 : 'ELECTRICAL WIRING',
+        48 : 'WOOD WORK (FURNITURE MAKING)',
+        90 : 'COMPUTER HARDWARE',
+        83 : 'POULTRY FARMING',
+        89 : 'FISH FARMING',
+        91 : 'BEAUTICIAN',
+        74 : 'WEAVING'
     }
     var sub8_Hum = 
     {
         0 : 'NOT SELECTED',
-        18: 'ART/ART & MODEL DRAWING',
         37: 'EDUCATION',
         26: 'CIVICS',
-        30: 'CLOTHING & TEXTILES',
         25: 'ECONOMICS',
         14: 'PHYSIOLOGY & HYGIENE',
         24: 'GEOGRAPHY',
         21: 'HISTORY OF PAKISTAN',
         35: 'ENGLISH LITERATURE',
         34: 'URDU LITERATURE',
-        19: 'ISLAMIC STUDIES',
+        19: 'ADVANCED ISLAMIC STUDIES',
         87: 'ENVIRONMENTAL STUDIES',
         33: 'COMMERCIAL GEOGRAPHY',
         22: 'ARABIC',
@@ -713,14 +333,14 @@ if(isset($files)){
         83: 'POULTRY FARMING',
         40: 'HEALTH & PHYSICAL EDUCATION',
         78: 'COMPUTER SCIENCE',
-        15: 'GEOMETRICAL & TECHNICAL DRAWING',
-        43: 'ELECTRICAL WIRING',
-        48: 'WOOD WORK (FURNITURE MAKING)',
-        90: 'COMPUTER HARDWARE',
-        83: 'POULTRY FARMING',
-        89: 'FISH FARMING',
-        91: 'BEAUTICIAN',
-        74: 'WEAVING'
+        15 : 'GEOMETRICAL & TECHNICAL DRAWING',
+        43 : 'ELECTRICAL WIRING',
+        48 : 'WOOD WORK (FURNITURE MAKING)',
+        90 : 'COMPUTER HARDWARE',
+        83 : 'POULTRY FARMING',
+        89 : 'FISH FARMING',
+        91 : 'BEAUTICIAN',
+        74 : 'WEAVING'
     }
     var sub5_Deaf = 
     {
@@ -766,8 +386,6 @@ if(isset($files)){
         73 : 'TYPE WRITING',
         74 : 'WEAVING'
     }
-
-    var langascd = ['22','23','36','34','35'];
 
     function downloadslip(rno)
     {
@@ -987,7 +605,7 @@ if(isset($files)){
         });
 
     }
-    function RestoreBatch(Batch_ID)
+     function RestoreBatch(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID
 
@@ -1035,7 +653,7 @@ if(isset($files)){
         $("#sub3").empty();
         var Religion = $("input[name=religion]:checked").val();
         //console.log(Religion);
-      //  console.log(Religion);
+        console.log(Religion);
         if(Religion == "1")
         {
 
@@ -1164,7 +782,7 @@ if(isset($files)){
             }
 
         } 
-        if(BatchRestore_Op != "")
+         if(BatchRestore_Op != "")
         {
             if(BatchRelease_Op == "success")
             {
@@ -1237,27 +855,27 @@ if(isset($files)){
             });
         });
         //MarkOfIden
-        /* $('#cand_name').focusout(function() 
-        {
-
-        //   alertify.log('hello funciton call');
-        var  name =  $('#cand_name').val();
-        //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
-        if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0) ) {
-        alertify.error("Incorrect Speccling of MUHAMMAD");
-        $('#cand_name').focus();                                    }
+        $('#cand_name').focusout(function() 
+            {
+                debugger;
+                //   alertify.log('hello funciton call');
+                var  name =  $('#cand_name').val();
+                //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
+                if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0) ) {
+                    alertify.error("Incorrect Speccling of MUHAMMAD");
+                    $('#cand_name').focus();                                    }
         })
         $('#father_name').focusout(function() 
-        {
-        //  debugger;
-        //   alertify.log('hello funciton call');
-        var  name =  $('#father_name').val();
-        //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
-        if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0)  ) {
-        alertify.error("Incorrect Speccling of MUHAMMAD");
-        $('#father_name').focus();
-        }
-        })*/
+            {
+                //  debugger;
+                //   alertify.log('hello funciton call');
+                var  name =  $('#father_name').val();
+                //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
+                if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0)  ) {
+                    alertify.error("Incorrect Speccling of MUHAMMAD");
+                    $('#father_name').focus();
+                }
+        })
         $('input[type=radio][name=opt]').change(function() {
             if (this.value == '1') {
                 // alert("Allot Thai Gayo Bhai");
@@ -1275,7 +893,7 @@ if(isset($files)){
         if($("#std_group").val() == "1")
         {
             load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('BIOLOGY',8));
+            $("#sub8").append(new Option('Biology',8));
         }
         else if($("#std_group").val() == "7"){
 
@@ -1293,12 +911,10 @@ if(isset($files)){
             $.each(sub7_Hum,function(val,text){
 
                 $("#sub7").append(new Option(text,val));
-                $("#corr_sub7").append(new Option(text,val));
             });
             $.each(sub8_Hum,function(val,text){
 
                 $("#sub8").append(new Option(text,val));
-                $("#corr_sub8").append(new Option(text,val));
             });
 
             var Elecgrp ="<?php echo @$grp_cd; ?>";
@@ -1331,9 +947,7 @@ if(isset($files)){
                 }  
             }
             $("#sub7").val(sub7_selected);
-            $("#corr_sub7").val(sub7_selected);
             $("#sub8").val(sub8_selected);
-            $("#corr_sub8").val(sub8_selected);
 
         }
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
@@ -1442,87 +1056,6 @@ if(isset($files)){
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
-    }
-    function Correction_form(formrno)
-    {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-        var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-        alertify.confirm(msg, function (e) {
-
-            if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Correction_EditForm/'+formrno;
-            } else {
-                // user clicked "cancel"
-
-            }
-        });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
-    }
-        function download_corr_form(formrno)
-    {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-        //alertify.confirm(msg, function (e) {
-
-         //   if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_correction_Form_Final/'+formrno;
-        //    } else {
-                // user clicked "cancel"
-
-        //    }
-      //  });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
-    }
-     function download_challan_form(formrno)
-    {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
-
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_challan_Form/'+formrno;
-        //    } else {
-                // user clicked "cancel"
-
-          //  }
-       // });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
-    }
-    //download_Branch_corr_form
-       function download_Branch_corr_form(formrno)
-    {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-        var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-        alertify.confirm(msg, function (e) {
-
-            if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Print_challan_Form/'+formrno;
-            } else {
-                // user clicked "cancel"
-
-            }
-        });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
-    }
-     function Corr_App_Delete(Appno)
-    {
-        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
-
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/NinthCorrection/Corr_App_Delete/'+Appno;
-        //    } else {
-                // user clicked "cancel"
-
-          //  }
-       // });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
     function downloadslip9th(rno)
@@ -1641,114 +1174,6 @@ if(isset($files)){
 
 
     }
-    function corr_load_Bio_CS_Sub()
-    {
-        debugger;
-        var NationalityVal = $("#hid_nat").val();
-        $('#corr_sub1').empty();
-        if(NationalityVal == "1")
-        {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#corr_sub3").empty();
-        var Religion = $("#hid_rel").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#corr_sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#corr_sub3").append(new Option(text,val));
-            });
-        }
-
-        // Subject 5 ,6 ,7 and 8
-        $("#corr_sub5").empty();
-        $("#corr_sub6").empty();
-        $("#corr_sub7").empty();
-        $("#corr_sub8").empty();
-
-        $("#corr_sub5").append(new Option('MATHEMATICS',5));
-        $("#corr_sub6").append(new Option('PHYSICS',6));
-        $("#corr_sub7").append(new Option('CHEMISTRY',7));
-
-    }
-
-    function corr_Hum_Deaf_Subjects()
-    {
-
-        //alert(isElec);
-        var NationalityVal = $("#hid_nat").val();
-        console.log(NationalityVal);
-        $('#corr_sub1').empty();
-        if(NationalityVal == "1")
-        {
-            console.log("Hi Pakistani ");
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#corr_sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#corr_sub3").empty();
-        var Religion = $("#hid_rel").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#corr_sub3").empty();
-                $("#corr_sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#corr_sub3").append(new Option(text,val));
-                //$("#sub3").prop('selectedIndex', 2);
-            });
-        }
-
-        $("#corr_sub5").empty();
-        $("#corr_sub6").empty();
-        $("#corr_sub7").empty();
-        $("#corr_sub8").empty();
-
-
-
-
-    }
     $("#sub6").change(function(){
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
@@ -1768,28 +1193,14 @@ if(isset($files)){
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
 
-
+        console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
         if((sub7 == sub8)|| (sub7 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
             $("#sub7").val('0');
             return;
         }
-        var valtext = 0;
-        for(var i =0 ; i<langascd.length; i++)
-        {
-            if(sub8 == langascd[i])
-            {
-                valtext =1;
-            }
-        }
-        if(valtext>0)
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#sub7").val('0');  
-            return;
-        }
-        if((sub7 == 20 && sub8 == 21) || (sub7 == 21 && sub8 == 20)  || (sub7 == 19 && sub8 == 20) || (sub7 == 19 && sub8 == 21) || (sub7 == 20 && sub8 == 19) || (sub7 == 21 && sub8 == 19)){
+        if((sub7 == 20 && sub8 == 21) || (sub7 == 21 && sub8 == 20)){
             alertify.error("Please choose Different Subjects as Double History is not allowed" );
             $("#sub7").val('0');
             return;
@@ -1800,7 +1211,7 @@ if(isset($files)){
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
-
+        console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
         if((sub7 == sub8)|| (sub8 == sub6))
         {
             alertify.error("Please choose Different Subjects" );
@@ -1809,22 +1220,7 @@ if(isset($files)){
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-
-        var valtext = 0;
-        for(var i =0 ; i<langascd.length; i++)
-        {
-            if(sub7 == langascd[i])
-            {
-                valtext =1;
-            }
-        }
-        if(valtext>0)
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#sub8").val('0');  
-            return;
-        }
-        if((sub7 == 20 && sub8 == 21) || (sub7 == 21 && sub8 == 20)  || (sub7 == 19 && sub8 == 20) || (sub7 == 19 && sub8 == 21) || (sub7 == 20 && sub8 == 19) || (sub7 == 21 && sub8 == 19)){
+        if((sub7 == 20 && sub8 == 21) || (sub7 == 21 && sub8 == 20)){
             alertify.error("Please choose Different Subjects as Double History is not allowed" );
             $("#sub8").val('0');
             // $('sub8 option:first-child').attr("selected", "selected");
@@ -1833,112 +1229,19 @@ if(isset($files)){
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-
+        console.log('Hi i am sub8 dropdown :) ');
     })
-    $("#corr_sub6").change(function(){
-        var corr_sub6 = $("#corr_sub6").val();
-        var corr_sub7 = $("#corr_sub7").val();
-        var corr_sub8 = $("#corr_sub8").val();
-        if((corr_sub6 == corr_sub7)|| (corr_sub6 == corr_sub8))
+     function remove_subjects()
         {
-            alertify.error("Please choose Different Subjects" );
-            $("#corr_sub6").val('0');
-            return;
+            $("#sub5").empty();
+            $("#sub5p2").empty();
+            $("#sub6").empty();
+            $("#sub6p2").empty();
+            $("#sub7").empty();
+            $("#sub7p2").empty();
+            $("#sub8").empty();
+            $("#sub8p2").empty();
         }
-        console.log('Hi i am sub6 dropdown :) ');
-    })
-
-    $("#corr_sub7").change(function(){
-        console.log('Hi i am sub7 dropdown :) ');
-        var corr_sub6 = $("#corr_sub6").val();
-        var corr_sub7 = $("#corr_sub7").val();
-        var corr_sub8 = $("#corr_sub8").val();
-
-
-        if((corr_sub7 == corr_sub8)|| (corr_sub7 == corr_sub6))
-        {
-            alertify.error("Please choose Different Subjects" );
-            $("#corr_sub7").val('0');
-            return;
-        }
-        var corr_valtext = 0;
-        for(var i =0 ; i<langascd.length; i++)
-        {
-            if(corr_sub8 == langascd[i])
-            {
-                corr_valtext =1;
-            }
-        }
-        if(valtext>0)
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#corr_sub7").val('0');  
-            return;
-        }
-        if((corr_sub7 == 20 && corr_sub8 == 21) || (corr_sub7 == 21 && corr_sub8 == 20)  || (corr_sub7 == 19 && corr_sub8 == 20) || (corr_sub7 == 19 && corr_sub8 == 21) || (corr_sub7 == 20 && corr_sub8 == 19) || (corr_sub7 == 21 && corr_sub8 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#corr_sub7").val('0');
-            return;
-        }
-    })
-
-    $("#corr_sub8").change(function(){
-        var corr_sub6 = $("#corr_sub6").val();
-        var corr_sub7 = $("#corr_sub7").val();
-        var corr_sub8 = $("#corr_sub8").val();
-
-        if((corr_sub7 == corr_sub8)|| (corr_sub8 == corr_sub6))
-        {
-            alertify.error("Please choose Different Subjects" );
-            $("#corr_sub8").val('0');
-            //$('sub8').trigger('change');
-            // $("sub8")[0].selectedIndex = 0;
-            return;
-        }
-
-        var corr_valtext = 0;
-        for(var i =0 ; i<langascd.length; i++)
-        {
-            if(corr_sub7 == langascd[i])
-            {
-                valtext =1;
-            }
-        }
-        if(valtext>0)
-        {
-            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#corr_sub8").val('0');  
-            return;
-        }
-        if((corr_sub7 == 20 && corr_sub8 == 21) || (corr_sub7 == 21 && corr_sub8 == 20)  || (corr_sub7 == 19 && corr_sub8 == 20) || (corr_sub7 == 19 && corr_sub8 == 21) || (corr_sub7 == 20 && corr_sub8 == 19) || (corr_sub7 == 21 && corr_sub8 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#corr_sub8").val('0');
-            // $('sub8 option:first-child').attr("selected", "selected");
-
-            //$('sub8').trigger('change');
-            // $("sub8")[0].selectedIndex = 0;
-            return;
-        }
-
-    })
-    function remove_subjects()
-    {
-        $("#sub5").empty();
-        $("#sub5p2").empty();
-        $("#sub6").empty();
-        $("#sub6p2").empty();
-        $("#sub7").empty();
-        $("#sub7p2").empty();
-        $("#sub8").empty();
-        $("#sub8p2").empty();
-    }
-    function corr_remove_subjects()
-    {
-        $("#corr_sub5").empty();
-        $("#corr_sub6").empty();
-        $("#corr_sub7").empty();
-        $("#sub8p2").empty();
-    }
     $("#std_group").change(function(){
 
 
@@ -1951,7 +1254,7 @@ if(isset($files)){
 
             // Check Nationality and select appropriate Subject1 against candidate Nationality :)
             load_Bio_CS_Sub();
-            $("#sub8").append(new Option('BIOLOGY',8));
+            $("#sub8").append(new Option('Biology',8));
 
         }
         else if(grp_cd == "7")
@@ -2023,11 +1326,10 @@ if(isset($files)){
                 $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
                 $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
             }
-            else if(Gender == "1")
+            else
             {
                 // alert('i am removed');
-
-                // dropdownElement.find('sub8[value=13]').remove();
+                dropdownElement.find('sub8[value=13]').remove();
 
 
             }
@@ -2054,125 +1356,7 @@ if(isset($files)){
         {
             remove_subjects();
         }
-
-
-    });
-    $("#corr_std_group").change(function(){
-
-
-        var grp_cd = $("#corr_std_group").val();
-        //alert(grp_cd);
-
-        // If Science with Biology group selected then 
-        if(grp_cd == "1")
-        {
-
-            // Check Nationality and select appropriate Subject1 against candidate Nationality :)
-            corr_load_Bio_CS_Sub();
-            $("#corr_sub8").append(new Option('BIOLOGY',8));
-
-        }
-        else if(grp_cd == "7")
-        {
-            corr_load_Bio_CS_Sub();
-            $("#corr_sub8").append(new Option('COMPUTER SCIENCE',78));
-            //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
-        }
-        else if (grp_cd == "8")
-        {
-            corr_load_Bio_CS_Sub();
-            $("#corr_sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
-            //ELECTRICAL WIRING (OPT)
-        }
-
-        else if(grp_cd == "2")
-        {
-
-            corr_Hum_Deaf_Subjects();
-            $.each(sub5_Hum,function(val,text){
-                $("#corr_sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Hum,function(val,text){
-                $("#corr_sub6").append(new Option(text,val));
-            });
-
-            $.each(sub7_Hum,function(val,text){
-
-                $("#corr_sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
-
-                $("#corr_sub8").append(new Option(text,val));
-            });
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
-
-                if(result!=-1)
-                {
-                    isElec = 1;
-                }
-            })
-
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
-                {
-                    // $("#sub7")
-                    //$("#sub7 option[value='43']").remove();
-                    //$("#sub8 option[value='43']").remove();
-                    $("#corr_sub7 option[value='43']").remove();
-                    $("#corr_sub8 option[value='43']").remove();
-
-                    // $("#sub7").find('option[value=43]').remove();
-                    // alert("removed");
-                }  
-            }
-
-
-            var Gender = $("#hid_sex").val();
-            //console.log(Religion);
-            if(Gender == "2")
-            {
-
-                $("#corr_sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                $("#corr_sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-            }
-            else if(Gender == "1")
-            {
-                // alert('i am removed');
-
-                // dropdownElement.find('sub8[value=13]').remove();
-
-
-            }
-
-
-        }
-        else if(grp_cd == "5")
-        {
-            corr_Hum_Deaf_Subjects();
-            $.each(sub5_Deaf,function(val,text){
-                $("#corr_sub5").append(new Option(text,val));
-            });
-            $.each(sub6_Deaf,function(val,text){
-                $("#corr_sub6").append(new Option(text,val));
-            });
-            $.each(sub7_Deaf,function(val,text){
-                $("#corr_sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Deaf,function(val,text){
-                $("#corr_sub8").append(new Option(text,val));
-            });
-        }
-        else if (grp_cd == "0")
-        {
-            corr_remove_subjects();
-        }
-
+       
 
     });
 
@@ -2187,7 +1371,6 @@ if(isset($files)){
     var cell = "<?php echo @$field_status['cell']; ?>";
     var emis = "<?php echo @$field_status['emis']; ?>";
     $("#bay_form,#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
-    $("#corr_bay_form,#corr_father_cnic").mask("99999-9999999-9",{placeholder:"_"});
     $("#dob,#dateofadmission").mask("99-99-9999",{placeholder:"_"});
     $("#mob_number").mask("9999-9999999",{placeholder:"_"});
     $("#Profile_cell").mask("9999-9999999",{placeholder:"_"});
@@ -2424,14 +1607,14 @@ if(isset($files)){
         if($(this).val() == 1) {
 
             $("#sub3").empty(); 
-            $("#sub3").prepend('<option selected="selected" value="3">ISLAMIYAT (COMPULSORY)</option>');
+            $("#sub3").prepend('<option selected="selected" value="3"> ISLAMIYAT (COMPULSORY) </option>');
             //$("#ddlList").prepend('<option selected="selected" value="0"> Select </option>');
         }else{
             //$("#father_cnic").mask("****************************",{placeholder:""});
 
             $("#sub3").empty(); 
             $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
-            $("#sub3").prepend("<option  value='3'>ISLAMIYAT (COMPULSORY)</option>");
+            $("#sub3").prepend("<option  value='3'> ISLAMIYAT (COMPULSORY) </option>");
         }
     });
 
@@ -2576,55 +1759,6 @@ if(isset($files)){
             } 
         });
     }
-    $(function() {
-        // gather all inputs of selected types
-        var inputs = $('input, textarea, select, button'), inputTo;
-
-        // bind on keydown
-        inputs.on('keydown', function(e) {
-
-            // if we pressed the tab
-            if (e.keyCode == 9 || e.which == 9) {
-                // prevent default tab action
-                e.preventDefault();
-
-                if (e.shiftKey) {
-                    // get previous input based on the current input
-                    inputTo = inputs.get(inputs.index(this) - 1);
-                } else {
-                    // get next input based on the current input
-                    inputTo = inputs.get(inputs.index(this) + 1);
-                }
-
-                // move focus to inputTo, otherwise focus first input
-                if (inputTo) {
-                    inputTo.focus();
-                } else {
-                    inputs[0].focus();
-                }
-            }
-        });
-    });   
-    function uplaodpics()
-    {
-        $( "#uplodpics" ).submit();
-    }
-
-    <?php if(@$isdashbord == 1) {?>
-        /*  $( window ).load(function() {
-
-        var msg = "<img src='<?php echo base_url(); ?>assets/img/NoteforPictureUploading2.jpg' alt='logo' style='width:800px; height: auto;' />"
-        alertify.confirm(msg, function (e) {
-
-        if (e) {
-        window.location.href = '<?=base_url()?>/index.php/Registration/EditPicForms';
-        } 
-
-
-        });   
-        });           */
-        <?php }?>
-
 </script>
 <script type="">
     var error = '<?php echo @$error_msg; ?>';
