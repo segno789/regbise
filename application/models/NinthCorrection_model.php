@@ -214,7 +214,39 @@
             return  false;
         }
     }
-    
+    public function EditEnrolement_Branch()
+    {
+
+       // DebugBreak();
+        //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
+        //sp_get_regInfo_spl_case
+
+        $query = $this->db->query("Registration..sp_get_regInfo_after_Correction_Branch 9,2016,1");    
+
+
+
+
+
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+            // $q1 = array('stdinfo'=>$query->result_array()) ;
+            //            for($i= 0; $i<$rowcount; $i++){
+            //            $q1['stdinfo'][$i]['sub1'];
+            //            }
+            //            $q1['stdinfo']['sub1'];
+            //            $q2 = $this->db->query("select SUB_ABR from tblsubject_newschm where SUB_CD in (1,2,3,4,5)");
+            //            $q2 = array('stdinfo_sub'=>$q2->result_array()) ;
+            //            $query = array('stdinfo_reg'=>$q1,'stdinfo_sub'=>$q2);
+
+
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function Delete_Corr_App($AppNo)
     {
         $data=array('isDeleted'=>1);

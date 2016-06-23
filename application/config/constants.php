@@ -54,7 +54,8 @@ define('Correction_Last_Date','2016-10-31');
 define('Corr_ApplicationNo','30000');
 define('CORR_IMAGE_PATH', 'uploads/correction/');
 
-
+define('session_year','2016-2018');
+define('corr_bank_chall_class','9TH');
 define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018'); 
 define('TITLE','Online 9th Registration'); 
