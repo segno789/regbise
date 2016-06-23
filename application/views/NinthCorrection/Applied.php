@@ -27,16 +27,16 @@
                                         </th> <th style="width:5%">
                                             Form No.
                                         </th>
-                                        <th style="width:20%">
+                                        <th style="width:15%">
                                             Name
                                         </th>
-                                        <th style="width:20%">
+                                        <th style="width:15%">
                                             Father's Name
                                         </th>
                                         <th style="width:5%" class="hidden-phone">
                                             DOB
                                         </th>
-                                    <th style="width:18%" class="hidden-phone" >
+                                    <th style="width:28%" class="hidden-phone" >
                                             Download
                                         </th>
                                     </tr>

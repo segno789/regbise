@@ -104,7 +104,7 @@
                                 </label>
 
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php $source = $data['0']['Dob']; $date = new DateTime($source); echo $date->format('d-m-Y'); ?>" required="required" readonly="readonly"  <?php if($isReAdm==1) echo "readonly='readonly'"; ?> >
+                                    <input class="span3" type="text"  name="dob" placeholder="DOB" value="<?php $source = $data['0']['Dob']; $date = new DateTime($source); echo $date->format('d-m-Y'); ?>" required="required" readonly="readonly"  <?php if($isReAdm==1) echo "readonly='readonly'"; ?> >
 
                                     <label class="control-label span2" >
                                         Correction Date of Birth : <input type="checkbox" class="corr_check_box" id="c2" name="c[]" value="3" style="width: 20px;    height: 20px;"> 

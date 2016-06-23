@@ -354,9 +354,10 @@ class NinthCorrection extends CI_Controller {
         // }
         //$totalfee
         $turn=1;     
-        $pdf=new PDF_Rotate("P","in","A4");
+        $pdf=new PDF_Rotate("P","in","A4");     
         $pdf->SetTitle("Challan Form | Application Correction Form");
         $pdf->SetMargins(0.5,0.5,0.5);
+        $pdf->AliasNbPages();
         $pdf->AddPage();
         $generatingpdf=false;
         $challanCopy=array(1=>"Depositor Copy",  2=>"Registration Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
@@ -383,9 +384,9 @@ class NinthCorrection extends CI_Controller {
         //  $pdf->SetDrawColor(0,0,0);
          $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
         //  $image =  $this->set_barcode($temp);
-         //DebugBreak();
+         //DebugBreak();       
        $temp =  $this->set_barcode($temp);
-       
+         
         $yy = 0.05;
         $dyy = 0.1;
         $corcnt = 0;
@@ -1563,7 +1564,7 @@ if($data['FnameFee']>0)
     }
     public function Corr_App_Delete($AppNo)
     {
-         DebugBreak();
+         //DebugBreak();
         $this->load->model('NinthCorrection_model');
         $RegStdData = array('data'=>$this->NinthCorrection_model->Delete_Corr_App($AppNo));
         $this->load->library('session');

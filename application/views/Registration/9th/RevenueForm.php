@@ -94,7 +94,7 @@
                 </tr>
 
                 <tr>
-                    <td><strong>Amount Of Late Enrolment Fee:</strong></td>
+                    <td><strong>Amount Of Late + Token Enrolment Fee:</strong></td>
                     <td><strong><?php echo  $data['batch_info'][0]["Total_LateRegistrationFee"];?></strong></td>
                     <td>&nbsp;</td>
                 </tr>
@@ -117,7 +117,7 @@
         <th class="th">Father Name</th>
         <!--    <th class="th">Date Of Adm</th> -->
         <th class="th">Reg. Fee</th>
-        <th class="th">Late Reg Fee</th>
+        <th class="th">Late+Token Reg. Fee</th>
         <th class="th">Process. Fee</th>
         <th class="th">Total Amount</th>
     </tr>

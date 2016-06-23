@@ -40,7 +40,7 @@ define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
 define('BARCODE_PATH', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE', '2016-06-07');
-define('DOUBLE_LAST_DATE', '2016-06-13');
+define('DOUBLE_LAST_DATE', '2016-06-30');
 
 
 define('IMAGE_PATH11', 'uploads/2016/colleges');
