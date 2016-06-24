@@ -19,7 +19,7 @@
                           <label class='control-label span1' >
                             EMIS CODE:
                              </label>
-           <input class='span3' type='text' id='Profile_emis' style='text-transform: uppercase;' name='Profile_emis' placeholder='EMIS CODE' value = '<?php   echo $emis; ?>' required='required'>
+           <input class='span3' type='text' id='Profile_emis' style='text-transform: uppercase;' name='Profile_emis' placeholder='EMIS CODE' value = '    $emis' required='required'>
             </div>
             </div>";
                         }

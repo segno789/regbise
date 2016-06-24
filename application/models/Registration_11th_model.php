@@ -120,7 +120,7 @@ class Registration_11th_model extends CI_Model
         $IsHafiz = $data['IsHafiz'];
         $rel = $data['rel'];
         $addr =strtoupper($data['addr']) ;
-     
+
         $sub1=  $data['sub1'];
         $sub2 = $data['sub2'];
         $sub3 = $data['sub3'];
@@ -151,16 +151,20 @@ class Registration_11th_model extends CI_Model
         $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,$OldRno,$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
-       
-        
+
+
     }
-    
-        public function Pre_Matric_data($data){
-        
-        //'matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,
-        
-        $query = $this->db->get_where('Admission_online..fl_dataforma16', array('class' => $data['oldClass'],'Iyear' => $data['year'],'sess'=>$data['session'], 'dob' => $data['dob'], 'rno'=>$data['mrollno'],'Brd_cd'=>$data['board']));
+
+    public function Pre_Matric_data($data){
+
+
+        $rno =  $data['mrollno'];
+        $sess = $data['session'];
+        $iyear =$data['year'];
+        $brd = $data['board'];
        // DebugBreak();
+        $query = $this->db->query("Registration..Prev_Get_Student_Matric $rno,$iyear,$sess,$brd");
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -168,12 +172,12 @@ class Registration_11th_model extends CI_Model
         }
         else
         {
-           return  false;
+            return  false;
         }
     }
     public function get_spl_name($splcd){
         $query = $this->db->get_where('Admission_online..tblSplCase', array('spl_cd' => $splcd));
-       // DebugBreak();
+        // DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -181,7 +185,7 @@ class Registration_11th_model extends CI_Model
         }
         else
         {
-           return  false;
+            return  false;
         }
     }
     public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  IA_P1_Reg_Adm2016_sp_Update
@@ -202,17 +206,17 @@ class Registration_11th_model extends CI_Model
         $IsHafiz = $data['IsHafiz'];
         $rel = $data['rel'];
         $addr =strtoupper($data['addr']);
-       /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
+        /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
         {
-            $grp_cd = 1;    
+        $grp_cd = 1;    
         }
         else if($data['grp_cd'] == 2 )
         {
-            $grp_cd = 2;        
+        $grp_cd = 2;        
         }
         else if($data['grp_cd'] == 5 )
         {
-            $grp_cd = 5;        
+        $grp_cd = 5;        
         }*/
         $sub1= $data['sub1'];
         $sub2 = $data['sub2'];
@@ -239,7 +243,7 @@ class Registration_11th_model extends CI_Model
         $regoldclass = $data['regoldclass'];
         $regoldyear = $data['regoldyear'];
         $isreadm = $data['isreadm'];
-       // DebugBreak();
+        // DebugBreak();
         $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$sex,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$regoldrno,$regoldclass,$regoldyear,$regoldsess,$isreadm");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
@@ -247,7 +251,7 @@ class Registration_11th_model extends CI_Model
     public function EditEnrolement($inst_cd)
     {
 
-       // DebugBreak();
+        // DebugBreak();
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
         //sp_get_regInfo_spl_case
 
@@ -277,33 +281,33 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-     
+
     public function ReleaseBatch_INSERT($allinputdata){
         // DebugBreak();
-         $Inst_cd = $allinputdata['Inst_Id'];
-         $batchid = $allinputdata['batchId'];
-         $reason = $allinputdata['reason'];
-         $branch = $allinputdata['branch'];
-         $challan = $allinputdata['challan'];
-         $amount = $allinputdata['amount'];
-         $date = $allinputdata['date'];
-         
-          $query = $this->db->query("Registration..ReleaseBatch_INSERT_Eleventh $Inst_cd,$batchid,'$reason','$branch',$challan,$amount,'$date'");
+        $Inst_cd = $allinputdata['Inst_Id'];
+        $batchid = $allinputdata['batchId'];
+        $reason = $allinputdata['reason'];
+        $branch = $allinputdata['branch'];
+        $challan = $allinputdata['challan'];
+        $amount = $allinputdata['amount'];
+        $date = $allinputdata['date'];
+
+        $query = $this->db->query("Registration..ReleaseBatch_INSERT_Eleventh $Inst_cd,$batchid,'$reason','$branch',$challan,$amount,'$date'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }
     public function EditEnrolement_data($formno,$year,$inst_cd)
     {
 
-       //  DebugBreak();
-         if($year == 2015){
-        $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
-         }
-         else{
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
-         }
-        
-        
+        //  DebugBreak();
+        if($year == 2015){
+            $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
+        }
+        else{
+            $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
+        }
+
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -396,7 +400,7 @@ class Registration_11th_model extends CI_Model
         {
 
             $result_1 = $query->result_array();
-           
+
             return  $result_1;
         }
         else

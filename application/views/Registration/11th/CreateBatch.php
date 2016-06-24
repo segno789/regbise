@@ -116,7 +116,7 @@
 
 
                             // DebugBreak();
-                            $subgroups =  split(',',$grp_cd);
+                            $subgroups =  split(',',$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
                             {
@@ -234,7 +234,7 @@
 
                             
                            // @$msg_status;
-                            @$subgroups =  split(',',@$grp_cd);
+                            @$subgroups =  split(',',@$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
                             {
@@ -433,7 +433,7 @@
                                                  <td>'.$vals["BForm"].'</td>
                                                 <td>'.$grp_name.'</td>
                                                 <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                                <td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                                <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
 
                                                 if($spl_cd ==FALSE || $spl_cd =="3" )
                                                     echo'<td>
