@@ -21,7 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -264,7 +264,7 @@
                                     <?php
                                    // DebugBreak();
                                         $grp = $data[0]['RegGrp'];
-                                          $subgroups =  split(',',$grp_cd);
+                                          $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
                                         {

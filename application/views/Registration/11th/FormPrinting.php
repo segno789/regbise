@@ -40,7 +40,7 @@
                             <div class="controls controls-row">
                                 <select id="std_group"   class="dropdown span3"  name="std_group">
                             <?php        
-                                    $subgroups =  split(',',$grp_cd);
+                                    $subgroups =  split(',',$grp_cdi);
                             echo "<option value='0' >SELECT GROUP</option>";
                             for($i =0 ; $i<count($subgroups); $i++)
                             {

@@ -35,6 +35,17 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
+        
+        var data_excep = "<?php echo @$excep_halt; ?>";
+         if(data_excep != '')
+        {
+            
+                alertify.error(data_excep);
+               // $('#Info_emis').focus();
+                return false;
+           
+
+        }
     });
 
 </script>
@@ -683,8 +694,8 @@ if(isset($files)){
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-       $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
-        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+       $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
 
         $("#sub1").append(new Option('Urdu',2));
@@ -709,8 +720,8 @@ if(isset($files)){
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-       $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
-        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+       $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
         $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
@@ -733,8 +744,8 @@ if(isset($files)){
         $("#sub4").empty();
         $("#sub5").empty();
         $("#sub6").empty();
-        $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
-        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
         
         
 
@@ -767,7 +778,7 @@ if(isset($files)){
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
         $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
@@ -833,8 +844,8 @@ if(isset($files)){
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-       $("#sub7").empty().append('<option selected="selected" value="-1">NONE</option>');
-        $("#sub8").empty().append('<option selected="selected" value="-1">NONE</option>');
+       $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
