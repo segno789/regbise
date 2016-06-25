@@ -313,7 +313,16 @@ class Registration_11th extends CI_Controller {
                 $year = 2016;    
             }
 
-            //  DebugBreak();
+              //DebugBreak();
+            $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
+            $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
+            if($feedingcheck != false)
+            {
+            $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
+            $this->session->set_flashdata('matric_error', 'This Roll No. Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
+            redirect('Registration_11th/Students_matricInfo');
+            return; 
+            }
             $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0);
 
         }
@@ -1975,13 +1984,13 @@ class Registration_11th extends CI_Controller {
             $pdf->Cell( 0.5,0.5,$data['FormNo'],0,'L');
 
             //--------------------------- Institution Code and Name   $user['Inst_Id']. "-". $user['inst_Name']
-            $pdf->SetXY(0.2,0.85+$Y);
+            $pdf->SetXY(0.2,0.73+$Y);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
 
             $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(1.75,0.85+$Y);
-            $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'].'122217-DAR-E-ARQAM MODEL HIGH SCHOOL FOR GIRLS, THIRKHA ROAD, SHAHDIWAL', 0);
+            $pdf->SetXY(1.75,0.89+$Y);
+            $pdf->MultiCell(6, .2, $user['Inst_Id']."-".$user['inst_Name'], 0);
             //$pdf->Cell(0.5,0.5,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
 
             //------ Picture Box on Centre      

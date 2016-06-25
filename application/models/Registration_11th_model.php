@@ -175,6 +175,44 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
+     public function IsFeeded($data){
+        $rno =  $data['mrollno'];
+        $sess = $data['session'];
+        $iyear =$data['year'];
+        $brd = $data['board'];
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('matRno' => $rno, 'yearOfPass'=>$iyear,'sessOfPass'=>$sess,'Brd_cd'=>$brd,'IsDeleted'=>0));
+        // DebugBreak();
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+     public function InstName($instCode)
+    {
+       // DebugBreak();
+         $this->db->select('Name');
+        //$this->db->order_by("formno", "DESC");
+        $name = $this->db->get_where('admission_online..tblInstitutes_all', array('Inst_cd' => $instCode));
+        $rowcount = $name->num_rows();
+
+        if($rowcount == 0 )
+        {
+            return false;
+        }
+        else
+        {
+            $row  = $name->result_array();
+            $inst_name = $row[0]['Name'];
+            return $inst_name;
+        }
+
+
+    }
     public function get_spl_name($splcd){
         $query = $this->db->get_where('Admission_online..tblSplCase', array('spl_cd' => $splcd));
         // DebugBreak();
