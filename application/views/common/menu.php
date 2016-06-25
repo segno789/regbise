@@ -75,7 +75,25 @@
                         </a>
                     </li>
                     
-                    <?php }?>
+                    <?php } 
+                    
+                    if($isselected == '0' OR $isselected == '8'){?>
+                
+                    <li>
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            9th Correction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            9th Reg. Batch
+                        </a>
+                    </li>
+                
+            
+                   <?php } ?>
             </ul>
             <div class="clearfix">
             </div>
@@ -110,7 +128,7 @@
             if($isselected == '0') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrections"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thbatch"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
 
                     <li>
                         <a href="<?php echo base_url(); ?>index.php/BiseCorrection/BatchRelease">
@@ -127,37 +145,41 @@
                             Batch Restore
                         </a>
                     </li>
-                    <!--   <li>
-                    <a href="<?php echo base_url(); ?>index.php/BiseCorrection/NewEnrolment">
-                    9th New Enrolment
-                    </a>
-                    </li>
-                    <li>
-                    <a href="<?php echo base_url(); ?>index.php/BiseCorrection/tracebyfromno">
-                    Trace by FormNo
-                    </a>
-                    </li>
-                    <li>
-                    <a href="<?php echo base_url(); ?>index.php/BiseCorrection/tracebyinstcode">
-                    Trace by Institute Code
-                    </a>
-                    </li>
-                    <li>
-                    <a href="<?php echo base_url(); ?>index.php/BiseCorrection/migration">
-                    9th Migration
-                    </a>
-                    </li>-->
+                   
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
-                    <!--  <li>
-                    <a href="<?php echo base_url(); ?>Registration/ProofReading">
-                    Proof Reading
-                    </a>
-                    </li>-->
+                 
                 </ul>
                 <?php
             }
+            
+            if($isselected == '8') {   ?>
+            
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrections"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp">
+                            9th Correction Applications
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/verifiedcorrection">
+                            Verified Correction  
+                        </a>
+                    </li>
+                    
+
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
+
+                </ul>
+            
+            
+            <?php }
+            
             if($isselected == '1') { 
                 ?>
                 <ul >

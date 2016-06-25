@@ -23,10 +23,10 @@
                         <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
                         </div>  -->    
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>9th Corrections Applications</a>
+                            <a href="<?php echo base_url(); ?>index.php/BiseCorrection/BatchRelease"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Online Batch Release</a>
                         </div>
                           <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/BiseCorrection/verifiedcorrection"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Verified Correction</a>
+                            <a href="<?php echo base_url(); ?>index.php/BiseCorrection/BatchRestoreManual"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Manual Batch Release</a>
                         </div>
                        <!-- <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>index.php/Registration/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>9th Migration </a>

@@ -71,6 +71,16 @@ class BiseCorrections_model extends CI_Model
         $result = $q2->result_array();
         return $result;
     }
+     public function get9thCorrectionData()
+    {
+        //DebugBreak();
+       
+        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0));
+        $result = $q2->result_array();
+        return $result;
+    }
+    
+    
        public function Batch_List_Deleted()
     {
         //DebugBreak();
@@ -80,6 +90,16 @@ class BiseCorrections_model extends CI_Model
         return $result;
     }
      public function Batch_List_UPDATE($fetch_data)
+    {
+        
+        $Inst_cd = $fetch_data['Inst_Cd'];
+        $Batch_Id = $fetch_data['BatchId'];
+        $ckpo = $fetch_data['ckpo'];
+        $query = $this->db->query("Registration..Release_Batch_By_BoardOperator $Inst_cd,$Batch_Id,$ckpo");
+        $rowcount = $query->num_rows();
+        return true;
+    }
+     public function reg9thCorrection_UPDATE($fetch_data)
     {
         
         $Inst_cd = $fetch_data['Inst_Cd'];

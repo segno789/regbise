@@ -436,11 +436,15 @@ class NinthCorrection extends CI_Controller {
         for ($j=1;$j<=4;$j++) 
         {
 
-            $corcnt = 0;
+            
+            
+            
             $yy = 0.04;
-            if($turn==1){$dyy=0.1;} else {
+            if($turn==1){$dyy=0.1;} 
+            else {
                 if($turn==2){$dyy=2.65;} else  if($turn==3) {$dyy=5.2; } else {$dyy=7.75 ; $turn=0;}
             }
+            $corcnt = 0;
             $pdf->SetFont('Arial','BI',11);
             $pdf->SetXY(1.0,$yy+$dyy);
             //   DebugBreak();
@@ -502,7 +506,7 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetFont('Arial','U',9);
             $pdf->Cell(0.5,0.25, "Particulars Of Depositor",0,2,'L');
             $pdf->SetX(4.0);
-            $pdf->SetFont('Arial','B',10);
+            $pdf->SetFont('Arial','B',8);
 
             if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
             $pdf->Cell(0.5,0.25,$result[0]['Pre_Name'].'    '.$sodo.$result[0]['Pre_FName'],0,2,'L');
@@ -510,7 +514,9 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
             // DebugBreak();
-            $pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+            //$pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+            $pdf->MultiCell(4, .1, "Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0);
+            $pdf->SetXY(4,$y+1.15+$dy);
             $pdf->SetFont('Arial','B',9);
             $pdf->Cell(0.5,0.3,"Amount in Words: ".$feeInWords,0,2,'L');
 
@@ -575,6 +581,10 @@ class NinthCorrection extends CI_Controller {
             }
             else if($corcnt ==5){
                 $y += .2;
+            }
+            
+            else if($corcnt ==6){
+                $y += .16;
             }
             $y += -0.2;
             $pdf->SetFont('Arial','B',12);
@@ -726,7 +736,7 @@ class NinthCorrection extends CI_Controller {
         $PicFee =0;
         $corr_totalFee = 0;
 
-        // DebugBreak();
+         $isPic = 0;
         // ======================= Name checkbox ======================
         if (isset($_POST['c'])){
 
@@ -900,24 +910,17 @@ class NinthCorrection extends CI_Controller {
                 //Group Checkbox Not Selected
                 }*/
                 // =============== Pic Checkbox ==================
-                $isPic = 0;
+               
                 if ($value== '7') {
 
-                    //$corr_grp_cd = $_POST['corr_std_group'];
                     $PicFee = $rule_fee[0]['PicFee'];
                     $isPic = 1;
-                    // Group Checkbox is selected
-                } /*else {
-
-                $corr_grp_cd = '';
-                $PicFee=0;
-                //Group Checkbox Not Selected
-                }*/
+                } 
 
             }          // =================== loop Ending
         }   //===============Array isset Ending
         $target_path = CORR_IMAGE_PATH.$Inst_Id.'/';
-
+          
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if($isPic ==1)
         {
