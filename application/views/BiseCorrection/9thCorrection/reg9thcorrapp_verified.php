@@ -44,7 +44,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                   // DebugBreak();
+                                  //  DebugBreak();
                                   //  $errors;
                                     if($info!= false)
                                     {
@@ -65,10 +65,7 @@
                                     if($vals['IsCorr']==1){
                                      echo '<button type="button" class="btn btn-danger" value="'.$vals['AppNo'].'" onclick="Verified_Update('.$vals['AppNo'].')">Verified Correction</button>';   
                                     }
-                                    else{
-                                        echo'<label style="color: green;    font-weight: bold;">APPLIED SUCCESSFULLY</label>';
-                                    }
-                                     echo ' 
+                                     echo ' <label style="color: green;    font-weight: bold;">APPLIED SUCCESSFULLY</label>
                                     </td>';
                                     endforeach;
                                     

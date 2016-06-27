@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/verifiedcorrection">
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp_verified">
                             Verified Correction  
                         </a>
                     </li>

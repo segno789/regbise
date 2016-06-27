@@ -236,7 +236,7 @@ class Login extends CI_Controller {
 
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
-            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303)
+            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229)
             {
 
 

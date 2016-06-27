@@ -75,11 +75,18 @@ class BiseCorrections_model extends CI_Model
     {
         //DebugBreak();
        
-        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0));
+        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1));
         $result = $q2->result_array();
         return $result;
     }
-    
+       public function get9thCorrectionData_verified()
+    {
+        //DebugBreak();
+       
+        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
+        $result = $q2->result_array();
+        return $result;
+    }
     
        public function Batch_List_Deleted()
     {
@@ -102,10 +109,11 @@ class BiseCorrections_model extends CI_Model
      public function reg9thCorrection_UPDATE($fetch_data)
     {
         
-        $Inst_cd = $fetch_data['Inst_Cd'];
-        $Batch_Id = $fetch_data['BatchId'];
+       // $Inst_cd = $fetch_data['Inst_Cd'];
+        $AppNo = $fetch_data['AppNo'];
         $ckpo = $fetch_data['ckpo'];
-        $query = $this->db->query("Registration..Release_Batch_By_BoardOperator $Inst_cd,$Batch_Id,$ckpo");
+        //DebugBreak();
+        $query = $this->db->query("Registration..Update_corrections_new_1 $AppNo,$ckpo");
         $rowcount = $query->num_rows();
         return true;
     }

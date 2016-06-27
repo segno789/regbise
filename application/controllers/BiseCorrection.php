@@ -27,7 +27,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/slips9thcorrections.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }
-     public function reg9thbatch()
+    public function reg9thbatch()
     {
         $this->load->helper('url');
         $data = array(
@@ -35,7 +35,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
-       // $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thObjectionStdData());
+        // $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thObjectionStdData());
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
@@ -43,8 +43,8 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/reg9thbatch.php');
         $this->load->view('common/footer.php');
     }
-    
-    
+
+
     public function reg9thcorrections()
     {
         $this->load->helper('url');
@@ -60,8 +60,8 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/reg9thcorrections.php');
         $this->load->view('common/footer.php');
     }
-     
-     public function reg9thcorrectionapp()
+
+    public function reg9thcorrectionapp()
     {
         $this->load->helper('url');
         $data = array(
@@ -69,11 +69,11 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
-         $NinthStdData = array('info'=>$this->BiseCorrections_model->get9thCorrectionData());
+        $NinthStdData = array('info'=>$this->BiseCorrections_model->get9thCorrectionData());
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
-         //  $data1 = array('Inst_Id'=>$Inst_Id);
+
+        //  $data1 = array('Inst_Id'=>$Inst_Id);
         if(!( $this->session->flashdata('BatchList_update'))){
 
             $user_info['errors_RB_update'] = '';  
@@ -86,8 +86,32 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/reg9thcorrapp.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }
-     
-     
+    public function reg9thcorrectionapp_verified()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('info'=>$this->BiseCorrections_model->get9thCorrectionData_verified());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        //  $data1 = array('Inst_Id'=>$Inst_Id);
+        if(!( $this->session->flashdata('BatchList_update'))){
+
+            $user_info['errors_RB_update'] = '';  
+        }
+        else{
+            $user_info['errors_RB_update'] = $this->session->flashdata('BatchList_update');
+        }
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/reg9thcorrapp_verified.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+    }
+
     public function BatchRelease()
     {
         $this->load->helper('url');
@@ -143,9 +167,9 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/BatchRestore.php',$user_info_arr);
         $this->load->view('common/footer.php');
     }
-     public function BatchRestoreManual()
+    public function BatchRestoreManual()
     {
-         $this->load->helper('url');
+        $this->load->helper('url');
         $data = array(
             'isselected' => '0',
         );
@@ -162,7 +186,7 @@ class BiseCorrection extends CI_Controller {
 
         $user_info  =  $this->BiseCorrections_model->Batch_List_all();
         $user_info_arr = array('info'=>$user_info,'errors_RB_update'=>$error_msg);
-       // $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thObjectionStdData());
+        // $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thObjectionStdData());
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
@@ -461,29 +485,33 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        //  DebugBreak();
+         // DebugBreak();
         $data = array(
             'isselected' => '0',
         );
         $ckpo = $userinfo['Inst_Id'];
-        $fetchdata = array('AppNo'=>$BatchId,'Inst_Cd'=>$Inst_Cd,'ckpo'=>$ckpo);
+        $fetchdata = array('AppNo'=>$BatchId,'ckpo'=>$ckpo);
         $status = array('data'=>$this->BiseCorrections_model->reg9thCorrection_UPDATE($fetchdata));
 
-        
+
         if($status == true){
 
             $error_msg= "success";
+            $this->session->set_flashdata('BatchList_update',$error_msg);
+            redirect('BiseCorrection/reg9thcorrectionapp_verified');
+            return;
         }
         else{
             $error_msg = "Fail";
+            $this->session->set_flashdata('BatchList_update',$error_msg);
+            redirect('BiseCorrection/reg9thcorrectionapp');
+            return;
         }
-        $this->session->set_flashdata('BatchList_update',$error_msg);
-        redirect('BiseCorrection/reg9thcorrectionapp');
-        return;
+
 
 
     }
-    
+
     public function BatchRelease_update($BatchId, $Inst_Cd)
     {
 
@@ -555,12 +583,12 @@ class BiseCorrection extends CI_Controller {
             $imageTmp=imagecreatefromjpeg($originalImage);
         else if (preg_match('/png/i',$ext))
             $imageTmp=imagecreatefrompng($originalImage);
-        else if (preg_match('/gif/i',$ext))
-            $imageTmp=imagecreatefromgif($originalImage);
-        else if (preg_match('/bmp/i',$ext))
-            $imageTmp=imagecreatefrombmp($originalImage);
-        else
-            return 0;
+            else if (preg_match('/gif/i',$ext))
+                $imageTmp=imagecreatefromgif($originalImage);
+                else if (preg_match('/bmp/i',$ext))
+                    $imageTmp=imagecreatefrombmp($originalImage);
+                    else
+                        return 0;
 
         imagejpeg($imageTmp, $outputImage, $quality);
         imagedestroy($imageTmp);
