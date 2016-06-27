@@ -107,15 +107,15 @@ class Registration_11th_model extends CI_Model
         //  DebugBreak();
         $name = strtoupper($data['name']);
         $fname =strtoupper($data['Fname']);
-        $BForm = $data['BForm'];
+        $BForm = $data['bFormNo'];
         $FNIC = $data['FNIC'];
-        $Dob = $data['Dob'];
-        $CellNo = $data['CellNo'];
+        $Dob = $data['dob'];
+        $CellNo = $data['MobNo'];
         $medium = $data['medium'];
         $Inst_Rno = strtoupper($data['Inst_Rno']);
-        $MarkOfIden =strtoupper($data['MarkOfIden']);
+        $MarkOfIden =strtoupper($data['markOfIden']);
         $Speciality = $data['Speciality'];
-        $nat = $data['nat'];
+        $nat = $data['IsPakistani'];
         $sex = $data['sex'];
         $IsHafiz = $data['IsHafiz'];
         $rel = $data['rel'];
@@ -142,15 +142,25 @@ class Registration_11th_model extends CI_Model
         $formno = $data['FormNo'];
         $RegGrp = $data['grp_cd'];
         $grp_cd = $RegGrp;
-        $OldRno = $data['OldRno'];
-        $OldYear = $data['OldYear'];
-        $OldSess = $data['OldSess'];
-        $OldBrd = $data['OldBrd'];
+        $OldRno = $data['SSC_RNo'];
+        $OldYear = $data['SSC_Year'];
+        $OldSess = $data['SSC_Sess'];
+        $OldBrd = $data['SSC_brd_cd'];
         $IsReAdm = $data['IsReAdm'];
-        //DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,$OldRno,$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm");
+       // DebugBreak();
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
-        return true;
+        
+         $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  true;
+        }
+       // return true;
 
 
     }
@@ -180,7 +190,8 @@ class Registration_11th_model extends CI_Model
         $sess = $data['session'];
         $iyear =$data['year'];
         $brd = $data['board'];
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('matRno' => $rno, 'yearOfPass'=>$iyear,'sessOfPass'=>$sess,'Brd_cd'=>$brd,'IsDeleted'=>0));
+      //  DebugBreak();
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('matRno' => "$rno", 'yearOfPass'=>$iyear,'sessOfPass'=>$sess,'Brd_cd'=>$brd,'IsDeleted'=>0));
         // DebugBreak();
         $rowcount = $query->num_rows();
         if($rowcount > 0)

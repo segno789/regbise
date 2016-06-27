@@ -262,6 +262,13 @@ if(isset($files)){
 </script>
 
 <script type="">
+
+var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
+debugger;
+if(isotherboard != 1)
+{
+       $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
+}
    // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, 'setDate': new Date() }).val(); //, startDate:new Date()
     var myOptions = {
@@ -999,7 +1006,7 @@ if(isset($files)){
                     e.preventDefault();
                 } else {
                     var key = e.keyCode;
-                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 66 && key <= 90))) {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 65 && key <= 90))) {
                         e.preventDefault();
                     }
                 }
@@ -1011,7 +1018,7 @@ if(isset($files)){
                     e.preventDefault();
                 } else {
                     var key = e.keyCode;
-                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 66 && key <= 90))) {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 36 && key <= 40) || (key >= 65 && key <= 90))) {
                         e.preventDefault();
                     }
                 }
