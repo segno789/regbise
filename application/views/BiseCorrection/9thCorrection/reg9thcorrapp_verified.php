@@ -65,7 +65,7 @@
                                     if($vals['IsCorr']==1){
                                      echo '<button type="button" class="btn btn-danger" value="'.$vals['AppNo'].'" onclick="Verified_Update('.$vals['AppNo'].')">Verified Correction</button>';   
                                     }
-                                     echo ' <label style="color: green;    font-weight: bold;">APPLIED SUCCESSFULLY</label>
+                                     echo ' <label style="color: green;    font-weight: bold;">CORRECTION UPDATED SUCCESSFULLY</label>
                                     </td>';
                                     endforeach;
                                     

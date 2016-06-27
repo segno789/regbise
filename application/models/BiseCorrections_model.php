@@ -79,6 +79,14 @@ class BiseCorrections_model extends CI_Model
         $result = $q2->result_array();
         return $result;
     }
+    public function get9thCorrectionDataById($app_id)
+    {
+        //DebugBreak();
+       
+        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1 , 'AppNo'=>$app_id));
+        $result = $q2->result_array();
+        return $result;
+    }
        public function get9thCorrectionData_verified()
     {
         //DebugBreak();
@@ -127,6 +135,17 @@ class BiseCorrections_model extends CI_Model
         $query = $this->db->query("Registration..Restore_Batch_By_BoardOperator $Inst_cd,$Batch_Id,$ckpo");
         $rowcount = $query->num_rows();
         return true;
+    }
+    
+     public function updateCorrectionStatus($app_id,$kpo){
+
+       $data2 = array(
+           'ckpo'=>$kpo,
+           'cDate'=>date('Y-m-d H:i:s'),
+           'IsCorr'=>2,
+       );
+       $this->db->where('AppNo',$app_id);
+       $this->db->update("Registration..MA_P1_Reg_Correction", $data2);
     }
 }
 ?>
