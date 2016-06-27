@@ -22,7 +22,7 @@
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
 
                                   
-                                    <!--                                    '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']-->
+                                    <!--                                    '/'.IMAGE_PATH.$Inst_Id.'/'.@$data[0]['PicPath']-->
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
                             </div>
@@ -39,16 +39,19 @@
                                     <input type="file" class="span4" id="image" name="image" onchange="readURL(this);">
                                 </div>
                             </div>
+                            <?php
+                                 @$brd_cd =  @$data[0]['SSC_brd_cd'];
+                            ?>
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Candidate Name :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" readonly="readonly" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>  >
+                                    <input class="span3"  type="text" id="cand_name"  style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if($isReAdm==0 && @$brd_cd == 1) {echo "readonly='readonly'";  } ?>  >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" readonly="readonly" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_name" name="father_name"  style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  @$data['0']['Fname']; ?>" <?php if($isReAdm==0  && @$brd_cd == 1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -56,11 +59,11 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form" readonly="readonly" placeholder="Bay Form No." value="<?php echo  $data['0']['bFormNo']; ?>" required="required" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>>
+                                    <input class="span3" type="text" id="bay_form" name="bay_form"  placeholder="Bay Form No." value="<?php echo  @$data['0']['bFormNo']; ?>" required="required" <?php if($isReAdm==0  && @$brd_cd == 1) echo "readonly='readonly'";  ?>>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" readonly="readonly" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if($isReAdm==0  && @$brd_cd == 1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
 
@@ -69,17 +72,23 @@
                                     Date of Birth:(dd-mm-yyyy)
                                 </label>
                                 <?php
-                                $source = $data['0']['dob'];;
+                                $source = @$data['0']['dob'];
+                                if($source !=''){
                                 $date = new DateTime($source);
-                                $date1 = $date->format('d-m-Y');
+                                $date1 = $date->format('d-m-Y');    
+                                }
+                                else{
+                                    $date1 ='';
+                                }
+                                
                                 ?>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo $date1;   ?>" required="required" readonly="readonly"  >
+                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo @$date1;   ?>" readonly='readonly' required="required"  >
 
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value=<?php echo  $data['0']['MobNo']; ?> required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value=<?php echo  @$data['0']['MobNo']; ?> required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -94,7 +103,7 @@
                                     <label class="control-label span2" >
                                         Class Roll No :
                                     </label> 
-                                    <!--                                    $data['0']['classRno']; -->
+                                    <!--                                    @$data['0']['classRno']; -->
                                     <input class="span3" id="Inst_Rno" type="text"  style="text-transform: uppercase;" name="Inst_Rno" placeholder="" value="<?php  echo '' ?>" required="required" maxlength="8">
                                 </div>
                             </div>
@@ -103,7 +112,7 @@
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  @$data['0']['markOfIden']; ?>" required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Speciality:
                                     </label> 
@@ -118,8 +127,10 @@
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
-                                    $nat = $data[0]['IsPakistani'];
-                                    if($nat == 1)
+                                    $nat = @$data[0]['IsPakistani'];
+                                    if(@$brd_cd ==1 )
+                                    {
+                                         if($nat == 1)
                                     {
                                         echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
@@ -129,13 +140,24 @@
                                         echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
                                     }
+                                    }
+                                    else
+                                    {
+                                         echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                    }
+                                   
                                     ?>
 
                                     <label class="control-label span2" for="gender1">
                                         Gender :
                                     </label> 
                                     <?php
-                                    $gender = $data[0]['Gender'];
+                                    //DebugBreak();
+                                    $gender;
+                                    
+                                    //$gender = @$data[0]['Gender'];
+                                     
                                     if($gender == 1)
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
@@ -146,6 +168,7 @@
                                         echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
                                     }
+                                   
                                     ?>
                                     <input type="hidden" name="gender" value="<?php echo $gender; ?>">
                                 </div>
@@ -175,8 +198,10 @@
                                         Religion :
                                     </label> 
                                     <?php
-                                    $rel = $data[0]['IsMuslim'];
-                                    if($rel == 1)
+                                    $rel = @$data[0]['IsMuslim'];
+                                    if($brd_cd == 1)
+                                    {
+                                        if($rel == 1)
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
@@ -185,7 +210,14 @@
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1'  name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
+                                    } 
                                     }
+                                    else
+                                    {
+                                         echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
+                                    }
+                                   
                                     ?>
 
                                 </div>
@@ -196,7 +228,9 @@
                             </label>
                             <div class="controls controls-row">  
                                 <?php
-                                $resid = $data[0]['isRural'];
+                                $resid = @$data[0]['isRural'];
+                                if($brd_cd == 1)
+                                {
                                 if($resid == 1 )
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
@@ -206,7 +240,14 @@
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
+                                }    
                                 }
+                                else
+                                {
+                                       echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
+                                }
+                                
 
                                 ?>
 
@@ -216,14 +257,92 @@
                                     Address :
                                 </label>
                                 <div class="controls controls-row">
-                                    <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"><?php
-                                        echo $data[0]['addr'];
+                                    <textarea style="height:150px; text-transform: uppercase;"  id="address" class="span8" name="address" required="required"><?php 
+                                        echo @$data[0]['addr'];
                                     ?></textarea>
+                                </div>
+                            </div>
+                           
+                            
+                            
+                            <hr>
+                            <div class="control-group">
+                                <h4 class="span4">Exam Information :</h4>
+                                <div class="controls controls-row">
+                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
+                                    <label class="control-label span2">
+
+                                    </label> 
+
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span1" >
+                                    Old Roll No :
+                                </label>
+                                <div class="controls controls-row">
+                                    <input class="span3"  type="text" id="old_rno_ssc"  style="text-transform: uppercase;" name="old_rno_ssc" placeholder="" maxlength="60"  value="<?php  echo  @$data[0]['SSC_RNo']; ?>" <?php if($isReAdm==0) {echo "readonly='readonly'";  } ?>  >
+                                    <label class="control-label span2" for="lblfather_name">
+                                        Year :
+                                    </label> 
+                                    <input class="span3" id="old_ssc_year" name="old_ssc_year" readonly="readonly" style="text-transform: uppercase;" type="text" placeholder="" maxlength="60" value="<?php echo   @$data[0]['SSC_Year']; ?>" required="required">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span1" >
+                                    Session :
+                                </label>
+                                <div class="controls controls-row">
+                                    <input class="span3" type="text" id="old_ssc_session" name="old_ssc_session" readonly="readonly" placeholder="" value="<?php if(@$data[0]['SSC_Sess']== 1){echo 'ANNUAL';}else{echo 'SUPPLYMENTARY';} ?>" required="required" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>>
+                                    <label class="control-label span2" for="father_cnic">
+                                        Board :
+                                    </label> 
+                                    <?php
+                                     $brdArray = array(
+                                     'BISE, GUJRANWALA' => 1,
+                                     'BISE,  LAHORE' => 2,
+                                     'BISE,  RAWALPINDI' => 3,
+                                     'BISE,  MULTAN' => 4,
+                                     'BISE,  FAISALABAD' => 5,
+                                     'BISE, BAHAWALPUR' => 6,
+                                     'BISE, SARGODHA' => 7,
+                                     'BISE, DERA GHAZI KHAN' => 8,
+                                     'FBISE, ISLAMABAD' => 9,
+                                     'BISE, MIRPUR' => 10,
+                                     'BISE, ABBOTTABAD' => 11,
+                                     'BISE, PESHAWAR' => 12,
+                                     'BSE, KARACHI' => 13,
+                                     'BISE, QUETTA' => 14,
+                                     'BISE, MARDAN' => 15,
+                                     'FBISE, ISLAMABAD' => 16,
+                                     'CAMBRIDGE' => 17,
+                                     'AIOU, ISLAMABAD' => 18,
+                                     'BISE, KOHAT' =>19 ,
+                                     'KARAKURUM' => 20,
+                                     'MALAKAND' => 21,
+                                     'BISE, BANNU' =>22 ,
+                                     'BISE, D.I.KHAN' =>23 ,
+                                     'AKUEB, KARACHI' =>24 ,
+                                     'BISE, HYDERABAD' => 25,
+                                     'BISE, LARKANA' =>26 ,
+                                     'BISE, MIRPUR(SINDH)' => 27,
+                                     'BISE, SUKKUR' => 28,
+                                     'BISE, SWAT' => 29,
+                                     'SBTE KARACHI' => 30,
+                                     'PBTE, LAHORE' => 31,
+                                     'AFBHE RAWALPINDI' =>32 ,
+                                     'BIE, KARACHI' => 33,
+                                     'BISE SAHIWAL' => 34
+                                     
+                                     );
+                                     ?>
+                                     
+                                    <input class="span3" id="old_brd_cd_ssc" name="old_brd_cd_ssc" readonly="readonly" type="text" placeholder="" value="<?php echo array_search( @$data[0]['SSC_brd_cd'],$brdArray); ?>"required="required">
                                 </div>
                             </div>
                             <hr>
                             <div class="control-group">
-                                <h4 class="span4">Exam Information :</h4>
+                                <h4 class="span4">Group and Subject Information :</h4>
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                     <label class="control-label span2">
@@ -240,7 +359,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
                                        
-                                        $grp = $data[0]['RegGrp'];
+                                        $grp = @$data[0]['RegGrp'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
@@ -455,7 +574,7 @@
                                             'BOOK KEEPING & ACCOUNTANCY' => '99'
 
                                         );
-                                        //$result =  array_search($data[0]['sub4'],$subarray);
+                                        //$result =  array_search(@$data[0]['sub4'],$subarray);
 
 
 
@@ -516,9 +635,9 @@
 
                                 </select> 
                                 <!--     <select id="sub8"  name="sub8" class="span3 dropdown">-->
-                                <!-- <option value="<?php  if($isReAdm != 1) { echo $data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
+                                <!-- <option value="<?php  if($isReAdm != 1) { echo @$data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
                                     // DebugBreak();
-                                    echo array_search($data[0]['sub8'],$subarray);}  else {echo "";};
+                                    echo array_search(@$data[0]['sub8'],$subarray);}  else {echo "";};
                                 ?></option>-->
                                 <!--</select>
                                 </div>-->
@@ -527,10 +646,10 @@
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value=""  name="formNo">
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
-                                <input type="hidden"   value="<?php  echo $data[0]['SSC_RNo'];; ?>"  name="OldRno">
-                                <input type="hidden"   value="<?php  echo $data[0]['SSC_Year'];; ?>"  name="OldYear">
-                                <input type="hidden"   value="<?php  echo $data[0]['SSC_Sess'];; ?>"  name="OldSess">
-                                <input type="hidden"   value="<?php  echo $data[0]['SSC_brd_cd'];; ?>"  name="OldBrd">
+                                <input type="hidden"   value="<?php  echo @$data[0]['SSC_RNo']; ?>"  name="OldRno">
+                                <input type="hidden"   value="<?php  echo @$data[0]['SSC_Year']; ?>"  name="OldYear">
+                                <input type="hidden"   value="<?php  echo @$data[0]['SSC_Sess']; ?>"  name="OldSess">
+                                <input type="hidden"   value="<?php  echo @$data[0]['SSC_brd_cd']; ?>"  name="OldBrd">
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Save Form
                                 </button>
