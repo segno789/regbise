@@ -256,7 +256,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-        // DebugBreak();
+         //DebugBreak();
         $mrollno = $_POST["oldRno"];
         
         $board   =  $_POST["oldBrd_cd"];
@@ -306,11 +306,11 @@ class Registration_11th extends CI_Controller {
 
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2015;
+                $year = 2016;
             }
             else{
                 $isReAdm = 0;
-                $year = 2016;    
+               // $year = 2016;    
             }
 
               //DebugBreak();
@@ -332,7 +332,18 @@ class Registration_11th extends CI_Controller {
         $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
         $status = $RegStdData['data'][0]['status'];
 
-        if($msg == -1)
+        if($RegStdData['data'] == False and $board != 1)
+        {
+            $error['excep'] = '';
+            $RegStdData['data']['SSC_RNO'] = $_POST["oldRno"];
+            $RegStdData['data']['SSC_Year'] = $_POST["oldYear"];
+            $RegStdData['data']['SSC_Sess'] = $_POST["oldSess"];
+            $RegStdData['data']['SSC_brd_cd'] = $_POST["oldBrd_cd"];
+          
+        }
+        
+        
+     else  if($msg == -1)
         {
             $this->session->set_flashdata('matric_error', 'NO DATA FOUND AGAINST YOUR RECORD');
             redirect('Registration_11th/Students_matricInfo');
