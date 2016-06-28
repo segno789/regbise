@@ -16,12 +16,12 @@
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
                                 <label class="control-label span2" style="width: 411px;margin-left: -199px;">
-                                      <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
-                                    </label>
+                                    <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
+                                </label>
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
 
-                                  
+
                                     <!--                                    '/'.IMAGE_PATH.$Inst_Id.'/'.@$data[0]['PicPath']-->
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
@@ -29,9 +29,9 @@
                             <div class="control-group">
 
                                 <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
-                                 
+
                                 <div class="controls controls-row">
-                                
+
                                     <input class="span3 hidden"  type="text" placeholder="" >  
                                     <label class="control-label span2">
                                         Image :  
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <?php
-                                 @$brd_cd =  @$data[0]['SSC_brd_cd'];
+                            @$brd_cd =  @$data[0]['SSC_brd_cd'];
                             ?>
                             <div class="control-group">
                                 <label class="control-label span1" >
@@ -74,13 +74,13 @@
                                 <?php
                                 $source = @$data['0']['dob'];
                                 if($source !=''){
-                                $date = new DateTime($source);
-                                $date1 = $date->format('d-m-Y');    
+                                    $date = new DateTime($source);
+                                    $date1 = $date->format('d-m-Y');    
                                 }
                                 else{
                                     $date1 ='';
                                 }
-                                
+
                                 ?>
                                 <div class="controls controls-row">
                                     <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php echo @$date1;   ?>" readonly='readonly' required="required"  >
@@ -97,14 +97,14 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="medium" class="dropdown span3" name="medium">
-                                     <option value='1' selected='selected'>Urdu</option> <option value='2'>English</option>
-                                                                      
+                                        <option value='1' selected='selected'>Urdu</option> <option value='2'>English</option>
+
                                     </select>
                                     <label class="control-label span2" >
                                         Class Roll No :
                                     </label> 
                                     <!--                                    @$data['0']['classRno']; -->
-                                    <input class="span3" id="Inst_Rno" type="text"  style="text-transform: uppercase;" name="Inst_Rno" placeholder="" value="<?php  echo '' ?>" required="required" maxlength="8">
+                                    <input class="span3" id="Inst_Rno" type="text"  style="text-transform: uppercase;" name="Inst_Rno" placeholder="" value="<?php   if((@$data['0']['excep'] != "")){echo @$data['0']['Inst_Rno']; } else {echo '';}    ?>" required="required" maxlength="8">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -117,8 +117,8 @@
                                         Speciality:
                                     </label> 
                                     <select id="speciality"  class="span3" name="speciality">
-                                       <option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>
-                                         </select>
+                                        <option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -127,26 +127,35 @@
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
+
                                     $nat = @$data[0]['IsPakistani'];
-                                    if(@$brd_cd ==1 )
+                                    if((@$data['0']['excep'] != ""))
                                     {
-                                         if($nat == 1)
-                                    {
-                                        echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
-                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                    }
-                                    else if ($nat == 2)
-                                    {
-                                        echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
-                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                    }
+                                        if(@$brd_cd ==1 )
+                                        {
+                                            if($nat == 1)
+                                            {
+                                                echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                                </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                            }
+                                            else if ($nat == 2)
+                                            {
+                                                echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
+                                                </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                            </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                        }  
                                     }
                                     else
                                     {
-                                         echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                        echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                    }
-                                   
+                                    }  
+
                                     ?>
 
                                     <label class="control-label span2" for="gender1">
@@ -155,9 +164,9 @@
                                     <?php
                                     //DebugBreak();
                                     $gender;
-                                    
+
                                     //$gender = @$data[0]['Gender'];
-                                     
+
                                     if($gender == 1)
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
@@ -168,7 +177,7 @@
                                         echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  checked='checked'  disabled='disabled'  name='gender'> Female </label> " ;
                                     }
-                                   
+
                                     ?>
                                     <input type="hidden" name="gender" value="<?php echo $gender; ?>">
                                 </div>
@@ -179,19 +188,37 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <?php
-                                    // DebugBreak();
-                                    if($isReAdm == 1)
+                                    //DebugBreak();
+
+                                    if((@$data['0']['excep'] != ""))
                                     {
-                                        echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
-                                        <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>";
+                                        if(@$data['0']['IsHafiz']==1)
+                                        {
+                                            echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
+                                            <label class='radio inline span1'><input type='radio' id='hafiz2' value='2'  name='hafiz'> Yes</label>";
+                                        }
+                                        else if(@$data['0']['IsHafiz']==2)
+                                        {
+                                            echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
+                                            <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>"; 
+                                        }
+                                        else if($isReAdm == 0)
+                                        {
+                                            echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1'  name='hafiz'> No</label>
+                                            <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' checked='checked' name='hafiz'> Yes</label>";
+                                        }
+                                        else
+                                        {
+                                            echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
+                                            <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' name='hafiz'> Yes</label>";
+                                        }     
                                     }
                                     else
                                     {
-                                       
-                                            echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
-                                            <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' name='hafiz'> Yes</label>";
-                                       
-                                    }    
+                                        echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
+                                        <label class='radio inline span1'><input type='radio' id='hafiz2' value='2' name='hafiz'> Yes</label>";
+                                    }
+
                                     ?>
 
                                     <label class="control-label span3" >
@@ -199,25 +226,27 @@
                                     </label> 
                                     <?php
                                     $rel = @$data[0]['IsMuslim'];
+                                    //if((@$data['0']['excep'] != "success"))
+                                    //  {
                                     if($brd_cd == 1)
                                     {
                                         if($rel == 1)
+                                        {
+                                            echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                            </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
+                                        }
+                                        else if ($rel == 2)
+                                        {
+                                            echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1'  name='religion'> Muslim
+                                            </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
+                                        } 
+                                    }
+                                    else
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
                                     }
-                                    else if ($rel == 2)
-                                    {
-                                        echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1'  name='religion'> Muslim
-                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
-                                    } 
-                                    }
-                                    else
-                                    {
-                                         echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
-                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
-                                    }
-                                   
+
                                     ?>
 
                                 </div>
@@ -231,23 +260,23 @@
                                 $resid = @$data[0]['isRural'];
                                 if($brd_cd == 1)
                                 {
-                                if($resid == 1 )
+                                    if($resid == 1 )
+                                    {
+                                        echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                        </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
+                                    }
+                                    else if($resid == 2)
+                                    {
+                                        echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
+                                        </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
+                                    }    
+                                }
+                                else
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
                                 }
-                                else if($resid == 2)
-                                {
-                                    echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
-                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
-                                }    
-                                }
-                                else
-                                {
-                                       echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
-                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
-                                }
-                                
+
 
                                 ?>
 
@@ -262,9 +291,9 @@
                                     ?></textarea>
                                 </div>
                             </div>
-                           
-                            
-                            
+
+
+
                             <hr>
                             <div class="control-group">
                                 <h4 class="span4">Exam Information :</h4>
@@ -298,45 +327,45 @@
                                         Board :
                                     </label> 
                                     <?php
-                                     $brdArray = array(
-                                     'BISE, GUJRANWALA' => 1,
-                                     'BISE,  LAHORE' => 2,
-                                     'BISE,  RAWALPINDI' => 3,
-                                     'BISE,  MULTAN' => 4,
-                                     'BISE,  FAISALABAD' => 5,
-                                     'BISE, BAHAWALPUR' => 6,
-                                     'BISE, SARGODHA' => 7,
-                                     'BISE, DERA GHAZI KHAN' => 8,
-                                     'FBISE, ISLAMABAD' => 9,
-                                     'BISE, MIRPUR' => 10,
-                                     'BISE, ABBOTTABAD' => 11,
-                                     'BISE, PESHAWAR' => 12,
-                                     'BSE, KARACHI' => 13,
-                                     'BISE, QUETTA' => 14,
-                                     'BISE, MARDAN' => 15,
-                                     'FBISE, ISLAMABAD' => 16,
-                                     'CAMBRIDGE' => 17,
-                                     'AIOU, ISLAMABAD' => 18,
-                                     'BISE, KOHAT' =>19 ,
-                                     'KARAKURUM' => 20,
-                                     'MALAKAND' => 21,
-                                     'BISE, BANNU' =>22 ,
-                                     'BISE, D.I.KHAN' =>23 ,
-                                     'AKUEB, KARACHI' =>24 ,
-                                     'BISE, HYDERABAD' => 25,
-                                     'BISE, LARKANA' =>26 ,
-                                     'BISE, MIRPUR(SINDH)' => 27,
-                                     'BISE, SUKKUR' => 28,
-                                     'BISE, SWAT' => 29,
-                                     'SBTE KARACHI' => 30,
-                                     'PBTE, LAHORE' => 31,
-                                     'AFBHE RAWALPINDI' =>32 ,
-                                     'BIE, KARACHI' => 33,
-                                     'BISE SAHIWAL' => 34
-                                     
-                                     );
-                                     ?>
-                                     
+                                    $brdArray = array(
+                                        'BISE, GUJRANWALA' => 1,
+                                        'BISE,  LAHORE' => 2,
+                                        'BISE,  RAWALPINDI' => 3,
+                                        'BISE,  MULTAN' => 4,
+                                        'BISE,  FAISALABAD' => 5,
+                                        'BISE, BAHAWALPUR' => 6,
+                                        'BISE, SARGODHA' => 7,
+                                        'BISE, DERA GHAZI KHAN' => 8,
+                                        'FBISE, ISLAMABAD' => 9,
+                                        'BISE, MIRPUR' => 10,
+                                        'BISE, ABBOTTABAD' => 11,
+                                        'BISE, PESHAWAR' => 12,
+                                        'BSE, KARACHI' => 13,
+                                        'BISE, QUETTA' => 14,
+                                        'BISE, MARDAN' => 15,
+                                        'FBISE, ISLAMABAD' => 16,
+                                        'CAMBRIDGE' => 17,
+                                        'AIOU, ISLAMABAD' => 18,
+                                        'BISE, KOHAT' =>19 ,
+                                        'KARAKURUM' => 20,
+                                        'MALAKAND' => 21,
+                                        'BISE, BANNU' =>22 ,
+                                        'BISE, D.I.KHAN' =>23 ,
+                                        'AKUEB, KARACHI' =>24 ,
+                                        'BISE, HYDERABAD' => 25,
+                                        'BISE, LARKANA' =>26 ,
+                                        'BISE, MIRPUR(SINDH)' => 27,
+                                        'BISE, SUKKUR' => 28,
+                                        'BISE, SWAT' => 29,
+                                        'SBTE KARACHI' => 30,
+                                        'PBTE, LAHORE' => 31,
+                                        'AFBHE RAWALPINDI' =>32 ,
+                                        'BIE, KARACHI' => 33,
+                                        'BISE SAHIWAL' => 34
+
+                                    );
+                                    ?>
+
                                     <input class="span3" id="old_brd_cd_ssc" name="old_brd_cd_ssc" readonly="readonly" type="text" placeholder="" value="<?php echo array_search( @$data[0]['SSC_brd_cd'],$brdArray); ?>"required="required">
                                 </div>
                             </div>
@@ -358,7 +387,7 @@
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
-                                       
+
                                         $grp = @$data[0]['RegGrp'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
@@ -379,42 +408,90 @@
                                             {
                                                 if($subgroups[$i] == 1)
                                                 {
-                                                   
-                                                        echo "<option value='1' >Pre-Medical</option>";    
-                                                   
+                                                    if((@$data['0']['excep'] != ""))
+                                                    {
+                                                        echo "<option value='1' selected='selected' >Pre-Medical</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                    echo "<option value='1' >Pre-Medical</option>";        
+                                                    }
+
+                                                    
+
                                                 }
                                                 else if($subgroups[$i] == 2)
                                                 {
-                                                   
-                                                        echo "<option value='2'>Pre-Engineering</option>"; 
+                                                    if((@$data['0']['excep'] != ""))
+                                                    {
+                                                         echo "<option value='2' selected='selected'>Pre-Engineering</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                     echo "<option value='2'>Pre-Engineering</option>";        
+                                                    }
+
                                                   
+
 
                                                 }
                                                 else if($subgroups[$i] == 3)
                                                 {
+
+                                                     if((@$data['0']['excep'] != ""))
+                                                    {
+                                                        echo "<option value='3' selected='selected'>Humanities</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                     echo "<option value='3'>Humanities</option>";          
+                                                    }
                                                    
-                                                        echo "<option value='3'>Humanities</option>";  
-                                                   
+
 
                                                 }
                                                 else if($subgroups[$i] == 4)
                                                 {
-                                                   
-                                                        echo "<option value='4'>General Science</option>";   
-                                                   
+                                                    if((@$data['0']['excep'] != ""))
+                                                    {
+                                                        echo "<option value='4' selected='selected'>General Science</option>";    
+                                                    }
+                                                    else
+                                                    {
+                                                     echo "<option value='4'>General Science</option>";         
+                                                    }
+
+                                                    
+
                                                 }
                                                 else if($subgroups[$i] == 5)
                                                 {
-                                                  
-                                                        echo "<option value='5'>Commerce</option>";  
+                                                    if((@$data['0']['excep'] != ""))
+                                                    {
+                                                        echo "<option value='5'  selected='selected'>Commerce</option>";   
+                                                    }
+                                                    else
+                                                    {
+                                                     echo "<option value='5'>Commerce</option>";          
+                                                    }
+
                                                    
+
 
                                                 }
                                                 else if($subgroups[$i] == 6)
                                                 {
-                                                   
-                                                        echo "<option value='6'>Home Economics</option>";  
-                                                   
+                                                     if((@$data['0']['excep'] != ""))
+                                                    {
+                                                       echo "<option value='6' selected='selected'>Home Economics</option>";     
+                                                    }
+                                                    else
+                                                    {
+                                                     echo "<option value='6'>Home Economics</option>";         
+                                                    }
+
+                                                    
+
 
                                                 }
                                             } 
@@ -663,22 +740,22 @@
                         <script type="text/javascript">
 
 
-        function readURL(input) {
-    debugger;
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
+                            function readURL(input) {
+                                debugger;
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
 
-    reader.onload = function (e) {
-    $('#previewImg').attr('src', e.target.result);
-    }
+                                    reader.onload = function (e) {
+                                        $('#previewImg').attr('src', e.target.result);
+                                    }
 
-    reader.readAsDataURL(input.files[0]);
-    }
-    }
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
 
                             function checks(){
 
-                                var status  =  check_NewEnrol_validation();
+                                var status  =  check_NewEnrol_validation_11th();
                                 if(status == 0)
                                 {
 

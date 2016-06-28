@@ -273,6 +273,9 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');
             $RegStdData['isReAdm'] = 0;
             $RegStdData['Oldrno'] = 0;
+           // $RegStdData['excep'] = 'error';
+            
+            
             //$spl_cd = $RegStdData['data'][0]['spl_cd'];
             //$isReAdm = $RegStdData['data'][0]['isreadm'];
             //$RegStdData['isReAdm']=$isReAdm;
@@ -337,7 +340,13 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
                 }
-            $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0);    
+            $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+              
+              $RegStdData['data'][0]['excep']='';
+              $RegStdData['data'][0]['isHafiz']=0;
+              $RegStdData['data'][0]['markOfIden']='';
+              
+              
              $spl_cd = $RegStdData['data'][0]['spl_cd'];
         $msg = $RegStdData['data'][0]['Mesg'];
         $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
@@ -346,15 +355,12 @@ class Registration_11th extends CI_Controller {
         $inst_userinfo_gender = $userinfo['gender'];
             }
             else{
-                $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0);    
+                $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'');    
             }
             
 
         }
 
-       
-       // DebugBreak();
-        //$rnolength = strlen ($RegStdData['data'][0]['SSC_RNo']);
         if($RegStdData['data'] == False and $board != 1)
         {
             $error['excep'] = '';
@@ -362,8 +368,9 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
             $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
             $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
-            
-             if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == '0' )
+           // DebugBreak();
+            $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
+             if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
         {
             $this->session->set_flashdata('matric_error', 'SSC ROLL NO. IS INCORRECT');
             redirect('Registration_11th/Students_matricInfo');
@@ -424,24 +431,50 @@ class Registration_11th extends CI_Controller {
         }
      
          $error['excep'] = '';
+         
         $this->load->view('Registration/11th/AdmissionForm.php',$RegStdData);
         $this->load->view('common/footer11threg.php');   
 
     }
-    public function commonheader($data)
-    {
-        $this->load->view('common/header.php',$data);
-        $this->load->view('common/menu.php',$data);
-    } 
-    public function commonfooter($data)
-    {
-        $this->load->view('common/footer11threg.php',$data);
-    }
-    public function NewEnrolment_insert()
-    {
+    public function NewEnrolment()
+    {    
+        // DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '6',
+        );
+        //  DebugBreak();
+        if($this->session->flashdata('NewEnrolment_error')){
+
+            $error['excep'] = $this->session->flashdata('NewEnrolment_error');    
+        }
+        else{
+            $error['excep'] = '';
+        }
+
+
+        $error['gender'] = $userinfo['gender'];
+        $error['isrural'] = $userinfo['isrural'];
+        $error['grp_cd'] = $userinfo['grp_cd'];
+        $error['isgovt'] = $userinfo['isgovt'];
+
+        $this->commonheader($data);
+        $this->load->view('Registration/11th/NewEnrolment.php',$error);
+        // $this->load->view('common/footer.php');
+        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
+        // if(@$_POST['cand_name'] != '' )//&& @$_POST['father_name'] != '' && @$_POST['bay_form'] != '' && @$_POST['father_cnic'] != '' && @$_POST['dob'] != '' && @$_POST['mob_number'] != '') //{   
 
 
 
+        //}
+
+
+
+    }public function NewEnrolment_insert()
+    {
         $this->load->model('Registration_11th_model');
         // DebugBreak();
         $this->load->library('session');
@@ -476,11 +509,6 @@ class Registration_11th extends CI_Controller {
             'sub8'=>@$_POST['sub8']
         );
 
-        /* $target_path = './assets/uploads/'.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-        mkdir($target_path, 0777, true);
-        }*/
-        //DebugBreak();
         if((@$_POST['std_group'] != 5) && (@$_POST['std_group'] != 6))
         {
             $allinputdata['sub7']=-1;
@@ -508,11 +536,7 @@ class Registration_11th extends CI_Controller {
         $config['file_name']     = $formno.'.jpg';
 
         $filepath = $target_path. $config['file_name']  ;
-
-        //$config['new_image']    = $formno.'.JPEG';
-
-        $this->load->library('upload', $config);
-
+         $this->load->library('upload', $config);
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         $this->upload->initialize($config);
 
@@ -557,16 +581,11 @@ class Registration_11th extends CI_Controller {
                 return;
             }
         }
-
-        // $this->frmvalidation('NewEnrolment',$allinputdata,0);
-
         $a = getimagesize($filepath);
         if($a[2]!=2)
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
-        // $name = 'Waseem Saleem';
-        // $fname = 'Muhammad Saleem'; 
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -629,9 +648,9 @@ class Registration_11th extends CI_Controller {
             'IsPakistani' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('gender'),
             'IsHafiz' =>$this->input->post('hafiz'),
-            'rel' =>$this->input->post('religion'),
+            'IsMuslim' =>$this->input->post('religion'),
             'addr' =>$this->input->post('address'),
-            'grp_cd' =>$this->input->post('std_group'),
+            'RegGrp' =>$this->input->post('std_group'),
             'sub1' =>$this->input->post('sub1'),
             'sub2' =>$this->input->post('sub2'),
             'sub3' =>$this->input->post('sub3'),
@@ -648,7 +667,7 @@ class Registration_11th extends CI_Controller {
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
             'sub8ap1' => ($sub8ap1),
-            'UrbanRural' =>$this->input->post('UrbanRural'),
+            'isRural' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
             'SSC_RNo'=>$this->input->post('OldRno'),
@@ -667,7 +686,7 @@ class Registration_11th extends CI_Controller {
 
         $logedIn = $this->Registration_11th_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         $error = $logedIn[0]['error'];
-        DebugBreak();
+      //  DebugBreak();
         if($error == 'true')
         {  
             $allinputdata = "";
@@ -695,44 +714,17 @@ class Registration_11th extends CI_Controller {
 
         $this->load->view('common/footer11threg.php');
     }
-    public function NewEnrolment()
-    {    
-        // DebugBreak();
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $data = array(
-            'isselected' => '6',
-        );
-        //  DebugBreak();
-        if($this->session->flashdata('NewEnrolment_error')){
-
-            $error['excep'] = $this->session->flashdata('NewEnrolment_error');    
-        }
-        else{
-            $error['excep'] = '';
-        }
-
-
-        $error['gender'] = $userinfo['gender'];
-        $error['isrural'] = $userinfo['isrural'];
-        $error['grp_cd'] = $userinfo['grp_cd'];
-        $error['isgovt'] = $userinfo['isgovt'];
-
-        $this->commonheader($data);
-        $this->load->view('Registration/11th/NewEnrolment.php',$error);
-        // $this->load->view('common/footer.php');
-        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
-        // if(@$_POST['cand_name'] != '' )//&& @$_POST['father_name'] != '' && @$_POST['bay_form'] != '' && @$_POST['father_cnic'] != '' && @$_POST['dob'] != '' && @$_POST['mob_number'] != '') //{   
-
-
-
-        //}
-
-
-
+    public function commonheader($data)
+    {
+        $this->load->view('common/header.php',$data);
+        $this->load->view('common/menu.php',$data);
+    } 
+    public function commonfooter($data)
+    {
+        $this->load->view('common/footer11threg.php',$data);
     }
+    
+  
     public function EditForms()
     {
         // DebugBreak();
