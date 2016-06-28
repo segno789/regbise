@@ -485,12 +485,33 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-         // DebugBreak();
         $data = array(
             'isselected' => '0',
         );
         $ckpo = $userinfo['Inst_Id'];
         $fetchdata = array('AppNo'=>$BatchId,'ckpo'=>$ckpo);
+        
+        $appdata = $this->BiseCorrections_model->get9thCorrectionDataById($BatchId);
+        
+        
+        if($appdata[0]['PicFee']>0)
+        {
+            $picPath =  $appdata[0]['PicPath'] ;
+            $formNo =  $appdata[0]['formNo'] ;
+            $copy_path = CORR_IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
+            $target_path = IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
+            
+            $oldPath = $target_path.$picPath;
+            $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
+            
+            rename($oldPath, $newPath)  ;
+            
+            copy($copy_path.$picPath, $target_path.$picPath);
+            
+            $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
+            
+        }
+        
         $status = array('data'=>$this->BiseCorrections_model->reg9thCorrection_UPDATE($fetchdata));
 
 

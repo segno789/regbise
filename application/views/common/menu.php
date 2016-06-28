@@ -11,7 +11,7 @@
                 if($isselected == '5'){?>
 
                     <li>
-                        <a style="width: 115px;" href="<?php echo base_url(); ?>index.php/Complaints" class="<?php if($isselected == '5') {echo 'selected';}?>" >
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>Complaints" class="<?php if($isselected == '5') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
                             Complaints
                         </a>
@@ -21,7 +21,7 @@
                 if($isselected == '4'){?>
 
                     <li>
-                        <a style="width: 115px;" href="<?php echo base_url(); ?>index.php/RollNoSlip" class="<?php if($isselected == '4') {echo 'selected';}?>" >
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>RollNoSlip" class="<?php if($isselected == '4') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
                             Roll No. Slips
                         </a>
@@ -30,19 +30,19 @@
                 else  if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Registration
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             11th Registration
                         </a>
@@ -52,13 +52,13 @@
                 else if($isselected == '2' OR $isselected == '7'){?>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Registration
                         </a>
                     </li>
                        <li>
-                        <a href="<?php echo base_url(); ?>index.php/NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
                         </a>
@@ -69,7 +69,7 @@
                 else if($isselected == '6'){?>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Registration
                         </a>
@@ -80,13 +80,13 @@
                     if($isselected == '0' OR $isselected == '8'){?>
                 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Correction
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Reg. Batch
                         </a>
@@ -105,12 +105,12 @@
                 <ul >
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/complaints">
+                        <a href="<?php echo base_url(); ?>complaints">
                             Pending Complaints
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/complaints/completeCMP">
+                        <a href="<?php echo base_url(); ?>complaints/completeCMP">
                             Completed
                         </a>
                     </li>
@@ -128,20 +128,20 @@
             if($isselected == '0') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thbatch"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/BatchRelease">
+                        <a href="<?php echo base_url(); ?>BiseCorrection/BatchRelease">
                             Online Batch Release
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/BatchRestoreManual">
+                        <a href="<?php echo base_url(); ?>BiseCorrection/BatchRestoreManual">
                             Manual Batch Release
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/BatchRestore">
+                        <a href="<?php echo base_url(); ?>BiseCorrection/BatchRestore">
                             Batch Restore
                         </a>
                     </li>
@@ -157,15 +157,15 @@
             if($isselected == '8') {   ?>
             
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrections"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp">
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrectionapp">
                             9th Correction Applications
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp_verified">
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrectionapp_verified">
                             Verified Correction  
                         </a>
                     </li>
@@ -195,10 +195,10 @@
             if($isselected == '2') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/Registration"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Registration</a></li>
+                    <li><a href="<?php echo base_url(); ?>Registration"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Registration</a></li>
                     <?php if($isfeedingallow == 1) {?>
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Registration/NewEnrolment">
+                            <a href="<?php echo base_url(); ?>Registration/NewEnrolment">
                                 New Enrolement
                             </a>
                         </li>
@@ -208,34 +208,34 @@
                         </a>
                         </li>-->
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Registration/EditForms">
+                            <a href="<?php echo base_url(); ?>Registration/EditForms">
                                 Edit Forms
                             </a>
                         </li> 
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Registration/CreateBatch">
+                            <a href="<?php echo base_url(); ?>Registration/CreateBatch">
                                 Create Batch
                             </a>
                         </li>
                         <?php }?>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration/EditPicForms">
+                        <a href="<?php echo base_url(); ?>Registration/EditPicForms">
                             Edit Pictures Forms
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration/batchlist">
+                        <a href="<?php echo base_url(); ?>Registration/batchlist">
                             Batch List
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration/FormPrinting">
+                        <a href="<?php echo base_url(); ?>Registration/FormPrinting">
                             Form Printing
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>/index.php/Registration/Profile">
+                        <a href="<?php echo base_url(); ?>/Registration/Profile">
                             Profile
                         </a>
                     </li>
@@ -255,34 +255,34 @@
             if($isselected == '3'){
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/Admission"   data-original-title="" >Admission</a></li>
+                    <li><a href="<?php echo base_url(); ?>Admission"   data-original-title="" >Admission</a></li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission/StudentsData">
+                        <a href="<?php echo base_url(); ?>Admission/StudentsData">
                             Students Data
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission/EditForms">
+                        <a href="<?php echo base_url(); ?>Admission/EditForms">
                             Edit Forms
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission/CreateBatch">
+                        <a href="<?php echo base_url(); ?>Admission/CreateBatch">
                             Create Batch
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission/BatchList">
+                        <a href="<?php echo base_url(); ?>Admission/BatchList">
                             Batch List
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission/FormPrinting">
+                        <a href="<?php echo base_url(); ?>Admission/FormPrinting">
                             Form Printing
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Admission/ProofReading">
+                        <a href="<?php echo base_url(); ?>Admission/ProofReading">
                             Proof Reading
                         </a>
                     </li>
@@ -295,24 +295,24 @@
             if($isselected == '4'){
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/RollNoSlip"   data-original-title="" >Roll No. Slips: </a></li>
+                    <li><a href="<?php echo base_url(); ?>RollNoSlip"   data-original-title="" >Roll No. Slips: </a></li>
                     <!-- <li>
-                    <a href="<?php echo base_url(); ?>index.php/RollNoSlip/NinthStd">
+                    <a href="<?php echo base_url(); ?>RollNoSlip/NinthStd">
                     9th Roll No. Slip
                     </a>
                     </li>-->
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/RollNoSlip/TenthStd">
+                        <a href="<?php echo base_url(); ?>RollNoSlip/TenthStd">
                             10th Roll No. Slip
                         </a>
                     </li>
                     <!-- <li>
-                    <a href="<?php echo base_url(); ?>index.php/RollNoSlip/EleventhStd">
+                    <a href="<?php echo base_url(); ?>RollNoSlip/EleventhStd">
                     11th Roll No. Slip
                     </a>
                     </li>-->
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/RollNoSlip/InterStd">
+                        <a href="<?php echo base_url(); ?>RollNoSlip/InterStd">
                             12th Roll No. Slip
                         </a>
                     </li>
@@ -329,10 +329,10 @@
                 ?>
                 <ul >
                 
-                    <li><a href="<?php echo base_url(); ?>index.php/NinthCorrection"   data-original-title="" class="<?php if($isselected == '7') {echo 'heading';}?>">9th Correction </a></li>
-                  <li><a href="<?php echo base_url(); ?>index.php/NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+                    <li><a href="<?php echo base_url(); ?>NinthCorrection"   data-original-title="" class="<?php if($isselected == '7') {echo 'heading';}?>">9th Correction </a></li>
+                  <li><a href="<?php echo base_url(); ?>NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/NinthCorrection/Applied">
+                        <a href="<?php echo base_url(); ?>NinthCorrection/Applied">
                             Applications
                         </a>
                     </li>
@@ -350,13 +350,13 @@
             if($isselected == '6') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>index.php/Registration_11th"   data-original-title="" class="<?php if($isselected == '6') {echo 'heading';}?>">Registration</a></li>
+                    <li><a href="<?php echo base_url(); ?>Registration_11th"   data-original-title="" class="<?php if($isselected == '6') {echo 'heading';}?>">Registration</a></li>
 
                     <?php  if($isinterfeeding == 1) {?>
 
 
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Registration_11th/Students_matricInfo">
+                            <a href="<?php echo base_url(); ?>Registration_11th/Students_matricInfo">
                                 Old Students 
                             </a>
                         </li>
@@ -367,29 +367,29 @@
                         </li>-->
 
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Registration_11th/EditForms">
+                            <a href="<?php echo base_url(); ?>Registration_11th/EditForms">
                                 Edit Forms
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Registration_11th/CreateBatch">
+                            <a href="<?php echo base_url(); ?>Registration_11th/CreateBatch">
                                 Create Batch
                             </a>
                         </li>
 
                         <?php }?>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration_11th/batchlist">
+                        <a href="<?php echo base_url(); ?>Registration_11th/batchlist">
                             Batch List
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/Registration_11th/FormPrinting">
+                        <a href="<?php echo base_url(); ?>Registration_11th/FormPrinting">
                             Form Printing
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>/index.php/Registration_11th/Profile">
+                        <a href="<?php echo base_url(); ?>/Registration_11th/Profile">
                             Profile
                         </a>
                     </li>

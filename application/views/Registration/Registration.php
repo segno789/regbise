@@ -17,31 +17,31 @@
 
 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Registration/NewEnrolment"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>New-Registration</a>
+                            <a href="<?php echo base_url(); ?>Registration/NewEnrolment"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>New-Registration</a>
                         </div>
                         <!--  <div class="shortcutHome">
                         <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
                         </div>  -->    
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Registration/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
+                            <a href="<?php echo base_url(); ?>Registration/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
                         </div>
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Registration/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Printing </a>
+                            <a href="<?php echo base_url(); ?>Registration/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Printing </a>
                         </div>
                         <div class="shortcutHome">
 
 
-                            <a href="<?php echo base_url(); ?>index.php/Registration/CreateBatch"><img src="<?php echo base_url();?>assets/img/batch_list.png"><br>Create Batch</a> 
+                            <a href="<?php echo base_url(); ?>Registration/CreateBatch"><img src="<?php echo base_url();?>assets/img/batch_list.png"><br>Create Batch</a> 
 
                         </div>
 
 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>index.php/Registration/batchlist"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
+                            <a href="<?php echo base_url(); ?>Registration/batchlist"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
                         </div>
 
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>/index.php/login/logout"><img src="<?php echo base_url();?>assets/img/logout_icon.png"><br>Logout</a>
+                            <a href="<?php echo base_url(); ?>/login/logout"><img src="<?php echo base_url();?>assets/img/logout_icon.png"><br>Logout</a>
                         </div>
                          <div class="shortcutHome">
                             <img src="<?php echo base_url(); ?>/assets/img/image_guideline.jpg" alt="" style="    margin-top: -20px;width: 450px;float: right;margin-right: 22px;">

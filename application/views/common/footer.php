@@ -489,7 +489,7 @@ if(isset($files)){
 
         }
 
-        window.location.href = '<?=base_url()?>/index.php/Registration/Incomplete_inst_info_INSERT/';
+        window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
     }
     function BatchRelease_INSERT()
     {
@@ -558,12 +558,12 @@ if(isset($files)){
         }
 
 
-        //  window.location.href = '<?=base_url()?>/index.php/Registration/Batchlist_INSERT/';
+        //  window.location.href = '<?=base_url()?>/Registration/Batchlist_INSERT/';
     }
     function downloadslip(rno,isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+rno+'/'+isdownload
+        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+rno+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -573,7 +573,7 @@ if(isset($files)){
     function downloadslip9th(rno,isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/NinthRollNo/'+rno+'/'+isdownload
+        window.location.href = '<?=base_url()?>/RollNoSlip/NinthRollNo/'+rno+'/'+isdownload
         if(isdownload == 1)
         {
             $('.mPageloader').hide();
@@ -582,7 +582,7 @@ if(isset($files)){
     function downloadgroupwise(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -592,7 +592,7 @@ if(isset($files)){
     function downloadgroupwise12(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/InterRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>/RollNoSlip/InterRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -602,7 +602,7 @@ if(isset($files)){
     function downloadgroupwise9th(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/NinthRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>/RollNoSlip/NinthRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
         if(isdownload == 1)
         {
             $('.mPageloader').hide();
@@ -615,7 +615,7 @@ if(isset($files)){
                                     if (e) {
                                         // user clicked "ok"
                                         parent.$.fancybox.close();
-                                       // window.location.href ='<?php echo base_url(); ?>index.php/Registration/EditForms';
+                                       // window.location.href ='<?php echo base_url(); ?>Registration/EditForms';
                                     } else {
                                         // user clicked "cancel"
 
@@ -770,11 +770,11 @@ if(isset($files)){
 
     function downloadslip(rno)
     {
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+rno
+        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+rno
     }
     function downloadslip_Inter(rno)
     {
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/InterRollNo/'+rno+'/2'
+        window.location.href = '<?=base_url()?>/RollNoSlip/InterRollNo/'+rno+'/2'
     }
     function EditForm(formrno)
     {
@@ -786,30 +786,30 @@ if(isset($files)){
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>/index.php/Registration/NewEnrolment_EditForm/'+formrno
+        window.location.href = '<?=base_url()?>/Registration/NewEnrolment_EditForm/'+formrno
     }
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+Batch_ID + '/1'
+        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+Batch_ID + '/1'
     }
     function ReturnForm_Final_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+grp_cd + '/2'
+        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+grp_cd + '/2'
     }
     function ReturnForm_Final_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/return_pdf/'+grp_cd + '/4'
+        window.location.href =  '<?=base_url()?>/Registration/return_pdf/'+grp_cd + '/4'
     }
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
 
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>/index.php/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
     $('#get_report').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
@@ -964,11 +964,11 @@ if(isset($files)){
 
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/revenue_pdf/'+Batch_ID
+        window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID
     }
     function ReleaseForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>/Registration/BatchRelease/'+Batch_ID
 
     }
     function ReleaseForm_UPDATE(Batch_ID,Inst_Cd)
@@ -978,7 +978,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href = '<?=base_url()?>index.php/BiseCorrection/BatchRelease_update/'+Batch_ID +'/'+Inst_Cd+'/'
+                window.location.href = '<?=base_url()?>BiseCorrection/BatchRelease_update/'+Batch_ID +'/'+Inst_Cd+'/'
             } else {
                 // user clicked "cancel"
 
@@ -994,7 +994,7 @@ if(isset($files)){
 
             if (e) {
                 // user clicked "ok"
-                window.location.href = '<?=base_url()?>index.php/BiseCorrection/correction_update/'+Batch_ID
+                window.location.href = '<?=base_url()?>BiseCorrection/correction_update/'+Batch_ID
             } else {
                 // user clicked "cancel"
 
