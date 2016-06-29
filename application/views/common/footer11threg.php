@@ -796,7 +796,9 @@ function  check_NewEnrol_validation_11th(){
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
+        //var ispic
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
+        
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -922,7 +924,7 @@ function  check_NewEnrol_validation_11th(){
             return status;  
         }
 
-        else   if ($("#sub7").find('option:selected').val() < 1) 
+        else   if ($("#sub7").find('option:selected').val() < 1 && ($("#std_group").find('option:selected').val() == 3 || $("#std_group").find('option:selected').val() == 5)) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1351,68 +1353,6 @@ function  check_NewEnrol_validation_11th(){
                 //  alert("Transfer Thai Gayo");
             }
         });
-
-        if($("#std_group").val() == "1")
-        {
-            load_PreMedical();
-            //load_Bio_CS_Sub_NewEnrolement();
-            //$("#sub8").append(new Option('Biology',8));
-        }
-        else if($("#std_group").val() == "7"){
-
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('COMPUTER SCIENCE',78));
-        }
-        else if($("#std_group").val() == "8"){
-
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
-        }
-        else if($("#std_group").val() == "2"){
-
-
-            $.each(sub7_Hum,function(val,text){
-
-                $("#sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
-
-                $("#sub8").append(new Option(text,val));
-            });
-
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var sub7_selected ="<?php  echo @$data[0]['sub7']; ?>";
-            var sub8_selected ="<?php echo @$data[0]['sub8']; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
-
-                if(result!=-1)
-                {
-                    isElec = 1;
-                }
-            })
-
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
-                {
-                    // $("#sub7")
-                    //$("#sub7 option[value='43']").remove();
-                    //$("#sub8 option[value='43']").remove();
-                    $("#sub7 option[value='43']").remove();
-                    $("#sub8 option[value='43']").remove();
-
-                    // $("#sub7").find('option[value=43]').remove();
-                    // alert("removed");
-                }  
-            }
-            $("#sub7").val(sub7_selected);
-            $("#sub8").val(sub8_selected);
-
-        }
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
