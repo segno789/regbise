@@ -388,6 +388,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
 
+                                        DebugBreak();
                                         $grp = @$data[0]['RegGrp'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
@@ -408,7 +409,7 @@
                                             {
                                                 if($subgroups[$i] == 1)
                                                 {
-                                                    if((@$data['0']['excep'] != ""))
+                                                    if (($grp == 1) && (@$data['0']['excep'] != ""))
                                                     {
                                                         echo "<option value='1' selected='selected' >Pre-Medical</option>";  
                                                     }
@@ -422,7 +423,7 @@
                                                 }
                                                 else if($subgroups[$i] == 2)
                                                 {
-                                                    if((@$data['0']['excep'] != ""))
+                                                    if (($grp == 2) && (@$data['0']['excep'] != ""))
                                                     {
                                                          echo "<option value='2' selected='selected'>Pre-Engineering</option>";  
                                                     }
@@ -438,7 +439,7 @@
                                                 else if($subgroups[$i] == 3)
                                                 {
 
-                                                     if((@$data['0']['excep'] != ""))
+                                                     if (($grp == 3) && (@$data['0']['excep'] != ""))
                                                     {
                                                         echo "<option value='3' selected='selected'>Humanities</option>";  
                                                     }
@@ -452,7 +453,7 @@
                                                 }
                                                 else if($subgroups[$i] == 4)
                                                 {
-                                                    if((@$data['0']['excep'] != ""))
+                                                    if (($grp == 4) && (@$data['0']['excep'] != ""))
                                                     {
                                                         echo "<option value='4' selected='selected'>General Science</option>";    
                                                     }
@@ -466,7 +467,7 @@
                                                 }
                                                 else if($subgroups[$i] == 5)
                                                 {
-                                                    if((@$data['0']['excep'] != ""))
+                                                    if (($grp == 5) && (@$data['0']['excep'] != ""))
                                                     {
                                                         echo "<option value='5'  selected='selected'>Commerce</option>";   
                                                     }
@@ -481,7 +482,7 @@
                                                 }
                                                 else if($subgroups[$i] == 6)
                                                 {
-                                                     if((@$data['0']['excep'] != ""))
+                                                     if (($grp == 6 && (@$data['0']['excep'] != "")))
                                                     {
                                                        echo "<option value='6' selected='selected'>Home Economics</option>";     
                                                     }

@@ -105,7 +105,7 @@ class Registration_11th_model extends CI_Model
     }
     public function Insert_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  
     {
-        //  DebugBreak();
+          DebugBreak();
         $name = strtoupper($data['name']);
         $fname =strtoupper($data['Fname']);
         $BForm = $data['bFormNo'];
@@ -168,6 +168,17 @@ class Registration_11th_model extends CI_Model
        // return true;
 
 
+    }
+  public function bay_form_fnic($bayformno,$fnic)
+    {
+        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
+        $rowcount = $query->num_rows();
+        if ($rowcount > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
      private function savepics($formno,$class,$iyear,$sess,$pic)
