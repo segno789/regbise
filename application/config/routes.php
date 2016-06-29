@@ -42,5 +42,13 @@ $route['default_controller'] = "login";
 $route['404_override'] = '';
 
 
+/*$route['institutelogin'] = "login/index/" ;
+$route['dashboard'] = "Registration/index/" ;
+$route['add-student'] = "Registration/NewEnrolment/" ;  */
+//$route['students-returns'] = "Registration/return_pdf/$2/$3" ;
+
+ 
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

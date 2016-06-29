@@ -1782,7 +1782,7 @@ class Registration extends CI_Controller {
     public function return_pdf()
     {
 
-
+            //  DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -2039,6 +2039,7 @@ class Registration extends CI_Controller {
     }
     public function revenue_pdf()
     {
+      
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
