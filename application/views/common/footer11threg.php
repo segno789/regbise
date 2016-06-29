@@ -922,7 +922,7 @@ function  check_NewEnrol_validation_11th(){
             return status;  
         }
 
-        else   if ($("#sub7").find('option:selected').val() < 1) 
+        else if ($("#sub7").find('option:selected').val() < 1 && ($("#std_group").find('option:selected').val() == 3 || $("#std_group").find('option:selected').val() == 5)) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
