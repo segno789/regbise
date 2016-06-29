@@ -775,7 +775,187 @@ if(isotherboard != 1)
         $("#sub6").append(new Option('Statistics',18));
         $("#sub6 option[value='83']").attr("selected","selected");
     }
+function  check_NewEnrol_validation_11th(){
+         debugger;
+        var name =  $('#cand_name').val();
+        var fName = $('#father_name').val();
+        var FNic = $('#father_cnic').val();
+        var bFormNo = $('#bay_form').val();
+        var dob = $('#dob').val();
+        var sub4 = $('#sub4').val();
+        var sub5 = $('#sub5').val();
+        var sub6 = $('#sub6').val();           
+        var sub7 = $('#sub7').val();
+        var mobNo = $('#mob_number').val();
+        
+        var grp_cd = $('#std_group').val();
+        var brd_cd = $('#brd_cd').val();
+        
+        var address = $('#address').val();
+        var image = $('#image').val();
+        var MarkOfIdent = $('#MarkOfIden').val();
+        var Inst_Rno = $('#Inst_Rno').val();
+        var status = 0;
+        // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
+        if(name == "" ||  name == undefined){
+            $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+           // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Enter your  Name")
+            $('#cand_name').focus(); 
+            return status;
+        }
+        else if(fName == "" || fName == undefined){
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+           // $('#ErrMsg').html("<b>Please Enter your Father's Name  </b>");   
+             alertify.error("Please Enter your Father's Name  ") 
+            $('#father_name').focus(); 
+            return status;
+        }   
 
+        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+           // $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
+            alertify.error("Please Enter your bay-Form") 
+            $('#bay_form').focus();  
+            return status; 
+        }
+        else if(FNic == "" || FNic.length == undefined )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+           // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
+             alertify.error("Please Enter your Father's CNIC") 
+            $('#father_cnic').focus();  
+            return status; 
+        }
+
+        else if(dob == "" || dob.length == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+             alertify.error("Please Enter your Date of Birth") 
+            $('#dob').focus(); 
+            return status;  
+        }
+
+        else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+           // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
+             alertify.error("Please Enter your Mobile No.") 
+            $('#mob_number').focus();   
+            return status;  
+        }
+       
+        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
+             alertify.error("Please Enter your Mark of Indentification") 
+            $('#MarkOfIden').focus();   
+            return status;  
+        }
+        else if(address == "" || address == 0 || address.length ==undefined )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+            alertify.error("Please Enter your Address")
+            $('#address').focus(); 
+            return status;    
+        }
+          else   if ($("#std_group").find('option:selected').val() < 1) 
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+          //  $('#ErrMsg').html("<b>Please Enter your Study Group</b>"); 
+              alertify.error('Please select your Study Group '); 
+            // alert('Study Group not selected ');                          
+            $("#std_group").focus();
+            return status;  
+        }
+        else   if ($("#sub3").find('option:selected').val() < 1) 
+        {
+           // $('#ErrMsg').show(); 
+             alertify.error('Please select your Study Group '); 
+            alert('Plesae select  Subject');                          
+            $("#sub3").focus();
+
+            return status;  
+        }
+        else   if ($("#sub4").find('option:selected').val() < 1) 
+        {
+            $('#ErrMsg').show(); 
+             alertify.error('Please select Subject '); 
+           // alert('Plesae select Subject');                          
+            $("#sub4").focus();
+
+            return status;  
+        }
+
+        else   if ($("#sub5").find('option:selected').val() < 1) 
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+             alertify.error('Please select Subject '); 
+          //  $('#ErrMsg').html("<b>Plesae select 6th Subject  </b>"); 
+            // alert('Plesae select 6th Subject  ');                          
+            $("#sub5").focus();
+            return status;  
+        }
+
+        else   if ($("#sub6").find('option:selected').val() < 1) 
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+             alertify.error('Please select Subject '); 
+           // $('#ErrMsg').html("<b>Plesae select 7th Subject  </b>"); 
+            //alert('Plesae select 7th Subject ');                          
+            $("#sub6").focus();
+            return status;  
+        }
+
+        else   if ($("#sub7").find('option:selected').val() < 1) 
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+             alertify.error('Please select Subject '); 
+            //$('#ErrMsg').html("<b>Plesae select 8th Subject  </b>"); 
+            //alert('Plesae select 8th Subject ');                          
+            $("#sub7").focus();
+            return status;  
+        }
+
+        status = 1;
+        return status;
+
+
+
+
+    }
+    $("#sec_board").change(function(){
+        if(this.value == 17)
+        {
+           // alert('hello angrez :) ');
+         $("#oldSess").empty().append('<option selected="selected" value="3">JANUARY 2016</option>');
+         $("#oldSess").append('<option  value="4">JUNE 2016</option>');
+         
+        }
+        else
+        {
+         $("#oldSess").empty().append('<option selected="selected" value="1">ANNUAL</option>');
+         $("#oldSess").append('<option  value="2">SUPPLYMENTARY</option>');
+        }
+        
+    })
+    
     function load_Commerce()
     {
         $("#sub1").empty();
@@ -871,6 +1051,58 @@ if(isotherboard != 1)
            // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
               
     }
+     var langascd = ['24','34','32','27','37'];
+     var doubleHistory = ['55','56','57','58'];
+        $("#sub4").change(function(){
+        console.log('Hi i am sub7 dropdown :) ');
+        var sub4 = $("#sub4").val();
+        var sub5 = $("#sub5").val();
+        var sub6 = $("#sub6").val();
+
+
+        if((sub4 == sub5)|| (sub4 == sub6))
+        {
+            if(sub5 != 0 || sub6 != 0)
+            {
+            alertify.error("Please choose Different Subjects" );
+            $("#sub4").val('0');
+            return;    
+            }
+            
+        }
+        var valtext = 0;
+        for(var i =0 ; i<langascd.length; i++)
+        {
+            if(sub6 == langascd[i] || sub5 == langascd[i])
+            {
+                valtext =1;
+            }
+        }
+        if(valtext>0)
+        {
+            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+            $("#sub4").val('0');  
+            return;
+        }
+        for(var i=0; i<doubleHistory.length; i++)
+        {
+            if(sub6 == doubleHistory[i] || sub5 == doubleHistory[i])
+            {
+                valhistory =1;
+            }
+        }
+         if(valhistory>0)
+        {
+            alertify.error("Please choose Different Subjects as Double History is not allowed" );
+            $("#sub4").val('0');  
+            return;
+        }
+       /* if((sub4 == 55 && sub5 == 56) || (sub4 == 55 && sub6 == 57)  || (sub4 == 56 && sub6 == 55) || (sub5 == 19 && sub6 == 21) || (sub5 == 20 && sub6 == 19) || (sub5 == 21 && sub6 == 19)){
+            alertify.error("Please choose Different Subjects as Double History is not allowed" );
+            $("#sub5").val('0');
+            return;
+        }*/
+    })
 
 
     //
@@ -952,6 +1184,54 @@ if(isotherboard != 1)
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
+        var grp_cd = $("#std_group").val();
+        //alert(grp_cd);
+
+        // If Science with Biology group selected then 
+        if(grp_cd == "1")
+        {
+
+
+            // Check Nationality and select appropriate Subject1 against candidate Nationality :)
+            // load_Bio_CS_Sub();
+            //  $("#sub8").append(new Option('Biology',8));
+            load_PreMedical();
+
+        }
+        else if(grp_cd == "2")
+        {
+            load_PreEngg();
+            // load_Bio_CS_Sub();
+            //   $("#sub8").append(new Option('COMPUTER SCIENCE',78));
+            //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
+        }
+        else if (grp_cd == "3")
+        {
+            load_Hum();
+            //    load_Bio_CS_Sub();
+            //    $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
+            //ELECTRICAL WIRING (OPT)
+        }
+
+        else if(grp_cd == "4")
+        {
+
+            load_GenSci();
+
+
+        }
+        else if(grp_cd == "5")
+        {
+            load_Commerce();
+        }
+        else if(grp_cd == "6")
+        {
+            load_HomeEco();
+        }
+        else if (grp_cd == "0")
+        {
+            remove_subjects();
+        }
         if(BatchRelease_Op != "")
         {
             if(BatchRelease_Op == "success")
@@ -1698,7 +1978,7 @@ if(isotherboard != 1)
             $("#father_cnic").unmask();
             $("#bay_form").unmask();
             $("#sub1").empty(); 
-            $("#sub1").prepend("<option selected='selected' value='11'> GEOGRAPHY OF PAKISTAN </option>");
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
             $("#sub1").prepend("<option  value='1'> URDU </option>");
         }
     });

@@ -118,7 +118,7 @@ class Registration_11th_model extends CI_Model
         $nat = $data['IsPakistani'];
         $sex = $data['sex'];
         $IsHafiz = $data['IsHafiz'];
-        $rel = $data['rel'];
+        $rel = $data['IsMuslim'];
         $addr =strtoupper($data['addr']) ;
 
         $sub1=  $data['sub1'];
@@ -137,10 +137,10 @@ class Registration_11th_model extends CI_Model
         $sub6ap1 = $data['sub6ap1'];
         $sub7ap1 = $data['sub7ap1'];
         $sub8ap1 = $data['sub8ap1'];
-        $UrbanRural = $data['UrbanRural'];
+        $UrbanRural = $data['isRural'];
         $Inst_cd = $data['Inst_cd'];
         $formno = $data['FormNo'];
-        $RegGrp = $data['grp_cd'];
+        $RegGrp = $data['RegGrp'];
         $grp_cd = $RegGrp;
         $OldRno = $data['SSC_RNo'];
         $OldYear = $data['SSC_Year'];
