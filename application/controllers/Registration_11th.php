@@ -687,8 +687,8 @@ class Registration_11th extends CI_Controller {
 
         $logedIn = $this->Registration_11th_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         $error = $logedIn[0]['error'];
-      //  DebugBreak();
-        if($error == 'true')
+       //DebugBreak();
+        if($error == 'true' || $logedIn == true)
         {  
             $allinputdata = "";
             $error = $logedIn[0]['error'];
@@ -846,7 +846,7 @@ class Registration_11th extends CI_Controller {
 
 
 
-        $target_path = IMAGE_PATH.$Inst_Id.'/';
+         $target_path = IMAGE_PATH;
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
@@ -856,7 +856,7 @@ class Registration_11th extends CI_Controller {
         if (!file_exists($target_path)){
 
             mkdir($target_path);
-        }
+        } 
 
         $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
@@ -867,11 +867,56 @@ class Registration_11th extends CI_Controller {
         $config['file_name']     = $formno.'.jpg';
 
         $filepath = $target_path. $config['file_name']  ;
+         $this->load->library('upload', $config);
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        $this->upload->initialize($config);
+
+        if($check !== false) {
+
+            $file_size = round($_FILES['image']['size']/1024, 2);
+            if($file_size<=20)
+            {
+                if ( !$this->upload->do_upload('image',true))
+                {
+                    if($this->upload->error_msg[0] != "")
+                    {
+                        $error['excep']= $this->upload->error_msg[0];
+                        $allinputdata['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                        redirect('Registration_11th/NewEnrolment/');
+                        return;
+
+                    }
 
 
-        //$config['new_image']    = $formno.'.JPEG';
+                }
+            }
+            else
+            {
+                $allinputdata['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                redirect('Registration_11th/NewEnrolment/');
 
-        $this->load->library('upload', $config);
+            }
+        }
+        else
+        {
+            // $check = getimagesize($filepath);
+            if($check === false)
+            {
+                $allinputdata['excep'] = 'Please Upload Your Picture';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration_11th/NewEnrolment/');
+                return;
+            }
+        }
+        $a = getimagesize($filepath);
+        if($a[2]!=2)
+        {
+            $this->convertImage($filepath,$filepath,100,$a['mime']);
+        }
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
