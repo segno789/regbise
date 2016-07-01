@@ -1142,27 +1142,21 @@ class Registration_11th extends CI_Controller {
             
         }
         // DebugBreak();
-        
-        $sub6_mockup = 47;
-        $Speciality_mockup = 1;
-        //$Inst_cd_mockup = ;
-        $rel_mockup = 1;
-        $interchange_bform_fnic = "";
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
-            'BForm' =>$this->input->post('father_cnic'),
-            'FNIC' =>$this->input->post('bay_form'),
+            'BForm' =>$this->input->post('bay_form'),
+            'FNIC' =>$this->input->post('father_cnic'),
             'Dob' =>$this->input->post('dob'),
             'CellNo' =>$this->input->post('mob_number'),
             'medium' =>$this->input->post('medium'),
             'Inst_Rno' =>$this->input->post('Inst_Rno'),
             'MarkOfIden' =>$this->input->post('MarkOfIden'),
-            'Speciality' =>$Speciality_mockup,//$this->input->post('speciality'),
+            'Speciality' =>$this->input->post('speciality'),
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('gender'),
             'IsHafiz' =>$this->input->post('hafiz'),
-            'rel' =>$rel_mockup,//$this->input->post('religion'),
+            'rel' =>$this->input->post('religion'),
             'addr' =>$this->input->post('address'),
             'grp_cd' =>$this->input->post('std_group'),
             'sub1' =>$this->input->post('sub1'),
@@ -1170,7 +1164,7 @@ class Registration_11th extends CI_Controller {
             'sub3' =>$this->input->post('sub3'),
             'sub4' =>$this->input->post('sub4'),
             'sub5' =>$this->input->post('sub5'),
-            'sub6' => $sub6_mockup, //$this->input->post('sub6'),
+            'sub6' =>$this->input->post('sub6'),
             'sub7' =>$this->input->post('sub7'),
             'sub8' =>$this->input->post('sub8'),
             'sub1ap1' => ($sub1ap1),
