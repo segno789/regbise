@@ -461,7 +461,8 @@ class Registration_11th extends CI_Controller {
 
 
 
-    }public function NewEnrolment_insert()
+    }
+    public function NewEnrolment_insert()
     {
         $this->load->model('Registration_11th_model');
        
@@ -577,7 +578,24 @@ class Registration_11th extends CI_Controller {
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
-        $encoded_data = base64_encode($filepath);
+
+        
+        $data = fopen ($filepath, 'rb');
+
+        $size=filesize ($filepath);
+
+        $contents= fread ($fd, $size);
+
+        fclose ($fd);  
+
+        $encoded_data = base64_encode($contents);
+        
+       
+        //$db_img = addslashes($db_img);
+        //$db_img = base64_decode($db_img);
+        
+        
+       // 
         
         $sub1ap1 = 0;
         $sub2ap1 = 0;
@@ -668,7 +686,7 @@ class Registration_11th extends CI_Controller {
             'SSC_Sess'=>$this->input->post('OldSess'),
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
-            'Image'=>$encoded_data  
+            'Image'=>$encoded_image  
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
 
@@ -2432,7 +2450,7 @@ class Registration_11th extends CI_Controller {
 
         }*/
 
-        else if(@$_POST['bay_form'] == ''  || ($allinputdata['BForm'] == '' && $isupdate ==1) )
+        else if(@$_POST['bay_form'] == ''  || (@$allinputdata['BForm'] == '' && $isupdate ==1) )
         {
             $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -2524,7 +2542,7 @@ class Registration_11th extends CI_Controller {
 
 
             }
-            else if (@$_POST['dob'] == ''  || ($allinputdata['Dob'] == ''   && $isupdate ==1) )
+            else if (@$_POST['dob'] == ''  || (@$allinputdata['Dob'] == ''   && $isupdate ==1) )
             {
                 $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

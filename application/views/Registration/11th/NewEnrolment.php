@@ -21,6 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
+
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
                             </div>

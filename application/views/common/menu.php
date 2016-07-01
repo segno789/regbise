@@ -350,7 +350,7 @@
             if($isselected == '6') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>Registration_11th"   data-original-title="" class="<?php if($isselected == '6') {echo 'heading';}?>">Registration</a></li>
+                    <li><a href="<?php echo base_url(); ?>Registration_11th"   data-original-title=""  class="<?php if($isselected == '6') {echo 'heading';}?>">Registration</a></li>
 
                     <?php  if($isinterfeeding == 1) {?>
 
@@ -396,11 +396,7 @@
                     <li>
                         <a style="cursor: pointer" onclick="return logout();">Logout</a>
                     </li>
-                    <!--  <li>
-                    <a href="<?php echo base_url(); ?>Registration/ProofReading">
-                    Proof Reading
-                    </a>
-                    </li>-->
+                  
                 </ul>
                 <?php
             }
