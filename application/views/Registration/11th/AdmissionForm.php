@@ -16,6 +16,7 @@
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
                                 <label class="control-label span2" style="width: 411px;margin-left: -199px;">
+                                
                                     <img src="<?php echo base_url(); ?>assets/img/upalodimage.jpg" alt="" >
                                 </label>
                                 <div class="controls controls-row">
@@ -388,7 +389,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
 
-                                        //DebugBreak();
+                                      //  DebugBreak();
                                         $grp = @$data[0]['RegGrp'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";

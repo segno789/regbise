@@ -43,7 +43,7 @@ define('SINGLE_LAST_DATE', '2016-10-07');
 define('DOUBLE_LAST_DATE', '2016-11-30');
 
 //===========================================================
-define('IMAGE_PATH11', 'uploads/2016/colleges');
+define('IMAGE_PATH11', 'uploads/2016/colleges/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE11', '2016-04-04');

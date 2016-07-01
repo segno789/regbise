@@ -11,7 +11,7 @@
                     </div>
                     <div class="widget-body">
 
-                        <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/index.php/Registration/NewEnrolment_insert" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>Registration/NewEnrolment_insert" method="post" enctype="multipart/form-data">
 
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
@@ -21,6 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
+
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
                             </div>

@@ -256,8 +256,8 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-         //DebugBreak();
-       
+        //DebugBreak();
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -270,46 +270,34 @@ class Registration_11th extends CI_Controller {
         {
            // DebugBreak();
 
+
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');
             $RegStdData['isReAdm'] = 0;
             $RegStdData['Oldrno'] = 0;
-           // $RegStdData['excep'] = 'error';
-            
-            
-            //$spl_cd = $RegStdData['data'][0]['spl_cd'];
-            //$isReAdm = $RegStdData['data'][0]['isreadm'];
-            //$RegStdData['isReAdm']=$isReAdm;
-            //$RegStdData['Oldrno']=0;
 
-             $this->load->view('Registration/11th/AdmissionForm.php',$RegStdData);
-        $this->load->view('common/footer11threg.php');  
-        return;
-            //if($spl_cd > 0)
-           // {
-            //    $spl_cd = array('data'=>$this->Registration_11th_model->get_spl_name($spl_cd));
-             //   $this->session->set_flashdata('matric_error', $spl_cd);
-             //   redirect('Registration_11th/Students_matricInfo');
-             //   return;
 
-           // }
+            $this->load->view('Registration/11th/AdmissionForm.php',$RegStdData);
+            $this->load->view('common/footer11threg.php');  
+            return;
+
 
         }
         else{
-             $mrollno = $_POST["oldRno"];
-        
-        $board   =  $_POST["oldBrd_cd"];
-       
-        $year    =  $_POST["oldYear"];
-       
-       // $dob     =  $_POST["dob"];
-       
-        $session =$_POST["oldSess"];
-        
-       // $oldClass= $_POST["oldClass"];
-        $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
-        $this->load->model('Registration_11th_model');
-        $this->load->library('session');
-        // $RegStdData = array('data'=>$this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+            $mrollno = $_POST["oldRno"];
+
+            $board   =  $_POST["oldBrd_cd"];
+
+            $year    =  $_POST["oldYear"];
+
+            // $dob     =  $_POST["dob"];
+
+            $session =$_POST["oldSess"];
+
+            // $oldClass= $_POST["oldClass"];
+            $data = array('mrollno'=>"$mrollno",'board'=>$board,'year'=>$year,'session'=>$session);
+            $this->load->model('Registration_11th_model');
+            $this->load->library('session');
+            // $RegStdData = array('data'=>$this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
 
             $error['excep'] = '';
 
@@ -319,45 +307,45 @@ class Registration_11th extends CI_Controller {
             }
             else{
                 $isReAdm = 0;
-               // $year = 2016;    
+                // $year = 2016;    
             }
 
-             // DebugBreak();
+            // DebugBreak();
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
             if($feedingcheck != false)
             {
-            $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
-            $this->session->set_flashdata('matric_error', 'This Roll No. Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
-            redirect('Registration_11th/Students_matricInfo');
-            return; 
+                $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
+                $this->session->set_flashdata('matric_error', 'This Roll No. Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
+                redirect('Registration_11th/Students_matricInfo');
+                return; 
             }
             if($board == 1)
             {
                 if(!ctype_digit($mrollno))
                 {
-            $this->session->set_flashdata('matric_error', 'SSC ROLL NO. IS INCORRECT');
-            redirect('Registration_11th/Students_matricInfo');
-            return;
+                    $this->session->set_flashdata('matric_error', 'SSC ROLL NO. IS INCORRECT');
+                    redirect('Registration_11th/Students_matricInfo');
+                    return;
                 }
-            $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
-              
-              $RegStdData['data'][0]['excep']='';
-              $RegStdData['data'][0]['isHafiz']=0;
-              $RegStdData['data'][0]['markOfIden']='';
-              
-              
-             $spl_cd = $RegStdData['data'][0]['spl_cd'];
-        $msg = $RegStdData['data'][0]['Mesg'];
-        $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
-        $status = $RegStdData['data'][0]['status'];
-        $cand_gender = $RegStdData['data'][0]['Gender'];
-        $inst_userinfo_gender = $userinfo['gender'];
+                $RegStdData = array('data'=>$this->Registration_11th_model->Pre_Matric_data($data),'isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'','isHafiz'=>'');  
+
+                $RegStdData['data'][0]['excep']='';
+                $RegStdData['data'][0]['isHafiz']=0;
+                $RegStdData['data'][0]['markOfIden']='';
+
+
+                $spl_cd = $RegStdData['data'][0]['spl_cd'];
+                $msg = $RegStdData['data'][0]['Mesg'];
+                $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
+                $status = $RegStdData['data'][0]['status'];
+                $cand_gender = $RegStdData['data'][0]['Gender'];
+                $inst_userinfo_gender = $userinfo['gender'];
             }
             else{
                 $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'');    
             }
-            
+
 
         }
 
@@ -368,18 +356,18 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
             $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
             $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
-           // DebugBreak();
+            // DebugBreak();
             $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
-             if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
-        {
-            $this->session->set_flashdata('matric_error', 'SSC ROLL NO. IS INCORRECT');
-            redirect('Registration_11th/Students_matricInfo');
-            return;
+            if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
+            {
+                $this->session->set_flashdata('matric_error', 'SSC ROLL NO. IS INCORRECT');
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+            }
+
         }
-          
-        }
-        
-         else  if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
+
+        else  if($RegStdData['data'][0]['SSC_RNo'] == '' || $RegStdData['data'][0]['SSC_RNo'] == 0 || strlen ($RegStdData['data'][0]['SSC_RNo']) != 6)
         {
             $this->session->set_flashdata('matric_error', 'SSC ROLL NO. IS INCORRECT');
             redirect('Registration_11th/Students_matricInfo');
@@ -389,49 +377,49 @@ class Registration_11th extends CI_Controller {
         {
             if($cand_gender==1 && $inst_userinfo_gender == 2)
             {
-            $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD');
-            redirect('Registration_11th/Students_matricInfo');
-            return;
+                $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD');
+                redirect('Registration_11th/Students_matricInfo');
+                return;
             }
             if($cand_gender==2 && $inst_userinfo_gender == 1)
             {
-            $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE FEMALE CANDIDATE RECORD');
-            redirect('Registration_11th/Students_matricInfo');
-            return;    
+                $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE FEMALE CANDIDATE RECORD');
+                redirect('Registration_11th/Students_matricInfo');
+                return;    
             }
-            
+
         }
-        
-        
-     else  if($msg == -1)
+
+
+        else  if($msg == -1)
         {
             $this->session->set_flashdata('matric_error', 'NO DATA FOUND AGAINST YOUR RECORD');
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
         else
-        if($msg != '')
-        {
-            $this->session->set_flashdata('matric_error', $msg);
-            redirect('Registration_11th/Students_matricInfo');
-            return;
+            if($msg != '')
+            {
+                $this->session->set_flashdata('matric_error', $msg);
+                redirect('Registration_11th/Students_matricInfo');
+                return;
 
-        }
-        else if($spl_cd != null)
-        {
-            $this->session->set_flashdata('matric_error', 'You can not appear due to '.$SpacialCase);
-            redirect('Registration_11th/Students_matricInfo');
-            return;
-        }
-        else if($status != 1)
-        {
-            $this->session->set_flashdata('matric_error', 'You are FAILED in matric ');
-            redirect('Registration_11th/Students_matricInfo');
-            return;
-        }
-     
-         $error['excep'] = '';
-         
+            }
+            else if($spl_cd != null)
+            {
+                $this->session->set_flashdata('matric_error', 'You can not appear due to '.$SpacialCase);
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+            }
+            else if($status != 1)
+            {
+                $this->session->set_flashdata('matric_error', 'You are FAILED in matric ');
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+            }
+
+            $error['excep'] = '';
+
         $this->load->view('Registration/11th/AdmissionForm.php',$RegStdData);
         $this->load->view('common/footer11threg.php');   
 
@@ -473,10 +461,11 @@ class Registration_11th extends CI_Controller {
 
 
 
-    }public function NewEnrolment_insert()
+    }
+    public function NewEnrolment_insert()
     {
         $this->load->model('Registration_11th_model');
-        // DebugBreak();
+       
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -515,18 +504,18 @@ class Registration_11th extends CI_Controller {
 
         }
         $allinputdata['sub8']=0;
-        $target_path = IMAGE_PATH;
+        $target_path = IMAGE_PATH11;
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
             mkdir($target_path);
         }
-        $target_path = IMAGE_PATH.$Inst_Id.'/';
+        $target_path = IMAGE_PATH11.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
             mkdir($target_path);
         } 
-
+        //   DebugBreak();
         $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
@@ -536,7 +525,7 @@ class Registration_11th extends CI_Controller {
         $config['file_name']     = $formno.'.jpg';
 
         $filepath = $target_path. $config['file_name']  ;
-         $this->load->library('upload', $config);
+        $this->load->library('upload', $config);
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         $this->upload->initialize($config);
 
@@ -582,10 +571,32 @@ class Registration_11th extends CI_Controller {
             }
         }
         $a = getimagesize($filepath);
+       
+        
+        
         if($a[2]!=2)
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
+
+        
+        $data = fopen ($filepath, 'rb');
+
+        $size=filesize ($filepath);
+
+        $contents= fread ($fd, $size);
+
+        fclose ($fd);  
+
+        $encoded_data = base64_encode($contents);
+        
+       
+        //$db_img = addslashes($db_img);
+        //$db_img = base64_decode($db_img);
+        
+        
+       // 
+        
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -674,9 +685,10 @@ class Registration_11th extends CI_Controller {
             'SSC_Year'=>$this->input->post('OldYear'),
             'SSC_Sess'=>$this->input->post('OldSess'),
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
-            'IsReAdm'=>$this->input->post('IsReAdm')
-           // 'spl_cd'=>$this->input->post('IsReAdm'),
-            
+            'IsReAdm'=>$this->input->post('IsReAdm')   ,
+            'Image'=>$encoded_image  
+            // 'spl_cd'=>$this->input->post('IsReAdm'),
+
 
 
 
@@ -701,7 +713,7 @@ class Registration_11th extends CI_Controller {
         }
         else
         {     
-            
+
             $allinputdata = $data;
             $allinputdata['excep'] = $error;
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -724,8 +736,8 @@ class Registration_11th extends CI_Controller {
     {
         $this->load->view('common/footer11threg.php',$data);
     }
-    
-  
+
+
     public function EditForms()
     {
         // DebugBreak();
@@ -846,13 +858,13 @@ class Registration_11th extends CI_Controller {
 
 
 
-         $target_path = IMAGE_PATH;
+        $target_path = IMAGE_PATH11.$Inst_Id.'/';
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
             mkdir($target_path);
         }
-        $target_path = IMAGE_PATH.$Inst_Id.'/';
+        $target_path = IMAGE_PATH11.$Inst_Id.'/';
         if (!file_exists($target_path)){
 
             mkdir($target_path);
@@ -1134,12 +1146,12 @@ class Registration_11th extends CI_Controller {
         if(@$_POST['sub7'] != 0)
         {
             $sub7ap1 = 1;  
-             
+
         }
         if(@$_POST['sub8'] != 0)
         {
             $sub8ap1 = 1;    
-            
+
         }
         // DebugBreak();
         $data = array(
@@ -1845,15 +1857,15 @@ class Registration_11th extends CI_Controller {
                 $pdf->SetFont('Arial','',7);    
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
 
-                //$pdf->Image(IMAGE_PATH.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
-                $pdf->Image(base_url().IMAGE_PATH.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
+                //$pdf->Image(IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
+                $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
             else
             {
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
                 $pdf->SetFont('Arial','',7);    
                 $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"]); //.','.$data["sub8_abr"]
-                //$pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
+                //$pdf->Image(IMAGE_PATH11.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG");    
             }
 
 
@@ -2104,7 +2116,7 @@ class Registration_11th extends CI_Controller {
             $pdf->SetXY(6.8, $Y +1.75);
             $pdf->Cell(1.25,1.4,'',1,0,'C',0);
 
-            $pdf->Image(IMAGE_PATH.$data["coll_cd"].'/'.$data["PicPath"],6.8, 1.75+ $Y, 1.25, 1.4, "JPG"); 
+            $pdf->Image(IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],6.8, 1.75+ $Y, 1.25, 1.4, "JPG"); 
             $pdf->SetFont('Arial','',10);
 
             //------------- Personal Infor Box
@@ -2483,7 +2495,7 @@ class Registration_11th extends CI_Controller {
 
         }*/
 
-        else if(@$_POST['bay_form'] == ''  || ($allinputdata['BForm'] == '' && $isupdate ==1) )
+        else if(@$_POST['bay_form'] == ''  || (@$allinputdata['BForm'] == '' && $isupdate ==1) )
         {
             $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -2575,7 +2587,7 @@ class Registration_11th extends CI_Controller {
 
 
             }
-            else if (@$_POST['dob'] == ''  || ($allinputdata['Dob'] == ''   && $isupdate ==1) )
+            else if (@$_POST['dob'] == ''  || (@$allinputdata['Dob'] == ''   && $isupdate ==1) )
             {
                 $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

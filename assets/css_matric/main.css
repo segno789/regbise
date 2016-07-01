@@ -381,15 +381,6 @@ tr.data:hover small {
     border-left: 0px solid #dcdcdc;
 }
 
-.heading {
-	font-size:13px;
-	padding:0;
-	margin:4px 0;
-	font-weight:bold;
-	display:block;
-	text-decoration:underline;
-}
-
 #company td {
 	vertical-align:top !important;
 }

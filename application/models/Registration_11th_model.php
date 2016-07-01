@@ -29,6 +29,7 @@ class Registration_11th_model extends CI_Model
         $this->db->insert('tblInstitutes_all_Info', $data); 
         return true;
     }
+    
     public function get_zone()
     {
 
@@ -148,7 +149,7 @@ class Registration_11th_model extends CI_Model
         $OldBrd = $data['SSC_brd_cd'];
         $IsReAdm = $data['IsReAdm'];
        // DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm");
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         
          $rowcount = $query->num_rows();
@@ -158,7 +159,10 @@ class Registration_11th_model extends CI_Model
         }
         else
         {
-            return  true;
+               $this->savepics($formno,11,2016,1,$data['Image']) ;
+            
+                 $error[0]['error'] =  true;
+                 return $error;
         }
        // return true;
 
@@ -176,7 +180,24 @@ class Registration_11th_model extends CI_Model
         }
     }
 
-  
+     private function savepics($formno,$class,$iyear,$sess,$pic)
+    {
+        //  DebugBreak();
+        $data = array(
+
+            'formNo' => $formno ,
+            'class' => $class ,
+            'iyear' => $iyear,
+            'sess' => $sess ,
+            'image' => $pic 
+
+
+        );
+
+        $this->db->insert('ImageDB..tblIAPics', $data); 
+        return true;
+    }
+    
     public function Pre_Matric_data($data){
 
 
@@ -305,7 +326,7 @@ class Registration_11th_model extends CI_Model
         $regoldyear = $data['regoldyear'];
         $isreadm = $data['isreadm'];
         // DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$sex,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$regoldrno,$regoldclass,$regoldyear,$regoldsess,$isreadm");
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$sex,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$regoldrno,$regoldclass,$regoldyear,$regoldsess,$isreadm");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }
@@ -316,7 +337,7 @@ class Registration_11th_model extends CI_Model
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
         //sp_get_regInfo_spl_case
 
-        $query = $this->db->query("Registration..sp_get_regInfo_11th $inst_cd,9,2016,1");    
+        $query = $this->db->query("Registration..sp_get_regInfo_11th $inst_cd,11,2016,1");    
 
 
 
@@ -362,10 +383,10 @@ class Registration_11th_model extends CI_Model
 
         //  DebugBreak();
         if($year == 2015){
-            $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
+            $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>11, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
         }
         else{
-            $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
+            $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>11,'iyear'=>$year,'sess'=>1));     
         }
 
 
@@ -455,7 +476,7 @@ class Registration_11th_model extends CI_Model
         $spl_cd = $User_info_data['spl_case'];
 
         // $forms_id = $User_info_data['forms_id'];
-        $query = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $RollNo,'spl_cd' => 17,'Coll_cd'=>$Inst_cd,'class'=>9,'Iyear'=>2016,'sess'=>1));
+        $query = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $RollNo,'spl_cd' => 17,'Coll_cd'=>$Inst_cd,'class'=>11,'Iyear'=>2016,'sess'=>1));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -627,17 +648,17 @@ class Registration_11th_model extends CI_Model
         {
             if($spl_cd == FALSE || ($spl_cd == "3"))
             {
-                $query = $this->db->query("Registration..sp_get_regInfo_11th $inst_cd,9,2016,1");    
+                $query = $this->db->query("Registration..sp_get_regInfo_11th $inst_cd,11,2016,1");    
             }
 
             else
             {
-                $query = $this->db->query("Registration..sp_get_regInfo_spl_case_11th $inst_cd,9,2016,1,$spl_cd");    
+                $query = $this->db->query("Registration..sp_get_regInfo_spl_case_11th $inst_cd,11,2016,1,$spl_cd");    
             }    
         }
         else
         {
-            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th $inst_cd,9,2016,1,$grp_selected");    
+            $query = $this->db->query("Registration..sp_get_regInfo_Groupwise_11th $inst_cd,11,2016,1,$grp_selected");    
         }
 
 
