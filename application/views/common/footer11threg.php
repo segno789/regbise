@@ -35,15 +35,15 @@ if(isset($files)){
             "sPaginationType": "full_numbers",
             "cache": false
         });
-        
+
         var data_excep = "<?php echo @$excep_halt; ?>";
-         if(data_excep != '')
+        if(data_excep != '')
         {
-            
-                alertify.error(data_excep);
-               // $('#Info_emis').focus();
-                return false;
-           
+
+            alertify.error(data_excep);
+            // $('#Info_emis').focus();
+            return false;
+
 
         }
     });
@@ -263,13 +263,13 @@ if(isset($files)){
 
 <script type="">
 
-var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
-debugger;
-if(isotherboard != 1)
-{
-       $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
-}
-   // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
+    var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
+    debugger;
+    if(isotherboard != 1)
+    {
+        $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
+    }
+    // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, 'setDate': new Date() }).val(); //, startDate:new Date()
     var myOptions = {
         val1 : 'text1',
@@ -701,7 +701,7 @@ if(isotherboard != 1)
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-       $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
 
@@ -727,7 +727,7 @@ if(isotherboard != 1)
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-       $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
         $("#sub1").append(new Option('Urdu',2));
@@ -753,8 +753,8 @@ if(isotherboard != 1)
         $("#sub6").empty();
         $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
-        
-        
+
+
 
         $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
@@ -775,8 +775,8 @@ if(isotherboard != 1)
         $("#sub6").append(new Option('Statistics',18));
         $("#sub6 option[value='83']").attr("selected","selected");
     }
-function  check_NewEnrol_validation_11th(){
-         debugger;
+    function  check_NewEnrol_validation_11th(){
+        debugger;
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
         var FNic = $('#father_cnic').val();
@@ -787,10 +787,10 @@ function  check_NewEnrol_validation_11th(){
         var sub6 = $('#sub6').val();           
         var sub7 = $('#sub7').val();
         var mobNo = $('#mob_number').val();
-        
+
         var grp_cd = $('#std_group').val();
         var brd_cd = $('#brd_cd').val();
-        
+
         var address = $('#address').val();
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
@@ -798,11 +798,11 @@ function  check_NewEnrol_validation_11th(){
         var status = 0;
         //var ispic
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
-        
+
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-           // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
             alertify.error("Please Enter your  Name")
             $('#cand_name').focus(); 
             return status;
@@ -810,8 +810,8 @@ function  check_NewEnrol_validation_11th(){
         else if(fName == "" || fName == undefined){
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-           // $('#ErrMsg').html("<b>Please Enter your Father's Name  </b>");   
-             alertify.error("Please Enter your Father's Name  ") 
+            // $('#ErrMsg').html("<b>Please Enter your Father's Name  </b>");   
+            alertify.error("Please Enter your Father's Name  ") 
             $('#father_name').focus(); 
             return status;
         }   
@@ -820,7 +820,7 @@ function  check_NewEnrol_validation_11th(){
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-           // $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
+            // $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
             alertify.error("Please Enter your bay-Form") 
             $('#bay_form').focus();  
             return status; 
@@ -829,8 +829,8 @@ function  check_NewEnrol_validation_11th(){
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-           // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
-             alertify.error("Please Enter your Father's CNIC") 
+            // $('#ErrMsg').html("<b>Please Enter your Father's CNIC</b>"); 
+            alertify.error("Please Enter your Father's CNIC") 
             $('#father_cnic').focus();  
             return status; 
         }
@@ -840,7 +840,7 @@ function  check_NewEnrol_validation_11th(){
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
-             alertify.error("Please Enter your Date of Birth") 
+            alertify.error("Please Enter your Date of Birth") 
             $('#dob').focus(); 
             return status;  
         }
@@ -849,18 +849,18 @@ function  check_NewEnrol_validation_11th(){
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-           // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
-             alertify.error("Please Enter your Mobile No.") 
+            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
+            alertify.error("Please Enter your Mobile No.") 
             $('#mob_number').focus();   
             return status;  
         }
-       
+
         else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
-             alertify.error("Please Enter your Mark of Indentification") 
+            alertify.error("Please Enter your Mark of Indentification") 
             $('#MarkOfIden').focus();   
             return status;  
         }
@@ -873,20 +873,20 @@ function  check_NewEnrol_validation_11th(){
             $('#address').focus(); 
             return status;    
         }
-          else   if ($("#std_group").find('option:selected').val() < 1) 
+        else   if ($("#std_group").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-          //  $('#ErrMsg').html("<b>Please Enter your Study Group</b>"); 
-              alertify.error('Please select your Study Group '); 
+            //  $('#ErrMsg').html("<b>Please Enter your Study Group</b>"); 
+            alertify.error('Please select your Study Group '); 
             // alert('Study Group not selected ');                          
             $("#std_group").focus();
             return status;  
         }
         else   if ($("#sub3").find('option:selected').val() < 1) 
         {
-           // $('#ErrMsg').show(); 
-             alertify.error('Please select your Study Group '); 
+            // $('#ErrMsg').show(); 
+            alertify.error('Please select your Study Group '); 
             alert('Plesae select  Subject');                          
             $("#sub3").focus();
 
@@ -895,8 +895,8 @@ function  check_NewEnrol_validation_11th(){
         else   if ($("#sub4").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
-             alertify.error('Please select Subject '); 
-           // alert('Plesae select Subject');                          
+            alertify.error('Please select Subject '); 
+            // alert('Plesae select Subject');                          
             $("#sub4").focus();
 
             return status;  
@@ -906,8 +906,8 @@ function  check_NewEnrol_validation_11th(){
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-             alertify.error('Please select Subject '); 
-          //  $('#ErrMsg').html("<b>Plesae select 6th Subject  </b>"); 
+            alertify.error('Please select Subject '); 
+            //  $('#ErrMsg').html("<b>Plesae select 6th Subject  </b>"); 
             // alert('Plesae select 6th Subject  ');                          
             $("#sub5").focus();
             return status;  
@@ -917,18 +917,18 @@ function  check_NewEnrol_validation_11th(){
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-             alertify.error('Please select Subject '); 
-           // $('#ErrMsg').html("<b>Plesae select 7th Subject  </b>"); 
+            alertify.error('Please select Subject '); 
+            // $('#ErrMsg').html("<b>Plesae select 7th Subject  </b>"); 
             //alert('Plesae select 7th Subject ');                          
             $("#sub6").focus();
             return status;  
         }
 
-        else   if ($("#sub7").find('option:selected').val() < 1 && ($("#std_group").find('option:selected').val() == 3 || $("#std_group").find('option:selected').val() == 5)) 
+        else   if ($("#sub7").find('option:selected').val() < 1 && ($("#std_group").find('option:selected').val() == 6 || $("#std_group").find('option:selected').val() == 5)) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-             alertify.error('Please select Subject '); 
+            alertify.error('Please select Subject '); 
             //$('#ErrMsg').html("<b>Plesae select 8th Subject  </b>"); 
             //alert('Plesae select 8th Subject ');                          
             $("#sub7").focus();
@@ -945,19 +945,19 @@ function  check_NewEnrol_validation_11th(){
     $("#sec_board").change(function(){
         if(this.value == 17)
         {
-           // alert('hello angrez :) ');
-         $("#oldSess").empty().append('<option selected="selected" value="3">JANUARY 2016</option>');
-         $("#oldSess").append('<option  value="4">JUNE 2016</option>');
-         
+            // alert('hello angrez :) ');
+            $("#oldSess").empty().append('<option selected="selected" value="3">JANUARY 2016</option>');
+            $("#oldSess").append('<option  value="4">JUNE 2016</option>');
+
         }
         else
         {
-         $("#oldSess").empty().append('<option selected="selected" value="1">ANNUAL</option>');
-         $("#oldSess").append('<option  value="2">SUPPLYMENTARY</option>');
+            $("#oldSess").empty().append('<option selected="selected" value="1">ANNUAL</option>');
+            $("#oldSess").append('<option  value="2">SUPPLYMENTARY</option>');
         }
-        
+
     })
-    
+
     function load_Commerce()
     {
         $("#sub1").empty();
@@ -1033,7 +1033,7 @@ function  check_NewEnrol_validation_11th(){
         $("#sub5").empty();
         $("#sub6").empty();
         $("#sub7").empty();
-       $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
+        $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
@@ -1043,68 +1043,237 @@ function  check_NewEnrol_validation_11th(){
         $("#sub3 option[value='92']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
             $('#sub4').append( new Option(text,val) );
-            }); 
-             $.each(sub6_Hum, function(val, text) {
+        }); 
+        $.each(sub6_Hum, function(val, text) {
             $('#sub5').append( new Option(text,val) );
-            }); 
-             $.each(sub6_Hum, function(val, text) {
+        }); 
+        $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
-            }); 
-           // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
-              
+        }); 
+        // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
+
     }
-     var langascd = ['24','34','32','27','37'];
-     var doubleHistory = ['55','56','57','58'];
-        $("#sub4").change(function(){
+    var langascd = ['24','34','32','27','37'];
+    var doubleHistory = ['55','56','57','58'];
+    $("#sub4").change(function(){
+        console.log('Hi i am sub7 dropdown :) ');
+        debugger;
+        var sub4 = $("#sub4").val();
+        var sub5 = $("#sub5").val();
+        var sub6 = $("#sub6").val();
+
+
+        if((sub5 != 0 || sub6 != 0) && sub4 != 0)
+        {
+            if((sub4 == sub5)|| (sub4 == sub6) || (sub5 == sub6))    
+            {
+                alertify.error("Please choose Different Subjects" );
+                $("#sub4").val('0');
+                return;    
+            }
+
+        }
+        var valtext = 0;
+        var valhistory = 0;
+        var islang = 0;
+
+
+        for(var i =0 ; i<langascd.length; i++)
+        {
+            if(sub4 == langascd[i])
+            {
+                islang=1;
+            }
+            if(sub5 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
+            }
+            if(sub6 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
+            }
+
+        }
+        if(islang==1 && valtext >= 1)
+        {
+            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+            $("#sub4").val('0');  
+            return;
+        }
+        var ishist = 0;
+        for(var i=0; i<doubleHistory.length; i++)
+        {
+            if(sub6 == doubleHistory[i]) 
+            {
+                valhistory =parseInt(valhistory) + 1;
+            }
+            if(sub5 == doubleHistory[i])
+            {
+                valhistory =parseInt(valhistory) + 1;
+            }
+            if(sub4 == doubleHistory[i])
+            {
+                ishist = 1;
+            }
+        }
+        if(ishist==1 &&  valhistory >= 1)
+        {
+            alertify.error("Please choose Different Subjects as Double History is not allowed" );
+            $("#sub4").val('0');  
+            return;
+        }
+        /* if((sub4 == 55 && sub5 == 56) || (sub4 == 55 && sub6 == 57)  || (sub4 == 56 && sub6 == 55) || (sub5 == 19 && sub6 == 21) || (sub5 == 20 && sub6 == 19) || (sub5 == 21 && sub6 == 19)){
+        alertify.error("Please choose Different Subjects as Double History is not allowed" );
+        $("#sub5").val('0');
+        return;
+        }*/
+    })
+    $("#sub5").change(function(){
         console.log('Hi i am sub7 dropdown :) ');
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
         var sub6 = $("#sub6").val();
 
 
-        if((sub4 == sub5)|| (sub4 == sub6))
-        {
-            if(sub5 != 0 || sub6 != 0)
+        if( (sub4 != 0 || sub6 != 0) && sub5 != 0)
+               {
+             if((sub5 == sub6)|| (sub5 == sub4) || (sub4 == sub6))
             {
-            alertify.error("Please choose Different Subjects" );
-            $("#sub4").val('0');
-            return;    
+                alertify.error("Please choose Different Subjects" );
+                $("#sub5").val('0');
+                return;    
             }
-            
+
         }
-        var valtext = 0;
+         var valtext = 0;
+        var valhistory = 0;
+        var islang = 0;
         for(var i =0 ; i<langascd.length; i++)
         {
-            if(sub6 == langascd[i] || sub5 == langascd[i])
+            if(sub4 == langascd[i]) 
             {
-                valtext =1;
+                valtext =parseInt(valtext) + 1;
             }
+            if(sub5 == langascd[i]) 
+            {
+                islang=1;
+            }
+
+            if(sub6 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
+            }
+
         }
-        if(valtext>0)
+        if(islang == 1 && valtext >= 1)
         {
             alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-            $("#sub4").val('0');  
+            $("#sub5").val('0');  
             return;
         }
+        var ishist = 0;
         for(var i=0; i<doubleHistory.length; i++)
         {
-            if(sub6 == doubleHistory[i] || sub5 == doubleHistory[i])
+            if(sub4 == doubleHistory[i])
             {
-                valhistory =1;
+                valhistory =parseInt(valhistory) + 1;
+            }
+            if(sub5 == doubleHistory[i])
+            {
+                ishist = 1;
+            }
+            if(sub6 == doubleHistory[i])
+            {
+                valhistory =parseInt(valhistory) + 1;
             }
         }
-         if(valhistory>0)
+        if(ishist ==1 && valhistory >= 1)
         {
             alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#sub4").val('0');  
+            $("#sub5").val('0');  
             return;
         }
-       /* if((sub4 == 55 && sub5 == 56) || (sub4 == 55 && sub6 == 57)  || (sub4 == 56 && sub6 == 55) || (sub5 == 19 && sub6 == 21) || (sub5 == 20 && sub6 == 19) || (sub5 == 21 && sub6 == 19)){
-            alertify.error("Please choose Different Subjects as Double History is not allowed" );
-            $("#sub5").val('0');
-            return;
+        /* if((sub4 == 55 && sub5 == 56) || (sub4 == 55 && sub6 == 57)  || (sub4 == 56 && sub6 == 55) || (sub5 == 19 && sub6 == 21) || (sub5 == 20 && sub6 == 19) || (sub5 == 21 && sub6 == 19)){
+        alertify.error("Please choose Different Subjects as Double History is not allowed" );
+        $("#sub5").val('0');
+        return;
         }*/
     })
+    $("#sub6").change(function(){
+        debugger;
+        console.log('Hi i am sub7 dropdown :) ');
+        var sub4 = $("#sub4").val();
+        var sub5 = $("#sub5").val();
+        var sub6 = $("#sub6").val();
+
+
+         if((sub4 != 0 || sub5 != 0) && sub6 !=0)
+                {
+        if((sub6 == sub5)|| (sub6 == sub4) ||(sub5 == sub4))   
+            {
+                alertify.error("Please choose Different Subjects" );
+                $("#sub6").val('0');
+                return;    
+            }
+
+        }
+        var valtext = 0;
+        var valhistory = 0;
+        var islang = 0;
+        for(var i =0 ; i<langascd.length; i++)
+        {
+
+            if(sub4 == langascd[i]) 
+            {
+                valtext =parseInt(valtext) + 1;
+            }
+            if(sub5 == langascd[i])
+            {
+                valtext = parseInt(valtext) + 1;
+            }
+            if(sub6 == langascd[i])
+            {
+                islang = 1;
+            }
+
+
+        }
+        if(islang==1 && valtext>=1)
+        {
+            alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+            $("#sub6").val('0');  
+            return;
+        }
+        var ishist =0;
+        for(var i=0; i<doubleHistory.length; i++)
+        {
+            if(sub4 == doubleHistory[i]) 
+            {
+                valhistory =parseInt(valhistory) + 1;
+            }
+            if(sub5 == doubleHistory[i])
+            {
+                valhistory = parseInt(valhistory) + 1;
+            }
+            if(sub6 == doubleHistory[i])
+            {
+                ishist = 1;
+            }
+           
+        }
+        if( ishist==1 && valhistory >=1)
+        {
+            alertify.error("Please choose Different Subjects as Double History is not allowed" );
+            $("#sub6").val('0');  
+            return;
+        }
+        /* if((sub4 == 55 && sub5 == 56) || (sub4 == 55 && sub6 == 57)  || (sub4 == 56 && sub6 == 55) || (sub5 == 19 && sub6 == 21) || (sub5 == 20 && sub6 == 19) || (sub5 == 21 && sub6 == 19)){
+        alertify.error("Please choose Different Subjects as Double History is not allowed" );
+        $("#sub5").val('0');
+        return;
+        }*/
+    })
+
 
 
     //
@@ -1646,7 +1815,7 @@ function  check_NewEnrol_validation_11th(){
         $("#sub7").hide();
     }
     $("#std_group").change(function(){
-    
+
         debugger;
 
         var grp_cd = $("#std_group").val();
@@ -1787,13 +1956,13 @@ function  check_NewEnrol_validation_11th(){
             return status; 
         }
 
-       /* else if(dob == "" || dob.length == undefined)
+        /* else if(dob == "" || dob.length == undefined)
         {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
-            $('#dob').focus(); 
-            return status;  
+        $('#ErrMsg').show(); 
+        $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+        $('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+        $('#dob').focus(); 
+        return status;  
         }*/
 
         else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
@@ -2082,7 +2251,7 @@ function  check_NewEnrol_validation_11th(){
             } 
         });
     }
-        function Dashboard(){
+    function Dashboard(){
         var msg = "Are you Sure You want to Cancel?"
 
         alertify.confirm(msg, function (e) {
