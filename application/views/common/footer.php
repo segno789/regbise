@@ -186,7 +186,7 @@ if(isset($files)){
     $("#btnsubmitUpdateEnrol").click(function(){
     
         // alert('hello');
-        
+        debugger;
         //alert(c1);
          var corr_cand_name = $("#corr_cand_name").val();
         var corr_father_name = $("#corr_father_name").val();
@@ -262,6 +262,11 @@ if(isset($files)){
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
             return false;
+            }
+            if(check_checkbox ==0)
+            {
+            alertify.error("Please Choose Correction First!");
+             return false;
             }
         var sub1 = $("#sub1 option:selected").text();
         var sub2 = $("#sub2 option:selected").text();
