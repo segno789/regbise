@@ -17,7 +17,7 @@
 
                          <?php  if($isinterfeeding == 1) {?>
                         <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>Registration_11th/NewEnrolment"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>New-Registration</a>
+                            <a href="<?php echo base_url(); ?>Registration_11th/Students_matricInfo"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>New-Registration</a>
                         </div>
                         <!--  <div class="shortcutHome">
                         <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>

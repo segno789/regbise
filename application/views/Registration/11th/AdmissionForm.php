@@ -44,9 +44,7 @@
                             @$brd_cd =  @$data[0]['SSC_brd_cd'];
                             ?>
                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Candidate Name :
-                                </label>
+                                <label class="control-label span1" >Candidate Name:</label>
                                 <div class="controls controls-row">
                                     <input class="span3"  type="text" id="cand_name"  style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if($isReAdm==0 && @$brd_cd == 1) {echo "readonly='readonly'";  } ?>  >
                                     <label class="control-label span2" for="lblfather_name">
