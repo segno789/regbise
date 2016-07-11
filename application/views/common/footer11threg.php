@@ -264,7 +264,7 @@ if(isset($files)){
 <script type="">
 
     var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
-    debugger;
+    //
     if(isotherboard != 1)
     {
         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
@@ -588,6 +588,10 @@ if(isset($files)){
     {
         window.location.href = '<?=base_url()?>/index.php/Registration_11th/revenue_pdf/'+Batch_ID
     }
+      function ChallanForm_11th(Batch_ID)
+    {
+        window.location.href = '<?=base_url()?>/index.php/Registration_11th/Print_challan_Form/'+Batch_ID
+    }
     function ReleaseForm(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/index.php/Registration_11th/BatchRelease/'+Batch_ID
@@ -629,68 +633,7 @@ if(isset($files)){
 
     }
 
-    function load_Bio_CS_Sub_NewEnrolement(sub1,sub3,sub5,sbu6,sbu7,sub8)
-    {
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        $('#sub1').empty();
-
-        if(NationalityVal == "1")
-        {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-
-                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            var sub1 =  "<?php echo @$data[0]['sub1']; ?>";
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-
-            $.each(sub3_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            var sub3 =  "<?php echo @$data[0]['sub3']; ?>";
-
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-                $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-            });
-        }
-
-        // Subject 5 ,6 ,7 and 8
-        $("#sub5").empty();
-        $("#sub6").empty();
-        $("#sub7").empty();
-        $("#sub8").empty();
-
-        $("#sub5").append(new Option('MATHEMATICS',5));
-        $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
-        $("#sub6").append(new Option('PHYSICS',6));
-        $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        $("#sub7").append(new Option('CHEMISTRY',7));
-        $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
-        $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
-
-    }
+    
 
     function load_PreMedical()
     {
@@ -776,7 +719,7 @@ if(isset($files)){
         $("#sub6 option[value='83']").attr("selected","selected");
     }
     function  check_NewEnrol_validation_11th(){
-        debugger;
+       // 
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
         var FNic = $('#father_cnic').val();
@@ -1057,7 +1000,7 @@ if(isset($files)){
     var doubleHistory = ['55','56','57','58'];
     $("#sub4").change(function(){
         console.log('Hi i am sub7 dropdown :) ');
-        debugger;
+        
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
         var sub6 = $("#sub6").val();
@@ -1200,7 +1143,7 @@ if(isset($files)){
         }*/
     })
     $("#sub6").change(function(){
-        debugger;
+        
         console.log('Hi i am sub7 dropdown :) ');
         var sub4 = $("#sub4").val();
         var sub5 = $("#sub5").val();
@@ -1274,7 +1217,7 @@ if(isset($files)){
         }*/
     })
 
-
+  var NationalityVal = $("input[name=nationality]:checked").val();
 
     //
     //  $("#sub8").append(new Option('COMPUTER SCIENCE',78));
@@ -1282,7 +1225,7 @@ if(isset($files)){
     function Hum_Deaf_Subjects_NewEnrolement(sub6,sub7,sub8)
     {
 
-        debugger;
+        
         var a = ['volvo','random data'];
         var b = ['random data'];
         $.each(a,function(i,val){
@@ -1361,27 +1304,19 @@ if(isset($files)){
         // If Science with Biology group selected then 
         if(grp_cd == "1")
         {
-
-
-            // Check Nationality and select appropriate Subject1 against candidate Nationality :)
-            // load_Bio_CS_Sub();
-            //  $("#sub8").append(new Option('Biology',8));
+            
             load_PreMedical();
 
         }
         else if(grp_cd == "2")
         {
             load_PreEngg();
-            // load_Bio_CS_Sub();
-            //   $("#sub8").append(new Option('COMPUTER SCIENCE',78));
-            //    alert('hello  Sweet Heart ! I love You UMMMMAH :) ') 
+            
         }
         else if (grp_cd == "3")
         {
             load_Hum();
-            //    load_Bio_CS_Sub();
-            //    $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
-            //ELECTRICAL WIRING (OPT)
+            
         }
 
         else if(grp_cd == "4")
@@ -1490,7 +1425,7 @@ if(isset($files)){
         //MarkOfIden
         $('#cand_name').focusout(function() 
             {
-                debugger;
+               // 
                 //   alertify.log('hello funciton call');
                 var  name =  $('#cand_name').val();
                 //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
@@ -1500,7 +1435,7 @@ if(isset($files)){
         })
         $('#father_name').focusout(function() 
             {
-                //  debugger;
+                //  
                 //   alertify.log('hello funciton call');
                 var  name =  $('#father_name').val();
                 //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
@@ -1553,64 +1488,7 @@ if(isset($files)){
 
         }
 
-        //   else if($("#std_group").val() == "2"){
-        //       
-        //       Hum_Deaf_Subjects_NewEnrolement('<?= @$sub6?>','<?= @$sub7?>','<?= @$sub8?>');
-        //        Hum_Deaf_Subjects();
-        //            $.each(sub6_Hum,function(val,text){
-        //                $("#sub6").append(new Option(text,val));
-        //            });
-        //             $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        //            $.each(sub6_Hum,function(val,text){
-        //                $("#sub6").append(new Option(text,val));
-        //            });
-        //             $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        //            $.each(sub7_Hum,function(val,text){
-        //                $("#sub7").append(new Option(text,val));
-        //            });
-        //             $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
-        //            $.each(sub8_Hum,function(val,text){
-        //                $("#sub8").append(new Option(text,val));
-        //            });
-        //             $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
-        //            var Gender = $("input[name=gender]:checked").val();
-        //            //console.log(Religion);
-        //            console.log(Gender);
-        //            if(Gender == "2")
-        //            {
-        //                console.log("Hi Miss :)");
-        //
-        //                $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-        //            }
-        //            else
-        //            {
-        //                // alert('i am removed');
-        //                dropdownElement.find('sub8[value=13]').remove();
-        //
-        //
-        //            }
-        //   }
-        //   else  if($("#std_group").val() == "6")
-        //   {
-        //        Hum_Deaf_Subjects();
-        //            $.each(sub6_Deaf,function(val,text){
-        //                $("#sub6").append(new Option(text,val));
-        //                
-        //            });
-        //             $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        //            $.each(sub6_Deaf,function(val,text){
-        //                $("#sub6").append(new Option(text,val));
-        //            });
-        //             $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
-        //            $.each(sub7_Deaf,function(val,text){
-        //                $("#sub7").append(new Option(text,val));
-        //            });
-        //             $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
-        //            $.each(sub8_Deaf,function(val,text){
-        //                $("#sub8").append(new Option(text,val));
-        //            });
-        //             $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
-        //   }
+       
 
     });
 
@@ -1639,18 +1517,8 @@ if(isset($files)){
         window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()
     }
 
-    function load_Bio_CS_Sub()
-    {
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        $('#sub1').empty();
-        if(NationalityVal == "1")
-        {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
 
-        }
-        else if (NationalityVal == "2")
+         if (NationalityVal == "2")
         {
             console.log("Hi Foreigner Welcom to Pakistan :) ");
             $.each(sub1_NonPak_options, function(val, text) {
@@ -1680,16 +1548,16 @@ if(isset($files)){
         }
 
         // Subject 6 ,6 ,7 and 8
-        $("#sub6").empty();
+      /*  $("#sub6").empty();
         $("#sub6").empty();
         $("#sub7").empty();
         $("#sub8").empty();
 
         $("#sub6").append(new Option('MATHEMATICS',6));
         $("#sub6").append(new Option('PHYSICS',6));
-        $("#sub7").append(new Option('CHEMISTRY',7));
+        $("#sub7").append(new Option('CHEMISTRY',7));*/
 
-    }
+    
 
     function Hum_Deaf_Subjects()
     {
@@ -1816,7 +1684,7 @@ if(isset($files)){
     }
     $("#std_group").change(function(){
 
-        debugger;
+        
 
         var grp_cd = $("#std_group").val();
         //alert(grp_cd);
@@ -2113,7 +1981,7 @@ if(isset($files)){
     var id           = $('#std_group').val();
 
     $('input[type=radio][name=batch_opt]').change(function() {
-        // debugger;
+        // 
         // alert(this.value + "  Transfer Thai Gayo");
         if (this.value == '1') {
             window.location.href = '<?=base_url()?>/index.php/Registration_11th/CreateBatch/'+'96/1/';

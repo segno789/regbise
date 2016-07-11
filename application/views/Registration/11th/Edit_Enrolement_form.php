@@ -475,7 +475,8 @@
                                             if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
                                         ?></option></select>
                                 </div>
-                            </div>    <div class="control-group">
+                            </div>  
+                              <div class="control-group">
                                 <label class="control-label span1" >
 
                                 </label>
@@ -493,7 +494,8 @@
                                         ?></option>
                                     </select>
                                 </div>
-                            </div>    <div class="control-group">
+                            </div> 
+                               <div class="control-group">
                                 <label class="control-label span1" >
 
                                 </label>

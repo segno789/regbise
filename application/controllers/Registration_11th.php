@@ -451,8 +451,9 @@ class Registration_11th extends CI_Controller {
 
         $this->commonheader($data);
         $this->load->view('Registration/11th/NewEnrolment.php',$error);
-        // $this->load->view('common/footer.php');
-        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
+        $this->load->view('common/footer11threg.php');
+         //$this->load->view('common/footer.php');
+        //$this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
         // if(@$_POST['cand_name'] != '' )//&& @$_POST['father_name'] != '' && @$_POST['bay_form'] != '' && @$_POST['father_cnic'] != '' && @$_POST['dob'] != '' && @$_POST['mob_number'] != '') //{   
 
 
@@ -474,6 +475,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
+        //DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -2422,19 +2424,25 @@ class Registration_11th extends CI_Controller {
     }
       public function Print_challan_Form()
     {
+          
+       
+      // DebugBreak();
+        
 
 
-        $formno = $this->uri->segment(3);
+        $Batch_Id = $this->uri->segment(3);
 
         $this->load->library('session');
         $this->load->library('NumbertoWord');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
-        $this->load->model('NinthCorrection_model');
+         $this->load->model('Registration_11th_model');
+        $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
          //$grp_cd = $this->uri->segment(3);
-        $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
+       // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
         //  DebugBreak();
-        $result = $this->NinthCorrection_model->Print_challan_Form($fetch_data);
+        $result = $this->Registration_11th_model->Print_challan_Form($fetch_data);
+       
         //   $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
 
 
@@ -2451,26 +2459,21 @@ class Registration_11th extends CI_Controller {
         //  for($i=1;$i<=8;$i++){
         //$feetitle =  $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
         // DebugBreak();
-        if($result[0]['NameFee'] > 0)
-        {
-            $feestructure[]    =  $result[0]['NameFee'];    
-            $displayfeetitle[] =  'Name Correction';    
-        }
-        if($result[0]['FnameFee'] > 0 ){
-            $feestructure[]     = $result[0]['FnameFee'];   
-            $displayfeetitle[] =  'Father Name Correction';   
-        }
-        if($result[0]['DobFee'] > 0)
-        {
-            $feestructure[]=$result[0]['DobFee']; 
-            $displayfeetitle[] =  'DOB Correction';   
-        }
-        if($result[0]['FnicFee']>0)
-        {
-            $feestructure[]=$result[0]['FnicFee'];    
-            $displayfeetitle[] =  'FNIC Correction';
-        }
-        if($result[0]['BFormFee']>0)
+        
+            $feestructure[]    =  $result[0]['Total_ProcessingFee'];    
+            $displayfeetitle[] =  'Total Processing Fee';    
+       
+            $feestructure[]     = $result[0]['Total_RegistrationFee'];   
+            $displayfeetitle[] =  'Total Registration Fee';   
+       
+            $feestructure[]=$result[0]['Total_LateRegistrationFee']; 
+            $displayfeetitle[] =  'Total Late Registration Fee';   
+       
+      
+           // $feestructure[]='0';// $result[0]['FnicFee'];    
+            //$displayfeetitle[] =  'Misc Fee';
+      //  }
+    /*    if($result[0]['BFormFee']>0)
         {
             $feestructure[]=$result[0]['BFormFee'];   
             $displayfeetitle[] =  'B-Form Correction'; 
@@ -2489,7 +2492,7 @@ class Registration_11th extends CI_Controller {
         {
             $feestructure[]=$result[0]['SubjectFee'];    
             $displayfeetitle[] =  'Subject Change';
-        }
+        }*/
         /*$feestructure[16]=$result[0]['BFormFee'];
         $feestructure[32]=$result[0]['PicFee'];
         $feestructure[64]=$result[0]['GroupFee'];
@@ -2506,27 +2509,31 @@ class Registration_11th extends CI_Controller {
         $generatingpdf=false;
         $challanCopy=array(1=>"Depositor Copy",  2=>"Registration Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Online Registration Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
-        $challanNo = $result[0]['challanNo']; 
+        $challanNo = $result[0]['Challan_No']; 
 
-        if(date('Y-m-d',strtotime(Correction_Last_Date))>=date('Y-m-d'))
+      //  DebugBreak();
+        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d'))
         {
-            $rule_fee   =  $this->NinthCorrection_model->getreulefee(1); 
+            $rule_fee   =  $this->Registration_11th_model->getreulefee(1); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
         }
         else
         {
-            $rule_fee   =  $this->NinthCorrection_model->getreulefee(2); 
+            $rule_fee   =  $this->Registration_11th_model->getreulefee(2); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
         }
 
         $obj    = new NumbertoWord();
-        $obj->toWords($result[0]['TotalFee'],"Only.","");
+        $obj->toWords($result[0]['Amount'],"Only.","");
         // $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
         $feeInWords = ucwords($obj->words);//strtoupper(cNum2Words($totalfee)); 
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-        $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
+        // $temp = $user['Inst_Id'].'11-2017-19';
+        //$image =  $this->set_barcode($temp);
+        
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@11@2016@1';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -2541,7 +2548,7 @@ class Registration_11th extends CI_Controller {
             
             
             $yy = 0.04;
-            if($turn==1){$dyy=0.1;} 
+            if($turn==1){$dyy=0.2;} 
             else {
                 if($turn==2){$dyy=2.65;} else  if($turn==3) {$dyy=5.2; } else {$dyy=7.75 ; $turn=0;}
             }
@@ -2557,8 +2564,8 @@ class Registration_11th extends CI_Controller {
             $generatingpdf=true;
 
 
-            if($turn==1){$dy=0.4;} else {
-                if($turn==2){$dy=2.9;} else  if($turn==3) {$dy=5.5; }else {$dy=8.1 ; $turn=0;}
+            if($turn==1){$dy=0.5;} else {
+                if($turn==2){$dy=3.0;} else  if($turn==3) {$dy=5.5; }else {$dy=8.1 ; $turn=0;}
             }
             $turn++;
             $y = 0.08;
@@ -2578,7 +2585,7 @@ class Registration_11th extends CI_Controller {
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.corr_bank_chall_class, 0.25, "L");
+            $pdf->Cell(0, $y, 'Registration Session '.CURRENT_SESS1.' '.corr_bank_chall_class1, 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
@@ -2603,14 +2610,14 @@ class Registration_11th extends CI_Controller {
             //--------------------------- Challan Depositor Information
             $pdf->SetXY(4,$y+0.1+$dy);
             $pdf->SetFont('Arial','B',10);
-            $pdf->Cell( 0.5,0.3,"Bank Challan No:".$challanNo."           Application No.".$result[0]['AppNo'],0,2,'L');
+            $pdf->Cell( 0.5,0.3,"Bank Challan No:".$challanNo."           Batch No.".$result[0]['Batch_ID'],0,2,'L');
             $pdf->SetFont('Arial','U',9);
             $pdf->Cell(0.5,0.25, "Particulars Of Depositor",0,2,'L');
             $pdf->SetX(4.0);
             $pdf->SetFont('Arial','B',8);
 
-            if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
-            $pdf->Cell(0.5,0.25,$result[0]['Pre_Name'].'    '.$sodo.$result[0]['Pre_FName'],0,2,'L');
+            //if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
+           // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
@@ -2693,7 +2700,7 @@ class Registration_11th extends CI_Controller {
             $pdf->Cell( 0.5,0.5,"Total Amount: ",0,'L');
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(3,$y+$dy);
-            $pdf->Cell(0.8,0.5,$result[0]['TotalFee'],0,'C');
+            $pdf->Cell(0.8,0.5,$result[0]['Amount'],0,'C');
 
             //------------- Signature
             $y += 0.2;

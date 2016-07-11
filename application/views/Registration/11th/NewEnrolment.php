@@ -313,171 +313,180 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group">
-                                        <?php 
-                                       // DebugBreak();
-                                        $subgroups =  split(',',$grp_cd);
+                                       <?php
+                                        // DebugBreak();
+                                        $grp = $excep['std_group'];
+                                        $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
-                                        for($i =0 ; $i<count($subgroups); $i++)
+                                        if(@$isReAdm == 1 )
                                         {
-                                            if($subgroups[$i] == 1)
+                                            echo " <option value='1'>Pre-Medical</option>
+                                            <option value='2'>Pre-Engineering</option>
+                                            <option value='3'>Humanities</option>
+                                            <option value='4'>General Science</option>
+                                            <option value='5'>Commerce</option>
+                                            <option value='6'>Home Economics</option>
+                                            ";  
+                                        }
+                                        if(@$isReAdm != 1)
+                                        {
+                                            for($i =0 ; $i<count($subgroups); $i++)
                                             {
-                                                if($excep['std_group'] == 1 &&  ($excep['excep'] != "success") && ($excep != ""))
+                                                if($subgroups[$i] == 1)
                                                 {
-                                                    echo "<option value='1' selected='selected'>SCIENCE WITH BIOLOGY</option>";  
+                                                    if($grp == 1)
+                                                    {
+                                                        echo "<option value='1' selected='selected'>Pre-Medical</option>";  
+                                                    }
+                                                    else 
+                                                    {
+                                                        echo "<option value='1' >Pre-Medical</option>";    
+                                                    }
                                                 }
-                                                else 
+                                                else if($subgroups[$i] == 2)
                                                 {
-                                                    echo "<option value='1' >SCIENCE WITH BIOLOGY</option>";    
+                                                    if($grp == 2)
+                                                    {
+                                                        echo "<option value='2' selected='selected'>Pre-Engineering</option>";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='2'>Pre-Engineering</option>"; 
+                                                    }
+
                                                 }
-                                            }
-                                            else if($subgroups[$i] == 7)
-                                            {
-                                                if($excep['std_group'] == 7 &&  ($excep['excep'] != "success") && ($excep != ""))
+                                                else if($subgroups[$i] == 3)
                                                 {
-                                                    echo "<option value='7' selected='selected'>SCIENCE  WITH COMPUTER SCIENCE</option>";
+                                                    if($grp == 3)
+                                                    {
+                                                        echo "<option value='3' selected='selected'>Humanities</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='3'>Humanities</option>";  
+                                                    }
+
                                                 }
-                                                else
+                                                else if($subgroups[$i] == 4)
                                                 {
-                                                   echo "<option value='7'>SCIENCE  WITH COMPUTER SCIENCE</option>"; 
+                                                    if($grp == 4)
+                                                    {
+                                                        echo "<option value='4' selected='selected'>General Science</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='4'>General Science</option>";   
+                                                    }
+
                                                 }
-                                                  
-                                            }
-                                            else if($subgroups[$i] == 8)
-                                            {
-                                                 if($excep['std_group'] == 8 &&  ($excep['excep'] != "success") && ($excep != ""))
+                                                else if($subgroups[$i] == 5)
                                                 {
-                                                    echo "<option value='8' selected='selected'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
+                                                    if($grp == 5)
+                                                    {
+                                                        echo "<option value='5' selected='selected'>Commerce</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='5'>Commerce</option>";  
+                                                    }
+
                                                 }
-                                                else
+                                                else if($subgroups[$i] == 6)
                                                 {
-                                                  echo "<option value='8'>SCIENCE  WITH ELECTRICAL WIRING</option>";  
+                                                    if($grp == 6)
+                                                    {
+                                                        echo "<option value='6' selected='selected'>Home Economics</option>";  
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<option value='6'>Home Economics</option>";  
+                                                    }
+
                                                 }
-                                                
-                                            }
-                                            else if($subgroups[$i] == 2)
-                                            {
-                                                 if($excep['std_group'] == 2 &&  ($excep['excep'] != "success") && ($excep != ""))
-                                                {
-                                                  echo "<option value='2' selected='selected'>HUMANTIES</option>";  
-                                                }
-                                                else
-                                                {
-                                                  echo "<option value='2'>HUMANTIES</option>";   
-                                                }
-                                                
-                                            }
-                                            else if($subgroups[$i] == 5)
-                                            {
-                                                 if($excep['std_group'] == 5 &&  ($excep['excep'] != "success") && ($excep != ""))
-                                                {
-                                                   echo "<option value='5' selected='selected'>DEAF AND DUMB</option>";  
-                                                }
-                                                else
-                                                {
-                                                   echo "<option value='5'>DEAF AND DUMB</option>";  
-                                                }
-                                               
-                                            }
+                                            } 
                                         }
                                         $subarray = array(
-                                            'Urdu' => '1',
-                                            'English' => '2',
-                                            'ISLAMIYAT (COMPULSORY)' => '3',
-                                            'PAKISTAN STUDIES' => '4',
-                                            'MATHEMATICS' => '5',
-                                            'PHYSICS' => '6',
-                                            'CHEMISTRY' => '7',
-                                            'BIOLOGY' => '8',
-                                            'GENERAL SCIENCE' => '9',
-                                            'FOUNDATION OF EDUCATION' => '10',
-                                            'GEOGRAPHY OF PAKISTAN' => '11',
-                                            'HOUSE HOLD ACCOUNTS & ITS RELATED PROBLEMS' => '12',
-                                            'ELEMENTS OF HOME ECONOMICS' => '13',
-                                            'PHYSIOLOGY & HYGIENE' => '14',
-                                            'GEOMETRICAL & TECHNICAL DRAWING' => '15',
-                                            'GEOLOGY' => '16',
-                                            'ASTRONOMY & SPACE SCIENCE' => '17',
-                                            'ART/ART & MODEL DRAWING' => '18',
-                                            'ISLAMIC STUDIES' => '19',
-                                            'ISLAMIC HISTORY' => '20',
-                                            'HISTORY OF PAKISTAN/ HISTORY OF INDO PAK' => '21',
-                                            'ARABIC' => '22',
-                                            'PERSIAN' => '23',
-                                            'GEOGRAPHY' => '24',
-                                            'ECONOMICS' => '25',
-                                            'CIVICS' => '26',
-                                            'FOOD AND NUTRITION' => '27',
-                                            'ART IN HOME ECONOMICS' => '28',
-                                            'MANAGEMENT FOR BETTER HOME' => '29',
-                                            'CLOTHING & TEXTILES' => '30',
-                                            'CHILD DEVELOPMENT AND FAMILY LIVING' => '31',
-                                            'MILITARY SCIENCE' => '32',
-                                            'COMMERCIAL GEOGRAPHY' => '33',
-                                            'URDU LITERATURE' => '34',
-                                            'ENGLISH LITERATURE' => '35',
-                                            'PUNJABI' => '36',
-                                            'EDUCATION' => '37',
-                                            'ELEMENTARY NURSING & FIRST AID' => '38',
-                                            'PHOTOGRAPHY' => '39',
-                                            'HEALTH & PHYSICAL EDUCATION' => '40',
-                                            'CALIGRAPHY' => '41',
-                                            'LOCAL (COMMUNITY) CRAFTS' => '42',
-                                            'ELECTRICAL WIRING' => '43',
-                                            'RADIO ELECTRONICS' => '44',
-                                            'COMMERCE' => '45',
-                                            'AGRICULTURE' => '46',
-                                            'BOOK KEEPING & ACCOUNTANCY' => '47',
-                                            'WOOD WORK (FURNITURE MAKING)' => '48',
-                                            'GENERAL AGRICULTURE' => '49',
-                                            'FARM ECONOMICS' => '50',
-                                            'ETHICS' => '51',
-                                            'LIVE STOCK FARMING' => '52',
-                                            'ANIMAL PRODUCTION' => '53',
-                                            'PRODUCTIVE INSECTS AND FISH CULTURE' => '54',
-                                            'HORTICULTURE' => '55',
-                                            'PRINCIPLES OF HOME ECONOMICS' => '56',
-                                            'RELATED ACT' => '57',
-                                            'HAND AND MACHINE EMBROIDERY' => '58',
-                                            'DRAFTING AND GARMENT MAKING' => '59',
-                                            'HAND & MACHINE KNITTING & CROCHEING' => '60',
-                                            'STUFFED TOYS AND DOLL MAKING' => '61',
-                                            'CONFECTIONERY AND BAKERY' => '62',
-                                            'PRESERVATION OF FRUITS,VEGETABLES & OTHER FOODS' => '63',
-                                            'CARE AND GUIDENCE OF CHILDREN' => '64',
-                                            'FARM HOUSE HOLD MANAGEMENT' => '65',
-                                            'ARITHEMATIC' => '66',
-                                            'BAKERY' => '67',
-                                            'CARPET MAKING' => '68',
-                                            'DRAWING' => '69',
-                                            'EMBORIDERY' => '70',
-                                            'HISTORY' => '71',
-                                            'TAILORING' => '72',
-                                            'TYPE WRITING' => '73',
-                                            'WEAVING' => '74',
-                                            'SECRETARIAL PRACTICE' => '75',
-                                            'CANDLE MAKING' => '76',
-                                            'SECRETARIAL PRACTICE AND CORRESPONDANCE' => '77',
-                                            'COMPUTER SCIENCES' => '78',
-                                            'WOOD WORK (BOAT MAKING)' => '79',
-                                            'PRINCIPLES OF ARITHMATIC' => '80',
-                                            'SEERAT-E-RASOOL' => '81',
-                                            'AL-QURAAN' => '82',
-                                            'POULTRY FARMING' => '83',
-                                            'ART & MODEL DRAWING' => '84',
-                                            'BUSINESS STUDIES' => '85',
-                                            'HADEES & FIQAH' => '86',
-                                            'ENVIRONMENTAL STUDIES' => '87',
-                                            'REFRIGERATION AND AIR CONDITIONING' => '88',
-                                            'FISH FARMING' => '89',
-                                            'COMPUTER HARDWARE' => '90',
-                                            'BEAUTICIAN' => '91',
-                                            'GENERAL MATHEMATICS' => '92',
-                                            'COMPUTER SCIENCES_DFD' => '93',
-                                            'HEALTH & PHYSICAL EDUCATION_DFD' => '94'
+                                            'ENGLISH' => '1',
+                                            'URDU' => '2',
+                                            'BANGALI' => '3',
+                                            'URDU(ALTERNATIVE EASY COURSE)' => '4',
+                                            'BENGALI(ALTERNATE EASY COURSE)' => '5',
+                                            'PAKISTANI CULTURE' => '6',
+                                            'HISTORY' => '7',
+                                            'LIBRARY SCIENCE' => '8',
+                                            'ISLAMIC HISTORY & CULTURE' => '9',
+                                            'FAZAL ARABIC' => '10',
+                                            'ECONOMICS' => '11',
+                                            'GEOGRAPHY' => '12',
+                                            'MILITARY SCIENCE' => '13',
+                                            'PHILOSOPHY' => '14',
+                                            'ISLAMIC STUDIES(ISL-ST. GROUP)' => '15',
+                                            'PSYCHOLOGY' => '16',
+                                            'CIVICS' => '17',
+                                            'STATISTICS' => '18',
+                                            'MATHEMATICS' => '19',
+                                            'ISLAMIC STUDIES' => '20',
+                                            'OUTLINES OF HOME ECONOMICS' => '21',
+                                            'MUSIC' => '22',
+                                            'FINE ARTS' => '23',
+                                            'ARABIC' => '24',
+                                            'BENGALI' => '25',
+                                            'BENGALI(ADVANCE)' => '26',
+                                            'ENGLISH ELECTIVE' => '27',
+                                            'FRENCH' => '28',
+                                            'GERMAN' => '29',
+                                            'LATIN' => '30',
+                                            'PUNJABI' => '32',
+                                            'PASHTO' => '33',
+                                            'PERSIAN' => '34',
+                                            'SANSKRIT' => '35',
+                                            'SINDHI' => '36',
+                                            'URDU (ADVANCE)' => '37',
+                                            'COMMERCIAL PRACTICE' => '38',
+                                            'PRINCIPLES OF COMMERCE' => '39',
+                                            'HEALTH & PHYSICAL EDUCATION' => '42',
+                                            'EDUCATION' => '43',
+                                            'GEOLOGY' => '44',
+                                            'SOCIOLOGY' => '45',
+                                            'BIOLOGY' => '46',
+                                            'PHYSICS' => '47',
+                                            'CHEMISTRY' => '48',
+                                            'ETHICS FOR NON MUSLIM' => '51',
+                                            'ADEEB ARBI' => '52',
+                                            'ADEEB URDU' => '53',
+                                            'FAZAL URDU' => '54',
+                                            'HISTORY OF PAKISTAN' => '55',
+                                            'HISTORY OF ISLAM' => '56',
+                                            'HISTORY OF INDO-PAK' => '57',
+                                            'HISTORY OF MODREN WORLD' => '58',
+                                            'APPLIED ART  (H-Eco Group)' => '59',
+                                            'FOOD & NUTRITION (H-Eco Group)' => '60',
+                                            'CHILD DEVELOPMENT AND FAMILY LIVING (H-Eco Group)' => '61',
+                                            'PRINCIPLES OF ACCOUNTING' => '70',
+                                            'PRINCIPLES OF ECONOMICS' => '71',
+                                            'BIOLOGY (H-Eco Group)' => '72',
+                                            'CHEMISTRY (H-Eco Group)' => '73',
+                                            'CLOTHING & TEXTILE (H-Eco Group)' => '75',
+                                            'HOME MANAGEMNET  (H-Eco Group)' => '76',
+                                            'NURSING' => '79',
+                                            'BUSINESS MATH' => '80',
+                                            'COMPUTER SCIENCE' => '83',
+                                            'AGRICULTURE' => '90',
+                                            'PAKISTAN STUDIES' => '91',
+                                            'ISLAMIC EDUCATION' => '92',
+                                            'CIVICS FOR NON MUSLIM' => '93',
+                                            'COMMERCIAL GEOGRAPHY' => '94',
+                                            'BANKING' => '95',
+                                            'TYPING' => '96',
+                                            'BUSINESS STATISTICS' => '97',
+                                            'COMPUTER STUDIES' => '98',
+                                            'BOOK KEEPING & ACCOUNTANCY' => '99'
 
                                         );
-                                        //  DebugBreak();
-                                        //  $result =  array_search($excep['sub1'],$subarray);
+                                        //$result =  array_search($data[0]['sub4'],$subarray);
+
+
+
                                         ?>
 
                                     </select>                                            
@@ -508,31 +517,38 @@
                                     <select id="sub3" class="span3 dropdown" name="sub3"><option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub3'];} else{ echo "3";} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub3'],$subarray);} else{echo "Islamyat Compulsory";} ?></option></select> 
                                     <select id="sub4"  name="sub4" class="span3 dropdown"><option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub4'];} else {echo "4";} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub4'],$subarray);} else{echo "Pakistan Studies";} ?></option></select>
                                 </div>
-                            </div>    <div class="control-group">
+                            </div>   
+                             <div class="control-group">
                                 <label class="control-label span1" >
 
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub5" class="span3 dropdown" name="sub5" >
-                                        <option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub5'];} ?>" ><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub5'],$subarray);} ?></option>
+                                        <option value="<?php  if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub5'];} ?>" ><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub5'],$subarray);} ?></option>
                                     </select> 
                                     <select id="sub6"  name="sub6" class="span3 dropdown">
                                         <option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub6'];} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub6'],$subarray);} ?></option>
                                     </select>
                                 </div>
-                            </div>    <div class="control-group">
+                            </div>   
+                             <div class="control-group">
                                 <label class="control-label span1" >
 
                                 </label>
+                                <?php if(($grp == 5) ||($grp == 6))
+                                {
+                                   
+                                    ?> 
+                                
                                 <div class="controls controls-row">
                                     <select id="sub7" class="span3 dropdown" name="sub7">
-                                        <option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub7'];} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub7'],$subarray);} ?></option></select> 
+                                        <option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ if (($excep['sub7']==-1) || ($excep['sub7']==0) ) echo ""; else  echo $excep['sub7'];} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){  if (($excep['sub7']==-1) || ($excep['sub7']==0) ) echo ""; else echo array_search($excep['sub7'],$subarray);} ?></option></select> 
                                     <select id="sub8"  name="sub8" class="span3 dropdown">
-                                        <option value="<?php if (($excep != "") && ($excep['excep'] != "success")){ echo $excep['sub8'];} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){ echo array_search($excep['sub8'],$subarray);} ?></option>
+                                        <option value="<?php if (($excep != "") && ($excep['excep'] != "success")){  if (($excep['sub7']==-1) || ($excep['sub7']==0) ) echo ""; else echo $excep['sub8'];} ?>"><?php if (($excep != "") && ($excep['excep'] != "success")){  if (($excep['sub7']==-1) || ($excep['sub7']==0) ) echo ""; else echo array_search($excep['sub8'],$subarray);} ?></option>
                                     </select>
                                 </div>
-                            </div>
-
+                            </div> <?php 
+                            } ?>
                             <div class="form-actions no-margin">
 
                                 <button type="submit" onclick="return checks()" name="btnsubmitNewEnrol" class="btn btn-large btn-info offset2">
@@ -578,7 +594,7 @@
         alertify.confirm(msg, function (e) {
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/Registration/';
+                window.location.href ='<?php echo base_url(); ?>index.php/Registration_11th/';
             } else {
                 // user clicked "cancel"
 

@@ -49,6 +49,9 @@ define('BARCODE_PATH11', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE11', '2016-04-04');
 define('DOUBLE_LAST_DATE11', '2016-11-01');
 
+//===============11th challan varaible
+define('corr_bank_chall_class1','11th');
+define('CURRENT_SESS1','2016-2018'); 
 //================ Ninth Correction variables ========================
 define('Correction_Last_Date','2016-10-31');
 define('Corr_ApplicationNo','30000');
