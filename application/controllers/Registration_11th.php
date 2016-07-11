@@ -2431,13 +2431,7 @@ class Registration_11th extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('NinthCorrection_model');
-
-
-
-
-
-
-        //$grp_cd = $this->uri->segment(3);
+         //$grp_cd = $this->uri->segment(3);
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
         //  DebugBreak();
         $result = $this->NinthCorrection_model->Print_challan_Form($fetch_data);
