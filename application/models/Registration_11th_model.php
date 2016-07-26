@@ -12,7 +12,7 @@ class Registration_11th_model extends CI_Model
     }
     public function Incomplete_inst_info_INSERT($allinfo)
     {
-        //  DebugBreak();
+          DebugBreak();
         $data = array(
 
             'Inst_cd' => $allinfo['Inst_Id'] ,
@@ -30,28 +30,17 @@ class Registration_11th_model extends CI_Model
         return true;
     }
     
-    public function get_zone()
-    {
-
-        //$this->db->select('zone_cd','zone_name');
-        //$this->db->order_by("formno", "DESC"); myear = 2016 and class = 10 and sess = 1 
-        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2016','class'=>10,'sess'=>1));
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-            return $query->result_array();
-
-        }
+  
 
 
 
-    }
+    
     public function Dashboard($inst_cd)
     {
 
         // DebugBreak();
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
-        $query = $this->db->query("Registration..Dashboard_reg_9th $inst_cd");
+        $query = $this->db->query("Registration..Dashboard_reg_11th $inst_cd");
 
 
 
@@ -161,7 +150,7 @@ class Registration_11th_model extends CI_Model
         {
                $this->savepics($formno,11,2016,1,$data['Image']) ;
             
-                 $error[0]['error'] =  true;
+                 $error[0]['error'] =  "true";
                  return $error;
         }
        // return true;
@@ -278,14 +267,14 @@ class Registration_11th_model extends CI_Model
         $BForm = $data['BForm'];
         $FNIC = $data['FNIC'];
         $Dob = $data['Dob'];
-        $CellNo = $data['CellNo'];
+        $CellNo = $data['MobNo'];
         $medium = $data['medium'];
-        $Inst_Rno = strtoupper($data['Inst_Rno']);
-        $MarkOfIden =strtoupper($data['MarkOfIden']);
+        $Inst_Rno = strtoupper($data['classRno']);
+        $MarkOfIden =strtoupper($data['markOfIden']);
         $Speciality = $data['Speciality'];
         $nat = $data['nat'];
         $sex = $data['sex'];
-        $IsHafiz = $data['IsHafiz'];
+        $IsHafiz = $data['Ishafiz'];
         $rel = $data['rel'];
         $addr =strtoupper($data['addr']);
         /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
@@ -316,7 +305,7 @@ class Registration_11th_model extends CI_Model
         $sub6ap1 = $data['sub6ap1'];
         $sub7ap1 = $data['sub7ap1'];
         $sub8ap1 = $data['sub8ap1'];
-        $UrbanRural = $data['UrbanRural'];
+        $UrbanRural = $data['ruralOrurban'];
         $Inst_cd = $data['Inst_cd'];
         $formno = $data['FormNo'];
         $RegGrp = $data['grp_cd'];
@@ -722,6 +711,22 @@ class Registration_11th_model extends CI_Model
         else{
             return false;
         }
+    }
+       public function get_zone()
+    {
+
+        //$this->db->select('zone_cd','zone_name');
+        //$this->db->order_by("formno", "DESC"); myear = 2016 and class = 10 and sess = 1 
+        $query = $this->db->get_where('matric_new..tblZones', array('myear' => '2016','class'=>12,'sess'=>1));
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+
+        }
+
+
+
     }
 
 }

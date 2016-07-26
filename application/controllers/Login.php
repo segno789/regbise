@@ -171,7 +171,7 @@ class Login extends CI_Controller {
                     }
 
 
-                    //DebugBreak();
+                   // DebugBreak();
                     $sess_array = array(
                         'Inst_Id' => $logedIn['flusers']['inst_cd'] ,
                         'edu_lvl' => $logedIn['tbl_inst']['edu_lvl'],
@@ -186,7 +186,7 @@ class Login extends CI_Controller {
                         'cell' => $logedIn['tbl_inst']['MobNo'],
                         'dist' => $logedIn['tbl_inst']['dist_cd'],
                         'teh' => $logedIn['tbl_inst']['teh_cd'],
-                        'zone' => $logedIn['tbl_inst']['zone_cd'],
+                        'zone' => $logedIn['tbl_inst']['iZone_cd'],
                         'emis' => $logedIn['tbl_inst']['emis_code'],
                         'isInserted' => $logedIn['isInserted'],
                         'isdeaf' => $isdeaf,

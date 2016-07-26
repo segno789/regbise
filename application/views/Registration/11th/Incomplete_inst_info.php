@@ -7,7 +7,7 @@
     </div>
     <div class="widget-body">
 
-        <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/index.php/Registration/Incomplete_inst_info_INSERT" method="post" >
+        <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/index.php/Registration_11th/Incomplete_inst_info_INSERT" method="post" >
 
             <div class="control-group">
                 <h4 class="span4">Institute Information :</h4>

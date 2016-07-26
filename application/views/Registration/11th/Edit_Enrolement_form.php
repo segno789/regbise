@@ -21,7 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php   if($isReAdm==1) {} else{echo base_url().IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -124,7 +124,7 @@
                                     Mark Of Identification :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php  echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
 
                                 </div>
                             </div>
@@ -447,10 +447,12 @@
                                 </label> 
 
                             </div>
+                            <br>
                             <div class="control-group">
                                 <label class="control-label span1" >
 
                                 </label>
+                              
                                 <div class="controls controls-row">
                                     <select id="sub1" class="span3 dropdown" name="sub1">
                                         <option value="<?php echo $data[0]['sub1'] ?>" ><?php echo array_search($data[0]['sub1'],$subarray); ?></option>

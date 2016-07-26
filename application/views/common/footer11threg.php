@@ -1970,6 +1970,7 @@ if(isset($files)){
             //$("#father_cnic").mask("****************************",{placeholder:""});
 
             $("#sub3").empty(); 
+            $("#sub3").prepend("<option selected='selected' value='93'> CIVICS FOR NON MUSLIM </option>");
             $("#sub3").prepend("<option selected='selected' value='61'> ETHICS </option>");
             $("#sub3").prepend("<option  value='3'> ISLAMIYAT (COMPULSORY) </option>");
         }

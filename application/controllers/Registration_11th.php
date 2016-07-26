@@ -30,7 +30,7 @@ class Registration_11th extends CI_Controller {
     }
     public function index()
     {
-        //DebugBreak(); 
+      //  DebugBreak(); 
         $msg = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -57,10 +57,10 @@ class Registration_11th extends CI_Controller {
 
         if($isgovt == 1)
         {
-            if(strlen($emis)> 1)
-            {
+           // if(strlen($emis)> 1)
+           // {
                 $field_status['emis'] = 1;
-            }
+           // }
             if(strlen($email) > 5){
                 $field_status['email'] = 1;
             }
@@ -83,9 +83,9 @@ class Registration_11th extends CI_Controller {
         else
         {
             $field_status['emis'] = 1;
-            if(strlen($email) > 5){
-                $field_status['email'] = 1;
-            }
+           // if(strlen($email) > 5){
+             //   $field_status['email'] = 1;
+           // }
             if(strlen($phone) > 3){
                 $field_status['phone'] = 1;
             }
@@ -122,8 +122,8 @@ class Registration_11th extends CI_Controller {
                 if($this->session->flashdata('status'))
                 {
                     $this->load->view('common/menu.php',$userinfo);
-                    $this->load->model('Registration_model');
-                    $count = $this->Registration_model->Dashboard($Inst_Id);
+                    $this->load->model('Registration_11th_model');
+                    $count = $this->Registration_11th_model->Dashboard($Inst_Id);
                     $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
                     $this->load->view('Registration/11th/Dashboard.php',$info);
                     $this->load->view('common/footer.php');  
@@ -131,13 +131,13 @@ class Registration_11th extends CI_Controller {
                 }
                 else{
                     if($isInserted < 1)
-                        /*  {
-                        $this->load->model('Registration_model');
-                        $count = $this->Registration_model->Dashboard($Inst_Id);
-                        // DebugBreak();
+                          {
+                        $this->load->model('Registration_11th_model');
+                        $count = $this->Registration_11th_model->Dashboard($Inst_Id);
+                         DebugBreak();
                         if($field_status['zone'] == 0)
                         {
-                        $zone = $this->Registration_model->get_zone();
+                        $zone = $this->Registration_11th_model->get_zone();
                         }
                         //DebugBreak();
                         if($this->session->flashdata('incomplete'))
@@ -159,14 +159,14 @@ class Registration_11th extends CI_Controller {
                         //$this->session->set_flashdata('incomplete',$allinfo);
                         $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name,'field_status'=>$field_status,'zone'=>$zone,'error'=>$errors,'fill_values'=>$fillvalues);
                         //$this->load->view('Registration/Registration.php',$info);
-                        $this->load->view('Registration/9th/Incomplete_inst_info.php',$info);
+                        $this->load->view('Registration/11th/Incomplete_inst_info.php',$info);
                         $this->load->view('common/footer.php');
                         }
-                        else*/
+                        else
                         {
                             $this->load->view('common/menu.php',$userinfo);
-                            $this->load->model('Registration_model');
-                            $count = $this->Registration_model->Dashboard($Inst_Id);
+                            $this->load->model('Registration_11th_model');
+                            $count = $this->Registration_11th_model->Dashboard($Inst_Id);
                             $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
                             $this->load->view('Registration/11th/Dashboard.php',$info);
                             $this->load->view('common/footer.php');    
@@ -180,13 +180,163 @@ class Registration_11th extends CI_Controller {
             else
             {
                 $this->load->view('common/menu.php',$userinfo);
-                $this->load->model('Registration_model');
-                $count = $this->Registration_model->Dashboard($Inst_Id);
+                $this->load->model('Registration_11th_model');
+                $count = $this->Registration_11th_model->Dashboard($Inst_Id);
                 $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
                 $this->load->view('Registration/11th/Dashboard.php',$info);
                 $this->load->view('common/footer.php');    
             } 
         }
+
+
+    }
+     public function Incomplete_inst_info_INSERT(){
+        //DebugBreak();
+        // $test = $_POST['info_zone'];
+        /*@$_POST['Info_email'];
+        @$_POST['info_phone'];
+        @$_POST['info_cellNo'];
+        @$_POST['info_dist'];
+        @$_POST['info_teh'];
+        @$_POST['info_zone'];*/
+        $this->load->model('Registration_11th_model');
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        $allinfo['Inst_Id'] =$userinfo['Inst_Id'];
+
+        if (!array_key_exists("Info_emis",$_POST))
+        {
+            $allinfo['Info_emis'] =$userinfo['emis'];
+        }
+        else
+        {
+            $allinfo['Info_emis'] =$_POST['Info_emis'];
+        }
+        if (!array_key_exists("Info_email",$_POST))
+        {
+            $allinfo['info_email']= $userinfo['email'];
+        }
+        else
+        {
+            $allinfo['info_email'] =$_POST['Info_email'];
+        }
+        if (!array_key_exists("info_phone",$_POST))
+        {
+            $allinfo['info_phone']= $userinfo['phone'];
+        }
+        else
+        {
+            $allinfo['info_phone'] =$_POST['info_phone'];
+        }
+        if (!array_key_exists("info_cellNo",$_POST))
+        {
+            $allinfo['info_cellNo']= $userinfo['cell'];
+        }
+        else
+        {
+            $allinfo['info_cellNo'] =$_POST['info_cellNo'];
+        }
+        if (!array_key_exists("info_dist",$_POST))
+        {
+            $allinfo['info_dist']= $userinfo['dist'];
+        }
+        else
+        {
+            $allinfo['info_dist'] =$_POST['info_dist'];
+        }
+        if (!array_key_exists("info_teh",$_POST))
+        {
+            $allinfo['info_teh']= $userinfo['teh'];
+        }
+        else
+        {
+            $allinfo['info_teh'] =$_POST['info_teh'];
+        }
+        if (!array_key_exists("info_zone",$_POST))
+        {
+            $allinfo['info_zone']= $userinfo['zone'];
+        }
+        else
+        {//info_zone
+            $allinfo['info_zone'] =$_POST['info_zone'];
+        }
+        // DebugBreak();
+        $filledinfo = array('emis'=>$_POST['Info_emis'],'email'=>$_POST['Info_email'],'phone'=>$_POST['info_phone'],'cell'=>$_POST['info_cellNo'],'dist'=>$_POST['info_dist'],'teh'=>$_POST['info_teh'],'zone'=>$_POST['info_zone']);
+      //  if( ($allinfo['Info_emis'] == 0 || $allinfo['Info_emis'] == '') && $userinfo['isgovt']==1  ){
+
+          //  $filledinfo['error'] = "Please Provide EMIS CODE";
+          //  $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+         //   redirect('Registration/index/');
+         //   return;
+
+      //  }
+        if(trim(empty($allinfo['info_email'])) )
+        {
+            $filledinfo['error'] = "Please Provide Institute Email Address";
+            $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+            redirect('Registration_11th/index/');
+            return;
+
+        }
+        if(trim($allinfo['info_phone']=="0") || trim($allinfo['info_phone']=="") || trim($allinfo['info_phone']=="-"))
+        {
+            $filledinfo['error'] = "Please Provide Institute Phone Number";
+            $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+            redirect('Registration_11th/index/');
+            return;
+
+        }
+        if(trim($allinfo['info_cellNo']=="0") || trim($allinfo['info_cellNo']=="") || trim($allinfo['info_cellNo']=="-"))
+        {
+            $filledinfo['error'] = "Please Provide Institute Mobile Number";
+            $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+            redirect('Registration_11th/index/');
+            return;
+
+        }
+        if(trim($allinfo['info_dist']=="0") || trim($allinfo['info_dist']=="") )
+        {
+
+            $filledinfo['error'] = "Please Provide Institute District";
+            $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+            redirect('Registration_11th/index/');
+            return;
+        }
+        if(trim($allinfo['info_teh']=="0") || trim($allinfo['info_teh']=="") )
+        {
+
+            $filledinfo['error'] = "Please Provide Institute Tehsil";
+            $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+            redirect('Registration_11th/index/');
+            return;
+        }
+        if(trim($allinfo['info_zone']=="0") || trim($allinfo['info_zone']==""))
+        {
+
+            $filledinfo['error'] = "Please Provide Institute Zone";
+            $this->session->set_flashdata('incomplete',$filledinfo);
+            //$this->load->view('Registration/9th/Incomplete_inst_info.php',$error);
+            redirect('Registration_11th/index/');
+            return;
+        }
+        $status = $this->Registration_11th_model->Incomplete_inst_info_INSERT($allinfo);
+
+        if($status == true)
+        {
+            $this->session->set_flashdata('status',true);
+            redirect('Registration_11th/index/');
+            return;
+
+        }
+
 
 
     }
@@ -442,8 +592,6 @@ class Registration_11th extends CI_Controller {
         else{
             $error['excep'] = '';
         }
-
-
         $error['gender'] = $userinfo['gender'];
         $error['isrural'] = $userinfo['isrural'];
         $error['grp_cd'] = $userinfo['grp_cd'];
@@ -701,8 +849,8 @@ class Registration_11th extends CI_Controller {
 
         $logedIn = $this->Registration_11th_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         $error = $logedIn[0]['error'];
-       //DebugBreak();
-        if($error == 'true' || $logedIn == true)
+       DebugBreak();
+        if($error == 'true' || $logedIn == "true")
         {  
             $allinputdata = "";
             $error = $logedIn[0]['error'];
@@ -791,9 +939,10 @@ class Registration_11th extends CI_Controller {
         redirect('Registration_11th/EditForms');
         return;
     }
-    public function NewEnrolment_EditForm($formno)
+    public function NewEnrolment_EditForm()
     {    
         //  DebugBreak();
+        $formno = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -809,7 +958,7 @@ class Registration_11th extends CI_Controller {
             //DebugBreak();
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
-            $isReAdm = $RegStdData['data'][0]['isreadm'];
+            $isReAdm = $RegStdData['data'][0]['isReAdm'];
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
 
@@ -855,82 +1004,6 @@ class Registration_11th extends CI_Controller {
         $error = array();
         // DebugBreak();
         $formno =  $_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
-
-
-
-
-
-        $target_path = IMAGE_PATH11.$Inst_Id.'/';
-        // $target_path = '../uploads2/'.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        }
-        $target_path = IMAGE_PATH11.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        } 
-
-        $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
-        $config['max_size']      = '20';
-        $config['max_width']     = '260';
-        $config['max_height']    = '290';
-        $config['overwrite']     = TRUE;
-        $config['file_name']     = $formno.'.jpg';
-
-        $filepath = $target_path. $config['file_name']  ;
-         $this->load->library('upload', $config);
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
-        $this->upload->initialize($config);
-
-        if($check !== false) {
-
-            $file_size = round($_FILES['image']['size']/1024, 2);
-            if($file_size<=20)
-            {
-                if ( !$this->upload->do_upload('image',true))
-                {
-                    if($this->upload->error_msg[0] != "")
-                    {
-                        $error['excep']= $this->upload->error_msg[0];
-                        $allinputdata['excep'] = $this->upload->error_msg[0];
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                        redirect('Registration_11th/NewEnrolment/');
-                        return;
-
-                    }
-
-
-                }
-            }
-            else
-            {
-                $allinputdata['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                redirect('Registration_11th/NewEnrolment/');
-
-            }
-        }
-        else
-        {
-            // $check = getimagesize($filepath);
-            if($check === false)
-            {
-                $allinputdata['excep'] = 'Please Upload Your Picture';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Registration_11th/NewEnrolment/');
-                return;
-            }
-        }
-        $a = getimagesize($filepath);
-        if($a[2]!=2)
-        {
-            $this->convertImage($filepath,$filepath,100,$a['mime']);
-        }
         $sub1ap1 = 0;
         $sub2ap1 = 0;
         $sub3ap1 = 0;
@@ -971,7 +1044,7 @@ class Registration_11th extends CI_Controller {
         {
             $sub8ap1 = 1;    
         }
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
+       
         // DebugBreak();
         if(@$_POST['IsReAdm'] == '1')
         {
@@ -1156,30 +1229,30 @@ class Registration_11th extends CI_Controller {
 
         }
         // DebugBreak();
-        $data = array(
+       $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
             'BForm' =>$this->input->post('bay_form'),
             'FNIC' =>$this->input->post('father_cnic'),
-            'Dob' =>$this->input->post('dob'),
-            'CellNo' =>$this->input->post('mob_number'),
+            'dob' =>$this->input->post('dob'),
+            'MobNo' =>$this->input->post('mob_number'),
             'medium' =>$this->input->post('medium'),
-            'Inst_Rno' =>$this->input->post('Inst_Rno'),
-            'MarkOfIden' =>$this->input->post('MarkOfIden'),
+            'classRno' =>$this->input->post('Inst_Rno'),
+            'markOfIden' =>$this->input->post('MarkOfIden'),
             'Speciality' =>$this->input->post('speciality'),
             'nat' =>$this->input->post('nationality'),
             'sex' =>$this->input->post('gender'),
-            'IsHafiz' =>$this->input->post('hafiz'),
+            'Ishafiz' =>$this->input->post('hafiz'),
             'rel' =>$this->input->post('religion'),
             'addr' =>$this->input->post('address'),
-            'grp_cd' =>$this->input->post('std_group'),
+            'RegGrp' =>$this->input->post('std_group'),
             'sub1' =>$this->input->post('sub1'),
             'sub2' =>$this->input->post('sub2'),
             'sub3' =>$this->input->post('sub3'),
             'sub4' =>$this->input->post('sub4'),
             'sub5' =>$this->input->post('sub5'),
             'sub6' =>$this->input->post('sub6'),
-            'sub7' =>$this->input->post('sub7'),
+            'sub7' =>($sub7),
             'sub8' =>$this->input->post('sub8'),
             'sub1ap1' => ($sub1ap1),
             'sub2ap1' => ($sub2ap1),
@@ -1189,19 +1262,88 @@ class Registration_11th extends CI_Controller {
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
             'sub8ap1' => ($sub8ap1),
-            'UrbanRural' =>$this->input->post('UrbanRural'),
+            'ruralOrurban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
-            'regoldrno' =>($allinputdata['regoldrno']),
-            'regoldsess' =>($allinputdata['regoldsess']),
-            'regoldclass' =>( $allinputdata['regoldclass']),
-            'regoldyear' =>( $allinputdata['regoldyear']),
-            'isreadm'=>($allinputdata['isreadm'])
+            'SSC_RNo'=>$this->input->post('OldRno'),
+            'SSC_Year'=>$this->input->post('OldYear'),
+            'SSC_Sess'=>$this->input->post('OldSess'),
+            'SSC_brd_cd'=>$this->input->post('OldBrd'),
+            'IsReAdm'=>$this->input->post('IsReAdm')   ,
+            'Image'=>$encoded_image  ,
+            'PicPath'=>$formno.".JPG"
+            // 'spl_cd'=>$this->input->post('IsReAdm'),
+
 
 
 
 
         );
+        
+        
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        
+
+        if($check !== false) {
+
+            $target_path = IMAGE_PATH11.$Inst_Id.'/';
+        // $target_path = '../uploads2/'.$Inst_Id.'/';
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        }
+        $target_path = IMAGE_PATH11.$Inst_Id.'/';
+        $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg';
+        $config['max_size']      = '20';
+        $config['max_width']     = '260';
+        $config['max_height']    = '290';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
+
+        $filepath = $target_path. $config['file_name']  ;
+         $this->load->library('upload', $config);
+         
+            $file_size = round($_FILES['image']['size']/1024, 2);
+            $this->upload->initialize($config);
+            if($file_size<=20)
+            {
+                if ( !$this->upload->do_upload('image',true))
+                {
+                    if($this->upload->error_msg[0] != "")
+                    {
+                        $error['excep']= $this->upload->error_msg[0];
+                        $allinputdata['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                        redirect('Registration_11th/NewEnrolment/');
+                        return;
+
+                    }
+
+
+                }
+            }
+            else
+            {
+                $allinputdata['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                redirect('Registration_11th/NewEnrolment/');
+
+            }
+             $check = getimagesize($_FILES["image"]["tmp_name"]);
+        $a = getimagesize($filepath);
+        if($a[2]!=2)
+        {
+            $this->convertImage($filepath,$filepath,100,$a['mime']);
+        }
+
+        }
+    
+        $data['isReAdm']=$isReAdm;
+        $data['Oldrno']=0;
+        $this->frmvalidation('NewEnrolment_EditForm',$data,1);        
         $logedIn = $this->Registration_11th_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  

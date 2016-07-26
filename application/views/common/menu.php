@@ -389,7 +389,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>/Registration_11th/Profile">
+                        <a href="<?php echo base_url(); ?>Registration_11th/Profile">
                             Profile
                         </a>
                     </li>

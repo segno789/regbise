@@ -114,13 +114,13 @@
                             <a href="<?php echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>
                             <br /><br />
                             <strong>NOTE:</strong> <br/>
-                            1. Please upload photo of student carefully and with good quality as this picture will be used in his/her matriculation Roll Number Slip/Result Card/certificate.<br /> 
+                            1. Please upload photo of student carefully and with good quality as this picture will be used in his/her INTER Roll Number Slip/Result Card/certificate.<br /> 
                             2. Fill correct Address of candiate as now governmet often demand addresses of regular candidates also from Board, for various purposes. i.e, Laptop Distribution, Soler Panel distribution, scholership etc.<br /> 
                             3. In case of any problem regarding registration, please send us email on <span style="font-weight:bold; font-family:Verdana, Geneva, sans-serif; font-style:italic; color:#00F" > complaint4bisegrw@gmail.com </span>
                             with your <span style="font-weight:bolder; "> User Id, Password,  Contact No. </span>  and description of problem. <br />
                             4. Please <span style="font-weight:bold; font-family:Verdana, Geneva, sans-serif;  color:#F24F00" > Ensure Mobile Number of student/Gaurdian must be correct.</span> As now Board Send Roll Number Slips information, result information and any other information regarding student's exam through SMS, and in case of
                             any problem of student's data , Board also contact to student on his mobile number.  <br/>
-                            5.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extention image.
+                            5.Picture size must be less than  20 kb, and use only Passport size with small letter ".jpg" extension image.
                         </div>
                     </div>      
                     <div class="clear"></div>  
