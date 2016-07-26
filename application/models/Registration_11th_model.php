@@ -363,7 +363,23 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-
+    public function Print_challan_Form($fetch_data)
+    {
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $Batch_Id = $fetch_data['Batch_Id'];
+      
+     // DebugBreak();
+        $query = $this->db->query("Registration..sp_get_registration_Batch_challan $Inst_cd,$Batch_Id");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function ReleaseBatch_INSERT($allinputdata){
         // DebugBreak();
         $Inst_cd = $allinputdata['Inst_Id'];
@@ -525,9 +541,10 @@ class Registration_11th_model extends CI_Model
     }
     public function getreulefee($ruleID)
     {
-        $ruleID = 1;
+       // $ruleID = 1;
         $q2         = $this->db->get_where('Registration..RuleFee_Reg_Eleventh',array('Rule_Fee_ID'=>$ruleID));
         $resultarr = $q2->result_array();
+        return $resultarr ;
     }
     public function Batch_Insertion($data)
     {
