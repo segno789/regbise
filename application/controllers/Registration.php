@@ -2038,7 +2038,7 @@ class Registration extends CI_Controller {
         $pdf->Output($data["Sch_cd"].'.pdf', 'I');
     }
     public function revenue_pdf()
-    {
+    {    //DebugBreak();
       
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
