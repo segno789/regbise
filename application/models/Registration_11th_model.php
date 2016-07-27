@@ -12,7 +12,7 @@ class Registration_11th_model extends CI_Model
     }
     public function Incomplete_inst_info_INSERT($allinfo)
     {
-          DebugBreak();
+       //   DebugBreak();
         $data = array(
 
             'Inst_cd' => $allinfo['Inst_Id'] ,

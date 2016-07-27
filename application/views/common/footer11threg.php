@@ -388,7 +388,7 @@ if(isset($files)){
         91 : 'BEAUTICIAN',
         74 : 'WEAVING'
     }
-
+//debugger;
 
     function downloadslip(rno)
     {
@@ -647,8 +647,19 @@ if(isset($files)){
         $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
+debugger;
+console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
-        $("#sub1").append(new Option('Urdu',2));
+        if(NationalityVal==2 && matric_sub1.value == 11)
+        {
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            $("#sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+        
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2 option[value='1']").attr("selected","selected");
@@ -673,7 +684,16 @@ if(isset($files)){
         $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
-        $("#sub1").append(new Option('Urdu',2));
+          if(NationalityVal==2)
+        {
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            $("#sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+       // $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2 option[value='1']").attr("selected","selected");
@@ -699,7 +719,16 @@ if(isset($files)){
 
 
 
-        $("#sub1").append(new Option('Urdu',2));
+          if(NationalityVal==2)
+        {
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            $("#sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+       // $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2 option[value='1']").attr("selected","selected");
@@ -739,6 +768,20 @@ if(isset($files)){
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
+        debugger;
+         var NationalityVal = $("input[name=nationality]:checked").val();
+         if(NationalityVal==2)
+        {
+            $("#nationality").val(2);
+            //$("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            //$("#sub1").append(new Option('Urdu',2));    
+        }
+        else {
+            $("#nationality").val(1);
+            //$("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+        
         //var ispic
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
 
@@ -877,7 +920,15 @@ if(isset($files)){
             $("#sub7").focus();
             return status;  
         }
-
+       /*else if(NationalityVal != 2 || NationalityVal != 1){
+            $('#ErrMsg').show();  
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your  Name </b>");    
+            alertify.error("Please Select Your Nationality");
+            $('#cand_name').focus(); 
+            return status;
+        }
+*/
         status = 1;
         return status;
 
@@ -912,7 +963,16 @@ if(isset($files)){
         $("#sub7").empty();
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
-        $("#sub1").append(new Option('Urdu',2));
+          if(NationalityVal==2)
+        {
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            $("#sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+        //$("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2 option[value='1']").attr("selected","selected");
@@ -945,7 +1005,16 @@ if(isset($files)){
         $("#sub7").empty();
         $("#sub8").empty();
 
-        $("#sub1").append(new Option('Urdu',2));
+          if(NationalityVal==2)
+        {
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            $("#sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+       // $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2 option[value='1']").attr("selected","selected");
@@ -978,7 +1047,16 @@ if(isset($files)){
         $("#sub7").empty();
         $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
-        $("#sub1").append(new Option('Urdu',2));
+          if(NationalityVal==2)
+        {
+            $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+            
+            $("#sub1").append(new Option('Urdu',2));    
+        }
+        else{
+            $("#sub1").prepend("<option  value='2'> URDU </option>");
+        }
+       // $("#sub1").append(new Option('Urdu',2));
         $("#sub1 option[value='2']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2 option[value='1']").attr("selected","selected");
@@ -1237,28 +1315,37 @@ if(isset($files)){
         //var isGovt ="<?php  echo @$field_status['emis']; ?>";
         //var isElect = "<?php  echo @$field_status['emis']; ?>";
         var NationalityVal = $("input[name=nationality]:checked").val();
+    
+    
         console.log(NationalityVal);
-        $('#sub1').empty();
+       /* debugger;
         if(NationalityVal == "1")
         {
+            $("#sub1").empty(); 
+            $("#sub1").prepend('<option selected="selected" value="1"> URDU </option>');
+            /*$('#sub1').empty();
             console.log("Hi Pakistani ");
             $.each(sub1_Pak_options, function(val, text) {
                 $('#sub1').append( new Option(text,val) );
                 $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
             }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
+*/
+        //}
+       // else if (NationalityVal == "2")
+       // {
+        //    $("#sub1").empty(); 
+        //    $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+        //    $("#sub1").prepend("<option  value='1'> URDU </option>");
+         /*   $('#sub1').empty();
             console.log("Hi Foreigner Welcom to Pakistan :) ");
             $.each(sub1_NonPak_options, function(val, text) {
                 $('#sub1').append( new Option(text,val) );
                 $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-            }); 
-        }
+            }); */
+      //  }*/
 
         // Check Religion and select sub........
-        $("#sub3").empty();
+   /*     $("#sub3").empty();
         var Religion = $("input[name=religion]:checked").val();
         //console.log(Religion);
         console.log(Religion);
@@ -1278,7 +1365,7 @@ if(isset($files)){
                 $("#sub3").append(new Option(text,val));
                 $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
             });
-        }
+        }*/
 
         $("#sub6").empty();
         $("#sub6 option[value='" + sub6 + "']").attr("selected","selected");
@@ -1299,6 +1386,8 @@ if(isset($files)){
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
         var grp_cd = $("#std_group").val();
+        
+        var matric_sub1 = document.getElementById("matric_sub1").value; //$("#matric_sub1.value").val();
         //alert(grp_cd);
 
         // If Science with Biology group selected then 
@@ -1518,19 +1607,36 @@ if(isset($files)){
     }
 
 
-         if (NationalityVal == "2")
-        {
+       //   if(NationalityVal == "1")
+      //  {
+       //     $("#sub1").empty(); 
+       //     $("#sub1").prepend('<option selected="selected" value="1"> URDU </option>');
+            /*$('#sub1').empty();
+            console.log("Hi Pakistani ");
+            $.each(sub1_Pak_options, function(val, text) {
+                $('#sub1').append( new Option(text,val) );
+                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
+            }); 
+*/
+      //  }
+      //  else if (NationalityVal == "2")
+     //   {
+       //     $("#sub1").empty(); 
+      //      $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
+      //      $("#sub1").prepend("<option  value='1'> URDU </option>");
+         /*   $('#sub1').empty();
             console.log("Hi Foreigner Welcom to Pakistan :) ");
             $.each(sub1_NonPak_options, function(val, text) {
                 $('#sub1').append( new Option(text,val) );
-            }); 
-        }
+                $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
+            }); */
+      //  }
 
         // Check Religion and select sub........
-        $("#sub3").empty();
+      //  $("#sub3").empty();
         var Religion = $("input[name=religion]:checked").val();
         //console.log(Religion);
-        console.log(Religion);
+    /*    console.log(Religion);
         if(Religion == "1")
         {
             console.log("Hi Muslim :)");
@@ -1545,7 +1651,7 @@ if(isset($files)){
             $.each(sub3_Non_Muslim,function(val,text){
                 $("#sub3").append(new Option(text,val));
             });
-        }
+        }*/
 
         // Subject 6 ,6 ,7 and 8
       /*  $("#sub6").empty();
@@ -1559,6 +1665,7 @@ if(isset($files)){
 
     
 
+    debugger;
     function Hum_Deaf_Subjects()
     {
 
@@ -1936,19 +2043,19 @@ if(isset($files)){
     Validations
     ===========================================
     */
-    var nationality = $('input:radio[name="nationality"]:checked').val();
-    if(nationality == 1) {
+   // var nationality = $('input:radio[name="nationality"]:checked').val();
+    if(NationalityVal == 1) {
         $("#bay_form","#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
     }else{
         $("#bay_form","#father_cnic").mask("****************************",{placeholder:""});
     }
 
+    
     $('input:radio[name="nationality"]').change(function(){
         if($(this).val() == 1) {
             $("#father_cnic").mask("99999-9999999-9",{placeholder:"_"});
             $("#bay_form").mask("99999-9999999-9",{placeholder:"_"});
-            $("#sub1").empty(); 
-            $("#sub1").prepend('<option selected="selected" value="1"> URDU </option>');
+           
             //$("#ddlList").prepend('<option selected="selected" value="0"> Select </option>');
         }else{
             //$("#father_cnic").mask("****************************",{placeholder:""});

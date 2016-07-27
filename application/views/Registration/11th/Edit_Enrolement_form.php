@@ -458,7 +458,7 @@
                                         <option value="<?php echo $data[0]['sub1'] ?>" ><?php echo array_search($data[0]['sub1'],$subarray); ?></option>
                                     </select> 
                                     <select id="sub2"  name="sub2" class="span3 dropdown">
-                                        <option value="<?php echo $data[0]['sub2'] ?>"><?php echo array_search($data[0]['sub2'],$subarray);?></option>
+                                        <option value="<?php  echo $data[0]['sub2'] ?>"><?php echo array_search($data[0]['sub2'],$subarray);?></option>
                                     </select>
                                 </div>
                             </div>

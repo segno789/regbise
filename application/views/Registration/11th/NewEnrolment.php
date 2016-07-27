@@ -143,6 +143,7 @@
                                 <div class="controls controls-row">  
                                     <?php if (($excep != "") && ($excep['excep'] != "success")){
 
+                                      
                                         if($excep['nationality'] == "1"){
                                             echo "  <label class='radio inline span1'>
                                             <input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani

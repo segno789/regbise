@@ -134,7 +134,7 @@ class Registration_11th extends CI_Controller {
                           {
                         $this->load->model('Registration_11th_model');
                         $count = $this->Registration_11th_model->Dashboard($Inst_Id);
-                         DebugBreak();
+                        // DebugBreak();
                         if($field_status['zone'] == 0)
                         {
                         $zone = $this->Registration_11th_model->get_zone();
@@ -460,7 +460,7 @@ class Registration_11th extends CI_Controller {
                 // $year = 2016;    
             }
 
-            // DebugBreak();
+//             DebugBreak();
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
             if($feedingcheck != false)
@@ -493,7 +493,9 @@ class Registration_11th extends CI_Controller {
                 $inst_userinfo_gender = $userinfo['gender'];
             }
             else{
-                $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'');    
+                $RegStdData = array('data'=>'','isReAdm'=>$isReAdm,'Oldrno'=>0,'Inst_Rno'=>'','excep'=>'');
+               
+                    
             }
 
 
@@ -506,6 +508,7 @@ class Registration_11th extends CI_Controller {
             $RegStdData['data'][0]['SSC_Year'] = $_POST["oldYear"];
             $RegStdData['data'][0]['SSC_Sess'] = $_POST["oldSess"];
             $RegStdData['data'][0]['SSC_brd_cd'] = $_POST["oldBrd_cd"];
+            $RegStdData['data'][0]['sub1']=1;
             // DebugBreak();
             $mylen = strlen(trim($RegStdData['data'][0]['SSC_RNo']));
             if(trim($RegStdData['data'][0]['SSC_RNo']," ") == '' ||  trim($RegStdData['data'][0]['SSC_RNo']) == '0' || $mylen < 4 )
@@ -523,7 +526,7 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
-        else  if($cand_gender != $inst_userinfo_gender)
+       /* else  if($cand_gender != $inst_userinfo_gender)
         {
             if($cand_gender==1 && $inst_userinfo_gender == 2)
             {
@@ -536,9 +539,9 @@ class Registration_11th extends CI_Controller {
                 $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE FEMALE CANDIDATE RECORD');
                 redirect('Registration_11th/Students_matricInfo');
                 return;    
-            }
+            }*/
 
-        }
+       // }
 
 
         else  if($msg == -1)
@@ -623,7 +626,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-        //DebugBreak();
+       // DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -654,91 +657,7 @@ class Registration_11th extends CI_Controller {
 
         }
         $allinputdata['sub8']=0;
-        $target_path = IMAGE_PATH11;
-        // $target_path = '../uploads2/'.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        }
-        $target_path = IMAGE_PATH11.$Inst_Id.'/';
-        if (!file_exists($target_path)){
-
-            mkdir($target_path);
-        } 
-        //   DebugBreak();
-        $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
-        $config['max_size']      = '20';
-        $config['max_width']     = '260';
-        $config['max_height']    = '290';
-        $config['overwrite']     = TRUE;
-        $config['file_name']     = $formno.'.jpg';
-
-        $filepath = $target_path. $config['file_name']  ;
-        $this->load->library('upload', $config);
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
-        $this->upload->initialize($config);
-
-        if($check !== false) {
-
-            $file_size = round($_FILES['image']['size']/1024, 2);
-            if($file_size<=20)
-            {
-                if ( !$this->upload->do_upload('image',true))
-                {
-                    if($this->upload->error_msg[0] != "")
-                    {
-                        $error['excep']= $this->upload->error_msg[0];
-                        $allinputdata['excep'] = $this->upload->error_msg[0];
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                        redirect('Registration_11th/NewEnrolment/');
-                        return;
-
-                    }
-
-
-                }
-            }
-            else
-            {
-                $allinputdata['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                redirect('Registration_11th/NewEnrolment/');
-
-            }
-        }
-        else
-        {
-            // $check = getimagesize($filepath);
-            if($check === false)
-            {
-                $allinputdata['excep'] = 'Please Upload Your Picture';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Registration_11th/NewEnrolment/');
-                return;
-            }
-        }
-        $a = getimagesize($filepath);
        
-        
-        
-        if($a[2]!=2)
-        {
-            $this->convertImage($filepath,$filepath,100,$a['mime']);
-        }
-
-        
-        $data = fopen ($filepath, 'rb');
-
-        $size=filesize ($filepath);
-
-        $contents= fread ($fd, $size);
-
-        fclose ($fd);  
-
-        $encoded_data = base64_encode($contents);
         
        
         //$db_img = addslashes($db_img);
@@ -795,6 +714,16 @@ class Registration_11th extends CI_Controller {
         else{
             $sub7 = @$_POST['sub7'];
         }
+       // DebugBreak();
+        if(@$_POST['OldBrd'] == 1)
+        {
+            $nationality_hidden = @$_POST['nationality_hidden'];
+        }
+        else
+        {
+            $nationality_hidden =@$_POST['nationality'];
+        }
+        //nationality_hidden
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -806,7 +735,7 @@ class Registration_11th extends CI_Controller {
             'Inst_Rno' =>$this->input->post('Inst_Rno'),
             'markOfIden' =>$this->input->post('MarkOfIden'),
             'Speciality' =>$this->input->post('speciality'),
-            'IsPakistani' =>$this->input->post('nationality'),
+            'IsPakistani' =>$nationality_hidden,
             'sex' =>$this->input->post('gender'),
             'IsHafiz' =>$this->input->post('hafiz'),
             'IsMuslim' =>$this->input->post('religion'),
@@ -836,7 +765,7 @@ class Registration_11th extends CI_Controller {
             'SSC_Sess'=>$this->input->post('OldSess'),
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
-            'Image'=>$encoded_image  
+            //'Image'=>$encoded_image  
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
 
@@ -845,11 +774,101 @@ class Registration_11th extends CI_Controller {
 
         );
 
+        /* $allinputdata['excep'] = 'Please Enter Your Name';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration_11th/'.$viewName);
+            return;*/
+         $target_path = IMAGE_PATH11;
+        // $target_path = '../uploads2/'.$Inst_Id.'/';
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        }
+        $target_path = IMAGE_PATH11.$Inst_Id.'/';
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        } 
+        //   DebugBreak();
+        $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg';
+        $config['max_size']      = '20';
+        $config['max_width']     = '260';
+        $config['max_height']    = '290';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
+
+        $filepath = $target_path. $config['file_name']  ;
+        $this->load->library('upload', $config);
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        $this->upload->initialize($config);
+
+        if($check !== false) {
+
+            $file_size = round($_FILES['image']['size']/1024, 2);
+            if($file_size<=20)
+            {
+                if ( !$this->upload->do_upload('image',true))
+                {
+                    if($this->upload->error_msg[0] != "")
+                    {
+                        $error['excep']= $this->upload->error_msg[0];
+                        $data['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$data);
+                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                        redirect('Registration_11th/Get_students_record/');
+                        return;
+
+                    }
+
+
+                }
+            }
+            else
+            {
+                $data['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                redirect('Registration_11th/Get_students_record/');
+
+            }
+        }
+        else
+        {
+            // $check = getimagesize($filepath);
+            if($check === false)
+            {
+                $data['excep'] = 'Please Upload Your Picture';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('Registration_11th/Get_students_record/');
+                return;
+            }
+        }
+        $a = getimagesize($filepath);
+       
+        
+        
+        if($a[2]!=2)
+        {
+            $this->convertImage($filepath,$filepath,100,$a['mime']);
+        }
+
+        
+        $data_pic = fopen ($filepath, 'rb');
+
+        $size=filesize ($filepath);
+
+        $contents= fread ($fd, $size);
+
+        fclose ($fd);  
+
+        $encoded_data = base64_encode($contents);
+        $data['Image']=$encoded_data;
         $this->frmvalidation('Get_students_record',$data,0);
 
         $logedIn = $this->Registration_11th_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         $error = $logedIn[0]['error'];
-       DebugBreak();
+      // DebugBreak();
         if($error == 'true' || $logedIn == "true")
         {  
             $allinputdata = "";
@@ -3092,7 +3111,7 @@ class Registration_11th extends CI_Controller {
                 return;
 
             }
-            else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
+            else if((((@$_POST['nationality'] != '1') || (@$_POST['nationality'] != '2')) && (@$_POST['OldBrd'])!=1) || (@$_POST['nationality_hidden'] != '1') and (@$_POST['nationality_hidden'] != '2') )
             {
                 $allinputdata['excep'] = 'Please Select Your Nationality';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

@@ -127,33 +127,35 @@
                                 <div class="controls controls-row">  
                                     <?php
 
+                                  //  DebugBreak();
                                     $nat = @$data[0]['IsPakistani'];
-                                    if((@$data['0']['excep'] != ""))
-                                    {
+                                    $matric_sub1 = $data[0]['sub1'];
+                                    
                                         if(@$brd_cd ==1 )
                                         {
-                                            if($nat == 1)
+                                            if($nat == 1 || $nat == 0)
                                             {
-                                                echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
-                                                </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                                echo  " <label class='radio inline span1'><input  disabled='disabled' type='radio' value='1' id='nationality' checked='checked' name='nationality' readonly='readonly'> Pakistani
+                                                </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' value='2' name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
                                             }
                                             else if ($nat == 2)
                                             {
-                                                echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
-                                                </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                                echo  "<label class='radio inline span1'><input  disabled='disabled' type='radio' value='1' id='nationality'  name='nationality' readonly='readonly'> Pakistani
+                                                </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' checked='checked' value='2' name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
+                                            }
+                                            else{
+                                                echo  " <label  class='radio inline span1'><input disabled='disabled' type='radio' value='1' id='nationality' checked='checked' name='nationality' readonly='readonly'> Pakistani
+                                                </label><label  class='radio inline span2'><input disabled='disabled' type='radio'  id='nationality1' value='2'  name='nationality' readonly='readonly'>  Non Pakistani</label>" ;
                                             }
                                         }
                                         else
                                         {
-                                            echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
-                                            </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                            echo  " <label  class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                            </label><label  class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                            $nat = 1;
                                         }  
-                                    }
-                                    else
-                                    {
-                                        echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
-                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ;
-                                    }  
+                                    
+                                   
 
                                     ?>
 
@@ -166,7 +168,7 @@
 
                                     //$gender = @$data[0]['Gender'];
 
-                                    if($gender == 1)
+                                    if($gender == 1 )
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'  disabled='disabled' name='gender'> Male</label> 
                                         <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  disabled='disabled'> Female </label> " ;
@@ -179,6 +181,8 @@
 
                                     ?>
                                     <input type="hidden" name="gender" value="<?php echo $gender; ?>">
+                                    <input type="hidden" name="nationality_hidden" id="nationality_hidden" value="<?php echo $nat; ?>">
+                                    <input type="hidden" name="matric_sub1" id="matric_sub1" value="<?php  echo $matric_sub1; ?>">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -191,7 +195,7 @@
 
                                     if((@$data['0']['excep'] != ""))
                                     {
-                                        if(@$data['0']['IsHafiz']==1)
+                                        if(@$data['0']['IsHafiz']==1 || @$data['0']['IsHafiz']==0)
                                         {
                                             echo " <label class='radio inline span1'><input type='radio' id='hafiz1' value='1' checked='checked' name='hafiz'> No</label>
                                             <label class='radio inline span1'><input type='radio' id='hafiz2' value='2'  name='hafiz'> Yes</label>";
@@ -229,7 +233,7 @@
                                     //  {
                                     if($brd_cd == 1)
                                     {
-                                        if($rel == 1)
+                                        if($rel == 1 || $rel == 0)
                                         {
                                             echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
                                             </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;
@@ -256,10 +260,12 @@
                             </label>
                             <div class="controls controls-row">  
                                 <?php
+                                //DebugBreak();
+                              // $isrural;
                                 $resid = @$data[0]['isRural'];
                                 if($brd_cd == 1)
                                 {
-                                    if($resid == 1 )
+                                    if($resid == 1 ||  $resid == 0)
                                     {
                                         echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
                                         </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
@@ -674,6 +680,7 @@
                                 <div class="controls controls-row">
                                     <select id="sub1" class="span3 dropdown" name="sub1">
 
+                                  
                                     </select> 
                                     <select id="sub2"  name="sub2" class="span3 dropdown">
 
