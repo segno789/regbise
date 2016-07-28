@@ -648,7 +648,7 @@ if(isset($files)){
         $("#sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
 debugger;
-console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
+//console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
         if(NationalityVal==2 && matric_sub1.value == 11)
         {
@@ -1387,7 +1387,16 @@ console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ N
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
         var grp_cd = $("#std_group").val();
         
-        var matric_sub1 = document.getElementById("matric_sub1").value; //$("#matric_sub1.value").val();
+        if(document.getElementById("matric_sub1")!= undefined)
+        {
+        var matric_sub1 = document.getElementById("matric_sub1").value; //$("#matric_sub1.value").val();    
+        }
+        else
+        {
+        var matric_sub1 = 1;    
+        }
+        
+        
         //alert(grp_cd);
 
         // If Science with Biology group selected then 

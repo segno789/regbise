@@ -308,14 +308,14 @@ class Registration_11th_model extends CI_Model
         $UrbanRural = $data['ruralOrurban'];
         $Inst_cd = $data['Inst_cd'];
         $formno = $data['FormNo'];
-        $RegGrp = $data['grp_cd'];
+        $RegGrp = $data['RegGrp'];
         $regoldrno = $data['regoldrno'];
         $regoldsess = $data['regoldsess'];
         $regoldclass = $data['regoldclass'];
         $regoldyear = $data['regoldyear'];
         $isreadm = $data['isreadm'];
         // DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$sex,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$regoldrno,$regoldclass,$regoldyear,$regoldsess,$isreadm");
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }

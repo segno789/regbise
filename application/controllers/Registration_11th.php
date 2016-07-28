@@ -977,7 +977,7 @@ class Registration_11th extends CI_Controller {
             //DebugBreak();
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
-            $isReAdm = $RegStdData['data'][0]['isReAdm'];
+            $isReAdm = 0;//$RegStdData['data'][0]['isReAdm'];
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
 
@@ -1055,10 +1055,19 @@ class Registration_11th extends CI_Controller {
         {
             $sub6ap1 = 1;    
         }
-        if(@$_POST['sub7'] != -1)
+        if(@$_POST['sub7'] == -1 || @$_POST['sub7'] == 0 )
+        {
+            $sub7 = 0;    
+        }
+        else
+        {
+            $sub7 = @$_POST['sub7'];
+            $sub7ap1 = 1;   
+        }
+       /* if(@$_POST['sub7'] != -1)
         {
             $sub7ap1 = 1;    
-        }
+        }*/
         if(@$_POST['sub8'] != -1)
         {
             $sub8ap1 = 1;    
@@ -1299,6 +1308,7 @@ class Registration_11th extends CI_Controller {
 
         );
         
+       // DebugBreak();
         
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         
@@ -1332,10 +1342,10 @@ class Registration_11th extends CI_Controller {
                     if($this->upload->error_msg[0] != "")
                     {
                         $error['excep']= $this->upload->error_msg[0];
-                        $allinputdata['excep'] = $this->upload->error_msg[0];
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        $data['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$data);
                         //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                        redirect('Registration_11th/NewEnrolment/');
+                        redirect('Registration_11th/NewEnrolment_EditForm/');
                         return;
 
                     }
@@ -1345,10 +1355,10 @@ class Registration_11th extends CI_Controller {
             }
             else
             {
-                $allinputdata['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                $data['excep'] = 'The file you are attempting to upload is larger than the permitted size.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
                 //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                redirect('Registration_11th/NewEnrolment/');
+                redirect('Registration_11th/NewEnrolment_EditForm/');
 
             }
              $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -2907,7 +2917,7 @@ class Registration_11th extends CI_Controller {
     }
      function frmvalidation($viewName,$allinputdata,$isupdate)
     {
-       // DebugBreak();
+        DebugBreak();
          $_POST['address']  = str_replace("'", "", $_POST['address'] );
           $subjectslang = array('22','23','36','34','35');
           $subjectshis = array('20','21','19');
@@ -2996,10 +3006,10 @@ class Registration_11th extends CI_Controller {
 
 
             }*/
-             else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
-            {
+          //   else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
+          //  {
                 // DebugBreak();
-                if($this->Registration_11th_model->bay_form_comp(@$_POST['bay_form']) == true )
+              /*  if($this->Registration_11th_model->bay_form_comp(@$_POST['bay_form']) == true )
                 {
                     // DebugBreak();
                     $allinputdata['excep'] = 'This Bay Form is already Feeded.';
@@ -3014,8 +3024,8 @@ class Registration_11th extends CI_Controller {
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect('Registration_11th/'.$viewName);
                     return;
-                }
-            }
+                }*/
+         //   }
             else if($this->Registration_11th_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
             {
                 // DebugBreak();
@@ -3057,14 +3067,14 @@ class Registration_11th extends CI_Controller {
 
 
             }
-            else if (@$_POST['dob'] == ''  || (@$allinputdata['Dob'] == ''   && $isupdate ==1) )
+            /*else if (@$_POST['dob'] == ''  || (@$allinputdata['Dob'] == ''   && $isupdate ==1) )
             {
                 $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Registration_11th/'.$viewName);
                 return;
 
-            }
+            }*/
             else if(@$_POST['mob_number'] == '')
             {
                 $allinputdata['excep'] = 'Please Enter Your Mobile Number';
@@ -3111,14 +3121,14 @@ class Registration_11th extends CI_Controller {
                 return;
 
             }
-            else if((((@$_POST['nationality'] != '1') || (@$_POST['nationality'] != '2')) && (@$_POST['OldBrd'])!=1) || (@$_POST['nationality_hidden'] != '1') and (@$_POST['nationality_hidden'] != '2') )
+            /*else if(((@$_POST['nationality'] != '1') || (@$_POST['nationality'] != '2')) && ((@$_POST['OldBrd']!=1) && ($isupdate ==0)) || (@$_POST['nationality_hidden'] != '1') and (@$_POST['nationality_hidden'] != '2') )
             {
                 $allinputdata['excep'] = 'Please Select Your Nationality';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Registration_11th/'.$viewName);
                 return;
 
-            }
+            }*/
             else if((@$_POST['gender'] != '1') and (@$_POST['gender'] != '2'))
             {
                 $allinputdata['excep'] = 'Please Select Your Gender';
@@ -3263,7 +3273,7 @@ class Registration_11th extends CI_Controller {
                             return;
 
                         }
-                        else if((@$_POST['sub7'] == @$_POST['sub1']) ||(@$_POST['sub7'] == @$_POST['sub3'])||(@$_POST['sub7'] == @$_POST['sub4'])||(@$_POST['sub7'] == @$_POST['sub5'])||(@$_POST['sub7'] == @$_POST['sub6'])||(@$_POST['sub7'] == @$_POST['sub2'])||(@$_POST['sub7'] == @$_POST['sub8']))
+                        else if((@$_POST['sub7'] == @$_POST['sub1']) ||(@$_POST['sub7'] == @$_POST['sub3'])||(@$_POST['sub7'] == @$_POST['sub4'])||(@$_POST['sub7'] == @$_POST['sub5'])||(@$_POST['sub7'] == @$_POST['sub6'])||(@$_POST['sub7'] == @$_POST['sub2']))
                         {
                             $allinputdata['excep'] = 'Please Select Different Subjects';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3271,14 +3281,14 @@ class Registration_11th extends CI_Controller {
                             return;
 
                         }
-                        else if((@$_POST['sub8'] == @$_POST['sub1']) ||(@$_POST['sub8'] == @$_POST['sub3'])||(@$_POST['sub8'] == @$_POST['sub4'])||(@$_POST['sub8'] == @$_POST['sub5'])||(@$_POST['sub8'] == @$_POST['sub6'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
+                       /* else if((@$_POST['sub8'] == @$_POST['sub1']) ||(@$_POST['sub8'] == @$_POST['sub3'])||(@$_POST['sub8'] == @$_POST['sub4'])||(@$_POST['sub8'] == @$_POST['sub5'])||(@$_POST['sub8'] == @$_POST['sub6'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
                         {
                             $allinputdata['excep'] = 'Please Select Different Subjects';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                             redirect('Registration_11th/'.$viewName);
                             return;
 
-                        }
+                        }*/
                           else if (in_array($_POST['sub4'], $subjectslang) && in_array($_POST['sub5'], $subjectslang)&& in_array($_POST['sub6'], $subjectslang))
                         {
                             $allinputdata['excep'] = 'Double Language is not Allowed Please choose a different Subject';
