@@ -789,7 +789,7 @@ class Registration_11th extends CI_Controller {
 
             mkdir($target_path);
         } 
-        //   DebugBreak();
+          // DebugBreak();
         $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
@@ -853,8 +853,21 @@ class Registration_11th extends CI_Controller {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
 
+      //  DebugBreak();
         
-        $data_pic = fopen ($filepath, 'rb');
+        /*$path = base_url().'Uploads/2016/Private/GridImageTemplate.jpg';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $this->load->model('Admission_model');
+        $this->load->library('session');
+        // DebugBreak();
+        $data = $this->Admission_model->Insert_Image($base64);
+        $myimg = $data[0][Image_string];
+        echo "<img src='$myimg'>";
+        
+        return;*/
+       /* $data_pic = fopen ($filepath, 'rb');
 
         $size=filesize ($filepath);
 
@@ -862,10 +875,16 @@ class Registration_11th extends CI_Controller {
 
         fclose ($fd);  
 
-        $encoded_data = base64_encode($contents);
-        $data['Image']=$encoded_data;
+        $encoded_data = base64_encode($contents);*/
+        
         $this->frmvalidation('Get_students_record',$data,0);
 
+       // DebugBreak();
+        $type = pathinfo($filepath, PATHINFO_EXTENSION);
+        $pic_data = file_get_contents($filepath);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($pic_data);
+        $data['Image']=$base64;
+        
         $logedIn = $this->Registration_11th_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         $error = $logedIn[0]['error'];
       // DebugBreak();
@@ -1298,7 +1317,7 @@ class Registration_11th extends CI_Controller {
             'SSC_Sess'=>$this->input->post('OldSess'),
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
-            'Image'=>$encoded_image  ,
+           // 'Image'=>$encoded_image  ,
             'PicPath'=>$formno.".JPG"
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
@@ -1308,12 +1327,13 @@ class Registration_11th extends CI_Controller {
 
         );
         
-       // DebugBreak();
+      // DebugBreak();
         
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         
 
-        if($check !== false) {
+        if($check !== false)
+         {
 
             $target_path = IMAGE_PATH11.$Inst_Id.'/';
         // $target_path = '../uploads2/'.$Inst_Id.'/';
@@ -1367,11 +1387,20 @@ class Registration_11th extends CI_Controller {
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
+        $type = pathinfo($filepath, PATHINFO_EXTENSION);
+        $pic_data = file_get_contents($filepath);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($pic_data);
+        $data['Image']=$base64;
 
+        }
+        else
+        {
+        $data['Image']='';    
         }
     
         $data['isReAdm']=$isReAdm;
         $data['Oldrno']=0;
+        //$data['Image'] = '';
         $this->frmvalidation('NewEnrolment_EditForm',$data,1);        
         $logedIn = $this->Registration_11th_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
@@ -2917,7 +2946,7 @@ class Registration_11th extends CI_Controller {
     }
      function frmvalidation($viewName,$allinputdata,$isupdate)
     {
-        DebugBreak();
+       // DebugBreak();
          $_POST['address']  = str_replace("'", "", $_POST['address'] );
           $subjectslang = array('22','23','36','34','35');
           $subjectshis = array('20','21','19');
