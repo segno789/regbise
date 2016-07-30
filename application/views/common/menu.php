@@ -76,8 +76,8 @@
                     </li>
                     
                     <?php } 
-                    
-                    if($isselected == '0' OR $isselected == '8'){?>
+                                     //   DebugBreak();
+                    if($isselected == '0' OR $isselected == '8' OR $isselected == '11'){?>
                 
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
@@ -91,7 +91,12 @@
                             9th Reg. Batch
                         </a>
                     </li>
-                
+                   <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
+                            Spec. Permission
+                        </a>
+                    </li>
             
                    <?php } ?>
             </ul>

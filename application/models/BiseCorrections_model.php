@@ -55,6 +55,24 @@ class BiseCorrections_model extends CI_Model
         }
     }
     
+    public function GetAllInstList(){
+        $this->db->select('Inst_cd, Name');
+        $this->db->from('Admission_Online..tblInstitutes_all');
+        $where = '(edu_lvl=1 or edu_lvl = 3)';
+        $this->db->where('IsActive', 1);
+        $this->db->where($where);
+        
+        
+        $result_1 = $this->db->get()->result();
+        return $result_1;
+    }
+    public function Insert_SpecPermison($data)
+    {
+        $query = $this->db->insert('Registration..inst_Special_Permission_9th', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
+         //DebugBreak();
+        return $query;
+    }
+    
        public function Batch_List()
     {
         //DebugBreak();

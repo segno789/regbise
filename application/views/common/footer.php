@@ -496,6 +496,46 @@ if(isset($files)){
 
         window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
     }
+    
+    function SpecPermission_INSERT()
+    {
+        var inst_cd  = $("#inst_cd").val();
+        var feeding_date = $("#txt_FeedingDate").val();
+        var regfee   = $("#Reg_fee").val();
+        var Proc_fee = $("#Proc_Fee").val();
+        var spec_fee = $("#Spec_Fee").val();
+        if(inst_cd == 0 )
+        {
+            alertify.error("Please Select Institute.");
+            $('#inst_cd').focus();
+            return false; 
+        }
+        if(feeding_date == "")
+        {
+            alertify.error("Please write Feeding Date.");
+            $('#txt_FeedingDate').focus();
+            return false; 
+        }
+        if(regfee == 0 || regfee == "")
+        {
+            alertify.error("Please write Registration Fee.");
+            $('#Reg_fee').focus();
+            return false; 
+        }
+        if(Proc_fee == 0 || Proc_fee == "")
+        {
+            alertify.error("Please Processing Fee.");
+            $('#Proc_Fee').focus();
+            return false; 
+        }
+        if(spec_fee == 0 || spec_fee == "")
+        {
+            alertify.error("Please Write Special Fee.");
+            $('#Spec_Fee').focus();
+            return false; 
+        }
+        
+    }
     function BatchRelease_INSERT()
     {
 
@@ -631,6 +671,7 @@ if(isset($files)){
 
 <script type="">
     $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
+    $( "#txt_FeedingDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(),minDate:new Date()}).val();
     $( "#corr_dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date(),maxDate:new Date(),minDate: -60 }).val();
     var myOptions = {
@@ -1173,6 +1214,16 @@ if(isset($files)){
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
+        var spec_case_inst = "<?php DebugBreak(); echo @$msg; ?>"
+        debugger;
+        if(spec_case_inst == "Saved")
+        {
+             alertify.success("Saved Successfully");
+        }
+        else if (spec_case_inst == "'Not Saved")
+        {
+             alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
+        }
         if(BatchRelease_Op != "")
         {
             if(BatchRelease_Op == "success")
