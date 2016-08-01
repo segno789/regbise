@@ -1517,9 +1517,11 @@ class Registration extends CI_Controller {
       //  DebugBreak();
         if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $reg_fee = $userinfo['isSpecial_Fee']['RegFee'];
-            $Lreg_fee =  $userinfo['isSpecial_Fee']['SpecialFee'];
-            $processing_fee = $userinfo['isSpecial_Fee']['ProcessingFee'];
+             $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
+            $rule_fee[0]['Rule_Fee_ID']   = 0; 
+            $lastdate  = date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate'])) ;
         }
         else
         {
@@ -1654,9 +1656,15 @@ class Registration extends CI_Controller {
         /*====================  Counting Fee  ==============================*/    
           if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $reg_fee = $userinfo['isSpecial_Fee']['RegFee'];
-            $Lreg_fee =  $userinfo['isSpecial_Fee']['SpecialFee'];
-            $processing_fee = $userinfo['isSpecial_Fee']['ProcessingFee'];
+           
+
+            $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
+              $rule_fee[0]['Rule_Fee_ID']   = 0; 
+            $lastdate  = date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate'])) ;
+            
+            
         }
         else
         {
@@ -2078,34 +2086,50 @@ class Registration extends CI_Controller {
         
         
         $isfine = 0;
-              
-        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+         
+         
+          if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['isfine'] = 0; 
-        }
-        else if($user_info['info'][0]['feedingDate'] != null)
-        {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-            if(date('Y-m-d')<=$lastdate)
-            {
-               
-                $rule_fee  =  $this->Registration_model->getreulefee(1);
-                 $rule_fee[0]['isfine'] = 0; 
-            }
-            else 
-            {
-                $rule_fee   =  $this->Registration_model->getreulefee(2);
-                $rule_fee[0]['isfine'] = 1;
-            }
-        }
-        else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
-        {
-            $isfine = 1;
-            $rule_fee   =  $this->Registration_model->getreulefee(2);
+            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
+            $rule_fee[0]['Rule_Fee_ID']   = 0; 
             $rule_fee[0]['isfine'] = 1; 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
         }
+        else
         
+        {
+            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+            {
+                $rule_fee[0]['isfine'] = 0; 
+            }
+            else if($user_info['info'][0]['feedingDate'] != null)
+            {
+                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+                if(date('Y-m-d')<=$lastdate)
+                {
+
+                    $rule_fee  =  $this->Registration_model->getreulefee(1);
+                    $rule_fee[0]['isfine'] = 0; 
+                }
+                else 
+                {
+                    $rule_fee   =  $this->Registration_model->getreulefee(2);
+                    $rule_fee[0]['isfine'] = 1;
+                }
+            }
+            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
+            {
+                $isfine = 1;
+                $rule_fee   =  $this->Registration_model->getreulefee(2);
+                $rule_fee[0]['isfine'] = 1; 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+
+        } 
+              
+      
 
 
         $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
