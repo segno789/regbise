@@ -30,11 +30,12 @@ class Login extends CI_Controller {
         {   
 
              $this->load->model('login_model'); 
-        $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
-            $this->load->model('login_model'); 
-            $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
-            $isgroup = -1;
-            if($logedIn != false)
+             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+             $this->load->model('login_model'); 
+             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+             $isgroup = -1;
+             
+        if($logedIn != false)
             {  
 
 
@@ -128,8 +129,25 @@ class Login extends CI_Controller {
                     $isinterfeeding = -1;
                     $lastdate = SINGLE_LAST_DATE;
                     //DebugBreak();
+                     
                     if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
                     {
+                          if($logedIn['SpecPermission']==1)
+                        {
+                          $lastdate=  $logedIn['spec_info']['FeedingDate'];
+                            if(date('Y-m-d',strtotime($lastdate))>=date('Y-m-d'))
+                            {
+                                 $isfeeding = 1;
+                            }
+                            {
+                                 $isfeeding = 0;
+                            }
+                            
+                        }
+                        else
+                        {
+                            
+                        
                         if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
                         {
                             $isfeeding = 1    ;
@@ -147,6 +165,9 @@ class Login extends CI_Controller {
                                 $isfeeding = -1;
                             }
                         }
+                        }
+                        
+                     
 
                     }  
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
@@ -193,7 +214,9 @@ class Login extends CI_Controller {
                         'isboardoperator' => 0  ,
                         'isfeedingallow' => $isfeeding   ,
                         'isinterfeeding' => $isinterfeeding ,
-                        'lastdate' => $lastdate   
+                        'lastdate' => $lastdate ,  
+                        'isSpecial' => $logedIn['SpecPermission'],   
+                        'isSpecial_Fee' => $logedIn['spec_info']   
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 

@@ -53,14 +53,15 @@ class BiseCorrection extends CI_Controller {
         
         $spec_case_msg="";
         $this->load->library('session');
-         if(!( $this->session->flashdata('msg'))){
+      //  DebugBreak();
+         if(( $this->session->flashdata('msg'))){
 
              $msg = $this->session->flashdata('msg');
-            $spec_case_msg = $msg['msg'];  
+            $spec_case_msg =array('msg'=>$msg);  
         }
         else{
-            $msg = $this->session->flashdata('msg');
-            $spec_case_msg = $msg['msg'];  
+            $msg = '';
+            $spec_case_msg =array('msg'=>$msg);  
         }
         $this->load->model('BiseCorrections_model');
         $NinthStdData = array('Inst_data'=>$this->BiseCorrections_model->GetAllInstList());

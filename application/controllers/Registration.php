@@ -1485,7 +1485,7 @@ class Registration extends CI_Controller {
     }
     public function Make_Batch_Group_wise()
     {
-        ///DebugBreak();
+        //DebugBreak();
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
 
@@ -1513,8 +1513,17 @@ class Registration extends CI_Controller {
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
         $netTotal = 0;
-        /*====================  Counting Fee  ==============================*/    
-        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+        /*====================  Counting Fee  ==============================*/   
+      //  DebugBreak();
+        if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
+        {
+            $reg_fee = $userinfo['isSpecial_Fee']['RegFee'];
+            $Lreg_fee =  $userinfo['isSpecial_Fee']['SpecialFee'];
+            $processing_fee = $userinfo['isSpecial_Fee']['ProcessingFee'];
+        }
+        else
+        {
+            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->Registration_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
@@ -1545,7 +1554,9 @@ class Registration extends CI_Controller {
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
-        }
+        }  
+        } 
+      
         // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
@@ -1641,6 +1652,16 @@ class Registration extends CI_Controller {
         $Totalprocessing_fee = 0;
         $netTotal = 0;
         /*====================  Counting Fee  ==============================*/    
+          if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
+        {
+            $reg_fee = $userinfo['isSpecial_Fee']['RegFee'];
+            $Lreg_fee =  $userinfo['isSpecial_Fee']['SpecialFee'];
+            $processing_fee = $userinfo['isSpecial_Fee']['ProcessingFee'];
+        }
+        else
+        {
+            
+        
          if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->Registration_model->getreulefee(1); 
@@ -1676,6 +1697,7 @@ class Registration extends CI_Controller {
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
+        }
         }
         // DebugBreak();
         $q1 = $user_info['fee'];

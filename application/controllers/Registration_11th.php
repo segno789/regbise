@@ -1728,8 +1728,18 @@ class Registration_11th extends CI_Controller {
         $Totalprocessing_fee = 0;
         $netTotal = 0;
         /*====================  Counting Fee  ==============================*/    
-        //DebugBreak();
-        $rule_fee = $user_info['rule_fee'];
+       // DebugBreak();
+        
+        /*if($userinfo['isSpecial']==1  )
+        {
+            if($userinfo['isSpecial_Fee'][''])
+            $reg_fee = $rule_fee[0]['Reg_Fee'];
+            $Lreg_fee = $rule_fee[0]['Fine'];
+            $processing_fee = $rule_fee[0]['Reg_Processing_Fee']; 
+        }
+        else
+        {*/
+               $rule_fee = $user_info['rule_fee'];
         if($user_info['info'][0]['affiliation_date'] != null)
         {
             $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['affiliation_date'])) ;
@@ -1755,7 +1765,10 @@ class Registration_11th extends CI_Controller {
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
-        }
+        }  
+       // }
+       // if($)
+   
         // DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;

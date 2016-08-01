@@ -1214,7 +1214,7 @@ if(isset($files)){
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
-        var spec_case_inst = "<?php DebugBreak(); echo @$msg; ?>"
+        var spec_case_inst = "<?php   echo @$msg; ?>"
         debugger;
         if(spec_case_inst == "Saved")
         {

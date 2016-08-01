@@ -5,7 +5,7 @@ class Login_model extends CI_Model {
     }
     public function auth($username,$password) 
     {
-      //  DebugBreak();
+       // DebugBreak();
         
 		$query = $this->db->get_where('Admission_online..fl_users', array('inst_cd' => $username,'pass' => $password));
 		$rowcount = $query->num_rows();
@@ -15,12 +15,23 @@ class Login_model extends CI_Model {
             
             
             $tblInstitutes_all_Info  = $this->db->get_where('Registration..tblInstitutes_all_Info', array('inst_cd' => $username));
+            $specialPermission = $this->db->get_where('Registration..inst_Special_Permission_9th',array('inst_cd'=>$username));
+            if($specialPermission->num_rows()>0)
+            {
+                
+                $isSpecial=1;
+                $isSpecial_Info= $specialPermission->row_array();
+            }
+            else{
+                $isSpecial=0;
+                $isSpecial_Info = false;
+            }
             $isInserted = 0;
             if ($tblInstitutes_all_Info->num_rows() > 0)
             {
                 $isInserted = 1;
             }
-               $allinfo = array('flusers'=>$query->row_array(), 'tbl_inst'=>$query_1->row_array(),'isInserted'=>$isInserted);
+               $allinfo = array('flusers'=>$query->row_array(), 'tbl_inst'=>$query_1->row_array(),'isInserted'=>$isInserted,'SpecPermission'=>$isSpecial,'spec_info'=>$isSpecial_Info);
 			 return $allinfo;
 		}
 		else
