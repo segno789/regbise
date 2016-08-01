@@ -31,7 +31,7 @@
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="image" onchange="Checkfiles()">
+                                    <input type="file" class="span4" id="image" name="image" onchange="readURL_corr(this)">
                                 </div>
                             </div>
                             <div class="control-group">
