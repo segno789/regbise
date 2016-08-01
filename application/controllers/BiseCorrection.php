@@ -45,7 +45,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function SpecPermison_9th()
     {
-       // DebugBreak();
+       DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '11',
