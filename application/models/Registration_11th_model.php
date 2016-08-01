@@ -137,9 +137,10 @@ class Registration_11th_model extends CI_Model
         $OldSess = $data['SSC_Sess'];
         $OldBrd = $data['SSC_brd_cd'];
         $IsReAdm = $data['IsReAdm'];
-        $pic_base_65 = $data['Image'];
+        $pic_base_64 = $data['Image'];
+      //  $pic_base_65 = $data['Image'];
        // DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_65'");
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         
          $rowcount = $query->num_rows();
