@@ -44,10 +44,10 @@
                         
                         foreach($Inst_data as $inst)
                         {
-                           // if( ($inst->Inst_cd != 399901) && ($inst->Inst_cd != 399902) && ($inst->Inst_cd != 399903) && ($inst->Inst_cd != 999999))
-                            //{?>
+                            if( ($inst->Inst_cd != 399901) && ($inst->Inst_cd != 399902) && ($inst->Inst_cd != 399903) && ($inst->Inst_cd != 999999))
+                            {?>
                             <option value="<?php echo $inst->Inst_cd ; ?>"> <?php echo $inst->Inst_cd.'-'.$inst->Name; ?> </option>
-                        <?php } //}
+                        <?php } }
                         ?>
                         </select>
                         
@@ -72,13 +72,13 @@
 
                     <div class='controls controls-row'>
                         <label class='control-label span1' for='lblfather_name'> REGISTRATION FEE :  </label>  
-                        <input class='span3' id='Reg_fee' name='Reg_fee' style='text-transform: uppercase;' type='number' placeholder="REGISTRATION FEE"  required='required'  value="" >
+                        <input class='span3' id='Reg_fee' name='Reg_fee' style='text-transform: uppercase;' type='number' placeholder="REGISTRATION FEE"  required='required'  value="1000" readonly="readonly" >
                     </div>
                 </div>
                
                 <div class='control-group'>
 
-                    <div class='controls controls-row'>  <label class='control-label span1' >  PROCESSING FEE: </label>  <input class='span3'  type='number' id='Proc_Fee' name='Proc_Fee' placeholder='PROCESSING FEE'  required='required' value="" >
+                    <div class='controls controls-row'>  <label class='control-label span1' >  PROCESSING FEE: </label>  <input class='span3'  type='number' id='Proc_Fee' name='Proc_Fee' placeholder='PROCESSING FEE'  required='required' value="100" readonly="readonly" >
                     </div>
                 </div>         
   <div class='control-group'>

@@ -526,7 +526,7 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
-       /* else  if($cand_gender != $inst_userinfo_gender)
+        else  if($cand_gender != $inst_userinfo_gender)
         {
             if($cand_gender==1 && $inst_userinfo_gender == 2)
             {
@@ -539,9 +539,9 @@ class Registration_11th extends CI_Controller {
                 $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE FEMALE CANDIDATE RECORD');
                 redirect('Registration_11th/Students_matricInfo');
                 return;    
-            }*/
+            }
 
-       // }
+       }
 
 
         else  if($msg == -1)
