@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="widget-body">
-                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registartion for 11th  without late fee is <b class="blink_text"><?php echo SINGLE_LAST_DATE11; ?></b></font></h1>
+                        <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registartion for 11th  without late fee is <b class="blink_text"><?php echo date('d-m-Y', strtotime(SINGLE_LAST_DATE11)); ?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
 
                          <?php  if($isinterfeeding == 1) {?>
@@ -109,10 +109,9 @@
                         <div style="  margin-top: -101px;margin-left: 20px;font-size: 16px;">
                             <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
                             <br/>
-                           <a href="http://www.bisegrw.com/download/online/registration/Training_Manual_11th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 11th Registration Training Manual. </a> <br/>
+                      
                             <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
-                            <a href="<?php echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>
-                            <br /><br />
+                      <br />
                             <strong>NOTE:</strong> <br/>
                             1. Please upload photo of student carefully and with good quality as this picture will be used in his/her INTER Roll Number Slip/Result Card/certificate.<br /> 
                             2. Fill correct Address of candiate as now governmet often demand addresses of regular candidates also from Board, for various purposes. i.e, Laptop Distribution, Soler Panel distribution, scholership etc.<br /> 
