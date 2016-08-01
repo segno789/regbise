@@ -19,7 +19,7 @@
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
 
                                        <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
-                                      <img src="../../assets/img/upalodimage.jpg" alt="" >
+                                      <img src="<?php echo base_url(); ?>/assets/img/upalodimage.jpg" alt="" >
                                     </label> 
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
@@ -32,7 +32,7 @@
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="image" onchange="Checkfiles()">
+                                    <input type="file" class="span4" id="image" name="image" onchange="return readURL(this);">
                                 </div>
                             </div>
                             <div class="control-group">

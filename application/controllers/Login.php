@@ -139,6 +139,7 @@ class Login extends CI_Controller {
                             {
                                  $isfeeding = 1;
                             }
+                            else
                             {
                                  $isfeeding = 0;
                             }

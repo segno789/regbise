@@ -53,7 +53,7 @@ if(isset($files)){
     }    */
     /*    }*/
 
-    function readURL(input) {
+    function readURL_corr(input) {
     debugger;
     if (input.files && input.files[0]) {
     var reader = new FileReader();
