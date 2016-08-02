@@ -1318,7 +1318,7 @@ class Registration_11th extends CI_Controller {
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
            // 'Image'=>$encoded_image  ,
-            'PicPath'=>$formno.".JPG"
+            'PicPath'=>$formno.".jpg"
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
 
@@ -2011,6 +2011,8 @@ class Registration_11th extends CI_Controller {
                 $pdf->Text($lmargin+.03,$title+.3,"Sr#");    //$pdf->Text(3,3,"TEXT TO DISPLAY");
                 $pdf->Text($col1+.2,$title+.3,"Form No.");
 
+                
+                
                 $pdf->Text($col2+.1,$title+.2,"Student Name / Dob /");
                 $pdf->Text($col2+.1,$title+.4,"Bay-Form");
 
@@ -2044,16 +2046,23 @@ class Registration_11th extends CI_Controller {
             $pdf->Text($lmargin+.1  , $ln[$countofrecords]+0.3 , $SR);                 // Sr No
             $pdf->Text($col1+.05    , $ln[$countofrecords]+0.3,$data["FormNo"]);       // Form No
 
+            $pdf->SetXY($col2+.1,$ln[$countofrecords]+0.05);
             $pdf->SetFont('Arial','B',8);    
-            $pdf->Text($col2+.1,$ln[$countofrecords]+0.2,strtoupper($data["name"]));
+            $pdf->MultiCell(1.5,0.12,strtoupper($data["name"]));
             $pdf->SetFont('Arial','',8);                
             // DebugBreak();
+            
             $pdf->Text($col2+.1,$ln[$countofrecords]+0.4,strtoupper($data["Dob"]));
             $pdf->SetFont('Arial','',7.5);                
             $pdf->Text($col2+.1,$ln[$countofrecords]+0.55,$data["BForm"]);
             $pdf->SetFont('Arial','',8);
-            $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["Fname"]);
-            $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
+            
+            $pdf->SetXY($col3+.08,$ln[$countofrecords]+0.05);
+            $pdf->SetFont('Arial','B',8);
+            $pdf->MultiCell(0.9,0.12,strtoupper($data["Fname"]), 0);
+            $pdf->SetFont('Arial','',8);
+           // $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["Fname"]);
+            $pdf->Text($col3+.1,$ln[$countofrecords]+0.5,$data["FNIC"]);
 
             // $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
             // $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");

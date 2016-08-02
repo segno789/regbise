@@ -27,15 +27,17 @@ if(isset($files)){
 ?> 
 <script type="">
     $(document).ready(function () {
-        $('#data-table').dataTable({
+        $('#data_table').dataTable({
             "sPaginationType": "full_numbers",
+            "bAutoWidth" : false,
             "cache": false
         });
         $('#data-tablereg').dataTable({
             "sPaginationType": "full_numbers",
+            "bAutoWidth" : false,
             "cache": false
         });
-
+//data_table
         var data_excep = "<?php echo @$excep_halt; ?>";
         if(data_excep != '')
         {
