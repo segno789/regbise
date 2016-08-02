@@ -1024,10 +1024,10 @@ debugger;
         $("#sub3 option[value='92']").attr("selected","selected");
 
 
-        $("#sub4").append(new Option('Chemistry',48));
+        $("#sub4").append(new Option('CHEMISTRY (Home-Economics Group)',73));
         $("#sub4 option[value='48']").attr("selected","selected");
 
-        $("#sub5").append(new Option('Biology',46));
+        $("#sub5").append(new Option('BIOLOGY (Home-Economics Group)',72));
         $("#sub5 option[value='46']").attr("selected","selected");
 
         $("#sub6").append(new Option('Clothing and Textile',75));
