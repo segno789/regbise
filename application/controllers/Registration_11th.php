@@ -383,7 +383,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-        //DebugBreak();
+       // DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -391,7 +391,7 @@ class Registration_11th extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$userinfo);
-        if($this->session->flashdata('matric_error')){
+        if($this->session->flashdata('matric_error') ){
 
             $data['excep_halt'] = $this->session->flashdata('matric_error');    
         }
@@ -406,7 +406,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-        //DebugBreak();
+      //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -616,6 +616,7 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_insert()
     {
+        
         $this->load->model('Registration_11th_model');
        
         $this->load->library('session');
@@ -626,7 +627,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-       // DebugBreak();
+      //  DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -816,7 +817,7 @@ class Registration_11th extends CI_Controller {
                         $data['excep'] = $this->upload->error_msg[0];
                         $this->session->set_flashdata('NewEnrolment_error',$data);
                         //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                        redirect('Registration_11th/Get_students_record/');
+                        redirect('Registration_11th/Get_students_record');
                         return;
 
                     }
@@ -902,10 +903,11 @@ class Registration_11th extends CI_Controller {
         else
         {     
 
-            $allinputdata = $data;
-            $allinputdata['excep'] = $error;
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Registration_11th/Get_students_record');
+           // DebugBreak();
+           // $allinputdata = $data;  Students_matricInfo matric_error
+            //$allinputdata['excep'] = $error;
+            $this->session->set_flashdata('matric_error',$error);
+            redirect('Registration_11th/Students_matricInfo');
             return;
             echo 'Data NOT Saved Successfully !';
 
@@ -1281,7 +1283,7 @@ class Registration_11th extends CI_Controller {
             'Fname' =>$this->input->post('father_name'),
             'BForm' =>$this->input->post('bay_form'),
             'FNIC' =>$this->input->post('father_cnic'),
-            'dob' =>$this->input->post('dob'),
+            'Dob' =>$this->input->post('dob'),
             'MobNo' =>$this->input->post('mob_number'),
             'medium' =>$this->input->post('medium'),
             'classRno' =>$this->input->post('Inst_Rno'),
@@ -1317,6 +1319,7 @@ class Registration_11th extends CI_Controller {
             'SSC_Sess'=>$this->input->post('OldSess'),
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
+            'Brd_cd'=>$this->input->post('Brd_cd'),
            // 'Image'=>$encoded_image  ,
             'PicPath'=>$formno.".jpg"
             // 'spl_cd'=>$this->input->post('IsReAdm'),
@@ -3255,8 +3258,9 @@ class Registration_11th extends CI_Controller {
                 return;
 
             }
-            else if((@$_POST['std_group'] == 4) && ((@$_POST['sub4']!=19) || ((@$_POST['sub5'] !=47)|| (@$_POST['sub5'] !=11 || (@$_POST['sub5'] !=18)))||((@$_POST['sub6']==83 || (@$_POST['sub6']==11) || (@$_POST['sub6']==18)))|| (@$_POST['sub7'] !=0)))
+            else if((@$_POST['std_group'] == 4) && ((@$_POST['sub4'] ==0) || ((@$_POST['sub5'] ==0)|| (@$_POST['sub6'] ==0))))
             {
+                //DebugBreak();
                 $allinputdata['excep'] = 'Subjects not according to Group';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Registration_11th/'.$viewName);
@@ -3419,7 +3423,7 @@ class Registration_11th extends CI_Controller {
                             return;
 
                         }
-                        else if(@$_POST['sub7'] == 0 && ((@$_POST['std_group'] == 4) || (@$_POST['std_group'] == 5)))
+                        else if(@$_POST['sub7'] == 0 && ((@$_POST['std_group'] == 6) || (@$_POST['std_group'] == 5)))
                         {
                             $allinputdata['excep'] = 'Please Select Subject 7';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
