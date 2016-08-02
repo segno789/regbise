@@ -40,11 +40,11 @@
                                     Candidate Name:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>  readonly="readonly" >
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($data['0']['Brd_cd']==1 ) { echo 'readonly="readonly"'; } ?>  >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required" readonly="readonly">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?> required="required" >
                                 </div>
                             </div>
                             <div class="control-group">
@@ -52,14 +52,25 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" readonly="readonly" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>>
+                                    <input class="span3"  type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?>>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" readonly="readonly" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3"  id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
+                            <?php if($data['0']['Brd_cd'] != 1)
+                            { ?>
+                             <div class="control-group">
+                                <label class="control-label span1" >
+                                    Date of Birth:(dd-mm-yyyy)
+                                </label>
 
+                                <div class="controls controls-row">
+                                <?php $dob_format = strtotime($data['0']['Dob']);  ?>
+                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php  echo date('d-m-Y',$dob_format); ?>" required="required" readonly="readonly" >
+                                    </div>
+                                    <?php } ?>
                             <div class="control-group">
 
                                 <label class="control-label span1" >
@@ -519,6 +530,7 @@
 
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value="<?php  echo $data[0]['FormNo']; ?>"  name="formNo">
+                                <input type="hidden"   value="<?php  echo $data[0]['Brd_cd']; ?>"  name="Brd_cd">
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
                                 <input type="hidden"   value="<?php  echo $Oldrno; ?>"  name="OldRno">
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
