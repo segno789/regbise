@@ -269,7 +269,8 @@ if(isset($files)){
     //
     if(isotherboard != 1)
     {
-        $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
+           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(1998, 7, 1),minDate:new Date(1980, 0, 1)}).val();
+
     }
     // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, 'setDate': new Date() }).val(); //, startDate:new Date()
@@ -2195,7 +2196,7 @@ debugger;
         }
         else if(option == "1" || option == "2")
         {
-            window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+'0/'+option+'/';
+            window.location.href = '<?=base_url()?>/index.php/Registration_11th/Make_Batch_Group_wise/'+'0/'+option+'/';
         }
         return false;
 

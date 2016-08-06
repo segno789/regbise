@@ -39,15 +39,15 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
 define('BARCODE_PATH', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE', '2016-10-07');
-define('DOUBLE_LAST_DATE', '2016-11-30');
+define('SINGLE_LAST_DATE', '2016-06-07');
+define('DOUBLE_LAST_DATE', '2016-06-30');
 
 //===========================================================
 define('IMAGE_PATH11', 'uploads/2016/colleges/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE11', '2016-04-04');
-define('DOUBLE_LAST_DATE11', '2016-11-01');
+define('SINGLE_LAST_DATE11', '2016-09-20');
+define('DOUBLE_LAST_DATE11', '2016-09-21');
 
 //===============11th challan varaible
 define('corr_bank_chall_class1','11th');

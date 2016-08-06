@@ -201,7 +201,9 @@
                 ?>
                 <ul >
                     <li><a href="<?php echo base_url(); ?>Registration"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Registration</a></li>
-                    <?php if($isfeedingallow == 1) {?>
+                    <?php 
+                    
+                    if($isfeedingallow == 1) {?>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration/NewEnrolment">
                                 New Enrolement
@@ -366,7 +368,7 @@
                             </a>
                         </li>
                         <!-- <li>
-                        <a href="<?php echo base_url(); ?>Registration_11th/ReAdmission">
+                        <a href="<?php //echo base_url(); ?>Registration_11th/ReAdmission">
                         Re-Admissions
                         </a>
                         </li>-->
