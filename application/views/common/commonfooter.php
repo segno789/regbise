@@ -637,6 +637,7 @@
             return;
         }
     })
+ 
     $('#get_Proof').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
         // alert(option);
@@ -781,6 +782,7 @@
     function ReturnForm_Final_Formnowise(startformno,endformno){
         window.location.href = '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
+   
     function ReturnForm_ProofReading_groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>/index.php/Admission_matric/return_pdf/'+grp_cd + '/4'
     }
