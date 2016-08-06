@@ -851,6 +851,12 @@ if(isset($files)){
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
         window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
+     function Print_RegCards_groupwise(grp_cd){
+        window.location.href = '<?=base_url()?>/index.php/Registration/Reg_Cards_Printing_9th_PDF/'+grp_cd + '/2'
+    }
+    function Print_RegCards_Formnowise(startformno,endformno){
+        window.location.href = '<?=base_url()?>/index.php/Registration/Reg_Cards_Printing_9th_PDF/'+startformno + '/3' +'/'+endformno +'/';
+    }
 
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
@@ -858,6 +864,34 @@ if(isset($files)){
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
         window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
+       $('#print_regCards').click( function(){
+        var option =  $('input[type=radio][name=opt]:checked').val(); 
+         //alert(option);
+       //  return;
+        if(option == "1")
+        {
+            var std_group = $('#std_group').val();
+            if(std_group == "0"){
+                alertify.error("Please Select a Group First !");
+                return;
+            }
+            Print_RegCards_groupwise(std_group);
+        }
+        else if(option =="2")
+        {
+            var startformno = $('#strt_formNo').val();
+            var endformno = $('#ending_formNo').val();
+            if((startformno.length < 10 ||  startformno.length > 10) && (endformno.length < 10 ||  endformno.length > 10))
+            {
+                alertify.error("Invalid Form No.");
+                return;
+            }
+            Print_RegCards_Formnowise(startformno,endformno);
+        }
+        else{
+            return;
+        }
+    })
     $('#get_report').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
         // alert(option);

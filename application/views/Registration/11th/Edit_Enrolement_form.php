@@ -495,8 +495,7 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub5" class="span3 dropdown" name="sub5" selected="selected">
-                                        <?php  if($isReAdm != 1)
-                                            { echo "";} ?>
+                                       
                                         <option value="<?php if($isReAdm != 1) {echo $data[0]['sub5'];} else{ echo "";} ?>"><?php  if($isReAdm != 1) {echo array_search($data[0]['sub5'],$subarray);} else {echo "";}
 
                                         ?></option>

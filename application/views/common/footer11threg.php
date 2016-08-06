@@ -1389,6 +1389,10 @@ debugger;
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
         var grp_cd = $("#std_group").val();
+        var  sub4_selected ="<?php  echo @$data[0]['sub4']; ?>";
+        var  sub5_selected="<?php echo @$data[0]['sub5']; ?>";
+        var  sub6_selected="<?php echo @$data[0]['sub6']; ?>";
+        var  sub7_selected="<?php echo @$data[0]['sub7']; ?>";
         
         if(document.getElementById("matric_sub1")!= undefined)
         {
@@ -1417,6 +1421,9 @@ debugger;
         else if (grp_cd == "3")
         {
             load_Hum();
+            $("#sub4").val(sub4_selected);
+            $("#sub5").val(sub5_selected);
+            $("#sub6").val(sub6_selected);
             
         }
 
@@ -1424,6 +1431,9 @@ debugger;
         {
 
             load_GenSci();
+            $("#sub4").val(sub4_selected);
+            $("#sub5").val(sub5_selected);
+            $("#sub6").val(sub6_selected);
 
 
         }
@@ -1434,6 +1444,10 @@ debugger;
         else if(grp_cd == "6")
         {
             load_HomeEco();
+            $("#sub4").val(sub4_selected);
+            $("#sub5").val(sub5_selected);
+            $("#sub6").val(sub6_selected);
+            $("#sub7").val(sub7_selected);
         }
         else if (grp_cd == "0")
         {

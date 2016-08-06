@@ -241,6 +241,11 @@
                             Form Printing
                         </a>
                     </li>
+                       <li>
+                        <a href="<?php echo base_url(); ?>Registration/Reg_Cards_Printing_9th">
+                            Registration Cards
+                        </a>
+                    </li>
                     <li>
                         <a href="<?php echo base_url(); ?>/Registration/Profile">
                             Profile
