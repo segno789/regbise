@@ -5,7 +5,9 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="title">
-                            Event registration for<a id="redgForm" data-original-title="">m</a>
+                            DELETING Form No. <a id="redgForm" data-original-title="" style="cursor: default;"><?php
+                                                                                            echo $data[0]['formNo'];
+                                                                                        ?></a>
                         </div>
                       
                     </div>
