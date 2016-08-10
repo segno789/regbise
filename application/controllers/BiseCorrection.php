@@ -114,6 +114,161 @@ class BiseCorrection extends CI_Controller {
             redirect('BiseCorrection/SpecPermison_9th');
         }
     }
+    public function Delete_Form()
+    {
+     $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+       // DebugBreak();
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        if($this->session->flashdata('NewEnrolment_error')){
+            //DebugBreak();
+
+            //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
+              $error['excep'] = 'Your Form No. is Invalid.';
+          //  $isReAdm = $RegStdData['data'][0]['isreadm'];
+          //  $RegStdData['isReAdm']=$isReAdm;
+          //  $RegStdData['Oldrno']=0;
+          
+
+        }
+        else{
+            $error['excep'] = '';
+        }
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
+        $this->load->view('common/footer.php');
+    }
+     public function NewEnrolment_EditForm()
+    {    
+          //DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $Inst_Id = $userinfo['Inst_Id'];
+        $this->load->view('common/header.php',$userinfo);
+        $formno = $_POST['txtformNo_search'];
+        if($formno == ""){
+            return;
+        }
+        $isReAdm = 0;
+        $year = 0;
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->model('BiseCorrections_model');
+        if($this->session->flashdata('NewEnrolment_error')){
+            //DebugBreak();
+
+            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+            $isReAdm = $RegStdData['data'][0]['isreadm'];
+            $RegStdData['isReAdm']=$isReAdm;
+            $RegStdData['Oldrno']=0;
+
+        }
+        else{
+            $error['excep'] = '';
+
+            if($this->session->flashdata('IsReAdm')){
+                $isReAdm = 1;
+                $year = 2015;
+            }
+            else{
+                $isReAdm = 1;
+                $year = 2016;    
+            }
+
+            $RegStdData = array('data'=>$this->BiseCorrections_model->EditEnrolement_data($formno),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+        }
+        if($RegStdData['data'] == FALSE)
+        {
+              $this->session->set_flashdata('NewEnrolment_error','error');
+                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                        redirect('BiseCorrection/Delete_Form/');
+                        return;
+        }
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/Edit_Enrolement_form.php',$RegStdData);   
+        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
+
+    }
+    public function Delete_candidate_UPDATE()
+    {
+       
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $formno = $_POST['formNo'];
+        $kpo = $userinfo['Inst_Id'];
+        if($formno == '')
+        {
+            return true;
+        }
+        else if(!isset($kpo))
+        {
+                return true;
+        }
+        $corr = array('info'=>$this->BiseCorrections_model->UpdateDeleteStatus($formno,$kpo,1));
+         $this->session->set_flashdata('Restore_msg','Deleted Successfully');
+        redirect('BiseCorrection/Restore_form');
+        return;
+       
+         
+    }
+    public function Restore_form()
+    {
+         //DebugBreak();
+       $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];  
+        if(( $this->session->flashdata('Restore_msg'))){
+
+            $restore_msg = $this->session->flashdata('Restore_msg');  
+        }
+        else{
+            $restore_msg = '';
+        }
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $RegStdData = array('data'=>$this->BiseCorrections_model->Restore_candidate_list($userinfo['Inst_Id']),'restore_msg'=>$restore_msg);
+        $this->load->view('BiseCorrection/9thCorrection/Restore_form.php',$RegStdData);
+        $this->load->view('common/footer.php');
+    }
+    public function Restore_form_UPDATE()
+    {
+        //DebugBreak();
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $formno = $this->uri->segment(3);
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];  
+        $kpo = $userinfo['Inst_Id'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $corr = array('info'=>$this->BiseCorrections_model->UpdateDeleteStatus($formno,$kpo,0));
+        $this->session->set_flashdata('Restore_msg','Restored Successfully');
+        redirect('BiseCorrection/Restore_form');
+        return;
+    }
 
 
     public function reg9thcorrections()

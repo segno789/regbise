@@ -1043,6 +1043,16 @@ if(isset($files)){
 
     }
 
+    function valid_delete_form()
+    {
+        var formno = $('#txtformNo_search').val();
+       
+        if(formno == "" || formno.length < 4 || formno.length > 10){
+            alertify.error("Please write Valid Form No.");
+            $('#txtformNo_search').focus();
+            return false;
+        }
+    }
     function RevenueForm(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID
@@ -1245,11 +1255,39 @@ if(isset($files)){
     $(document).ready(function() {
 
 
+        $("#deleteForm").submit(function (e){
+            e.preventDefault(); 
+             var msg = "Are You Sure You want to DELETE this Form ?"
+     alertify.confirm(msg, function (e) 
+     {
+         
+    if (e) {
+        // user clicked "ok"
+      window.location.href ='<?php echo base_url(); ?>index.php/BiseCorrection/Delete_Form';
+       $("#deleteForm")[0].submit();
+    } else {
+        
+        // user clicked "cancel"
+        
+    }
+    
+});  
+        })
         var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
         var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
         var spec_case_inst = "<?php   echo @$msg; ?>"
+        var excep_Invalid_formno = "<?php  echo @$excep; ?>"
+        var restore_msg = "<?php   echo  @$restore_msg; ?>"
+        if(restore_msg!="")
+        {
+             alertify.success(restore_msg);
+        }
+        if (excep_Invalid_formno != "")
+        {
+             alertify.error("Invalid Form No. Please write Valid Form No.");
+        }
         debugger;
         if(spec_case_inst == "Saved")
         {
@@ -1544,6 +1582,22 @@ if(isset($files)){
             if (e) {
                 // user clicked "ok"
                 window.location.href ='<?php echo base_url(); ?>index.php/Registration/NewEnrolment_Delete/'+formrno;
+            } else {
+                // user clicked "cancel"
+
+            }
+        });
+        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+    }
+       function Restore_Deleted_Form_BiseAdmin(formrno)
+    {
+        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+        var msg = "Are You Sure You want to Restore this Form ?"
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href ='<?php echo base_url(); ?>index.php/BiseCorrection/Restore_form_UPDATE/'+formrno;
             } else {
                 // user clicked "cancel"
 
