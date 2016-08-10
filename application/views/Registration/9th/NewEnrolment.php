@@ -356,11 +356,11 @@
                                             {
                                                  if($excep['std_group'] == 2 &&  ($excep['excep'] != "success") && ($excep != ""))
                                                 {
-                                                  echo "<option value='2' selected='selected'>HUMANTIES</option>";  
+                                                  echo "<option value='2' selected='selected'>GENERAL</option>";  
                                                 }
                                                 else
                                                 {
-                                                  echo "<option value='2'>HUMANTIES</option>";   
+                                                  echo "<option value='2'>GENERAL</option>";   
                                                 }
                                                 
                                             }
