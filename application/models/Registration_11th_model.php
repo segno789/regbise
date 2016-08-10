@@ -278,7 +278,7 @@ class Registration_11th_model extends CI_Model
         $sex = $data['sex'];
         $IsHafiz = $data['Ishafiz'];
         $rel = $data['rel'];
-        $addr =strtoupper($data['addr']);
+        $addr =strtoupper(trim($data['addr'],"'"));
         /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
         {
         $grp_cd = 1;    

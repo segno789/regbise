@@ -1929,11 +1929,11 @@ foreach ($result as $key=>$data)
     //--------------------------- Registration Number  
     $pdf->SetXY(1.5,$y+0.1+$dy);
     $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Registration No: ________________",0,'L');
+    $pdf->Cell( 0.5,0.5,"Registration No: __________________",0,'L');
 
     $pdf->SetFont('Arial','IB',12);
     $pdf->SetXY(2.6,$y+0.08+$dy);
-    $pdf->Cell(0.5,0.5, '2016-343433',0,'L');    
+    $pdf->Cell(0.5,0.5, '1-2-110234-2016',0,'L');    
     //$pdf->Cell(0.5,0.5, $data['StrRegNo'],0,'L');    
 
     //--------------------------- Institution Code and Name  
@@ -1941,10 +1941,20 @@ foreach ($result as $key=>$data)
     $pdf->SetFont('Arial','',10);
     $pdf->Cell( 0.5,0.5,"Institution Code & Name:",0,'L');
 
+    $sch_code_name=$data["Sch_cd"]."-". $user['inst_Name'];
     $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(1.78,$y+0.47+$dy);
-    $pdf->MultiCell(6,0.15,$data["Sch_cd"]."-". $user['inst_Name']."122026-PUBLIC MODEL HIGH SCHOOL RAILWAY ROAD GUJRAT
-",0,'L',0);
+    
+    if(strlen($sch_code_name)<69)
+    {
+        $pdf->SetXY(1.78,$y+0.58+$dy);
+    $pdf->MultiCell(6,0.15,$sch_code_name,0,'L',0);    
+    }
+    else
+    {
+        $pdf->SetXY(1.78,$y+0.47+$dy);
+    $pdf->MultiCell(6,0.15,$sch_code_name,0,'L',0);    
+    }
+    
     //$pdf->Cell(0.5,0.5, $data["Sch_cd"]."-". $user['inst_Name'],0,'L');    
 
     //------ Picture Box on Centre      .$data["Inst_Cd"].'/'. $data["PicPath"]
@@ -1978,7 +1988,7 @@ foreach ($result as $key=>$data)
     $pdf->Cell(0.5,0.5,"Date Of Birth:",0,'L');
     $pdf->SetFont('Arial','B',10);
     $pdf->SetXY(1.5,$y+$dy);
-    $pdf->Cell(0.5,0.5,$data["Dob"],0,'L');     
+    $pdf->Cell(0.5,0.5,date('d-m-Y', strtotime($data['Dob'])),0,'L');     
 //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
      
     $pdf->SetXY(3.5+$x,$y+$dy);
