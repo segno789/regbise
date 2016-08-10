@@ -174,6 +174,16 @@
                             Verified Correction  
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Delete_Form">
+                            Delete Candidate  
+                        </a>
+                    </li>
+                       <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form">
+                            Restore Candidate  
+                        </a>
+                    </li>
                     
 
                     <li>

@@ -393,7 +393,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                         <?php
 
-                                      //  DebugBreak();
+                                       // DebugBreak();
                                         $grp = @$data[0]['RegGrp'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";

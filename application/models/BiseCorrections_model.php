@@ -54,6 +54,22 @@ class BiseCorrections_model extends CI_Model
            return  false;; 
         }
     }
+       public function EditEnrolement_data($formno)
+    {
+
+       //  DebugBreak();
+        
+        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>2016,'sess'=>1));     
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     
     public function GetAllInstList(){
         $this->db->select('Inst_cd, Name');
@@ -164,6 +180,25 @@ class BiseCorrections_model extends CI_Model
        );
        $this->db->where('AppNo',$app_id);
        $this->db->update("Registration..MA_P1_Reg_Correction", $data2);
+    }
+   public function UpdateDeleteStatus($formno,$kpo,$isDeleted){
+
+      // DebugBreak();
+       $data2 = array(
+           'ckpo'=>$kpo,
+           'cDate'=>date('Y-m-d H:i:s'),
+           'IsDeleted'=>$isDeleted,
+       );
+       $this->db->where('formNo',$formno);
+       $this->db->update("Registration..MA_P1_Reg_Adm2016", $data2);
+    }
+       
+    //Restore_Form_UPDATE
+    public function Restore_candidate_list($ckpo)
+    {
+        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',array('IsDeleted'=>1,'ckpo'=>$ckpo));
+        $result = $q2->result_array();
+        return $result;
     }
 }
 ?>
