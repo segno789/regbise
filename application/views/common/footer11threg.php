@@ -942,8 +942,8 @@ debugger;
         if(this.value == 17)
         {
             // alert('hello angrez :) ');
-            $("#oldSess").empty().append('<option selected="selected" value="3">JANUARY 2016</option>');
-            $("#oldSess").append('<option  value="4">JUNE 2016</option>');
+            $("#oldSess").empty().append('<option selected="selected" value="1">JANUARY 2016</option>');
+            $("#oldSess").append('<option  value="2">JUNE 2016</option>');
 
         }
         else
