@@ -540,7 +540,7 @@ class Registration_11th_model extends CI_Model
     }
     public function Batch_Insertion($data)
     {
-        // DebugBreak();
+         DebugBreak();
 
         $inst_cd = $data['inst_cd'];
         $total_fee = $data['total_fee'];
