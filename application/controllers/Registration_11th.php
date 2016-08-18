@@ -483,6 +483,7 @@ class Registration_11th extends CI_Controller {
                 $RegStdData['data'][0]['excep']='';
                 $RegStdData['data'][0]['isHafiz']=0;
                 $RegStdData['data'][0]['markOfIden']='';
+                $RegStdData['data'][0]['SSC_brd_cd'] = 1;
 
 
                 $spl_cd = $RegStdData['data'][0]['spl_cd'];
@@ -3038,7 +3039,7 @@ class Registration_11th extends CI_Controller {
 
 
         }
-        else if( (@$_POST['bay_form'] == '00000-0000000-0') || (@$_POST['bay_form'] == '11111-1111111-1') || (@$_POST['bay_form'] == '22222-2222222-2') || (@$_POST['bay_form'] == '33333-3333333-3') || (@$_POST['bay_form'] == '44444-4444444-4')
+    /*    else if( (@$_POST['bay_form'] == '00000-0000000-0') || (@$_POST['bay_form'] == '11111-1111111-1') || (@$_POST['bay_form'] == '22222-2222222-2') || (@$_POST['bay_form'] == '33333-3333333-3') || (@$_POST['bay_form'] == '44444-4444444-4')
             || (@$_POST['bay_form'] == '55555-5555555-5') || (@$_POST['bay_form'] == '66666-6666666-6') || (@$_POST['bay_form'] == '77777-7777777-7') || (@$_POST['bay_form'] == '88888-8888888-8') || (@$_POST['bay_form'] == '99999-9999999-9') ||
             (@$_POST['bay_form'] == '00000-1111111-0') || (@$_POST['bay_form'] == '00000-1111111-1') || (@$_POST['bay_form'] == '00000-0000000-1' || $cntzero >7 || $cntone >7 || $cnttwo >7 || $cntfour >7 || $cntthr >7 || $cntfive >7 || $cntsix >7 || $cntseven >7 || $cnteight >7 || $cntnine >7)
             )
@@ -3048,7 +3049,7 @@ class Registration_11th extends CI_Controller {
                 redirect('Registration_11th/'.$viewName);
                 return;
 
-            }
+            }*/
            /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
             {
                 // DebugBreak();

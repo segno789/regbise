@@ -10,7 +10,7 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.scrollUp.js"></script>
-<!--<script src="<?php echo base_url(); ?>assets/js/wysiwyg/bootstrap-wysihtml5.js"></script>-->
+
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.mask.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
@@ -27,7 +27,7 @@ if(isset($files)){
 ?> 
 <script type="">
     $(document).ready(function () {
-        $('#data_table').dataTable({
+        $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "bAutoWidth" : false,
             "cache": false
@@ -269,7 +269,7 @@ if(isset($files)){
     //
     if(isotherboard != 1)
     {
-           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(1998, 7, 1),minDate:new Date(1980, 0, 1)}).val();
+           $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2002, 8, 1),minDate:new Date(1980, 0, 1)}).val();
 
     }
     // $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true }).val();
@@ -943,8 +943,8 @@ debugger;
         if(this.value == 17)
         {
             // alert('hello angrez :) ');
-            $("#oldSess").empty().append('<option selected="selected" value="3">JANUARY 2016</option>');
-            $("#oldSess").append('<option  value="4">JUNE 2016</option>');
+            $("#oldSess").empty().append('<option selected="selected" value="1">JANUARY 2016</option>');
+            $("#oldSess").append('<option  value="2">JUNE 2016</option>');
 
         }
         else
@@ -1389,10 +1389,6 @@ debugger;
         var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
         var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
         var grp_cd = $("#std_group").val();
-        var  sub4_selected ="<?php  echo @$data[0]['sub4']; ?>";
-        var  sub5_selected="<?php echo @$data[0]['sub5']; ?>";
-        var  sub6_selected="<?php echo @$data[0]['sub6']; ?>";
-        var  sub7_selected="<?php echo @$data[0]['sub7']; ?>";
         
         if(document.getElementById("matric_sub1")!= undefined)
         {
@@ -1421,9 +1417,6 @@ debugger;
         else if (grp_cd == "3")
         {
             load_Hum();
-            $("#sub4").val(sub4_selected);
-            $("#sub5").val(sub5_selected);
-            $("#sub6").val(sub6_selected);
             
         }
 
@@ -1431,9 +1424,6 @@ debugger;
         {
 
             load_GenSci();
-            $("#sub4").val(sub4_selected);
-            $("#sub5").val(sub5_selected);
-            $("#sub6").val(sub6_selected);
 
 
         }
@@ -1444,10 +1434,6 @@ debugger;
         else if(grp_cd == "6")
         {
             load_HomeEco();
-            $("#sub4").val(sub4_selected);
-            $("#sub5").val(sub5_selected);
-            $("#sub6").val(sub6_selected);
-            $("#sub7").val(sub7_selected);
         }
         else if (grp_cd == "0")
         {

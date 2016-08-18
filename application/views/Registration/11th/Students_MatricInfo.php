@@ -38,6 +38,9 @@
                                                 if($gender== 1){ ?>
                                                         <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
                                                         <option value="<?php echo $prev_year; ?>" ><?php echo $prev_year; ?></option>  
+                                                        <option value="<?php echo date("Y",strtotime("-2 year")); ?>" ><?php echo date("Y",strtotime("-2 year")); ?></option>  
+                                                        <option value="<?php echo date("Y",strtotime("-3 year")); ?>" ><?php echo date("Y",strtotime("-3 year")); ?></option>  
+                                                        <option value="<?php echo date("Y",strtotime("-4 year")); ?>" ><?php echo date("Y",strtotime("-4 year")); ?></option>  
                                                 <?php }
                                                 else{?>
                                                         <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
