@@ -7,7 +7,7 @@
                
 
                 <?php 
-                
+                     
                 if($isselected == '5'){?>
 
                     <li>
@@ -97,7 +97,7 @@
                             Spec. Permission
                         </a>
                     </li>
-            
+                    
                    <?php } ?>
             </ul>
             <div class="clearfix">
@@ -184,8 +184,12 @@
                             Restore Candidate  
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/result9thcorrections">
+                            9th Result Cards(2016)  
+                        </a>
+                    </li>
                     
-
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
@@ -219,11 +223,11 @@
                                 New Enrolement
                             </a>
                         </li>
-                        <!--<li>
-                        <a href="<?php echo base_url(); ?>Registration/ReAdmission">
-                        Re-Admissions
-                        </a>
-                        </li>-->
+                        <li>
+                            <a href="<?php echo base_url(); ?>Registration/ReAdmission">
+                                Re-Admissions
+                            </a>
+                        </li>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration/EditForms">
                                 Edit Forms

@@ -11,6 +11,24 @@ class BiseCorrection extends CI_Controller {
             // redirect('login/biselogin');
         }
     }
+    public function result9thcorrections()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thDeactive('Registration'));
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+    }
+    
+    
     public function slips9thcorrections()
     {
         $this->load->helper('url');
@@ -702,9 +720,17 @@ class BiseCorrection extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateslipData($rno,$userinfo['Inst_Id']));
-        redirect('index.php/BiseCorrection/slips9thcorrections');
+        redirect('/BiseCorrection/slips9thcorrections');
     }
-
+    public function Res9thactive()
+    {
+        $rno = $this->uri->segment(3);
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->updateResData($rno,$userinfo['Inst_Id']));
+        redirect('/BiseCorrection/result9thcorrections');
+    }
     public function correction_update($BatchId)
     {
 

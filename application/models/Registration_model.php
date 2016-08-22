@@ -415,7 +415,7 @@ class Registration_model extends CI_Model
         $spl_cd = $User_info_data['spl_case'];
 
         // $forms_id = $User_info_data['forms_id'];
-        $query = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $RollNo,'spl_cd' => 17,'Sch_cd'=>$Inst_cd,'class'=>9,'Iyear'=>2016,'sess'=>1));
+        $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo,'spl_cd' => 17));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

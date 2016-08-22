@@ -8,9 +8,7 @@
                     <div class="title">
                       Re-Admission<a data-original-title="" id="notifications">s</a>
                     </div>
-                    <span class="tools">
-                      <a data-original-title="" class="fs1" aria-hidden="true" data-icon=""></a>
-                    </span>
+                  
                   </div>
                   <div class="widget-body">
                   <h4>
@@ -29,7 +27,7 @@
                    </label>
                    <select id="sec_year"  class="span3" name="oldYear">
                             <!--<option value="2014">2014</option> -->                           
-                            <option value="2015" selected="selected">2015</option>                            
+                            <option value="2016" selected="selected">2016</option>                            
                     </select>
                    </div>
                   </div>

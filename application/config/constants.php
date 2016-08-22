@@ -39,8 +39,9 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
 define('BARCODE_PATH', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE', '2016-06-07');
-define('DOUBLE_LAST_DATE', '2016-06-30');
+define('SINGLE_LAST_DATE', '2016-09-19');
+define('DOUBLE_LAST_DATE', '2016-09-19');
+define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
 
 //===========================================================
 define('IMAGE_PATH11', 'uploads/2016/colleges/');
@@ -63,6 +64,7 @@ define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018'); 
 define('Reg_Cards_9th_Heading','SECONDARY SCHOOL'); 
 define('TITLE','Online 9th Registration'); 
+
 
 
    
