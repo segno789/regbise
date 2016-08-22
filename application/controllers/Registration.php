@@ -804,7 +804,7 @@ class Registration extends CI_Controller {
     }
     public function NewEnrolment_EditForm($formno)
     {    
-        //  DebugBreak();
+//          DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -822,7 +822,7 @@ class Registration extends CI_Controller {
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
             $RegStdData['isReAdm']=$isReAdm;
-            $RegStdData['Oldrno']=0;
+            $RegStdData['Oldrno']=$RegStdData['data'][0]['regoldrno'];
 
         }
         else{
@@ -848,7 +848,7 @@ class Registration extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-         //DebugBreak();
+        DebugBreak();
 
         $this->load->model('Registration_model');
 
@@ -924,7 +924,7 @@ class Registration extends CI_Controller {
         $config['file_name']     = $formno.'.jpg';
 
         $filepath = $target_path. $config['file_name']  ;
-        // DebugBreak();
+       //  DebugBreak();
         if(@$_POST['IsReAdm'] == '1')
         {
 
@@ -1347,10 +1347,14 @@ class Registration extends CI_Controller {
         }
         else
         {
+           // DebugBreak();
             $formno = $user_info[0]['formNo'];
             $OldRno = $user_info[0]['rno'];
             $year = 2015;
-            $RegStdData = array('data'=>$this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>'1','Oldrno'=>$OldRno);
+            
+            $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
+            $RegStdData['data'][0]=$user_info[0];
+            $RegStdData['data'][0]['CellNo'] = $RegStdData['data'][0]['MobNo'];
 
             $filledinfo['error'] = "";
             //$this->session->set_flashdata('isReAdm','1');
@@ -1666,13 +1670,14 @@ class Registration extends CI_Controller {
             
             
         }
+        
         else
         {
             
         
          if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
         {
-            $rule_fee   =  $this->Registration_model->getreulefee(1); 
+            $rule_fee   =  $this->Registration_model->getreulefee(2); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
         }
         else if($user_info['info'][0]['feedingDate'] != null)
@@ -1706,6 +1711,7 @@ class Registration extends CI_Controller {
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
         }
+        
         }
         // DebugBreak();
         $q1 = $user_info['fee'];
@@ -1729,12 +1735,18 @@ class Registration extends CI_Controller {
                     $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
                 }
+                if($v['IsReAdm']==1)
+                {
+                   $Lreg_fee = 0; 
+                }
+                
                 if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
                     $reg_fee = 0;
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 }
+                
                 else 
                 {
                     $TotalRegFee = $TotalRegFee + $reg_fee;

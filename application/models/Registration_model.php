@@ -302,7 +302,7 @@ class Registration_model extends CI_Model
     public function EditEnrolement_data($formno,$year,$inst_cd)
     {
 
-       //  DebugBreak();
+       //  DebugBreak(); 
          if($year == 2015){
         $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
          }

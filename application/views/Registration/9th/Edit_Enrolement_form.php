@@ -39,7 +39,7 @@
                                     Candidate Name :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>  >
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($isReAdm==1) echo "readonly='readonly'";  ?>  >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
@@ -531,7 +531,7 @@
                             <div class="form-actions no-margin">
                              <input type="hidden"   value="<?php  echo $data[0]['formNo']; ?>"  name="formNo">
                              <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
-                             <input type="hidden"   value="<?php  echo $Oldrno; ?>"  name="OldRno">
+                             <input type="hidden"   value="<?php   echo $Oldrno; ?>"  name="OldRno">
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
                                     Update Form
                                 </button>
