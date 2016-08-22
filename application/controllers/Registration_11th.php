@@ -2647,7 +2647,7 @@ class Registration_11th extends CI_Controller {
 
         $pdf->Output($data["coll_cd"].'.pdf', 'I');
     }
-      public function Print_challan_Form()
+    public function Print_challan_Form()
     {
           
        
