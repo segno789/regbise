@@ -36,7 +36,16 @@ class BiseCorrections_model extends CI_Model
        $this->db->where('rno',$rno);
        $this->db->update("Registration..maP1blockrnobranch", $data2);
     }
-    
+      public function updateResData($rno,$kpo){
+
+       $data2 = array(
+           'isactive'=>1,
+           'kpo'=>$kpo,
+           'cdate'=>date('Y-m-d H:i:s'),
+       );
+       $this->db->where('inst_cd',$rno);
+       $this->db->update("Admission_online..tblInstitutes_Deactivated", $data2);
+    }
 
       public function biseauth($username,$password) 
     {
@@ -54,6 +63,32 @@ class BiseCorrections_model extends CI_Model
            return  false;; 
         }
     }
+     public function get9thDeactive($branch)
+    {
+
+      
+        
+         $table1= 'Admission_online..tblInstitutes_Deactivated';
+         $table2= 'Admission_online..tblInstitutes_all';
+         $this->db->select("$table2.name,$table1.inst_cd");
+         $this->db->from($table2);
+         //join LEFT by default
+         $this->db->join($table1, "$table1.inst_cd=$table2.inst_cd");
+         $this->db->where("$table1.isactive = 0 AND $table1.BranchName='$branch'");
+         $query = $this->db->get();
+         $rowcount = $this->db->count_all_results();
+         if($rowcount > 0)
+         {
+             return $query->result_array();
+         }
+         else
+         {
+             return  false;
+         }
+    }
+    
+    
+    
        public function EditEnrolement_data($formno)
     {
 
@@ -70,7 +105,18 @@ class BiseCorrections_model extends CI_Model
             return  false;
         }
     }
-    
+      public function GetInstNamebyId($isnt){
+        $this->db->select('Name');
+        $this->db->from('Admission_Online..tblInstitutes_all');
+        $where = '(edu_lvl=1 or edu_lvl = 3)';
+        $this->db->where('IsActive', 1);
+        $this->db->where('inst_cd', $isnt);
+        $this->db->where($where);
+        
+        
+        $result_1 = $this->db->get()->result();
+        return $result_1;
+    }
     public function GetAllInstList(){
         $this->db->select('Inst_cd, Name');
         $this->db->from('Admission_Online..tblInstitutes_all');

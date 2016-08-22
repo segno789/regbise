@@ -34,7 +34,7 @@ class Login extends CI_Controller {
              $this->load->model('login_model'); 
              $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
              $isgroup = -1;
-             
+         // DebugBreak();   
         if($logedIn != false)
             {  
 
@@ -128,7 +128,7 @@ class Login extends CI_Controller {
                     $isfeeding = -1;
                     $isinterfeeding = -1;
                     $lastdate = SINGLE_LAST_DATE;
-                    //DebugBreak();
+                  //  DebugBreak();
                      
                     if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
                     {
@@ -139,8 +139,7 @@ class Login extends CI_Controller {
                             {
                                  $isfeeding = 1;
                             }
-                            else
-                            {
+                           else {
                                  $isfeeding = 0;
                             }
                             

@@ -1517,9 +1517,11 @@ class Registration extends CI_Controller {
       //  DebugBreak();
         if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $reg_fee = $userinfo['isSpecial_Fee']['RegFee'];
-            $Lreg_fee =  $userinfo['isSpecial_Fee']['SpecialFee'];
-            $processing_fee = $userinfo['isSpecial_Fee']['ProcessingFee'];
+             $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
+            $rule_fee[0]['Rule_Fee_ID']   = 0; 
+            $lastdate  = date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate'])) ;
         }
         else
         {
@@ -1654,9 +1656,15 @@ class Registration extends CI_Controller {
         /*====================  Counting Fee  ==============================*/    
           if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $reg_fee = $userinfo['isSpecial_Fee']['RegFee'];
-            $Lreg_fee =  $userinfo['isSpecial_Fee']['SpecialFee'];
-            $processing_fee = $userinfo['isSpecial_Fee']['ProcessingFee'];
+           
+
+            $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
+              $rule_fee[0]['Rule_Fee_ID']   = 0; 
+            $lastdate  = date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate'])) ;
+            
+            
         }
         else
         {
@@ -1786,11 +1794,11 @@ class Registration extends CI_Controller {
 
         //$this->load->model('Registration_model');
     }
-     public function Reg_Cards_Printing_9th()
+    public function Reg_Cards_Printing_9th()
     {
 
         $this->load->library('session');
-       // DebugBreak();
+        // DebugBreak();
         if(!( $this->session->flashdata('error'))){
 
             $error_msg = "0";    
@@ -1820,7 +1828,7 @@ class Registration extends CI_Controller {
     public function Reg_Cards_Printing_9th_PDF()
     {
 
-           //   DebugBreak();
+        //   DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -1885,240 +1893,230 @@ class Registration extends CI_Controller {
         //$studeninfo['data']['info'][0]['barcode'] = $image;
         $this->load->library('PDF_Rotate');
 
-$turn=1;     
- $pdf = new PDF_Rotate('P','in',"A4");
-//$pdf=new FPDF_BARCODE("P","in","A4");
-$pdf->SetMargins(0.5,1.2,0.5);
- 
-        
-$generatingpdf=false;
-$result = $result['data'] ;
-$inc=0 ;
-foreach ($result as $key=>$data) 
-{
-    $generatingpdf=true;
-    if($turn==1){$pdf->AddPage(); $dy=0.1;} else {
-        if($turn==2){$dy=3.8;} else {$dy=7.5; $turn=0;}
-    }
-    $inc++;
-    $turn++;
-    $y = 0.05;
-    $pdf->SetFont('Arial','U',16);
-    $pdf->SetXY(1.2,$y+$dy+0.17);
-    $pdf->Cell(0, $y, "Board of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
+        $turn=1;     
+        $pdf = new PDF_Rotate('P','in',"A4");
+        //$pdf=new FPDF_BARCODE("P","in","A4");
+        $pdf->SetMargins(0.5,1.2,0.5);
 
-    $pdf->Image(base_url()."assets/img/logo.jpg",0.3,$y+$dy+0.1, 0.60,0.60, "JPG", "http://www.bisegrw.com");
-    $pdf->SetFont('Arial','',10);
-    $y += 0.25;
-    $pdf->SetFont('Arial','B',9);
-    $pdf->SetXY(1.4,$y+$dy-0.00);
-    $pdf->Cell(0, 0.25, "".Reg_Cards_9th_Heading." REGULAR STUDENT REGISTRATION CARD SESSION (".CURRENT_SESS.")", 0.25, "C");
 
-    $pdf->SetDrawColor(0,0,0);
-    //$pdf->PrintBarcode(6.2,0.25+$dy,trim(str_replace("-","",$data['StrRegNo'])),0.25,0.013);    
-    
-    //--------------------------- Form No & Rno
-    $pdf->SetXY(6,$y+$dy+0.1);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell(0.5,0.5,"Form No: _______________",0,'L');
+        $generatingpdf=false;
+        $result = $result['data'] ;
+        $inc=0 ;
+        foreach ($result as $key=>$data) 
+        {
+            $generatingpdf=true;
+            if($turn==1){$pdf->AddPage(); $dy=0.1;} else {
+                if($turn==2){$dy=3.8;} else {$dy=7.5; $turn=0;}
+            }
+            $inc++;
+            $turn++;
+            $y = 0.05;
+            $pdf->SetFont('Arial','U',16);
+            $pdf->SetXY(1.2,$y+$dy+0.17);
+            $pdf->Cell(0, $y, "Board of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
 
-    $pdf->SetXY(6.7,$y+$dy+0.08);
-    $pdf->SetFont('Arial','IB',12);
-    $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
+            $pdf->Image(base_url()."assets/img/logo.jpg",0.3,$y+$dy+0.1, 0.60,0.60, "JPG", "http://www.bisegrw.com");
+            $pdf->SetFont('Arial','',10);
+            $y += 0.25;
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.4,$y+$dy-0.00);
+            $pdf->Cell(0, 0.25, "".Reg_Cards_9th_Heading." REGULAR STUDENT REGISTRATION CARD SESSION (".CURRENT_SESS.")", 0.25, "C");
 
-    //--------------------------- Registration Number  
-    $pdf->SetXY(1.5,$y+0.1+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Registration No: __________________",0,'L');
+            $pdf->SetDrawColor(0,0,0);
+            //$pdf->PrintBarcode(6.2,0.25+$dy,trim(str_replace("-","",$data['StrRegNo'])),0.25,0.013);    
 
-    $pdf->SetFont('Arial','IB',12);
-    $pdf->SetXY(2.6,$y+0.08+$dy);
-    $pdf->Cell(0.5,0.5, '1-2-110234-2016',0,'L');    
-    //$pdf->Cell(0.5,0.5, $data['StrRegNo'],0,'L');    
+            //--------------------------- Form No & Rno
+            $pdf->SetXY(6,$y+$dy+0.1);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(0.5,0.5,"Form No: _______________",0,'L');
 
-    //--------------------------- Institution Code and Name  
-    $pdf->SetXY(0.2,$y+0.4+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Institution Code & Name:",0,'L');
+            $pdf->SetXY(6.7,$y+$dy+0.08);
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->Cell( 0.5,0.5,$data['formNo'],0,'L');
 
-    $sch_code_name=$data["Sch_cd"]."-". $user['inst_Name'];
-    $pdf->SetFont('Arial','B',10);
-    
-    if(strlen($sch_code_name)<69)
-    {
-        $pdf->SetXY(1.78,$y+0.58+$dy);
-    $pdf->MultiCell(6,0.15,$sch_code_name,0,'L',0);    
-    }
-    else
-    {
-        $pdf->SetXY(1.78,$y+0.47+$dy);
-    $pdf->MultiCell(6,0.15,$sch_code_name,0,'L',0);    
-    }
-    
-    //$pdf->Cell(0.5,0.5, $data["Sch_cd"]."-". $user['inst_Name'],0,'L');    
+            //--------------------------- Registration Number  
+            $pdf->SetXY(1.5,$y+0.1+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Registration No: ________________",0,'L');
 
-    //------ Picture Box on Centre      .$data["Inst_Cd"].'/'. $data["PicPath"]
-    $pdf->SetXY(6.5, $y+1+$dy);
-    $pdf->Cell(1.25,1.4,'',1,0,'C',0);
-    $pdf->Image( base_url().'uploads/2016/121158/1211580002.jpg',6.5, 1+ $y+$dy, 1.25, 1.4, "JPG");
-    $pdf->SetFont('Arial','',10);
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->SetXY(2.6,$y+0.08+$dy);
+            $pdf->Cell(0.5,0.5, '2016-343433',0,'L');    
+            //$pdf->Cell(0.5,0.5, $data['StrRegNo'],0,'L');    
 
-    //------------- Personal Infor Box    
-    $x = 0.55;
-    $y += 0.65;
-    //--------------------------- 1st line 
-    $pdf->SetFont('Arial','',10);
-    $pdf->SetXY(0.5,$y+$dy);
-    $pdf->Cell( 0.5,0.5,"Name:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(1.5,$y+$dy);
-    $pdf->Cell(0.5,0.5,$data["name"],0,'L');
-    //--------------------------- FATHER NAME 
-    $pdf->SetXY(3.5+$x,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Father Name:.",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(4.5+$x,$y+$dy);
-    $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
-     
-    $y += 0.2;
-//--------------------------- 3rd line 
-    $pdf->SetXY(0.5,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell(0.5,0.5,"Date Of Birth:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(1.5,$y+$dy);
-    $pdf->Cell(0.5,0.5,date('d-m-Y', strtotime($data['Dob'])),0,'L');     
-//    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
-     
-    $pdf->SetXY(3.5+$x,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Gender:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(4.5+$x,$y+$dy);
-    $pdf->Cell(0.5,0.5,$data["sex"]==1?"MALE":"FEMALE",0,'L');            
+            //--------------------------- Institution Code and Name  
+            $pdf->SetXY(0.2,$y+0.4+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Institution Code & Name:",0,'L');
 
-    //--------------------------- 4th line 
-    //DebugBreak();
-    $y += 0.2;
-    $pdf->SetXY(0.5,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell(0.5,0.5,"Bay Form No:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(1.5,$y+$dy);
-    $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');     
-//    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
-     
-    $pdf->SetXY(3.5+$x,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Father's CNIC:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(4.5+$x,$y+$dy);
-    $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');     
-//========================================  Identification Mark
-    $y += 0.2;
-    $pdf->SetXY(0.5,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Identification Mark:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(1.7,$y+$dy);
-    $pdf->Cell(0.5,0.5, $data['markOfIden'],0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.78,$y+0.47+$dy);
+            $pdf->MultiCell(6,0.15,$data["Sch_cd"]."-". $user['inst_Name']."122026-PUBLIC MODEL HIGH SCHOOL RAILWAY ROAD GUJRAT
+                ",0,'L',0);
+            //$pdf->Cell(0.5,0.5, $data["Sch_cd"]."-". $user['inst_Name'],0,'L');    
 
-//========================================  Exam Info 
-    $y += 0.2;
-    $pdf->SetXY(0.5,$y+$dy);
-    $pdf->SetFont('Arial','',10);
-    $pdf->Cell( 0.5,0.5,"Group:",0,'L');
-    $pdf->SetFont('Arial','B',10);
-    $pdf->SetXY(1.7,$y+$dy);
-        $grp_name = $data["RegGrp"];
-                switch ($grp_name) {
-                    case '1':
-                        $grp_name = 'SCIENCE WITH BIOLOGY';
-                        break;
-                    case '7':
-                        $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                        break;
-                    case '8':
-                        $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                        break;
-                    case '2':
-                        $grp_name = 'Humanities';
-                        break;
-                    case '5':
-                        $grp_name = 'Deaf and Dumb';
-                        break;
-                    default:
-                        $grp_name = "No Group Selected.";
-                }
-    $pdf->Cell(0.5,0.5, $grp_name,0,'L');
+            //------ Picture Box on Centre      .$data["Inst_Cd"].'/'. $data["PicPath"]
+            $pdf->SetXY(6.5, $y+1+$dy);
+            $pdf->Cell(1.25,1.4,'',1,0,'C',0);
+            $pdf->Image( base_url().'uploads/2016/121158/1211580002.jpg',6.5, 1+ $y+$dy, 1.25, 1.4, "JPG");
+            $pdf->SetFont('Arial','',10);
 
-    $y += 0.2;
-    $x = 1;                 
-//--------------------------- Subjects
-  //  $y += 0.2;
-    $pdf->SetFont('Arial','',10);
-    //------------- sub 1 & 5
-    $pdf->SetXY(0.5,$y+$dy);
-    $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
-    $pdf->SetXY(3+$x,$y+$dy);
-    $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
-    //------------- sub 2 & 6
-    $pdf->SetXY(0.5,0.2+$y+$dy);
-    $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
-    $pdf->SetXY(3+$x,0.2+$y+$dy);
-    $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
-    //------------- sub 3 & 7
-    $pdf->SetXY(0.5,0.4+$y+$dy);
-    $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
-    $pdf->SetXY(3+$x,0.4+$y+$dy);
-    $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
-    //------------- sub 4 & 8
-    $pdf->SetXY(0.5,0.6+$y+$dy);
-    $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-    $pdf->SetXY(3+$x,0.6+$y+$dy);
-    $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-    $y += 0.95;
-//------------- Signature
-    $pdf->SetXY(0.2,$y+$dy);
-    $pdf->Cell(0.5,0.5, 'Head of the Institution: ___________________',0,'L');
-    $pdf->SetXY(5.8,$y+$dy);
-    $pdf->Cell(0.5,0.5, 'Secretary: _________________',0,'L');    
+            //------------- Personal Infor Box    
+            $x = 0.55;
+            $y += 0.65;
+            //--------------------------- 1st line 
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.5,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+            //--------------------------- FATHER NAME 
+            $pdf->SetXY(3.5+$x,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father Name:.",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(4.5+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
 
-    if ($turn>1){
-        $y += 0.5;
-        $pdf->Image(base_url()."assets/img/cut_line.png",0.3,$y+$dy, 7.5,0.15, "PNG");
-    }
-    if ($inc >4)
-    {
-        break;
-    }
-    
-}    
+            $y += 0.2;
+            //--------------------------- 3rd line 
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(0.5,0.5,"Date Of Birth:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.5,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["Dob"],0,'L');     
+            //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
 
-if ($generatingpdf==true)
-{
-    $pdf->Output('Registration Cards.pdf','I');
-} else {
-    $containsError=true;
-    $errorMessage = "<br />Your Institute does not have any student registration card(s) in accordance your selected group or form no. range.";
-}
-      /*  $pdf = new PDF_Rotate('P','in',"A4");
+            $pdf->SetXY(3.5+$x,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Gender:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(4.5+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["sex"]==1?"MALE":"FEMALE",0,'L');            
+
+            //--------------------------- 4th line 
+            //DebugBreak();
+            $y += 0.2;
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(0.5,0.5,"Bay Form No:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.5,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');     
+            //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
+
+            $pdf->SetXY(3.5+$x,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father's CNIC:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(4.5+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');     
+            //========================================  Identification Mark
+            $y += 0.2;
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Identification Mark:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.7,$y+$dy);
+            $pdf->Cell(0.5,0.5, $data['markOfIden'],0,'L');
+
+            //========================================  Exam Info 
+            $y += 0.2;
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Group:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.7,$y+$dy);
+            $grp_name = $data["RegGrp"];
+            switch ($grp_name) {
+                case '1':
+                    $grp_name = 'SCIENCE WITH BIOLOGY';
+                    break;
+                case '7':
+                    $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
+                    break;
+                case '8':
+                    $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
+                    break;
+                case '2':
+                    $grp_name = 'Humanities';
+                    break;
+                case '5':
+                    $grp_name = 'Deaf and Dumb';
+                    break;
+                default:
+                    $grp_name = "No Group Selected.";
+            }
+            $pdf->Cell(0.5,0.5, $grp_name,0,'L');
+
+            $y += 0.2;
+            $x = 1;                 
+            //--------------------------- Subjects
+            //  $y += 0.2;
+            $pdf->SetFont('Arial','',10);
+            //------------- sub 1 & 5
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+            $pdf->SetXY(3+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+            //------------- sub 2 & 6
+            $pdf->SetXY(0.5,0.2+$y+$dy);
+            $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+            $pdf->SetXY(3+$x,0.2+$y+$dy);
+            $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+            //------------- sub 3 & 7
+            $pdf->SetXY(0.5,0.4+$y+$dy);
+            $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+            $pdf->SetXY(3+$x,0.4+$y+$dy);
+            $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+            //------------- sub 4 & 8
+            $pdf->SetXY(0.5,0.6+$y+$dy);
+            $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+            $pdf->SetXY(3+$x,0.6+$y+$dy);
+            $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+            $y += 0.95;
+            //------------- Signature
+            $pdf->SetXY(0.2,$y+$dy);
+            $pdf->Cell(0.5,0.5, 'Head of the Institution: ___________________',0,'L');
+            $pdf->SetXY(5.8,$y+$dy);
+            $pdf->Cell(0.5,0.5, 'Secretary: _________________',0,'L');    
+
+            if ($turn>1){
+                $y += 0.5;
+                $pdf->Image(base_url()."assets/img/cut_line.png",0.3,$y+$dy, 7.5,0.15, "PNG");
+            }
+            if ($inc >4)
+            {
+                break;
+            }
+
+        }    
+
+        if ($generatingpdf==true)
+        {
+            $pdf->Output('Registration Cards.pdf','I');
+        } else {
+            $containsError=true;
+            $errorMessage = "<br />Your Institute does not have any student registration card(s) in accordance your selected group or form no. range.";
+        }
+        /*  $pdf = new PDF_Rotate('P','in',"A4");
         $pdf->Rotate(0,-1,-1);
         //   $pdf->SetFont('Arial','B',50);
         //             $pdf->SetTextColor(255,192,203);
         //             $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
         $pdf->AliasNbPages();
-         if($Condition==4 or $Condition == 5)
-                {
-                    $pdf->SetTitle('Proof Print of Return');   
-                }
-                else
-                {
-                    $pdf->SetTitle('Final Print of Return');
-                }
-        
-        
+        if($Condition==4 or $Condition == 5)
+        {
+        $pdf->SetTitle('Proof Print of Return');   
+        }
+        else
+        {
+        $pdf->SetTitle('Final Print of Return');
+        }
+
+
         $pdf->SetMargins(0.5,0.5,0.5);
         $lmargin =0.5;
         $rmargin =7.5;
@@ -2129,8 +2127,8 @@ if ($generatingpdf==true)
         $SR=1;
         while($cnt<15) 
         {
-            $cnt++;
-            $ln[$cnt]=$ln[$cnt-1]+ 0.6;  //0.5;
+        $cnt++;
+        $ln[$cnt]=$ln[$cnt-1]+ 0.6;  //0.5;
         }
 
         $i = 4;
@@ -2138,156 +2136,156 @@ if ($generatingpdf==true)
         // DebugBreak();
         foreach ($result as $key=>$data) 
         {
-            //DebugBreak();
-            //DebugBreak();
-            $i++;
-            $countofrecords=$countofrecords+1;
-            if($countofrecords==15) {
-                $countofrecords=0;
+        //DebugBreak();
+        //DebugBreak();
+        $i++;
+        $countofrecords=$countofrecords+1;
+        if($countofrecords==15) {
+        $countofrecords=0;
 
-                $pdf->AddPage();
+        $pdf->AddPage();
 
-                //     $pdf->SetFont('Arial','B',50);
-                //                 $pdf->SetTextColor(255,192,203);
-                //                 $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
-
-
-                if($Condition==4 or $Condition == 5)
-                {
-                    $pdf->Image( base_url().'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG");     
-                }
-
-                $pdf->SetFont('Arial','U',14);
-                $pdf->SetXY( 0.4,0.2);
-                $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-
-                $pdf->SetFont('Arial','',10);
-                $pdf->SetXY(1.7,0.4);
-                $pdf->Cell(0, 0.25, "MATRIC PART-I ENROLMENT RETURN SESSION (2016-2018)", 0.25, "C");
-
-                $pdf->SetFont('Arial','',10);
-                $pdf->SetXY(2.6,0.4);
-                $pdf->Image(BARCODE_PATH.$image,6.3,0.43, 1.8, 0.20, "PNG"); 
-                $pdf->SetFont('Arial','',9);
-                $pdf->SetXY(1.4,0.6);
-                $pdf->Cell(0, 0.25,$user['Inst_Id']. "-". $user['inst_Name'], 0.25, "C");
-
-                $pdf->SetFont('Arial','',10);
-                $pdf->SetXY(6.9,0.8);
-                $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
-                $grp_name = $data["RegGrp"];
-                switch ($grp_name) {
-                    case '1':
-                        $grp_name = 'SCIENCE WITH BIOLOGY';
-                        break;
-                    case '7':
-                        $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                        break;
-                    case '8':
-                        $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                        break;
-                    case '2':
-                        $grp_name = 'Humanities';
-                        break;
-                    case '5':
-                        $grp_name = 'Deaf and Dumb';
-                        break;
-                    default:
-                        $grp_name = "No Group Selected.";
-                }
-                $pdf->SetFont('Arial','',10);
-                $pdf->SetXY(2.5,0.8);
-                $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
+        //     $pdf->SetFont('Arial','B',50);
+        //                 $pdf->SetTextColor(255,192,203);
+        //                 $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
 
 
-                $pdf->rect($lmargin,1,$rmargin,10.5);                //the main rectangle box
-                $cnt=-1;
+        if($Condition==4 or $Condition == 5)
+        {
+        $pdf->Image( base_url().'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG");     
+        }
 
-                while($cnt<15) 
-                { 
-                    $cnt++;
-                    $pdf->Line($lmargin, $ln[$cnt],$rmargin+.5,$ln[$cnt]);    
-                }
+        $pdf->SetFont('Arial','U',14);
+        $pdf->SetXY( 0.4,0.2);
+        $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
 
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(1.7,0.4);
+        $pdf->Cell(0, 0.25, "MATRIC PART-I ENROLMENT RETURN SESSION (2016-2018)", 0.25, "C");
 
-                $col1=$lmargin+.3;    
-                $col2=$col1+0.9;    
-                $col3=$col2+1.8;
-                $col4=$col3+1.1;    
-                $col5=$col4+1.0;    
-                $col6=$col5+1.8;
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(2.6,0.4);
+        $pdf->Image(BARCODE_PATH.$image,6.3,0.43, 1.8, 0.20, "PNG"); 
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(1.4,0.6);
+        $pdf->Cell(0, 0.25,$user['Inst_Id']. "-". $user['inst_Name'], 0.25, "C");
 
-                $pdf->Line($col1,$title,$col1,$ln[15]);
-                $pdf->Line($col2,$title,$col2,$ln[15]);
-                $pdf->Line($col3,$title,$col3,$ln[15]);
-                $pdf->Line($col4,$title,$col4,$ln[15]);
-                $pdf->Line($col5,$title,$col5,$ln[15]);
-                $pdf->Line($col6,$title,$col6,$ln[15]);
-
-                $pdf->SetFont('Arial','B',9);
-                $pdf->Text($lmargin+.03,$title+.3,"Sr#");    //$pdf->Text(3,3,"TEXT TO DISPLAY");
-                $pdf->Text($col1+.2,$title+.3,"FormNo.");
-
-                $pdf->Text($col2+.1,$title+.2,"Name / Father`s Name");
-                $pdf->Text($col2+.1,$title+.4,"Mobile No");
-
-                $pdf->Text($col3+.1,$title+.2,"Bay Form No"); 
-                $pdf->Text($col3+.1,$title+.4,"Father CNIC");
-
-                $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
-                $pdf->Text($col4+.1,$title+.31,"Relegion");
-                $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
-
-                $pdf->Text($col5+.1,$title+.3,"Subjects");
-
-                $pdf->Text($col6+.1,$title+.3,"Picture");
-            }
-            $dob = date("d-m-Y", strtotime($data["Dob"]));
-            $adm = date("d-m-Y", strtotime($data["edate"]));
-
-            //============================ Values ==========================================            
-            $pdf->SetFont('Arial','',10);    
-            $pdf->Text($lmargin+.03  , $ln[$countofrecords]+0.3 , $SR);                 // Sr No
-            $pdf->Text($col1+.05    , $ln[$countofrecords]+0.3,$data["formNo"]);       // Form No
-
-            $pdf->SetFont('Arial','B',8);    
-            $pdf->Text($col2+.1,$ln[$countofrecords]+0.2,strtoupper($data["name"]));
-            $pdf->SetFont('Arial','',8);                
-            $pdf->Text($col2+.1,$ln[$countofrecords]+0.4,strtoupper($data["Fname"]));
-            $pdf->SetFont('Arial','',7.5);                
-            $pdf->Text($col2+.1,$ln[$countofrecords]+0.55,$data["CellNo"]);
-            $pdf->SetFont('Arial','',8);
-            $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["BForm"]);
-            $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
-
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
-            
-            if($data["IsReAdm"] == '1' )
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
-            //$pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(Re-Admission)');
-            else
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
-
-            $pdf->SetFont('Arial','B',7);    
-            //            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,GroupName($data["Grp_Cd"]));
-            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
-            $pdf->SetFont('Arial','',7);    
-            $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"].','.$data["sub8_abr"]);
-
-            $pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
-
-            ++$SR;
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(6.9,0.8);
+        $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
+        $grp_name = $data["RegGrp"];
+        switch ($grp_name) {
+        case '1':
+        $grp_name = 'SCIENCE WITH BIOLOGY';
+        break;
+        case '7':
+        $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
+        break;
+        case '8':
+        $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
+        break;
+        case '2':
+        $grp_name = 'Humanities';
+        break;
+        case '5':
+        $grp_name = 'Deaf and Dumb';
+        break;
+        default:
+        $grp_name = "No Group Selected.";
+        }
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(2.5,0.8);
+        $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
 
 
-            //Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.
-            $pdf->SetFont('Arial','',8);
-            $pdf->Text($lmargin+.5,10.8,"Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.");
-            //$pdf->Text($lmargin+.5,11,"Signature _____________________");
-            $pdf->SetFont('Arial','',10);
-            $pdf->Text($rmargin-2.5,11.2,"_____________________________________");
-            $pdf->Text($rmargin-2.5,11.4,"Signature of Head of Institution with Stamp");
-            $pdf->Text($lmargin+0.5,11.4,'Print Date: '. date('d-m-Y H:i:s a'));    
+        $pdf->rect($lmargin,1,$rmargin,10.5);                //the main rectangle box
+        $cnt=-1;
+
+        while($cnt<15) 
+        { 
+        $cnt++;
+        $pdf->Line($lmargin, $ln[$cnt],$rmargin+.5,$ln[$cnt]);    
+        }
+
+
+        $col1=$lmargin+.3;    
+        $col2=$col1+0.9;    
+        $col3=$col2+1.8;
+        $col4=$col3+1.1;    
+        $col5=$col4+1.0;    
+        $col6=$col5+1.8;
+
+        $pdf->Line($col1,$title,$col1,$ln[15]);
+        $pdf->Line($col2,$title,$col2,$ln[15]);
+        $pdf->Line($col3,$title,$col3,$ln[15]);
+        $pdf->Line($col4,$title,$col4,$ln[15]);
+        $pdf->Line($col5,$title,$col5,$ln[15]);
+        $pdf->Line($col6,$title,$col6,$ln[15]);
+
+        $pdf->SetFont('Arial','B',9);
+        $pdf->Text($lmargin+.03,$title+.3,"Sr#");    //$pdf->Text(3,3,"TEXT TO DISPLAY");
+        $pdf->Text($col1+.2,$title+.3,"FormNo.");
+
+        $pdf->Text($col2+.1,$title+.2,"Name / Father`s Name");
+        $pdf->Text($col2+.1,$title+.4,"Mobile No");
+
+        $pdf->Text($col3+.1,$title+.2,"Bay Form No"); 
+        $pdf->Text($col3+.1,$title+.4,"Father CNIC");
+
+        $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
+        $pdf->Text($col4+.1,$title+.31,"Relegion");
+        $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
+
+        $pdf->Text($col5+.1,$title+.3,"Subjects");
+
+        $pdf->Text($col6+.1,$title+.3,"Picture");
+        }
+        $dob = date("d-m-Y", strtotime($data["Dob"]));
+        $adm = date("d-m-Y", strtotime($data["edate"]));
+
+        //============================ Values ==========================================            
+        $pdf->SetFont('Arial','',10);    
+        $pdf->Text($lmargin+.03  , $ln[$countofrecords]+0.3 , $SR);                 // Sr No
+        $pdf->Text($col1+.05    , $ln[$countofrecords]+0.3,$data["formNo"]);       // Form No
+
+        $pdf->SetFont('Arial','B',8);    
+        $pdf->Text($col2+.1,$ln[$countofrecords]+0.2,strtoupper($data["name"]));
+        $pdf->SetFont('Arial','',8);                
+        $pdf->Text($col2+.1,$ln[$countofrecords]+0.4,strtoupper($data["Fname"]));
+        $pdf->SetFont('Arial','',7.5);                
+        $pdf->Text($col2+.1,$ln[$countofrecords]+0.55,$data["CellNo"]);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["BForm"]);
+        $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
+
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
+
+        if($data["IsReAdm"] == '1' )
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
+        //$pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(Re-Admission)');
+        else
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
+
+        $pdf->SetFont('Arial','B',7);    
+        //            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,GroupName($data["Grp_Cd"]));
+        $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
+        $pdf->SetFont('Arial','',7);    
+        $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"].','.$data["sub8_abr"]);
+
+        $pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+
+        ++$SR;
+
+
+        //Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.
+        $pdf->SetFont('Arial','',8);
+        $pdf->Text($lmargin+.5,10.8,"Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.");
+        //$pdf->Text($lmargin+.5,11,"Signature _____________________");
+        $pdf->SetFont('Arial','',10);
+        $pdf->Text($rmargin-2.5,11.2,"_____________________________________");
+        $pdf->Text($rmargin-2.5,11.4,"Signature of Head of Institution with Stamp");
+        $pdf->Text($lmargin+0.5,11.4,'Print Date: '. date('d-m-Y H:i:s a'));    
 
         }
         $pdf->Output($data["Sch_cd"].'.pdf', 'I');*/
@@ -2310,7 +2308,7 @@ if ($generatingpdf==true)
     public function return_pdf()
     {
 
-            //  DebugBreak();
+        //  DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -2382,16 +2380,16 @@ if ($generatingpdf==true)
         //             $pdf->SetTextColor(255,192,203);
         //             $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
         $pdf->AliasNbPages();
-         if($Condition==4 or $Condition == 5)
-                {
-                    $pdf->SetTitle('Proof Print of Return');   
-                }
-                else
-                {
-                    $pdf->SetTitle('Final Print of Return');
-                }
-        
-        
+        if($Condition==4 or $Condition == 5)
+        {
+            $pdf->SetTitle('Proof Print of Return');   
+        }
+        else
+        {
+            $pdf->SetTitle('Final Print of Return');
+        }
+
+
         $pdf->SetMargins(0.5,0.5,0.5);
         $lmargin =0.5;
         $rmargin =7.5;
@@ -2535,12 +2533,12 @@ if ($generatingpdf==true)
 
             $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
             $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
-            
+
             if($data["IsReAdm"] == '1' )
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
+                $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
             //$pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(Re-Admission)');
             else
-            $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
+                $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
 
             $pdf->SetFont('Arial','B',7);    
             //            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,GroupName($data["Grp_Cd"]));
@@ -2567,7 +2565,7 @@ if ($generatingpdf==true)
     }
     public function revenue_pdf()
     {    //DebugBreak();
-      
+
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2576,42 +2574,58 @@ if ($generatingpdf==true)
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
         $temp = $user['Inst_Id'].'09-2016-18';
         $image =  $this->set_barcode($temp);
-        
-       //  DebugBreak();    
+
+        //  DebugBreak();    
         $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
         $user_info  =  $this->Registration_model->getuser_info($User_info_data); 
-        
-        
-        
+
+
+
         $isfine = 0;
-              
-        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+
+
+        if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['isfine'] = 0; 
-        }
-        else if($user_info['info'][0]['feedingDate'] != null)
-        {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-            if(date('Y-m-d')<=$lastdate)
-            {
-               
-                $rule_fee  =  $this->Registration_model->getreulefee(1);
-                 $rule_fee[0]['isfine'] = 0; 
-            }
-            else 
-            {
-                $rule_fee   =  $this->Registration_model->getreulefee(2);
-                $rule_fee[0]['isfine'] = 1;
-            }
-        }
-        else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
-        {
-            $isfine = 1;
-            $rule_fee   =  $this->Registration_model->getreulefee(2);
+            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
+            $rule_fee[0]['Rule_Fee_ID']   = 0; 
             $rule_fee[0]['isfine'] = 1; 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
         }
-        
+        else
+
+        {
+            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+            {
+                $rule_fee[0]['isfine'] = 0; 
+            }
+            else if($user_info['info'][0]['feedingDate'] != null)
+            {
+                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+                if(date('Y-m-d')<=$lastdate)
+                {
+
+                    $rule_fee  =  $this->Registration_model->getreulefee(1);
+                    $rule_fee[0]['isfine'] = 0; 
+                }
+                else 
+                {
+                    $rule_fee   =  $this->Registration_model->getreulefee(2);
+                    $rule_fee[0]['isfine'] = 1;
+                }
+            }
+            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
+            {
+                $isfine = 1;
+                $rule_fee   =  $this->Registration_model->getreulefee(2);
+                $rule_fee[0]['isfine'] = 1; 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+
+        } 
+
+
 
 
         $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
@@ -2668,10 +2682,10 @@ if ($generatingpdf==true)
         $pdf = new PDF_Rotate('P','in',"A4");
         //      $this->load->library('PDFF');
         //        $pdf=new PDFF('P','in',"A4");  
-         $pdf->AliasNbPages();
+        $pdf->AliasNbPages();
         $pdf->SetMargins(0.5,0.5,0.5);
         $grp_cd = $this->uri->segment(3);
-       
+
         $pdf->SetTitle('Proof Print Registration From');
 
         $fontSize = 10;
@@ -2694,11 +2708,11 @@ if ($generatingpdf==true)
             //$pdf = new FPDF_BARCODE("P","in","A4");
             $pdf->AddPage();
             $Y = 0.5;
-           
+
 
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
-            
+
             $temp = $data['formNo'].'@09@2016@1';
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
@@ -2731,16 +2745,16 @@ if ($generatingpdf==true)
             $pdf->SetXY(0.2,0.85+$Y);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
-           
+
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(1.75,0.85+$Y);
-           // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
+            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
             $pdf->Cell(0.5,0.5,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
 
             //------ Picture Box on Centre      
             $pdf->SetXY(6.8, $Y +1.75);
             $pdf->Cell(1.25,1.4,'',1,0,'C',0);
-           
+
             $pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],6.8, 1.75+ $Y, 1.25, 1.4, "JPG"); 
             $pdf->SetFont('Arial','',10);
 
@@ -2971,22 +2985,22 @@ if ($generatingpdf==true)
     }
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
-         $_POST['address']  = str_replace("'", "", $_POST['address'] );
-          $subjectslang = array('22','23','36','34','35');
-          $subjectshis = array('20','21','19');
-          
-          $cntzero = substr_count(@$_POST['bay_form'],"0");
-          $cntone = substr_count(@$_POST['bay_form'],"1");
-          $cnttwo = substr_count(@$_POST['bay_form'],"2");
-          $cntthr = substr_count(@$_POST['bay_form'],"3");
-          $cntfour = substr_count(@$_POST['bay_form'],"4");
-          $cntfive = substr_count(@$_POST['bay_form'],"5");
-          $cntsix = substr_count(@$_POST['bay_form'],"6");
-          $cntseven = substr_count(@$_POST['bay_form'],"7");
-          $cnteight = substr_count(@$_POST['bay_form'],"8");
-          $cntnine = substr_count(@$_POST['bay_form'],"9");
-          
-          
+        $_POST['address']  = str_replace("'", "", $_POST['address'] );
+        $subjectslang = array('22','23','36','34','35');
+        $subjectshis = array('20','21','19');
+
+        $cntzero = substr_count(@$_POST['bay_form'],"0");
+        $cntone = substr_count(@$_POST['bay_form'],"1");
+        $cnttwo = substr_count(@$_POST['bay_form'],"2");
+        $cntthr = substr_count(@$_POST['bay_form'],"3");
+        $cntfour = substr_count(@$_POST['bay_form'],"4");
+        $cntfive = substr_count(@$_POST['bay_form'],"5");
+        $cntsix = substr_count(@$_POST['bay_form'],"6");
+        $cntseven = substr_count(@$_POST['bay_form'],"7");
+        $cnteight = substr_count(@$_POST['bay_form'],"8");
+        $cntnine = substr_count(@$_POST['bay_form'],"9");
+
+
         if(@$_POST['dob'] != null || $allinputdata['Dob'] != null)
         {
             $date = new DateTime(@$_POST['dob']);
@@ -3002,12 +3016,12 @@ if ($generatingpdf==true)
 
         }
         //(strpos($a, 'are') !== false)
-       /* if ((strpos(@$_POST['cand_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOHD') !== false) || (strpos(@$_POST['cand_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOOHAMAD') !== false))
+        /* if ((strpos(@$_POST['cand_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOHD') !== false) || (strpos(@$_POST['cand_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOOHAMAD') !== false))
         {
-            $allinputdata['excep'] = 'MUHAMMAD Spelling is not Correct in Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Registration/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'MUHAMMAD Spelling is not Correct in Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration/'.$viewName);
+        return;
 
         }
 
@@ -3019,12 +3033,12 @@ if ($generatingpdf==true)
             return;
 
         }
-      /*  if ((strpos(@$_POST['father_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOOHAMAD') !== false))
+        /*  if ((strpos(@$_POST['father_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOOHAMAD') !== false))
         {
-            $allinputdata['excep'] = 'MUHAMMAD Spelling is not Correct in Fathers Name';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Registration/'.$viewName);
-            return;
+        $allinputdata['excep'] = 'MUHAMMAD Spelling is not Correct in Fathers Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration/'.$viewName);
+        return;
 
         }*/
 
@@ -3048,18 +3062,18 @@ if ($generatingpdf==true)
                 return;
 
             }
-           /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
+            /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
             {
-                // DebugBreak();
-                $allinputdata['excep'] = 'This Bay Form is already Feeded.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect('Registration/'.$viewName);
-                return;
+            // DebugBreak();
+            $allinputdata['excep'] = 'This Bay Form is already Feeded.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration/'.$viewName);
+            return;
 
 
 
             }*/
-             else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
+            else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
             {
                 // DebugBreak();
                 if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true )
@@ -3265,7 +3279,7 @@ if ($generatingpdf==true)
                 return;
 
             }
-            
+
             else if((@$_POST['std_group'] == 5)&& ((@$_POST['sub5']==5) || (@$_POST['sub6']==6)||(@$_POST['sub7']==7)|| (@$_POST['sub8']==43) || (@$_POST['sub8']==8)))
             {
                 $allinputdata['excep'] = 'Subjects not according to Group';
@@ -3342,16 +3356,16 @@ if ($generatingpdf==true)
                             return;
 
                         }
-                          else if (in_array($_POST['sub8'], $subjectslang) && in_array($_POST['sub7'], $subjectslang))
+                        else if (in_array($_POST['sub8'], $subjectslang) && in_array($_POST['sub7'], $subjectslang))
                         {
                             $allinputdata['excep'] = 'Double Language is not Allowed Please choose a different Subject';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                             redirect('Registration/'.$viewName);
                             return;
                         }
-                         else if (in_array($_POST['sub8'], $subjectshis) && in_array($_POST['sub7'], $subjectshis))
+                        else if (in_array($_POST['sub8'], $subjectshis) && in_array($_POST['sub7'], $subjectshis))
                         {
-                             $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
+                            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
                             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                             redirect('Registration/'.$viewName);
                             return;
@@ -3438,7 +3452,7 @@ if ($generatingpdf==true)
 
                         }
     }  
-        public function EditPicForms()
+    public function EditPicForms()
     {
         // DebugBreak();
         $this->load->library('session');
@@ -3476,7 +3490,7 @@ if ($generatingpdf==true)
 
 
     }
-    
+
     public function uplaodpics()
     {
         $this->load->library('session');
@@ -3484,7 +3498,7 @@ if ($generatingpdf==true)
         $userinfo = $Logged_In_Array['logged_in'];
         $formno = $_POST['formno']  ;
         $target_path = IMAGE_PATH;
-        
+
         $Inst_Id = $userinfo['Inst_Id'];
         if (!file_exists($target_path)){
 
@@ -3500,8 +3514,8 @@ if ($generatingpdf==true)
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
         $config['min_size']      = '4';
-      //  $config['max_width']     = '260';
-       // $config['max_height']    = '290';
+        //  $config['max_width']     = '260';
+        // $config['max_height']    = '290';
         $config['min_width']     = '110';
         $config['min_height']    = '100';
         $config['overwrite']     = TRUE;
@@ -3558,17 +3572,17 @@ if ($generatingpdf==true)
             }
         }
 
-       // $this->frmvalidation('NewEnrolment',$allinputdata,0);
+        // $this->frmvalidation('NewEnrolment',$allinputdata,0);
 
         $a = getimagesize($filepath);
         if($a[2]!=2)
         {
             $this->convertImage($filepath,$filepath,100,$a['mime']);
         }
-         redirect('Registration/EditPicForms/');
-         return;
+        redirect('Registration/EditPicForms/');
+        return;
     }
-     public function deleteExtarfiles($dirPath)
+    public function deleteExtarfiles($dirPath)
     {
         //DebugBreak();
         if (is_dir($dirPath)) {

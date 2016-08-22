@@ -11,6 +11,24 @@ class BiseCorrection extends CI_Controller {
             // redirect('login/biselogin');
         }
     }
+    public function result9thcorrections()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thDeactive('Registration'));
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+    }
+    
+    
     public function slips9thcorrections()
     {
         $this->load->helper('url');
@@ -45,18 +63,18 @@ class BiseCorrection extends CI_Controller {
     }
     public function SpecPermison_9th()
     {
-       // DebugBreak();
+        //DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '11',
         );
-        
+
         $spec_case_msg="";
         $this->load->library('session');
-      //  DebugBreak();
-         if(( $this->session->flashdata('msg'))){
+        //  DebugBreak();
+        if(( $this->session->flashdata('msg'))){
 
-             $msg = $this->session->flashdata('msg');
+            $msg = $this->session->flashdata('msg');
             $spec_case_msg =array('msg'=>$msg);  
         }
         else{
@@ -74,8 +92,8 @@ class BiseCorrection extends CI_Controller {
     }
     public function SpecPermison_9th_INSERT()
     {
-         $this->load->model('BiseCorrections_model');
-       
+        $this->load->model('BiseCorrections_model');
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -84,7 +102,7 @@ class BiseCorrection extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-     //   DebugBreak();
+        //   DebugBreak();
         if (!isset($kpo))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -92,15 +110,15 @@ class BiseCorrection extends CI_Controller {
         }
         $lastdate  = date('Y-m-d',strtotime(@$_POST['txt_FeedingDate'])) ;
         $data = array(
-        
-        'Inst_cd'=>@$_POST['inst_cd'],
-        'FeedingDate'=>$lastdate,
-        'RegFee'=>@$_POST['Reg_fee'],
-        'ProcessingFee'=>@$_POST['Proc_Fee'],
-        'SpecialFee'=>@$_POST['Spec_Fee'],
-        'Isactive'=>@$_POST['IsActivated'],
-        'Kpo'=>$kpo
-        
+
+            'Inst_cd'=>@$_POST['inst_cd'],
+            'FeedingDate'=>$lastdate,
+            'RegFee'=>@$_POST['Reg_fee'],
+            'ProcessingFee'=>@$_POST['Proc_Fee'],
+            'SpecialFee'=>@$_POST['Spec_Fee'],
+            'Isactive'=>@$_POST['IsActivated'],
+            'Kpo'=>$kpo
+
         );
         $IsInserted = $this->BiseCorrections_model->Insert_SpecPermison($data);
         if($IsInserted == true)
@@ -116,11 +134,11 @@ class BiseCorrection extends CI_Controller {
     }
     public function Delete_Form()
     {
-     $this->load->helper('url');
+        $this->load->helper('url');
         $data = array(
             'isselected' => '8',
         );
-       // DebugBreak();
+        // DebugBreak();
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -129,11 +147,11 @@ class BiseCorrection extends CI_Controller {
             //DebugBreak();
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
-              $error['excep'] = 'Your Form No. is Invalid.';
-          //  $isReAdm = $RegStdData['data'][0]['isreadm'];
-          //  $RegStdData['isReAdm']=$isReAdm;
-          //  $RegStdData['Oldrno']=0;
-          
+            $error['excep'] = 'Your Form No. is Invalid.';
+            //  $isReAdm = $RegStdData['data'][0]['isreadm'];
+            //  $RegStdData['isReAdm']=$isReAdm;
+            //  $RegStdData['Oldrno']=0;
+
 
         }
         else{
@@ -144,9 +162,9 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
         $this->load->view('common/footer.php');
     }
-     public function NewEnrolment_EditForm()
+    public function NewEnrolment_EditForm()
     {    
-          //DebugBreak();
+        //DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -182,15 +200,16 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 1;
                 $year = 2016;    
             }
-
-            $RegStdData = array('data'=>$this->BiseCorrections_model->EditEnrolement_data($formno),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+            $datainfo = $this->BiseCorrections_model->EditEnrolement_data($formno);
+            $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['Sch_cd']);
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['Sch_cd']);
         }
         if($RegStdData['data'] == FALSE)
         {
-              $this->session->set_flashdata('NewEnrolment_error','error');
-                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                        redirect('BiseCorrection/Delete_Form/');
-                        return;
+            $this->session->set_flashdata('NewEnrolment_error','error');
+            //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+            redirect('BiseCorrection/Delete_Form/');
+            return;
         }
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/9thCorrection/Edit_Enrolement_form.php',$RegStdData);   
@@ -199,7 +218,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Delete_candidate_UPDATE()
     {
-       
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '8',
@@ -216,19 +235,19 @@ class BiseCorrection extends CI_Controller {
         }
         else if(!isset($kpo))
         {
-                return true;
+            return true;
         }
         $corr = array('info'=>$this->BiseCorrections_model->UpdateDeleteStatus($formno,$kpo,1));
-         $this->session->set_flashdata('Restore_msg','Deleted Successfully');
+        $this->session->set_flashdata('Restore_msg','Deleted Successfully');
         redirect('BiseCorrection/Restore_form');
         return;
-       
-         
+
+
     }
     public function Restore_form()
     {
-         //DebugBreak();
-       $this->load->helper('url');
+        //DebugBreak();
+        $this->load->helper('url');
         $data = array(
             'isselected' => '8',
         );
@@ -701,9 +720,17 @@ class BiseCorrection extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateslipData($rno,$userinfo['Inst_Id']));
-        redirect('index.php/BiseCorrection/slips9thcorrections');
+        redirect('/BiseCorrection/slips9thcorrections');
     }
-
+    public function Res9thactive()
+    {
+        $rno = $this->uri->segment(3);
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->updateResData($rno,$userinfo['Inst_Id']));
+        redirect('/BiseCorrection/result9thcorrections');
+    }
     public function correction_update($BatchId)
     {
 
@@ -716,28 +743,28 @@ class BiseCorrection extends CI_Controller {
         );
         $ckpo = $userinfo['Inst_Id'];
         $fetchdata = array('AppNo'=>$BatchId,'ckpo'=>$ckpo);
-        
+
         $appdata = $this->BiseCorrections_model->get9thCorrectionDataById($BatchId);
-        
-        
+
+
         if($appdata[0]['PicFee']>0)
         {
             $picPath =  $appdata[0]['PicPath'] ;
             $formNo =  $appdata[0]['formNo'] ;
             $copy_path = CORR_IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
             $target_path = IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
-            
+
             $oldPath = $target_path.$picPath;
             $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
-            
+
             rename($oldPath, $newPath)  ;
-            
+
             copy($copy_path.$picPath, $target_path.$picPath);
-            
+
             $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
-            
+
         }
-        
+
         $status = array('data'=>$this->BiseCorrections_model->reg9thCorrection_UPDATE($fetchdata));
 
 
