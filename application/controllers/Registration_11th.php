@@ -383,7 +383,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-       // DebugBreak();   //Students_matricInfo matric_error
+     // DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -393,7 +393,9 @@ class Registration_11th extends CI_Controller {
         $this->load->view('common/menu.php',$userinfo);
         if($this->session->flashdata('matric_error') ){
 
-            $data['excep_halt'] = $this->session->flashdata('matric_error');    
+            $string = $this->session->flashdata('matric_error'); 
+            $string = trim(preg_replace('/\s\s+/', ' ', $string));
+            $data['excep_halt'] = $string; 
         }
         else{
             $data['excep_halt'] = '';
@@ -406,7 +408,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-      //  DebugBreak();
+       
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -466,7 +468,7 @@ class Registration_11th extends CI_Controller {
             if($feedingcheck != false)
             {
                 $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
-                $this->session->set_flashdata('matric_error', 'This Roll No. Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
+                $this->session->set_flashdata('matric_error','This Candidate is already registered in'.$feeding_inst_cd.'-'.$instName.'.');
                 redirect('Registration_11th/Students_matricInfo');
                 return; 
             }

@@ -596,7 +596,7 @@
 function activeres(rno)
 {
      $('.mPageloader').show();
-     window.location.href = '<?=base_url()?>/BiseCorrection/Res9thactive/'+rno
+     window.location.href = '<?=base_url()?>BiseCorrection/Res9thactive/'+rno
 }
 </script>
 

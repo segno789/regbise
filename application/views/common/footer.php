@@ -54,7 +54,6 @@ if(isset($files)){
     /*    }*/
 
     function readURL_corr(input) {
-    debugger;
     if (input.files && input.files[0]) {
     var reader = new FileReader();
 
@@ -673,7 +672,7 @@ if(isset($files)){
 
 var isReadm = "<?php  echo @$isReAdm; ?>";
 
-if(isReadm != 1)
+if(isReadm == 0)
     {
     $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();    
     }
@@ -1062,6 +1061,23 @@ if(isReadm != 1)
             return false;
         }
     }
+     function valid_migration_form()
+    {
+        var formno = $('#txtformNo_search').val();
+        var inst_cd = $('#txtinst_search').val();
+       
+        if(formno == "" || formno.length < 10 || formno.length > 10){
+            alertify.error("Please write Valid Form No.");
+            $('#txtformNo_search').focus();
+            return false;
+        }
+        else  if(inst_cd == "" || inst_cd.length < 6 || inst_cd.length > 6)
+        {
+            alertify.error("Please write Valid Inst. Code.");
+            $('#txtformNo_search').focus();
+            return false;
+        }
+    }
     function RevenueForm(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID
@@ -1289,15 +1305,20 @@ if(isReadm != 1)
         var spec_case_inst = "<?php   echo @$msg; ?>"
         var excep_Invalid_formno = "<?php  echo @$excep; ?>"
         var restore_msg = "<?php   echo  @$restore_msg; ?>"
-        if(restore_msg!="")
+        if (excep_Invalid_formno == "success")
         {
-             alertify.success(restore_msg);
+            alertify.success("Updated Successfully");
         }
+        else  if(restore_msg!="")
+        {
+            alertify.success(restore_msg);
+        }
+         
         if (excep_Invalid_formno != "")
         {
-             alertify.error("Invalid Form No. Please write Valid Form No.");
+             alertify.error(excep_Invalid_formno);
         }
-        debugger;
+      //  debugger;
         if(spec_case_inst == "Saved")
         {
              alertify.success("Saved Successfully");

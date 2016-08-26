@@ -8,18 +8,282 @@ class BiseCorrection extends CI_Controller {
 
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
-            // redirect('login/biselogin');
+            redirect('login/biselogin');
         }
     }
+    public function migration9th()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '4',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        // DebugBreak();
+        if($this->session->flashdata('NewEnrolment_error')){
+
+            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
+            $error['excep'] = $error['excep']['excep'];
+        }
+        else{
+            $error['excep'] = '';
+        }
+        $data['migration'] = $this->BiseCorrections_model->getmigration(9);
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/migration9th.php',$error);
+        $this->load->view('common/footer.php');
+    }
+    public function migration10th()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '4',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        // DebugBreak();
+        if($this->session->flashdata('NewEnrolment_error')){
+
+            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
+            $error['excep'] = $error['excep']['excep'];
+        }
+        else{
+            $error['excep'] = '';
+        }
+        $data['migration'] = $this->BiseCorrections_model->getmigration(10);
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/migration10th.php',$error);
+        $this->load->view('common/footer.php');
+    }
+    public function listmigration9th()
+    {
+        // DebugBreak();
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '4',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        // DebugBreak();
+        if($this->session->flashdata('NewEnrolment_error')){
+
+            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
+            $error['excep'] = $error['excep']['excep'];
+        }
+        else{
+            $error['excep'] = '';
+        }
+        $data['migration'] = $this->BiseCorrections_model->getlistmigration(9);
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/ListMir9th.php',$error);
+        $this->load->view('common/footer.php');
+    }
+    public function listmigration10th()
+    {
+        // DebugBreak();
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '4',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        // DebugBreak();
+        if($this->session->flashdata('NewEnrolment_error')){
+
+            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
+            $error['excep'] = $error['excep']['excep'];
+        }
+        else{
+            $error['excep'] = '';
+        }
+        $data['migration'] = $this->BiseCorrections_model->getlistmigration(10);
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/ListMir10th.php',$error);
+        $this->load->view('common/footer.php');
+    }
+    public function migrate()
+    {
+
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '4',
+        );
+        $isclass = $this->uri->segment(3);
+        $formno = $this->uri->segment(4);
+        $migrateto = $this->uri->segment(5);
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        if($isclass == 9)
+        {
+            if($migrateto != '')
+            {
+                $oldinst_cd = substr($formno, 0, 6);
+                $newinst_cd    = $migrateto;
+                $formnopic = $formno.'.jpg'; 
+            }
+            else
+            {
+                $formno =  $_POST['txtformNo_search'];
+                $oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
+                $newinst_cd    = $_POST['txtinst_search'];
+                $formnopic = @$_POST['txtformNo_search'].'.jpg';
+
+            }
+
+            $isupadte = $this->BiseCorrections_model->updateMigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id']);
+
+            if($isupadte >0)
+            {
+                $base_path = IMAGE_PATH.$oldinst_cd.'/'.$formnopic;
+                $copyimg = IMAGE_PATH.$newinst_cd.'/'.$formnopic;;
+
+                if (!(copy($base_path, $copyimg))) 
+                {
+                    $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                    $this->session->set_flashdata('NewEnrolment_error',$data);
+                    redirect('BiseCorrection/migration9th/');
+                }
+                else
+                {
+                    $data['excep'] = 'success';
+                    $this->session->set_flashdata('NewEnrolment_error',$data);
+                    redirect('BiseCorrection/migration9th/');
+                }  
+            }
+
+            else
+            {
+                $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/migration9th/');
+            }
+        }
+        else if($isclass == 10)
+        {
+            if($migrateto != '')
+            {
+                $oldinst_cd = substr($formno, 0, 6);
+                $newinst_cd    = $migrateto;
+                $formnopic = $formno.'.jpg'; 
+            }
+            else
+            {
+                $formno =  $_POST['txtformNo_search'];
+                $oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
+                $newinst_cd    = $_POST['txtinst_search'];
+                $formnopic = @$_POST['txtformNo_search'].'.jpg';
+
+            }
+
+            $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],1);
+
+            if($isupadte >0)
+            {
+
+                $data['excep'] = 'success';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/migration10th/');
+
+            }
+
+            else
+            {
+                $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/migration10th/');
+            } 
+        }
+
+    }
+
+    public function restoreMigration()
+    {
+
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '4',
+        );
+        $isclass = $this->uri->segment(3);
+        $formno = $this->uri->segment(4);
+        $migrateto = $this->uri->segment(5);
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        if($isclass == 9)
+        {
+            if($migrateto != '')
+            {
+                $oldinst_cd = 0;
+                $newinst_cd    = $migrateto;
+            }
+            $isupadte = $this->BiseCorrections_model->updateMigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id']);
+
+            if($isupadte >0)
+            {
+
+                $data['excep'] = 'success';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/listmigration9th/');
+            }
+            else
+            {
+                $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/listmigration9th/');
+            }
+        }
+        else if($isclass == 10)
+        {
+
+            $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],2);
+
+            if($isupadte >0)
+            {
+
+                $data['excep'] = 'success';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/listmigration10th/');
+            }
+            else
+            {
+                $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/listmigration10th/');
+            }
+        }
+
+    }
+
+
+
+
     public function result9thcorrections()
     {
         $this->load->helper('url');
+
         $data = array(
             'isselected' => '8',
         );
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
-        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thDeactive('Registration'));
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thDeactive('Finance Income'));
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
@@ -27,8 +291,6 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }
-    
-    
     public function slips9thcorrections()
     {
         $this->load->helper('url');

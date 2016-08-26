@@ -4,10 +4,10 @@
         <div class="dashboard-container">
         <div class="top-nav">
             <ul>
-               
+
 
                 <?php 
-                     
+
                 if($isselected == '5'){?>
 
                     <li>
@@ -20,12 +20,7 @@
                     <?php } 
                 if($isselected == '4'){?>
 
-                    <li>
-                        <a style="width: 115px;" href="<?php echo base_url(); ?>RollNoSlip" class="<?php if($isselected == '4') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
-                            Roll No. Slips
-                        </a>
-                    </li>
+                   
                     <?php } 
                 else  if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
 
@@ -57,7 +52,7 @@
                             Registration
                         </a>
                     </li>
-                       <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
@@ -65,7 +60,7 @@
                     </li>
                     <?php } 
 
-             
+
                 else if($isselected == '6'){?>
 
                     <li>
@@ -74,62 +69,44 @@
                             Registration
                         </a>
                     </li>
-                    
+
                     <?php } 
-                                     //   DebugBreak();
-                    if($isselected == '0' OR $isselected == '8' OR $isselected == '11'){?>
-                
+                //   DebugBreak();
+                if($isselected == '0' OR $isselected == '8' OR $isselected == '11'  OR $isselected == '4'){?>
+
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Correction
                         </a>
                     </li>
+                     <li>
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration9th" class="<?php if($isselected == '4') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
+                            Migration
+                        </a>
+                    </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
+                       <!-- <a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Reg. Batch
                         </a>
-                    </li>
-                   <li>
+                    </li>-->
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
                             Spec. Permission
                         </a>
                     </li>
-                    
-                   <?php } ?>
+
+                    <?php } ?>
             </ul>
             <div class="clearfix">
             </div>
         </div>
         <div class="sub-nav">
+
             <?php
-            if($isselected == '5') { 
-                ?>
-                <ul >
-
-                    <li>
-                        <a href="<?php echo base_url(); ?>complaints">
-                            Pending Complaints
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>complaints/completeCMP">
-                            Completed
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="return logout();">Logout</a>
-                    </li>
-
-                </ul>
-                <?php
-            }
-
-
-
-
             if($isselected == '0') { 
                 ?>
                 <ul >
@@ -150,17 +127,49 @@
                             Batch Restore
                         </a>
                     </li>
-                   
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
-                 
+
                 </ul>
                 <?php
             }
-            
+              if($isselected == '4') {   ?>
+
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/migration9th"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Migration</a></li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration9th">
+                            9th Migration <?= MIGRATIONSESS?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration9th">
+                           List 9th Migration <?= MIGRATIONSESS?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration10th">
+                            10th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration10th">
+                           List 10th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
+
+                </ul>
+                <?php
+              }
             if($isselected == '8') {   ?>
-            
+
                 <ul >
                     <li><a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
 
@@ -174,31 +183,31 @@
                             Verified Correction  
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/Delete_Form">
                             Delete Candidate  
                         </a>
                     </li>
-                       <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form">
                             Restore Candidate  
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/result9thcorrections">
                             9th Result Cards(2016)  
                         </a>
                     </li>
-                    
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
 
                 </ul>
-            
-            
-            <?php }
-            
+
+
+                <?php }
+
             if($isselected == '1') { 
                 ?>
                 <ul >
@@ -216,7 +225,7 @@
                 <ul >
                     <li><a href="<?php echo base_url(); ?>Registration"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Registration</a></li>
                     <?php 
-                    
+
                     if($isfeedingallow == 1) {?>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration/NewEnrolment">
@@ -255,7 +264,7 @@
                             Form Printing
                         </a>
                     </li>
-                       <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>Registration/Reg_Cards_Printing_9th">
                             Registration Cards
                         </a>
@@ -318,60 +327,29 @@
             }
             ?>
             <?php
-            if($isselected == '4'){
-                ?>
-                <ul >
-                    <li><a href="<?php echo base_url(); ?>RollNoSlip"   data-original-title="" >Roll No. Slips: </a></li>
-                    <!-- <li>
-                    <a href="<?php echo base_url(); ?>RollNoSlip/NinthStd">
-                    9th Roll No. Slip
-                    </a>
-                    </li>-->
-                    <li>
-                        <a href="<?php echo base_url(); ?>RollNoSlip/TenthStd">
-                            10th Roll No. Slip
-                        </a>
-                    </li>
-                    <!-- <li>
-                    <a href="<?php echo base_url(); ?>RollNoSlip/EleventhStd">
-                    11th Roll No. Slip
-                    </a>
-                    </li>-->
-                    <li>
-                        <a href="<?php echo base_url(); ?>RollNoSlip/InterStd">
-                            12th Roll No. Slip
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="return logout();">Logout</a>
-                    </li>
 
 
-                </ul>
-                <?php
-            }
-           
             if($isselected == '7'){
                 ?>
                 <ul >
-                
+
                     <li><a href="<?php echo base_url(); ?>NinthCorrection"   data-original-title="" class="<?php if($isselected == '7') {echo 'heading';}?>">9th Correction </a></li>
-                  <li><a href="<?php echo base_url(); ?>NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+                    <li><a href="<?php echo base_url(); ?>NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>NinthCorrection/Applied">
                             Applications
                         </a>
                     </li>
-                    
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
-                   
+
 
                 </ul>
                 <?php
             }
-            
+
             // Inter Registration
             if($isselected == '6') { 
                 ?>
@@ -422,7 +400,7 @@
                     <li>
                         <a style="cursor: pointer" onclick="return logout();">Logout</a>
                     </li>
-                  
+
                 </ul>
                 <?php
             }

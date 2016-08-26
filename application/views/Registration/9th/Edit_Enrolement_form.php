@@ -39,11 +39,11 @@
                                     Candidate Name :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($isReAdm==1) echo "readonly='readonly'";  ?>  >
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?>  >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -53,11 +53,11 @@
                                 <div class="controls controls-row">
                                 <input type="hidden" name="oldbform" value="<?php echo   $data['0']['BForm']; ?>">
                                 <input type="hidden" name="oldfform" value="<?php echo  $data['0']['FNIC']; ?>">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($isReAdm==1) echo "readonly='readonly'";  ?>>
+                                    <input class="span3" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?>>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($isReAdm==1) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
 
@@ -72,7 +72,7 @@
                                     $source = $data['0']['Dob'];;
                                     $date = new DateTime($source);
                                     echo $date->format('d-m-Y'); 
-                                     ?>" required="required" readonly="readonly"  <?php if($isReAdm==1) echo "readonly='readonly'"; ?> >
+                                     ?>" required="required" readonly="readonly"  <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'"; ?> >
 
                                     <label class="control-label span2" >
                                         Mobile Number :

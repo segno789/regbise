@@ -409,13 +409,18 @@ class Registration_model extends CI_Model
     }
      public function readmission_check($User_info_data)
     {
-        // DebugBreak();
+        
         $Inst_cd = $User_info_data['Inst_Id'];
         $RollNo = $User_info_data['RollNo'];
         $spl_cd = $User_info_data['spl_case'];
 
         // $forms_id = $User_info_data['forms_id'];
-        $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo,'spl_cd' => 17));
+        
+        $where = ' (spl_cd =  17 OR status=4 OR status=2)';
+        $this->db->where('rno', $RollNo);
+     //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
+        $query = $this->db->where($where);
+        $query = $this->db->get(RE_ADMISSION_TBL);
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
