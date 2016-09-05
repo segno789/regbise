@@ -69,7 +69,12 @@ define('TITLE','Online 9th Registration');
 define('MIGRATIONSESS','2016-18'); 
 define('MIGRATIONSESS2','2015-17'); 
 define('TBLMIGRATION','Registration..MA_P1_Reg_Adm2016'); 
-define('TBLMIGRATION1','Admission_online..tblAdmMig'); 
+define('TBLMIGRATION1','matric_new..tblAdmMig'); 
+define('TBLMIGRATION2','matric_new..tblRegMig'); 
+define('TBLMIGRATION3','Registration..tblMig'); 
+define('DIRPATH','F:\xampp\htdocs\Share Images\OldPics'); 
+define('TBLMIGRATION4','matric_new..vw9th16'); 
+
 
 
 

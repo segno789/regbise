@@ -218,7 +218,7 @@ class NinthCorrection extends CI_Controller {
         else{
             $error_msg = $msg;
         }
-
+         // DebugBreak();
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         // $this->load->model('Registration_model');

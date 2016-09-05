@@ -19,7 +19,7 @@
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
 
                                        <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
-                                      <img src="<?php echo base_url(); ?>/assets/img/upalodimage.jpg" alt="" >
+                                      <img src="../../assets/img/upalodimage.jpg" alt="" >
                                     </label> 
                                     <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php echo base_url(); ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
@@ -32,7 +32,7 @@
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="image" onchange="return readURL(this);">
+                                    <input type="file" class="span4" id="image" name="image"  onchange="return readURL(this);">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -356,11 +356,11 @@
                                             {
                                                  if($excep['std_group'] == 2 &&  ($excep['excep'] != "success") && ($excep != ""))
                                                 {
-                                                  echo "<option value='2' selected='selected'>GENERAL</option>";  
+                                                  echo "<option value='2' selected='selected'>HUMANTIES</option>";  
                                                 }
                                                 else
                                                 {
-                                                  echo "<option value='2'>GENERAL</option>";   
+                                                  echo "<option value='2'>HUMANTIES</option>";   
                                                 }
                                                 
                                             }

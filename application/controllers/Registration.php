@@ -1330,7 +1330,7 @@ class Registration extends CI_Controller {
     public function ReAdmission_check()
     {
         // DebugBreak();
-        $RollNo = $this->uri->segment(3);
+               $RollNo = @$_POST['oldRno'];//$this->uri->segment(3);
         //$Spl_case = $this->uri->segment(4);
 
         $this->load->model('Registration_model');

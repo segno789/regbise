@@ -239,6 +239,12 @@
                                          echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
                                     }
+                                       else {echo "  <label class='radio inline span1'>
+                                    <input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                    </label>
+                                    <label class='radio inline span2'>
+                                    <input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural 
+                                    </label>";}
                                 
                                 ?>
                                    

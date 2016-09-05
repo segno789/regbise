@@ -28,13 +28,13 @@ class Login extends CI_Controller {
         
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
-
+          
              $this->load->model('login_model'); 
              $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
-             $this->load->model('login_model'); 
-             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+             
+           
              $isgroup = -1;
-         // DebugBreak();   
+             
         if($logedIn != false)
             {  
 
@@ -218,17 +218,19 @@ class Login extends CI_Controller {
                         'isSpecial' => $logedIn['SpecPermission'],   
                         'isSpecial_Fee' => $logedIn['spec_info']   
                     );
+                   
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
-                    // redirect('Registration/','refresh');
-                    // redirect('Admission_matric/','refresh');
-                    if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
+                  
+                  // echo '<pre>'; Print_r($sess_array) ; echo '</pre>';
+         //   exit();
+                    if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
-                        redirect('Registration/','refresh');
+                        redirect('Registration_11th/');  
                     }
-                    else  if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
+                   else if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
                     {
-                        redirect('Registration_11th/','refresh');  
+                        redirect('Registration/');
                     }
                 }
             }
@@ -277,7 +279,7 @@ class Login extends CI_Controller {
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
-                    redirect('BiseCorrection/reg9thcorrections', 'refresh'); 
+                    redirect('BiseCorrection/reg9thcorrections'); 
                 }
                 else
                 {  
@@ -312,29 +314,29 @@ class Login extends CI_Controller {
 
         // DebugBreak();
         $this->load->library('session');
+        
+        
+        
+        
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = @$Logged_In_Array['logged_in'];
+        $this->CI =& get_instance();   
+        $this->CI->session->sess_destroy();
+       header("Cache-Control: private, must-revalidate,
+        max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+      );
+        //redirect(base_url());
         if($userinfo['isboardoperator']==1){
-            $this->session->unset_userdata('logged_in');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('username');
-            $this->session->unset_userdata('logged_in_front');
-            $this->session->unset_userdata('user_id_front');
-            $this->session->unset_userdata('username_front');
+     
 
             $this->session->sess_destroy();    
-            redirect('login/biselogin','refresh');
+            redirect('login/biselogin');
         }
         else{
-            $this->session->unset_userdata('logged_in');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('username');
-            $this->session->unset_userdata('logged_in_front');
-            $this->session->unset_userdata('user_id_front');
-            $this->session->unset_userdata('username_front');
+          
 
             $this->session->sess_destroy();
-            redirect('login','refresh');
+                redirect('login');
         }
 
 

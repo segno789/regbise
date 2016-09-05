@@ -281,7 +281,8 @@ class CI_Session {
 		else
 		{
 			// Serialize the custom data array so we can store it
-			$custom_userdata = $this->_serialize($custom_userdata);
+            $custom_userdata = $this->_serialize($custom_userdata);
+			//$custom_userdata_json = json_encode($custom_userdata);
 		}
 
 		// Run the update query
@@ -402,7 +403,8 @@ class CI_Session {
 		if ($this->sess_use_database === TRUE && isset($this->userdata['session_id']))
 		{
 			$this->CI->db->where('session_id', $this->userdata['session_id']);
-			$this->CI->db->delete($this->sess_table_name);
+			//$this->CI->db->delete($this->sess_table_name);
+            $this->CI->db->update($this->sess_table_name, array('logoutTime' => date('Y-m-d H:i:s')));
 		}
 
 		// Kill the cookie

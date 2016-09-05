@@ -84,7 +84,8 @@
                   }
                   else
                   {
-                      window.location.href = '<?=base_url()?>/index.php/Registration/ReAdmission_check/'+oldrno+'/';
+                       $( "#std_fth_dob_frm" ).submit();
+                     // window.location.href = '/index.php/Registration/ReAdmission_check/'+oldrno+'/';
                   }
                   
                   

@@ -91,16 +91,16 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="medium" class="dropdown span3" name="medium">
-                                        <?php // DebugBreak();
+                                        <?php //DebugBreak();
                                         $med = $data['0']['med'] ;
                                         // $med = 2; 
                                         if($med == 1)
                                         {
-                                            echo  "<option value='1' selected='selected'>Urdu</option> <option value='1'>English</option>";
+                                            echo  "<option value='1' selected='selected'>Urdu</option> <option value='2'>English</option>";
                                         }
                                         else
                                         {
-                                            echo  "<option value='2' >Urdu</option> <option value='2' selected='selected'>English</option>";
+                                            echo  "<option value='2' selected='selected'>English</option><option value='1' >Urdu</option> ";
                                         }
                                         ?>
 
@@ -275,7 +275,7 @@
                                         <?php
                                         // DebugBreak();
                                         $grp = $data[0]['RegGrp'];
-                                        $subgroups =  split(',',$grp_cdi);
+                                        $subgroups =  explode(',',@$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
                                         {
@@ -495,7 +495,8 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub5" class="span3 dropdown" name="sub5" selected="selected">
-                                       
+                                        <?php  if($isReAdm != 1)
+                                            { echo "";} ?>
                                         <option value="<?php if($isReAdm != 1) {echo $data[0]['sub5'];} else{ echo "";} ?>"><?php  if($isReAdm != 1) {echo array_search($data[0]['sub5'],$subarray);} else {echo "";}
 
                                         ?></option>
@@ -548,7 +549,7 @@
 
                             function checks(){
 
-                                var status  =  check_NewEnrol_validation();
+                                var status  =  check_NewEnrol_validation_11th();
                                 if(status == 0)
                                 {
 

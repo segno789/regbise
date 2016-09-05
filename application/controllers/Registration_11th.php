@@ -383,7 +383,7 @@ class Registration_11th extends CI_Controller {
 
     }
     public function Students_matricInfo(){
-     // DebugBreak();   //Students_matricInfo matric_error
+       // DebugBreak();   //Students_matricInfo matric_error
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -395,7 +395,7 @@ class Registration_11th extends CI_Controller {
 
             $string = $this->session->flashdata('matric_error'); 
             $string = trim(preg_replace('/\s\s+/', ' ', $string));
-            $data['excep_halt'] = $string; 
+            $data['excep_halt'] = $string;    
         }
         else{
             $data['excep_halt'] = '';
@@ -408,7 +408,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-       
+      //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -468,7 +468,7 @@ class Registration_11th extends CI_Controller {
             if($feedingcheck != false)
             {
                 $instName=$this->Registration_11th_model->InstName($feeding_inst_cd);
-                $this->session->set_flashdata('matric_error','This Candidate is already registered in'.$feeding_inst_cd.'-'.$instName.'.');
+                $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
                 redirect('Registration_11th/Students_matricInfo');
                 return; 
             }
@@ -485,8 +485,7 @@ class Registration_11th extends CI_Controller {
                 $RegStdData['data'][0]['excep']='';
                 $RegStdData['data'][0]['isHafiz']=0;
                 $RegStdData['data'][0]['markOfIden']='';
-                $RegStdData['data'][0]['SSC_brd_cd'] = 1;
-
+                 $RegStdData['data'][0]['SSC_brd_cd'] = $board;
 
                 $spl_cd = $RegStdData['data'][0]['spl_cd'];
                 $msg = $RegStdData['data'][0]['Mesg'];
@@ -728,6 +727,7 @@ class Registration_11th extends CI_Controller {
             $nationality_hidden =@$_POST['nationality'];
         }
         //nationality_hidden
+         $addre =  str_replace("'", "", $this->input->post('address'));
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -743,7 +743,7 @@ class Registration_11th extends CI_Controller {
             'sex' =>$this->input->post('gender'),
             'IsHafiz' =>$this->input->post('hafiz'),
             'IsMuslim' =>$this->input->post('religion'),
-            'addr' =>$this->input->post('address'),
+            'addr' =>$addre,
             'RegGrp' =>$this->input->post('std_group'),
             'sub1' =>$this->input->post('sub1'),
             'sub2' =>$this->input->post('sub2'),
@@ -1112,13 +1112,14 @@ class Registration_11th extends CI_Controller {
                 return;
             }
             // DebugBreak();
+             $addre =  str_replace("'", "", @$_POST['address']);
             $allinputdata = array('CellNo'=>@$_POST['mob_number'],
                 'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
                 'speciality'=>@$_POST['speciality'],'markOfIden'=>@$_POST['MarkOfIden'],
                 'med'=>@$_POST['medium'],'nat'=>@$_POST['nationality'],
                 'sex'=>@$_POST['gender'],'Ishafiz'=>@$_POST['hafiz'],
                 'rel'=>@$_POST['religion'],'RegGrp'=>@$_POST['std_group'],
-                'addr'=>@$_POST['address'],
+                'addr'=>$addre,
                 'RuralORUrban'=>@$_POST['UrbanRural'],'sub1'=>@$_POST['sub1'],
                 'sub2'=>@$_POST['sub2'],'sub3'=>@$_POST['sub3'],
                 'sub4'=>@$_POST['sub4'],'sub5'=>@$_POST['sub5'],
@@ -1150,6 +1151,7 @@ class Registration_11th extends CI_Controller {
 
         }
         else{
+              $addre =  str_replace("'", "", @$_POST['address']);
             $allinputdata = array('name'=>@$_POST['cand_name'],'Fname'=>@$_POST['father_name'],
                 'BForm'=>@$_POST['bay_form'],'FNIC'=>@$_POST['father_cnic'],
                 'Dob'=>@$_POST['dob'],'CellNo'=>@$_POST['mob_number'],
@@ -1158,7 +1160,7 @@ class Registration_11th extends CI_Controller {
                 'med'=>@$_POST['medium'],'nat'=>@$_POST['nationality'],
                 'sex'=>@$_POST['gender'],'Ishafiz'=>@$_POST['hafiz'],
                 'rel'=>@$_POST['religion'],'RegGrp'=>@$_POST['std_group'],
-                'addr'=>@$_POST['address'],
+                'addr'=>$addre,
                 'RuralORUrban'=>@$_POST['UrbanRural'],'sub1'=>@$_POST['sub1'],
                 'sub2'=>@$_POST['sub2'],'sub3'=>@$_POST['sub3'],
                 'sub4'=>@$_POST['sub4'],'sub5'=>@$_POST['sub5'],
@@ -2650,7 +2652,7 @@ class Registration_11th extends CI_Controller {
 
         $pdf->Output($data["coll_cd"].'.pdf', 'I');
     }
-    public function Print_challan_Form()
+      public function Print_challan_Form()
     {
           
        
@@ -3032,9 +3034,9 @@ class Registration_11th extends CI_Controller {
 
         }*/
 
-        else if(@$_POST['bay_form'] == ''  || (@$allinputdata['BForm'] == '' && $isupdate ==1) )
+        else if((@$_POST['bay_form'] == '' ||  (@$allinputdata['BForm'] == '' && $isupdate ==1))  && @$allinputdata['iyear']>=2014 )
         {
-            $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
+            $allinputdata['excep'] = 'Please Enter Your Bay Form No fh.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Registration_11th/'.$viewName);
             return;
@@ -3106,7 +3108,7 @@ class Registration_11th extends CI_Controller {
 
             }
 
-            else if(@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == '' && $isupdate ==1)  )
+            else if((@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == ''  && $isupdate ==1))  && @$allinputdata['iyear']>=2014   )
             {
                 $allinputdata['excep'] = 'Please Enter Your Father CNIC';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3115,7 +3117,7 @@ class Registration_11th extends CI_Controller {
 
 
             }
-            else if((@$_POST['bay_form'] == @$_POST['father_cnic']) || (@$_POST['father_cnic'] == @$_POST['bay_form']) )
+           /* else if((@$_POST['bay_form'] == @$_POST['father_cnic']) || (@$_POST['father_cnic'] == @$_POST['bay_form']) )
             {
                 $allinputdata['excep'] = 'Your Bay Form and FNIC No. are not same';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3123,7 +3125,7 @@ class Registration_11th extends CI_Controller {
                 return;
 
 
-            }
+            }*/
             /*else if (@$_POST['dob'] == ''  || (@$allinputdata['Dob'] == ''   && $isupdate ==1) )
             {
                 $allinputdata['excep'] = 'Please Enter Your  Date of Birth';

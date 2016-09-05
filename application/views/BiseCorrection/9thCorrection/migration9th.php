@@ -18,11 +18,11 @@
                                 <label class='control-label span2' >
                                     FORM NO:
                                 </label>
-                                <input class='span3' type='number' id='txtformNo_search' style='text-transform: uppercase;' name='txtformNo_search' placeholder='FORM NO.' maxlength="10" value = '' required='required'>
+                                <input class='span3' type='number' id='txtformNo_search' style='text-transform: uppercase;' name='txtformNo_search' placeholder='FORM NO.' maxlength="10"  required='required' oninput="maxLengthCheck(this)">
                                   <label class='control-label span2' >
                                    Inst. Code:
                                 </label>
-                                <input class='span3' type='number' id='txtinst_search' style='text-transform: uppercase;' name='txtinst_search' placeholder='Inst. Code.' maxlength="6" value = '' required='required'>
+                                <input class='span3' type='number' id='txtinst_search' style='text-transform: uppercase;' name='txtinst_search' placeholder='Inst. Code.' maxlength="6" required='required' oninput="maxLengthCheck(this)">
                             </div>
                         </div>
 
@@ -153,6 +153,11 @@
             }
         });
     }
+      function maxLengthCheck(object)
+  {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
     function migrateto(formno,inst_cd)
     {
         window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/9/"+formno+"/"+inst_cd; 
