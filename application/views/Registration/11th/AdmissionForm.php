@@ -348,7 +348,6 @@
                                         'BSE, KARACHI' => 13,
                                         'BISE, QUETTA' => 14,
                                         'BISE, MARDAN' => 15,
-                                        'FBISE, ISLAMABAD' => 16,
                                         'CAMBRIDGE' => 17,
                                         'AIOU, ISLAMABAD' => 18,
                                         'BISE, KOHAT' =>19 ,

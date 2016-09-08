@@ -140,7 +140,17 @@ class Login extends CI_Controller {
                                  $isfeeding = 1;
                             }
                            else {
-                                 $isfeeding = 0;
+                                 if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                                 {
+                                     $isfeeding = 1    ;
+                                     $lastdate = SINGLE_LAST_DATE;
+                                     $logedIn['SpecPermission'] = 0;
+                                 }
+                                 else
+                                 {
+                                     $isfeeding = 0;   
+                                 }
+                                 
                             }
                             
                         }
@@ -166,9 +176,6 @@ class Login extends CI_Controller {
                             }
                         }
                         }
-                        
-                     
-
                     }  
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
@@ -218,7 +225,6 @@ class Login extends CI_Controller {
                         'isSpecial' => $logedIn['SpecPermission'],   
                         'isSpecial_Fee' => $logedIn['spec_info']   
                     );
-                   
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
                   

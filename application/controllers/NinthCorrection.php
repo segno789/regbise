@@ -218,7 +218,7 @@ class NinthCorrection extends CI_Controller {
         else{
             $error_msg = $msg;
         }
-         // DebugBreak();
+
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         // $this->load->model('Registration_model');
@@ -1385,7 +1385,7 @@ class NinthCorrection extends CI_Controller {
                     $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
                     break;
                 case '2':
-                    $grp_name = 'HUMANITIES';
+                    $grp_name = 'GENERAL';
                     break;
                 case '5':
                     $grp_name = 'DEAF AND DUMB';
@@ -1405,7 +1405,7 @@ class NinthCorrection extends CI_Controller {
                     $N_grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
                     break;
                 case '2':
-                    $N_grp_name = 'HUMANITIES';
+                    $N_grp_name = 'GENERAL';
                     break;
                 case '5':
                     $N_grp_name = 'DEAF AND DUMB';
@@ -1512,7 +1512,7 @@ class NinthCorrection extends CI_Controller {
                 $pdf->SetXY(3+$x,9.45+$y);
                 $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
             }
-            if( $data["N_Reggrp"] == 2 && $data['groupFee'] > 0)
+            if(  $data['groupFee'] > 0)
             {
 
                 $x = 1.5;

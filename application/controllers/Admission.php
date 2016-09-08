@@ -10,8 +10,6 @@ class Admission extends CI_Controller {
         $data = array(
             'isselected' => '3',
         );
-        
-        
         $this->load->view('common/header.php');
         $this->load->view('common/menu.php',$data);
         $this->load->view('Admission/Admission.php');

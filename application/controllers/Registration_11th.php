@@ -463,7 +463,7 @@ class Registration_11th extends CI_Controller {
             }
 
 //             DebugBreak();
-            $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
+           /* $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
             if($feedingcheck != false)
             {
@@ -471,7 +471,7 @@ class Registration_11th extends CI_Controller {
                 $this->session->set_flashdata('matric_error', 'This Candidate is already registered in '.$feeding_inst_cd.'-'.$instName.'.');
                 redirect('Registration_11th/Students_matricInfo');
                 return; 
-            }
+            }    */
             if($board == 1)
             {
                 if(!ctype_digit($mrollno))
@@ -3085,27 +3085,21 @@ class Registration_11th extends CI_Controller {
                     return;
                 }*/
          //   }
-            else if($this->Registration_11th_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
+            else if($this->Registration_11th_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 && $allinputdata['SSC_brd_cd'] != 1 )
             {
                 // DebugBreak();
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Registration_11th/'.$viewName);
                 return;
-
-
-
             }
-            else if($this->Registration_11th_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0 )
+            else if($this->Registration_11th_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0  && $allinputdata['SSC_brd_cd'] != 1 )
             {
                 // DebugBreak();
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Registration_11th/'.$viewName);
                 return;
-
-
-
             }
 
             else if((@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == ''  && $isupdate ==1))  && @$allinputdata['iyear']>=2014   )

@@ -247,11 +247,11 @@
                                                 {
                                                     if($grp == 2)
                                                     {
-                                                        echo "<option value='2' selected='selected'>HUMANTIES</option>";  
+                                                        echo "<option value='2' selected='selected'>GENERAL</option>";  
                                                     }
                                                     else
                                                     {
-                                                        echo "<option value='2'>HUMANTIES</option>";   
+                                                        echo "<option value='2'>GENERAL</option>";   
                                                     }
 
                                                 }
@@ -384,7 +384,7 @@
                                             echo "<option value='1' >SCIENCE WITH BIOLOGY</option>
                                             <option value='7'>SCIENCE  WITH COMPUTER SCIENCE</option>
                                             <option value='8' >SCIENCE  WITH ELECTRICAL WIRING</option>
-                                            <option value='2'>HUMANTIES</option>
+                                            <option value='2'>GENERAL</option>
                                             <option value='5'>DEAF AND DUMB</option>
                                             ";  
                                         }
@@ -431,11 +431,11 @@
                                                 {
                                                     if($grp == 2)
                                                     {
-                                                        echo "<option value='2' selected='selected'>HUMANTIES</option>";  
+                                                        echo "<option value='2' selected='selected'>GENERAL</option>";  
                                                     }
                                                     else
                                                     {
-                                                        echo "<option value='2'>HUMANTIES</option>";   
+                                                        echo "<option value='2'>GENERAL</option>";   
                                                     }
 
                                                 }

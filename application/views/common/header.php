@@ -74,7 +74,7 @@
 
 <header>
     <a href="#" >
-        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" alt="logo" style="width:auto; height: 92%;     float: left;" />
+        <img src="<?php echo base_url(); ?>assets/img/BISEGRW_Icon.png" alt="logo" style="width:auto; height: 92%;" />
     </a>
     <div class="btn-group">
         <button class="btn btn-primary">

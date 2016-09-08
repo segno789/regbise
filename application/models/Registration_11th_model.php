@@ -140,6 +140,25 @@ class Registration_11th_model extends CI_Model
         $pic_base_64 = $data['Image'];
       //  $pic_base_65 = $data['Image'];
       //  DebugBreak();
+      
+      if($OldBrd == 1 )
+      {
+          $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
+          $rowcount = $query->num_rows();
+          if($rowcount > 0)
+          {
+              $info =  $query->result_array();
+              $name = strtoupper($info[0]['name']);
+              $fname =strtoupper($info[0]['Fname']);
+              $BForm = $info[0]['bFormNo'];
+              $FNIC = $info[0]['FNIC'];
+              $Dob = $info[0]['dob'];
+          }
+          else
+          {
+              return  false;
+          }
+      }
         $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         
@@ -278,7 +297,7 @@ class Registration_11th_model extends CI_Model
         $sex = $data['sex'];
         $IsHafiz = $data['Ishafiz'];
         $rel = $data['rel'];
-        $addr =strtoupper(trim($data['addr'],"'"));
+        $addr =strtoupper($data['addr']);
         /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
         {
         $grp_cd = 1;    
@@ -540,7 +559,7 @@ class Registration_11th_model extends CI_Model
     }
     public function Batch_Insertion($data)
     {
-         DebugBreak();
+        // DebugBreak();
 
         $inst_cd = $data['inst_cd'];
         $total_fee = $data['total_fee'];
