@@ -1,6 +1,6 @@
 <div class="dashboard-wrapper class wysihtml5-supported">
           <div class="left-sidebar">
-         
+       
             <div class="row-fluid">
               <div class="span12">
                 <div class="widget no-margin">
@@ -62,7 +62,7 @@
                                     <td>'.$vals["Total_ProcessingFee"].'</td> 
                                     <td style="font-weight: bold;font-size: 16px;">'.$vals["Amount"].'</td>
                                     <td><button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ReturnForm('.$vals['Batch_ID'].')">Return Form</button>
-                                    <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ChallanForm_11th('.$vals['Batch_ID'].')">Download Challan Form</button>
+                                      <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ChallanForm_11th('.$vals['Batch_ID'].')">Download Challan Form</button>
                                     <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="RevenueForm('.$vals['Batch_ID'].')">Revenue Form</button>';
                                     if($vals['flag']==0){
                                      echo '<button type="button" class="btn btn-danger" value="'.$vals['Batch_ID'].'" onclick="ReleaseForm('.$vals['Batch_ID'].')">Release Batch</button>';   
@@ -86,7 +86,7 @@
                     <hr>
                      <div class="control-group">
                      <div class="controls controls-row">
-                     <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetter.pdf" class="link offset5 blink_text" style="font-size: x-large;" target="_blank" >Download Farwarding letter.<br> </a>
+                     <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetterInter.pdf" class="link offset5 blink_text" style="font-size: x-large;" target="_blank" >Download Farwarding letter.<br> </a>
                      </div>
                      </div>
                      

@@ -42,6 +42,7 @@ define('BARCODE_PATH', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE', '2016-09-19');
 define('DOUBLE_LAST_DATE', '2016-09-19');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
+define('ISREADMISSION', '1');
 
 //===========================================================
 define('IMAGE_PATH11', 'uploads/2016/colleges/');
@@ -64,6 +65,16 @@ define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018'); 
 define('Reg_Cards_9th_Heading','SECONDARY SCHOOL'); 
 define('TITLE','Online 9th Registration'); 
+//================ Migration variables ========================
+define('MIGRATIONSESS','2016-18'); 
+define('MIGRATIONSESS2','2015-17'); 
+define('TBLMIGRATION','Registration..MA_P1_Reg_Adm2016'); 
+define('TBLMIGRATION1','matric_new..tblAdmMig'); 
+define('TBLMIGRATION2','matric_new..tblRegMig'); 
+define('TBLMIGRATION3','Registration..tblMig'); 
+define('DIRPATH','F:\xampp\htdocs\Share Images\OldPics'); 
+define('TBLMIGRATION4','matric_new..vw9th16'); 
+
 
 
 

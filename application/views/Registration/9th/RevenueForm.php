@@ -48,7 +48,7 @@
       $count = $data['batch_info'][0]["COUNT"];
       $data['batch_info'][0]["Total_RegistrationFee"] =  $count*$rulefee[0]['Reg_Fee'] ;
       $data['batch_info'][0]["Total_ProcessingFee"] =  $count*$rulefee[0]['Reg_Processing_Fee'] ;
-      $data['batch_info'][0]["Total_LateRegistrationFee"] =  $count*$rulefee[0]['Fine'] ;
+      //$data['batch_info'][0]["Total_LateRegistrationFee"] =  $count*$rulefee[0]['Fine'] ;
       $data['batch_info'][0]["Amount"] =  $data['batch_info'][0]["Total_LateRegistrationFee"]+$data['batch_info'][0]["Total_ProcessingFee"]+$data['batch_info'][0]["Total_RegistrationFee"] ;
    }
 
@@ -123,14 +123,24 @@
     </tr>
 
     <?php
-    //DebugBreak();
+  //DebugBreak();
     $n = 0; 
+    $data['batch_info'][0]["Total_LateRegistrationFee"] = 0;
     foreach ($data['stdinfo'] as $key=>$vals) {
         $n++;
         if($rulefee[0]['isfine'] == 1)
         {
            $vals->regFee    = $rulefee[0]['Reg_Fee'];
-           $vals->RegFineFee = $rulefee[0]['Fine'];
+           if($vals->IsReAdm == 1)
+           {
+               $vals->RegFineFee = 0;
+           }
+           else
+           {
+             $vals->RegFineFee = $rulefee[0]['Fine']; 
+               $data['batch_info'][0]["Total_LateRegistrationFee"] = $data['batch_info'][0]["Total_LateRegistrationFee"] +$vals->RegFineFee; 
+           }
+         
            $vals->RegProcessFee = $rulefee[0]['Reg_Processing_Fee'];
            $vals->RegTotalFee   = $vals->regFee+$vals->RegFineFee+$vals->RegProcessFee;
         }

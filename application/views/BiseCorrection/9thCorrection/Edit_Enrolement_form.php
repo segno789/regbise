@@ -22,10 +22,10 @@
                                      <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
                                    
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$data[0]['Sch_cd'].'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  echo base_url().IMAGE_PATH.$data[0]['Sch_cd'].'/'.$data[0]['PicPath'];  ?>" alt="Candidate Image">
                                 </div>
                             </div>
-                            <div class="control-group" style="font-size: 15px;font-weight: bold;">
+                             <div class="control-group" style="font-size: 15px;font-weight: bold;">
                                <?php echo $inst_cd.'-'.$inst_name?>
                                 <div class="controls controls-row">
                                     <input class="span3 hidden"  type="text" placeholder="" >  

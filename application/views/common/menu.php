@@ -7,7 +7,7 @@
                
 
                 <?php 
-                     
+                
                 if($isselected == '5'){?>
 
                     <li>
@@ -18,15 +18,7 @@
                     </li>
 
                     <?php } 
-                if($isselected == '4'){?>
-
-                    <li>
-                        <a style="width: 115px;" href="<?php echo base_url(); ?>RollNoSlip" class="<?php if($isselected == '4') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
-                            Roll No. Slips
-                        </a>
-                    </li>
-                    <?php } 
+               
                 else  if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
 
                     <li>
@@ -76,8 +68,8 @@
                     </li>
                     
                     <?php } 
-                                     //   DebugBreak();
-                    if($isselected == '0' OR $isselected == '8' OR $isselected == '11'){?>
+                    
+                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4'){?>
                 
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
@@ -85,19 +77,25 @@
                             9th Correction
                         </a>
                     </li>
-                    <li>
+                 <!--   <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Reg. Batch
                         </a>
+                    </li>-->
+                     <li>
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration9th" class="<?php if($isselected == '4') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
+                            Migration
+                        </a>
                     </li>
-                   <li>
+                <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
                             Spec. Permission
                         </a>
                     </li>
-                    
+            
                    <?php } ?>
             </ul>
             <div class="clearfix">
@@ -184,12 +182,11 @@
                             Restore Candidate  
                         </a>
                     </li>
-                     <li>
+                       <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/result9thcorrections">
                             9th Result Cards(2016)  
                         </a>
                     </li>
-                    
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
@@ -215,18 +212,16 @@
                 ?>
                 <ul >
                     <li><a href="<?php echo base_url(); ?>Registration"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Registration</a></li>
-                    <?php 
-                    
-                    if($isfeedingallow == 1) {?>
+                    <?php if($isfeedingallow == 1) {?>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration/NewEnrolment">
                                 New Enrolement
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>Registration/ReAdmission">
-                                Re-Admissions
-                            </a>
+                        <a href="<?php echo base_url(); ?>Registration/ReAdmission">
+                        Re-Admissions
+                        </a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>Registration/EditForms">
@@ -253,11 +248,6 @@
                     <li>
                         <a href="<?php echo base_url(); ?>Registration/FormPrinting">
                             Form Printing
-                        </a>
-                    </li>
-                       <li>
-                        <a href="<?php echo base_url(); ?>Registration/Reg_Cards_Printing_9th">
-                            Registration Cards
                         </a>
                     </li>
                     <li>
@@ -320,32 +310,33 @@
             <?php
             if($isselected == '4'){
                 ?>
-                <ul >
-                    <li><a href="<?php echo base_url(); ?>RollNoSlip"   data-original-title="" >Roll No. Slips: </a></li>
-                    <!-- <li>
-                    <a href="<?php echo base_url(); ?>RollNoSlip/NinthStd">
-                    9th Roll No. Slip
-                    </a>
-                    </li>-->
+                  <ul >
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/migration9th"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Migration</a></li>
+
                     <li>
-                        <a href="<?php echo base_url(); ?>RollNoSlip/TenthStd">
-                            10th Roll No. Slip
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration9th">
+                            9th Migration <?= MIGRATIONSESS?>
                         </a>
                     </li>
-                    <!-- <li>
-                    <a href="<?php echo base_url(); ?>RollNoSlip/EleventhStd">
-                    11th Roll No. Slip
-                    </a>
-                    </li>-->
                     <li>
-                        <a href="<?php echo base_url(); ?>RollNoSlip/InterStd">
-                            12th Roll No. Slip
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration9th">
+                           List 9th Migration <?= MIGRATIONSESS?>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration10th">
+                            10th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration10th">
+                           List 10th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
-
 
                 </ul>
                 <?php
@@ -387,7 +378,7 @@
                             </a>
                         </li>
                         <!-- <li>
-                        <a href="<?php //echo base_url(); ?>Registration_11th/ReAdmission">
+                        <a href="<?php echo base_url(); ?>Registration_11th/ReAdmission">
                         Re-Admissions
                         </a>
                         </li>-->

@@ -12,7 +12,7 @@ class Registration_11th_model extends CI_Model
     }
     public function Incomplete_inst_info_INSERT($allinfo)
     {
-        //   DebugBreak();
+       //   DebugBreak();
         $data = array(
 
             'Inst_cd' => $allinfo['Inst_Id'] ,
@@ -29,12 +29,12 @@ class Registration_11th_model extends CI_Model
         $this->db->insert('tblInstitutes_all_Info', $data); 
         return true;
     }
+    
+  
 
 
 
-
-
-
+    
     public function Dashboard($inst_cd)
     {
 
@@ -138,47 +138,47 @@ class Registration_11th_model extends CI_Model
         $OldBrd = $data['SSC_brd_cd'];
         $IsReAdm = $data['IsReAdm'];
         $pic_base_64 = $data['Image'];
-
-
-        $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
-
-       
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-            $info =  $query->result_array();
-            $name = strtoupper($info[0]['name']);
-            $fname =strtoupper($info[0]['Fname']);
-            $BForm = $info[0]['bFormNo'];
-            $FNIC = $info[0]['FNIC'];
-            $Dob = $info[0]['dob'];
-        }
-        else
-        {
-            return  false;
-        }
-        //  $pic_base_65 = $data['Image'];
-        //  DebugBreak();
+      //  $pic_base_65 = $data['Image'];
+      //  DebugBreak();
+      
+      if($OldBrd == 1 )
+      {
+          $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
+          $rowcount = $query->num_rows();
+          if($rowcount > 0)
+          {
+              $info =  $query->result_array();
+              $name = strtoupper($info[0]['name']);
+              $fname =strtoupper($info[0]['Fname']);
+              $BForm = $info[0]['bFormNo'];
+              $FNIC = $info[0]['FNIC'];
+              $Dob = $info[0]['dob'];
+          }
+          else
+          {
+              return  false;
+          }
+      }
         $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
-
-        $rowcount = $query->num_rows();
+        
+         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
             return $query->result_array();
         }
         else
         {
-            // $this->savepics($formno,11,2016,1,$data['Image']) ;
-
-            $error[0]['error'] =  "true";
-            return $error;
+              // $this->savepics($formno,11,2016,1,$data['Image']) ;
+            
+                 $error[0]['error'] =  "true";
+                 return $error;
         }
-        // return true;
+       // return true;
 
 
     }
-    public function bay_form_fnic($bayformno,$fnic)
+  public function bay_form_fnic($bayformno,$fnic)
     {
         $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('BForm' => $bayformno,'FNIC' => $fnic,'IsDeleted'=>0));
         $rowcount = $query->num_rows();
@@ -190,7 +190,7 @@ class Registration_11th_model extends CI_Model
         }
     }
 
-    private function savepics($formno,$class,$iyear,$sess,$pic)
+     private function savepics($formno,$class,$iyear,$sess,$pic)
     {
         //  DebugBreak();
         $data = array(
@@ -207,7 +207,7 @@ class Registration_11th_model extends CI_Model
         $this->db->insert('ImageDB..tblIAPics', $data); 
         return true;
     }
-
+    
     public function Pre_Matric_data($data){
 
 
@@ -215,9 +215,9 @@ class Registration_11th_model extends CI_Model
         $sess = $data['session'];
         $iyear =$data['year'];
         $brd = $data['board'];
-        // DebugBreak();
+       // DebugBreak();
         $query = $this->db->query("Registration..Prev_Get_Student_Matric $rno,$iyear,$sess,$brd");
-
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -228,12 +228,12 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-    public function IsFeeded($data){
+     public function IsFeeded($data){
         $rno =  $data['mrollno'];
         $sess = $data['session'];
         $iyear =$data['year'];
         $brd = $data['board'];
-        //  DebugBreak();
+      //  DebugBreak();
         $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('matRno' => "$rno", 'yearOfPass'=>$iyear,'sessOfPass'=>$sess,'Brd_cd'=>$brd,'IsDeleted'=>0));
         // DebugBreak();
         $rowcount = $query->num_rows();
@@ -246,10 +246,10 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-    public function InstName($instCode)
+     public function InstName($instCode)
     {
-        // DebugBreak();
-        $this->db->select('Name');
+       // DebugBreak();
+         $this->db->select('Name');
         //$this->db->order_by("formno", "DESC");
         $name = $this->db->get_where('admission_online..tblInstitutes_all', array('Inst_cd' => $instCode));
         $rowcount = $name->num_rows();
@@ -297,7 +297,7 @@ class Registration_11th_model extends CI_Model
         $sex = $data['sex'];
         $IsHafiz = $data['Ishafiz'];
         $rel = $data['rel'];
-        $addr =strtoupper(trim($data['addr'],"'"));
+        $addr =strtoupper($data['addr']);
         /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
         {
         $grp_cd = 1;    
@@ -336,7 +336,7 @@ class Registration_11th_model extends CI_Model
         $regoldyear = $data['regoldyear'];
         $isreadm = $data['isreadm'];
         $pic_base_64 = $data['Image'];
-        //  DebugBreak();
+       //  DebugBreak();
         $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
@@ -378,8 +378,8 @@ class Registration_11th_model extends CI_Model
     {
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
-
-        // DebugBreak();
+      
+     // DebugBreak();
         $query = $this->db->query("Registration..sp_get_registration_Batch_challan $Inst_cd,$Batch_Id");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -552,14 +552,14 @@ class Registration_11th_model extends CI_Model
     }
     public function getreulefee($ruleID)
     {
-        // $ruleID = 1;
+       // $ruleID = 1;
         $q2         = $this->db->get_where('Registration..RuleFee_Reg_Eleventh',array('Rule_Fee_ID'=>$ruleID));
         $resultarr = $q2->result_array();
         return $resultarr ;
     }
     public function Batch_Insertion($data)
     {
-        DebugBreak();
+        // DebugBreak();
 
         $inst_cd = $data['inst_cd'];
         $total_fee = $data['total_fee'];
@@ -734,7 +734,7 @@ class Registration_11th_model extends CI_Model
             return false;
         }
     }
-    public function get_zone()
+       public function get_zone()
     {
 
         //$this->db->select('zone_cd','zone_name');

@@ -29,7 +29,9 @@ if(isset($files)){
 ?> 
 <script type="">
 
-
+    function preventBack(){window.history.forward();}
+    setTimeout("preventBack()", 0);
+    window.onunload=function(){null};
 
 
     /*function showMyImage(fileInput) {
@@ -54,7 +56,6 @@ if(isset($files)){
     /*    }*/
 
     function readURL_corr(input) {
-    debugger;
     if (input.files && input.files[0]) {
     var reader = new FileReader();
 
@@ -673,7 +674,7 @@ if(isset($files)){
 
 var isReadm = "<?php  echo @$isReAdm; ?>";
 
-if(isReadm != 1)
+if(isReadm == 0)
     {
     $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();    
     }
@@ -1282,63 +1283,7 @@ if(isReadm != 1)
     
 });  
         })
-        var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
-        var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
-        var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
-        var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
-        var spec_case_inst = "<?php   echo @$msg; ?>"
-        var excep_Invalid_formno = "<?php  echo @$excep; ?>"
-        var restore_msg = "<?php   echo  @$restore_msg; ?>"
-        if(restore_msg!="")
-        {
-             alertify.success(restore_msg);
-        }
-        if (excep_Invalid_formno != "")
-        {
-             alertify.error("Invalid Form No. Please write Valid Form No.");
-        }
-        debugger;
-        if(spec_case_inst == "Saved")
-        {
-             alertify.success("Saved Successfully");
-        }
-        else if (spec_case_inst == "'Not Saved")
-        {
-             alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
-        }
-        if(BatchRelease_Op != "")
-        {
-            if(BatchRelease_Op == "success")
-            {
-                alertify.success("Batch Release Successfully");    
-            }
-            else if(BatchRelease_Op == "Fail")
-            {
-                alertify.error("A Problem occur, Please Try Again later.");
-            }
-
-        } 
-        if(BatchRestore_Op != "")
-        {
-            if(BatchRelease_Op == "success")
-            {
-                alertify.success("Batch Restored Successfully");    
-            }
-            else if(BatchRelease_Op == "Fail")
-            {
-                alertify.error("A Problem occur, Please Try Again later.");
-            }
-
-        } 
-        if(success_BatchRelease != "")
-        {
-            alertify.success(success_BatchRelease);
-        } 
-        if(error_BatchRelease != "")
-        {
-            alertify.error(error_BatchRelease);
-        }  
-
+  
         var error = "<?php echo @$error; ?>";
         if(error != ""){
             alertify.error(error);
@@ -1490,6 +1435,7 @@ if(isReadm != 1)
             $("#corr_sub8").val(sub8_selected);
 
         }
+        
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
@@ -2778,6 +2724,72 @@ if(isReadm != 1)
     {
         $( "#uplodpics" ).submit();
     }
+           var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
+        var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
+        var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
+        var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
+        var spec_case_inst = "<?php   echo @$msg; ?>"
+        var excep_Invalid_formno = "<?php  echo @$excep; ?>"
+        var restore_msg = "<?php   echo  @$restore_msg; ?>"
+        
+         if (excep_Invalid_formno == "success")
+        {
+            alertify.success("Updated Successfully");
+        }
+        else  if (excep_Invalid_formno != "")
+        {
+             alertify.error("Invalid Form No. Please write Valid Form No.");
+        }
+        else  if(restore_msg!="")
+        {
+            alertify.success(restore_msg);
+        }
+        
+        if(restore_msg!="")
+        {
+             alertify.success(restore_msg);
+        }
+       
+        if(spec_case_inst == "Saved")
+        {
+             alertify.success("Saved Successfully");
+        }
+        else if (spec_case_inst == "'Not Saved")
+        {
+             alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
+        }
+        if(BatchRelease_Op != "")
+        {
+            if(BatchRelease_Op == "success")
+            {
+                alertify.success("Batch Release Successfully");    
+            }
+            else if(BatchRelease_Op == "Fail")
+            {
+                alertify.error("A Problem occur, Please Try Again later.");
+            }
+
+        } 
+        if(BatchRestore_Op != "")
+        {
+            if(BatchRelease_Op == "success")
+            {
+                alertify.success("Batch Restored Successfully");    
+            }
+            else if(BatchRelease_Op == "Fail")
+            {
+                alertify.error("A Problem occur, Please Try Again later.");
+            }
+
+        } 
+        if(success_BatchRelease != "")
+        {
+            alertify.success(success_BatchRelease);
+        } 
+        if(error_BatchRelease != "")
+        {
+            alertify.error(error_BatchRelease);
+        }  
 
     <?php if(@$isdashbord == 1) {?>
         /*  $( window ).load(function() {

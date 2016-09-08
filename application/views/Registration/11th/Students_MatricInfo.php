@@ -23,7 +23,7 @@
                                                <!-- <td style="text-align: left;"><label class=mytblmargin><b>Date of Birth</b><br /><span class="mytblmargin">(DD-MM-YYYY)</span></label></td>
                                                 <td><input type="text" class="panjang required custom" id="dob" name="dob" value=""   ></td> -->
                                                 <td style="text-align: left;"><b class=mytblmargin>Old Roll No </b></td>
-                                                <td><input type="text" class="panjang custom required" id="oldRno" required name="oldRno" value="" maxlength="6" /></td>
+                                                <td><input type="text" class="panjang custom required" id="oldRno" required name="oldRno" value="" maxlength="10" /></td>
                                                 
                                                  <td style="text-align: left;"><b class=mytblmargin>Year</b></td>
                                                 <td><select id="oldYear" class="custom" name="oldYear">
@@ -36,7 +36,7 @@
                                                     $prev_year = date("Y",strtotime("-1 year"));
                                                     
                                                 if($gender== 1){ ?>
-                                                        <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
+                                                       <option value="<?php echo $current_year;  ?>"><?php echo $current_year;  ?></option>
                                                         <option value="<?php echo $prev_year; ?>" ><?php echo $prev_year; ?></option>  
                                                         <option value="<?php echo date("Y",strtotime("-2 year")); ?>" ><?php echo date("Y",strtotime("-2 year")); ?></option>  
                                                         <option value="<?php echo date("Y",strtotime("-3 year")); ?>" ><?php echo date("Y",strtotime("-3 year")); ?></option>  

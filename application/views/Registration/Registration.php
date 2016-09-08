@@ -15,7 +15,7 @@
                         <h1    style="text-align: center;"><font color="#000000" size="+1" >Note:-Last Date of Online Registartion for 9th  without late fee is <b class="blink_text"> <?php echo  date("d F, Y", strtotime($lastdate));?></b></font></h1>
                         <h4>Welcome to Board of Intermediate &amp; Secondary Education, GUJRANWALA</br></br> &nbsp; Dashboard</h4>
 
-
+                         <?php if($isfeedingallow == 1) {?>
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Registration/NewEnrolment"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>New-Registration</a>
                         </div>
@@ -25,17 +25,17 @@
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Registration/EditForms"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>Edit Form</a>
                         </div>
-                        <div class="shortcutHome">
-                            <a href="<?php echo base_url(); ?>Registration/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Printing </a>
-                        </div>
+                        
                         <div class="shortcutHome">
 
 
                             <a href="<?php echo base_url(); ?>Registration/CreateBatch"><img src="<?php echo base_url();?>assets/img/batch_list.png"><br>Create Batch</a> 
 
                         </div>
-
-
+                          <?php }?>
+                         <div class="shortcutHome">
+                            <a href="<?php echo base_url(); ?>Registration/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>Printing </a>
+                        </div>
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Registration/batchlist"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Batch List</a>
                         </div>

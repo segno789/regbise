@@ -86,13 +86,14 @@
                     <div class='controls controls-row'>  <label class='control-label span1' >  SPECIAL FEE: </label>  <input class='span3'  type='number' id='Spec_Fee' name='Spec_Fee' placeholder='SPECIAL FEE'  required='required' value="" >
                     </div>
                 </div>    
-                  <div class='control-group'>
+                <input type="hidden" value="1" name="IsActivated" id="IsActivated">
+                 <!-- <div class='control-group'>
 
                     <div class='controls controls-row'>  <label class='control-label span1' >  ACTIVATED : </label>   
                     <div class="span3"><label class="span1"><input type="radio" value="1"  checked="checked" name="IsActivated" id="IsActivated" style="    width: 24px;    height: 24px;" > YES </label> <label class="span1"> <input type="radio" value="0" style="    width: 24px;    height: 24px;" name="IsActivated" id="IsActivated" >      NO</label></div>
                     
                     </div>
-                </div>    
+                </div>    -->
               
             <?php
             // DebugBreak();

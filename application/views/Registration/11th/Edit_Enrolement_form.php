@@ -96,11 +96,11 @@
                                         // $med = 2; 
                                         if($med == 1)
                                         {
-                                            echo  "<option value='1' selected='selected'>Urdu</option> <option value='1'>English</option>";
+                                            echo  "<option value='1' selected='selected'>Urdu</option> <option value='2'>English</option>";
                                         }
                                         else
                                         {
-                                            echo  "<option value='2' >Urdu</option> <option value='2' selected='selected'>English</option>";
+                                            echo  "<option value='2' selected='selected'>English</option><option value='1' >Urdu</option> ";
                                         }
                                         ?>
 
@@ -157,7 +157,7 @@
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
                                     }
                                     ?>
-
+                                        <input type="hidden" name="matric_sub1" id="matric_sub1" value="<?php  echo $data[0]['sub1']; ?>">
                                     <label class="control-label span2" for="gender1">
                                         Gender :
                                     </label> 
@@ -275,7 +275,7 @@
                                         <?php
                                         // DebugBreak();
                                         $grp = $data[0]['RegGrp'];
-                                        $subgroups =  split(',',$grp_cdi);
+                                        $subgroups =  explode(',',@$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
                                         {
@@ -495,7 +495,8 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="sub5" class="span3 dropdown" name="sub5" selected="selected">
-                                       
+                                        <?php  if($isReAdm != 1)
+                                            { echo "";} ?>
                                         <option value="<?php if($isReAdm != 1) {echo $data[0]['sub5'];} else{ echo "";} ?>"><?php  if($isReAdm != 1) {echo array_search($data[0]['sub5'],$subarray);} else {echo "";}
 
                                         ?></option>

@@ -830,14 +830,21 @@ class Registration extends CI_Controller {
 
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2015;
+                $year = 2016;
             }
             else{
                 $isReAdm = 0;
                 $year = 2016;    
             }
-
-            $RegStdData = array('data'=>$this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+            $datainfo = $this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id);
+            
+            
+            if($datainfo[0]['IsReAdm'] == 1 )
+            {
+                $isReAdm = 2;
+            }
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0);
+            
         }
 
 
@@ -848,7 +855,7 @@ class Registration extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-        DebugBreak();
+       
 
         $this->load->model('Registration_model');
 
@@ -913,18 +920,7 @@ class Registration extends CI_Controller {
             mkdir($target_path);
         }
 
-        $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
-        $config['max_size']      = '20';
-        // $config['max_width']     = '260';
-        // $config['max_height']    = '290';
-        $config['min_width']     = '110';
-        $config['min_height']    = '100';
-        $config['overwrite']     = TRUE;
-        $config['file_name']     = $formno.'.jpg';
-
-        $filepath = $target_path. $config['file_name']  ;
-       //  DebugBreak();
+       // DebugBreak();
         if(@$_POST['IsReAdm'] == '1')
         {
 
@@ -1004,11 +1000,22 @@ class Registration extends CI_Controller {
             $allinputdata['regoldsess']= 0;
             $allinputdata['regoldclass']=0;
             $allinputdata['regoldyear']= 0;
-            $allinputdata['isreadm']= 0;
+            $allinputdata['isreadm']= $_POST['IsReAdm'];
         }
 
       
+      
+        $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg';
+        $config['max_size']      = '20';
+        // $config['max_width']     = '260';
+        // $config['max_height']    = '290';
+        $config['min_width']     = '110';
+        $config['min_height']    = '100';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
 
+        $filepath = $target_path. $config['file_name']  ;
      
 
 
@@ -1323,7 +1330,7 @@ class Registration extends CI_Controller {
     public function ReAdmission_check()
     {
         // DebugBreak();
-        $RollNo = $this->uri->segment(3);
+               $RollNo = @$_POST['oldRno'];//$this->uri->segment(3);
         //$Spl_case = $this->uri->segment(4);
 
         $this->load->model('Registration_model');
@@ -1350,7 +1357,7 @@ class Registration extends CI_Controller {
            // DebugBreak();
             $formno = $user_info[0]['formNo'];
             $OldRno = $user_info[0]['rno'];
-            $year = 2015;
+            $year = 2016;
             
             $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
             $RegStdData['data'][0]=$user_info[0];
@@ -1508,7 +1515,15 @@ class Registration extends CI_Controller {
             redirect('Registration/CreateBatch');
             return;
         }
-        $is_gov            =  $user_info['info'][0]['IsGovernment'];  
+        if(ISREADMISSION == 1)
+        {
+         $is_gov = 0;  
+        }
+        else
+        {
+             $is_gov            =  $user_info['info'][0]['IsGovernment'];   
+        }
+      
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 100;
         $reg_fee           = 1000;
@@ -1530,40 +1545,40 @@ class Registration extends CI_Controller {
         else
         {
             if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
-        {
-            $rule_fee   =  $this->Registration_model->getreulefee(1); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-        }
-        else if($user_info['info'][0]['feedingDate'] != null)
-        {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-            if(date('Y-m-d')<=$lastdate)
             {
-                $rule_fee  =  $this->Registration_model->getreulefee(1); 
+                $rule_fee   =  $this->Registration_model->getreulefee(1); 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
-        }
-        else if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
-        {
-            $rule_fee   =  $this->Registration_model->getreulefee(2); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-        }
-        
-        if($is_gov == 1 && $rule_fee[0]['Rule_Fee_ID'] ==1)
-        {
-            $reg_fee = 0;
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
-        }
-        else
-        {
-            $reg_fee = $rule_fee[0]['Reg_Fee'];
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+            else if($user_info['info'][0]['feedingDate'] != null)
+            {
+                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+                if(date('Y-m-d')<=$lastdate)
+                {
+                    $rule_fee  =  $this->Registration_model->getreulefee(1); 
+                }
+            }
+            else if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+            {
+                $rule_fee   =  $this->Registration_model->getreulefee(2); 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
 
-        }  
+            if($is_gov == 1 && $rule_fee[0]['Rule_Fee_ID'] ==1)
+            {
+                $reg_fee = 0;
+                $Lreg_fee = $rule_fee[0]['Fine'];
+                $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+            }
+            else
+            {
+                $reg_fee = $rule_fee[0]['Reg_Fee'];
+                $Lreg_fee = $rule_fee[0]['Fine'];
+                $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+
+            }  
         } 
       
-        // DebugBreak();
+       
         $q1 = $user_info['fee'];
         $total_std = 0;
         foreach($q1 as $k=>$v) 
@@ -1579,13 +1594,27 @@ class Registration extends CI_Controller {
                 if($is_gov == 1 && $rule_fee[0]['Rule_Fee_ID'] ==1)
                 {
                     $reg_fee = 0;
-                    $Lreg_fee = $rule_fee[0]['Fine'];
+                     if($v['IsReAdm']==1)
+                    {
+                        $Lreg_fee = 0; 
+                    }
+                    else
+                    {
+                        $Lreg_fee = $rule_fee[0]['Fine'];
+                    }
                     $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
                 }
                 else
                 {
                     $reg_fee = $rule_fee[0]['Reg_Fee'];
-                    $Lreg_fee = $rule_fee[0]['Fine'];
+                      if($v['IsReAdm']==1)
+                    {
+                        $Lreg_fee = 0; 
+                    }
+                    else
+                    {
+                        $Lreg_fee = $rule_fee[0]['Fine'];
+                    }
                     $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
                 }
@@ -1628,7 +1657,7 @@ class Registration extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        //DebugBreak();
+       
         if(!empty($_POST["chk"]))
         {
 
@@ -1647,8 +1676,15 @@ class Registration extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $page_name  = "Create Batch";
         $User_info_data = array('Inst_Id'=>$Inst_Id,'forms_id'=>$forms_id);
-        $user_info  =  $this->Registration_model->user_info_Formwise($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
-        $is_gov            =  $user_info['info'][0]['IsGovernment'];  //getValue("IsGovernment", " Admission_online..tblinstitutes_all", "Inst_cd =".$user->inst_cd);
+        $user_info  =  $this->Registration_model->user_info_Formwise($User_info_data); //$db->first("SELECT * 
+        if(ISREADMISSION == 1)
+        {
+            $is_gov = 0;  
+        }
+        else
+        {
+            $is_gov    =  $user_info['info'][0]['IsGovernment'];   
+        }
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 0;
         $reg_fee           = 1000;
@@ -1674,44 +1710,44 @@ class Registration extends CI_Controller {
         else
         {
             
-        
-         if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
-        {
-            $rule_fee   =  $this->Registration_model->getreulefee(2); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-        }
-        else if($user_info['info'][0]['feedingDate'] != null)
-        {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
-            if(date('Y-m-d')<=$lastdate)
+
+            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
             {
-                $rule_fee  =  $this->Registration_model->getreulefee(1); 
+                $rule_fee   =  $this->Registration_model->getreulefee(1); 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+            else if($user_info['info'][0]['feedingDate'] != null)
+            {
+                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+                if(date('Y-m-d')<=$lastdate)
+                {
+                    $rule_fee  =  $this->Registration_model->getreulefee(1); 
+                }
+                else
+                {
+                    $rule_fee  =  $this->Registration_model->getreulefee(2); 
+                }
+            }
+            else if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+            {
+                $rule_fee   =  $this->Registration_model->getreulefee(2); 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+
+            if($is_gov == 1 && $rule_fee[0]['Rule_Fee_ID'] ==1)
+            {
+                $reg_fee = 0;
+                $Lreg_fee = $rule_fee[0]['Fine'];
+                $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
             }
             else
             {
-                $rule_fee  =  $this->Registration_model->getreulefee(2); 
-            }
-        }
-        else if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
-        {
-            $rule_fee   =  $this->Registration_model->getreulefee(2); 
-            $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
-        }
-        
-        if($is_gov == 1 && $rule_fee[0]['Rule_Fee_ID'] ==1)
-        {
-            $reg_fee = 0;
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
-        }
-        else
-        {
-            $reg_fee = $rule_fee[0]['Reg_Fee'];
-            $Lreg_fee = $rule_fee[0]['Fine'];
-            $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
+                $reg_fee = $rule_fee[0]['Reg_Fee'];
+                $Lreg_fee = $rule_fee[0]['Fine'];
+                $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
-        }
-        
+            }
+
         }
         // DebugBreak();
         $q1 = $user_info['fee'];
@@ -1724,21 +1760,34 @@ class Registration extends CI_Controller {
             {
                   if($is_gov == 1 &&   $rule_fee[0]['Rule_Fee_ID'] ==1)
                 {
+                    if($v['IsReAdm']==1)
+                    {
+                        $Lreg_fee = 0; 
+                    }
+                    else
+                    {
+                        $Lreg_fee = $rule_fee[0]['Fine'];
+                    }
                     $reg_fee = 0;
-                    $Lreg_fee = $rule_fee[0]['Fine'];
+                   
                     $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
                 }
                 else
                 {
+                    if($v['IsReAdm']==1)
+                    {
+                        $Lreg_fee = 0; 
+                    }
+                    else
+                    {
+                        $Lreg_fee = $rule_fee[0]['Fine'];
+                    }
                     $reg_fee = $rule_fee[0]['Reg_Fee'];
-                    $Lreg_fee = $rule_fee[0]['Fine'];
+                    
                     $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
                 }
-                if($v['IsReAdm']==1)
-                {
-                   $Lreg_fee = 0; 
-                }
+               
                 
                 if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
@@ -2587,7 +2636,7 @@ class Registration extends CI_Controller {
         $temp = $user['Inst_Id'].'09-2016-18';
         $image =  $this->set_barcode($temp);
 
-        //  DebugBreak();    
+          //DebugBreak();    
         $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
         $user_info  =  $this->Registration_model->getuser_info($User_info_data); 
 
@@ -2634,12 +2683,22 @@ class Registration extends CI_Controller {
                 $rule_fee[0]['isfine'] = 1; 
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
+          //  DebugBreak();
+            if(ISREADMISSION == 1)
+            {
+                $rule_fee  =  $this->Registration_model->getreulefee(1);
+                $rule_fee[0]['isfine'] = 1; 
+                $isfine = 1;
+            }
+        
+            
+            
 
         } 
 
 
 
-
+//DebugBreak();
         $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
         $this->load->view('Registration/9th/RevenueForm.php',$data);
     }
@@ -3096,16 +3155,16 @@ class Registration extends CI_Controller {
                     redirect('Registration/'.$viewName);
                     return;
                 }
-                else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
+             /*   else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
                 {
                     // DebugBreak();
                     $allinputdata['excep'] = 'This Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect('Registration/'.$viewName);
                     return;
-                }
+                }      */
             }
-            else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
+            /*else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
             {
                 // DebugBreak();
                 $allinputdata['excep'] = 'This Form is already Feeded.';
@@ -3126,7 +3185,7 @@ class Registration extends CI_Controller {
 
 
 
-            }
+            }                */
 
             else if(@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == '' && $isupdate ==1)  )
             {
