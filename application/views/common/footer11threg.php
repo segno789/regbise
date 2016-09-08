@@ -770,7 +770,9 @@ debugger;
         var image = $('#image').val();
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
+         var mat_Year = $('#old_ssc_year').val();
         var status = 0;
+        
         debugger;
          var NationalityVal = $("input[name=nationality]:checked").val();
          if(NationalityVal==2)
@@ -805,7 +807,7 @@ debugger;
             return status;
         }   
 
-        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        else if(parseInt(mat_Year) > 2013 && (bFormNo == "" || bFormNo == 0 || bFormNo == undefined))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -814,7 +816,7 @@ debugger;
             $('#bay_form').focus();  
             return status; 
         }
-        else if(FNic == "" || FNic.length == undefined )
+        else if(parseInt(mat_Year) > 2013 && (FNic == "" || FNic.length == undefined ))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1909,6 +1911,7 @@ debugger;
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
+       
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  

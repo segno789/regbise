@@ -548,7 +548,7 @@
 
                             function checks(){
 
-                                var status  =  check_NewEnrol_validation();
+                                var status  =  check_NewEnrol_validation_11th();
                                 if(status == 0)
                                 {
 

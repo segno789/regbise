@@ -460,7 +460,7 @@ class Registration_11th extends CI_Controller {
                 // $year = 2016;    
             }
 
-//             DebugBreak();
+             //DebugBreak();
             $feedingcheck=$this->Registration_11th_model->IsFeeded($data);
             $feeding_inst_cd =$feedingcheck[0]['coll_cd'];
             if($feedingcheck != false)
@@ -628,7 +628,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-      //  DebugBreak();
+        DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -2972,7 +2972,7 @@ class Registration_11th extends CI_Controller {
     }
      function frmvalidation($viewName,$allinputdata,$isupdate)
     {
-       // DebugBreak();
+        //DebugBreak();
          $_POST['address']  = str_replace("'", "", $_POST['address'] );
           $subjectslang = array('22','23','36','34','35');
           $subjectshis = array('20','21','19');
@@ -3030,7 +3030,7 @@ class Registration_11th extends CI_Controller {
 
         }*/
 
-        else if(@$_POST['bay_form'] == ''  || (@$allinputdata['BForm'] == '' && $isupdate ==1) )
+        else if((@$_POST['bay_form'] == '' && @$_POST['OldYear']>2013)  || (@$allinputdata['BForm'] == '' && $isupdate ==1 && @$_POST['OldYear']>2013) )
         {
             $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3104,7 +3104,7 @@ class Registration_11th extends CI_Controller {
 
             }
 
-            else if(@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == '' && $isupdate ==1)  )
+            else if((@$_POST['father_cnic'] == '' && @$_POST['OldYear']>2013) || ($allinputdata['FNIC'] == '' && $isupdate ==1 && @$_POST['OldYear']>2013)  )
             {
                 $allinputdata['excep'] = 'Please Enter Your Father CNIC';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
@@ -3113,7 +3113,7 @@ class Registration_11th extends CI_Controller {
 
 
             }
-            else if((@$_POST['bay_form'] == @$_POST['father_cnic']) || (@$_POST['father_cnic'] == @$_POST['bay_form']) )
+            else if((@$_POST['bay_form'] == @$_POST['father_cnic'] && @$_POST['OldYear']>2013) || (@$_POST['father_cnic'] == @$_POST['bay_form'] && @$_POST['OldYear']>2013) )
             {
                 $allinputdata['excep'] = 'Your Bay Form and FNIC No. are not same';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);

@@ -34,7 +34,7 @@ class Login extends CI_Controller {
              $this->load->model('login_model'); 
              $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
              $isgroup = -1;
-         // DebugBreak();   
+          DebugBreak();   
         if($logedIn != false)
             {  
 
@@ -140,7 +140,19 @@ class Login extends CI_Controller {
                                  $isfeeding = 1;
                             }
                            else {
-                                 $isfeeding = 0;
+                               if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                                    {
+                                        $isfeeding = 1    ;
+                                         $lastdate = SINGLE_LAST_DATE; 
+                                    }
+                                    else
+                                    {
+                                 $isfeeding = 0;       
+                                    }
+                                 
+                                
+                                 
+                                 
                             }
                             
                         }
