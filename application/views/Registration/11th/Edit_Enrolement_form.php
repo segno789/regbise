@@ -91,7 +91,7 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="medium" class="dropdown span3" name="medium">
-                                        <?php //DebugBreak();
+                                        <?php // DebugBreak();
                                         $med = $data['0']['med'] ;
                                         // $med = 2; 
                                         if($med == 1)
@@ -157,7 +157,7 @@
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
                                     }
                                     ?>
-
+                                        <input type="hidden" name="matric_sub1" id="matric_sub1" value="<?php  echo $data[0]['sub1']; ?>">
                                     <label class="control-label span2" for="gender1">
                                         Gender :
                                     </label> 

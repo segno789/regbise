@@ -129,7 +129,7 @@
 
                                   //  DebugBreak();
                                     $nat = @$data[0]['IsPakistani'];
-                                    $matric_sub1 = $data[0]['sub1'];
+                                    $matric_sub1 = @$data[0]['sub1'];
                                     
                                         if(@$brd_cd ==1 )
                                         {

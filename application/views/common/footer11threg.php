@@ -39,7 +39,6 @@ if(isset($files)){
         });
 //data_table
         var data_excep = "<?php echo @$excep_halt; ?>";
-        console.log(data_excep)
         if(data_excep != '')
         {
 
@@ -654,7 +653,7 @@ if(isset($files)){
 debugger;
 //console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
-        if(NationalityVal==2 && matric_sub1.value == 11)
+        if(NationalityVal==2 || matric_sub1.value == 11)
         {
             $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
             
@@ -772,7 +771,8 @@ debugger;
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
-        debugger;
+        var mat_Year = $('#old_ssc_year').val();
+      debugger;
          var NationalityVal = $("input[name=nationality]:checked").val();
          if(NationalityVal==2)
         {
@@ -806,16 +806,16 @@ debugger;
             return status;
         }   
 
-        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        else if(parseInt(mat_Year) > 2013 && (bFormNo == "" || bFormNo == 0 || bFormNo == undefined) && isotherboard != 1)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
             // $('#ErrMsg').html("<b>Please Enter your bay-Form</b>"); 
-            alertify.error("Please Enter your bay-Form") 
+            alertify.error("Please Enter your bay-Form.") 
             $('#bay_form').focus();  
             return status; 
         }
-        else if(FNic == "" || FNic.length == undefined )
+        else if(parseInt(mat_Year) > 2013 && (FNic == "" || FNic.length == undefined ))
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1910,6 +1910,7 @@ debugger;
         var MarkOfIdent = $('#MarkOfIden').val();
         var Inst_Rno = $('#Inst_Rno').val();
         var status = 0;
+        debugger;
         // alert('sub6 '+sub6p1+ ' and '+ sub6p2);
         if(name == "" ||  name == undefined){
             $('#ErrMsg').show();  
@@ -1927,7 +1928,7 @@ debugger;
             return status;
         }   
 
-        else if(bFormNo == "" || bFormNo == 0 || bFormNo == undefined)
+        else if((bFormNo == "" || bFormNo == 0 || bFormNo == undefined) && brd_cd != 1)
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
