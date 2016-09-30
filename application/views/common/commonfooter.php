@@ -33,7 +33,12 @@
  
     
     
+      function releaseForm(formrno)
+    {
      
+        window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
+    }
+    
     $(document).ready(function(){
         //$spl_cd
          $('#data-table').dataTable({

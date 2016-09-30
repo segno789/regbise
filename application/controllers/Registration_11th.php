@@ -408,7 +408,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-      //  DebugBreak();
+    //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -528,8 +528,17 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
+         else if($msg != '')
+            {
+                $this->session->set_flashdata('matric_error', $msg);
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+
+            }
         else  if($cand_gender != $inst_userinfo_gender)
         {
+           // DebugBreak();
+           // DebugBreak();
             if($cand_gender==1 && $inst_userinfo_gender == 2)
             {
                 $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD');
@@ -552,15 +561,8 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
-        else
-            if($msg != '')
-            {
-                $this->session->set_flashdata('matric_error', $msg);
-                redirect('Registration_11th/Students_matricInfo');
-                return;
-
-            }
-            else if($spl_cd != null)
+       
+            else if($spl_cd != null && $spl_cd != 34)
             {
                 $this->session->set_flashdata('matric_error', 'You can not appear due to '.$SpacialCase);
                 redirect('Registration_11th/Students_matricInfo');
@@ -1629,7 +1631,7 @@ class Registration_11th extends CI_Controller {
         }
         if($is_gov == 1)
         {
-            $reg_fee = 0;
+            $reg_fee = $rule_fee[0]['Reg_Fee'];
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
         }
@@ -1651,7 +1653,7 @@ class Registration_11th extends CI_Controller {
             {
                 if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
-                    $reg_fee = 0;
+                   $reg_fee = $rule_fee[0]['Reg_Fee'];
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 }
@@ -1659,7 +1661,7 @@ class Registration_11th extends CI_Controller {
                 {
                     if($is_gov == 1)
                     {
-                        $reg_fee = 0;
+                        $reg_fee = $rule_fee[0]['Reg_Fee'];
                         $Lreg_fee = $rule_fee[0]['Fine'];
                         $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
                     }
@@ -1686,6 +1688,11 @@ class Registration_11th extends CI_Controller {
             } // end of Else
 
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+             if($total_std > 360)
+            {
+                break;
+            }
+
         }
 
 
@@ -1763,7 +1770,7 @@ class Registration_11th extends CI_Controller {
         }
         if($is_gov == 1)
         {
-            $reg_fee = 0;
+            $reg_fee = $rule_fee[0]['Reg_Fee'];;
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
         }
@@ -1788,8 +1795,8 @@ class Registration_11th extends CI_Controller {
             {
                 if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
-                    $TotalRegFee =  0;
-                    $reg_fee = 0;
+                      $TotalRegFee = $TotalRegFee + $reg_fee;
+                    $reg_fee = $rule_fee[0]['Reg_Fee'];;
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 }
@@ -1809,6 +1816,11 @@ class Registration_11th extends CI_Controller {
             } // end of Else
 
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+             if($total_std > 360)
+            {
+                break;
+            }
+
         }
 
 
@@ -3085,7 +3097,7 @@ class Registration_11th extends CI_Controller {
                     return;
                 }*/
          //   }
-            else if($this->Registration_11th_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 && $allinputdata['SSC_brd_cd'] != 1 )
+          /*  else if($this->Registration_11th_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 && $allinputdata['SSC_brd_cd'] != 1 )
             {
                 // DebugBreak();
                 $allinputdata['excep'] = 'This Form is already Feeded.';
@@ -3100,7 +3112,7 @@ class Registration_11th extends CI_Controller {
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('Registration_11th/'.$viewName);
                 return;
-            }
+            }         */
 
             else if((@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == ''  && $isupdate ==1))  && @$allinputdata['iyear']>=2014   )
             {

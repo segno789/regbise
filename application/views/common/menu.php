@@ -39,9 +39,15 @@
                             11th Registration
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '8') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            Migration
+                        </a>
+                    </li>
                     <?php }
 
-                else if($isselected == '2' OR $isselected == '7'){?>
+                else if($isselected == '2' OR $isselected == '7'   OR $isselected == '10'){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -53,6 +59,12 @@
                         <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            Migration
                         </a>
                     </li>
                     <?php } 
@@ -267,7 +279,30 @@
                 <?php
             }
             ?>
-            <?php   // 9th admission
+            <?php   
+            ///Migration
+             if($isselected == '10'){
+                ?>
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass">
+                            9th Class Students
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease">
+                            Release List
+                        </a>
+                    </li>
+                  
+
+                </ul>
+                <?php
+            }
+            
+            
+            // 9th admission
             if($isselected == '3'){
                 ?>
                 <ul >
