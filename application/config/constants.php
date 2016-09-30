@@ -48,8 +48,8 @@ define('ISREADMISSION', '1');
 define('IMAGE_PATH11', 'uploads/2016/colleges/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE11', '2016-09-20');
-define('DOUBLE_LAST_DATE11', '2016-09-21');
+define('SINGLE_LAST_DATE11', '2016-09-30');
+define('DOUBLE_LAST_DATE11', '2016-10-01');
 
 //===============11th challan varaible
 define('corr_bank_chall_class1','11th');

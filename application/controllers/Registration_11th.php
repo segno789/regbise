@@ -883,7 +883,7 @@ class Registration_11th extends CI_Controller {
         
         $this->frmvalidation('Get_students_record',$data,0);
 
-       // DebugBreak();
+        //DebugBreak();
         $type = pathinfo($filepath, PATHINFO_EXTENSION);
         $pic_data = file_get_contents($filepath);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($pic_data);
@@ -1629,7 +1629,7 @@ class Registration_11th extends CI_Controller {
         }
         if($is_gov == 1)
         {
-            $reg_fee = 0;
+            $reg_fee = $rule_fee[0]['Reg_Fee'];
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
         }
@@ -1651,7 +1651,8 @@ class Registration_11th extends CI_Controller {
             {
                 if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
-                    $reg_fee = 0;
+                    //$reg_fee = 0;
+                    $reg_fee = $rule_fee[0]['Reg_Fee'];
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 }
@@ -1659,7 +1660,8 @@ class Registration_11th extends CI_Controller {
                 {
                     if($is_gov == 1)
                     {
-                        $reg_fee = 0;
+                        //$reg_fee = 0;
+                        $reg_fee = $rule_fee[0]['Reg_Fee'];
                         $Lreg_fee = $rule_fee[0]['Fine'];
                         $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
                     }
@@ -1686,6 +1688,10 @@ class Registration_11th extends CI_Controller {
             } // end of Else
 
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+             if($total_std > 360)
+            {
+                break;
+            }
         }
 
 
@@ -1809,6 +1815,10 @@ class Registration_11th extends CI_Controller {
             } // end of Else
 
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
+            if($total_std > 360)
+            {
+                break;
+            }
         }
 
 
