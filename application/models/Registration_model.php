@@ -255,30 +255,11 @@ class Registration_model extends CI_Model
     public function EditEnrolement($inst_cd)
     {
 
-        // DebugBreak();
-        //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
-        //sp_get_regInfo_spl_case
-
         $query = $this->db->query("Registration..sp_get_regInfo $inst_cd,9,2016,1");    
-
-
-
-
-
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
             return $query->result_array();
-            // $q1 = array('stdinfo'=>$query->result_array()) ;
-            //            for($i= 0; $i<$rowcount; $i++){
-            //            $q1['stdinfo'][$i]['sub1'];
-            //            }
-            //            $q1['stdinfo']['sub1'];
-            //            $q2 = $this->db->query("select SUB_ABR from tblsubject_newschm where SUB_CD in (1,2,3,4,5)");
-            //            $q2 = array('stdinfo_sub'=>$q2->result_array()) ;
-            //            $query = array('stdinfo_reg'=>$q1,'stdinfo_sub'=>$q2);
-
-
         }
         else
         {
@@ -331,12 +312,11 @@ class Registration_model extends CI_Model
     }
     public function GetFormNo($Inst_Id)
     {
-        // DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $Inst_Id));
         $rowcount = $formno->num_rows();
-
+//$rowcount = 1258;
         if($rowcount == 0 )
         {
             $formno =  ($Inst_Id.'0001' );
@@ -345,7 +325,9 @@ class Registration_model extends CI_Model
         else
         {
             $row  = $formno->result_array();
-            $formno = $row[0]['formno']+1;
+            $fromno = $row[0]['formNo'];
+            $row = $Inst_Id.str_pad($rowcount, 4, '0', STR_PAD_LEFT); 
+            $formno = $row+1;
             return $formno;
         }
 

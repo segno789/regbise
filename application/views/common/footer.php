@@ -845,6 +845,14 @@ if(isReadm == 0)
         $('#sub8').empty();
         window.location.href = '<?=base_url()?>/Registration/NewEnrolment_EditForm/'+formrno
     }
+     function releaseForm(formrno)
+    {
+     
+        window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
+    }
+    
+    
+    
     function ReturnForm(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/Registration/return_pdf/'+Batch_ID + '/1'
@@ -2321,6 +2329,32 @@ if(isReadm == 0)
     // $("#registration").validate();
     //  $("#cand_name").focus();
 
+       function  check_migration_validation(){
+       
+        var grp_cd = $('#migrateto').val();
+      
+        var status = 0;
+      
+
+       
+
+           if ($("#migrateto").find('option:selected').val() < 1) 
+        {
+           alertify.error("Please Select Migrate To Inst.") ;
+            // alert('Study Group not selected ');                          
+            $("#migrateto").focus();
+            return status;  
+        }
+     
+        status = 1;
+        return status;
+
+
+
+
+    }
+    
+    
     function  check_NewEnrol_validation(){
         var name =  $('#cand_name').val();
         var dist_cd= $('#dist option:selected').val();
