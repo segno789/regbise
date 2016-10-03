@@ -1250,6 +1250,324 @@ class Registration extends CI_Controller {
         $this->load->view('Registration/9th/BatchRelease.php',$error);//,$myinfo);
         $this->load->view('common/footer.php');
     }
+    
+     public function ChallanForm_Reg9th_Regular()
+    {
+       // DebugBreak();
+     $Batch_Id = $this->uri->segment(3);
+     $this->load->library('session');
+        $this->load->library('NumbertoWord');
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+         $this->load->model('Registration_model');
+        $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
+         //$grp_cd = $this->uri->segment(3);
+       // $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
+        //  DebugBreak();
+        $result = $this->Registration_model->Print_challan_Form($fetch_data);
+        $this->load->library('PDF_Rotate');
+
+        $ctid=1;  //correction type of id starts from one and multiples by 2 for next type of correction id
+      
+            $feestructure[]    =  $result[0]['Total_ProcessingFee'];    
+            $displayfeetitle[] =  'Total Processing Fee';    
+       
+            $feestructure[]    =  $result[0]['Total_RegistrationFee'];   
+            $displayfeetitle[] =  'Total Admission Fee';   
+       
+            $feestructure[]    =  $result[0]['Total_LateRegistrationFee']; 
+            $displayfeetitle[] =  'Total Late Admission Fee'; 
+           /* $feestructure[]    =  $result[0]['TotalCertificateFee']; 
+            $displayfeetitle[] =  'Total Certificate Fee';  */  
+       
+        $turn=1;     
+        $pdf=new PDF_Rotate("P","in","A4");
+        $pdf->AliasNbPages();
+        $pdf->SetTitle("Challan Form | Admission inter 2016 Supplemantry Batch Form Fee");
+        $pdf->SetMargins(0.5,0.5,0.5);
+        $pdf->AddPage();
+        $generatingpdf=false;
+        $challanCopy=array(1=>"Depositor Copy",  2=>"Admission Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
+        $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
+        $challanNo = $result[0]['Challan_No']; 
+
+      //  DebugBreak();
+     
+        $User_info_data = array('Inst_Id'=>$user['Inst_Id'],'RegGrp'=>@$RegGrp,'spl_case'=>@$Spl_case);
+        $user_info  =  $this->Registration_model->getuser_info($User_info_data); 
+
+
+
+        $isfine = 0;
+
+
+        if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
+        {
+            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
+            $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
+            $rule_fee[0]['Rule_Fee_ID']   = 0; 
+            $rule_fee[0]['isfine'] = 1; 
+            $lastdate  = date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate'])) ;
+        }
+        else
+
+        {
+            if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+            {
+                $rule_fee[0]['isfine'] = 0; 
+            }
+            else if($user_info['info'][0]['feedingDate'] != null)
+            {
+                $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+                if(date('Y-m-d')<=$lastdate)
+                {
+
+                    $rule_fee  =  $this->Registration_model->getreulefee(1);
+                    $rule_fee[0]['isfine'] = 0; 
+                }
+                else 
+                {
+                    $rule_fee   =  $this->Registration_model->getreulefee(2);
+                    $rule_fee[0]['isfine'] = 1;
+                }
+            }
+            else   if(date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>date('Y-m-d'))
+            {
+                $isfine = 1;
+                $rule_fee   =  $this->Registration_model->getreulefee(2);
+                $rule_fee[0]['isfine'] = 1; 
+                $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            }
+          //  DebugBreak();
+            if(ISREADMISSION == 1)
+            {
+                $rule_fee  =  $this->Registration_model->getreulefee(1);
+                $rule_fee[0]['isfine'] = 1; 
+                $isfine = 1;
+            }
+        
+            
+            
+
+        } 
+        /*if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d'))
+        {
+            $rule_fee   =  $this->Registration_model->getreulefee(); 
+            $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
+        }
+        else
+        {
+            $rule_fee   =  $this->Registration_model->getreulefee(); 
+            $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
+        }  */
+
+        $obj    = new NumbertoWord();
+        $obj->toWords($result[0]['Amount'],"Only.","");
+        // $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
+        $feeInWords = ucwords($obj->words);//strtoupper(cNum2Words($totalfee)); 
+
+        //-------------------- PRINT BARCODE
+        //  $pdf->SetDrawColor(0,0,0);
+        // $temp = $user['Inst_Id'].'11-2017-19';
+        //$image =  $this->set_barcode($temp);
+        
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@09@2016@1';
+        //  $image =  $this->set_barcode($temp);
+        //DebugBreak();
+        $temp =  $this->set_barcode($temp);
+
+        $yy = 0.05;
+        $dyy = 0.1;
+        $corcnt = 0;
+        for ($j=1;$j<=4;$j++) 
+        {
+
+            
+            
+            
+            $yy = 0.04;
+            if($turn==1){$dyy=0.2;} 
+            else {
+                if($turn==2){$dyy=2.65;} else  if($turn==3) {$dyy=5.2; } else {$dyy=7.75 ; $turn=0;}
+            }
+            $corcnt = 0;
+            $pdf->SetFont('Arial','BI',11);
+            $pdf->SetXY(1.0,$yy+$dyy);
+            //   DebugBreak();
+            $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
+            $pdf->Image(base_url()."assets/img/icon2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
+            //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
+            $pdf->Image(base_url().BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
+            $challanTitle = $challanCopy[$j];
+            $generatingpdf=true;
+
+
+            if($turn==1){$dy=0.5;} else {
+                if($turn==2){$dy=3.0;} else  if($turn==3) {$dy=5.5; }else {$dy=8.1 ; $turn=0;}
+            }
+            $turn++;
+            $y = 0.08;
+
+            //$pdf->SetFont('Arial','BI',14);
+            //$pdf->SetXY(5.5,$y+$dy);
+            //$pdf->Image(BARCODE_PATH.$image,3.2, 0.61  ,1.8,0.20,"PNG");
+            //$pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
+
+            $pdf->SetFont('Arial','BI',9);
+            $pdf->SetXY(1.0,$y+$dy);
+            $pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
+            $w = $pdf->GetStringWidth($challanCopy[$j]);
+            $pdf->SetXY($w+1.2,$y+$dy);
+            $pdf->SetFont('Arial','I',7);
+            $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
+
+            $pdf->SetXY($w+1.4,$y+$dy+0.15);
+            $pdf->SetFont('Arial','I',7);
+            $pdf->Cell(0, $y, 'Registration Session '.CURRENT_SESS.' '.corr_bank_chall_class, 0.25, "L");
+
+            $y += 0.25;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.5,$y+$dy-0.01);
+            $pdf->SetFillColor(0,0,0);
+            $pdf->Cell(1.5,0.2,'',1,0,'C',1);
+            $pdf->SetFillColor(255,255,255);
+            $pdf->SetTextColor(255,255,255);
+            $pdf->SetXY(0.5,$y+$dy-0.01);
+            $pdf->Cell(0, 0.25, "Due Date: ".$user_info['rule_fee'][0]['End_Date'], 0.25, "C");
+            $pdf->SetTextColor(0,0,0);
+            $pdf->SetFont('Arial','BI',8);
+            $pdf->SetXY(2.0,$y+$dy-0.04);
+            $pdf->Cell(0, 0.25, "Printing Date: ".date("d/m/y",time())."  Account Title: BISE, GUJRANWALA   CMD Account No. 00427900072103", 0.25, "C");
+            //CMD Account No. 00427900072103
+            //--------------------------- Fee Description
+            $pdf->SetXY(2.8,$y+$dy);
+            $pdf->SetFont('Arial','U',8);
+            $pdf->Cell(0.5,0.5,"Fee Description",0,'L');
+
+            //  DebugBreak();
+            //--------------------------- Challan Depositor Information
+            $pdf->SetXY(4,$y+0.1+$dy);
+            $pdf->SetFont('Arial','B',10);
+            $pdf->Cell( 0.5,0.3,"Bank Challan No:".$result[0]['Challan_No']."           Batch No.".$result[0]['Batch_ID'],0,2,'L');
+            $pdf->SetFont('Arial','U',9);
+            $pdf->Cell(0.5,0.25, "Particulars Of Depositor",0,2,'L');
+            $pdf->SetX(4.0);
+            $pdf->SetFont('Arial','B',8);
+
+            //if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
+           // $pdf->Cell(0.5,0.25,$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+            // $pdf->Cell(0.5,0.25,,0,2,'L');
+            $pdf->SetX(4);
+            $pdf->SetFont('Arial','I',6.5);
+            // DebugBreak();
+            //$pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
+            $pdf->MultiCell(4, .1, "Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0);
+            $pdf->SetXY(4,$y+1.15+$dy);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(0.5,0.3,"Amount in Words: ".$feeInWords,0,2,'L');
+
+            $x = 0.55;
+            $y += 0.2;
+
+            //------------- Fee Statement
+            //  DebugBreak();
+            $ctid=1;
+            $multiply=1;
+
+            /*    foreach ($feestructure as $value) {
+            //  $value = $value * 2;
+
+            $pdf->SetFont('Arial','',9);
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell( 0.5,0.5,$displayfeetitle[$ctid],0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(3,$y+$dy);
+            $pdf->Cell(0.8,0.5,$feestructure[$ctid],0,'C');
+            $ctid *= 2;
+            $y += 0.18;
+            }*/
+            // DebugBreak();
+            $total =  count($feestructure);
+            for ($k = 0; $k<count($feestructure); $k++){
+
+
+                $pdf->SetFont('Arial','',9);
+                $pdf->SetXY(0.5,$y+$dy);
+
+                //$feestructure = array(1=>0, 2=>0, 4=>0, 8=>0, 16=>0, 32=>0, 64=>0, 128=>0);
+                $pdf->Cell( 0.5,0.5,$displayfeetitle[$k],0,'L');
+                $pdf->SetFont('Arial','B',10);
+                $pdf->SetXY(3,$y+$dy);
+                $pdf->Cell(0.8,0.5,$feestructure[$k],0,'C');
+                $y += 0.18;
+                $corcnt = $k;
+
+
+
+
+            }
+
+            //------------- Total Amount
+
+
+            if($corcnt ==0){
+                $y += 1.0;
+            }
+            else if($corcnt ==1){
+                $y += .7;
+            }
+            else if($corcnt ==2){
+                $y += .6;
+            }
+            else if($corcnt ==3){
+                $y += .4;
+            }
+            else if($corcnt ==4){
+                $y += .3;
+            }
+            else if($corcnt ==5){
+                $y += .2;
+            }
+            
+            else if($corcnt ==6){
+                $y += .16;
+            }
+            $y += -0.2;
+            $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY(0.5,($y)+$dy);
+            $pdf->Cell( 0.5,0.5,"Total Amount: ",0,'L');
+            $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY(3,$y+$dy);
+            $pdf->Cell(0.8,0.5,$result[0]['Amount'],0,'C');
+
+            //------------- Signature
+            $y += 0.2;
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell(0.5,0.5, 'Cashier: ___________________',0,'L');
+            $pdf->SetXY(5.6,$y+$dy);
+            $pdf->Cell(0.5,0.5, 'Manager: _________________',0,'L');    
+
+            if ($turn>1){
+                $y += 0.4;
+                $pdf->Image( base_url().'assets/img/cut_line.png' ,0.3,$y+$dy, 7.5,0.15, "PNG");   
+                // $pdf->Image("images/cut_line.png",0.3,$y+$dy, 7.5,0.15, "PNG");
+            }            
+        }  
+        if ($generatingpdf==true)
+        {
+            $pdf->Output('challanform.pdf','I');
+        } else {
+            $containsError=true;
+            $errorMessage = "<br />Your Institute does not have any student registration card in accordance with selected group or form no. range.";
+        }  
+
+        //======================================================================================
+        //  }
+
+        //  $pdf->Output($data["Sch_cd"].'.pdf', 'I');
+    }
     public function Batchlist_INSERT()
     {
         $this->load->model('Registration_model');
@@ -1446,6 +1764,7 @@ class Registration extends CI_Controller {
         //  $this->load->view('Registration/9th/BatchList.php');
         //$this->commonfooter();
     }
+    
     public function ProofReading()
     {
         $data = array(
@@ -2629,6 +2948,7 @@ class Registration extends CI_Controller {
     {    //DebugBreak();
 
         $Batch_Id = $this->uri->segment(3);
+        $isrevenue = $this->uri->segment(4);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
@@ -2701,7 +3021,34 @@ class Registration extends CI_Controller {
 
 //DebugBreak();
         $data = array('data'=>$this->Registration_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image,"rulefee"=>$rule_fee);
-        $this->load->view('Registration/9th/RevenueForm.php',$data);
+        if($isrevenue == 1)
+        {
+         $this->load->view('Registration/9th/RevenueForm.php',$data);
+        }
+        else
+        {
+         $this->load->view('Registration/9th/ForwardingLetter.php',$data);
+        }
+        
+    }
+    public function forwarding_pdf()
+    {
+       //$Batch_Id = $this->uri->segment(3);
+        $isrevenue = $this->uri->segment(4);
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Registration_model');
+        $fetch_data = array('Inst_cd'=>$user['Inst_Id']);
+        $temp = $user['Inst_Id'].'09-2016-18';
+        $image =  $this->set_barcode($temp);
+        //DebugBreak();    
+        $data = array('data'=>$this->Registration_model->forwarding_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image);
+        //  $data = $data['data'][0];
+        $this->load->view('Registration/9th/ForwardingLetter.php',$data);
+       
+        
+    
     }
     public function commonheader($data)
     {

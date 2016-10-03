@@ -24,7 +24,24 @@ class Migration_model extends CI_Model
             return  false;
         }
     }
-    
+   
+       public function Print_challan_Form($fetch_data)
+    {
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $formno = $fetch_data['formno'];
+      
+     // DebugBreak();
+        $query = $this->db->query("Registration..sp_get_regInfo_correction_challan $Inst_cd,9,2016,1,'$formno'");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    } 
     public function updatemigratefrom($info)
     {
 
@@ -32,7 +49,7 @@ class Migration_model extends CI_Model
         $this->db->order_by("app_No", "DESC");
         $formno = $this->db->get_where(TBLMIGRATIONTESTING3);
         $rowcount = $formno->num_rows();
-        //  DebugBreak();
+        // DebugBreak();
         if($rowcount == 0 )
         {
             $formno =  (NOC_APP_NO.'1' );
@@ -45,8 +62,21 @@ class Migration_model extends CI_Model
             $formno = $row[0]['app_No']+1;
            // return $formno;
         }
-        $app_no =   $formno;
         
+        $app_no =   $formno;
+       /* $queryX = $this->db->query("EXEC Registration..GenChallNo 1,1,1");
+        $rowcountX = $queryX->num_rows();
+       $res = $queryX->result_array();
+        if($rowcountX > 0)
+        {
+            return $queryX->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+        
+        $challNo = $res;*/
         $data2 = array(
             'app_no'=>$app_no,
             'Formno'=>$info['formno'],
@@ -60,7 +90,7 @@ class Migration_model extends CI_Model
             'Migrated_to'=>$info['migto'],
             'ekpo'=>$info['migfrom'],
             'sex'=>$info['sex'],
-            'isother'=>0  ,
+            'isother'=>0,
 
         );  
         $res =  $this->db->insert(TBLMIGRATIONTESTING3, $data2);
@@ -71,6 +101,15 @@ class Migration_model extends CI_Model
         $q2         = $this->db->get_where(TBLMIGRATIONTESTING3,array('isother'=>0,'ekpo'=>$inst));
         $result = $q2->result_array();
         return $result;
+    }
+    public function getinfoAll($AppNo)
+    {
+    
+    //DebugBreak();
+        $query = $this->db->query("Registration..sp_get_reg_Print_Form_Migration $AppNo");
+        $result = $query->result_array();
+        return $result;
+    
     }
      public function getappbyid($id)
     {
