@@ -107,7 +107,7 @@
                             <!--    ( <a href="#" class="guidlines">Read Instruction's Guide</a>  ) -->
                             <br/>
                             <a href="http://www.bisegrw.com/download/online/registration/Training_Manual_9th_Registration_Central_Software_Urdu.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download 9th Registration Training Manual. </a> <br/>
-                            <a href="<?php echo base_url(); ?>/assets/img/ForwardingLetter.pdf" target="_blank" class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
+                            <a href="<?=base_url()?>/Registration/forwarding_pdf/"  class="guidlines blink_text" style="font-size: 18px;">Download Farwarding letter. </a> <br/>
                             <a href="<?php echo base_url(); ?>/assets/img//Image_error.pdf" class="guidlines blink_text" target="_blank" style="font-size: 18px;">Instruction for Error occured due to Image uploading. </a>
                             <br /><br />
                             <strong>NOTE:</strong> <br/>

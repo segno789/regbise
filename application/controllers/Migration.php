@@ -28,7 +28,6 @@ class Migration extends CI_Controller {
             redirect('login');
         }
     }
-
     public function std9thclass()
     {
 
@@ -67,7 +66,7 @@ class Migration extends CI_Controller {
 
 
     }
-public function get9threalease()
+    public function get9threalease()
     {
 
         $this->load->library('session');
@@ -142,10 +141,9 @@ public function get9threalease()
         }
         
     }
-    
     public function release_stdForm($formno)
     {    
-        //          DebugBreak();
+                 //DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -182,11 +180,10 @@ public function get9threalease()
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
-
     public function Print_migration_Form_Final()
     {
 
-        //  DebugBreak();
+       //   DebugBreak();
         $AppNo = $this->uri->segment(3);
 
         $this->load->library('session');
@@ -196,7 +193,7 @@ public function get9threalease()
         $this->load->model('Migration_model');
 
      
-        $result = array('data'=>$this->Migration_model->getappbyid($AppNo));
+        $result = array('data'=>$this->Migration_model->getinfoAll($AppNo));
         //Print_Form_Formnowise
 
 
@@ -299,33 +296,122 @@ public function get9threalease()
             $pdf->SetXY(0.5,1.65+$Y);
             $pdf->Cell( 0.5,0.5,"Candidate Name:",0,'L');
             $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.5,1.65+$Y);
+            $pdf->SetXY(1.7,1.65+$Y);
             $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
 
-            $pdf->SetXY(3.5+$x,1.65+$Y);
+             $pdf->SetXY(0.5,$Y+2);
+           // $pdf->SetXY(3.5+$x,1.65+$Y);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Father Name:",0,'L');
             $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(4.3+$x,1.65+$Y);
+            $pdf->SetXY(1.7,$Y+2);
             $pdf->Cell(0.5,0.5, strtoupper(@$data["fname"]),0,'L');
 
 
-            $pdf->SetXY(0.5,$Y+2);
+            $pdf->SetXY(0.5,$Y+2.4);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Father CNIC:",0,'L');
             $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(2.1,$Y+2);
+            $pdf->SetXY(1.7,$Y+2.4);
             $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
 
-          
-
+            $pdf->Image(base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
+             //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
             //========================================  Exam Info ===============================================================================            
             $sY = -0.3;//0.5;
             $pdf->SetXY(0.2,6.1+$sY);
             $pdf->SetFillColor(240,240,240);
             $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
+            // DebugBreak();
+             $grp_name = $data["grp_cd"];
+            switch ($grp_name) {
+                case '1':
+                    $grp_name = 'SCIENCE WITH BIOLOGY';
+                    break;
+                case '7':
+                    $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
+                    break;
+                case '8':
+                    $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
+                    break;
+                case '2':
+                    $grp_name = 'GENERAL';
+                    break;
+                case '5':
+                    $grp_name = 'DEAF AND DUMB';
+                    break;
+                default:
+                $grp_name = "NO GROUP SELECTED";
+            }
+            
+             $pdf->SetXY(0.2,6.5+$sY);
+           // $pdf->SetFillColor(240,240,240);
+           $pdf->SetFont('Arial','BU',12);
+            $pdf->Cell(8,0.3,'Group:  '.$grp_name,0,'L');
+               $y = $y-1.8;
+            
+             $pdf->SetFont('Arial','B',9);  
+                $pdf->SetFont('Arial','',8);
+                $pdf->SetXY(0.5,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
 
-         
+               /* $pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
+                                                                           */
+                /*$pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
+                //------------- sub 2 & 6
+                $pdf->SetXY(0.5,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');    */
+                /*$pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
+                //------------- sub 3 & 7
+                $pdf->SetXY(0.5,7.70+$y);
+                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R');   */
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
+                //------------- sub 4 & 8
+                $pdf->SetXY(0.5,8.05+$y);
+                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,8.05+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');  */
+                //-----------------
+
+                $pdf->SetXY(0.5,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');     */
+
+                //-------------------------
+                $pdf->SetXY(0.5,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R'); */
+
+                //------------------------
+
+                $pdf->SetXY(0.5,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
+
+                //------------------------------
+
+                $pdf->SetXY(0.5,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+
+              /*  $pdf->SetXY(3+$x,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');   */
+            
+
+      
 
             $pdf->SetFont('Arial','UI',10);  
             $pdf->SetXY(0.5,  10.2+$y);
@@ -344,7 +430,6 @@ public function get9threalease()
 
         $pdf->Output($data['app_No'].'.pdf', 'I');
     }
-
     public function Print_challan_Form()
     {
 
@@ -356,16 +441,12 @@ public function get9threalease()
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('NinthCorrection_model');
-
-
-
-
-
-
+        $this->load->model('Migration_model');
         //$grp_cd = $this->uri->segment(3);
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
-        //  DebugBreak();
-        $result = $this->NinthCorrection_model->Print_challan_Form($fetch_data);
+         // DebugBreak();
+        $result = $this->Migration_model->getappbyid($formno);
+       
         //   $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
 
 
@@ -381,8 +462,8 @@ public function get9threalease()
         // $feestructure = array();
         //  for($i=1;$i<=8;$i++){
         //$feetitle =  $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
-        // DebugBreak();
-        if($result[0]['NameFee'] > 0)
+       //  DebugBreak();
+       /* if($result[0]['NameFee'] > 0)
         {
             $feestructure[]    =  $result[0]['NameFee'];    
             $displayfeetitle[] =  'Name Correction';    
@@ -420,7 +501,7 @@ public function get9threalease()
         {
             $feestructure[]=$result[0]['SubjectFee'];    
             $displayfeetitle[] =  'Subject Change';
-        }
+        }             */
         /*$feestructure[16]=$result[0]['BFormFee'];
         $feestructure[32]=$result[0]['PicFee'];
         $feestructure[64]=$result[0]['GroupFee'];
@@ -428,6 +509,9 @@ public function get9threalease()
         //  $ctid *= 2;
         // }
         //$totalfee
+        $migFee =   1650;
+         $feestructure[]=$migFee;    
+            $displayfeetitle[] =  'Institute Migration';
         $turn=1;     
         $pdf=new PDF_Rotate("P","in","A4");
         $pdf->AliasNbPages();
@@ -437,9 +521,10 @@ public function get9threalease()
         $generatingpdf=false;
         $challanCopy=array(1=>"Depositor Copy",  2=>"Registration Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Online Registration Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
-        $challanNo = $result[0]['challanNo']; 
+       // DebugBreak();
+        $challanNo =$result[0]['app_No']; 
 
-        if(date('Y-m-d',strtotime(Correction_Last_Date))>=date('Y-m-d'))
+       /* if(date('Y-m-d',strtotime(Correction_Last_Date))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->NinthCorrection_model->getreulefee(1); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
@@ -448,16 +533,16 @@ public function get9threalease()
         {
             $rule_fee   =  $this->NinthCorrection_model->getreulefee(2); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
-        }
+        }    */
 
         $obj    = new NumbertoWord();
-        $obj->toWords($result[0]['TotalFee'],"Only.","");
+        $obj->toWords($migFee,"Only.","");
         // $pdf->Cell( 0.5,0.5,ucwords($obj->words),0,'L');
         $feeInWords = ucwords($obj->words);//strtoupper(cNum2Words($totalfee)); 
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-        $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
+        $temp = $challanNo.'@'.$result[0]['app_No'].'@09@2016@1';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -519,7 +604,7 @@ public function get9threalease()
             $pdf->SetFillColor(255,255,255);
             $pdf->SetTextColor(255,255,255);
             $pdf->SetXY(0.5,$y+$dy-0.01);
-            $pdf->Cell(0, 0.25, "Due Date: ".$challanDueDate, 0.25, "C");
+            $pdf->Cell(0, 0.25, "Due Date: ".date('d-m-Y', strtotime("+10 days")), 0.25, "C");
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('Arial','BI',8);
             $pdf->SetXY(2.0,$y+$dy-0.04);
@@ -534,14 +619,14 @@ public function get9threalease()
             //--------------------------- Challan Depositor Information
             $pdf->SetXY(4,$y+0.1+$dy);
             $pdf->SetFont('Arial','B',10);
-            $pdf->Cell( 0.5,0.3,"Bank Challan No:".$challanNo."           Application No.".$result[0]['AppNo'],0,2,'L');
+            $pdf->Cell( 0.5,0.3,"Bank Challan No:".$challanNo."           Application No.".$result[0]['app_No'],0,2,'L');
             $pdf->SetFont('Arial','U',9);
             $pdf->Cell(0.5,0.25, "Particulars Of Depositor",0,2,'L');
             $pdf->SetX(4.0);
             $pdf->SetFont('Arial','B',8);
 
             if(intval($result[0]['sex'])==1){$sodo="S/O ";}else{$sodo="D/O ";}
-            $pdf->Cell(0.5,0.25,$result[0]['Pre_Name'].'    '.$sodo.$result[0]['Pre_FName'],0,2,'L');
+            $pdf->Cell(0.5,0.25,$result[0]['name'].'    '.$sodo.$result[0]['fname'],0,2,'L');
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
             $pdf->SetFont('Arial','I',6.5);
@@ -624,7 +709,7 @@ public function get9threalease()
             $pdf->Cell( 0.5,0.5,"Total Amount: ",0,'L');
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY(3,$y+$dy);
-            $pdf->Cell(0.8,0.5,$result[0]['TotalFee'],0,'C');
+            $pdf->Cell(0.8,0.5,$migFee,0,'C');
 
             //------------- Signature
             $y += 0.2;
@@ -662,7 +747,6 @@ public function get9threalease()
     {
         $this->load->view('common/footer.php',$data);
     }
-
     public function tblmainstall()
     {
         // select '"'+convert(varchar(20), Inst_cd) +'" =>"' +Name+'",' from matric..tblInstitutes_all where IsActive=1 and edu_lvl in(1,3) order by Inst_cd asc  
@@ -3299,7 +3383,7 @@ public function get9threalease()
 
 
     }
-     private function set_barcode($code)
+    private function set_barcode($code)
     {
         //  DebugBreak()  ;
         //load library

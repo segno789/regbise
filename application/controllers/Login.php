@@ -34,7 +34,7 @@ class Login extends CI_Controller {
              
            
              $isgroup = -1;
-             
+        //  DebugBreak()   ;
         if($logedIn != false)
             {  
 
@@ -45,6 +45,7 @@ class Login extends CI_Controller {
                         'user_status' => 3                     
                     );
                     $this->load->view('login/login.php',$data);
+                    return;
                 }  
 
                 if($logedIn['tbl_inst']['edu_lvl'] == 1)
@@ -74,6 +75,8 @@ class Login extends CI_Controller {
                             'user_status' => 7                     
                         );
                         $this->load->view('login/login.php',$data);
+                        return;
+                        
                     }
                 }
                 else if($logedIn['tbl_inst']['edu_lvl'] == 3)
@@ -246,12 +249,13 @@ class Login extends CI_Controller {
                     'user_status' => 1                     
                 );
                 $this->load->view('login/login.php',$data);
-
+                 return;
             }
         }
         else
         {
             $this->load->view('login/login.php',$data);
+             return;
         }
 
     }

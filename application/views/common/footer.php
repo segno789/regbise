@@ -875,7 +875,10 @@ if(isReadm == 0)
     function Print_RegCards_Formnowise(startformno,endformno){
         window.location.href = '<?=base_url()?>/index.php/Registration/Reg_Cards_Printing_9th_PDF/'+startformno + '/3' +'/'+endformno +'/';
     }
-
+      function ChallanForm_Reg9th_Regular(Batch_ID)
+    {
+        window.location.href = '<?=base_url()?>/index.php/Registration/ChallanForm_Reg9th_Regular/'+Batch_ID
+    }
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
         window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
@@ -1073,7 +1076,11 @@ if(isReadm == 0)
     }
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID
+        window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID+'/1'
+    }
+    function downForwarding()
+    {
+      window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID+'/2'
     }
     function ReleaseForm(Batch_ID)
     {
