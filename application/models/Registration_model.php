@@ -325,9 +325,20 @@ class Registration_model extends CI_Model
         else
         {
             $row  = $formno->result_array();
-            $fromno = $row[0]['formNo'];
-            $row = $Inst_Id.str_pad($rowcount, 4, '0', STR_PAD_LEFT); 
-            $formno = $row+1;
+            
+            $fromno = $row[0]['formno'];
+           // $count =  substr($fromno, -4);
+            $inst_cd = substr($fromno, 0, 6);
+            if($inst_cd != $Inst_Id)
+            {
+                $row = $Inst_Id.str_pad($rowcount, 4, '0', STR_PAD_LEFT); 
+                $formno = $row+1;   
+            }
+            else
+            {
+                $formno = $row[0]['formno']+1;
+            }
+
             return $formno;
         }
 
