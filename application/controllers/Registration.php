@@ -2950,14 +2950,7 @@ class Registration extends CI_Controller {
     {
 
         //  DebugBreak();
-        // $Condition = $this->uri->segment(4);
-        /*
-        $Condition  1 == Batch Id wise printing.
-        2 == Final Group wise prining.
-        3 == Final Formno wise Printing.
-        4 == Proof reading Group wise Printing.
-        5 == Proof reading Formno wise Printing.
-        */
+       
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
@@ -3112,7 +3105,7 @@ class Registration extends CI_Controller {
        // DebugBreak();
         
         $boxWidth = 2.6;
-        $pdf->SetFont('Arial','B',10);
+        $pdf->SetFont('Arial','B',7);
         $pdf->SetXY($xx,3.8+$yy);
         $pdf->SetFillColor(240,240,240);
         $pdf->Cell($boxWidth-2.2,0.2,'Sr#',1,0,'C',1);
@@ -3122,7 +3115,7 @@ class Registration extends CI_Controller {
         $pdf->Cell($boxWidth-1.8,0.2,'With Late Fee',1,0,'L',1);
         $pdf->Cell($boxWidth-1.7,0.2,'Without Late fee',1,0,'L',1);
         
-        $pdf->SetFont('Arial','B',10);
+        $pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth-1.5,0.2,'No. of Students.',1,0,'C',1);
         $pdf->SetFillColor(255,255,255);
         $pdf->SetFont('Arial','',7);
@@ -3523,25 +3516,7 @@ class Registration extends CI_Controller {
         }
 
     }
-    public function forwarding_pdf_()
-    {
-        //$Batch_Id = $this->uri->segment(3);
-        $isrevenue = $this->uri->segment(4);
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Registration_model');
-        $fetch_data = array('Inst_cd'=>$user['Inst_Id']);
-        $temp = $user['Inst_Id'].'09-2016-18';
-        $image =  $this->set_barcode($temp);
-        //DebugBreak();    
-        $data = array('data'=>$this->Registration_model->forwarding_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image);
-        //  $data = $data['data'][0];
-        $this->load->view('Registration/9th/ForwardingLetter.php',$data);
-
-
-
-    }
+   
     public function commonheader($data)
     {
         $this->load->view('common/header.php',$data);

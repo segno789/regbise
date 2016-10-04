@@ -228,6 +228,21 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
+     public function forwarding_pdf_final($fetch_data)
+    {
+        //DebugBreak();
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $query = $this->db->query("Registration..sp_Forwading_letter_final_11TH $Inst_cd");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
      public function IsFeeded($data){
         $rno =  $data['mrollno'];
         $sess = $data['session'];
