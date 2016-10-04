@@ -589,11 +589,11 @@ class Registration_model extends CI_Model
             return  false;
         }
     }
-    public function forwarding_pdf($fetch_data)
+    public function forwarding_pdf_final($fetch_data)
     {
         //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
-        $query = $this->db->query("Registration..sp_ForwardingLetter12thAdm $Inst_cd");
+        $query = $this->db->query("Registration..sp_Forwading_letter_final $Inst_cd");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -604,6 +604,7 @@ class Registration_model extends CI_Model
             return  false;
         }
     }
+    
     public function Spl_case_std_list($myinfo)
     {
 
