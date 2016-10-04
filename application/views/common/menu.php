@@ -8,18 +8,8 @@
 
                 <?php 
                 
-                if($isselected == '5'){?>
-
-                    <li>
-                        <a style="width: 115px;" href="<?php echo base_url(); ?>Complaints" class="<?php if($isselected == '5') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
-                            Complaints
-                        </a>
-                    </li>
-
-                    <?php } 
-               
-                else  if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
+              
+                 if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -40,7 +30,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '8') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Migration
                         </a>
@@ -115,28 +105,7 @@
         </div>
         <div class="sub-nav">
             <?php
-            if($isselected == '5') { 
-                ?>
-                <ul >
-
-                    <li>
-                        <a href="<?php echo base_url(); ?>complaints">
-                            Pending Complaints
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>complaints/completeCMP">
-                            Completed
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="return logout();">Logout</a>
-                    </li>
-
-                </ul>
-                <?php
-            }
-
+            
 
 
 
@@ -285,6 +254,9 @@
                 ?>
                 <ul >
                     <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>
+                    
+                    <?php if($edu_lvl == 3 || $edu_lvl == 1) {?>
+                    
                     <li>
                         <a href="<?php echo base_url(); ?>migration/std9thclass">
                             9th Class Students
@@ -292,10 +264,10 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>migration/get9threalease">
-                            Release List
+                           9th Release List
                         </a>
                     </li>
-                  
+                  <?php }?>
 
                 </ul>
                 <?php

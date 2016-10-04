@@ -88,7 +88,7 @@
                                      <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
-                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="releaseForm('.$formno.')">Release</button>
+                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="releasemForm('.$formno.')">Release</button>
                                     </td>
                                     </tr>';
                                     endforeach;

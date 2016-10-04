@@ -408,7 +408,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-    //  DebugBreak();
+      //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -537,8 +537,6 @@ class Registration_11th extends CI_Controller {
             }
         else  if($cand_gender != $inst_userinfo_gender)
         {
-           // DebugBreak();
-           // DebugBreak();
             if($cand_gender==1 && $inst_userinfo_gender == 2)
             {
                 $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD');
@@ -561,7 +559,14 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
-       
+        else
+            if($msg != '')
+            {
+                $this->session->set_flashdata('matric_error', $msg);
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+
+            }
             else if($spl_cd != null && $spl_cd != 34)
             {
                 $this->session->set_flashdata('matric_error', 'You can not appear due to '.$SpacialCase);
@@ -1623,10 +1628,16 @@ class Registration_11th extends CI_Controller {
             {
                 $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             }
+            else
+            {
+                   $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            }
         }
         else 
         {
+              $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+          
 
         }
         if($is_gov == 1)
@@ -1762,10 +1773,16 @@ class Registration_11th extends CI_Controller {
             {
                 $rule_fee  =  $this->Registration_model->getreulefee(1); 
             }
+            else
+            {
+                   $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            }
         }
         else 
         {
+             $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            
 
         }
         if($is_gov == 1)
@@ -3444,125 +3461,4 @@ class Registration_11th extends CI_Controller {
                         }
                        
     }  
-    
-      public function forwardingletter()
-    {
-         $this->load->library('PDFFWithOutPage');
-        $pdf=new PDFFWithOutPage('P','in',"A4");   
-        $pdf->SetAutoPageBreak(true,2);
-        $pdf->AddPage();
-       
-        $pdf->Image("assets/img/ForwardingLetterInter-1.jpg",1.0,2, 235,290, "JPG"); 
-
-       
-
-        $fontSize = 10; 
-        $marge    = .95;   // between barcode and hri in pixel
-        $bx        = 38.6;  // barcode center
-        $by        = 45.75;  // barcode center
-        $height   = 5.7;   // barcode height in 1D ; module size in 2D
-        $width    = .26;  // barcode height in 1D ; not use in 2D
-        $angle    = 0;   // rotation in degrees
-
-        $code     = '222020';     // barcode (CP852 encoding for Polish and other Central European languages)
-        $type     = 'code128';
-        $black    = '000000'; // color in hex
-        $Y = 3;
-        $x = 5;
-       
-
-        $Barcode = "20562@11@1@2016";
-
-        $bardata = Barcode::fpdf($pdf, $black, $bx, $by, $angle, $type, array('code'=>$Barcode), $width, $height);
-
-        $len = $pdf->GetStringWidth($bardata['hri']);
-        Barcode::rotate(-$len / 2, ($bardata['height'] / 2) + $fontSize + $marge, $angle, $xt, $yt);
-        $cellheight = 5;
-        $by =  $by+20;
-        $bx =  $bx+15;
-        $pdf->SetTextColor(0 ,0,0);
-        $pdf->SetFont('Arial','B',14);
-        $pdf->SetXY($bx,$by);
-        $pdf->Cell(0, 0.2, "222562", 0.25, "C");
-        
-        
-         $by =  $by+6;
-        
-        
-        $pdf->SetFont('Arial','B',8);
-        $pdf->SetXY($bx-10,$by);
-        $pdf->MultiCell(150,$cellheight,'GOVT. DEGREE COLLEGE FOR BOYS, GHAKHAR MANDI, WAZIRABAD, GUJRANWALA  FOR BOYS, GHAKHAR MANDI, WAZIRABAD, GUJRANWALA',0,'L');
-        
-        $by =  $by+12;
-        $pdf->SetFont('Arial','B',10);
-        $pdf->SetXY($bx,$by);
-        $pdf->Cell(0, 0.2, "0300-7465790", 0.25, "C");
-        
-        $bx =  $bx+90;
-        $pdf->SetXY($bx,$by);
-        $pdf->Cell(0, 0.2, "055-7465790", 0.25, "C");
-        
-        
-        $by =  $by+8;
-        $bx =  $bx-50;
-        $pdf->SetXY($bx,$by);
-        $pdf->Cell(0, 0.2, "shahid1376@gmail.com", 0.25, "C");
-        
-        
-        $by =  $by+8;
-        $bx =  $bx+10;
-        $pdf->SetFont('Arial','B',12);
-        $pdf->SetXY($bx,$by);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-       
-       
-        $pdf->SetXY($bx-55,$by+8);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-        $pdf->SetXY($bx-10,$by+8);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-
-        $pdf->SetXY($bx-55,$by+16);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-        $pdf->SetXY($bx-10,$by+16);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-        $pdf->SetXY($bx,$by+24);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-        
-        
-        $pdf->SetXY($bx-55,$by+32);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-        $pdf->SetXY($bx-10,$by+32);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-
-        $pdf->SetXY($bx-55,$by+40);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-
-        $pdf->SetXY($bx-10,$by+40);
-        $pdf->Cell(0, 0.2, "50", 0.25, "C");
-        
-         $pdf->SetFont('Arial','B',13);
-         $pdf->SetXY($bx+30,$by+48);
-        $pdf->Cell(0, 0.2, "500", 0.25, "C");
-        
-        
-        $pdf->SetFont('Arial','B',13);
-        $pdf->SetXY($bx+30,$by+56);
-        $pdf->Cell(0, 0.2, "2", 0.25, "C");
-
-        $pdf->SetFont('Arial','B',9);
-        $pdf->SetXY($bx+57,$by+64);
-        $pdf->Cell(0, 0.2, "2000789/-", 0.25, "C");
-       
-       
-       $pdf->Output('forwardingletter.pdf', 'I');    
-
-    }
-    
-    
 }
