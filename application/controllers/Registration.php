@@ -3059,7 +3059,7 @@ class Registration extends CI_Controller {
         $pdf->SetFont('Arial','',10);
         $pdf->SetXY(0.9+$x,4.3+$y);
         
-        $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." ".CURRENT_SESS." Registration are
+        $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class." REGISTRATION, ".session_year." are
             ", 0,"J",0);
             
         
@@ -3122,34 +3122,43 @@ class Registration extends CI_Controller {
         $pdf->SetXY($xx,4.0+$yy);
         $pdf->Cell($boxWidth-2.2,0.2,'1',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'SCIENCE WITH BIOLOGY',1,0,'L',1);
+        $pdf->SetFont('Arial','',10);
         $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee1'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee1'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee1'],1,0,'C',1);
         
         $pdf->SetXY($xx,4.2+$yy);
+        $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'2',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'SCIENCE  WITH COMPUTER SCIENCE',1,0,'L',1);
+        $pdf->SetFont('Arial','',10);
         $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee2'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee2'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee2'],1,0,'C',1);
         
         $pdf->SetXY($xx,4.4+$yy);
+        $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'3',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'SCIENCE  WITH ELECTRICAL WIRING',1,0,'L',1);
+        $pdf->SetFont('Arial','',10);
         $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee3'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee3'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee3'],1,0,'C',1);
         
         $pdf->SetXY($xx,4.6+$yy);
+        $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'4',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'HUMANITIES',1,0,'L',1);
+        $pdf->SetFont('Arial','',10);
         $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee4'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee4'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee4'],1,0,'C',1);
         
         $pdf->SetXY($xx,4.8+$yy);
+        $pdf->SetFont('Arial','',7);
         $pdf->Cell($boxWidth-2.2,0.2,'5',1,0,'C',1);
         $pdf->Cell($boxWidth-0.7,0.2,'DEAF & DUMB',1,0,'L',1);
+        $pdf->SetFont('Arial','',10);
         $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee5'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1);
         $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
