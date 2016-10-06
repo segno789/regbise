@@ -180,6 +180,45 @@ class Migration extends CI_Controller {
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
+      public function std11thclass()
+    {
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '10',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+        //  $error['grp_cd'] = $user['grp_cd'];
+        $RegStdData = array('data'=>$this->Migration_model->std11thclass($user['Inst_Id']));
+        $RegStdData['msg_status'] = $error_msg;
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/std9thclass.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
+    
     public function Print_migration_Form_Final()
     {
 
@@ -456,6 +495,10 @@ class Migration extends CI_Controller {
 
         $pdf->Output($data['app_No'].'.pdf', 'I');
     }
+    
+    
+    
+    
     public function Print_challan_Form()
     {
 
