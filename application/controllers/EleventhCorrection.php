@@ -114,8 +114,8 @@ class EleventhCorrection extends CI_Controller {
         if($msg == 7)
         {
             $this->load->view('common/menu.php',$userinfo);
-            $this->load->model('Registration_model');
-            $count = $this->Registration_model->Dashboard($Inst_Id);
+            $this->load->model('Registration_11th_model');
+            $count = $this->Registration_11th_model->Dashboard($Inst_Id);
             $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
             $this->load->view('Registration/Registration.php',$info);
             $this->load->view('common/footer.php');  
@@ -165,7 +165,7 @@ class EleventhCorrection extends CI_Controller {
                         //$this->session->set_flashdata('incomplete',$allinfo);
                         $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name,'field_status'=>$field_status,'zone'=>$zone,'error'=>$errors,'fill_values'=>$fillvalues);
                         //$this->load->view('Registration/Registration.php',$info);
-                        $this->load->view('Registration/9th/Incomplete_inst_info.php',$info);
+                        $this->load->view('Registration/11th/Incomplete_inst_info.php',$info);
                         $this->load->view('common/footer.php');
                     }
                     else{
@@ -672,7 +672,7 @@ class EleventhCorrection extends CI_Controller {
     } 
     public function NewEnrolment_update()
     {
-      //  DebugBreak();
+        DebugBreak();
 
         $this->load->model('EleventhCorrection_model');
 
@@ -881,7 +881,9 @@ class EleventhCorrection extends CI_Controller {
                         else{
                             $corr_sub6 =  0;
                         }
-                        if($RegStdData[0]['sub7'] != $_POST['corr_sub7'])
+                        if($pre_grp_cd == 5 || $corr_grp_cd ==5)
+                        {
+                          if(isset($RegStdData[0]['sub7']) != $_POST['corr_sub7'])
                         {
                             $subFee = $subFee + $rule_fee[0]['SubFee']; 
                             $corr_sub7 =  $_POST['corr_sub7'];
@@ -889,14 +891,10 @@ class EleventhCorrection extends CI_Controller {
                         else{
                             $corr_sub7 =  0;
                         }
-                        if($RegStdData[0]['sub8'] != $_POST['corr_sub8'])
-                        {
-                            $subFee = $subFee + $rule_fee[0]['SubFee']; 
-                            $corr_sub8 =  $_POST['corr_sub8'];
                         }
-                        else{
-                            $corr_sub8 =  0;
-                        }
+                        
+                        
+                        
                     }
 
 

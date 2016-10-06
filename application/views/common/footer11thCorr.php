@@ -183,7 +183,7 @@ if(isset($files)){
             }
         });
         var NationalityVal = $("#hid_nat").val();
-        
+  
 
     });
     $("#btnsubmitUpdateEnrol").click(function(){
@@ -390,7 +390,7 @@ if(isset($files)){
             }
               if($(this).val() == '6')
             {
-                $('#div_confirmation').append('<div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          <div class="control-group">                                <label class="control-label span2" >                                    Subject 8 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="sub8" name="sub8" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub8+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_sub8" value="'+corr_sub8+'" disabled="disabled"  maxlength="60">                                </div>                            </div>             ');
+                $('#div_confirmation').append('<div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          </div>             ');
             }
            
             
@@ -1232,69 +1232,41 @@ if(isReadm == 0)
             }
         });
 
-        if($("#std_group").val() == "1")
+              if(grp_cd == "1")
         {
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('BIOLOGY',8));
+            
+            load_PreMedical();
+
         }
-        else if($("#std_group").val() == "7"){
-
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('COMPUTER SCIENCE',78));
+        else if(grp_cd == "2")
+        {
+            load_PreEngg();
+            
         }
-        else if($("#std_group").val() == "8"){
-
-            load_Bio_CS_Sub_NewEnrolement();
-            $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
+        else if (grp_cd == "3")
+        {
+            load_Hum();
+            
         }
-        else if($("#std_group").val() == "2"){
+
+        else if(grp_cd == "4")
+        {
+
+            load_GenSci();
 
 
-            $.each(sub7_Hum,function(val,text){
-
-                $("#sub7").append(new Option(text,val));
-                $("#corr_sub7").append(new Option(text,val));
-            });
-            $.each(sub8_Hum,function(val,text){
-
-                $("#sub8").append(new Option(text,val));
-                $("#corr_sub8").append(new Option(text,val));
-            });
-
-            var Elecgrp ="<?php echo @$grp_cd; ?>";
-            var isgovt ="<?php echo @$isgovt; ?>";
-            var sub7_selected ="<?php  echo @$data[0]['sub7']; ?>";
-            var sub8_selected ="<?php echo @$data[0]['sub8']; ?>";
-            var b = ['8'];
-            var isElec = '0';
-            $.each(Elecgrp,function(i,val){
-                var result=$.inArray(val,b);
-
-                if(result!=-1)
-                {
-                    isElec = 1;
-                }
-            })
-
-            if(isgovt == 2)
-            {
-                if(isElec != 1)
-                {
-                    // $("#sub7")
-                    //$("#sub7 option[value='43']").remove();
-                    //$("#sub8 option[value='43']").remove();
-                    $("#sub7 option[value='43']").remove();
-                    $("#sub8 option[value='43']").remove();
-
-                    // $("#sub7").find('option[value=43]').remove();
-                    // alert("removed");
-                }  
-            }
-            $("#sub7").val(sub7_selected);
-            $("#corr_sub7").val(sub7_selected);
-            $("#sub8").val(sub8_selected);
-            $("#corr_sub8").val(sub8_selected);
-
+        }
+        else if(grp_cd == "5")
+        {
+            load_Commerce();
+        }
+        else if(grp_cd == "6")
+        {
+            load_HomeEco();
+        }
+        else if (grp_cd == "0")
+        {
+            remove_subjects();
         }
         
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
@@ -1330,7 +1302,7 @@ if(isReadm == 0)
 
         //   else if($("#std_group").val() == "2"){
         //       
-        //       Hum_Deaf_Subjects_NewEnrolement('<?= @$sub6?>','<?= @$sub7?>','<?= @$sub8?>');
+        //     
         //        Hum_Deaf_Subjects();
         //            $.each(sub5_Hum,function(val,text){
         //                $("#sub5").append(new Option(text,val));
@@ -1526,57 +1498,7 @@ if(isReadm == 0)
         window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()
     }
 
-    function load_Bio_CS_Sub()
-    {
-        var NationalityVal = $("input[name=nationality]:checked").val();
-        $('#sub1').empty();
-        if(NationalityVal == "1")
-        {
-            $.each(sub1_Pak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
-
-        }
-        else if (NationalityVal == "2")
-        {
-            console.log("Hi Foreigner Welcom to Pakistan :) ");
-            $.each(sub1_NonPak_options, function(val, text) {
-                $('#sub1').append( new Option(text,val) );
-            }); 
-        }
-
-        // Check Religion and select sub........
-        $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
-        //console.log(Religion);
-        console.log(Religion);
-        if(Religion == "1")
-        {
-            console.log("Hi Muslim :)");
-            $.each(sub3_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-            });
-
-        }
-        else if(Religion == "2")
-        {
-            console.log("Hi Non-Muslim :)");
-            $.each(sub3_Non_Muslim,function(val,text){
-                $("#sub3").append(new Option(text,val));
-            });
-        }
-
-        // Subject 5 ,6 ,7 and 8
-        $("#sub5").empty();
-        $("#sub6").empty();
-        $("#sub7").empty();
-        $("#sub8").empty();
-
-        $("#sub5").append(new Option('MATHEMATICS',5));
-        $("#sub6").append(new Option('PHYSICS',6));
-        $("#sub7").append(new Option('CHEMISTRY',7));
-
-    }
+ 
 
     
     
@@ -2269,6 +2191,43 @@ if(isReadm == 0)
     MASKINGS Settings
     ===========================================
     */
+     var grp_cd = $("#std_group").val();
+          if(grp_cd == "1")
+        {
+            
+            load_PreMedical();
+
+        }
+        else if(grp_cd == "2")
+        {
+            load_PreEngg();
+            
+        }
+        else if (grp_cd == "3")
+        {
+            load_Hum();
+            
+        }
+
+        else if(grp_cd == "4")
+        {
+
+            load_GenSci();
+
+
+        }
+        else if(grp_cd == "5")
+        {
+            load_Commerce();
+        }
+        else if(grp_cd == "6")
+        {
+            load_HomeEco();
+        }
+        else if (grp_cd == "0")
+        {
+            remove_subjects();
+        }
     var phone = "<?php echo @$field_status['phone']; ?>";
     var cell = "<?php echo @$field_status['cell']; ?>";
     var emis = "<?php echo @$field_status['emis']; ?>";
