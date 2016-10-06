@@ -91,7 +91,7 @@
         $sub5 = $data['sub5'];
         $sub6 = $data['sub6'];
         $sub7 = $data['sub7'];
-        $sub8 = $data['sub8'];
+        $sub8 = '0';
         $Inst_cd = $data['Inst_cd'];
         $RegGrp = $data['RegGrp'];
         $formno = $data['formNo'];

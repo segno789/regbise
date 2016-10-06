@@ -672,7 +672,7 @@ class EleventhCorrection extends CI_Controller {
     } 
     public function NewEnrolment_update()
     {
-        DebugBreak();
+        //DebugBreak();
 
         $this->load->model('EleventhCorrection_model');
 
@@ -916,7 +916,7 @@ class EleventhCorrection extends CI_Controller {
 
             }          // =================== loop Ending
         }   //===============Array isset Ending
-        $target_path = CORR_IMAGE_PATH.$Inst_Id.'/';
+        $target_path = CORR_IMAGE_PATH11.$Inst_Id.'/';
           
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if($isPic ==1)
@@ -1010,7 +1010,7 @@ class EleventhCorrection extends CI_Controller {
             'sub1'=>$corr_sub1,'sub2'=>$corr_sub2,'sub3'=>$corr_sub3,
             'sub4'=>$corr_sub4,'sub5'=>$corr_sub5,
             'sub6'=>$corr_sub6,'sub7'=>$corr_sub7,
-            'sub8'=>$corr_sub8,'PicPath'=>$filename ,'formNo'=>@$_POST['formNo'],
+            'PicPath'=>$filename ,'formNo'=>@$_POST['formNo'],
 
         );
 
@@ -1049,7 +1049,7 @@ class EleventhCorrection extends CI_Controller {
             'sub1'=>$corr_sub1,'sub2'=>$corr_sub2,'sub3'=>$corr_sub3,
             'sub4'=>$corr_sub4,'sub5'=>$corr_sub5,
             'sub6'=>$corr_sub6,'sub7'=>$corr_sub7,
-            'sub8'=>$corr_sub8,'PicPath'=>$filename,'formNo'=>@$_POST['formNo'],
+            'PicPath'=>$filename,'formNo'=>@$_POST['formNo'],
             'AppNo'=>$AppNo,
             'Pic'=>$isPic,
             'Inst_cd'=>$Inst_Id,
@@ -1229,7 +1229,7 @@ class EleventhCorrection extends CI_Controller {
                 $pdf->SetXY(4.8, $Y +1.79);
                 $pdf->Cell(1.25,1.4,'',1,0,'C',0);
 
-                $pdf->Image(CORR_IMAGE_PATH.$user['Inst_Id'].'/'.$data["PicPath"],4.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
+                $pdf->Image(CORR_IMAGE_PATH11.$user['Inst_Id'].'/'.$data["PicPath"],4.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
                 $pdf->SetFont('Arial','',10);
                 $Y = 2.0; 
             }
@@ -1368,7 +1368,7 @@ class EleventhCorrection extends CI_Controller {
             $pdf->SetXY(0.2,6.1+$sY);
             $pdf->SetFillColor(240,240,240);
             $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
-           //  DebugBreak();
+          //  DebugBreak();
             //--------------------------- Subject Group
             $grp_name = $data["Reggrp"];
             switch ($grp_name) {
@@ -1386,6 +1386,9 @@ class EleventhCorrection extends CI_Controller {
                     break;
                 case '5':
                     $grp_name = 'COMMERCE';
+                    break;
+                case '6':
+                    $grp_name = 'HOME ECONOMICS';
                     break;
                 default:
                 $grp_name = "NO GROUP SELECTED";
@@ -1406,6 +1409,9 @@ class EleventhCorrection extends CI_Controller {
                     break;
                 case '5':
                     $N_grp_name = 'COMMERCE';
+                    break;
+                 case '6':
+                    $N_grp_name = 'HOME ECONOMICS';
                     break;
                 default:
                     $N_grp_name = "NO GROUP SELECTED";
@@ -1503,11 +1509,7 @@ class EleventhCorrection extends CI_Controller {
 
                 //------------------------------
 
-                $pdf->SetXY(0.5,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-
-                $pdf->SetXY(3+$x,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
+              
             }
             if(  $data['groupFee'] > 0)
             {
@@ -1584,11 +1586,7 @@ class EleventhCorrection extends CI_Controller {
 
                 //------------------------------
 
-                $pdf->SetXY(0.5,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-
-                $pdf->SetXY(3+$x,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');
+         
             } 
 
             $pdf->SetFont('Arial','UI',10);  
