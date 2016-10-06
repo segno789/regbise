@@ -182,6 +182,9 @@ class Login extends CI_Controller {
                     }  
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
+                       // DebugBreak();
+                        $date =  date('Y-m-d',strtotime(DOUBLE_LAST_DATE11));
+                        $crntdate =  date('Y-m-d');
                         if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE11))>=date('Y-m-d'))
                         {
                             $isinterfeeding = 1    ;

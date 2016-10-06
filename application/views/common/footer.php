@@ -845,7 +845,7 @@ if(isReadm == 0)
         $('#sub8').empty();
         window.location.href = '<?=base_url()?>/Registration/NewEnrolment_EditForm/'+formrno
     }
-     function releaseForm(formrno)
+     function releasemForm(formrno)
     {
      
         window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno

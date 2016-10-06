@@ -6,6 +6,8 @@ require_once dirname(__FILE__) . '/fpdf/php-barcode.php';
 class PDF_RotateWithOutPage extends FPDF
 {
 var $angle=0;
+
+    var $extgstates = array();
 function TextWithRotation($x, $y, $txt, $txt_angle, $font_angle=0)
     {
         $font_angle+=90+$txt_angle;
@@ -49,7 +51,7 @@ function Footer()
     //Arial italic 8
     $this->SetFont('Arial','I',8);
     //Page number
-    $this->Cell(0,29,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+   // $this->Cell(0,29,'Page '.$this->PageNo().'/{nb}',0,0,'C');
 }
 
 function _endpage()
@@ -61,5 +63,63 @@ function _endpage()
     }
     parent::_endpage();
 }
+
+ function SetAlpha($alpha, $bm='Normal')
+    {
+        // set alpha for stroking (CA) and non-stroking (ca) operations
+        $gs = $this->AddExtGState(array('ca'=>$alpha, 'CA'=>$alpha, 'BM'=>'/'.$bm));
+        $this->SetExtGState($gs);
+    }
+
+    function AddExtGState($parms)
+    {
+        $n = count($this->extgstates)+1;
+        $this->extgstates[$n]['parms'] = $parms;
+        return $n;
+    }
+
+    function SetExtGState($gs)
+    {
+        $this->_out(sprintf('/GS%d gs', $gs));
+    }
+
+    function _enddoc()
+    {
+        if(!empty($this->extgstates) && $this->PDFVersion<'1.4')
+            $this->PDFVersion='1.4';
+        parent::_enddoc();
+    }
+
+    function _putextgstates()
+    {
+        for ($i = 1; $i <= count($this->extgstates); $i++)
+        {
+            $this->_newobj();
+            $this->extgstates[$i]['n'] = $this->n;
+            $this->_out('<</Type /ExtGState');
+            $parms = $this->extgstates[$i]['parms'];
+            $this->_out(sprintf('/ca %.3F', $parms['ca']));
+            $this->_out(sprintf('/CA %.3F', $parms['CA']));
+            $this->_out('/BM '.$parms['BM']);
+            $this->_out('>>');
+            $this->_out('endobj');
+        }
+    }
+
+    function _putresourcedict()
+    {
+        parent::_putresourcedict();
+        $this->_out('/ExtGState <<');
+        foreach($this->extgstates as $k=>$extgstate)
+            $this->_out('/GS'.$k.' '.$extgstate['n'].' 0 R');
+        $this->_out('>>');
+    }
+
+    function _putresources()
+    {
+        $this->_putextgstates();
+        parent::_putresources();
+    }
+
 }
 ?>

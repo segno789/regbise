@@ -408,7 +408,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-    //  DebugBreak();
+      //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -537,8 +537,6 @@ class Registration_11th extends CI_Controller {
             }
         else  if($cand_gender != $inst_userinfo_gender)
         {
-           // DebugBreak();
-           // DebugBreak();
             if($cand_gender==1 && $inst_userinfo_gender == 2)
             {
                 $this->session->set_flashdata('matric_error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD');
@@ -561,7 +559,14 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
-       
+        else
+            if($msg != '')
+            {
+                $this->session->set_flashdata('matric_error', $msg);
+                redirect('Registration_11th/Students_matricInfo');
+                return;
+
+            }
             else if($spl_cd != null && $spl_cd != 34)
             {
                 $this->session->set_flashdata('matric_error', 'You can not appear due to '.$SpacialCase);
@@ -1488,8 +1493,8 @@ class Registration_11th extends CI_Controller {
         }
         $temp = $user['Inst_Id'].'@11@2016-18';
         $image =  $this->set_barcode($temp);
-        $this->load->library('PDF_Rotate');
-        $pdf = new PDF_Rotate('P','in',"A4");
+        $this->load->library('PDF_RotateWithOutPage');
+        $pdf = new PDF_RotateWithOutPage('P','in',"A4");
         $pdf->Rotate(0,-1,-1);
         $pdf->AliasNbPages();
         $pdf->SetTitle('Forwarding Letter');
@@ -1577,160 +1582,161 @@ class Registration_11th extends CI_Controller {
         $pdf->MultiCell(6.5, 0.2, "  I am forwarding registration forms along with the relevent enclosures of Candidates Group appearing from my Institute in the ensuring ".corr_bank_chall_class1." REGISTRATION, ".CURRENT_SESS1." are
             ", 0,"J",0);
          
-            $x = 1; 
-            $dy = 4.6; 
-            $pdf->SetXY(0.5,$y+$dy);
-            $pdf->SetFont('Arial','',10);
-            //$pdf->Cell( 0.5,0.5,"Group:",0,'L');
-                /*$pdf->Cell(0.5,0.5,"PRE-MEDICAL",0,'L');
-            else      if ($data["grp_cd"]=='2')
-                $pdf->Cell(0.5,0.5,"PRE-ENGINEERING",0,'L');
-                else      if ($data["grp_cd"]=='3')
-                    $pdf->Cell(0.5,0.5,"HUMANITIES",0,'L');
-                    else      if ($data["grp_cd"]=='4')
-                        $pdf->Cell(0.5,0.5,"GENERAL SCIENCE",0,'L');
-                        else      if ($data["grp_cd"]=='5')
-                            $pdf->Cell(0.5,0.5,"COMMERCE",0,'L');    */
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(1.7,$y+$dy);
-          
-            $xx= 1.5;
-        $y = $y - 1;                
+        $x = 1; 
+        $dy = 4.6; 
+        $pdf->SetXY(0.5,$y+$dy);
+        $pdf->SetFont('Arial','',10);
+
+        $pdf->SetFont('Arial','B',10);
+        $pdf->SetXY(1.7,$y+$dy);
+
+        $xx= 2.0;
+        $y = $y - 1.1;                
         $yy = 2.05+$y;
-     
-        $boxWidth = 2.6;
-       $pdf->SetFont('Arial','B',7);
-        $pdf->SetXY($xx,3.8+$yy);
+
+        $fontsize = 8;
+        $boxWidth = 2.9;
+        $boxhieght =  .26;
+        $pdf->SetFont('Arial','B',$fontsize);
+
+        $yy =  3.75+$yy;
+
+        $pdf->SetXY($xx,$yy);
         $pdf->SetFillColor(240,240,240);
-        $pdf->Cell($boxWidth-2.2,0.2,'Sr#',1,0,'C',1);
-        $pdf->Cell($boxWidth-0.7,0.2,'Group Name',1,0,'L',1);
-        
-        $pdf->SetFont('Arial','B',7);
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'Sr#',1,0,'C',1);
+        $pdf->Cell($boxWidth-0.7,$boxhieght,'Group Name',1,0,'L',1);
+        $pdf->SetFont('Arial','B',$fontsize);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,'No. of Students.',1,0,'C',1);
+        /*$pdf->SetFont('Arial','B',7);
         $pdf->Cell($boxWidth-1.8,0.2,'With Late Fee',1,0,'L',1);
-        $pdf->Cell($boxWidth-1.7,0.2,'Without Late fee',1,0,'L',1);
-        
-        $pdf->SetFont('Arial','B',7);
-        $pdf->Cell($boxWidth-1.5,0.2,'No. of Students.',1,0,'C',1);
+        $pdf->Cell($boxWidth-1.7,0.2,'Without Late fee',1,0,'L',1);*/
+        $yy = $boxhieght+$yy;
         $pdf->SetFillColor(255,255,255);
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY($xx,4.0+$yy);
-        $pdf->Cell($boxWidth-2.2,0.2,'1',1,0,'C',1);
-        $pdf->Cell($boxWidth-0.7,0.2,'PRE-MEDICAL',1,0,'L',1);
+        $pdf->SetFont('Arial','',$fontsize);
+
+        $pdf->SetXY($xx,$yy);
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'1',1,0,'C',1);
+        $pdf->Cell($boxWidth-0.7,$boxhieght,'PRE-MEDICAL',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee1'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee1'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee1'],1,0,'C',1);
-        
-        $pdf->SetXY($xx,4.2+$yy);
-         $pdf->SetFont('Arial','',7);
-        $pdf->Cell($boxWidth-2.2,0.2,'2',1,0,'C',1);
-        $pdf->Cell($boxWidth-0.7,0.2,'PRE-ENGINEERING',1,0,'L',1);
-         $pdf->SetFont('Arial','',10);
-        $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee2'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee2'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee2'],1,0,'C',1);
-        
-        $pdf->SetXY($xx,4.4+$yy);
-        $pdf->SetFont('Arial','',7);
-        $pdf->Cell($boxWidth-2.2,0.2,'3',1,0,'C',1);
-        $pdf->Cell($boxWidth-0.7,0.2,'HUMANITIES',1,0,'L',1);
+        // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee1'],1,0,'C',1);
+        // $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee1'],1,0,'C',1);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee1'],1,0,'C',1);
+
+        $yy = $boxhieght+$yy;
+        $pdf->SetXY($xx,$yy);
+        $pdf->SetFont('Arial','',$fontsize);
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'2',1,0,'C',1);
+        $pdf->Cell($boxWidth-0.7,$boxhieght,'PRE-ENGINEERING',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee3'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee3'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee3'],1,0,'C',1);
+        //$pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee2'],1,0,'C',1);
+        //$pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee2'],1,0,'C',1);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee2'],1,0,'C',1);
         
-        $pdf->SetXY($xx,4.6+$yy);
-        $pdf->SetFont('Arial','',7);
-        $pdf->Cell($boxWidth-2.2,0.2,'4',1,0,'C',1);
-        $pdf->Cell($boxWidth-0.7,0.2,'GENERAL SCIENCE',1,0,'L',1);
+        $yy = $boxhieght+$yy;
+        $pdf->SetXY($xx,$yy);
+        $pdf->SetFont('Arial','',$fontsize);
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'3',1,0,'C',1);
+        $pdf->Cell($boxWidth-0.7,$boxhieght,'HUMANITIES',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee4'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee4'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee4'],1,0,'C',1);
+        // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee3'],1,0,'C',1);
+        //  $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee3'],1,0,'C',1);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee3'],1,0,'C',1);
         
-        $pdf->SetXY($xx,4.8+$yy);
-        $pdf->SetFont('Arial','',7);
-        $pdf->Cell($boxWidth-2.2,0.2,'5',1,0,'C',1);
-        $pdf->Cell($boxWidth-0.7,0.2,'COMMERCE',1,0,'L',1);
+          $yy = $boxhieght+$yy;
+         $pdf->SetXY($xx,$yy);
+        $pdf->SetFont('Arial','',$fontsize);
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'4',1,0,'C',1);
+        $pdf->Cell($boxWidth-0.7,$boxhieght,'GENERAL SCIENCE',1,0,'L',1);
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee5'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['grpFee5'],1,0,'C',1);
+        // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee4'],1,0,'C',1);
+        // $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee4'],1,0,'C',1);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee4'],1,0,'C',1);
         
-        $pdf->SetXY($xx,5.0+$yy);
+        $yy = $boxhieght+$yy;
+        $pdf->SetXY($xx,$yy);
+        $pdf->SetFont('Arial','',$fontsize);
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'5',1,0,'C',1);
+        $pdf->Cell($boxWidth-0.7,$boxhieght,'COMMERCE',1,0,'L',1);
+        $pdf->SetFont('Arial','',10);
+        // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['lateFee5'],1,0,'C',1);
+        // $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlateFee5'],1,0,'C',1);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['grpFee5'],1,0,'C',1);
+
+        $yy = $boxhieght+$yy;
+        $pdf->SetXY($xx,$yy);
         $pdf->SetFont('Arial','B',11);
-        $pdf->Cell($boxWidth-2.2,0.2,'',1,0,'C',1);
-        
-        $pdf->Cell($boxWidth-0.7    ,0.2,'Total:',1,0,'L',1);
-        $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['latetotalFee'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlatetotalFee'],1,0,'C',1);
-        $pdf->Cell($boxWidth-1.5,0.2,$result['data'][0]['totalFee'],1,0,'C',1);
-        
-        $y = $y+1;
+        $pdf->Cell($boxWidth-2.2,$boxhieght,'',1,0,'C',1);
+
+        $pdf->Cell($boxWidth-0.7    ,$boxhieght,'Total:',1,0,'L',1);
+        // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['latetotalFee'],1,0,'C',1);
+        // $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlatetotalFee'],1,0,'C',1);
+        $pdf->Cell($boxWidth-1.5,$boxhieght,$result['data'][0]['totalFee'],1,0,'C',1);
+
+        $y = $y+1.1;
         $pdf->SetFont('Arial','',10);
-        $pdf->SetXY(0.9,6.3+$y);    
+        $pdf->SetXY(0.9,6.6+$y);    
         $pdf->MultiCell(6.5,0.2," Name of the candidates who have not completed the required number of attendances up to the date of the submission of their forms are being submitted provisionally and are mentioned overleaf. Final report regarding their eligibility will be sent to you in due course as instructed in the book of instructions and information.
-        ",0,"J",0)    ;
-        
+            ",0,"J",0)    ;
+
         $pdf->SetFont('Arial','',10);
-        $pdf->SetXY(0.9,7.2+$y);    
+        $pdf->SetXY(0.85,7.4+$y);    
         $pdf->MultiCell(6.5,0.2," I certify that the forms have been filled in strictly according to the instructions and the certificate printed on the registration forms have been signed by me. I also certify that I have initialled all corrections made in the registration forms.
 
-        ",0,"J",0)    ;
-        
+            ",0,"J",0)    ;
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.0+$y);    
         $pdf->MultiCell(8.5,0.2," All my candidates will appear at ________________________________________________________ ",0,"L",0)    ;
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.25+$y);    
         $pdf->Cell(1.6,0.2,"(Other remarks if any)",0,"R",0);
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.55+$y); 
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-        
-        
+
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,8.85+$y);    
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.15+$y);    
         $pdf->MultiCell(8.5,0.2,"____________________________________________________________________________________",0,"L",0)    ;   
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.4+$y);    
-       $pdf->MultiCell(6.6,0.2,"Yours Obediently,",0,"R",0)    ;   
-        
+        $pdf->MultiCell(6.6,0.2,"Yours Obediently,",0,"R",0)    ;   
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.65+$y);    
         $pdf->MultiCell(8.5,0.2,"Enclosures:",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,9.95+$y);    
         $pdf->MultiCell(8.5,0.2,"1.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.25+$y);    
         $pdf->MultiCell(8.5,0.2,"2.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.55+$y);    
         $pdf->MultiCell(8.5,0.2,"3.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,10.85+$y);    
         $pdf->MultiCell(8.5,0.2,"4.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','B',10);
         $pdf->SetXY(0.9,11.15+$y);    
         $pdf->MultiCell(8.5,0.2,"5.____________________________",0,"L",0)    ;  
-        
+
         $pdf->SetFont('Arial','UB',10);
         $pdf->SetXY(5.4,11.05+$y);    
         $pdf->MultiCell(8.5,0.2,"Signature & Stamp of Principal",0,"L",0)    ; 
-        
+
         $pdf->SetFont('Arial','B',8);
         $pdf->SetXY(5.4,11.25+$y);    
         $pdf->MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
@@ -1888,10 +1894,16 @@ class Registration_11th extends CI_Controller {
             {
                 $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             }
+            else
+            {
+                   $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            }
         }
         else 
         {
+              $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+          
 
         }
         if($is_gov == 1)
@@ -2027,10 +2039,16 @@ class Registration_11th extends CI_Controller {
             {
                 $rule_fee  =  $this->Registration_model->getreulefee(1); 
             }
+            else
+            {
+                   $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            }
         }
         else 
         {
+             $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
+            
 
         }
         if($is_gov == 1)

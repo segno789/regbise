@@ -50,7 +50,7 @@ define('IMAGE_PATH11', 'uploads/2016/colleges/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE11', '2016-09-30');
-define('DOUBLE_LAST_DATE11', '2016-10-01');
+define('DOUBLE_LAST_DATE11', '2016-10-10');
 
 //================ Ninth Correction variables ========================
 define('Correction_Last_Date','2016-10-31');
@@ -70,14 +70,17 @@ define('corr_bank_chall_class1','11th');
 define('CURRENT_SESS1','2016-2018'); 
 
 //================ Migration variables ========================
+
+define('NOC_APP_NO','80000'); 
 define('MIGRATIONSESS','2016-18'); 
 define('MIGRATIONSESS2','2015-17'); 
 define('TBLMIGRATION','Registration..MA_P1_Reg_Adm2016'); 
 define('TBLMIGRATION1','matric_new..tblAdmMig'); 
 define('TBLMIGRATION2','matric_new..tblRegMig');
 define('TBLMIGRATION3','Registration..tblMig');  
-define('TBLMIGRATIONTESTING3','Registration..tblMig_testing_purpose');  
+define('TBLMIGRATIONTESTING3','Registration..tblMig');  
 define('DIRPATH','C:\inetpub\vhosts\bisegrw.com\ssc.bisegrw.com\oldPics'); 
+define('DIRPATHMIG','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\\'); 
 define('TBLMIGRATION4','matric_new..vw9th16'); 
 
 

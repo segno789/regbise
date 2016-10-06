@@ -318,6 +318,32 @@ class Migration extends CI_Controller {
             $pdf->Image(base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
              //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
             //========================================  Exam Info ===============================================================================            
+           
+            $Y = $Y+2.2;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Migration Information ',1,0,'L',1);
+           
+           $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Migration From:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.80+$Y);
+            $pdf->MultiCell(7,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+           // $pdf->Cell(0.5,0.5,  '',0,'L');
+           
+           
+           $pdf->SetXY(0.5,$Y+2.2);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Migration To:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.35);
+           
+            $pdf->MultiCell(7,0.2,  $data['Migrated_to']. "-". $data['Migrated_name'],0,'L');    
+           
+           
             $sY = -0.3;//0.5;
             $pdf->SetXY(0.2,6.1+$sY);
             $pdf->SetFillColor(240,240,240);
@@ -413,16 +439,16 @@ class Migration extends CI_Controller {
 
       
 
-            $pdf->SetFont('Arial','UI',10);  
+           /*  
             $pdf->SetXY(0.5,  10.2+$y);
             $date = strtotime($data['edate']); 
-            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');
-
+            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');*/
+            $pdf->SetFont('Arial','UI',10); 
             $pdf->SetXY(4.6,  10.2+$y);
             $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
             //date_format($$data['EDate'], 'd/m/Y H:i:s');
 
-            $pdf->SetXY(0.5,  10.5+$y);
+           $pdf->SetXY(0.5,  10.2+$y);
             $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
 
             //======================================================================================
@@ -455,61 +481,10 @@ class Migration extends CI_Controller {
         $this->load->library('PDF_Rotate');
 
 
-        // $pdf = new PDF_Rotate('P','in',"A4");
-        //for each type of correction total 7 types of corrections are now
+
         $ctid=1;  //correction type of id starts from one and multiples by 2 for next type of correction id
-        //   $displayfeetitle=array(1=>'Name Correction', 2=>'Father Name Correction', 3=>'DOB Correction', 4=>'FNIC Correction', 5=>'B-Form Correction', 6=>'Picture Change', 7=>'Group Change', 8=>'Subject Change');
-        // $feestructure = array();
-        //  for($i=1;$i<=8;$i++){
-        //$feetitle =  $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
-       //  DebugBreak();
-       /* if($result[0]['NameFee'] > 0)
-        {
-            $feestructure[]    =  $result[0]['NameFee'];    
-            $displayfeetitle[] =  'Name Correction';    
-        }
-        if($result[0]['FnameFee'] > 0 ){
-            $feestructure[]     = $result[0]['FnameFee'];   
-            $displayfeetitle[] =  'Father Name Correction';   
-        }
-        if($result[0]['DobFee'] > 0)
-        {
-            $feestructure[]=$result[0]['DobFee']; 
-            $displayfeetitle[] =  'DOB Correction';   
-        }
-        if($result[0]['FnicFee']>0)
-        {
-            $feestructure[]=$result[0]['FnicFee'];    
-            $displayfeetitle[] =  'FNIC Correction';
-        }
-        if($result[0]['BFormFee']>0)
-        {
-            $feestructure[]=$result[0]['BFormFee'];   
-            $displayfeetitle[] =  'B-Form Correction'; 
-        }
-        if($result[0]['PicFee']>0)
-        {
-            $feestructure[]=$result[0]['PicFee'];   
-            $displayfeetitle[] =  'Picture Change'; 
-        }
-        if($result[0]['GroupFee']>0)
-        {
-            $feestructure[]=$result[0]['GroupFee'];  
-            $displayfeetitle[] =  'Group Change';  
-        }
-        if($result[0]['SubjectFee']>0)
-        {
-            $feestructure[]=$result[0]['SubjectFee'];    
-            $displayfeetitle[] =  'Subject Change';
-        }             */
-        /*$feestructure[16]=$result[0]['BFormFee'];
-        $feestructure[32]=$result[0]['PicFee'];
-        $feestructure[64]=$result[0]['GroupFee'];
-        $feestructure[128]=$result[0]['SubjectFee'];*/
-        //  $ctid *= 2;
-        // }
-        //$totalfee
-        $migFee =   1650;
+    
+        $migFee =   1600;
          $feestructure[]=$migFee;    
             $displayfeetitle[] =  'Institute Migration';
         $turn=1;     
