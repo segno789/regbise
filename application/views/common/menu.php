@@ -7,7 +7,7 @@
                
 
                 <?php 
-                 // DebugBreak();
+                //  DebugBreak();
                 if($isselected == '5'){?>
 
                     <li>
@@ -19,7 +19,7 @@
 
                     <?php } 
                          
-                else  if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
+                else  if(($isselected == '6' || $isselected == '2' || $isselected == '12') && $edu_lvl == 3){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -35,7 +35,7 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe0e2;"></div>
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             11th Registration
                         </a>
                     </li>
@@ -53,7 +53,7 @@
                     </li>
                     <?php }
 
-                else if($isselected == '2' OR $isselected == '7' OR $isselected == '12'   OR $isselected == '10'){?>
+                else if($isselected == '2' OR $isselected == '7'   OR $isselected == '10'){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -69,7 +69,7 @@
                     </li>
                       <li>
                         <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe152;"></div>
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             11th Correction
                         </a>
                     </li>
@@ -82,12 +82,18 @@
                     <?php } 
 
              
-                else if($isselected == '6'){?>
+                else if($isselected == '6' OR ($isselected == '12' && ($edu_lvl == 2)) ){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Registration
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
+                            11th Correction
                         </a>
                     </li>
                     
