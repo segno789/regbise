@@ -98,8 +98,11 @@
                                     <input class="span3" id="corr_father_name" type="text"  style="text-transform: uppercase; display:none;" name="corr_father_name" placeholder="Father's Name"  maxlength="60">
                                 </div>
                             </div>
+                            <?php if(isset($data['0']['Intr_Brd']) && (@$data['0']['Intr_Brd'] != 1) )
+                            {
+                              ?>
                             <div class="control-group">
-                                <label class="control-label span1" >
+                            <label class="control-label span1" >
                                     Date of Birth:(dd-mm-yyyy)
                                 </label>
 
@@ -113,7 +116,7 @@
                                 </div>
                             </div>
 
-
+                             <?php } ?>
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Bay Form No :
