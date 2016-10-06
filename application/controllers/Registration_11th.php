@@ -1736,6 +1736,7 @@ class Registration_11th extends CI_Controller {
         $pdf->MultiCell(8.5,0.2,'Print Date: '. date('d-m-Y H:i:s a'),0,"L",0)    ;  
         $pdf->Output('123'.'.pdf', 'I');
     }
+    
     public function BatchList()
     {
         // DebugBreak();

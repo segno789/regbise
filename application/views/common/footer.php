@@ -1591,6 +1591,22 @@ if(isReadm == 0)
         });
         // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
     }
+      function Correction_form_11th(formrno)
+    {
+        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+        var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Correction_EditForm/'+formrno;
+            } else {
+                // user clicked "cancel"
+
+            }
+        });
+        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+    }
         function download_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"

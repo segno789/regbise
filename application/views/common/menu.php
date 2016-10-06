@@ -7,7 +7,7 @@
                
 
                 <?php 
-                
+                 // DebugBreak();
                 if($isselected == '5'){?>
 
                     <li>
@@ -18,7 +18,7 @@
                     </li>
 
                     <?php } 
-               
+                         
                 else  if(($isselected == '6' || $isselected == '2') && $edu_lvl == 3){?>
 
                     <li>
@@ -35,8 +35,14 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0e2;"></div>
                             11th Registration
+                        </a>
+                    </li>
+                        <li>
+                        <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
+                            11th Correction
                         </a>
                     </li>
                     <li>
@@ -47,7 +53,7 @@
                     </li>
                     <?php }
 
-                else if($isselected == '2' OR $isselected == '7'   OR $isselected == '10'){?>
+                else if($isselected == '2' OR $isselected == '7' OR $isselected == '12'   OR $isselected == '10'){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -59,6 +65,12 @@
                         <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
+                        </a>
+                    </li>
+                      <li>
+                        <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe152;"></div>
+                            11th Correction
                         </a>
                     </li>
                     <li>
@@ -397,6 +409,27 @@
                 </ul>
                 <?php
             }
+              
+            if($isselected == '12'){
+                ?>
+                <ul >
+                
+                    <li><a href="<?php echo base_url(); ?>EleventhCorrection"   data-original-title="" class="<?php if($isselected == '12') {echo 'heading';}?>">11th Correction </a></li>
+                  <li><a href="<?php echo base_url(); ?>EleventhCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>EleventhCorrection/Applied">
+                            Applications
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
+                   
+
+                </ul>
+                <?php
+            }
             
             // Inter Registration
             if($isselected == '6') { 
@@ -453,6 +486,9 @@
                 <?php
             }
             ?>
+            
+            
+            
             <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu
