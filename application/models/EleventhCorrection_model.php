@@ -19,7 +19,7 @@
 
         if($rowcount == 0 )
         {
-            $appno =  (Corr_ApplicationNo.'1' );
+            $appno =  (Corr_ApplicationNo11.'1' );
             return $appno;
         }
         else

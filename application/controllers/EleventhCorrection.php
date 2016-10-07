@@ -27,174 +27,7 @@ class EleventhCorrection extends CI_Controller {
             redirect('login');
         }
     }
-    public function index()
-    {
-        //DebugBreak(); 
-        $msg = $this->uri->segment(3);
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $userinfo['isselected'] = 12;
-        $userinfo['isdashbord'] = 1;
-        $Inst_Id = $userinfo['Inst_Id'];
-        $isgovt = $userinfo['isgovt'];
-        $emis = $userinfo['emis'];
-        $email = $userinfo['email'];
-        $phone = $userinfo['phone'];
-        $cell = $userinfo['cell'];
-        $dist = $userinfo['dist'];
-        $teh = $userinfo['teh'];
-        $zone = $userinfo['zone'];
-        $isInserted = $userinfo['isInserted'];
-        $field_status = array();
-        $field_status['emis'] = 0;
-        $field_status['email'] = 0;
-        $field_status['phone'] = 0;
-        $field_status['cell'] = 0;
-        $field_status['dist'] = 0;
-        $field_status['teh'] = 0;
-        $field_status['zone'] = 0;
-        if($Inst_Id == 399903)
-        {
-            $target_path = IMAGE_PATH.'/';
-            //$this->deleteExtarfiles($target_path );
-            //return false; 
-        }
-
-        if($isgovt == 1)
-        {
-            if(strlen($emis)> 1)
-            {
-                $field_status['emis'] = 1;
-            }
-            if(strlen($email) > 5){
-                $field_status['email'] = 1;
-            }
-            if(strlen($phone) > 3){
-                $field_status['phone'] = 1;
-            }
-            if(strlen(($cell)>5)){
-                $field_status['cell'] = 1;
-            }
-            if(($dist > 0)){
-                $field_status['dist'] = 1;
-            }
-            if(($teh > 0)){
-                $field_status['teh'] = 1;
-            }
-            if(($zone > 0)){
-                $field_status['zone'] = 1;
-            }
-        }
-        else
-        {
-            $field_status['emis'] = 1;
-            if(strlen($email) > 5){
-                $field_status['email'] = 1;
-            }
-            if(strlen($phone) > 3){
-                $field_status['phone'] = 1;
-            }
-            if(strlen(($cell)>5)){
-                $field_status['cell'] = 1;
-            }
-            if(($dist > 0)){
-                $field_status['dist'] = 1;
-            }
-            if(($teh > 0)){
-                $field_status['teh'] = 1;
-            }
-            if(($zone > 0)){
-                $field_status['zone'] = 1;
-            }
-        }
-        $Inst_name = $userinfo['inst_Name'];
-        $this->load->view('common/header.php',$userinfo);
-        //DebugBreak();
-        if($msg == 7)
-        {
-            $this->load->view('common/menu.php',$userinfo);
-            $this->load->model('Registration_11th_model');
-            $count = $this->Registration_11th_model->Dashboard($Inst_Id);
-            $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-            $this->load->view('Registration/Registration.php',$info);
-            $this->load->view('common/footer.php');  
-        }
-        else
-        {
-            if( ($field_status['emis'] == 0) || ($field_status['email'] == 0) || ($field_status['phone'] == 0) || ($field_status['cell'] == 0) || ($field_status['dist'] == 0) || ($field_status['teh'] == 0)|| ($field_status['zone'] == 0))
-            {
-                // $this->session->set_userdata("status",$this->session->flashdata('status'));
-                if($this->session->flashdata('status'))
-                {
-                    $this->load->view('common/menu.php',$userinfo);
-                    $this->load->model('Registration_model');
-                    $count = $this->Registration_model->Dashboard($Inst_Id);
-                    $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-                    $this->load->view('Registration/Registration.php',$info);
-                    $this->load->view('common/footer.php');  
-
-                }
-                else{
-                    if($isInserted < 1)
-                    {
-                        $this->load->model('Registration_model');
-                        $count = $this->Registration_model->Dashboard($Inst_Id);
-                        // DebugBreak();
-                        if($field_status['zone'] == 0)
-                        {
-                            $zone = $this->Registration_model->get_zone();
-                        }
-                        //DebugBreak();
-                        if($this->session->flashdata('incomplete'))
-                        {
-                            $all_PreData = $this->session->flashdata('incomplete'); 
-                            $fillvalues['emis'] = $all_PreData['emis'];
-                            $fillvalues['email'] = $all_PreData['email'];
-                            $fillvalues['phone'] = $all_PreData['phone'];
-                            $fillvalues['cell'] = $all_PreData['cell'];
-                            $fillvalues['dist'] = $all_PreData['dist'];
-                            $fillvalues['teh'] = $all_PreData['teh'];
-                            $fillvalues['zone'] = $all_PreData['zone'];
-                            $errors = $all_PreData['error'];
-                        }
-                        else{
-                            $errors ="";
-                            $fillvalues="";
-                        }
-                        //$this->session->set_flashdata('incomplete',$allinfo);
-                        $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name,'field_status'=>$field_status,'zone'=>$zone,'error'=>$errors,'fill_values'=>$fillvalues);
-                        //$this->load->view('Registration/Registration.php',$info);
-                        $this->load->view('Registration/11th/Incomplete_inst_info.php',$info);
-                        $this->load->view('common/footer.php');
-                    }
-                    else{
-                        $this->load->view('common/menu.php',$userinfo);
-                        $this->load->model('Registration_model');
-                        $count = $this->Registration_model->Dashboard($Inst_Id);
-                        $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-                        $this->load->view('Registration/Registration.php',$info);
-                        $this->load->view('common/footer.php');    
-
-                    } 
-                }
-
-                //$this->load->view('common/menu.php',$userinfo);
-
-            }
-            else
-            {
-                $this->load->view('common/menu.php',$userinfo);
-                $this->load->model('Registration_model');
-                $count = $this->Registration_model->Dashboard($Inst_Id);
-                $info = array('count'=>$count,'Inst_id'=>$Inst_Id,'Inst_name'=>$Inst_name);
-                $this->load->view('Registration/Registration.php',$info);
-                $this->load->view('common/footer.php');    
-            } 
-        }
-
-
-    }
+   
     public function EditForms()
     {
         //  DebugBreak();
@@ -338,7 +171,7 @@ class EleventhCorrection extends CI_Controller {
 
 
 
-        $this->load->library('PDF_Rotate');
+        $this->load->library('PDF_rotateWithOutPage');
 
 
         // $pdf = new PDF_Rotate('P','in',"A4");
@@ -396,7 +229,7 @@ class EleventhCorrection extends CI_Controller {
         // }
         //$totalfee
         $turn=1;     
-        $pdf=new PDF_Rotate("P","in","A4");
+        $pdf=new PDF_rotateWithOutPage("P","in","A4");
         $pdf->AliasNbPages();
         $pdf->SetTitle("Challan Form | Application Correction Form");
         $pdf->SetMargins(0.5,0.5,0.5);
@@ -424,7 +257,7 @@ class EleventhCorrection extends CI_Controller {
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-        $temp = $challanNo.'@'.$result[0]['formNo'].'@11@2016@1';
+        $temp = $challanNo.'@'.$result[0]['formNo'].'@'.$result[0]['class'].'@'.$result[0]['Iyear'].'@'.$result[0]['sess'];
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -475,8 +308,8 @@ class EleventhCorrection extends CI_Controller {
             $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
-            $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.corr_bank_chall_class1, 0.25, "L");
+            $pdf->SetFont('Arial','I',9);
+            $pdf->Cell(0, $y, corr_bank_chall_class1.' '.'Registration Session '.session_year, 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
@@ -1127,10 +960,10 @@ class EleventhCorrection extends CI_Controller {
         }
 
 
-        $this->load->library('PDF_Rotate');
+        $this->load->library('PDF_rotateWithOutPage');
 
 
-        $pdf = new PDF_Rotate('P','in',"A4");
+        $pdf = new PDF_rotateWithOutPage('P','in',"A4");
         //      $this->load->library('PDFF');
         //        $pdf=new PDFF('P','in',"A4");  
         $pdf->AliasNbPages();

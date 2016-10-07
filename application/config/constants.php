@@ -55,6 +55,7 @@ define('DOUBLE_LAST_DATE11', '2016-10-10');
 //================ Ninth Correction variables ========================
 define('Correction_Last_Date','2016-10-31');
 define('Corr_ApplicationNo','30000');
+define('Corr_ApplicationNo11','10000');
 define('CORR_IMAGE_PATH', 'uploads/correction/');
 define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
 
