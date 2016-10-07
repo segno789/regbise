@@ -117,5 +117,21 @@ class Migration_model extends CI_Model
         $result = $q2->result_array();
         return $result;
     }
+    
+     public function std11thclass($inst_cd)
+    {
+
+        $query = $this->db->query("Registration..[sp_get_regmigration] $inst_cd,9,2016,1");    
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+    
 }
 ?>

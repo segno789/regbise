@@ -302,7 +302,11 @@
              if($isselected == '10'){
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>
+                <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>
+
+                    <?php 
+                    
+                    if( $edu_lvl == 3 ) {?>
                     <li>
                         <a href="<?php echo base_url(); ?>migration/std9thclass">
                             9th Class Students
@@ -310,10 +314,54 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>migration/get9threalease">
-                            Release List
+                           9th Class Release List
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>migration/std11thclass">
+                            11th Class Students
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/get11threalease">
+                           11th Class Release List
+                        </a>
+                    </li>
+                  <?php } 
+                  else if($edu_lvl == 1 )
+                  {?>
+                      
+                        <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass">
+                            9th Class Students
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease">
+                           9th Class Release List
+                        </a>
+                    </li>
+                      
+                  <?php }
                   
+                  else if($edu_lvl == 2 )
+                  {?>
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/std11thclass">
+                          11th Class Students
+                      </a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/get11threalease">
+                          11th Class Release List
+                      </a>
+                  </li>
+                     
+                     
+                      
+                  <?php 
+                  }
+                  ?>
 
                 </ul>
                 <?php

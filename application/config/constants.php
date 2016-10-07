@@ -57,6 +57,7 @@ define('DOUBLE_LAST_DATE11', '2016-10-10');
 define('Correction_Last_Date','2016-10-31');
 define('Corr_ApplicationNo','30000');
 define('CORR_IMAGE_PATH', 'uploads/correction/');
+define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
 
 define('session_year','2016-2018');
 define('corr_bank_chall_class','9TH');
