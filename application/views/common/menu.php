@@ -7,7 +7,7 @@
                
 
                 <?php 
-                //  DebugBreak();
+                // DebugBreak();
                 if($isselected == '5'){?>
 
                     <li>
@@ -499,11 +499,11 @@
                                 Old Students 
                             </a>
                         </li>
-                        <!-- <li>
+                         <li>
                         <a href="<?php echo base_url(); ?>Registration_11th/ReAdmission">
                         Re-Admissions
                         </a>
-                        </li>-->
+                        </li>
 
                         <li>
                             <a href="<?php echo base_url(); ?>Registration_11th/EditForms">

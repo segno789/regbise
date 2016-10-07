@@ -1,6 +1,6 @@
 <div class="dashboard-wrapper class wysihtml5-supported">
           <div class="left-sidebar">
-           <form name="std_fth_dob_frm" id="std_fth_dob_frm" action="<?=base_url()?>/index.php/Registration/ReAdmission_check" method="post">
+           <form name="std_fth_dob_frm" id="std_fth_dob_frm" action="<?=base_url()?>/index.php/Registration_11th/ReAdmission_check" method="post">
             <div class="row-fluid">
               <div class="span12">
                 <div class="widget no-margin">
@@ -86,7 +86,8 @@
                   }
                   else
                   {
-                      window.location.href = '<?=base_url()?>/index.php/Registration/ReAdmission_check/'+oldrno+'/';
+                   $( "#std_fth_dob_frm" ).submit();
+                      //window.location.href = '//base_url() /index.php/Registration_11th/ReAdmission_check/'+oldrno+'/';
                   }
                   
                   
@@ -98,7 +99,7 @@
      alertify.confirm(msg, function (e) {
     if (e) {
         // user clicked "ok"
-      window.location.href ='<?php echo base_url(); ?>index.php/Registration/NewEnrolment';
+      window.location.href ='<?php echo base_url(); ?>index.php/Registration_11th/NewEnrolment';
     } else {
         // user clicked "cancel"
         

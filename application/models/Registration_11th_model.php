@@ -153,6 +153,8 @@ class Registration_11th_model extends CI_Model
               $BForm = $info[0]['bFormNo'];
               $FNIC = $info[0]['FNIC'];
               $Dob = $info[0]['dob'];
+             
+              
           }
           else
           {
@@ -237,6 +239,33 @@ class Registration_11th_model extends CI_Model
         if($rowcount > 0)
         {
             return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+        public function readmission_check($User_info_data)
+    {
+        //DebugBreak();
+        $Inst_cd = $User_info_data['Inst_Id'];
+        $RollNo = $User_info_data['RollNo'];
+        $spl_cd = $User_info_data['spl_case'];
+
+        // $forms_id = $User_info_data['forms_id'];
+
+        $where = ' (spl_cd =  17 OR  spl_cd = 70 OR status=4 OR status=2)';
+        $this->db->where('rno', $RollNo);
+        //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
+        $query = $this->db->where($where);
+        $query = $this->db->get(RE_ADMISSION_TBL11);
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+
+            $result_1 = $query->result_array();
+
+            return  $result_1;
         }
         else
         {
@@ -510,7 +539,7 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-    public function readmission_check($User_info_data)
+   /* public function readmission_check($User_info_data)
     {
         // DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
@@ -531,7 +560,7 @@ class Registration_11th_model extends CI_Model
         {
             return  false;
         }
-    }
+    }   */
     public function user_info_Formwise($User_info_data)
     {
         // DebugBreak();
