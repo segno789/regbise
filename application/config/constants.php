@@ -42,6 +42,7 @@ define('BARCODE_PATH', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE', '2016-09-30');
 define('DOUBLE_LAST_DATE', '2016-09-30');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
+define('RE_ADMISSION_TBL11', 'matric_new..vwIA2P15');
 define('ISREADMISSION', '1');
 
 

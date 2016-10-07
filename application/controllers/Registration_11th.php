@@ -190,6 +190,72 @@ class Registration_11th extends CI_Controller {
 
 
     }
+     public function ReAdmission()
+    {
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        // DebugBreak();
+        $data = array(
+            'isselected' => '6',
+        );
+        $this->load->view('common/header.php',$userinfo);
+        $this->commonheader($data);
+        if(!( $this->session->flashdata('error'))){
+
+            $error_msg_readmission = "";    
+        }
+        else{
+            $error_msg_readmission = $this->session->flashdata('error');
+        }
+        $myinfo = array('error'=>$error_msg_readmission);
+        $this->load->view('Registration/11th/ReAdmission.php',$myinfo);
+        $this->load->view('common/footer.php');
+
+    }
+    public function ReAdmission_check()
+    {
+         //DebugBreak();
+        $RollNo = @$_POST['oldRno'];//$this->uri->segment(3);
+        //$Spl_case = $this->uri->segment(4);
+
+        $this->load->model('Registration_11th_model');
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $data = array(
+            'isselected' => '6',
+        );
+        $userinfo['isselected'] = 6;
+        $Inst_Id = $userinfo['Inst_Id'];
+        $this->load->view('common/header.php',$userinfo);
+        $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>$RollNo,'spl_case'=>17);
+        $user_info  =  $this->Registration_11th_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
+
+        if($user_info == false)
+        {
+            $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 9th Branch Before proceeding!');
+            redirect('Registration_11th/ReAdmission');
+            return;
+        }
+        else
+        {
+           //  DebugBreak();
+            $formno = $user_info[0]['FormNo'];
+            $OldRno = $user_info[0]['rno'];
+            $year = 2016;
+
+            $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
+            $RegStdData['data'][0]=$user_info[0];
+            $RegStdData['data'][0]['CellNo'] = $RegStdData['data'][0]['MobNo'];
+
+            $filledinfo['error'] = "";
+            //$this->session->set_flashdata('isReAdm','1');
+            $this->load->view('common/menu.php',$data);
+            $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
+            $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
+        }
+    }
      public function Incomplete_inst_info_INSERT(){
         //DebugBreak();
         // $test = $_POST['info_zone'];
@@ -636,7 +702,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-      //  DebugBreak();
+        //DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
