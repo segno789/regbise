@@ -234,7 +234,7 @@ class Registration_11th extends CI_Controller {
 
         if($user_info == false)
         {
-            $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 9th Branch Before proceeding!');
+            $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from INTER PART-I Branch Before proceeding!');
             redirect('Registration_11th/ReAdmission');
             return;
         }
@@ -1180,7 +1180,7 @@ class Registration_11th extends CI_Controller {
 
             if($user_info == false)
             {
-                $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 9th Branch Before proceeding!');
+                $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from INTER PART-I Branch Before proceeding!');
                 redirect('Registration/ReAdmission');
                 return;
             }
@@ -1985,7 +1985,7 @@ class Registration_11th extends CI_Controller {
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
 
         }
-        // DebugBreak();
+         //DebugBreak();
         $q1 = $user_info['fee'];
         $total_std = 0;
         foreach($q1 as $k=>$v) 
@@ -1997,7 +1997,14 @@ class Registration_11th extends CI_Controller {
                 if($v["Spec"] == 1 || $v["Spec"] ==  2)
                 {
                    $reg_fee = $rule_fee[0]['Reg_Fee'];
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                   if($v['IsReAdm']==1)
+                {
+                $TotalLatefee = $TotalLatefee + 0;
+                }
+                else
+                {
+                $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 }
                 else 
@@ -2018,7 +2025,14 @@ class Registration_11th extends CI_Controller {
 
 
                     $TotalRegFee = $TotalRegFee + $reg_fee;
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                   if($v['IsReAdm']==1)
+                {
+                $TotalLatefee = $TotalLatefee + 0;
+                }
+                else
+                {
+                $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 } 
             } 
@@ -2026,7 +2040,14 @@ class Registration_11th extends CI_Controller {
             {
                 $reg_fee = $rule_fee[0]['Reg_Fee'];
                 $TotalRegFee = $TotalRegFee + $reg_fee;
+               if($v['IsReAdm']==1)
+                {
+                $TotalLatefee = $TotalLatefee + 0;
+                }
+                else
+                {
                 $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
 
@@ -2056,7 +2077,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-        //DebugBreak();
+      //  DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2119,7 +2140,8 @@ class Registration_11th extends CI_Controller {
         }
         if($is_gov == 1)
         {
-            $reg_fee = $rule_fee[0]['Reg_Fee'];;
+            $reg_fee = $rule_fee[0]['Reg_Fee'];
+          
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
         }
@@ -2146,13 +2168,27 @@ class Registration_11th extends CI_Controller {
                 {
                       $TotalRegFee = $TotalRegFee + $reg_fee;
                     $reg_fee = $rule_fee[0]['Reg_Fee'];;
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                   if($v['IsReAdm']==1)
+                {
+                $TotalLatefee = $TotalLatefee + 0;
+                }
+                else
+                {
+                $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 }
                 else 
                 {
                     $TotalRegFee = $TotalRegFee + $reg_fee;
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                   if($v['IsReAdm']==1)
+                {
+                $TotalLatefee = $TotalLatefee + 0;
+                }
+                else
+                {
+                $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 } 
             } 
@@ -2160,7 +2196,14 @@ class Registration_11th extends CI_Controller {
             {
                 $reg_fee = $rule_fee[0]['Reg_Fee'];
                 $TotalRegFee = $TotalRegFee + $reg_fee;
+                if($v['IsReAdm']==1)
+                {
+                $TotalLatefee = $TotalLatefee + 0;
+                }
+                else
+                {
                 $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
 
