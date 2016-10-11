@@ -724,7 +724,6 @@ class Registration_11th extends CI_Controller {
             'sub2'=>@$_POST['sub2'],'sub3'=>@$_POST['sub3'],
             'sub4'=>@$_POST['sub4'],'sub5'=>@$_POST['sub5'],
             'sub6'=>@$_POST['sub6'],'sub7'=>@$_POST['sub7'],
-            'sub8'=>@$_POST['sub8']
         );
 
         if((@$_POST['std_group'] != 5) && (@$_POST['std_group'] != 6))
@@ -1165,11 +1164,7 @@ class Registration_11th extends CI_Controller {
         {
             $sub7ap1 = 1;    
         }*/
-        if(@$_POST['sub8'] != -1)
-        {
-            $sub8ap1 = 1;    
-        }
-       
+     
         // DebugBreak();
         if(@$_POST['IsReAdm'] == '1')
         {
@@ -1180,7 +1175,7 @@ class Registration_11th extends CI_Controller {
 
             if($user_info == false)
             {
-                $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 9th Branch Before proceeding!');
+                $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 11th Branch Before proceeding!');
                 redirect('Registration/ReAdmission');
                 return;
             }
@@ -1205,7 +1200,6 @@ class Registration_11th extends CI_Controller {
                 'sub5ap1' => ($sub5ap1),
                 'sub6ap1' => ($sub6ap1),
                 'sub7ap1' => ($sub7ap1),
-                'sub8ap1' => ($sub8ap1),
 
             );
             $allinputdata['name']= $user_info[0]['name'];
@@ -1246,7 +1240,6 @@ class Registration_11th extends CI_Controller {
                 'sub5ap1' => ($sub5ap1),
                 'sub6ap1' => ($sub6ap1),
                 'sub7ap1' => ($sub7ap1),
-                'sub8ap1' => ($sub8ap1),
             );
             $allinputdata['regoldrno']= 0;
             $allinputdata['regoldsess']= 0;
@@ -1320,7 +1313,6 @@ class Registration_11th extends CI_Controller {
         $sub5ap1 = 0;
         $sub6ap1 = 0;
         $sub7ap1 = 0;
-        $sub8ap1 = 0;
         if(@$_POST['sub1'] != 0)
         {
             $sub1ap1 = 1;    
@@ -1350,11 +1342,7 @@ class Registration_11th extends CI_Controller {
             $sub7ap1 = 1;  
 
         }
-        if(@$_POST['sub8'] != 0)
-        {
-            $sub8ap1 = 1;    
-
-        }
+       
         // DebugBreak();
        $data = array(
             'name' =>$this->input->post('cand_name'),
@@ -1380,7 +1368,6 @@ class Registration_11th extends CI_Controller {
             'sub5' =>$this->input->post('sub5'),
             'sub6' =>$this->input->post('sub6'),
             'sub7' =>($sub7),
-            'sub8' =>$this->input->post('sub8'),
             'sub1ap1' => ($sub1ap1),
             'sub2ap1' => ($sub2ap1),
             'sub3ap1' => ($sub3ap1),
@@ -1388,7 +1375,6 @@ class Registration_11th extends CI_Controller {
             'sub5ap1' => ($sub5ap1),
             'sub6ap1' => ($sub6ap1),
             'sub7ap1' => ($sub7ap1),
-            'sub8ap1' => ($sub8ap1),
             'ruralOrurban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),

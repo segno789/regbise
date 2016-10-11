@@ -11,7 +11,7 @@ class BiseCorrection extends CI_Controller {
             // redirect('login/biselogin');
         }
     }
-        public function migration9th()
+    public function migration9th()
     {
         $this->load->helper('url');
         $data = array(
@@ -568,6 +568,21 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
+       public function reg11thcorrections()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/reg9thcorrections.php');
+        $this->load->view('common/footer.php');
+    }
     public function reg9thcorrectionapp()
     {
         $this->load->helper('url');
@@ -619,6 +634,58 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
+    
+     public function reg11thcorrectionapp()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('info'=>$this->BiseCorrections_model->get11thCorrectionData());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        //  $data1 = array('Inst_Id'=>$Inst_Id);
+        if(!( $this->session->flashdata('BatchList_update'))){
+
+            $user_info['errors_RB_update'] = '';  
+        }
+        else{
+            $user_info['errors_RB_update'] = $this->session->flashdata('BatchList_update');
+        }
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/reg9thcorrapp.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+    }
+    public function reg11thcorrectionapp_verified()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('info'=>$this->BiseCorrections_model->get11thCorrectionData_verified());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        //  $data1 = array('Inst_Id'=>$Inst_Id);
+        if(!( $this->session->flashdata('BatchList_update'))){
+
+            $user_info['errors_RB_update'] = '';  
+        }
+        else{
+            $user_info['errors_RB_update'] = $this->session->flashdata('BatchList_update');
+        }
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/reg9thcorrapp_verified.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+    }
+    
     public function BatchRelease()
     {
         $this->load->helper('url');
@@ -1008,6 +1075,7 @@ class BiseCorrection extends CI_Controller {
 
         $appdata = $this->BiseCorrections_model->get9thCorrectionDataById($BatchId);
 
+      
 
         if($appdata[0]['PicFee']>0)
         {
@@ -1023,13 +1091,13 @@ class BiseCorrection extends CI_Controller {
 
             copy($copy_path.$picPath, $target_path.$picPath);
 
-            $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
+            //$appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
 
         }
 
         $status = array('data'=>$this->BiseCorrections_model->reg9thCorrection_UPDATE($fetchdata));
 
-
+         $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
         if($status == true){
 
             $error_msg= "success";
@@ -1048,6 +1116,61 @@ class BiseCorrection extends CI_Controller {
 
     }
 
+      public function correction_update11($BatchId)
+    {
+
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $data = array(
+            'isselected' => '0',
+        );
+        $ckpo = $userinfo['Inst_Id'];
+        $fetchdata = array('AppNo'=>$BatchId,'ckpo'=>$ckpo);
+
+        $appdata = $this->BiseCorrections_model->get11thCorrectionDataById($BatchId);
+       //   DebugBreak();
+
+        if($appdata[0]['PicFee']>0)
+        {
+            $picPath =  $appdata[0]['PicPath'] ;
+            $formNo =  $appdata[0]['formNo'] ;
+            $copy_path = CORR_IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
+            $target_path = IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
+
+            $oldPath = $target_path.$picPath;
+            $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
+
+            rename($oldPath, $newPath)  ;
+
+            copy($copy_path.$picPath, $target_path.$picPath);
+
+           
+
+        }
+            $appdata = $this->BiseCorrections_model->updateCorrectionStatus11($BatchId,$ckpo);
+        $status = array('data'=>$this->BiseCorrections_model->reg11thCorrection_UPDATE($fetchdata));
+
+
+        if($status == true){
+
+            $error_msg= "success";
+            $this->session->set_flashdata('BatchList_update',$error_msg);
+            redirect('BiseCorrection/reg11thcorrectionapp_verified');
+            return;
+        }
+        else{
+            $error_msg = "Fail";
+            $this->session->set_flashdata('BatchList_update',$error_msg);
+            redirect('BiseCorrection/reg11thcorrectionapp');
+            return;
+        }
+
+
+
+    }
+    
     public function BatchRelease_update($BatchId, $Inst_Cd)
     {
 

@@ -361,7 +361,6 @@ class Registration_11th_model extends CI_Model
         $sub5 = $data['sub5'];
         $sub6 = $data['sub6'];
         $sub7 = $data['sub7'];
-        $sub8 = $data['sub8'];
         $sub1ap1 = $data['sub1ap1'];
         $sub2ap1 = $data['sub2ap1'];
         $sub3ap1 = $data['sub3ap1'];
@@ -369,7 +368,6 @@ class Registration_11th_model extends CI_Model
         $sub5ap1 = $data['sub5ap1'];
         $sub6ap1 = $data['sub6ap1'];
         $sub7ap1 = $data['sub7ap1'];
-        $sub8ap1 = $data['sub8ap1'];
         $UrbanRural = $data['ruralOrurban'];
         $Inst_cd = $data['Inst_cd'];
         $formno = $data['FormNo'];

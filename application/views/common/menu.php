@@ -99,12 +99,18 @@
                     
                     <?php } 
                     
-                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4'){?>
+                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4' OR $isselected == '13'){?>
                 
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Correction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrections" class="<?php if($isselected == '13') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            11th Correction
                         </a>
                     </li>
                  <!--   <li>
@@ -186,7 +192,44 @@
                 </ul>
                 <?php
             }
+                  if($isselected == '13') {   ?>
             
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrections"   data-original-title="" class="<?php if($isselected == '13') {echo 'heading';}?>">11th Registration</a></li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrectionapp">
+                            11th Correction Applications
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrectionapp_verified">
+                            Verified Correction  
+                        </a>
+                    </li>
+                  <!--   <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Delete_Form">
+                            Delete Candidate  
+                        </a>
+                    </li>
+                       <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form">
+                            Restore Candidate  
+                        </a>
+                    </li>
+                       <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/result11thcorrections">
+                            11th Result Cards(2016)  
+                        </a>
+                    </li>                                                   -->
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
+
+                </ul>
+            
+            
+            <?php }
             if($isselected == '8') {   ?>
             
                 <ul >

@@ -1118,7 +1118,21 @@ if(isReadm == 0)
         });
 
     }
-    
+     function Verified11_Update(Batch_ID)
+    {
+        var msg = "Are You Sure You want to update ?"
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href = '<?=base_url()?>BiseCorrection/correction_update11/'+Batch_ID
+            } else {
+                // user clicked "cancel"
+
+            }
+        });
+
+    }
     function RestoreBatch(Batch_ID)
     {
         window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID

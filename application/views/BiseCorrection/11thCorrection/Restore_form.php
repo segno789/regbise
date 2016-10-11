@@ -6,15 +6,13 @@
                 <div class="widget no-margin">
                     <div class="widget-header">
                         <div class="title">
-                            Edit Forms 9th Correction<a data-original-title="" id="notifications">s</a>
+                            Deleted 9th Registration Form<a data-original-title="" id="notifications">s</a>
                         </div>
                         
                     </div>
                     <div class="widget-body">
                         <h4>
-                            View All Submited Forms:   
-                            </br>
-                            <img src="../assets/img/OnlineCorrectoin.jpg" alt="" style="    margin-left: 225px;">
+                            View All Your Deleted Forms:
                         </h4>
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
@@ -39,20 +37,17 @@
                                         <th style="width:20%" class="hidden-phone">
                                             Subject Group
                                         </th>
-                                        <th style="width:11%" class="hidden-phone">
-                                            Selected Subjects
-                                        </th>
                                          <th style="width:4%" class="hidden-phone">
                                             Picture
                                         </th>
                                         <th style="width:18%" class="hidden-phone" >
-                                            Download
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                   // DebugBreak();
+                                   
                                     if($data != false)
                                     {
                                     $n=0;  
@@ -88,15 +83,13 @@
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                     <td>'.$grp_name.'</td>
-                                    <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                    
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$vals['Sch_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
-                                   
-                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="Correction_form('.$formno.')">Apply for Correction</button>
+                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="Restore_Deleted_Form_BiseAdmin('.$formno.')">Restore DELETED Form</button>
                                     </td>
                                     </tr>';
-                                     //<button type="button" class="btn btn-info" value="'.$formno.'" onclick="EditForm('.$formno.')">Edit Form</button>
                                     endforeach;
                                     }
                                     ?>
@@ -104,13 +97,13 @@
                             </table>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="control-group">
+                        <!--<div class="control-group">
                             <div class="controls controls-row">
                                 <label class="label label-important" style="font-size: large;">
                                     Note: Please write "No Image" in the above search to check if any image of candidate is missing or not.
                                 </label>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

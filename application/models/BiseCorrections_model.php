@@ -227,6 +227,23 @@ class BiseCorrections_model extends CI_Model
         $result = $q2->result_array();
         return $result;
     }
+    
+      public function get11thCorrectionData()
+    {
+        //DebugBreak();
+
+        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1));
+        $result = $q2->result_array();
+        return $result;
+    }
+    public function get11thCorrectionDataById($app_id)
+    {
+        //DebugBreak();
+
+        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1 , 'AppNo'=>$app_id));
+        $result = $q2->result_array();
+        return $result;
+    }
     public function get9thCorrectionDataById($app_id)
     {
         //DebugBreak();
@@ -235,6 +252,15 @@ class BiseCorrections_model extends CI_Model
         $result = $q2->result_array();
         return $result;
     }
+     public function get11thCorrectionData_verified()
+    {
+        //DebugBreak();
+
+        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
+        $result = $q2->result_array();
+        return $result;
+    }
+
     public function get9thCorrectionData_verified()
     {
         //DebugBreak();
@@ -273,6 +299,19 @@ class BiseCorrections_model extends CI_Model
         $rowcount = $query->num_rows();
         return true;
     }
+    
+     public function reg11thCorrection_UPDATE($fetch_data)
+    {
+
+        // $Inst_cd = $fetch_data['Inst_Cd'];
+        $AppNo = $fetch_data['AppNo'];
+        $ckpo = $fetch_data['ckpo'];
+        //DebugBreak();
+        $query = $this->db->query("Registration..Update_corrections_new_11 $AppNo,$ckpo");
+        $rowcount = $query->num_rows();
+        return true;
+    }
+    
     public function Batch_List_RESTORE($fetch_data)
     {
 
@@ -284,7 +323,16 @@ class BiseCorrections_model extends CI_Model
         $rowcount = $query->num_rows();
         return true;
     }
+     public function updateCorrectionStatus11($app_id,$kpo){
 
+        $data2 = array(
+            'ckpo'=>$kpo,
+            'cDate'=>date('Y-m-d H:i:s'),
+            'IsCorr'=>2,
+        );
+        $this->db->where('AppNo',$app_id);
+        $this->db->update("Registration..IA_P1_Reg_Correction", $data2);
+    }
     public function updateCorrectionStatus($app_id,$kpo){
 
         $data2 = array(
