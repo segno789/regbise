@@ -472,8 +472,8 @@ class Registration_11th extends CI_Controller {
             //------------- sub 4 & 8
             $pdf->SetXY(0.5,0.6+$y+$dy);
             $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-            $pdf->SetXY(3+$x,0.6+$y+$dy);
-            $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+            //$pdf->SetXY(3+$x,0.6+$y+$dy);
+            //$pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
             $y += 0.95;
             //------------- Signature
             $pdf->SetXY(0.2,$y+$dy);
