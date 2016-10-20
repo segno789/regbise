@@ -347,7 +347,7 @@ class Registration_11th extends CI_Controller {
 
             $pdf->SetFont('Arial','B',9);
             $pdf->SetXY(1.78,$y+0.48+$dy);
-            $pdf->MultiCell(6.5,0.13,$data["coll_cd"]."-". $user['inst_Name']."",0,'L',0);
+            $pdf->MultiCell(6.0,0.13,$data["coll_cd"]."-". $user['inst_Name']."",0,'L',0);
             //$pdf->Cell(0.5,0.5, $data["Sch_cd"]."-". $user['inst_Name'],0,'L');    
 
             //------ Picture Box on Centre      .$data["Inst_Cd"].'/'. $data["PicPath"]
@@ -468,12 +468,20 @@ class Registration_11th extends CI_Controller {
             $pdf->SetXY(0.5,0.4+$y+$dy);
             $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
             $pdf->SetXY(3+$x,0.4+$y+$dy);
+            if(isset($data['sub7_NAME']))
+            {
             $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+            }
+            else{
+            $pdf->Cell(0.5,0.5, ' ',0,'R');
+            }
+            
+            
             //------------- sub 4 & 8
             $pdf->SetXY(0.5,0.6+$y+$dy);
             $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-            $pdf->SetXY(3+$x,0.6+$y+$dy);
-            $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+            //$pdf->SetXY(3+$x,0.6+$y+$dy);
+            //$pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
             $y += 0.95;
             //------------- Signature
             $pdf->SetXY(0.2,$y+$dy);

@@ -864,7 +864,11 @@ class Migration extends CI_Controller {
                 //------------------------
 
                 $pdf->SetXY(0.5,9.10+$y);
+                if(isset($data['sub7_NAME']))
+                {
                 $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+                }
+                else{ $pdf->Cell(0.5,0.5, '',0,'R'); }
 
                /* $pdf->SetXY(3+$x,9.10+$y);
                 $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
