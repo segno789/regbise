@@ -96,6 +96,12 @@
                             11th Correction
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/std11thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                           11th Migration
+                        </a>
+                    </li>
                     
                     <?php } 
                     
@@ -122,7 +128,7 @@
                      <li>
                         <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration9th" class="<?php if($isselected == '4') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
-                            Migration
+                          9th Migration
                         </a>
                     </li>
                 <li>
@@ -324,6 +330,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?php echo base_url(); ?>/Registration/Reg_Cards_Printing_9th">
+                            Registration Cards
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?php echo base_url(); ?>/Registration/Profile">
                             Profile
                         </a>
@@ -342,6 +353,7 @@
             ?>
             <?php   
             ///Migration
+          //  DebugBreak();
              if($isselected == '10'){
                 ?>
                 <ul >
@@ -568,6 +580,11 @@
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th/FormPrinting">
                             Form Printing
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>/Registration_11th/Reg_Cards_Printing_11th">
+                            Registration Cards
                         </a>
                     </li>
                     <li>

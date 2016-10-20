@@ -92,13 +92,52 @@ class Migration extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Migration_model');
-        //  $error['grp_cd'] = $user['grp_cd'];
+        //  $error['grp_cd'] = $user['grp_cd'];  
         $RegStdData = array('data'=>$this->Migration_model->getrelease9thstd($user['Inst_Id']));
         $RegStdData['msg_status'] = $error_msg;
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('migration/Releasestd9thclass.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
+    public function get11threalease()
+    {
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '10',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+        
+        //  $error['grp_cd'] = $user['grp_cd'];
+        $RegStdData = array('data'=>$this->Migration_model->getrelease9thstd($user['Inst_Id']));
+        $RegStdData['msg_status'] = $error_msg;
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/Releasestd11thclass.php',$RegStdData);
         $this->load->view('common/footer.php');
 
 
@@ -126,7 +165,8 @@ class Migration extends CI_Controller {
                     "bform"   =>$_POST['bform'],
                     "migto"   =>$_POST['migrateto'],
                     "sex"   =>$_POST['sex'],
-                    "migfrom" =>$Inst_Id
+                    "migfrom" =>$Inst_Id ,
+                    "myclass"=>9
         );
         $datainfo = $this->Migration_model->updatemigratefrom($insertinfo);
         if($datainfo == 0)
@@ -141,6 +181,44 @@ class Migration extends CI_Controller {
         }
         
     }
+     public function updatefrom11th()
+    {
+       
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $Inst_Id = $userinfo['Inst_Id'];
+        $isReAdm = 0;
+        $year = 0;
+        $data = array(
+            'isselected' => '10',
+        );
+        
+        $this->load->model('Migration_model');
+        $insertinfo = array(
+                    "formno"  =>$_POST['formno'],
+                    "name"    =>$_POST['cand_name'],
+                    "fname"   =>$_POST['father_name'],
+                    "fnic"    =>$_POST['fnic'],
+                    "bform"   =>$_POST['bform'],
+                    "migto"   =>$_POST['migrateto'],
+                    "sex"   =>$_POST['sex'],
+                    "migfrom" =>$Inst_Id ,
+                    "myclass"=>11
+        );
+        $datainfo = $this->Migration_model->updatemigratefrom($insertinfo);
+        if($datainfo == 0)
+        {
+            $allinputdata['excep'] = 'Your Form is not saved.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Migration/release_stdForm11th/');
+        }
+        else
+        {
+            redirect('Migration/get11threalease/');
+        }
+        
+    }
     public function release_stdForm($formno)
     {    
                  //DebugBreak();
@@ -151,6 +229,7 @@ class Migration extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
         $year = 0;
+        
         $data = array(
             'isselected' => '10',
         );
@@ -167,6 +246,7 @@ class Migration extends CI_Controller {
         }
         else
         {
+            
             $this->load->model('Registration_model');
             $year = 2016;
             $datainfo = $this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id);
@@ -177,6 +257,47 @@ class Migration extends CI_Controller {
 
         $this->load->view('common/menu.php',$data);
         $this->load->view('migration/9thmigration_form.php',$RegStdData);   
+        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
+
+    }
+    public function release_stdForm11th($formno)
+    {    
+                 //DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $Inst_Id = $userinfo['Inst_Id'];
+        $this->load->view('common/header.php',$userinfo);
+        $isReAdm = 0;
+        $year = 0;
+        
+        $data = array(
+            'isselected' => '10',
+        );
+        
+        if($this->session->flashdata('NewEnrolment_error')){
+            //DebugBreak();
+
+            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+            $RegStdData['isReAdm']=0;
+            $RegStdData['Oldrno']=0;
+            $RegStdData['install']=$this->tblmainstall11();
+
+
+        }
+        else
+        {
+            
+            $this->load->model('Registration_11th_model');
+            $year = 2016;
+            $datainfo = $this->Registration_11th_model->EditEnrolement_data($formno,$year,$Inst_Id);
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" => $this->tblmainstall11());  
+        }
+        
+
+
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/11thmigration_form.php',$RegStdData);   
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
@@ -212,7 +333,7 @@ class Migration extends CI_Controller {
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
-        $this->load->view('migration/std9thclass.php',$RegStdData);
+        $this->load->view('migration/std11thclass.php',$RegStdData);
         $this->load->view('common/footer.php');
 
 
@@ -222,7 +343,7 @@ class Migration extends CI_Controller {
     public function Print_migration_Form_Final()
     {
 
-       //   DebugBreak();
+          //DebugBreak();
         $AppNo = $this->uri->segment(3);
 
         $this->load->library('session');
@@ -237,6 +358,7 @@ class Migration extends CI_Controller {
 
 
         if(empty($result['data'])){
+       
             $this->session->get9threalease('error', $Condition);
             redirect('Migration/FormPrinting');
             return;
@@ -495,10 +617,286 @@ class Migration extends CI_Controller {
 
         $pdf->Output($data['app_No'].'.pdf', 'I');
     }
-    
-    
-    
-    
+     public function Print_migration_Form_Final11th()
+    {
+
+          //DebugBreak();
+        $AppNo = $this->uri->segment(3);
+
+        $this->load->library('session');
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+
+     
+        $result = array('data'=>$this->Migration_model->getinfoAll($AppNo));
+        //Print_Form_Formnowise
+
+
+        if(empty($result['data'])){
+       
+            $this->session->get11threalease('error', $Condition);
+            redirect('Migration/FormPrinting');
+            return;
+
+        }
+
+
+        $this->load->library('PDF_Rotate');
+
+
+        $pdf = new PDF_Rotate('P','in',"A4");
+        //      $this->load->library('PDFF');
+        //        $pdf=new PDFF('P','in',"A4");  
+        $pdf->AliasNbPages();
+        $pdf->SetMargins(0.5,0.5,0.5);
+        //$grp_cd = $this->uri->segment(3);
+
+        $pdf->SetTitle('Print Migration From');
+
+        $fontSize = 10;
+        $marge    = .4;   // between barcode and hri in pixel
+        $x        = 7.5;  // barcode center
+        $y        = 1.2;  // barcode center
+        $height   = 0.35;   // barcode height in 1D ; module size in 2D
+        $width    = .013;  // barcode height in 1D ; not use in 2D
+        $angle    = 0;   // rotation in degrees
+
+        $type     = 'code128';
+        $black    = '000000'; // color in hex
+     //   DebugBreak();
+        $result = $result['data'];
+        //if(!empty($result)):
+        foreach ($result as $key=>$data) 
+        {
+
+            //First Page ---class instantiation    
+            //$pdf = new FPDF_BARCODE("P","in","A4");
+            $pdf->AddPage();
+            $Y = 0.5;
+            $pdf->SetFillColor(0,0,0);
+            $pdf->SetDrawColor(0,0,0); 
+            $temp = $data['app_No'].'@11@2016@1';
+            $image =  $this->set_barcode($temp);
+            $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
+            $pdf->SetFont('Arial','U',16);
+            $pdf->SetXY( 1.2,0.2);
+            $pdf->Cell(0, 0.2, "Board Of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
+            $pdf->Image(base_url()."assets/img/logo.jpg",0.35,0.2, 0.75,0.75, "JPG", "http://www.bisegrw.com");
+
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(1.7,0.4);
+            $pdf->Cell(0, 0.25, " Migration FORM FOR CLASS ".$data['class'].'TH'." SESSION 2016-2018", 0.25, "C");
+            //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
+            //--------------- Proof Read
+            $ProofReed = "Application No. ".$data['app_No'];
+            $pdf->SetXY(3,0.8);
+            $pdf->SetFont("Arial",'B',12);
+            $pdf->Cell(0, 0.25, $ProofReed  ,0,'C');
+
+            //--------------------------- Form No & Rno
+            $pdf->SetXY(0.2,0.5+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Form No: _______________",0,'L');
+
+            $pdf->SetXY(0.8,0.5+$Y);
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->Cell( 0.5,0.5,$data['Formno'],0,'L');
+
+            //--------------------------- Institution Code and Name   $user['Inst_Id']. "-". $user['inst_Name']
+            $pdf->SetXY(0.2,0.75+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
+
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.75,0.92+$Y);
+            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
+            $pdf->MultiCell(6,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+
+            //------ Picture Box on Centre      
+            $Y = $Y+0.1;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Personal Information ',1,0,'L',1);
+            //------------- Personal Infor Box
+            //====================================================================================================================
+
+           
+            //  $Y = $Y+0.1;
+
+
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Candidate Name:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.65+$Y);
+            $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
+
+             $pdf->SetXY(0.5,$Y+2);
+           // $pdf->SetXY(3.5+$x,1.65+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father Name:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2);
+            $pdf->Cell(0.5,0.5, strtoupper(@$data["fname"]),0,'L');
+
+
+            $pdf->SetXY(0.5,$Y+2.4);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father CNIC:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.4);
+            $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
+
+            $pdf->Image(base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
+             //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
+            //========================================  Exam Info ===============================================================================            
+           
+            $Y = $Y+2.2;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Migration Information ',1,0,'L',1);
+           
+           $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Migration From:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.80+$Y);
+            $pdf->MultiCell(7,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+           // $pdf->Cell(0.5,0.5,  '',0,'L');
+           
+           
+           $pdf->SetXY(0.5,$Y+2.2);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Migration To:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.35);
+           
+            $pdf->MultiCell(7,0.2,  $data['Migrated_to']. "-". $data['Migrated_name'],0,'L');    
+           
+           
+            $sY = -0.3;//0.5;
+            $pdf->SetXY(0.2,6.1+$sY);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
+            // DebugBreak();
+             $grp_name = $data["grp_cd"];
+            switch ($grp_name) {
+                    case '1':
+                        $grp_name = 'Pre-Medical';
+                        break;
+                    case '2':
+                        $grp_name = 'Pre-Engineering';
+                        break;
+                    case '3':
+                        $grp_name = 'Humanities';
+                        break;
+                    case '4':
+                        $grp_name = 'General Science';
+                        break;
+                    case '5':
+                        $grp_name = 'Commerce';
+                        break;
+                    case '6':
+                        $grp_name = 'Home Economics';
+                        break;
+                    default:
+                        $grp_name = "No Group Selected.";
+                }
+            
+             $pdf->SetXY(0.2,6.5+$sY);
+           // $pdf->SetFillColor(240,240,240);
+           $pdf->SetFont('Arial','BU',12);
+            $pdf->Cell(8,0.3,'Group:  '.$grp_name,0,'L');
+               $y = $y-1.8;
+            
+             $pdf->SetFont('Arial','B',9);  
+                $pdf->SetFont('Arial','',8);
+                $pdf->SetXY(0.5,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
+                                                                           */
+                /*$pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
+                //------------- sub 2 & 6
+                $pdf->SetXY(0.5,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');    */
+                /*$pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
+                //------------- sub 3 & 7
+                $pdf->SetXY(0.5,7.70+$y);
+                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R');   */
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
+                //------------- sub 4 & 8
+                $pdf->SetXY(0.5,8.05+$y);
+                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,8.05+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');  */
+                //-----------------
+
+                $pdf->SetXY(0.5,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');     */
+
+                //-------------------------
+                $pdf->SetXY(0.5,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R'); */
+
+                //------------------------
+
+                $pdf->SetXY(0.5,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
+
+                //------------------------------
+
+               // $pdf->SetXY(0.5,9.45+$y);
+              //  $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+
+              /*  $pdf->SetXY(3+$x,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');   */
+            
+
+      
+
+           /*  
+            $pdf->SetXY(0.5,  10.2+$y);
+            $date = strtotime($data['edate']); 
+            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');*/
+            $pdf->SetFont('Arial','UI',10); 
+            $pdf->SetXY(4.6,  10.2+$y);
+            $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
+            //date_format($$data['EDate'], 'd/m/Y H:i:s');
+
+           $pdf->SetXY(0.5,  10.2+$y);
+            $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
+
+            //======================================================================================
+        }
+
+        $pdf->Output($data['app_No'].'.pdf', 'I');
+    }
     public function Print_challan_Form()
     {
 
@@ -612,7 +1010,7 @@ class Migration extends CI_Controller {
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
             $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.corr_bank_chall_class, 0.25, "L");
+            $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.$result[0]['class'].'TH', 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
@@ -3398,8 +3796,651 @@ class Migration extends CI_Controller {
 
 
         );
+    }
+    public function tblmainstall11()
+    {
+        return array(
+   "211001"=>"GOVT. COLLEGE, GUJRANWALA",
+"211002"=>"GOVT. ISLAMIA COLLEGE, GUJRANWALA",
+"211003"=>"GOVT. DEGREE COLLEGE (FOR BOYS) PEOPLES COLONY, GUJRANWALA",
+"211004"=>"MAULANA ZAFAR ALI KHAN GOVT. DEGREE COLLEGE, WAZIRABAD (GRW)",
+"211005"=>"GOVT. CH. ILLAM DIN COLLEGE, ALIPUR CHATHA (GUJRANWALA)",
+"211006"=>"GOVT. DEGREE COLLEGE, QILA DIDAR SINGH (GUJRANWALA)",
+"211007"=>"GOVT. DEGREE COLLEGE, KAMOKE (GUJRANWALA)",
+"211010"=>"PAKISTAN INTERNATIONAL PUBLIC SCHOOL/COLLEGE, GUJRANWALA",
+"211011"=>"QUAID-E-AZAM PUBLIC COLLEGE FOR BOYS, GUJRANWALA",
+"211012"=>"PUNJAB COLLEGE OF COMMERCE FOR BOYS, GUJRANWALA",
+"211013"=>"GUJRANWALA COLLEGE OF COMMERCE, GUJRANWALA",
+"211016"=>"NATIONAL SCIENCE COLLEGE FOR BOYS, GUJRANWALA",
+"211019"=>"ELITE COLLEGE OF COMMERCE, GUJRANWALA.",
+"211020"=>"SUPERIOR SCIENCE COLLEGE FOR BOYS, GUJRANWALA",
+"211026"=>"GIFT COLLEGE OF SCIENCES (FOR BOYS)  GUJRANWALA",
+"211030"=>"CRESCENT SCIENCE COLLEGE 162-D, SATELLITE TOWN, GUJRANWALA",
+"211031"=>"CHENAB COLLEGE OF I.T. & COMMERCE, WAZIRABAD (GUJRANWALA)",
+"211033"=>"THE EDUCATORS COLLEGE FOR BOYS GUJRANWALA",
+"211036"=>"PUNJAB COLLEGE OF SCIENCE GUJRANWALA",
+"211038"=>"SOFT SOLUTION COLLEGE, GUJRANWALA",
+"211040"=>"FEDERAL SCIENCE COLLEGE WAPDA EMPLOYEES TOWN GUJRANWALA",
+"211041"=>"CITY SCIENCE COLLEGE FOR BOYS SIALKOT ROAD, WAZIRABAD (GRW)",
+"211043"=>"THE WEBSTER COLLEGE OF COMMERCE FOR BOYS, G.T. ROAD, KAMOKE. (GRW)",
+"211045"=>"ARMY PUBLIC COLLEGE OF MANAGEMENT SCIENCES (A.P.C.O.M.S) GWA CANTT.",
+"211048"=>"MICRO WORLD COLLEGE OF COMMERCE & COMPUTER SCIENCE, KAMOKE",
+"211050"=>"APTECH COMPUTER EDUCATION 1-A SATELLITE TOWN, OPP DISTT. COURTS GUJRANWALA",
+"211071"=>"ELITE SCIENCE COLLEGE GUJRANWALA",
+"211073"=>"SUPERIOR COLLEGE FOR BOYS MAIN G.T. ROAD GUJRANWALA",
+"211074"=>"PUNJAB COLLEGE OF COMMERCE FOR BOYS, G.T. ROAD, WAZIRABAD, GUJRANWALA",
+"211076"=>"ALLIED SCIENCE COLLEGE FOR BOYS, SATELLITE TOWN, GUJRANWALA",
+"211077"=>"PUNJAB COLLEGE OF COMMERCE FOR BOYS, G.T. ROAD, KAMOKE, GUJRANWALA",
+"211078"=>"CMS COLLEGE FOR BOYS, 689-B SATELLITE TOWN GUJRANWALA",
+"211079"=>"KIPS COLLEGE BOYS CAMPUS, OPP. SHAHEENABAD, G.T. ROAD, GUJRANWALA",
+"211080"=>"UNITED COLLEGE FOR BOYS, G.T. ROAD KAMOKE, GUJRANWALA",
+"211081"=>"GOVT,COLLEGE FOR ELEMENTARY TEACHERS, GAKHAR DISTRICT GUJRANWALA",
+"211082"=>"GOVT. COLLEGE FOR ELEMENTARY TEACHERS (BOYS), GAKKHAR, GUJRANWALA",
+"211083"=>"GOVT. DEGREE COLLEGE FOR BOYS, GHAKHAR MANDI, WAZIRABAD, GUJRANWALA",
+"211084"=>"GOVT. DEGREE COLLEGE FOR BOYS, EMINABAD, GUJRANWALA",
+"211085"=>"ROYAL COLLEGE FOR BOYS, PARACHA CENTRE, NEAR PACE, GUJRANWALA",
+"211086"=>"MUSLIM HANDS COLLEGE OF EXCELLENCE FOR BOYS, SIALKOT ROAD, SOHDRA MORE, WAZIRABAD, GUJRANWALA",
+"211087"=>"SUPERIOR COLLEGE FOR BOYS, JAURA RICE MILLS & FARMS, HUSSAIN ABAD, ALI PUR CHATTHA, GUJRANWALA",
+"211088"=>"GOVT. FAQIR MUHAMMAD FAQIR DEGREE COLLEGE FOR BOYS, PEOPLES COLONY, GUJRANWALA",
+"211089"=>"MUSLIM IDEAL SCIENCE COLLEGE FOR BOYS, MANDIALA TEGA, KAMOKE, GUJRANWALA",
+"211090"=>"GOVT. DEGREE COLLEGE FOR BOYS, NEAR OFFICER COLONY, NOWSHEHRA VIRKAN, GUJRANWALA",
+"211091"=>"PUNJAB COLLEGE OF COMMERCE FOR BOYS CAMPUS NO. 2, OPP. GARDEN TOWN, SIALKOT BYPASS ROAD, GUJRANWALA",
+"211092"=>"WINWARE COLLEGE FOR BOYS, NAGRI ABBAS SHAH, G.T ROAD, KAMOKE, GUJRANWALA",
+"211093"=>"GOVT. DEGREE COLLEGE FOR BOYS, RAHWALI, GUJRANWALA",
+"211094"=>"SUPERIOR COLLEGE FOR BOYS, FOUR SEASON HALL, HAFIZABAD ROAD, QILA DIDAR SINGH, GUJRANWALA",
+"211095"=>"GOVT. INSTITUTE OF COMMERCE, G.T. ROAD, GHANIA, KAMOKE, GUJRANWALA",
+"211096"=>"WISE COLLEGE FOR BOYS, MARI ROAD, KAMOKE, GUJRANWALA",
+"211097"=>"CONCORDIA COLLEGE FOR BOYS, LOHIYAWALA, CANAL BRIDGE, G.T ROAD, GUJRANWALA",
+"211099"=>"GOVT. COLLEGE OF COMMERCE, W-BLOCK, PEOPLES COLONY, GUJRANWALA",
+"211100"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), BHATTIKEY ROAD, WAZIRABAD, GUJRANWALA",
+"211101"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), NEAR NEW KATCHERY, KARYAL ROAD, NOWSHERA VIRKAN, GUJRA",
+"211102"=>"GOVT. INSTITUTE OF COMMERCE, NOWSHERA ROAD, GUJRANWALA",
+"212001"=>"GOVT. POST GRADUATE COLLEGE FOR WOMEN S/TOWN, GUJRANWALA",
+"212002"=>"GOVT. COLLEGE FOR WOMEN, MODEL TOWN, GUJRANWALA",
+"212003"=>"GOVT. COLLEGE FOR WOMEN, GUJRANWALA CITY",
+"212005"=>"GOVT. COLLEGE FOR WOMEN, WAZIRABAD (GUJRANWALA)",
+"212006"=>"GOVT. COLLEGE FOR WOMEN, QILA DIDAR SINGH (GUJRANWALA)",
+"212007"=>"GOVT. COLLEGE FOR WOMEN, KAMOKE (GUJRANWALA)",
+"212013"=>"GOVT. GIRLS INTER COLLEGE, ALIPUR CHATHA (GUJRANWALA)",
+"212014"=>"GOVT. DEGREE COLLEGE FOR WOMEN, NOSHEHRA VIRKAN(GUJRANWALA)",
+"212015"=>"NATIONAL SCIENCE COLLEGE FOR GIRLS, GUJRANWALA",
+"212016"=>"PUNJAB COLLEGE FOR WOMEN MIAN ZIA UL HAQ ROAD, CIVIL LINES, GUJRANWALA",
+"212019"=>"SUPERIOR SCIENCE COLLEGE FOR GIRLS, GUJRANWALA",
+"212024"=>"GIFT COLLEGE OF SCIENCES (FOR GIRLS)  GUJRANWALA",
+"212025"=>"SHIBLEE COLLEGE FOR WOMEN, GUJRANWALA",
+"212026"=>"GOVT. DEGREE COLLEGE FOR WOMEN, RAHWALI (GUJRANWALA)",
+"212027"=>"GOVT. GIRLS INTER COLLEGE, WAHNDO (GUJRANWALA)",
+"212028"=>"CHENAB COLLEGE OF I.T. & COMMERCE FOR WOMEN, WAZIRABAD (GRW)",
+"212029"=>"CRESCENT SCIENCE COLLEGE 162-D, SATELLITE TOWN, GUJRANWALA",
+"212030"=>"ELITE  COLLEGE OF MANAGEMENT SCIENCES GUJRANWALA",
+"212031"=>"GOVT. DEGREE COLLEGE FOR WOMEN PEOPLES COLONY GUJRANWALA",
+"212032"=>"THE EDUCATORS COLLEGE FOR GIRLS GUJRANWALA",
+"212033"=>"AL-FAROOQ SCIENCE COLLEGE SHALIMAR TOWN, GUJRANWALA",
+"212035"=>"HAIDER MEMORIAL HR./S. SCHOOL SAROKI DISTT GUJRANWALA",
+"212038"=>"SIR SYED SCIENCE COLLEGE FOR GIRLS, KAMOKE - GUJRANWALA",
+"212039"=>"ARMY PUBLIC COLLEGE OF MANAGEMENT SCIENCES (A.P.C.O.M.S) GWA CANTT.",
+"212041"=>"CITY SCIENCE COLLEGE FOR WOMEN, WAZIRABAD (GUJRANWALA)",
+"212042"=>"JINNAH SCIENCE COLLEGE (FOR WOMEN) 29-A S. TOWN GRW",
+"212044"=>"FATIMA JINNAH GIRLS COLLEGE, KAMOKE, DISTRICT GUJRANWALA",
+"212046"=>"ALLIED SCIENCE COLLEGE GUJRANWALA",
+"212049"=>"ZIA MODEL COLLEGE OF COMMERCE & COMPUTER SCIENCE NEW GHALLA MANDI EIDHI ROAD KAMOKE",
+"212052"=>"GOVT. COMMUNITY INTER COLLEGE FOR GIRLS, BUDHA GORAYA (GRW)",
+"212058"=>"COMMUNITY MODEL INTER COLLEGE FOR GIRLS, MUBARAK COLONY(GRW)",
+"212076"=>"COMMUNITY MODEL INTER COLLEGE (GIRLS), ALIPUR CHATHA (GRW)",
+"212090"=>"GOVT. CM. MC. GIRLS INTER COLLEGE, QILA DIDAR SINGH(GRW)",
+"212094"=>"GOVT. C.M. GIRLS INTER COLLEGE LADHEWALA WARRIACH, GUJRANWALA",
+"212095"=>"GOVT.GIRLS COMMUNITY HIGHER SECONDARY SCHOOL ALI PUR CHATTHA, GUJRANWALA",
+"212096"=>"G.G COMMUNITY MODEL INTER COLLEGE KALASKE",
+"212097"=>"GOVT DEGREE COLLEGE (W) COLLEGE ROAD , GUJRANWALA",
+"212098"=>"EXCELLENCE COLLEGE OF EDUCATION  (GIRLS) S/TOWN GUJRANWALA",
+"212100"=>"GOVT. DEGREE COLLEGE FOR WOMEN EMINABAD GUJRANWALA",
+"212101"=>"GOVT. DEGREE COLLEGE FOR WOMEN COLLEGE ROAD GUJRANWALA",
+"212102"=>"SUPERIOR COLLEGE FOR GIRLS MAIN G.T. ROAD GUJRANWALA",
+"212104"=>"PUNJAB COLLEGE OF COMMERCE FOR GIRLS, G.T. ROAD, WAZIRABAD, GUJRANWALA",
+"212105"=>"THE WEBSTER COLLEGE FOR GIRLS, G.T. ROAD, KAMOKE, GUJRANWALA",
+"212106"=>"PUNJAB COLLEGE OF COMMERCE FOR GIRLS, G.T. ROAD, KAMOKE, GUJRANWALA",
+"212107"=>"TIMES COLLEGE FOR GIRLS, 91-A SATELLITE TOWN, GUJRANWALA",
+"212108"=>"GUJRANWALA COLLEGE OF COMMERCE FOR GIRLS, SATELLITE TOWN, GUJRANWALA
+",
+"212109"=>"MUSLIM IDEAL SCIENCE COLLEGE FOR GIRLS MANDIALA TEGA
+",
+"212110"=>"THE PUNJAB COLLEGE OF SCIENCES FOR WOMEN, KHIALI PULI, GUJRANWALA
+",
+"212111"=>"MUSLIM IDEAL SCIENCE COLLEGE FOR GIRLS, MANDIALA TEGA TEHSIL KAMONKE, DISTRICT GUJRANWALA",
+"212112"=>"KIPS COLLEGE FOR GIRLS, OPP. REGIONAL TAX OFFICE, G.T. ROAD, GUJRANWALA",
+"212113"=>"UNITED COLLEGE FOR GIRLS, G.T. ROAD KAMOKE, GUJRANWALA",
+"212115"=>"GOVT.COLLEGE FOR ELEMENTARY TEACHERS FOR GIRLS, G.T ROAD, GAKHAR TEHSIL WAZIRABAD,GUJRANWALA",
+"212116"=>"GOVT. COLLEGE FOR ELEMENTARY TEACHERS (GIRLS), GAKKHAR, GUJRANWALA",
+"212117"=>"GOVT. GIRLS DEGREE COLLEGE, GHAKKHAR MANDI, WAZIRABAD, GUJRANWALA",
+"212118"=>"GOVT. DEGREE COLLEGE FOR WOMEN, NOSHEHRA ROAD, GUJRANWALA",
+"212119"=>"GREENZ COLLEGE FOR GIRLS, 122-A SATELLITE TOWN, GUJRANWALA",
+"212120"=>"GOVT. GIRLS DEGREE COLLEGE, WAZIRABAD, GUJRANWALA",
+"212121"=>"ROYAL COLLEGE FOR GIRLS, PARACHA CENTRE, NEAR PACE, MAIN G.T ROAD, GUJRANWALA",
+"212122"=>"MUSLIM HANDS COLLEGE OF EXCELLENCE FOR GIRLS, SIALKOT ROAD, SOHDRA MORE, WAZIRABAD, GUJRANWALA",
+"212123"=>"SUPERIOR COLLEGE FOR GIRLS, JAURA RICE MILLS & FARMS, HUSSAIN ABAD, ALI PUR CHATTHA, GUJRANWALA",
+"212124"=>"ZIETECH COLLEGE OF COMMERCE FOR WOMEN, 76-A, SATELLITE TOWN, GUJRANWALA",
+"212125"=>"SUPERIOR COLLEGE FOR WOMEN, FOUR SEASON HALL, HAFIZABAD ROAD, QILA DIDAR SINGH, GUJRANWALA",
+"212126"=>"DAR-E-ARQAM GIRLS COLLEGE, MAIN PEOPLES COLONY ROAD, SHADMAN TOWN, GUJRANWALA",
+"212127"=>"GOVT. GIRLS DEGREE COLLEGE, NOKHAR, GUJRANWALA",
+"212128"=>"GOVT. GIRLS DEGREE COLLEGE, TARIQABAD, KHOKHARKI, GUJRANWALA",
+"212129"=>"CONCORDIA COLLEGE FOR GIRLS, LOHIYAWALA CANAL BRIDGE, G.T ROAD, GUJRANWALA",
+"212130"=>"ILM COLLEGE FOR GIRLS, G.T ROAD NEAR CHENAB TOLL PLAZA, WAZIRABAD, GUJRANWALA",
+"212131"=>"GOVT. INSTITUTE OF COMMERCE FOR WOMEN, ST. NO.04, CIVIL LINES (KALAN), GUJRANWALA",
+"221001"=>"GOVT. SIR SYED DEGREE COLLEGE, GUJRAT",
+"221002"=>"GOVT. ZAMINDAR POSTGRADUATE COLLEGE BIMBHER ROAD, GUJRAT",
+"221003"=>"GOVT. ZAMINDAR DEGREE SCIENCE COLLEGE, GUJRAT",
+"221004"=>"GOVT. ABDUL HAQ ISLAMIA DEGREE COLLEGE, JALALPUR JATTAN (GUJRAT)",
+"221005"=>"GOVT. DEGREE COLLEGE, LALAMUSA (GUJRAT)",
+"221011"=>"CHENAB COLLEGE OF COMMERCE FOR BOYS, GUJRAT",
+"221012"=>"GOVT. INTER COLLEGE, KARIANWALA (GUJRAT)",
+"221016"=>"GOVT. DEGREE COLLEGE FOR BOYS, SARAI ALAMGIR (GUJRAT)",
+"221018"=>"ISLAMIC ASIAN COLLEGE OF COMMERCE KHARIAN (GUJRAT)",
+"221019"=>"GUJRAT COLLEGE OF COMMERCE GUJRAT",
+"221021"=>"GOVT. DEGREE COLLEGE, KHARIAN CITY (GUJRAT)",
+"221024"=>"GOVT. COLLEGE, GUJRAT",
+"221027"=>"AJMERY COLLEGE OF COMMERCE, GUJRAT",
+"221028"=>"BASTION COMMERCE SCIENCE COLLEGE, JALALPUR JATTAN (GUJRAT)",
+"221029"=>"BARANI COLLEGE OF COMMERCE, LALAMUSA (GUJRAT)",
+"221032"=>"GOVT. DEGREE COLLEGE, DINGA (GUJRAT)",
+"221033"=>"SAINT FRANCIS DEGREE COLLEGE FOR MEN SARAI ALAMGIR (GUJRAT)",
+"221035"=>"VISION SCIENCE COLLEGE 9-B- MARGHZAR COLONY GUJRAT",
+"221036"=>"CITY DEGREE COLLEGE (REGD.) OPP: CAMPING PLAY GROUND LALAMUSA",
+"221037"=>"JINNAH COLLEGE OF COMMERCE (GUJRAT)",
+"221038"=>"IBN-E-IMAM DEGREE SCIENCE COLLEGE JALAL PUR JATTAN (GUJRAT)",
+"221039"=>"AL-FALAH COLLEGE OF COMMERCE FOR BOYS, GUJRAT",
+"221040"=>"KHARIAN COLLEGE OF COMMERCE G.T. ROAD, KHARIAN",
+"221041"=>"PUNJAB COLLEGE GUJRAT",
+"221045"=>"ILM COLLEGE OF COMMERCE FOR BOYS GUJRAT",
+"221047"=>"ISLAMIC ASIAN COLLEGE OF MANAGEMENT SCIENCES FOR BOYS DINGA CITY KHARIAN GUJRAT",
+"221048"=>"THE EDUCATORS JALALPUR CAMPUS FOR BOYS, JALAL PUR JATTAN, GUJRAT",
+"221050"=>"SUPERIOR COLLEGE FOR BOYS, REHMAN SHAHEED ROAD, JAIL CHOWK, GUJRAT",
+"221051"=>"SUPERIOR COLLEGE FOR BOYS, OPPOSITE SKY WAYS RESTORENT, G.T ROAD, KHARIAN, GUJRAT",
+"221236"=>"PUNJAB COLLEGE FOR BOYS KHARIAN GUJRAT",
+"221237"=>"PUNJAB COLLEGE (JALAL PUR JATTAN CAMPUS) FOR BOYS, GUJRAT",
+"221238"=>"GOVT. DEGREE COLLEGE FOR BOYS, KOTLA ARAB ALI KHAN, KHARIAN, GUJRAT",
+"221239"=>"GOVT. DEGREE COLLEGE FOR BOYS, MANGOWAL GHARBI, GUJRAT",
+"221240"=>"JINNAH PUBLIC INTER COLLEGE (BOYS), HAFIZ HAYAT CAMPUS, GUJRAT",
+"221241"=>"CONCORDIA COLLEGE FOR BOYS, OPPOSITE STATE LIFE BUILDING, G.T ROAD, GUJRAT",
+"221242"=>"LEADS COLLEGE FOR BOYS, GUJRAT ROAD, JALALPUR JATTAN, GUJRAT",
+"221243"=>"AL-NOOR INTERNATIONAL SCIENCE COLLEGE FOR BOYS, SARGODHA ROAD, MANGOWAL GHARBI, GUJRAT",
+"221244"=>"GOVT. POST GRADUATE COLLEGE OF COMMERCE, JALALPUR JATTAN ROAD, GUJRAT",
+"221245"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), NEAR PIA OFFICE, G.T ROAD, KHARIAN (GUJRAT)",
+"222001"=>"GOVT. COLLEGE FOR WOMEN, FAWARA CHOWK, GUJRAT",
+"222002"=>"GOVT. COLLEGE FOR WOMEN, MARGHZAR COLONY, GUJRAT",
+"222003"=>"IBN-E- AMEER GOVT. COLLEGE FOR WOMEN,JALALPUR JATTAN (GUJRAT)",
+"222004"=>"GOVT. I.D. JANJUA COLLEGE FOR WOMEN, LALAMUSA (GUJRAT)",
+"222007"=>"GOVT. GIRLS DEGREE COLLEGE, KUNJAH (GUJRAT)",
+"222008"=>"GOVT. COLLEGE (F/W), DINGA, (GUJRAT)",
+"222014"=>"GOVT. DEGREE COLLEGE FOR WOMEN KHARIAN (GUJRAT)",
+"222015"=>"WISDOM HOUSE INTER COLLEGE FOR WOMEN, CHANNAN (GUJRAT)",
+"222019"=>"FATIMA JINNAH GIRLS COLLEGE 9-B. MARGHZAR COLONY, GUJRAT",
+"222020"=>"GUJRAT COLLEGE OF COMMERCE & I.T. FOR WOMEN, GUJRAT",
+"222022"=>"GOVT. COLLEGE FOR WOMEN RAILWAY ROAD, GUJRAT",
+"222023"=>"GOVT. FATIMA JINNAH COLLEGE FOR WOMEN, GUJRAT",
+"222026"=>"IBN-E-IMAM SCIENCE COLLEGE, JALAL PUR JATTAN (GUJRAT)",
+"222028"=>"F. J. COLLEGE FOR WOMEN, UNIVERSITY OF GUJRAT",
+"222031"=>"CITY DEGREE COLLEGE (FOR WOMEN) (REGD.) CAMPING GROUND LALAMUSA",
+"222032"=>"CHENAB COLLEGE FOR WOMEN, GUJRAT",
+"222033"=>"GOVT. COLLEGE FOR WOMAN, KOTLA ARAB ALI KHAN DISTT. GUJRAT",
+"222034"=>"GOVT. DEGREE COLLEGE FOR WOMEN BHAGOWAL KALAN (GUJRAT)",
+"222036"=>"GOVT. NAWAB MUMTAZGIRLS INTER COLLEGE, DAULAT NAGAR (GUJRAT)",
+"222039"=>"AL-FALAH COLLEGE OF COMMERCE FOR GIRLS, GUJRAT",
+"222040"=>"AJMERY GIRLS COLLEGE GUJRAT",
+"222041"=>"GOVT. COLLEGE FOR WOMEN, SARAI ALAMGIR (GUJRAT)",
+"222043"=>"PUNJAB COLLEGE FOR WOMEN GUJRAT",
+"222044"=>"JINNAH COLLEGE OF COMMERCE I.T. GUJRAT",
+"222045"=>"ISLAMIC ASIAN COLLEGE FOR (W) G.T. ROAD, KHARIAN",
+"222052"=>"COMMUNITY GIRLS MODEL COLLEGE SHADIWAL (GUJRAT)",
+"222073"=>"GOVT. GIRLS HIGH SCHOOL MACHIWAL (GUJRAT)",
+"222076"=>"ILM COLLEGE OF COMMERCE FOR GIRLS GUJRAT",
+"222077"=>"KHARIAN COLLEGE OF COMMERCE AND COMPUTER SCIENCES FOR WOMEN, G.T. ROAD, KHARIAN",
+"222078"=>"AISHA SIDDIQA GIRLS SCIENCE COLLEGE, TANDA, GUJRAT",
+"222079"=>"SAINT FRANCIS COLLEGE OF COMMERCE AND SCIENCES FOR GIRLS, G.T. ROAD, SARAI ALAMGIR, GUJRAT",
+"222080"=>"NISA GIRLS COLLEGE NEAR HEERA C.N.G, G.T ROAD KHARIAN GUJRAT",
+"222081"=>"SUPERIOR COLLEGE FOR GIRLS, REHMAN SHAHEED ROAD, JAIL CHOWK, GUJRAT",
+"222083"=>"SUPERIOR COLLEGE FOR GIRLS, OPPOSITE SKY WAYS RESTORENT, G.T ROAD, KHARIAN, GUJRAT",
+"222215"=>"PUNJAB COLLEGE FOR GIRLS KHARIAN GUJRAT",
+"222216"=>"PUNJAB COLLEGE (JALAL PUR JATTAN CAMPUS) FOR GIRLS, GUJRAT",
+"222218"=>"JINNAH PUBLIC INTER COLLEGE (GIRLS), HAFIZ HAYAT CAMPUS, GUJRAT",
+"222219"=>"CONCORDIA COLLEGE FOR GIRLS, OPPOSITE STATE LIFE BUILDING, G.T ROAD, GUJRAT",
+"222220"=>"LEADS COLLEGE OF COMMERCE AND SCIENCES FOR WOMEN, PURANI LINE, ALAM MARKET, SARAI ALAMGIR, GUJRAT",
+"222221"=>"GOVT. DEGREE COLLEGE FOR WOMEN, OPPOSITE NATIONAL BANK, GULIANA, GUJRAT",
+"222222"=>"LEADS COLLEGE FOR GIRLS, GUJRAT ROAD, JALALPUR JATTAN, GUJRAT",
+"222223"=>"GUJRAT GIRLS COLLEGE, DHAMTHAL MORE, KARIANWALA, GUJRAT",
+"222224"=>"AL-NOOR INTERNATIONAL SCIENCE COLLEGE FOR WOMEN, SARGODHA ROAD, MANGOWAL GHARBI, GUJRAT",
+"222225"=>"DANISH INTERNATIONAL GIRLS COLLEGE, KARIANWALA ROAD, DHUDHRAY SHARQI P/O CHAK KAMALA (GUJR",
+"222226"=>"LAUREL HOUSE COLLEGE FOR WOMEN, MANGOWAL DINGA ROAD, KHOJA TEHSIL KHARIAN, GUJRAT",
+"222227"=>"GOVT. INSTITUTE OF COMMERCE FOR WOMEN, JALALPUR JATTAN ROAD NEAR POLICE CHOWKI, GREEN TOWN",
+"231001"=>"GOVT. DEGREE COLLEGE, HAFIZABAD",
+"231002"=>"GOVT. DEGREE COLLEGE, PINDI BHATTIAN (HAFIZABAD)",
+"231004"=>"GOVT. RASHID MINHAS H/S/S, SUKHEKI MANDI (HAFIZABAD)",
+"231006"=>"GOVT. H/S/S KALEKE MANDI (HAFIZABAD)",
+"231007"=>"HAFIZABAD COLLEGE OF COMMERCE  & COMPUTER SCIENCES, HAFIZABAD",
+"231008"=>"M.H. SUFI FOUNDATION COLLEGE FOR BOYS, KOT ISHAQ (HAFIZABAD)",
+"231009"=>"BRIGHT MUSLIM COLLEGE OF COMMERCE & COMPUTER SCIENCES HAFIZABAD",
+"231014"=>"GOVT. MODEL H.S.S. HAFIZABAD",
+"231017"=>"CAUSE WAY COLLEGE FOR BOYS ALI PUR ROAD HAFIZABAD",
+"231019"=>"PUNJAB COLLEGE OF COMMERCE HAFIZABAD",
+"231053"=>"SUPERIOR COLLEGE FOR BOYS, JINNAH CHOWK, GUJRANWALA BY PASS, HAFIZABAD",
+"231054"=>"GOVT. DEGREE COLLEGE FOR BOYS, COLLEGE ROAD, JALALPUR BHATTIAN, HAFIZABAD",
+"231055"=>"CAUSE WAY COLLEGE FOR BOYS, NEAR HUSNAIN CNG, VANIKE ROAD, HAFIZABAD",
+"231056"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), BEHIND CITY POLICE STATION, HAFIZABAD",
+"232002"=>"GOVT. ISLAMIA DEGREE COLLEGE FOR WOMEN, HAFIZABAD",
+"232007"=>"M.H. SUFI FOUNDATION COLLEGE FOR GIRLS, KOT ISHAQ(HAFIZABAD)",
+"232008"=>"GOVT. COLLEGE (WOMEN) PINDI BHATTIAN (HAFIZABAD)",
+"232009"=>"PROFESSORS COLLEGE FOR GIRLS HAFIZABAD",
+"232011"=>"GOVT. GIRLS MODEL H.S.S, HAFIZABAD",
+"232012"=>"GOVT. GIRLS INTER COLLEGE JALALPUR BHATTIAN HAFIZABAD",
+"232013"=>"PUNJAB COLLEGE FOR WOMEN HAFIZABAD",
+"232052"=>"SUPERIOR COLLEGE FOR WOMEN, D.C.O COLONY, JINNAH CHOWK, HAFIZABAD",
+"232053"=>"GOVT. DEGREE COLLEGE FOR GIRLS, NEAR WAPDA GRID STATION, LAHORE ROAD, SUKHEKI MANDI, HAFIZ",
+"232054"=>"CAUSEWAY COLLEGE FOR GIRLS, ALI PUR ROAD NEAR DEGREE COLLEGE, HAFIZABAD",
+"241001"=>"GOVT. DEGREE COLLEGE, MANDI BAHAUDDIN",
+"241002"=>"GOVT. PIR YAQOOB SHAH DEGREE COLLEGE, PHALIA (M. B. DIN)",
+"241003"=>"GOVT. DEGREE COLLEGE, MALAKWAL (MANDI BAHAUDDIN)",
+"241010"=>"NATIONAL COLLEGE OF COMMERCE & COMPUTER SCIENCES, M. B. DIN",
+"241014"=>"GOVT. DEGREE COLLEGE, BHOA HASSAN (MANDI BAHAUDDIN)",
+"241015"=>"TRUST COLLEGE OF COMMERCE,ARTS & SCIENCE MANDI BAHAUDDIN",
+"241016"=>"DISTT. JINNAH PUBLIC HIGHER SECONDARY SCHOOL MANDI BAHA-UD-DIN",
+"241017"=>"ATLAS COLLEGE OF COMMERCE AND COMPUTER SCIENCES, RASUL ROAD, MANDI BAHA UD DIN",
+"241019"=>"PUNJAB COLLEGE FOR BOYS RASUL ROAD MANDI BAHUDDIN",
+"241020"=>"GHAZALI COLLEGE FOR BOYS, PHALIA, MANDI BAHAUDDIN",
+"241021"=>"PUNJAB COLLEGE FOR BOYS PHALIA CAMPUS, PHALIA, MANDI BAHAUDDIN",
+"241057"=>"SUPERIOR COLEGE OF COMMERCE FOR BOYS, SATT SIRA CHOWK, SUGAR MILL ROAD, MANDI BAHA UD DIN",
+"241058"=>"GABRIEL COLLEGE FOR BOYS, PHALIA ROAD, UNIVERSITY TOWN, M B DIN",
+"241059"=>"CONCORDIA COLLEGE FOR BOYS, SAT SIRA CHOWK, PHALIA ROAD, MANDI BAHAUDDIN",
+"241060"=>"GOVT. ZULFIQAR ALI BHUTTO SHAHEED DEGREE COLLEGE FOR BOYS, PAHRIANWALI, PHALIA, MANDI BAHAUDDIN",
+"241061"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), JINNAH COLONY, MONG, MANDI BAHAUDDIN",
+"241062"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), GUJRAT ROAD, PHALIA, MANDI BAHAUDDIN",
+"242001"=>"GOVT. COLLEGE FOR WOMEN, MANDI BAHAUDDIN",
+"242002"=>"GOVT. COLLEGE FOR WOMEN, MALAKWAL (MANDI BAHAUDDIN)",
+"242003"=>"GOVT. COLLEGE FOR WOMEN, PHALIA (MANDI BAHAUDDIN)",
+"242005"=>"GOVT. DEGREE COLLEGE FOR WOMEN, QADIRABAD (MANDI BAHAUDDIN)",
+"242006"=>"GOVT. GIRLS DEGREE COLLEGE, PAHRIANWALI (MANDI BAHAUDDIN)",
+"242009"=>"DISTT. JINNAH PUBLIC COLLEGE (FOR GIRLS) MANDI BAHA-UD-DIN",
+"242010"=>"TRUST COLLEGE OF COMMERCE, ARTS & SCIENCE M.B.DIN",
+"242014"=>"MUSTAFAI SCIENCE MODEL H/SEC. SCHOOL ADA PAHRIANWALI TEH. PHALIA (M.B.DIN)",
+"242015"=>"THE MOTIVATORS MAKKAYWAL CAMPUS (M. B. DIN)",
+"242016"=>"PUNJAB COLLEGE FOR WOMEN, RASUL ROAD, MANDI BAHUDDIN",
+"242017"=>"GHAZALI COLLEGE FOR GIRLS, PHALIA, MANDI BAHAUDDIN",
+"242018"=>"PUNJAB COLLEGE FOR GIRLS PHALIA CAMPUS, PHALIA, MANDI BAHAUDDIN",
+"242051"=>"COMMUNITY INTER COLLEGE FOR GIRLS, MANGAT (MANDI BAHAUDDIN)",
+"242052"=>"COMMUNITY INTER COLLEGE FOR GIRLS, MONA DEPO (M. B. DIN)",
+"242069"=>"GOVT. NAWAZ SHARIF GIRLS DEGREE COLLEGE, MANDI BAHAUDDIN",
+"242071"=>"SUPERIOR COLEGE FOR GIRLS, SATT SIRA CHOWK, SUGAR MILL ROAD, MANDI BAHA UD DIN",
+"242072"=>"GABRIEL COLLEGE FOR GIRLS,PHALIA ROAD, UNIVERSITY TOWN, MANDI BAHAUDDIN",
+"242073"=>"THE NATIONAL COLLEGE FOR WOMEN, THANA ROAD, MALAKWAL, MANDI BAHAUDDIN",
+"242074"=>"GOVT. ZULFIQAR ALI BHUTTO SHAHEED DEGREE COLLEGE FOR BOYS, PAHRIANWALI, PHALIA, MANDI BAHAUDDIN",
+"242075"=>"CONCORDIA COLLEGE FOR GIRLS, CHEEMA CHOWK, PHALIA ROAD, MANDI BAHAUDDIN",
+"242076"=>"GOVT. DEGREE COLLEGE FOR WOMEN, BOSAL SUKHA TEHSIL MALAKWAL, MANDI BAHAUDDIN",
+"242077"=>"GOVT. BENAZIR SHAHEED DEGREE COLLEGE (WOMEN), BHAGAT, MANDI BAHAUDDIN",
+"251001"=>"GOVT. ISLAMIA DEGREE COLLEGE, NAROWAL",
+"251002"=>"GOVT. COLLEGE, SHAKARGARH (NAROWAL)",
+"251003"=>"GOVT. ISLAMIA DEGREE COLLEGE, BADDOMALHI (NAROWAL)",
+"251004"=>"GOVT. DEGREE COLLEGE, ZAFARWAL (NAROWAL)",
+"251005"=>"GOVT. G. D. ISLAMIA H/S/S, MAINGRI (NAROWAL)",
+"251009"=>"STANDRAD COLLEGE OF COMMERCE NAROWAL",
+"251010"=>"GOVT. C.D. ISLAMIA H.S.S. TALWANDI BHINDRAN (NAROWAL)",
+"251018"=>"PUNJAB COLLEGE FOR BOYS, CHOWK BIJLI GHAR, PASRUR ROAD, NAROWAL
+",
+"251019"=>"PUNJAB COLLEGE FOR BOYS. RAIBA MORE,ZAFARWAL ROAD,SHAKARGARH,NAROWAL",
+"251020"=>"SUPERIOR COLLEGE OF COMMERCE, CHOWK BIJLI GHAR, PASRUR RAOD, NAROWAL",
+"251021"=>"ROYAL COLLEGE OF SCIENCE FOR BOYS, CIRCULAR ROAD, NAROWAL",
+"251022"=>"GOVT. POST GRADUATE COLLEGE OF COMMERCE, NEW LAHORE ROAD, NAROWAL",
+"251023"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), SHAKARGARH, NAROWAL",
+"252001"=>"GOVT. MUSLIM COLLEGE FOR WOMEN, NAROWAL",
+"252002"=>"GOVT. COLLEGE FOR WOMEN, SHAKARGARH (NAROWAL)",
+"252003"=>"GOVT. DEGREE COLLEGE FOR WOMEN BADDOMALHI (NAROWAL)",
+"252005"=>"GOVT. COLLEGE FOR WOMEN, ZAFARWAL (NAROWAL)",
+"252011"=>"ROYAL COLLEGE OF SCIENCE (FOR GIRLS) NAROWAL",
+"252014"=>"PUNJAB COLLEGE FOR GIRLS, CHOWK BIJLI GHAR, PASRUR ROAD, NAROWAL",
+"252015"=>"PUNJAB COLLEGE FOR GIRLS.RAIBA MORE, ZAFARWAL ROAD,SHAKARGARH, NAROWAL",
+"252016"=>"GOVT. DEGREE COLLEGE FOR WOMEN, TALWANDI BHINDRAN, NAROWAL",
+"252018"=>"GOVT.COLLEGE FOR WOMEN,MAIN ROAD CHAK MARO,LINK ROAD TARKHANA MARIDA TEHSIL SHAKARGARH,NAROWAL",
+"252019"=>"STANDARD COLLEGE OF COMMERCE FOR GIRLS, CIRCULAR ROAD, RANSIWAL PHATAK, NAROWAL",
+"252020"=>"SUPERIOR COLLEGE FOR WOMEN, CHOWK BIJLI GHAR, PASRUR RAOD, NAROWAL",
+"261001"=>"GOVT. ALLAMA IQBAL POSTGRADUATE COLLEGE, SIALKOT",
+"261002"=>"GOVT. JINNAH ISLAMIA COLLEGE, SIALKOT",
+"261003"=>"GOVT. MURRAY COLLEGE, SIALKOT",
+"261004"=>"GOVT. DEGREE COLLEGE, PASRUR (SIALKOT)",
+"261005"=>"GOVT. DEGREE COLLEGE, DASKA (SIALKOT)",
+"261006"=>"GOVT. ISLAMIA COLLEGE, SAMBRIAL (SIALKOT)",
+"261007"=>"GOVT. ISLAMIA INTER COLLEGE, MITRANWALI (SIALKOT)",
+"261014"=>"SIALKOT COLLEGE OF COMMERCE NEAR GULSHAN-E-IQBAL HAIDER PARK PASRUR ROAD, SIALKOT",
+"261016"=>"THE STANDARD COLLEGE FOR BOYS 45-KACHAHRI ROAD, SIALKOT",
+"261017"=>"CADET COLLEGE SIALKOT FOR BOYS, SIALKOT",
+"261018"=>"SIIT COLLEGE OF COMMERCE, SIALKOT",
+"261019"=>"AL-HARMAIN COLLEGE OF COMMERCE AND COMPUTER SCIENCE, MOTRA (SKT)",
+"261027"=>"LEADERSHIP COLLEGE KHADIM ALI ROAD, SIALKOT",
+"261029"=>"PUNJAB COLLEGE FOR BOYS, SIALKOT",
+"261030"=>"HAILEY WISHERS COLLEGE DASKA (SIALKOT).",
+"261033"=>"COMPREHENSIVE PUNJAB COLLEGE OF COMMERCE SIALKOT",
+"261036"=>"PEERS' COLLEGE FOR BOYS, 7-KHADIM ALI ROAD, SIALKOT",
+"261037"=>"ELITE COLLEGE OF COMMERCE, DASKA (SIALKOT)",
+"261039"=>"GOVT. DEGREE COLLEGE CHAWINDA, SIALKOT",
+"261040"=>"SUPERIOR COLLEGE FOR BOYS KASHMIR ROAD SIALKOT",
+"261043"=>"SIALKOT INSTITUTE OF MANAGEMENT SCIENCE AND COMMERCE FOR BOYS, ABBOT ROAD, SIALKOT",
+"261045"=>"PUNJAB COLLEGE OF COMMERCE FOR BOYS, PASRUR BYPASS ROAD, DASKA, SIALKOT",
+"261051"=>"COMMUNITY MODEL INTER COLLEGE NISBAT ROAD, DASKA (SIALKOT)",
+"261052"=>"COMMUNITY MODEL INTER COLLEGE, DASKA (SIALKOT)",
+"261054"=>"COMMUNITY MODEL INTER COLLEGE, PASRUR (SIALKOT)",
+"261056"=>"SUPERIOR COLLEGE FOR BOYS, DASKA ROAD PASRUR, SIALKOT",
+"261057"=>"ILM COLLEGE FOR BOYS, DASKA ROAD NEAR SAGA SPORTS, SIALKOT
+",
+"261058"=>"SUPERIOR COLLEGE FOR BOYS,PASRUR BY-PASS ROAD,DASKA DISTRICT SIALKOT",
+"261059"=>"THE VISION GROUP OF COLLEGES FOR BOYS, SAIDPUR GONDAL ROAD, SIALKOT",
+"261060"=>"PUNJAB COLLEGE OF SCIENCE FOR BOYS, NEAR LARI ADA CHAWINDA TEH. PASRUR, SIALKOT",
+"261061"=>"SUPERIOR COLLEGE OF COMMERCE FOR BOYS, OPP. MCB  WAZIRABAD ROAD SAMBRIAL SIALKOT",
+"261062"=>"GOVT.COLLEGE FOR ELEMENTARY TEACHERS, PASRUR DISTRICT SIALKOT",
+"261063"=>"GOVT. COLLEGE FOR ELEMENTARY TEACHERS (BOYS), PASRUR, SIALKOT",
+"261064"=>"PUNJAB COLLEGE OF SCIENCES FOR BOYS, WAZIRABAD ROAD, UNIVERSITY ROAD, SAMBRIAL, SIALKOT",
+"261065"=>"ILM COLLEGE FOR BOYS, OPP. NAWAZ SHARIF PARK, PASRUR, SIALKOT",
+"261066"=>"PUNJAB COLLEGE FOR BOYS, SIALKOT ROAD, PASRUR, SIALKOT",
+"261067"=>"CADET COLLEGE PASRUR FOR BOYS, NAROWAL ROAD, PASRUR, SIALKOT",
+"261068"=>"CONCORDIA COLLEGE FOR BOYS, DASKA ROAD NEAR UNIVERSITY OF GUJRAT, SIALKOT",
+"261069"=>"GOVT. POSTGRADUATE COLLEGE OF COMMERCE, SIALKOT",
+"261070"=>"GOVT. INSTITUTE OF COMMERCE, CIRCULAR ROAD, DASKA, SIALKOT",
+"261071"=>"GOVT. INSTITUTE OF COMMERCE, INSIDE GOVT. DEGREE COLLEGE (BOYS), PASRUR, SIALKOT",
+"261072"=>"GOVT. INSTITUTE OF COMMERCE (BOYS), KATCHERY ROAD, SIALKOT",
+"262001"=>"GOVT. POST GRADUATE COLLEGE FOR WOMEN, SIALKOT",
+"262002"=>"GOVT. COLLEGE FOR WOMEN, HAJIPURA, SIALKOT",
+"262006"=>"GOVT. COLLEGE FOR WOMEN, DASKA (SIALKOT)",
+"262007"=>"GOVT. COLLEGE FOR WOMEN, PASRUR (SIALKOT)",
+"262008"=>"GOVT. COLLEGE FOR WOMEN, SAMBRIAL (SIALKOT)",
+"262017"=>"SIALKOT COLLEGE OF INFORMATION TECHNOLOGY FOR GIRLS, SIALKOT",
+"262019"=>"NISA GIRLS COLLEGE, PARIS ROAD, SIALKOT",
+"262021"=>"GOVT. ALLAMA IQBAL COLLEGE FOR WOMEN, SIALKOT",
+"262024"=>"LEADERSHIP  COLLEGE FOR WOMEN KHADIM ALI ROAD, SIALKOT",
+"262027"=>"PUNJAB COLLEGE FOR GIRLS, SIALKOT",
+"262029"=>"IMAGE SCIENCE COLLEGE FOR WOMEN DASKA (SIALKOT).",
+"262030"=>"SIALKOT COLLEGE OF COMMERCE FOR GIRLS RAILWAY ROAD SIALKOT",
+"262033"=>"PEERS' COLLEGE FOR GIRLS, 7-KHADIM ALI ROAD, SIALKOT",
+"262037"=>"PAKISTAN COLLEGE FOR WOMEN BADIANA, SIALKOT",
+"262042"=>"SUPERIOR COLLEGE FOR WOMEN KASHMIR ROAD SIALKOT",
+"262044"=>"ICON COLLEGE FOR WOMEN, SAMBRIAL",
+"262045"=>"SHADAB COLLEGE OF COMMERCE FOR GIRLS ABBOT ROAD SIALKOT",
+"262047"=>"GOVT. COLLEGE FOR WOMEN BHOPAL WALA SIALKOT",
+"262048"=>"GOVT. DEGREE COLLEGE FOR WOMEN QILA KALAR WALA SIALKOT",
+"262049"=>"SIALKOT INSTITUTE OF MANAGEMENT SCIENCE AND COMMERCE FOR GIRLS, ABBOT ROAD, SIALKOT",
+"262050"=>"PUNJAB COLLEGE OF COMMERCE FOR GIRLS, PASRUR BYPASS ROAD, DASKA, SIALKOT",
+"262058"=>"GOVT. GIRLS COMMUNITY INTER COLLEGE, MARAKIWAL (SIALKOT)",
+"262064"=>"GOVT. COMMUNITY INTER COLLEGE FOR GIRLS JODHALA,PASRUR (SKT)",
+"262069"=>"GOVT. COMMUNITY COLLEGE FOR WOMEN GHUINKE, SIALKOT",
+"262070"=>"CADET COLLEGE SIALKOT FOR GIRLS, KOTLI NOONA, SAMBRIAL, SIALKOT",
+"262071"=>"STANDARD COLLEGE FOR GIRLS AND BUSINESS ADMINISTRATION, CIRCULAR ROAD, SIALKOT",
+"262075"=>"COMMUNITY MODEL INTER COLLEGE FOR GIRLS, DHIDOWALI, DASKA, SIALKOT",
+"262076"=>"GOVT. DEGREE COLLEGE(W), KAPOORWALI, SIALKOT",
+"262077"=>"APEX COLLEGE FOR GIRLS, DEFENCE ROAD, RORAS ROAD, SIALKOT",
+"262078"=>"GRACE GIRLS COLLEGE, MARALA ROAD, KOTLI LOHARAN, SIALKOT",
+"262079"=>"UNIVERSAL GIRLS COLLEGE, MARALA ROAD, GOHADPUR, SIALKOT",
+"262080"=>"SUPERIOR COLLEGE FOR GIRLS, DASKA ROAD PASRUR, SIALKOT",
+"262081"=>"HASSAN COLLEGE OF EDUCATION DASKA (SIALKOT)",
+"262084"=>"ILM COLLEGE FOR GIRLS, DASKA ROAD NEAR SAGA SPORTS, SIALKOT
+",
+"262085"=>"HAILEY WISHERS COLLEGE FATIMA CAMPUS FOR GIRLS, DASKA, SIALKOT
+",
+"262087"=>"SUPERIOR COLLEGE FOR GIRLS,DASKA, SIALKOT",
+"262088"=>"PRIME GIRLS SCIENCE COLLEGE, GULSHAN COLONY,COLLEGE ROAD DASKA,SIALKOT",
+"262089"=>"THE VISION GROUP OF COLLEGES FOR GIRLS, SAIDPUR GONDAL ROAD, SIALKOT",
+"262091"=>"PUNJAB COLLEGE OF SCIENCE FOR GIRLS, NEAR LARI ADA CHAWINDA TEH. PASRUR, SIALKOT",
+"262092"=>"NIMBLE INSTITUTE OF MODERN STUDIES FOR GIRLS, COLLEGE ROAD, DASKA, SIALKOT",
+"262093"=>"GOVT.COLLEGE FOR ELEMENTARY TEACHERS FOR GIRLS, DATCHEHRY ROAD PASRUR SIALKOT",
+"262094"=>"SUPERIOR COLLEGE OF COMMERCE FOR WOMEN, OPP. MCB, WAZIRABAD ROAD,SAMBRIAL, SIALKOT",
+"262095"=>"GOVT. COLLEGE FOR ELEMENTARY TEACHERS (GIRLS), PASRUR, SIALKOT",
+"262096"=>"GOVT. COLLEGE FOR WOMEN, SOUKINWIND, PASRUR, SIALKOT",
+"262097"=>"SULTAN GIRLS COLLEGE, CHAPRAR ROAD, KAMANWALA, SIALKOT",
+"262098"=>"PUNJAB COLLEGE OF SCIENCES FOR WOMEN, WAZIRABAD ROAD, UNIVERSITY ROAD, SAMBRIAL, SIALKOT",
+"262099"=>"ILM COLLEGE FOR GIRLS, OPP. NAWAZ SHARIF PARK, PASRUR, SIALKOT",
+"262100"=>"GOVT. DEGREE COLLEGE FOR WOMEN, CHOBARA, SIALKOT",
+"262101"=>"GOVT. COLLEGE FOR WOMEN, ZAFARWAL ROAD, CHAWINDA, PASRUR, SIALKOT",
+"262102"=>"GOVT. COLLEGE WOMEN UNIVERSITY, SIALKOT",
+"262103"=>"GOVT. SHAHBAZ SHARIF DEGREE COLLEGE FOR WOMEN, JAMKEY CHEEMA, DASKA, SIALKOT",
+"262104"=>"PUNJAB COLLEGE FOR WOMEN, SIALKOT ROAD, PASRUR, SIALKOT",
+"262105"=>"CONCORDIA COLLEGE FOR GIRLS, DASKA ROAD NEAR UNIVBERSITY OF GUJRAT, SIALKOT",
+"262106"=>"GOVT. MUHAMMAD NAWAZ SHARIF GIRLS DEGREE COLLEGE, NEAR LABOUR COLONY, PASRUR ROAD, SIALKOT",
+"262107"=>"GOVT. FATIMA JINNAH GIRLS DEGREE COLLEGE, DHALLEWALI, SIALKOT",
+"262108"=>"LEARNING EMPORIUM COLLEGE FOR WOMEN, AIRPORT ROAD, SAMBRIAL, SIALKOT",
+"262109"=>"OXFORD GIRLS COLLEGE, MARALA ROAD, KOTLI LOHARAN, SIALKOT",
+"262110"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL, CHICHERWALI TEHSIL PASRUR, SIALKOT",
+"262111"=>"GOVT. COLLEGE OF COMMERCE FOR WOMEN, PARIS ROAD, SIALKOT",
+"311025"=>"WORKERS WELFARE HIGHER SECONDARY SCHOOL FOR BOYS PEOPLES COLONY, GUJRAWALA",
+"311035"=>"GOVT. HIGHER SECONDARY SCHOOL GAKKHAR DISTRICT GUJRANWALA",
+"311042"=>"GOVT. HIGHER SECONDARY SCHOOL (BOYS) EMINABAD GUJRANWALA",
+"311044"=>"MILLAT IDEAL HIGHER SECONDARY SCHOOL (FOR BOYS)  HAFIZABAD ROAD GUJRANWALA",
+"311053"=>"GOVT. HIGHER SECONDARY SCHOOL MANDIALA TEGA (GUJRANWALA)",
+"311083"=>"GOVT. HIGHER SECONDARY SCHOOL WAHNDO (GUJRANWALA)",
+"311091"=>"GOVT. HIGHER SECONDARY SCHOOL G. T. ROAD GUJRANWALA",
+"311104"=>"K. T. MODEL HIGHER SECONDARY SCHOOL, GUJRANWALA",
+"311131"=>"SHAH WALI ULLAH HIGHER SECONDARY SCHOOL, ATAWA (GUJRANWALA)",
+"311145"=>"MASHRAQ SCIENCE HIGHER SECONDARY SCHOOL MUHAFIZ TOWN, GUJRANWALA",
+"311188"=>"AL-KABIR UNIVERSAL HIGHER SECONDARY SCHOOL, DELTA ROAD, GRW",
+"311193"=>"THE PUNJAB HIGHER SECONDARY SCHOOL KHIALI SHAH PUR GUJRANWALA",
+"311242"=>"PAKISTAN MODEL HIGHER SECONDARY SCHOOL FOR BOYS  SCHOOL ROAD FEROZEWALA",
+"311260"=>"HAIDER MEORIAL HIGHER SECONDARY SCHOOL FOR BOYS, SAROKI CHEEMA, WAZIRABAD, GUJRANWALA.",
+"311261"=>"GOVT HIGHER SECONDARY SCHOOL, GAKHAR, DISTRICT GURJRANWALA,",
+"311262"=>"GOVT HIGHER SECONDARY SCHOOL FOR BOYS, AHMED NAGAR TEHSIL WAZIRABAD, GUJRANWALA",
+"311264"=>"COMMUNITY MODEL HIGHER SECONDARY FOR BOYS,QILA DIDAR SINGH,GUJRANWALA",
+"311296"=>"GOVT. HIGHER SECONDARY SCHOOL, LADHEWALA WARRAICH, GUJRANWALA",
+"311297"=>"WAPDA TOWN HIGHER SECONDARY SCHOOL FOR BOYS, WAPDA TOWN, GUJRANWALA",
+"311298"=>"GOVT. HIGHER SECONDARY SCHOOL, TATLAY AALI TEHSIL NOWSHERA VIRKAN, GUJRANWALA",
+"311299"=>"GOVT. HIGHER SECONDARY SCHOOL FOR BOYS, NOKHAR TEHSIL NOWSHERA VIRKAN, GUJRANWALA",
+"312001"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL AHMAD NAGAR (GUJRANWALA)",
+"312010"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL EMINABAD (GUJRANWALA)",
+"312012"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL GAKHAR (GUJRANWALA)",
+"312017"=>"QUAID-E-AZAM DIVISIONAL PUBLIC HIGHER SECONDARY SCHOOL FOR GIRLS, GUJRANWALA",
+"312042"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL RASUL NAGAR (GUJRANWALA)",
+"312048"=>"HIJAB PUBLIC HIGHER SECONDARY SCHOOL (FOR GIRLS) KALASKE, DISTT. GUJRANWALA",
+"312060"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL NO.1 GUJRANWALA",
+"312070"=>"JAMIA TUL BANAT HIGHER SECONDARY SCHOOL MODEL TOWN, GUJRANWALA",
+"312086"=>"WORKERS WELFARE HIGHER SECONDARY SCHOOL FOR GIRLS PEOPLES COLONY GUJRANWALA",
+"312093"=>"MASHRIQ SCIENCE HIGHER SECONDARY SCHOOL FOR GIRLS, KANGNIWALA, G.T ROAD, GUJRANWALA",
+"312109"=>"MILLAT IDEAL HIGHER SECONDARY SCHOOL (FOR GIRLS) HAFIZABAD ROAD GUJRANWALA",
+"312122"=>"AL-REHMAN IDEAL HIGHER SECONDARY SCHOOL, 15-FAISALABAD, GUJRANWALA",
+"312128"=>"JAMIA-TUL-BANAT HIGHER SECONDARY SCHOOL MAAN DISTT. GUJRANWALA",
+"312191"=>"AL-SYED GIRLS HIGHER SECONDARY SCHOOL TATLAY AALI (GRW)",
+"312192"=>"BRIGHT FUTURE HIGHER SECONDARY SCHOOL FOR GIRLS, TATLEY AALI, NOWSHEHRA ROAD, GUJRANWALA",
+"312193"=>"SIR SYED PILOT HIGHER SECONDARY SCHOOL FOR GIRLS,WAZIRABAD GUJRANWALA",
+"312195"=>"GOVT.GIRLS HIGHER SECONDARY SCHOOL, AROOP, GUJRANWALA",
+"312196"=>"WAPDA TOWN HIGHER SECONDARY SCHOOL FOR GIRLS, WAPDA TOWN, GUJRANWALA",
+"312324"=>"PAKISTAN MODEL HIGHER SECONDAY SCHOOL FOR GIRLS, SAROKI CHEEMA, GUJRANWALA",
+"312325"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL, NOKHAR, NOWSHEHRA VIRKAN, GUJRANWALA",
+"312326"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, TATLAY AALI, NOWSHEHRA VIRKAN, GUJRANWALA",
+"312328"=>"CHRISTIAN HIGHER SECONDARY SCHOOL FOR GIRLS, CIVIL LINES, CHURCH ROAD, GUJRANWALA",
+"312329"=>"COMMUNITY MODEL HIGHER SECONDARY SCHOOL FOR GIRLS, KALASKE, GUJRANWALA",
+"312330"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, BUDHA GORAYA TEHSIL NOSHERA VIRKAN, GUJRANWALA",
+"312539"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL WAYIANWALI (GUJRANWALA)",
+"312540"=>"GOVT. C. M. GIRLS HIGHER SECONDARY SCHOOL DERA SHAH JAMAL (GUJRANWALA)",
+"321015"=>"GOVT. HIGHER SECONDARY SCHOOL BAGRIAN WALA (GUJRAT)",
+"321034"=>"GOVT. HIGHER SECONDARY SCHOOL DINGA (GUJRAT)",
+"321043"=>"GOVT. HIGHER SECONDARY SCHOOL, GULIANA  TEH. KHARIAN DISTT. GUJRAT",
+"321079"=>"GOVT. PUBLIC HIGHER SECONDARY SCHOOL KUNJAH (GUJRAT)",
+"321126"=>"GOVT. HIGHER SECONDARY SCHOOL TANDA (GUJRAT)",
+"321134"=>"GOVT. HIGHER SECONDARY SCHOOL, THILL (GUJRAT)",
+"321136"=>"GOVT. HIGHER SECONDARY SCHOOL KHOHAR (GUJRAT)",
+"321157"=>"GOVT. HIGHER SECONDARY SCHOOL FOR BOYS, KOTLA ARAB ALI  KHAN (GUJRAT)",
+"321159"=>"CITY PUBLIC HIGHER SECONDARY SCHOOL LALAMUSA (GUJRAT)",
+"321175"=>"GHAZALI PUBLIC HIGHER SECONDARY SCHOOL (FOR BOYS) SADKAL KHARIAN (GUJRAT)",
+"321182"=>"EDUCATION HOUSE HIGHER SECONDARY SCHOOL, DAULAT NAGAR (GUJRAT)",
+"321189"=>"KINZA HIGHER SECONDARY SCHOOL (BOYS) LALAMUSA (GUJRAT)",
+"321198"=>"ZIA PUBLIC HIGHER SECONDARY SCHOOL DAULAT NAGAR",
+"321199"=>"MADER-E-MILLAT FATIMA JINNAH BOYS HIGHER SECONDARY SCHOOL KOTLA ARAB ALI KHAN (GUJRAT)",
+"321212"=>"SAYAM BOYS HIGHER SECONDARY SCHOOL JALAPUR SOBATIAN (GUJRAT)",
+"321213"=>"GOVT. HIGHER SECONDARY SCHOOL FOR BOYS KATHALA CHENAB GUJRAT",
+"321214"=>"PAKISTAN OVERSEAS HIGHER SECONDARY SCHOOL MANDEER, DINGA ROAD KHARIAN GUJRAT",
+"321215"=>"GOVT. HIGHER SECONDARY SCHOOL, DANDI NIZAM, SARAI ALAMGIR, GUJRAT",
+"321216"=>"INTERNATIONAL MODEL HIGHER SECONDARY SCHOOL FOR BOYS, UDA P/O SIDH TEHSIL KHARIAN, GUJRAT",
+"322006"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL KOTLA ARAB ALI KHAN (GUJRAT)",
+"322011"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, SARAI ALAMGIR (GUJRAT)",
+"322024"=>"SHAUKAT GIRLS  HIGH SCHOOL NO 1, OUT SIDE  SHAH FAISAL GATE, GUJRAT",
+"322027"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, KARIANWALA (GUJRAT)",
+"322037"=>"GHAZALI GIRLS HIGHER SECONDARY SCHOOL, SADKAL (DISTT. GUJRAT)",
+"322038"=>"LAURAL HOME HIGHER SECONDARY SCHOOL FOR GIRLS G.T. ROAD GUJRAT",
+"322039"=>"SIR SYED GIRLS HIGHER SECONDARY SCHOOL, SHAH HUSSAIN ROAD, GUJRAT",
+"322042"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL KHOHAR (GUJRAT)",
+"322046"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, GOLEKI (GUJRAT)",
+"322047"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL NINDOWAL (GUJRAT)",
+"322049"=>"GOVT. GIRLS HIGHER SEC. SCHOOL THUTHA RAI BAHADUR (GUJRAT)",
+"322050"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL KHARIAN (GUJRAT)",
+"322060"=>"GIRLS COMMUNITY MODEL HIGHER SECONDARY SCHOOL, JEWRANWALI (GUJRAT)",
+"322074"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL BEGA (GUJRAT)",
+"322075"=>"GOVT. GIRLS MODEL HIGHER SECONDARY SCHOOL (GUJRAT)",
+"322082"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL SARAI ALAMGIR (GUJRAT)",
+"322093"=>"PUNJAB PUBLIC GIRLS HIGHER SECONDARY SCHOOL KALRA KALAN, GUJRAT",
+"322095"=>"JAMIA GHOSIA NAEEMIA HIGHER SECONDARY SCHOOL FOR GIRLS, GUJRAT",
+"322110"=>"C.B.A. MODEL HIGHER SECONDARY SCHOOL GIRLS, JANDALA (GUJRAT)",
+"322113"=>"PAKISTAN QUALITY PUBLIC HIGHER SECONDARY SCHOOL GIRLS DINGA (GUJRAT)",
+"322115"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, NINDOWAL (GUJRAT)",
+"322135"=>"MADAR-E-MILLAT FATIMA JINNAH GIRLS HIGHER SECONDARY SCHOOL, KOTLA ARAB ALI KHAN (GUJRAT)",
+"322136"=>"KINZA HIGHER SECONDARY SCHOOL (GIRLS), LALAMUSA (GUJRAT)",
+"322173"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, GULYANA KHARIAN (GUJRAT)",
+"322184"=>"SARDAR MEMORIAL (GIRLS) HIGHER SECONDARY EDUCATIONAL INSTITUTE DANDI TEH. SARAI ALAMGIR",
+"322201"=>"EDUCATION HOUSE HIGHER SECONDARY SCHOOL DAULAT NAGAR (GUJRAT)",
+"322206"=>"SYEDA AMINA GIRLS HIGHER SECONDARY SCHOOL DARBAR-E-ALIA  DHODA SHARIF DISTRICT GUJRAT",
+"322216"=>"NEW NAVEED-E-SAHAR HIGHER SECONDARY SCHOOL FOR GIRLS, ISLAMIA HIGH SCHOOL ROAD, NEAR BARKAT PARK, LALA MUSA",
+"322217"=>"SARDAR MEMORIAL GIRLS HIGHER SECONDARY EDUCATIONAL INSTITUTE, DANDI NIZAM TEHSIL SARAI ALAMGIR, GUJRAT",
+"322218"=>"THE CAMBRIDGE HIGHER SECONDARY SCHOOL FOR GIRLS, G.T ROAD, LALAMUSA, GUJRAT",
+"322219"=>"OFFICER HIGHER SECONDARY SCHOOL FOR GIRLS, MAIN ROAD, SHADIWAL, GUJRAT",
+"322506"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL, BEHLPUR (GUJRAT)",
+"322523"=>"GOVT GIRLS HIGHER SECONDARY SCHOOL, SARIYA, KHARIAN, GUJRAT",
+"322524"=>"GOVT GIRLS HIGHER SECONDARY SCHOOL, DEONA, GUJRAT",
+"322525"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL KATHALA CHENAB GUJRAT",
+"322526"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, SOHAL KHURD, GUJRAT",
+"322527"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, SOHAL KHURD, GUJRAT",
+"331013"=>"GOVT. HIGHER SECONDARY SCHOOL, KOLO TARAR DISTRICT, HAFIZABAD",
+"331015"=>"GOVT. HIGHER SECONDARY SCHOOL KALEKE MANDI (HAFIZABAD)",
+"331018"=>"GOVT HIGHER SECONDARY SCHOOL VANIKE TARAR HAFIZABAD",
+"331027"=>"GOVT. SECONDARY SCHOOL QADIR ABAD COLONY (HAFIZABAD)",
+"331031"=>"GOVT. RASHID MINHAS HIGHER SECONDARY SCHOOL, SUKHEKE MANDI (HAFIZABAD)",
+"331037"=>"GOVT. HIGHER SECONDARY SCHOOL VANIKE TARAR (HAFIZABAD)",
+"331038"=>"GOVT. PUBLIC HIGHER SECONDARY SCHOOL  JALAL PUR BHATTAIN (HAFIZABAD)",
+"331039"=>"GOVT HIGHER SECONDARY SCHOOL FOR BOYS, KASSOKE TEHSIL & DISTRICT HAFIZABAD",
+"331040"=>"GOVT. PUBLIC HIGHER SECONDARY SCHOOL JALAL PUR BHATTIAN, HAFIZABAD",
+"331041"=>"GOVT. MODEL HIGHER SECONDARY SCHOOL, NEAR BUS STOP, HAFIZABAD",
+"332001"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, PINDI BHATTIAN (HAFIZABAD)",
+"332004"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, KOLO TARAR (HAFIZABAD)",
+"332005"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL KALEKE MANDI (HAFIZABAD)",
+"332008"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL PINDI BHATTIAN (HAFIZABAD)",
+"332010"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, SUKHEKE MANDI (HAFIZABAD)",
+"332011"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL VANIKE TARAR (HAFIZABAD)",
+"332012"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL NO.1 (CENTERS OF EXCELLENCE), MOH. USMAN GUNJ, ST. NO.",
+"332502"=>"GOVT GIRLS HIGER SECONDARY SCHOOL SOOIANWALA, HAFIZABAD",
+"341004"=>"GOVT. HIGHER SECONDARY SCHOOL,  BOSAL (MANDI BAHA-UD-DIN)",
+"341005"=>"GOVT. HIGHER SECONDARY SCHOOL BHIKHI SHARIF (MANDI BAHA-UD-DIN)",
+"341018"=>"GOVT. HIGHER SECONDARY SCHOOL DHOK KASIB (MANDI BAHA-UD-DIN)",
+"341029"=>"GOVT. HIGHER SECONDARY SCHOOL, KHEWA (MANDI BAHA-UD-DIN)",
+"341042"=>"GOVT. HIGHER SECONDARY SCHOOL MAKHNANWALI (MANDI BAHA-UD-DIN)",
+"341056"=>"GOVT. HIGHER SECONDARY SCHOOL, QADIRABAD (MANDI BAHA-UD-DIN)",
+"341057"=>"GOVT. MAJOR QAISER MEHMOOD SAHI SHAHEED HIGHER SECONDARY SCHOOOL FOR BOYS, DHOK KASIB, MAN",
+"341058"=>"DISTRICT JINNAH PUBLIC HIGHER SECONDARY SCHOOL FOR BOYS,NEAR NEW DISTRICT COMPLEX, MURALA ",
+"341059"=>"FARABI HIGHER SECONDARY SCHOOL FOR BOYS, FARABI CHOWK, PHALIA, MANDI BAHAUDDIN",
+"341503"=>"GOVT HIGHER SECONDARY SCHOOL, SOHAWA BOLANI M B.DIN",
+"342005"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL MALAKWAL (MANDI BAHA-UD-DIN)",
+"342010"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL MONG (MANDI BAHA-UD-DIN)",
+"342038"=>"THE CHENAB HIGHER SECONDARY SCHOOL JOKALIAN (MANDI BAHAUDDIN)",
+"342041"=>"BISMILLAH MUHAMMAD HUSSAIN ZAMINDAR HIGHER SECONDARY SCHOOL, LASURI KALAN  (MANDI BAHAUDDIN)",
+"342047"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL NAI ABADI RASUL (M.B. DIN)",
+"342073"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL MIANWAL RANJHA (M.B.DIN)",
+"342074"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL HELAN (DISTT.M.B.DIN)",
+"342075"=>"NEW CHENAB HIGHER SECONDARY SCHOOL FOR GIRLS, JOKALIAN, PHALIA, MANDI BAHA UD DIN",
+"342076"=>"THE MOTIVATORS HIGHER SECONDARY SCHOOL FOR GIRLS, MAKAY WAL, MANDI BAHAUDDIN",
+"342077"=>"DISTRICT JINNAH PUBLIC HIGHER SECONDARY SCHOOL FOR GIRLS, NEAR NEW DISTRICT COMPLEX MURALA",
+"342078"=>"MUSTAFAI SCIENCE MODEL HIGHER SECONDARY SCHOOL FOR GIRLS. ADDA PAHRIANWALA PHALIA, M.B.DIN",
+"342079"=>"FARABI HIGHER SECONDARY SCHOOL FOR GIRLS, FARABI CHOWK, PHALIA, MANDI BAHAUDDIN",
+"342080"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, CHILIANWALA, MANDI BAHAUDDIN",
+"342081"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, BHIKHI SHARIF, MANDI BAHAUDDIN",
+"342528"=>"GOVT GIRLS HIGHER SECONDARY SCHOOL, MIANA GONDAL, M.B.DIN",
+"351012"=>"NAROWAL PUBLIC HIGHER SECONDARY SCHOOL NAROWAL",
+"351013"=>"OXFORD HIGHER SECONDARY SCHOLL FOR BOYS SHAKRGARH NAROWAL",
+"351031"=>"GOVT. HIGHER SECONDARY SCHOOL, KOT NAINAN (NAROWAL)",
+"351035"=>"GOVT. G.D. ISLAMIA HIGHER SECONDARY SCHOOL MAINGRI (NAROWAL)",
+"351070"=>"BUBAK HIGHER SECONDARY SCHOOL EID-GAH ROAD NAROWAL",
+"351077"=>"GOVT. HIGHER SECONDARY SCHOOL BUA. NAROWAL",
+"351086"=>"UNIQUE BOYS HIGHER SECONDARY SCHOOL SHAKARGARH (NAROWAL)",
+"351089"=>"GOVT. HIGHER SECONDARY SCHOOL MADDU KAHLWAN FOR BOYS NAROWAL",
+"351090"=>"THE INNOVATORS HIGHER SECONDARY SCHOOL FOR BOYS  MARDOWAL ,SHAKARGARH NAROWAL",
+"351093"=>"THE EDUCATORS HIGHER SECONDARY SCHOOL FOR BOYS, MOTAY ROAD, SHAKARGARH, NAROWAL",
+"351095"=>"GOVT. HIGHER SECONDARY SCHOOL FOR BOYS BUA, SHAKARGARH, NAROWAL",
+"351096"=>"INTERNATIONAL ISLAMIC UNIVERSITY ISLAMABAD HIGHER SECONDARY SCHOOL, CHAMAN CHANDOWAL ROAD, NAROWAL",
+"351097"=>"GOVT. HIGHER SECONDARY SCHOOL HALLOWAL TEH & DISTT NAROWAL",
+"351098"=>"GOVT HIGHER SECONDARY SCHOOL FOR BOYS, RAYYA KHAS, NAROWAL",
+"351099"=>"GOVT, ISLAM HIGHER SECONDARY SCHOOL, KANJRUR, NAROWAL",
+"351100"=>"GHAZALI MODEL HIGHER SECONDARY SCHOOL FOR BOYS, NOORKOT ROAD,SHAKAR GARH DISTRICT NAROWAL",
+"351101"=>"GOVT. HIGHER SECONDARY SCHOOL, RAMBRI, NAROWAL",
+"351102"=>"NEW UNIQUE HIGHER SECONDARY SCHOOL FOR BOYS, NAROWAL ROAD, ZAFARWAL, NAROWAL",
+"351502"=>"GOVT HIGHER SECONDARY SCHOOL GHOTTA FATEH GARH, NAROWAL",
+"351503"=>"GOVT. MUSLIM MODEL HIGHER SECONDARY SCHOOL, KOTLA AFGHANA, P/O KNAJRUR, SHAKARGARH, NAROWAL",
+"351504"=>"GOVT HIGHER SECONDARY SCHOOL, JABBAL, ZAFARWAL, NAROWAL",
+"351505"=>"GOVT MUSLIM MODEL HIGHER SECONDARY SCHOOL, KOTLA  AFGHANA, P/O KANJRUR, SHAKARGARH, NAROWAL",
+"352006"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, QILA AHMAD ABAD (NAROWAL)",
+"352007"=>"LASANI IDEAL GIRLS HIGHER SECONDARY SCHOOL SHAKARGARH",
+"352012"=>"NAROWAL PUBLIC HIGHER SECONDARY SCHOOL FOR GIRLS NAROWAL",
+"352038"=>"ISLAMIA GIRLS HIGHER SECONDARY SCHOOL NOOR KOT ROAD, SHAKARGARH (NAROWAL)",
+"352048"=>"OXFORD GIRLS MODEL HIGHER SECONDARY SCHOOL, SHAKARGARH (NAROWAL)",
+"352052"=>"UNIQUE GIRLS HIGHER SECONDARY SCHOOL SHAKARGARH",
+"352070"=>"THE INNOVATORS HIGHER SECONDARY SCHOOL FOR GIRLS SHAKARGARH NAROWAL",
+"352071"=>"MUSLIM MODEL HIGHER SECONDARY SCHOOL FOR GILRS, EID GAH ROAD, ZAFARWAL NAROWAL",
+"352072"=>"THE ZAFARWAL PUBLIC HIGHER SECONDARY SCHOOL FOR GIRLS, MOHALLA NANGALI GATE PURANA CHAWINDA ROAD ZAF",
+"352073"=>"GHAZALI MODEL HIGHER SECONDARY SCHOOL FOR GIRSL, NOORKOT ROAD, SHAKAR GARH DISTRICT NAROWAL",
+"352074"=>"THE LEADERSHIP HIGHER SECONARY SCHOOL FOR GIRLS, NAROWAL ROAD, ZAFARWAL, NAROWAL",
+"352075"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, JABBAL TEHSIL ZAFARWAL, NAROWAL",
+"352076"=>"THE EDUCATORS HIGHER SECONDARY SCHOOL FOR GIRLS, NOOR KOT ROAD, SHAKARGARH, NAROWAL",
+"352077"=>"IDEAL PUBLIC HIGHER SECONDARY SCHOOL FOR GIRLS, MELLU SELLU TEHSIL SHAKARGARH, NAROWAL",
+"352078"=>"NEW UNIQUE HIGHER SECONDARY SCHOOL FOR GIRLS, NAROWAL ROAD, ZAFARWAL, NAROWAL",
+"352079"=>"SUPERIOR EDUCATION SYSTEM FOR GIRLS HIGHER SECONDARY SCHOOL, NONAR TEHSIL ZAFARWAL, NAROWA",
+"352501"=>"COMMUNITY GIRLS HIGHER SECONDARY SCHOOL, AIMA QAGZIAN (NAROWAL)",
+"352502"=>"GOVT. COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL AIMA QAZIAN DISTT. NAROWAL",
+"352503"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, KANJRUR, NAROWAL",
+"352504"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL GHOTA FATEH GARH, NAROWAL",
+"352906"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, MARYAL, SHAKARGARH, NAROWAL",
+"361033"=>"GOVT. HIGHER SECONDARY SCHOOL GHUINKE (SIALKOT)",
+"361034"=>"MISALI ZAKARIYA HIGHER SECONDARY SCHOOL DASKA (SIALKOT)",
+"361084"=>"GOVT. HIGHER SECONDARY SCHOOL NO.2, SIALKOT",
+"361091"=>"GOVT. CHRISTIAN HIGHER SECONDARY SCHOOL SIALKOT CANTT.",
+"361101"=>"GOVT. ALLAMA IQBAL MEMORIAL HIGHER SECONDARY SCHOOL, GOHADPUR MURADPUR (SIALKOT)",
+"361120"=>"GOVT. HIGHER SECONDARY SCHOOL, ADAMKE CHEEMA (SIALKOT)",
+"361121"=>"GOVT. HIGHER SECONDARY SCHOOL FOR BOYS, UGGOKI, SIALKOT",
+"361122"=>"GOVT. HIGHER SECONDARY SCHOOL, MERAJKE, PASRUR, SIALKOT",
+"361123"=>"ISLAM INTERNATIONAL HIGHER SECONDRY SCHOOL FOR BOYS, PAKKI KOTLI, DASKA ROAD, SIALKOT",
+"361124"=>"GOVT. PILOT HIGHER SECONDARY SCHOOL (CENTER OF EXCELLENCE), NEAR JINNAH STADIUM, CIRCULAR ",
+"361502"=>"GOVT HIGHER SECONDARY SCHOOL FOR BOYS, KOTLI LOHARAN, SIALKOT",
+"362003"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL BADIANA (SIALKOT)",
+"362004"=>"LADY ANDERSON GOVT. GIRLS HIGHER SECONDARY SCHOOL, SIALKOT CITY",
+"362005"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, MODEL TOWN, SIALKOT",
+"362009"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, CHAWINDA (SIALKOT)",
+"362012"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL CHAWINDA (SIALKOT)",
+"362013"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL BADIANA (SIALKOT)",
+"362014"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, DHAROWAL (SIALKOT)",
+"362015"=>"ALLAMA IQBAL GIRLS HIGHER SECONDARY SCHOOL RORAS ROAD, KOTLI BHATTA, NEAR NWOL MOR SIALKOT",
+"362020"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL DHAROWAL (SIALKOT)",
+"362023"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, HEAD MARALA (SIALKOT)",
+"362032"=>"GOVT. ZANIB  GIRLS HIGHER SECONDARY SCHOOL KOTLI LOHARAN WEST (SIALKOT)",
+"362043"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL VERYO, SIALKOT",
+"362055"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL, GOPALPUR ADDA (SIALKOT)",
+"362058"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL SATRAH (SIALKOT)",
+"362065"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL MODEL TOWN SIALKOT",
+"362066"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, SIALKOT CANTT.",
+"362068"=>"GOVT. KHAWAJA SAFDAR GIRLS HIGHER SECONDARY SCHOOL, SIALKOT",
+"362069"=>"GOVT. L.A. GIRLS HIGHER SECONDARY SCHOOL SIALKOT",
+"362077"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL MURAD PUR SIALKOT",
+"362086"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, UGOKI (SIALKOT)",
+"362087"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, MURADPUR (SIALKOT)",
+"362118"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, WADALA SANDHWAN, (SIALKOT)",
+"362236"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL KAMAL PUR",
+"362237"=>"COMMUNITY MODEL GIRLS HIGHER SECONDARY SCHOOL, SEOKE TEHSIL DASKA SIALKOT",
+"362238"=>"SIALKOT PUBLIC HIGHER SECONDARY SCHOOL FOR GIRLS.GUNNA KLAN,PASRUR ROAD,SIALKOT",
+"362239"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, VILLAGE HUNDAL, SIALKOT",
+"362240"=>"AL-FARID ISLAMIC MODEL GIRLS HIGHER SECONDARY SCHOOL, QILA KALAR WALA, PASRUR, SIALKOT",
+"362241"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, KULLUWAL, SIALKOT",
+"362242"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, BEGOWALA, SAMBRIAL, SIALKOT",
+"362243"=>"TAMEER-E-MILLAT GIRLS HIGHER SECONDARY SCHOOL MITRANWALI, DASKA, SIALKOT",
+"362244"=>"CHRISTIAN GIRLS HIGHER SECONDARY SCHOOL, SATRAH ROAD, PASRUR, SIALKOT",
+"362245"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, SABAZ KOT TEHSIL PASRUR, SIALKOT",
+"362246"=>"COMMUNITY MODEL HIGHER SECONDARY SCHOOL FOR GIRLS, GALOTIAN TEHSIL DASKA, SIALKOT",
+"362247"=>"ISLAM INTERNATIONAL HIGHER SECONDRY SCHOOL FOR GIRLS, PAKKI KOTLI, DASKA ROAD, SIALKOT",
+"362520"=>"GOVT. GIRLS HIGER SECONDARY SCHOOL, MUNDEKI GORAYA, DISTRICT SIALKOT",
+"362521"=>"GOVT. GIRLS HIGHER SECONDARY SCHOOL, KHAROLIAN, DISTRICT SIALKOT",
 
-
+   );
     }
     private function set_barcode($code)
     {

@@ -850,7 +850,11 @@ if(isReadm == 0)
      
         window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
     }
-    
+      function releasemForm11th(formrno)
+    {
+     
+        window.location.href = '<?=base_url()?>/migration/release_stdForm11th/'+formrno
+    }
     
     
     function ReturnForm(Batch_ID)

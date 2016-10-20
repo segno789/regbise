@@ -25,7 +25,7 @@ class Migration_model extends CI_Model
         }
     }
    
-       public function Print_challan_Form($fetch_data)
+    public function Print_challan_Form($fetch_data)
     {
         $Inst_cd = $fetch_data['Inst_cd'];
         $formno = $fetch_data['formno'];
@@ -80,7 +80,7 @@ class Migration_model extends CI_Model
         $data2 = array(
             'app_no'=>$app_no,
             'Formno'=>$info['formno'],
-            'class'=>9,
+            'class'=>$info['myclass'],
             'iyear'=>2016,
             'sess'=>1,
             'name'=>$info['name'],
@@ -98,6 +98,7 @@ class Migration_model extends CI_Model
     }
     public function getrelease9thstd($inst)
     {
+       // DebugBreak();
         $q2         = $this->db->get_where(TBLMIGRATIONTESTING3,array('isother'=>0,'ekpo'=>$inst));
         $result = $q2->result_array();
         return $result;
@@ -121,7 +122,7 @@ class Migration_model extends CI_Model
      public function std11thclass($inst_cd)
     {
 
-        $query = $this->db->query("Registration..[sp_get_regmigration] $inst_cd,9,2016,1");    
+        $query = $this->db->query("Registration..[sp_get_regmigration] $inst_cd,11,2016,1");    
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

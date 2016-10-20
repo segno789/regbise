@@ -65,6 +65,7 @@ define('corr_bank_chall_class','9TH');
 define('return_pdf_isPicture','1');
 define('CURRENT_SESS','2016-2018'); 
 define('Reg_Cards_9th_Heading','SECONDARY SCHOOL'); 
+define('Reg_Cards_11th_Heading','HIGHER SECONDARY SCHOOL'); 
 define('TITLE','Online 11th/9th Registration'); 
 
    

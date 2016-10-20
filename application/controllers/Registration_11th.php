@@ -190,6 +190,504 @@ class Registration_11th extends CI_Controller {
 
 
     }
+       public function Reg_Cards_Printing_11th()
+    {
+
+        $this->load->library('session');
+        // DebugBreak();
+        if(!( $this->session->flashdata('error'))){
+
+            $error_msg = "0";    
+        }
+        else{
+            $error_msg = $this->session->flashdata('error');
+        }
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '6',
+        );
+        //  DebugBreak();
+        $error = array();
+        $error['excep'] = '';
+        $error['gender'] = $userinfo['gender'];
+        $error['isrural'] = $userinfo['isrural'];
+        $error['error_msg'] = $error_msg;
+        $this->commonheader($data);
+        $this->load->view('Registration/11th/RegCards.php',$error);
+         $this->load->view('common/footer11threg.php');
+       // $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
+
+        //$this->load->model('Registration_model');
+    }
+    public function Reg_Cards_Printing_11th_PDF()
+    {
+
+       // DebugBreak();
+        $Condition = $this->uri->segment(4);
+        /*
+        $Condition  1 == Batch Id wise printing.
+        2 == Final Group wise prining.
+        3 == Final Formno wise Printing.
+        4 == Proof reading Group wise Printing.
+        5 == Proof reading Formno wise Printing.
+        */
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Registration_11th_model');
+        if($Condition == "1")
+        {
+            $Batch_Id = $this->uri->segment(3);
+            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
+            $result = array('data'=>$this->Registration_11th_model->return_pdf($fetch_data),'inst_Name'=>$user['inst_Name']);    
+        }
+        else if($Condition == "2")
+        {
+            $grp_cd = $this->uri->segment(3);
+            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'grp_cd'=>$grp_cd,'Batch_Id'=>0);
+            $result = array('data'=>$this->Registration_11th_model->Print_Form_Groupwise($fetch_data));
+
+        }
+
+        else if($Condition == "3")
+        {
+            $start_formno = $this->uri->segment(3);
+            $end_formno = $this->uri->segment(5);
+
+
+            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'start_formno'=>$start_formno,'end_formno'=>$end_formno,'Batch_Id'=>0);
+            $result = array('data'=>$this->Registration_11th_model->Print_Form_Formnowise($fetch_data));
+        }
+        else if($Condition == "4")
+        {
+            $grp_cd = $this->uri->segment(3);
+            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'grp_cd'=>$grp_cd,'Batch_Id'=>-1);
+            $result = array('data'=>$this->Registration_11th_model->Print_Form_Groupwise($fetch_data),'inst_Name'=>$user['inst_Name']);
+
+        }
+        else if($Condition == "5")
+        {
+            $start_formno = $this->uri->segment(3);
+            $end_formno = $this->uri->segment(5);
+            $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'start_formno'=>$start_formno,'end_formno'=>$end_formno,'Batch_Id'=>-1);
+            $result = array('data'=>$this->Registration_11th_model->Print_Form_Formnowise($fetch_data),'inst_Name'=>$user['inst_Name']);
+
+        }
+
+        // DebugBreak();
+        if(empty($result['data'])){
+            $this->session->set_flashdata('error', $Condition);
+            redirect('Registration_11th/FormPrinting');
+            return;
+
+        }
+        $temp = $user['Inst_Id'].'09-2016-18';
+        $image =  $this->set_barcode($temp);
+        // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
+        //$studeninfo['data']['info'][0]['barcode'] = $image;
+        $this->load->library('PDF_Rotate');
+
+        $turn=1;     
+        $pdf = new PDF_Rotate('P','in',"A4");
+        //$pdf=new FPDF_BARCODE("P","in","A4");
+        $pdf->SetMargins(0.5,1.2,0.5);
+
+
+        $generatingpdf=false;
+        $result = $result['data'] ;
+        $inc=0 ;
+        foreach ($result as $key=>$data) 
+        {
+            $generatingpdf=true;
+            if($turn==1){$pdf->AddPage(); $dy=0.1;} else {
+                if($turn==2){$dy=3.8;} else {$dy=7.5; $turn=0;}
+            }
+            $inc++;
+            $turn++;
+            $y = 0.05;
+            $pdf->SetFont('Arial','U',16);
+            $pdf->SetXY(1.2,$y+$dy+0.17);
+            $pdf->Cell(0, $y, "Board of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
+
+            $pdf->Image(base_url()."assets/img/logo.jpg",0.3,$y+$dy+0.1, 0.60,0.60, "JPG", "http://www.bisegrw.com");
+            $pdf->SetFont('Arial','',10);
+            $y += 0.25;
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.4,$y+$dy-0.00);
+            $pdf->Cell(0, 0.25, "".Reg_Cards_11th_Heading." REGULAR STUDENT REGISTRATION CARD SESSION (".CURRENT_SESS.")", 0.25, "C");
+
+            $pdf->SetDrawColor(0,0,0);
+            //$pdf->PrintBarcode(6.2,0.25+$dy,trim(str_replace("-","",$data['StrRegNo'])),0.25,0.013);    
+
+            //--------------------------- Form No & Rno
+            $pdf->SetXY(6,$y+$dy+0.1);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(0.5,0.5,"Form No: _______________",0,'L');
+
+            $pdf->SetXY(6.7,$y+$dy+0.08);
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->Cell( 0.5,0.5,$data['FormNo'],0,'L');
+
+            //--------------------------- Registration Number  
+            $pdf->SetXY(1.5,$y+0.1+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Registration No: ________________",0,'L');
+
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->SetXY(2.6,$y+0.08+$dy);
+            $pdf->Cell(0.5,0.5, '2016-343433',0,'L');    
+            //$pdf->Cell(0.5,0.5, $data['StrRegNo'],0,'L');    
+
+            //--------------------------- Institution Code and Name  
+            $pdf->SetXY(0.2,$y+0.3+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Institution Code & Name:",0,'L');
+
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.78,$y+0.48+$dy);
+            $pdf->MultiCell(6.5,0.13,$data["coll_cd"]."-". $user['inst_Name']."",0,'L',0);
+            //$pdf->Cell(0.5,0.5, $data["Sch_cd"]."-". $user['inst_Name'],0,'L');    
+
+            //------ Picture Box on Centre      .$data["Inst_Cd"].'/'. $data["PicPath"]
+            $pdf->SetXY(6.5, $y+1+$dy);
+            $pdf->Cell(1.25,1.4,'',1,0,'C',0);
+            $pdf->Image( base_url().'uploads/2016/121158/1211580002.jpg',6.5, 1+ $y+$dy, 1.25, 1.4, "JPG");
+            $pdf->SetFont('Arial','',10);
+
+            //------------- Personal Infor Box    
+            $x = 0.55;
+            $y += 0.65;
+            //--------------------------- 1st line 
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell( 0.5,0.5,"Name:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.5,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["name"],0,'L');
+            //--------------------------- FATHER NAME 
+            $pdf->SetXY(3.5+$x,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father Name:.",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(4.5+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["Fname"],0,'L');
+
+            $y += 0.2;
+            //--------------------------- 3rd line 
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+             $pdf->Cell(0.5,0.5,"Bay Form No:",0,'L');// $pdf->Cell(0.5,0.5,"Date Of Birth:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.5,$y+$dy);
+             $pdf->Cell(0.5,0.5,$data["BForm"],0,'L'); // $pdf->Cell(0.5,0.5,$data["Dob"],0,'L');     
+            //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
+
+            $pdf->SetXY(3.5+$x,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Gender:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(4.5+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["sex"]==1?"MALE":"FEMALE",0,'L');            
+
+            //--------------------------- 4th line 
+            //DebugBreak();
+            $y += 0.2;
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell(0.5,0.5,"Bay Form No:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.5,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');     
+            //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
+
+            $pdf->SetXY(3.5+$x,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father's CNIC:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(4.5+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');     
+            //========================================  Identification Mark
+            $y += 0.2;
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Identification Mark:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.7,$y+$dy);
+            $pdf->Cell(0.5,0.5, $data['markOfIden'],0,'L');
+
+            //========================================  Exam Info 
+            $y += 0.2;
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Group:",0,'L');
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.7,$y+$dy);
+            $grp_name = $data["RegGrp"];
+                   switch ($grp_name) {
+                    case '1':
+                        $grp_name = 'Pre-Medical';
+                        break;
+                    case '2':
+                        $grp_name = 'Pre-Engineering';
+                        break;
+                    case '3':
+                        $grp_name = 'Humanities';
+                        break;
+                    case '4':
+                        $grp_name = 'General Science';
+                        break;
+                    case '5':
+                        $grp_name = 'Commerce';
+                        break;
+                    case '6':
+                        $grp_name = 'Home Economics';
+                        break;
+                    default:
+                        $grp_name = "No Group Selected.";
+                }
+            $pdf->Cell(0.5,0.5, $grp_name,0,'L');
+
+            $y += 0.2;
+            $x = 1;                 
+            //--------------------------- Subjects
+            //  $y += 0.2;
+            $pdf->SetFont('Arial','',10);
+            //------------- sub 1 & 5
+            $pdf->SetXY(0.5,$y+$dy);
+            $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+            $pdf->SetXY(3+$x,$y+$dy);
+            $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+            //------------- sub 2 & 6
+            $pdf->SetXY(0.5,0.2+$y+$dy);
+            $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+            $pdf->SetXY(3+$x,0.2+$y+$dy);
+            $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+            //------------- sub 3 & 7
+            $pdf->SetXY(0.5,0.4+$y+$dy);
+            $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+            $pdf->SetXY(3+$x,0.4+$y+$dy);
+            $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+            //------------- sub 4 & 8
+            $pdf->SetXY(0.5,0.6+$y+$dy);
+            $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+            $pdf->SetXY(3+$x,0.6+$y+$dy);
+            $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+            $y += 0.95;
+            //------------- Signature
+            $pdf->SetXY(0.2,$y+$dy);
+            $pdf->Cell(0.5,0.5, 'Head of the Institution: ___________________',0,'L');
+            $pdf->SetXY(5.8,$y+$dy);
+            $pdf->Cell(0.5,0.5, 'Secretary: _________________',0,'L');    
+
+            if ($turn>1){
+                $y += 0.5;
+                $pdf->Image(base_url()."assets/img/cut_line.png",0.3,$y+$dy, 7.5,0.15, "PNG");
+            }
+            if ($inc >4)
+            {
+                break;
+            }
+
+        }    
+
+        if ($generatingpdf==true)
+        {
+            $pdf->Output('Registration Cards.pdf','I');
+        } else {
+            $containsError=true;
+            $errorMessage = "<br />Your Institute does not have any student registration card(s) in accordance your selected group or form no. range.";
+        }
+        /*  $pdf = new PDF_Rotate('P','in',"A4");
+        $pdf->Rotate(0,-1,-1);
+        //   $pdf->SetFont('Arial','B',50);
+        //             $pdf->SetTextColor(255,192,203);
+        //             $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
+        $pdf->AliasNbPages();
+        if($Condition==4 or $Condition == 5)
+        {
+        $pdf->SetTitle('Proof Print of Return');   
+        }
+        else
+        {
+        $pdf->SetTitle('Final Print of Return');
+        }
+
+
+        $pdf->SetMargins(0.5,0.5,0.5);
+        $lmargin =0.5;
+        $rmargin =7.5;
+        $topMargin = 0.5;
+        $countofrecords=14;
+        $title=1.0;
+        $cnt=0; $ln[0]=1.5;
+        $SR=1;
+        while($cnt<15) 
+        {
+        $cnt++;
+        $ln[$cnt]=$ln[$cnt-1]+ 0.6;  //0.5;
+        }
+
+        $i = 4;
+        $result = $result['data'] ;
+        // DebugBreak();
+        foreach ($result as $key=>$data) 
+        {
+        //DebugBreak();
+        //DebugBreak();
+        $i++;
+        $countofrecords=$countofrecords+1;
+        if($countofrecords==15) {
+        $countofrecords=0;
+
+        $pdf->AddPage();
+
+        //     $pdf->SetFont('Arial','B',50);
+        //                 $pdf->SetTextColor(255,192,203);
+        //                 $pdf->Rotate(35,190,'W a t e r m a r k   d e m o',45);
+
+
+        if($Condition==4 or $Condition == 5)
+        {
+        $pdf->Image( base_url().'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG");     
+        }
+
+        $pdf->SetFont('Arial','U',14);
+        $pdf->SetXY( 0.4,0.2);
+        $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(1.7,0.4);
+        $pdf->Cell(0, 0.25, "MATRIC PART-I ENROLMENT RETURN SESSION (2016-2018)", 0.25, "C");
+
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(2.6,0.4);
+        $pdf->Image(BARCODE_PATH.$image,6.3,0.43, 1.8, 0.20, "PNG"); 
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(1.4,0.6);
+        $pdf->Cell(0, 0.25,$user['Inst_Id']. "-". $user['inst_Name'], 0.25, "C");
+
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(6.9,0.8);
+        $pdf->Cell(0, 0.25,  'Gender: '. ($data['sex']==1?"MALE":"FEMALE" ), 0.25, "C");
+        $grp_name = $data["RegGrp"];
+        switch ($grp_name) {
+        case '1':
+        $grp_name = 'SCIENCE WITH BIOLOGY';
+        break;
+        case '7':
+        $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
+        break;
+        case '8':
+        $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
+        break;
+        case '2':
+        $grp_name = 'Humanities';
+        break;
+        case '5':
+        $grp_name = 'Deaf and Dumb';
+        break;
+        default:
+        $grp_name = "No Group Selected.";
+        }
+        $pdf->SetFont('Arial','',10);
+        $pdf->SetXY(2.5,0.8);
+        $pdf->Cell(0, 0.25,  'Group: '.$grp_name, 0.25, "C");
+
+
+        $pdf->rect($lmargin,1,$rmargin,10.5);                //the main rectangle box
+        $cnt=-1;
+
+        while($cnt<15) 
+        { 
+        $cnt++;
+        $pdf->Line($lmargin, $ln[$cnt],$rmargin+.5,$ln[$cnt]);    
+        }
+
+
+        $col1=$lmargin+.3;    
+        $col2=$col1+0.9;    
+        $col3=$col2+1.8;
+        $col4=$col3+1.1;    
+        $col5=$col4+1.0;    
+        $col6=$col5+1.8;
+
+        $pdf->Line($col1,$title,$col1,$ln[15]);
+        $pdf->Line($col2,$title,$col2,$ln[15]);
+        $pdf->Line($col3,$title,$col3,$ln[15]);
+        $pdf->Line($col4,$title,$col4,$ln[15]);
+        $pdf->Line($col5,$title,$col5,$ln[15]);
+        $pdf->Line($col6,$title,$col6,$ln[15]);
+
+        $pdf->SetFont('Arial','B',9);
+        $pdf->Text($lmargin+.03,$title+.3,"Sr#");    //$pdf->Text(3,3,"TEXT TO DISPLAY");
+        $pdf->Text($col1+.2,$title+.3,"FormNo.");
+
+        $pdf->Text($col2+.1,$title+.2,"Name / Father`s Name");
+        $pdf->Text($col2+.1,$title+.4,"Mobile No");
+
+        $pdf->Text($col3+.1,$title+.2,"Bay Form No"); 
+        $pdf->Text($col3+.1,$title+.4,"Father CNIC");
+
+        $pdf->Text($col4+.1,$title+.2,"Date Of Birth");
+        $pdf->Text($col4+.1,$title+.31,"Relegion");
+        $pdf->Text($col4+.1,$title+.45,"Old RNo-Year");
+
+        $pdf->Text($col5+.1,$title+.3,"Subjects");
+
+        $pdf->Text($col6+.1,$title+.3,"Picture");
+        }
+        $dob = date("d-m-Y", strtotime($data["Dob"]));
+        $adm = date("d-m-Y", strtotime($data["edate"]));
+
+        //============================ Values ==========================================            
+        $pdf->SetFont('Arial','',10);    
+        $pdf->Text($lmargin+.03  , $ln[$countofrecords]+0.3 , $SR);                 // Sr No
+        $pdf->Text($col1+.05    , $ln[$countofrecords]+0.3,$data["formNo"]);       // Form No
+
+        $pdf->SetFont('Arial','B',8);    
+        $pdf->Text($col2+.1,$ln[$countofrecords]+0.2,strtoupper($data["name"]));
+        $pdf->SetFont('Arial','',8);                
+        $pdf->Text($col2+.1,$ln[$countofrecords]+0.4,strtoupper($data["Fname"]));
+        $pdf->SetFont('Arial','',7.5);                
+        $pdf->Text($col2+.1,$ln[$countofrecords]+0.55,$data["CellNo"]);
+        $pdf->SetFont('Arial','',8);
+        $pdf->Text($col3+.1,$ln[$countofrecords]+0.2,$data["BForm"]);
+        $pdf->Text($col3+.1,$ln[$countofrecords]+0.4,$data["FNIC"]);
+
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.2,$dob);
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.4,$data["rel"]==1?"Muslim":"Non-Muslim");
+
+        if($data["IsReAdm"] == '1' )
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,strtoupper($data["oldRno_reg"]).'-'.$data["oldYear_reg"]);
+        //$pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(Re-Admission)');
+        else
+        $pdf->Text($col4+.1,$ln[$countofrecords]+0.55,'(NEW)');
+
+        $pdf->SetFont('Arial','B',7);    
+        //            $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,GroupName($data["Grp_Cd"]));
+        $pdf->Text($col5+.05,$ln[$countofrecords]+0.2,  $data["sub1_abr"].','.$data["sub2_abr"].','.$data["sub3_abr"].','.$data["sub4_abr"]);
+        $pdf->SetFont('Arial','',7);    
+        $pdf->Text($col5+.05,$ln[$countofrecords]+0.4,$data["sub5_abr"].','.$data["sub6_abr"].','.$data["sub7_abr"].','.$data["sub8_abr"]);
+
+        $pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],$col6+0.05,$ln[$countofrecords]+0.05 , 0.50, 0.50, "JPG"); 
+
+        ++$SR;
+
+
+        //Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.
+        $pdf->SetFont('Arial','',8);
+        $pdf->Text($lmargin+.5,10.8,"Certified that I have checked all the relevant record of the students and the particulars as mentioned above are correct.");
+        //$pdf->Text($lmargin+.5,11,"Signature _____________________");
+        $pdf->SetFont('Arial','',10);
+        $pdf->Text($rmargin-2.5,11.2,"_____________________________________");
+        $pdf->Text($rmargin-2.5,11.4,"Signature of Head of Institution with Stamp");
+        $pdf->Text($lmargin+0.5,11.4,'Print Date: '. date('d-m-Y H:i:s a'));    
+
+        }
+        $pdf->Output($data["Sch_cd"].'.pdf', 'I');*/
+    }
     public function ReAdmission()
     {
         $this->load->library('session');
