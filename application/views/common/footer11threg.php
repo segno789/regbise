@@ -1596,7 +1596,6 @@ debugger;
     });
      function Print_RegCards_groupwise(grp_cd)
     {
-        debugger;
         var myv = '<?=base_url()?>/index.php/Registration_11th/Reg_Cards_Printing_11th_PDF/'+grp_cd+'/2'; 
         window.location.href = myv;
     }

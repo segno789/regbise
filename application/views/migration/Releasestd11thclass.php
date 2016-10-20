@@ -61,7 +61,7 @@
                                       <td>'.$formno.'</td>
                                     <td>'.$vals["name"].'</td>
                                     <td>'.$vals["fname"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$Inst_Id.'/'.$PicPath.'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$Inst_Id.'/'.$PicPath.'" alt="Candidate Image"></td>';
                                     echo'<td>
                                     <button type="button" class="btn btn-info" value="'.$vals["app_No"].'" onclick="downloadchallan('.$vals["app_No"].',1)">Download Challan</button>
                                     <button type="button" class="btn btn-info" value="'.$vals["app_No"].'" onclick="downloadchallan('.$vals["app_No"].',2)">Download Migration Form</button>

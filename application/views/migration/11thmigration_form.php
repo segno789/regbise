@@ -22,7 +22,7 @@
                                     <input type="hidden" class="span2 hidden" id="bform" name="bform" value="<?=  $data['0']['BForm']?>">
                                     <input type="hidden" class="span2 hidden" id="fnic" name="fnic" value="<?=  $data['0']['FNIC']?>">
                                     <input type="hidden" class="span2 hidden" id="sex" name="sex" value="<?=  $data['0']['sex']?>">
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  echo base_url().IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath'];?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">

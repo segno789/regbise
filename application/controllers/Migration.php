@@ -753,7 +753,7 @@ class Migration extends CI_Controller {
             $pdf->SetXY(1.7,$Y+2.4);
             $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
 
-            $pdf->Image(base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
+            $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],4.5,1.79+$Y , 0.95, 1.0, "JPG"); //
              //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
             //========================================  Exam Info ===============================================================================            
            

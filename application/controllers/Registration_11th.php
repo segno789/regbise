@@ -353,7 +353,7 @@ class Registration_11th extends CI_Controller {
             //------ Picture Box on Centre      .$data["Inst_Cd"].'/'. $data["PicPath"]
             $pdf->SetXY(6.5, $y+1+$dy);
             $pdf->Cell(1.25,1.4,'',1,0,'C',0);
-            $pdf->Image( base_url().'uploads/2016/121158/1211580002.jpg',6.5, 1+ $y+$dy, 1.25, 1.4, "JPG");
+            $pdf->Image( IMAGE_PATH11.$data["coll_cd"].'/'. $data["PicPath"],6.5, 1+ $y+$dy, 1.25, 1.4, "JPG");
             $pdf->SetFont('Arial','',10);
 
             //------------- Personal Infor Box    
