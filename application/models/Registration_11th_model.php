@@ -132,15 +132,25 @@ class Registration_11th_model extends CI_Model
         $formno = $data['FormNo'];
         $RegGrp = $data['RegGrp'];
         $grp_cd = $RegGrp;
+        $iOldRno = @$data['old_RNo'];
+        $iOldYear = @$data['old_year'];
+        $iOldSess = @$data['old_sess'];
         $OldRno = $data['SSC_RNo'];
         $OldYear = $data['SSC_Year'];
         $OldSess = $data['SSC_Sess'];
         $OldBrd = $data['SSC_brd_cd'];
         $IsReAdm = $data['IsReAdm'];
         $pic_base_64 = $data['Image'];
+    //    DebugBreak();
+        if($iOldRno ==  false)
+           $iOldRno =  0;
+        if($iOldYear ==  false)
+           $iOldYear =  0;
+        if($iOldSess ==  false)
+           $iOldSess =  0;
       //  $pic_base_65 = $data['Image'];
       //  DebugBreak();
-      
+      //  DebugBreak();
       if($OldBrd == 1 )
       {
           $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
@@ -153,15 +163,13 @@ class Registration_11th_model extends CI_Model
               $BForm = $info[0]['bFormNo'];
               $FNIC = $info[0]['FNIC'];
               $Dob = $info[0]['dob'];
-             
-              
           }
           else
           {
               return  false;
           }
       }
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_insert '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,1,'$OldRno',$OldYear,$OldSess,$OldBrd,$iOldRno,$iOldYear,$iOldSess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$IsReAdm,'$pic_base_64'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         
          $rowcount = $query->num_rows();
@@ -608,6 +616,7 @@ class Registration_11th_model extends CI_Model
         $processing_fee = $data['proces_fee'];
         $reg_fee = $data['reg_fee'];
         $fine = $data['fine'];
+        $refine = $data['refine'];
         $TotalRegFee = $data['TotalRegFee'];
         $TotalLatefee = $data['TotalLatefee'];
         $Totalprocessing_fee = $data['Totalprocessing_fee'];
@@ -615,7 +624,7 @@ class Registration_11th_model extends CI_Model
         $todaydate = $data['todaydate'];
         $total_std = $data['total_std'];
         //        EXEC Batch_Create @Inst_Cd = ".$user->inst_cd.",@UserId = ".$user->get_currentUser_ID()."@Amount = ".$tot_fee.",@Total_ProcessingFee = ".$prs_fee.",@Total_RegistrationFee = ".$reg_fee.",@Total_LateRegistrationFee =".$late_fee.",@Total_LateAdmissionFee = 0,@Valid_Date = '$today',@form_ids = '$forms_id'"
-        $query = $this->db->query("Registration..Batch_Create_11th_2016 $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id'");
+        $query = $this->db->query("Registration..Batch_Create_11th_2016 $inst_cd,$reg_fee,$fine,$refine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id'");
     }
     public function Batch_List($data)
     {

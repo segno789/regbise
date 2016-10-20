@@ -42,7 +42,7 @@ define('BARCODE_PATH', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE', '2016-09-30');
 define('DOUBLE_LAST_DATE', '2016-09-30');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
-define('RE_ADMISSION_TBL11', 'matric_new..vwIA2P15');
+define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
 define('ISREADMISSION', '1');
 
 
@@ -50,8 +50,8 @@ define('ISREADMISSION', '1');
 define('IMAGE_PATH11', 'uploads/2016/colleges/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE11', '2016-09-30');
-define('DOUBLE_LAST_DATE11', '2016-10-10');
+define('SINGLE_LAST_DATE11', '2016-11-08');
+define('DOUBLE_LAST_DATE11', '2016-11-08');
 
 //================ Ninth Correction variables ========================
 define('Correction_Last_Date','2016-10-31');

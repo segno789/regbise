@@ -484,9 +484,7 @@
                                             echo array_search($data[0]['sub3'],$subarray);
                                         ?></option></select> 
                                     <select id="sub4"  name="sub4" class="span3 dropdown">
-                                        <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
-                                            if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
-                                        ?></option></select>
+                                        <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"></option></select>
                                 </div>
                             </div>  
                               <div class="control-group">
@@ -519,12 +517,7 @@
                                             echo array_search($data[0]['sub7'],$subarray);} else {echo "";};
                                         ?></option>
                                     </select> 
-                                    <select id="sub8"  name="sub8" class="span3 dropdown">
-                                        <option value="<?php  if($isReAdm != 1) { echo $data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
-                                            // DebugBreak();
-                                            echo array_search($data[0]['sub8'],$subarray);}  else {echo "";};
-                                        ?></option>
-                                    </select>
+                                 
                                 </div>
                             </div>
 
@@ -535,6 +528,9 @@
                                 <input type="hidden"   value="<?php  echo $data[0]['matRno'];  ?>"  name="OldRno">
                                 <input type="hidden"   value="<?php  echo $data[0]['yearOfPass']; ?>"  name="OldYear">
                                 <input type="hidden"   value="<?php  echo $data[0]['sessOfPass']; ?>"  name="OldSess">
+                                <input type="hidden"   value="<?php  echo $data[0]['rno']; ?>"  name="iOldRno">
+                                <input type="hidden"   value="<?php  echo $data[0]['Iyear']; ?>"  name="iOldYear">
+                                <input type="hidden"   value="<?php  echo $data[0]['sess']; ?>"  name="iOldSess">
                                 <input type="hidden"   value="<?php  echo $data[0]['nat']; ?>"  name="nationality_hidden">
                               
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2">
