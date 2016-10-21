@@ -195,7 +195,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group" disabled="disabled" >
                                         <?php
                                         // DebugBreak();
-                                        $grp = $data[0]['RegGrp'];
+                                        $grp = $data[0]['grp_cd'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
@@ -389,7 +389,7 @@
    <select id="corr_std_group" class="dropdown span6"  name="corr_std_group" style="display: none;">
                                         <?php
                                       //   DebugBreak();
-                                        $grp = $data[0]['RegGrp'];
+                                        $grp = $data[0]['grp_cd'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )

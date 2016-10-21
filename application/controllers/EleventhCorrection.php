@@ -1203,7 +1203,7 @@ class EleventhCorrection extends CI_Controller {
             $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
           //  DebugBreak();
             //--------------------------- Subject Group
-            $grp_name = $data["Reggrp"];
+            $grp_name = $data["grp_cd"];
             switch ($grp_name) {
                 case '1':
                     $grp_name = 'PRE-MEDICAL';
