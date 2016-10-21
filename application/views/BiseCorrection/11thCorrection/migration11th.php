@@ -5,11 +5,11 @@
             <div class="widget">
                 <div class="widget-header">
                     <div class="title">
-                        9th Migration by Form No.<a id="redgForm" data-original-title=""></a>
+                        11th Migration by Form No.<a id="redgForm" data-original-title=""></a>
                     </div>
                 </div>
                 <div class="widget-body">
-                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/9" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/11" method="post" enctype="multipart/form-data">
 
 
 
@@ -41,7 +41,7 @@
                 
                   <div class="widget-body">
                         <h4>
-                            All OneWindow 9th Migration Forms:
+                            All OneWindow 11th Migration Forms:
                         </h4>
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
@@ -60,9 +60,9 @@
                                         <th style="width:10%">
                                             Father's Name
                                         </th>
-                                        <th style="width:6%" class="hidden-phone">
+                                       <!-- <th style="width:6%" class="hidden-phone">
                                             DOB
-                                        </th>
+                                        </th>  -->
                                         <th style="width:10%" class="hidden-phone">
                                             Subject Group
                                         </th>
@@ -83,34 +83,37 @@
                                         $grp_name='';                             
                                         foreach($migration as $key=>$vals):
                                         $n++;
-                                        $formno = !empty($vals["formno"])?$vals["formno"]:"N/A";
+                                        $formno = !empty($vals["Formno"])?$vals["Formno"]:"N/A";
                                         $grp_name = $vals["RegGrp"];
                                         switch ($grp_name) {
-                                            case '1':
-                                                $grp_name = 'SCIENCE WITH BIOLOGY';
-                                                break;
-                                            case '7':
-                                                $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                                                break;
-                                            case '8':
-                                                $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                                                break;
-                                            case '2':
-                                                $grp_name = 'General';
-                                                break;
-                                            case '5':
-                                                $grp_name = 'Deaf and Dumb';
-                                                break;
-                                            default:
-                                                $grp_name = "No Group Selected.";
-                                        }
+                                                            case '1':
+                                                                $grp_name = 'Pre-Medical';
+                                                                break;
+                                                            case '2':
+                                                                $grp_name = 'Pre-Engineering';
+                                                                break;
+                                                            case '3':
+                                                                $grp_name = 'Humanities';
+                                                                break;
+                                                            case '4':
+                                                                $grp_name = 'General Science';
+                                                                break;
+                                                            case '5':
+                                                                $grp_name = 'Commerce';
+                                                                break;
+                                                            case '6':
+                                                                $grp_name = 'Home Economics';
+                                                                break;
+                                                            default:
+                                                                $grp_name = "No Group Selected.";
+                                                        }
 
                                         echo '<tr  >
                                         <td>'.$n.'</td>
                                         <td>'.$formno.'</td>
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["fname"].'</td>
-                                        <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
+                                       
                                         <td>'.$grp_name.'</td>
 
                                         <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$vals['Migrated_From'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
@@ -160,6 +163,6 @@
   }
     function migrateto(formno,inst_cd)
     {
-        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/9/"+formno+"/"+inst_cd; 
+        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/11/"+formno+"/"+inst_cd; 
     }
 </script>
