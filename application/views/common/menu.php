@@ -105,7 +105,7 @@
                     
                     <?php } 
                     
-                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4' OR $isselected == '13'){?>
+                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4' OR $isselected == '40' OR $isselected == '13'){?>
                 
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
@@ -129,6 +129,12 @@
                         <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration9th" class="<?php if($isselected == '4') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
                           9th Migration
+                        </a>
+                    </li>
+                     <li>
+                        <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration11th" class="<?php if($isselected == '40') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
+                          11th Migration
                         </a>
                     </li>
                 <li>
@@ -497,7 +503,39 @@
                 </ul>
                 <?php
             }
-           
+             if($isselected == '40'){
+                ?>
+                  <ul >
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/migration11th"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Migration</a></li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration11th">
+                            11th Migration <?= MIGRATIONSESS?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration11th">
+                           List 11th Migration <?= MIGRATIONSESS?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration12th">
+                            12th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration12th">
+                           List 12th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a onclick="return logout();">Logout</a>
+                    </li>
+
+                </ul>
+                <?php
+            }
             if($isselected == '7'){
                 ?>
                 <ul >

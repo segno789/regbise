@@ -1,4 +1,4 @@
-<?php 
+<?php
      function generatepath($rno,$class,$year,$sess)
     {
       $basepath = DIRPATH;
@@ -68,7 +68,6 @@
         return  $basepath;
     }
 
-
 ?>
 
 <div class="dashboard-wrapper class wysihtml5-supported" style="background: white;">
@@ -78,13 +77,40 @@
             <div class="widget">
                 <div class="widget-header">
                     <div class="title">
-                        List of 10th Migration <a id="redgForm" data-original-title=""></a>
+                        12th Migration by Roll No.<a id="redgForm" data-original-title=""></a>
                     </div>
                 </div>
-           
                 <div class="widget-body">
+                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/12" method="post" enctype="multipart/form-data">
+                        <div class='control-group'>
+                            <div class='controls controls-row'>
+                                <label class='control-label span2' >
+                                    Roll Number:
+                                </label>
+                                <input class='span3' type='number' id='txtformNo_search' style='text-transform: uppercase;' name='txtformNo_search' placeholder='Roll Number.' maxlength='6' min='100001' max="399999"  required='required' oninput="maxLengthCheck(this)">
+                                  <label class='control-label span2' >
+                                   Inst. Code:
+                                </label>
+                                <input class='span3' type='number' id='txtinst_search' style='text-transform: uppercase;' name='txtinst_search' placeholder='Inst. Code.' maxlength="6" required='required' oninput="maxLengthCheck(this)">
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions no-margin">
+                        <button type="submit" onclick="return valid_migration_form()" name="btnsubmitNewEnrol" class="btn btn-large btn-info offset2">
+                            Update Form
+                        </button>
+
+
+                        <div class="clearfix">
+                        </div>
+
+                    </form>
+                </div>
+                
+                  <div class="widget-body">
                         <h4>
-                            All 10th Migrated Forms:
+                            All OneWindow 12th Migration Forms:
                         </h4>
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
@@ -103,8 +129,7 @@
                                         <th style="width:10%">
                                             Father's Name
                                         </th>
-                                       
-                                       <th style="width:5%">
+                                          <th style="width:5%">
                                             Picture
                                         </th>
                                       
@@ -123,7 +148,7 @@
                                         foreach($migration as $key=>$vals):
                                         $n++;
                                         $formno = !empty($vals["rno"])?$vals["rno"]:"N/A";
-                                          $path = generatepath($vals["rno"],9,2016,1).$vals["rno"].'.jpg';
+                                        $path = generatepath($vals["rno"],11,2016,1).$vals["rno"].'.jpg';
                                         $type = pathinfo($path, PATHINFO_EXTENSION);
                                         $data = file_get_contents($path);
                                         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -132,8 +157,9 @@
                                         <td>'.$formno.'</td>
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["fname"].'</td>';
-                                        echo'<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"><td>
-                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].')">Restore</button>
+
+                                        echo'<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"></td><td>
+                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].')">Update Migrate</button>
                                         </td>
                                         </tr>';
                                         endforeach;
@@ -145,6 +171,7 @@
                         </div>
                      
                     </div>
+                
                 
                 
             </div>  
@@ -169,8 +196,13 @@
             }
         });
     }
-    function migrateto(formno,inst_cd,oldinst)
+    function maxLengthCheck(object)
+  {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    function migrateto(formno,inst_cd)
     {
-        window.location.href ="<?php echo base_url(); ?>bisecorrection/restoreMigration/10/"+formno+"/"+inst_cd; 
+        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/12/"+formno+"/"+inst_cd; 
     }
 </script>
