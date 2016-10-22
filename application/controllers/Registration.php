@@ -2209,7 +2209,7 @@ class Registration extends CI_Controller {
     public function Reg_Cards_Printing_9th_PDF()
     {
 
-        //   DebugBreak();
+          DebugBreak();
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
@@ -2278,7 +2278,7 @@ class Registration extends CI_Controller {
         $pdf = new PDF_Rotate('P','in',"A4");
         //$pdf=new FPDF_BARCODE("P","in","A4");
         $pdf->SetMargins(0.5,1.2,0.5);
-
+         $pdf->AliasNbPages();
 
         $generatingpdf=false;
         $result = $result['data'] ;
@@ -2689,7 +2689,7 @@ class Registration extends CI_Controller {
     public function return_pdf()
     {
 
-        //  DebugBreak();
+         
         $Condition = $this->uri->segment(4);
         /*
         $Condition  1 == Batch Id wise printing.
