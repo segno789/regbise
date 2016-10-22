@@ -24,8 +24,7 @@ class Login extends CI_Controller {
         $data = array(
             'user_status' => ''                     
 
-        );
-        
+        );        
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
           
