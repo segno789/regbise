@@ -397,12 +397,21 @@
                             9th Class Students
                         </a>
                     </li>
+                      <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass_byRollNo">
+                           9th By Roll No.
+                        </a>
+                    </li>
                     <li>
                         <a href="<?php echo base_url(); ?>migration/get9threalease">
                            9th Class Release List
                         </a>
                     </li>
-                      
+                     <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease_byRollNo">
+                          9th By Roll No. Release List
+                        </a>
+                    </li>   
                   <?php }
                   
                   else if($edu_lvl == 2 )
@@ -413,8 +422,19 @@
                       </a>
                   </li>
                   <li>
+                      <a href="<?php echo base_url(); ?>migration/std11thclass_byRollNo">
+                          11th By Roll No.
+                                                </a>
+                  </li>
+                  <li>
                       <a href="<?php echo base_url(); ?>migration/get11threalease">
                           11th Class Release List
+                      </a>
+                  </li>
+                   
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/get11threalease_byRollNo">
+                          11th By Roll No. Release List
                       </a>
                   </li>
                      

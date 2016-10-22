@@ -850,10 +850,20 @@ if(isReadm == 0)
      
         window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
     }
+      function releasemForm_byRollNo(formrno)
+    {
+     
+        window.location.href = '<?=base_url()?>/migration/release_stdForm_byRollNo/'+formrno
+    }
       function releasemForm11th(formrno)
     {
      
         window.location.href = '<?=base_url()?>/migration/release_stdForm11th/'+formrno
+    }
+     function releasemForm11th_byRollNo(formrno)
+    {
+     
+        window.location.href = '<?=base_url()?>/migration/release_stdForm11th_byRollNo/'+formrno
     }
     
     

@@ -856,7 +856,7 @@ class Registration extends CI_Controller {
     public function NewEnrolment_update()
     {
 
-        DebugBreak();
+      //  DebugBreak();
 
         $this->load->model('Registration_model');
 
@@ -1250,7 +1250,6 @@ class Registration extends CI_Controller {
         $this->load->view('Registration/9th/BatchRelease.php',$error);//,$myinfo);
         $this->load->view('common/footer.php');
     }
-
     public function ChallanForm_Reg9th_Regular()
     {
         // DebugBreak();
@@ -1764,7 +1763,6 @@ class Registration extends CI_Controller {
         //  $this->load->view('Registration/9th/BatchList.php');
         //$this->commonfooter();
     }
-
     public function ProofReading()
     {
         $data = array(
