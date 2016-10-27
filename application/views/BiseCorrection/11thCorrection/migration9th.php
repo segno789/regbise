@@ -5,13 +5,43 @@
             <div class="widget">
                 <div class="widget-header">
                     <div class="title">
-                        List of 9th Migration <a id="redgForm" data-original-title=""></a>
+                        9th Migration by Form No.<a id="redgForm" data-original-title=""></a>
                     </div>
                 </div>
-           
+                <div class="widget-body">
+                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/9" method="post" enctype="multipart/form-data">
+
+
+
+                        <div class='control-group'>
+                            <div class='controls controls-row'>
+                                <label class='control-label span2' >
+                                    FORM NO:
+                                </label>
+                                <input class='span3' type='number' id='txtformNo_search' style='text-transform: uppercase;' name='txtformNo_search' placeholder='FORM NO.' maxlength="10"  required='required' oninput="maxLengthCheck(this)">
+                                  <label class='control-label span2' >
+                                   Inst. Code:
+                                </label>
+                                <input class='span3' type='number' id='txtinst_search' style='text-transform: uppercase;' name='txtinst_search' placeholder='Inst. Code.' maxlength="6" required='required' oninput="maxLengthCheck(this)">
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions no-margin">
+                        <button type="submit" onclick="return valid_migration_form()" name="btnsubmitNewEnrol" class="btn btn-large btn-info offset2">
+                            Update Form
+                        </button>
+
+
+                        <div class="clearfix">
+                        </div>
+
+                    </form>
+                </div>
+                
                   <div class="widget-body">
                         <h4>
-                            All 9th Migration Forms:
+                            All OneWindow 9th Migration Forms:
                         </h4>
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
@@ -24,20 +54,11 @@
                                         <th style="width:5%">
                                             Form No.
                                         </th>
-                                        <th style="width:5%">
-                                            Application No.
-                                        </th>
                                         <th style="width:10%">
                                             Name
                                         </th>
                                         <th style="width:10%">
                                             Father's Name
-                                        </th>
-                                        <th style="width:6%">
-                                            New Inst.code
-                                        </th>
-                                        <th style="width:6%">
-                                            Old Inst.code
                                         </th>
                                         <th style="width:6%" class="hidden-phone">
                                             DOB
@@ -63,12 +84,6 @@
                                         foreach($migration as $key=>$vals):
                                         $n++;
                                         $formno = !empty($vals["formno"])?$vals["formno"]:"N/A";
-                                         $app_no = !empty($vals["app_no"])?$vals["app_no"]:"N/A";
-                                         $app_txt = $app_no;
-                                         if($app_no == 'N/A')
-                                         {
-                                           $app_txt =  -1;  
-                                         }
                                         $grp_name = $vals["RegGrp"];
                                         switch ($grp_name) {
                                             case '1':
@@ -92,20 +107,16 @@
 
                                         echo '<tr  >
                                         <td>'.$n.'</td>
-                                       
                                         <td>'.$formno.'</td>
-                                         <td>'.$app_no.'</td>
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["fname"].'</td>
-                                        <td>'.$vals["sch_cd"].'</td>
-                                        <td>'.$vals["oldinst_cd"].'</td>
                                         <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                         <td>'.$grp_name.'</td>
 
-                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$vals['sch_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$vals['Migrated_From'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
 
                                         echo'<td>
-                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['oldinst_cd'].','.$vals['oldinst_cd'].','.$app_txt.')">Restore</button>
+                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].')">Update Migrate</button>
                                         </td>
                                         </tr>';
                                         endforeach;
@@ -142,8 +153,13 @@
             }
         });
     }
-    function migrateto(formno,inst_cd,oldinst,app_no)
+      function maxLengthCheck(object)
+  {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    function migrateto(formno,inst_cd)
     {
-        window.location.href ="<?php echo base_url(); ?>bisecorrection/restoreMigration/9/"+formno+"/"+inst_cd+'/'+app_no; 
+        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/9/"+formno+"/"+inst_cd; 
     }
 </script>

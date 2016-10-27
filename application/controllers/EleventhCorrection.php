@@ -1052,7 +1052,7 @@ class EleventhCorrection extends CI_Controller {
                 $pdf->SetXY(1.8, $Y +1.79);
                 $pdf->Cell(1.25,1.4,'',1,0,'C',0);
 
-                $pdf->Image(IMAGE_PATH.$user['Inst_Id'].'/'.$data["PicPath"],1.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
+                $pdf->Image(IMAGE_PATH11.$user['Inst_Id'].'/'.$data["PicPath"],1.8, 1.79+ $Y, 1.25, 1.4, "JPG"); 
                 $pdf->SetFont('Arial','',10);
 
                 $pdf->SetFont('Arial','',10);
@@ -1203,7 +1203,7 @@ class EleventhCorrection extends CI_Controller {
             $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
           //  DebugBreak();
             //--------------------------- Subject Group
-            $grp_name = $data["grp_cd"];
+            $grp_name = $data["Reggrp"];
             switch ($grp_name) {
                 case '1':
                     $grp_name = 'PRE-MEDICAL';

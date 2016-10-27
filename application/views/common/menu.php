@@ -7,19 +7,9 @@
                
 
                 <?php 
-                // DebugBreak();
-                if($isselected == '5'){?>
-
-                    <li>
-                        <a style="width: 115px;" href="<?php echo base_url(); ?>Complaints" class="<?php if($isselected == '5') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
-                            Complaints
-                        </a>
-                    </li>
-
-                    <?php } 
-                         
-                else  if(($isselected == '6' || $isselected == '2' || $isselected == '12') && $edu_lvl == 3){?>
+                
+               
+                  if(($isselected == '6' ||  $isselected == '7' || $isselected == '2' || $isselected == '12' ||  $isselected == '10') && $edu_lvl == 3){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -39,21 +29,21 @@
                             11th Registration
                         </a>
                     </li>
-                        <li>
+                      <li>
                         <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             11th Correction
                         </a>
-                    </li>
+                    </li>         
                     <li>
-                        <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '8') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>migration/std11thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Migration
                         </a>
                     </li>
                     <?php }
 
-                else if($isselected == '2' OR $isselected == '7'   OR $isselected == '10'){?>
+                else if(($isselected == '2' OR $isselected == '7' OR $isselected == '10')  && $edu_lvl == 1 ){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration" class="<?php if($isselected == '2') {echo 'selected';}?>" >
@@ -67,22 +57,16 @@
                             9th Correction
                         </a>
                     </li>
-                      <li>
-                        <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
-                            11th Correction
-                        </a>
-                    </li>
-                    <li>
+                   <!--  <li>
                         <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Migration
                         </a>
-                    </li>
+                    </li>        -->
                     <?php } 
 
              
-                else if($isselected == '6' OR ($isselected == '12' && ($edu_lvl == 2)) ){?>
+                else if(($isselected == '6' ||  $isselected == '12' OR $isselected == '10') && $edu_lvl == 2){?>
 
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
@@ -90,22 +74,21 @@
                             Registration
                         </a>
                     </li>
-                    <li>
+                        <li>
                         <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             11th Correction
                         </a>
-                    </li>
-                    <li>
+                    </li>   
+                        <li>
                         <a href="<?php echo base_url(); ?>migration/std11thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
-                           11th Migration
+                            Migration
                         </a>
-                    </li>
-                    
+                    </li> 
                     <?php } 
                     
-                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4' OR $isselected == '40' OR $isselected == '13'){?>
+                    if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4' OR $isselected == '13'  OR $isselected == '40'){?>
                 
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
@@ -113,12 +96,7 @@
                             9th Correction
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrections" class="<?php if($isselected == '13') {echo 'selected';}?>" >
-                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
-                            11th Correction
-                        </a>
-                    </li>
+                       
                  <!--   <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
@@ -128,16 +106,22 @@
                      <li>
                         <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration9th" class="<?php if($isselected == '4') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
-                          9th Migration
+                           9th Migration
                         </a>
                     </li>
-                     <li>
+                      <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrections" class="<?php if($isselected == '13') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+                            11th Correction
+                        </a>
+                    </li>
+                 <li>
                         <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration11th" class="<?php if($isselected == '40') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
                           11th Migration
                         </a>
                     </li>
-                <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
                             Spec. Permission
@@ -151,20 +135,34 @@
         </div>
         <div class="sub-nav">
             <?php
-            if($isselected == '5') { 
+            
+
+                     if($isselected == '40'){
                 ?>
-                <ul >
+                  <ul >
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/migration11th"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Migration</a></li>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>complaints">
-                            Pending Complaints
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration11th">
+                            11th Migration <?= MIGRATIONSESS?>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>complaints/completeCMP">
-                            Completed
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration11th">
+                           List 11th Migration <?= MIGRATIONSESS?>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/migration12th">
+                            12th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration12th">
+                           List 12th Migration <?= MIGRATIONSESS2?>
+                        </a>
+                    </li>
+
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
@@ -172,8 +170,6 @@
                 </ul>
                 <?php
             }
-
-
 
 
             if($isselected == '0') { 
@@ -203,8 +199,7 @@
                  
                 </ul>
                 <?php
-            }
-                  if($isselected == '13') {   ?>
+            }     if($isselected == '13') {   ?>
             
                 <ul >
                     <li><a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrections"   data-original-title="" class="<?php if($isselected == '13') {echo 'heading';}?>">11th Registration</a></li>
@@ -217,6 +212,11 @@
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrectionapp_verified">
                             Verified Correction  
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/result11thcorrections">
+                            11th Result Cards(2016)  
                         </a>
                     </li>
                   <!--   <li>
@@ -239,9 +239,7 @@
                     </li>
 
                 </ul>
-            
-            
-            <?php }
+            <?php    }
             if($isselected == '8') {   ?>
             
                 <ul >
@@ -335,7 +333,7 @@
                             Form Printing
                         </a>
                     </li>
-                    <li>
+                      <li>
                         <a href="<?php echo base_url(); ?>/Registration/Reg_Cards_Printing_9th">
                             Registration Cards
                         </a>
@@ -357,99 +355,7 @@
                 <?php
             }
             ?>
-            <?php   
-            ///Migration
-          //  DebugBreak();
-             if($isselected == '10'){
-                ?>
-                <ul >
-                <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>
-
-                    <?php 
-                    
-                    if( $edu_lvl == 3 ) {?>
-                    <li>
-                        <a href="<?php echo base_url(); ?>migration/std9thclass">
-                            9th Class Students
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>migration/get9threalease">
-                           9th Class Release List
-                        </a>
-                    </li>
-                     <li>
-                        <a href="<?php echo base_url(); ?>migration/std11thclass">
-                            11th Class Students
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>migration/get11threalease">
-                           11th Class Release List
-                        </a>
-                    </li>
-                  <?php } 
-                  else if($edu_lvl == 1 )
-                  {?>
-                      
-                        <li>
-                        <a href="<?php echo base_url(); ?>migration/std9thclass">
-                            9th Class Students
-                        </a>
-                    </li>
-                      <li>
-                        <a href="<?php echo base_url(); ?>migration/std9thclass_byRollNo">
-                           9th By Roll No.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>migration/get9threalease">
-                           9th Class Release List
-                        </a>
-                    </li>
-                     <li>
-                        <a href="<?php echo base_url(); ?>migration/get9threalease_byRollNo">
-                          9th By Roll No. Release List
-                        </a>
-                    </li>   
-                  <?php }
-                  
-                  else if($edu_lvl == 2 )
-                  {?>
-                  <li>
-                      <a href="<?php echo base_url(); ?>migration/std11thclass">
-                          11th Class Students
-                      </a>
-                  </li>
-                  <li>
-                      <a href="<?php echo base_url(); ?>migration/std11thclass_byRollNo">
-                          11th By Roll No.
-                                                </a>
-                  </li>
-                  <li>
-                      <a href="<?php echo base_url(); ?>migration/get11threalease">
-                          11th Class Release List
-                      </a>
-                  </li>
-                   
-                  <li>
-                      <a href="<?php echo base_url(); ?>migration/get11threalease_byRollNo">
-                          11th By Roll No. Release List
-                      </a>
-                  </li>
-                     
-                     
-                      
-                  <?php 
-                  }
-                  ?>
-
-                </ul>
-                <?php
-            }
-            
-            
-            // 9th admission
+            <?php   // 9th admission
             if($isselected == '3'){
                 ?>
                 <ul >
@@ -523,39 +429,7 @@
                 </ul>
                 <?php
             }
-             if($isselected == '40'){
-                ?>
-                  <ul >
-                    <li><a href="<?php echo base_url(); ?>BiseCorrection/migration11th"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">Migration</a></li>
-
-                    <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/migration11th">
-                            11th Migration <?= MIGRATIONSESS?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration11th">
-                           List 11th Migration <?= MIGRATIONSESS?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/migration12th">
-                            12th Migration <?= MIGRATIONSESS2?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/listmigration12th">
-                           List 12th Migration <?= MIGRATIONSESS2?>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a onclick="return logout();">Logout</a>
-                    </li>
-
-                </ul>
-                <?php
-            }
+           
             if($isselected == '7'){
                 ?>
                 <ul >
@@ -576,8 +450,7 @@
                 </ul>
                 <?php
             }
-              
-            if($isselected == '12'){
+             if($isselected == '12'){
                 ?>
                 <ul >
                 
@@ -612,7 +485,7 @@
                                 Old Students 
                             </a>
                         </li>
-                         <li>
+                        <li>
                         <a href="<?php echo base_url(); ?>Registration_11th/ReAdmission">
                         Re-Admissions
                         </a>
@@ -640,11 +513,6 @@
                             Form Printing
                         </a>
                     </li>
-                     <li>
-                        <a href="<?php echo base_url(); ?>/Registration_11th/Reg_Cards_Printing_11th">
-                            Registration Cards
-                        </a>
-                    </li>
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th/Profile">
                             Profile
@@ -657,10 +525,116 @@
                 </ul>
                 <?php
             }
+            
+               if($isselected == '10'){
+                ?>
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>
+                    
+                     <?php 
+                    
+                    if( $edu_lvl == 3 ) {?>
+                    <!--<li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass">
+                            9th Class Students
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease">
+                           9th Class Release List
+                        </a>
+                    </li>
+                       <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass_byRollNo">
+                           9th By Roll No.
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease_byRollNo">
+                          9th By Roll No. Release List
+                        </a>
+                    </li>          -->
+                     <li>
+                        <a href="<?php echo base_url(); ?>migration/std11thclass">
+                            11th Class Students
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/get11threalease">
+                           11th Class Release List
+                        </a>
+                    </li>
+                       <li>
+                      <a href="<?php echo base_url(); ?>migration/std11thclass_byRollNo">
+                          11th By Roll No.
+                                                </a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/get11threalease_byRollNo">
+                          11th By Roll No. Release List
+                      </a>
+                  </li>
+                  <?php } 
+                  else if($edu_lvl == 1 )
+                  {?>
+                      
+                       <!-- <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass">
+                            9th Class Students
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease">
+                           9th Class Release List
+                        </a>
+                    </li>
+                             <li>
+                        <a href="<?php echo base_url(); ?>migration/std9thclass_byRollNo">
+                           9th By Roll No.
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>migration/get9threalease_byRollNo">
+                          9th By Roll No. Release List
+                        </a>
+                    </li>             -->
+                  <?php }
+                  
+                  else if($edu_lvl == 2 )
+                  {?>
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/std11thclass">
+                          11th Class Students
+                      </a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/get11threalease">
+                          11th Class Release List
+                      </a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/std11thclass_byRollNo">
+                          11th By Roll No.
+                                                </a>
+                  </li>
+                   
+                  <li>
+                      <a href="<?php echo base_url(); ?>migration/get11threalease_byRollNo">
+                          11th By Roll No. Release List
+                      </a>
+                  </li>  
+                     
+                      
+                  <?php 
+                  }
+                  ?>
+
+                </ul>
+                <?php
+            }
+            
+            
             ?>
-            
-            
-            
             <div class="btn-group pull-right">
                 <button class="btn btn-primary">
                     Main Menu

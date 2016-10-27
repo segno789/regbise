@@ -53,7 +53,7 @@
                                 <div class="controls controls-row">
                                 <input type="hidden" name="oldbform" value="<?php echo   $data['0']['BForm']; ?>">
                                 <input type="hidden" name="oldfform" value="<?php echo  $data['0']['FNIC']; ?>">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?>>
+                                    <input class="span3" type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php //if($isReAdm==1 ) echo "readonly='readonly'";  ?>>
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 

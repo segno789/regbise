@@ -59,18 +59,7 @@
                                     <input class="span3"  id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
-                            <?php if($data['0']['Brd_cd'] != 1)
-                            { ?>
-                             <div class="control-group">
-                                <label class="control-label span1" >
-                                    Date of Birth:(dd-mm-yyyy)
-                                </label>
-
-                                <div class="controls controls-row">
-                                <?php $dob_format = strtotime($data['0']['Dob']);  ?>
-                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php  echo date('d-m-Y',$dob_format); ?>" required="required" readonly="readonly" >
-                                    </div>
-                                    <?php } ?>
+                         
                             <div class="control-group">
 
                                 <label class="control-label span1" >
@@ -230,17 +219,18 @@
                             </label>
                             <div class="controls controls-row">  
                                 <?php
-                                $resid = $data[0]['ruralOrurban'];
+                                 echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
+                               /* $resid = $data[0]['ruralOrurban'];
                                 if($resid == 1 )
                                 {
-                                    echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
-                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
+                                   
                                 }
                                 else if($resid == 2)
                                 {
                                     echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' name='UrbanRural'> Urban
                                     </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2'  checked='checked'  name='UrbanRural'>  Rural </label>";
-                                }
+                                }  */
 
                                 ?>
 

@@ -13,6 +13,8 @@
                     <div class="widget-body">
                         <h4>
                             View All Submited Forms:
+                            </br>
+                            <img src="../assets/img/OnlineCorrectoin.jpg" alt="" style="    margin-left: 225px;">
                         </h4>
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
@@ -58,7 +60,7 @@
                                     foreach($data as $key=>$vals):
                                     $n++;
                                     $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
-                                    $grp_name = $vals["RegGrp"];
+                                    $grp_name = $vals["grp_cd"];
                                     switch ($grp_name) {
                                         case '1':
                                             $grp_name = 'PRE-MEDICAL';
@@ -87,7 +89,7 @@
                                     <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                     <td>'.$grp_name.'</td>
                                     <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].','.$vals["sub8_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="../'.IMAGE_PATH11.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
                                    

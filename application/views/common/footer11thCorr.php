@@ -29,9 +29,9 @@ if(isset($files)){
 ?> 
 <script type="">
 
-    function preventBack(){window.history.forward();}
+    /*function preventBack(){window.history.forward();}
     setTimeout("preventBack()", 0);
-    window.onunload=function(){null};
+    window.onunload=function(){null};      */
 
 
     /*function showMyImage(fileInput) {
@@ -56,15 +56,15 @@ if(isset($files)){
     /*    }*/
 
     function readURL_corr(input) {
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    reader.onload = function (e) {
-    $('#corr_image').attr('src', e.target.result);
-    }
+            reader.onload = function (e) {
+                $('#corr_image').attr('src', e.target.result);
+            }
 
-    reader.readAsDataURL(input.files[0]);
-    }
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 
     /*$("#corr_image").change(function(){
@@ -183,94 +183,93 @@ if(isset($files)){
             }
         });
         var NationalityVal = $("#hid_nat").val();
-  
+
 
     });
     $("#btnsubmitUpdateEnrol").click(function(){
-    
+
         // alert('hello');
-        debugger;
         //alert(c1);
-         var corr_cand_name = $("#corr_cand_name").val();
+        var corr_cand_name = $("#corr_cand_name").val();
         var corr_father_name = $("#corr_father_name").val();
         var corr_dob = $("#corr_dob").val();
         var corr_bay_form = $("#corr_bay_form").val();
         var corr_father_cnic = $("#corr_father_cnic").val();
-         var corr_std_group = $("#corr_std_group option:selected").text();
-         var corr_std_group_val = $("#corr_std_group option:selected").val();
-           var std_group = $("#std_group option:selected").text();
-           
+        var corr_std_group = $("#corr_std_group option:selected").text();
+        var corr_std_group_val = $("#corr_std_group option:selected").val();
+        var std_group = $("#std_group option:selected").text();
+
         var check_checkbox = 0;
         var corr_type = 0;
-            if ($("#c0").prop('checked')==true){ 
+        if ($("#c0").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 1;
-            }if ($("#c1").prop('checked')==true){ 
+        }if ($("#c1").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 2;
-            }if ($("#c2").prop('checked')==true){ 
+        }if ($("#c2").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 3;
-            }if ($("#c3").prop('checked')==true){ 
+        }if ($("#c3").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 4;
-            }if ($("#c4").prop('checked')==true){ 
+        }if ($("#c4").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 5;
-            }if ($("#c5").prop('checked')==true){ 
+        }if ($("#c5").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 6;
-            }if ($("#c6").prop('checked')==true){ 
+        }if ($("#c6").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 7;
-            }if ($("#c7").prop('checked')==true){ 
+        }if ($("#c7").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 8;
-            }
-       
-            if(corr_type == 1 && corr_cand_name=='')
-            {
+        }
+
+        if(corr_type == 1 && corr_cand_name=='')
+        {
             alertify.error("Please write correct Name!");
             $("#corr_cand_name").focus();
             return false;
-            }
-           if(corr_type == 2 && corr_father_name=='')
-            {
+        }
+        if(corr_type == 2 && corr_father_name=='')
+        {
             alertify.error("Please write correct Father's Name!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 3 && corr_dob=='')
-            {
+        }
+        if(corr_type == 3 && corr_dob=='')
+        {
             alertify.error("Please write correct Date of Birth!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 4 && corr_bay_form=='')
-            {
+        }
+        if(corr_type == 4 && corr_bay_form=='')
+        {
             alertify.error("Please write correct Bay-Form No.!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 5 && corr_father_cnic=='')
-            {
+        }
+        if(corr_type == 5 && corr_father_cnic=='')
+        {
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(check_checkbox ==0)
-            {
+        }
+        if(check_checkbox ==0)
+        {
             alertify.error("Please Choose Correction First!");
-             return false;
-            }
+            return false;
+        }
         var sub1 = $("#sub1 option:selected").text();
         var sub2 = $("#sub2 option:selected").text();
         var sub3 = $("#sub3 option:selected").text();
@@ -278,7 +277,6 @@ if(isset($files)){
         var sub5 = $("#sub5 option:selected").text();
         var sub6 = $("#sub6 option:selected").text();
         var sub7 = $("#sub7 option:selected").text();
-        var sub8 = $("#sub8 option:selected").text();
         var corr_sub1 = $("#corr_sub1 option:selected").text();
         var corr_sub2 = $("#corr_sub2 option:selected").text();
         var corr_sub3 = $("#corr_sub3 option:selected").text();
@@ -286,7 +284,6 @@ if(isset($files)){
         var corr_sub5 = $("#corr_sub5 option:selected").text();
         var corr_sub6 = $("#corr_sub6 option:selected").text();
         var corr_sub7 = $("#corr_sub7 option:selected").text();
-        var corr_sub8 = $("#corr_sub8 option:selected").text();
         var sub1_match =0;
         var sub2_match =0;
         var sub3_match =0;
@@ -294,118 +291,126 @@ if(isset($files)){
         var sub5_match =0;
         var sub6_match =0;
         var sub7_match =0;
-        var sub8_match =0;
-        debugger;
-            if(corr_type == 6 )
+        var corr_sub4_val = $("#corr_sub4 option:selected").val();
+        var corr_sub5_val = $("#corr_sub5 option:selected").val();
+        var corr_sub6_val = $("#corr_sub6 option:selected").val();
+        if(corr_type == 6 )
+        {
+
+            if(corr_std_group_val == 3 && (corr_sub4_val == 0 || corr_sub5_val==0 || corr_sub6_val == 0))
             {
-                //&& corr_std_group_val==0
-                if((corr_std_group== std_group))
-                {
-                    if(sub1==corr_sub1)
-                    {
-                       sub1_match=1 
-                    }
-                    if(sub2==corr_sub2)
-                    {
-                       sub2_match=1 
-                    }
-                    if(sub3==corr_sub3)
-                    {
-                       sub3_match=1 
-                    }
-                    if(sub4==corr_sub4)
-                    {
-                       sub4_match=1 
-                    }
-                    if(sub5==corr_sub5)
-                    {
-                       sub5_match=1 
-                    }
-                    if(sub6==corr_sub6)
-                    {
-                       sub6_match=1 
-                    }
-                    if(sub7==corr_sub7)
-                    {
-                       sub7_match=1 
-                    }
-                    if(sub8==corr_sub8)
-                    {
-                       sub8_match=1 
-                    }
-                    if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
-                    {
-                         alertify.error("Please select correct Group/Subject First!");
-                         $("#corr_cand_name").focus();
-                         return false;
-                    }
-                    
-                }
-           
+                alertify.error("Please Select Subject First!");
+                //$("#corr_cand_name").focus();
+                return false;
             }
-           
+
+
+            //&& corr_std_group_val==0
+            if((corr_std_group== std_group))
+            {
+                if(sub1==corr_sub1)
+                {
+                    sub1_match=1 
+                }
+                if(sub2==corr_sub2)
+                {
+                    sub2_match=1 
+                }
+                if(sub3==corr_sub3)
+                {
+                    sub3_match=1 
+                }
+                if(sub4==corr_sub4)
+                {
+                    sub4_match=1 
+                }
+                if(sub5==corr_sub5)
+                {
+                    sub5_match=1 
+                }
+                if(sub6==corr_sub6)
+                {
+                    sub6_match=1 
+                }
+                if(sub7==corr_sub7)
+                {
+                    sub7_match=1 
+                }
+
+                if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1  )
+                {
+                    alertify.error("Please select correct Group/Subject First!");
+                    $("#corr_cand_name").focus();
+                    return false;
+                }
+
+            }
+
+
+        }
+
         //do something
-         
-              
-    
-   
+
+
+
+
         //if()
         var formno = $("#lblFormNo").text();
-       
-      
-       
-       
+
+
+
+
         var corr_pic_src = $("#corr_previewImg").attr('src');
-      //  alert(corr_pic_src);
-      $('#div_confirmation').html('');
+        //  alert(corr_pic_src);
+        $('#div_confirmation').html('');
         $('#div_confirmation').append(' <h3 class="welcome_note">View Your Correction Application Form</h3><br>  <div class="widget">                    <div class="widget-header" id="lblFormNo">                        <div class="title">   <h3>                      Form No.   <?php                                       echo @$data[0]['formNo'];                                       ?>                       </h3> </div>                    </div>                    <div class="widget-body"><div class="control-group">                                <h4 class="span4">Personal Information :</h4>                                <div class="controls controls-row">                                                                                                    </div>                            </div> '); 
-        
-        
+
+
         var chkBoxArray = [];
         $('.corr_check_box:checked').each(function() {
             chkBoxArray.push($(this).val());
-               if($(this).val() == '7')
+            if($(this).val() == '7')
             {
-               $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
+                $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  echo '../../'.IMAGE_PATH11.@$Inst_Id.'/'.@$data[0]['PicPath']; ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
             if($(this).val() == '1')
             {
                 $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2 " >                                    Candidate Name :                                </label>                          <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;    font-size: 10px;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?>  >                                <label class="control-label span1 "> TO </label>     <input class="span2" name="corr_cand_name" style="text-transform: uppercase; " readonly="readonly" type="text" value="'+corr_cand_name+'" >                                </div>                            </div>');
-                             
+
             }
-              if($(this).val() == '2')
+            if($(this).val() == '2')
             {
-                  $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '3')
+            if($(this).val() == '3')
             {
                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Date of Birth:(dd-mm-yyyy)<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="dob" name="dob" placeholder="DOB" style="text-transform: uppercase;     font-size: 10px;" type="text"  value="<?php  $source = @$data['0']['Dob']; @$date = new DateTime(@$source); echo @$date->format('d-m-Y'); ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_dob" readonly="readonly" value="'+corr_dob+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '4')
+            if($(this).val() == '4')
             {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['BForm']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_bay_form+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['BForm']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_bay_form+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '5')
+            if($(this).val() == '5')
             {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '6')
+            if($(this).val() == '6')
             {
                 $('#div_confirmation').append('<div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          </div>             ');
             }
-           
-            
+
+
         });
-         $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
-         $("#btnsubmitConfirmation").click(function(){
-       // alert('called');
-        $("#corr_form").submit();
-    })
-         $.fancybox("#div_confirmation");
+        $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
+        $("#btnsubmitConfirmation").click(function(){
+            // alert('called');
+            $("#corr_form").submit();
+        })
+        $.fancybox("#div_confirmation");
         // alert(chkBoxArray);
         //  $.fancybox("#div_confirmation");
         // $("#div_confirmation").fancybox();
     })
-    
+
 </script>
 <script type="">
     function isValidEmailAddress(emailAddress) {
@@ -497,9 +502,9 @@ if(isset($files)){
 
         }
 
-        window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
+        window.location.href = '<?=base_url()?>Registration/Incomplete_inst_info_INSERT/';
     }
-    
+
     function SpecPermission_INSERT()
     {
         var inst_cd  = $("#inst_cd").val();
@@ -537,7 +542,7 @@ if(isset($files)){
             $('#Spec_Fee').focus();
             return false; 
         }
-        
+
     }
     function BatchRelease_INSERT()
     {
@@ -606,12 +611,12 @@ if(isset($files)){
         }
 
 
-        //  window.location.href = '<?=base_url()?>/Registration/Batchlist_INSERT/';
+        //  window.location.href = '<?=base_url()?>Registration/Batchlist_INSERT/';
     }
     function downloadslip(rno,isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+rno+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+rno+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -621,7 +626,7 @@ if(isset($files)){
     function downloadslip9th(rno,isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/NinthRollNo/'+rno+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/NinthRollNo/'+rno+'/'+isdownload
         if(isdownload == 1)
         {
             $('.mPageloader').hide();
@@ -630,7 +635,7 @@ if(isset($files)){
     function downloadgroupwise(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -640,7 +645,7 @@ if(isset($files)){
     function downloadgroupwise12(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/InterRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/InterRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
 
         if(isdownload == 1)
         {
@@ -650,40 +655,40 @@ if(isset($files)){
     function downloadgroupwise9th(isdownload)
     {
         $('.mPageloader').show();
-        window.location.href = '<?=base_url()?>/RollNoSlip/NinthRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
+        window.location.href = '<?=base_url()?>RollNoSlip/NinthRollNoGroupwise/'+$("#std_group").val()+'/'+isdownload
         if(isdownload == 1)
         {
             $('.mPageloader').hide();
         }
     }
-     function CancelAlert_confirmation_form()
-                            {
-                                var msg = "Are You Sure You want to Cancel this Form ?"
-                                alertify.confirm(msg, function (e) {
-                                    if (e) {
-                                        // user clicked "ok"
-                                        parent.$.fancybox.close();
-                                       // window.location.href ='<?php echo base_url(); ?>Registration/EditForms';
-                                    } else {
-                                        // user clicked "cancel"
+    function CancelAlert_confirmation_form()
+    {
+        var msg = "Are You Sure You want to Cancel this Form ?"
+        alertify.confirm(msg, function (e) {
+            if (e) {
+                // user clicked "ok"
+                parent.$.fancybox.close();
+                // window.location.href ='<?php echo base_url(); ?>Registration/EditForms';
+            } else {
+                // user clicked "cancel"
 
-                                    }
-                                });
-                            }
+            }
+        });
+    }
 </script>
 
 <script type="">
 
-var isReadm = "<?php  echo @$isReAdm; ?>";
+    var isReadm = "<?php  echo @$isReAdm; ?>";
 
-if(isReadm == 0)
+    if(isReadm == 0)
     {
-    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();    
+        $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();    
     }
-    
-    
-    
-     //var date2 = $('.pickupDate').datepicker('getDate', '+1d'); 
+
+
+
+    //var date2 = $('.pickupDate').datepicker('getDate', '+1d'); 
     $( "#txt_FeedingDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:"+10D",minDate:-0}).val();
     $( "#corr_dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date(),maxDate:new Date(),minDate: -60 }).val();
@@ -691,7 +696,7 @@ if(isReadm == 0)
         val1 : 'text1',
         val2 : 'text2'
     };
-   var sub1_Pak_options = {
+    var sub1_Pak_options = {
         2 : 'Urdu'
     }
     var sub1_NonPak_options = 
@@ -809,11 +814,11 @@ if(isReadm == 0)
 
     function downloadslip(rno)
     {
-        window.location.href = '<?=base_url()?>/RollNoSlip/MatricRollNo/'+rno
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+rno
     }
     function downloadslip_Inter(rno)
     {
-        window.location.href = '<?=base_url()?>/RollNoSlip/InterRollNo/'+rno+'/2'
+        window.location.href = '<?=base_url()?>RollNoSlip/InterRollNo/'+rno+'/2'
     }
     function EditForm(formrno)
     {
@@ -825,52 +830,52 @@ if(isReadm == 0)
         $('#sub6').empty();
         $('#sub7').empty();
         $('#sub8').empty();
-        window.location.href = '<?=base_url()?>/Registration/NewEnrolment_EditForm/'+formrno
+        window.location.href = '<?=base_url()?>Registration/NewEnrolment_EditForm/'+formrno
     }
-     function releaseForm(formrno)
+    function releaseForm(formrno)
     {
-     
-        window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
+
+        window.location.href = '<?=base_url()?>migration/release_stdForm/'+formrno
     }
-    
-    
-    
+
+
+
     function ReturnForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+Batch_ID + '/1'
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+Batch_ID + '/1'
     }
     function ReturnForm_Final_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+grp_cd + '/2'
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+grp_cd + '/2'
     }
     function ReturnForm_Final_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+startformno + '/3' +'/'+endformno +'/';
     }
     function ReturnForm_ProofReading_groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/Registration/return_pdf/'+grp_cd + '/4'
+        window.location.href =  '<?=base_url()?>Registration/return_pdf/'+grp_cd + '/4'
     }
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
+        window.location.href = '<?=base_url()?>Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
-     function Print_RegCards_groupwise(grp_cd){
-        window.location.href = '<?=base_url()?>/index.php/Registration/Reg_Cards_Printing_9th_PDF/'+grp_cd + '/2'
+    function Print_RegCards_groupwise(grp_cd){
+        window.location.href = '<?=base_url()?>Registration/Reg_Cards_Printing_9th_PDF/'+grp_cd + '/2'
     }
     function Print_RegCards_Formnowise(startformno,endformno){
-        window.location.href = '<?=base_url()?>/index.php/Registration/Reg_Cards_Printing_9th_PDF/'+startformno + '/3' +'/'+endformno +'/';
+        window.location.href = '<?=base_url()?>Registration/Reg_Cards_Printing_9th_PDF/'+startformno + '/3' +'/'+endformno +'/';
     }
-      function ChallanForm_Reg9th_Regular(Batch_ID)
+    function ChallanForm_Reg9th_Regular(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/ChallanForm_Reg9th_Regular/'+Batch_ID
+        window.location.href = '<?=base_url()?>Registration/ChallanForm_Reg9th_Regular/'+Batch_ID
     }
     function Print_Registration_Form_Proofreading_Groupwise(grp_cd){
-        window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
+        window.location.href =  '<?=base_url()?>Registration/Print_Registration_Form_Proofreading_Groupwise/'+grp_cd + '/1'
     }
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
-        window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
+        window.location.href =  '<?=base_url()?>Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
-       $('#print_regCards').click( function(){
+    $('#print_regCards').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
-         //alert(option);
-       //  return;
+        //alert(option);
+        //  return;
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -1049,7 +1054,7 @@ if(isReadm == 0)
     function valid_delete_form()
     {
         var formno = $('#txtformNo_search').val();
-       
+
         if(formno == "" || formno.length < 4 || formno.length > 10){
             alertify.error("Please write Valid Form No.");
             $('#txtformNo_search').focus();
@@ -1058,15 +1063,15 @@ if(isReadm == 0)
     }
     function RevenueForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID+'/1'
+        window.location.href = '<?=base_url()?>Registration/revenue_pdf/'+Batch_ID+'/1'
     }
     function downForwarding()
     {
-      window.location.href = '<?=base_url()?>/Registration/revenue_pdf/'+Batch_ID+'/2'
+        window.location.href = '<?=base_url()?>Registration/revenue_pdf/'+Batch_ID+'/2'
     }
     function ReleaseForm(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/Registration/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>Registration/BatchRelease/'+Batch_ID
 
     }
     function ReleaseForm_UPDATE(Batch_ID,Inst_Cd)
@@ -1084,7 +1089,7 @@ if(isReadm == 0)
         });
 
     }
-    
+
     function Verified_Update(Batch_ID)
     {
         var msg = "Are You Sure You want to update ?"
@@ -1100,10 +1105,10 @@ if(isReadm == 0)
         });
 
     }
-    
+
     function RestoreBatch(Batch_ID)
     {
-        window.location.href = '<?=base_url()?>/index.php/Registration/BatchRelease/'+Batch_ID
+        window.location.href = '<?=base_url()?>Registration/BatchRelease/'+Batch_ID
 
     }
     function RestoreBatch_UPDATE(Batch_ID,Inst_Cd)
@@ -1113,7 +1118,7 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href = '<?=base_url()?>index.php/BiseCorrection/BatchRestore_update/'+Batch_ID +'/'+Inst_Cd+'/'
+                window.location.href = '<?=base_url()?>BiseCorrection/BatchRestore_update/'+Batch_ID +'/'+Inst_Cd+'/'
             } else {
                 // user clicked "cancel"
 
@@ -1128,23 +1133,23 @@ if(isReadm == 0)
 
         $("#deleteForm").submit(function (e){
             e.preventDefault(); 
-             var msg = "Are You Sure You want to DELETE this Form ?"
-     alertify.confirm(msg, function (e) 
-     {
-         
-    if (e) {
-        // user clicked "ok"
-      window.location.href ='<?php echo base_url(); ?>index.php/BiseCorrection/Delete_Form';
-       $("#deleteForm")[0].submit();
-    } else {
-        
-        // user clicked "cancel"
-        
-    }
-    
-});  
+            var msg = "Are You Sure You want to DELETE this Form ?"
+            alertify.confirm(msg, function (e) 
+                {
+
+                    if (e) {
+                        // user clicked "ok"
+                        window.location.href ='<?php echo base_url(); ?>BiseCorrection/Delete_Form';
+                        $("#deleteForm")[0].submit();
+                    } else {
+
+                        // user clicked "cancel"
+
+                    }
+
+            });  
         })
-  
+
         var error = "<?php echo @$error; ?>";
         if(error != ""){
             alertify.error(error);
@@ -1232,21 +1237,21 @@ if(isReadm == 0)
             }
         });
 
-              if(grp_cd == "1")
+        if(grp_cd == "1")
         {
-            
+
             load_PreMedical();
 
         }
         else if(grp_cd == "2")
         {
             load_PreEngg();
-            
+
         }
         else if (grp_cd == "3")
         {
             load_Hum();
-            
+
         }
 
         else if(grp_cd == "4")
@@ -1268,7 +1273,7 @@ if(isReadm == 0)
         {
             remove_subjects();
         }
-        
+
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
@@ -1369,15 +1374,15 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/Registration/NewEnrolment_Delete/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>Registration/NewEnrolment_Delete/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-       function Restore_Deleted_Form_BiseAdmin(formrno)
+    function Restore_Deleted_Form_BiseAdmin(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Restore this Form ?"
@@ -1385,13 +1390,13 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/BiseCorrection/Restore_form_UPDATE/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>BiseCorrection/Restore_form_UPDATE/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
     function Correction_form(formrno)
     {
@@ -1401,15 +1406,15 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Correction_EditForm/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Correction_EditForm/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-      function Correction_form_11th(formrno)
+    function Correction_form_11th(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Apply for Correction to this Form ?"
@@ -1417,47 +1422,47 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Correction_EditForm/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Correction_EditForm/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-        function download_corr_form(formrno)
+    function download_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
         //alertify.confirm(msg, function (e) {
 
-         //   if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Print_correction_Form_Final/'+formrno;
+        //   if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Print_correction_Form_Final/'+formrno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
         //    }
-      //  });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        //  });
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function download_challan_form(formrno)
+    function download_challan_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        //  alertify.confirm(msg, function (e) {
 
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Print_challan_Form/'+formrno;
+        //     if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Print_challan_Form/'+formrno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
-          //  }
-       // });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        //  }
+        // });
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function download_Branch_corr_form(formrno)
+    function download_Branch_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Apply for Correction to this Form ?"
@@ -1465,48 +1470,48 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Print_challan_Form/'+formrno;
+                window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Print_challan_Form/'+formrno;
             } else {
                 // user clicked "cancel"
 
             }
         });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function Corr_App_Delete(Appno)
+    function Corr_App_Delete(Appno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        //  alertify.confirm(msg, function (e) {
 
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/EleventhCorrection/Corr_App_Delete/'+Appno;
+        //     if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>EleventhCorrection/Corr_App_Delete/'+Appno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
-          //  }
-       // });
-        // window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNo/'+formrno
+        //  }
+        // });
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
     function downloadslip9th(rno)
     {
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/NinthRollNo/'+rno
+        window.location.href = '<?=base_url()?>RollNoSlip/NinthRollNo/'+rno
     }
     function downloadgroupwise()
     {
-        window.location.href = '<?=base_url()?>/index.php/RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()
+        window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNoGroupwise/'+$("#std_group").val()
     }
 
- 
 
-    
-    
+
+
+
     var langascd = ['24','34','32','27','37'];
     var doubleHistory = ['55','56','57','58'];
     $("#corr_sub4").change(function(){
         console.log('Hi i am corr_sub7 dropdown :) ');
-        
+
         var corr_sub4 = $("#corr_sub4").val();
         var corr_sub5 = $("#corr_sub5").val();
         var corr_sub6 = $("#corr_sub6").val();
@@ -1585,8 +1590,8 @@ if(isReadm == 0)
 
 
         if( (corr_sub4 != 0 || corr_sub6 != 0) && corr_sub5 != 0)
-               {
-             if((corr_sub5 == corr_sub6)|| (corr_sub5 == corr_sub4) || (corr_sub4 == corr_sub6))
+        {
+            if((corr_sub5 == corr_sub6)|| (corr_sub5 == corr_sub4) || (corr_sub4 == corr_sub6))
             {
                 alertify.error("Please choose Different corr_subjects" );
                 $("#corr_sub5").val('0');
@@ -1594,7 +1599,7 @@ if(isReadm == 0)
             }
 
         }
-         var valtext = 0;
+        var valtext = 0;
         var valhistory = 0;
         var islang = 0;
         for(var i =0 ; i<langascd.length; i++)
@@ -1649,16 +1654,16 @@ if(isReadm == 0)
         }*/
     })
     $("#corr_sub6").change(function(){
-        
+
         console.log('Hi i am corr_sub7 dropdown :) ');
         var corr_sub4 = $("#corr_sub4").val();
         var corr_sub5 = $("#corr_sub5").val();
         var corr_sub6 = $("#corr_sub6").val();
 
 
-         if((corr_sub4 != 0 || corr_sub5 != 0) && corr_sub6 !=0)
-                {
-        if((corr_sub6 == corr_sub5)|| (corr_sub6 == corr_sub4) ||(corr_sub5 == corr_sub4))   
+        if((corr_sub4 != 0 || corr_sub5 != 0) && corr_sub6 !=0)
+        {
+            if((corr_sub6 == corr_sub5)|| (corr_sub6 == corr_sub4) ||(corr_sub5 == corr_sub4))   
             {
                 alertify.error("Please choose Different corr_subjects" );
                 $("#corr_sub6").val('0');
@@ -1708,7 +1713,7 @@ if(isReadm == 0)
             {
                 ishist = 1;
             }
-           
+
         }
         if( ishist==1 && valhistory >=1)
         {
@@ -1858,7 +1863,7 @@ if(isReadm == 0)
 
 
     });
-   
+
     function load_PreMedical()
     {
         $("#corr_sub1").empty();
@@ -1872,19 +1877,19 @@ if(isReadm == 0)
         $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
         var NationalityVal = $("#hid_nat").val();
         //alert('nat ' + NationalityVal);
-//debugger;
-//console.log('matric_corr_sub1.value = ' +matric_corr_sub1.value + '  and Nationaliy = '+ NationalityVal);
+        //debugger;
+        //console.log('matric_corr_sub1.value = ' +matric_corr_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
         if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
-            
+
             $("#corr_sub1").append(new Option('Urdu',2));    
         }
         else{
             $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
         }  
-        
+
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
@@ -1908,17 +1913,17 @@ if(isReadm == 0)
         $("#corr_sub7").empty();
         $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
-         var NationalityVal = $("#hid_nat").val();
+        var NationalityVal = $("#hid_nat").val();
         if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
-            
+
             $("#corr_sub1").append(new Option('Urdu',2));    
         }
         else{
             $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
         } 
-       // $("#corr_sub1").append(new Option('Urdu',2));
+        // $("#corr_sub1").append(new Option('Urdu',2));
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
@@ -1942,18 +1947,18 @@ if(isReadm == 0)
         $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
 
-           var NationalityVal = $("#hid_nat").val();
+        var NationalityVal = $("#hid_nat").val();
 
-          if(NationalityVal==2)
+        if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
-            
+
             $("#corr_sub1").append(new Option('Urdu',2));    
         }
         else{
             $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
         }  
-       // $("#corr_sub1").append(new Option('Urdu',2));
+        // $("#corr_sub1").append(new Option('Urdu',2));
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
@@ -1972,7 +1977,7 @@ if(isReadm == 0)
         $("#corr_sub6").append(new Option('Statistics',18));
         $("#corr_sub6 option[value='83']").attr("selected","selected");
     }
-     function load_Commerce()
+    function load_Commerce()
     {
         $("#corr_sub1").empty();
         $("#corr_sub2").empty();
@@ -1982,11 +1987,11 @@ if(isReadm == 0)
         $("#corr_sub6").empty();
         $("#corr_sub7").empty();
         $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
-              var NationalityVal = $("#hid_nat").val();
-          if(NationalityVal==2)
+        var NationalityVal = $("#hid_nat").val();
+        if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
-            
+
             $("#corr_sub1").append(new Option('Urdu',2));    
         }
         else{
@@ -2025,16 +2030,16 @@ if(isReadm == 0)
         $("#corr_sub7").empty();
         $("#corr_sub8").empty();
         var NationalityVal = $("#hid_nat").val();
-          if(NationalityVal==2)
+        if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
-            
+
             $("#corr_sub1").append(new Option('Urdu',2));    
         }
         else{
             $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
         }   
-       // $("#corr_sub1").append(new Option('Urdu',2));
+        // $("#corr_sub1").append(new Option('Urdu',2));
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
@@ -2067,17 +2072,17 @@ if(isReadm == 0)
         $("#corr_sub7").empty();
         $("#corr_sub7").empty().append('<option selected="selected" value="0">NONE</option>');
         $("#corr_sub8").empty().append('<option selected="selected" value="0">NONE</option>');
-         var NationalityVal = $("#hid_nat").val();
-          if(NationalityVal==2)
+        var NationalityVal = $("#hid_nat").val();
+        if(NationalityVal==2)
         {
             $("#corr_sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
-            
+
             $("#corr_sub1").append(new Option('Urdu',2));    
         }
         else{
             $("#corr_sub1").prepend("<option  value='2'> URDU </option>");
         }  
-       // $("#corr_sub1").append(new Option('Urdu',2));
+        // $("#corr_sub1").append(new Option('Urdu',2));
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
@@ -2095,7 +2100,7 @@ if(isReadm == 0)
         // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
 
     }
-     function remove_subjects()
+    function remove_subjects()
     {
         $("#corr_sub1").empty();
         $("#corr_sub2").empty();
@@ -2108,7 +2113,7 @@ if(isReadm == 0)
     }
     $("#corr_std_group").change(function(){
 
-       
+
         var grp_cd = $("#corr_std_group").val();
         //alert(grp_cd);
 
@@ -2159,7 +2164,7 @@ if(isReadm == 0)
         }
 
 
-        
+
         else if(grp_cd == "5")
         {
             corr_Hum_Deaf_Subjects();
@@ -2191,43 +2196,43 @@ if(isReadm == 0)
     MASKINGS Settings
     ===========================================
     */
-     var grp_cd = $("#std_group").val();
-          if(grp_cd == "1")
-        {
-            
-            load_PreMedical();
+    var grp_cd = $("#std_group").val();
+    if(grp_cd == "1")
+    {
 
-        }
-        else if(grp_cd == "2")
-        {
-            load_PreEngg();
-            
-        }
-        else if (grp_cd == "3")
-        {
-            load_Hum();
-            
-        }
+        load_PreMedical();
 
-        else if(grp_cd == "4")
-        {
+    }
+    else if(grp_cd == "2")
+    {
+        load_PreEngg();
 
-            load_GenSci();
+    }
+    else if (grp_cd == "3")
+    {
+        load_Hum();
+
+    }
+
+    else if(grp_cd == "4")
+    {
+
+        load_GenSci();
 
 
-        }
-        else if(grp_cd == "5")
-        {
-            load_Commerce();
-        }
-        else if(grp_cd == "6")
-        {
-            load_HomeEco();
-        }
-        else if (grp_cd == "0")
-        {
-            remove_subjects();
-        }
+    }
+    else if(grp_cd == "5")
+    {
+        load_Commerce();
+    }
+    else if(grp_cd == "6")
+    {
+        load_HomeEco();
+    }
+    else if (grp_cd == "0")
+    {
+        remove_subjects();
+    }
     var phone = "<?php echo @$field_status['phone']; ?>";
     var cell = "<?php echo @$field_status['cell']; ?>";
     var emis = "<?php echo @$field_status['emis']; ?>";
@@ -2251,23 +2256,23 @@ if(isReadm == 0)
     // $("#registration").validate();
     //  $("#cand_name").focus();
 
-       function  check_migration_validation(){
-       
+    function  check_migration_validation(){
+
         var grp_cd = $('#migrateto').val();
-      
+
         var status = 0;
-      
 
-       
 
-           if ($("#migrateto").find('option:selected').val() < 1) 
+
+
+        if ($("#migrateto").find('option:selected').val() < 1) 
         {
-           alertify.error("Please Select Migrate To Inst.") ;
+            alertify.error("Please Select Migrate To Inst.") ;
             // alert('Study Group not selected ');                          
             $("#migrateto").focus();
             return status;  
         }
-     
+
         status = 1;
         return status;
 
@@ -2275,8 +2280,8 @@ if(isReadm == 0)
 
 
     }
-    
-    
+
+
     function  check_NewEnrol_validation(){
         var name =  $('#cand_name').val();
         var dist_cd= $('#dist option:selected').val();
@@ -2515,15 +2520,15 @@ if(isReadm == 0)
         // debugger;
         // alert(this.value + "  Transfer Thai Gayo");
         if (this.value == '1') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/1/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'96/1/';
             // alert("Allot Thai Gayo Bhai");
         }
         else  if (this.value == '2') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/2/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'97/2/';
             //  alert("Transfer Thai Gayo");
         }
         else  if(this.value == 3){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'98/3';
             //alert("Transfer Thai Gayo");
         }
 
@@ -2532,23 +2537,23 @@ if(isReadm == 0)
     $( "#std_groups" ).change(function () {
         if (this.value == '1') {
             // 1 biology   2 humanities   5 deaf and dumb  7 computer science  8 electrical wiring 
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'96/3/1/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'96/3/1/';
             //  alert("Allot Thai Gayo Bhai");
         }
         else  if (this.value == '2') {
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'97/3/2/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'97/3/2/';
             // alert("Transfer Thai Gayo");
         }
         else  if(this.value == '5'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/5/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'98/3/5/';
             // alert("Transfer Thai Gayo");
         }
         else  if(this.value == '7'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/7/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'98/3/7/';
             //  alert("Transfer Thai Gayo");
         }
         else  if(this.value == '8'){
-            window.location.href = '<?=base_url()?>/index.php/Registration/CreateBatch/'+'98/3/8/';
+            window.location.href = '<?=base_url()?>Registration/CreateBatch/'+'98/3/8/';
             //  alert("Transfer Thai Gayo");
         }
 
@@ -2595,7 +2600,7 @@ if(isReadm == 0)
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
-                        window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
+                        window.location.href = '<?=base_url()?>Registration/Make_Batch_Group_wise/'+$("#std_groups").val()+'/0';
                     } 
 
 
@@ -2604,7 +2609,7 @@ if(isReadm == 0)
         }
         else if(option == "1" || option == "2")
         {
-            window.location.href = '<?=base_url()?>/index.php/Registration/Make_Batch_Group_wise/'+'0/'+option+'/';
+            window.location.href = '<?=base_url()?>Registration/Make_Batch_Group_wise/'+'0/'+option+'/';
         }
         return false;
 
@@ -2643,7 +2648,7 @@ if(isReadm == 0)
 
             if (e) {
                 // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>index.php/login/logout';
+                window.location.href ='<?php echo base_url(); ?>login/logout';
             } 
         });
     }
@@ -2680,87 +2685,74 @@ if(isReadm == 0)
     {
         $( "#uplodpics" ).submit();
     }
-           var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
-        var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
-        var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
-        var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
-        var spec_case_inst = "<?php   echo @$msg; ?>"
-        var excep_Invalid_formno = "<?php  echo @$excep; ?>"
-        var restore_msg = "<?php   echo  @$restore_msg; ?>"
-        
-         if (excep_Invalid_formno == "success")
+    var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
+    var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
+    var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
+    var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
+    var spec_case_inst = "<?php   echo @$msg; ?>"
+    var excep_Invalid_formno = "<?php  echo @$excep; ?>"
+    var restore_msg = "<?php   echo  @$restore_msg; ?>"
+
+    if (excep_Invalid_formno == "success")
+    {
+        alertify.success("Updated Successfully");
+    }
+    else  if (excep_Invalid_formno != "")
+    {
+        alertify.error("Invalid Form No. Please write Valid Form No.");
+    }
+    else  if(restore_msg!="")
+    {
+        alertify.success(restore_msg);
+    }
+
+    if(restore_msg!="")
+    {
+        alertify.success(restore_msg);
+    }
+
+    if(spec_case_inst == "Saved")
+    {
+        alertify.success("Saved Successfully");
+    }
+    else if (spec_case_inst == "'Not Saved")
+    {
+        alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
+    }
+    if(BatchRelease_Op != "")
+    {
+        if(BatchRelease_Op == "success")
         {
-            alertify.success("Updated Successfully");
+            alertify.success("Batch Release Successfully");    
         }
-        else  if (excep_Invalid_formno != "")
+        else if(BatchRelease_Op == "Fail")
         {
-             alertify.error("Invalid Form No. Please write Valid Form No.");
+            alertify.error("A Problem occur, Please Try Again later.");
         }
-        else  if(restore_msg!="")
+
+    } 
+    if(BatchRestore_Op != "")
+    {
+        if(BatchRelease_Op == "success")
         {
-            alertify.success(restore_msg);
+            alertify.success("Batch Restored Successfully");    
         }
-        
-        if(restore_msg!="")
+        else if(BatchRelease_Op == "Fail")
         {
-             alertify.success(restore_msg);
+            alertify.error("A Problem occur, Please Try Again later.");
         }
-       
-        if(spec_case_inst == "Saved")
-        {
-             alertify.success("Saved Successfully");
-        }
-        else if (spec_case_inst == "'Not Saved")
-        {
-             alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
-        }
-        if(BatchRelease_Op != "")
-        {
-            if(BatchRelease_Op == "success")
-            {
-                alertify.success("Batch Release Successfully");    
-            }
-            else if(BatchRelease_Op == "Fail")
-            {
-                alertify.error("A Problem occur, Please Try Again later.");
-            }
 
-        } 
-        if(BatchRestore_Op != "")
-        {
-            if(BatchRelease_Op == "success")
-            {
-                alertify.success("Batch Restored Successfully");    
-            }
-            else if(BatchRelease_Op == "Fail")
-            {
-                alertify.error("A Problem occur, Please Try Again later.");
-            }
-
-        } 
-        if(success_BatchRelease != "")
-        {
-            alertify.success(success_BatchRelease);
-        } 
-        if(error_BatchRelease != "")
-        {
-            alertify.error(error_BatchRelease);
-        }  
-
-    <?php if(@$isdashbord == 1) {?>
-        /*  $( window ).load(function() {
-
-        var msg = "<img src='<?php echo base_url(); ?>assets/img/NoteforPictureUploading2.jpg' alt='logo' style='width:800px; height: auto;' />"
-        alertify.confirm(msg, function (e) {
-
-        if (e) {
-        window.location.href = '<?=base_url()?>/index.php/Registration/EditPicForms';
-        } 
+    } 
+    if(success_BatchRelease != "")
+    {
+        alertify.success(success_BatchRelease);
+    } 
+    if(error_BatchRelease != "")
+    {
+        alertify.error(error_BatchRelease);
+    }  
 
 
-        });   
-        });           */
-        <?php }?>
 
 </script>
 <script type="">

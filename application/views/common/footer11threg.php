@@ -292,7 +292,7 @@ if(isset($files)){
     }
     var sub3_Non_Muslim = 
     {
-        61 : 'ETHICS',
+        51 : 'ETHICS',
         92  :'Islamic Education'
     }
     var sub5_Hum = 
@@ -1532,9 +1532,11 @@ debugger;
                 //   alertify.log('hello funciton call');
                 var  name =  $('#cand_name').val();
                 //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
-                if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0) ) {
+               /* if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0) ) 
+                {
                     alertify.error("Incorrect Speccling of MUHAMMAD");
-                    $('#cand_name').focus();                                    }
+                    $('#cand_name').focus();                                   
+                }    */
         })
         $('#father_name').focusout(function() 
             {
@@ -1542,10 +1544,10 @@ debugger;
                 //   alertify.log('hello funciton call');
                 var  name =  $('#father_name').val();
                 //(['MOHAMMAD', 'MOHAMAD', 'MHOAMAD', 'MOOHAMMAD']) 
-                if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0)  ) {
+                /*if ((name.toUpperCase().indexOf("MOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOHAMAD") >= 0) || (name.toUpperCase().indexOf("MUHAMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMMAD") >= 0) || (name.toUpperCase().indexOf("MOOHAMAD") >= 0) || (name.toUpperCase().indexOf("MOHD") >= 0)  ) {
                     alertify.error("Incorrect Speccling of MUHAMMAD");
                     $('#father_name').focus();
-                }
+                }   */
         })
         $('input[type=radio][name=opt]').change(function() {
             if (this.value == '1') {
@@ -1594,7 +1596,7 @@ debugger;
        
 
     });
-     function Print_RegCards_groupwise(grp_cd)
+       function Print_RegCards_groupwise(grp_cd)
     {
         var myv = '<?=base_url()?>/index.php/Registration_11th/Reg_Cards_Printing_11th_PDF/'+grp_cd+'/2'; 
         window.location.href = myv;
@@ -2131,7 +2133,7 @@ debugger;
 
             $("#sub3").empty(); 
             $("#sub3").prepend("<option selected='selected' value='93'> CIVICS FOR NON MUSLIM </option>");
-            $("#sub3").prepend("<option selected='selected' value='61'> ETHICS </option>");
+            $("#sub3").prepend("<option selected='selected' value='51'> ETHICS </option>");
             $("#sub3").prepend("<option  value='3'> ISLAMIYAT (COMPULSORY) </option>");
         }
     });
@@ -2223,8 +2225,9 @@ debugger;
                 alertify.error("Please Select Group First!") ;
             }
             else{
-                var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 60px;' />"
+               // var msg = "<img src='<?php //echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+                var msg = 'Are You Sure You want to Create Batch';//"<img src='<?php //echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+                //var msg = "Are You Sure You want to Cancel this Form ? <img src='<?php //echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:30px; height: 60px;' />"
                 alertify.confirm(msg, function (e) {
 
                     if (e) {
@@ -2248,7 +2251,8 @@ debugger;
 
         if( $('input[name="chk[]"]:checked').length > 0 )
         {
-            var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+           // var msg = "<img src='<?php //echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+             var msg = 'Are You Sure You want to Create Batch';
 
             alertify.confirm(msg, function (e) {
 

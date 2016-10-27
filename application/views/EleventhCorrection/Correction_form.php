@@ -20,14 +20,16 @@
                     </div>
                     <div class="widget-body">
 
-                        <form class="form-horizontal no-margin" id="corr_form" action="<?php  echo base_url(); ?>/index.php/EleventhCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" id="corr_form" action="<?php  echo base_url(); ?>EleventhCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
 
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
+                                 </br>
+                            <img src="../../assets/img/OnlineCorrectoin.jpg" alt="" style="width: 530px;">
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                    
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  echo '../../'.IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath']; ?>" alt="Candidate Image">
                                    
                                     <img id="corr_previewImg" name="corr_previewImg" style="width:80px; height: 80px; margin-right: 322px;    float: right; display: none;" class="span2" src="<?php echo base_url() ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
@@ -195,6 +197,7 @@
                                     <select id="std_group" class="dropdown span6"  name="std_group" disabled="disabled" >
                                         <?php
                                         // DebugBreak();
+                                    //    $grp_cdi = '1,2,3,4,5';
                                         $grp = $data[0]['grp_cd'];
                                         $subgroups =  split(',',$grp_cdi);
                                         echo "<option value='0' >SELECT GROUP</option>";

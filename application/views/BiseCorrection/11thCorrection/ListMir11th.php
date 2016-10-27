@@ -24,6 +24,9 @@
                                         <th style="width:5%">
                                             Form No.
                                         </th>
+                                          <th style="width:5%">
+                                            Application No.
+                                        </th>
                                         <th style="width:10%">
                                             Name
                                         </th>
@@ -60,6 +63,12 @@
                                         foreach($migration as $key=>$vals):
                                         $n++;
                                         $formno = !empty($vals["Formno"])?$vals["Formno"]:"N/A";
+                                        $app_no = !empty($vals["app_no"])?$vals["app_no"]:"N/A";
+                                         $app_txt = $app_no;
+                                         if($app_no == 'N/A')
+                                         {
+                                           $app_txt =  -1;  
+                                         }
                                         $grp_name = $vals["RegGrp"];
                                                  switch ($grp_name) {
                                                             case '1':
@@ -87,6 +96,7 @@
                                         echo '<tr  >
                                         <td>'.$n.'</td>
                                         <td>'.$formno.'</td>
+                                        <td>'.$app_no.'</td>
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["fname"].'</td>
                                         <td>'.$vals["coll_cd"].'</td>
@@ -94,10 +104,10 @@
                                       
                                         <td>'.$grp_name.'</td>
 
-                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$vals['coll_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$vals['coll_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
 
                                         echo'<td>
-                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['oldinst_cd'].','.$vals['oldinst_cd'].')">Restore</button>
+                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['oldinst_cd'].','.$vals['oldinst_cd'].','.$app_txt.')">Restore</button>
                                         </td>
                                         </tr>';
                                         endforeach;
@@ -134,8 +144,8 @@
             }
         });
     }
-    function migrateto(formno,inst_cd,oldinst)
+    function migrateto(formno,inst_cd,oldinst,appno)
     {
-        window.location.href ="<?php echo base_url(); ?>bisecorrection11/restoreMigration/11/"+formno+"/"+inst_cd; 
+        window.location.href ="<?php echo base_url(); ?>bisecorrection/restoreMigration11/11/"+formno+"/"+inst_cd+'/'+appno; 
     }
 </script>

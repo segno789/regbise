@@ -31,14 +31,14 @@
     /* <![CDATA[ */
     /* ]]> */
  
-    
-    
-      function releaseForm(formrno)
+    function ReleaseForm(Batch_ID)
     {
-     
-        window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
+        window.location.href = '<?=base_url()?>/Registration/BatchRelease/'+Batch_ID
+
     }
+   
     
+     
     $(document).ready(function(){
         //$spl_cd
          $('#data-table').dataTable({

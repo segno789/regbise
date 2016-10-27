@@ -24,7 +24,8 @@ class Login extends CI_Controller {
         $data = array(
             'user_status' => ''                     
 
-        );        
+        );
+        
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
           
@@ -33,7 +34,7 @@ class Login extends CI_Controller {
              
            
              $isgroup = -1;
-        //  DebugBreak()   ;
+             
         if($logedIn != false)
             {  
 
@@ -44,7 +45,7 @@ class Login extends CI_Controller {
                         'user_status' => 3                     
                     );
                     $this->load->view('login/login.php',$data);
-                    return;
+                    return ;
                 }  
 
                 if($logedIn['tbl_inst']['edu_lvl'] == 1)
@@ -74,8 +75,7 @@ class Login extends CI_Controller {
                             'user_status' => 7                     
                         );
                         $this->load->view('login/login.php',$data);
-                        return;
-                        
+                        return ;
                     }
                 }
                 else if($logedIn['tbl_inst']['edu_lvl'] == 3)
@@ -88,6 +88,7 @@ class Login extends CI_Controller {
                             'user_status' => 7                     
                         );
                         $this->load->view('login/login.php',$data);
+                        return ;
                     }
                     if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
@@ -181,9 +182,6 @@ class Login extends CI_Controller {
                     }  
                     if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
                     {
-                       // DebugBreak();
-                        $date =  date('Y-m-d',strtotime(DOUBLE_LAST_DATE11));
-                        $crntdate =  date('Y-m-d');
                         if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE11))>=date('Y-m-d'))
                         {
                             $isinterfeeding = 1    ;
@@ -251,7 +249,8 @@ class Login extends CI_Controller {
                     'user_status' => 1                     
                 );
                 $this->load->view('login/login.php',$data);
-                 return;
+                return;
+
             }
         }
         else

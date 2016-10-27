@@ -449,7 +449,7 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetXY(1.0,$yy+$dyy);
             //   DebugBreak();
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
-            $pdf->Image(base_url()."assets/img/logo2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
+            $pdf->Image(base_url()."assets/img/logo.jpg",0.30,$yy+$dyy, 0.50,0.50, "JPG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
             $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
             $challanTitle = $challanCopy[$j];
@@ -816,6 +816,10 @@ class NinthCorrection extends CI_Controller {
                     $year = 2016;
                     $RegStdData = $this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id);
                     $corr_grp_cd = $_POST['corr_std_group'];
+                    if($corr_grp_cd ==  8 || $corr_grp_cd ==  7)
+                    {
+                        $corr_grp_cd =    1;
+                    }
                     $pre_grp_cd = $RegStdData[0]['grp_cd'];
                     if($corr_grp_cd != $pre_grp_cd)
                     {
@@ -995,7 +999,7 @@ class NinthCorrection extends CI_Controller {
         $grpFee ='';
         $subFee ='';
         $PicFee ='';*/
-
+           $corr_grp_cd = $_POST['corr_std_group'];
         $allinputdata = array('name'=>$corr_name,'Fname'=>$corr_Fname,
             'BForm'=>$corr_BForm,'FNIC'=>$corr_FNIC,
             'Dob'=>$corr_Dob,'RegGrp'=>$corr_grp_cd,
