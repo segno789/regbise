@@ -55,12 +55,15 @@ class Registration extends CI_Controller {
         $field_status['dist'] = 0;
         $field_status['teh'] = 0;
         $field_status['zone'] = 0;
-        if($Inst_Id == 399903)
+          
+       /* if($Inst_Id == 399903)
         {
-            $target_path = IMAGE_PATH.'/';
+           // $target_path = IMAGE_PATH.'/';
+           // print_r($userinfo);
+           // exit();  
             //$this->deleteExtarfiles($target_path );
             //return false; 
-        }
+        }      */
 
         if($isgovt == 1)
         {
@@ -1220,7 +1223,7 @@ class Registration extends CI_Controller {
         else{
             $error_msg_readmission = $this->session->flashdata('error');
         }
-        $myinfo = array('error'=>$error_msg_readmission);
+        $myinfo = array('error'=>$error_msg_readmission);  
         $this->load->view('Registration/9th/ReAdmission.php',$myinfo);
         $this->load->view('common/footer.php');
 
@@ -1859,10 +1862,10 @@ class Registration extends CI_Controller {
     {
 
         $this->load->library('session');
-        // DebugBreak();
+      //  DebugBreak();
         if(!( $this->session->flashdata('error'))){
 
-            $error_msg = "0";    
+            $error_msg = "";    
         }
         else{
             $error_msg = $this->session->flashdata('error');
@@ -1878,10 +1881,10 @@ class Registration extends CI_Controller {
         $error['excep'] = '';
         $error['gender'] = $userinfo['gender'];
         $error['isrural'] = $userinfo['isrural'];
-        $error['error_msg'] = $error_msg;
+        $error['error'] = $error_msg;
         $this->commonheader($data);
         $this->load->view('Registration/9th/RegCards.php',$error);
-        // $this->load->view('common/footer.php');
+        //$this->load->view('common/footer.php');
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
 
         //$this->load->model('Registration_model');
@@ -1943,8 +1946,8 @@ class Registration extends CI_Controller {
 
         // DebugBreak();
         if(empty($result['data'])){
-            $this->session->set_flashdata('error', $Condition);
-            redirect('Registration/FormPrinting');
+            $this->session->set_flashdata('error', 'No Record Found.');
+            redirect('Registration/Reg_Cards_Printing_9th');
             return;
 
         }
@@ -2580,7 +2583,7 @@ class Registration extends CI_Controller {
 
         // DebugBreak();
         if(empty($result['data'])){
-            $this->session->set_flashdata('error', $Condition);
+            $this->session->set_flashdata('error', 'No Record Found');
             redirect('Registration/FormPrinting');
             return;
 
@@ -2897,7 +2900,7 @@ class Registration extends CI_Controller {
 
 
         if(empty($result['data'])){
-            $this->session->set_flashdata('error', $Condition);
+            $this->session->set_flashdata('error', 'No Record Found');
             redirect('Registration/FormPrinting');
             return;
 
@@ -3985,7 +3988,7 @@ class Registration extends CI_Controller {
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
+      //  $this->load->view('common/header.php',$userinfo);
         $data = array(
             'isselected' => '2',
 

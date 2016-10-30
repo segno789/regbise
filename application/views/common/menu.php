@@ -318,11 +318,11 @@
                         </li>
                         <?php }?>
 
-                    <li>
+                    <!--<li>
                         <a href="<?php echo base_url(); ?>Registration/EditPicForms">
                             Edit Pictures Forms
                         </a>
-                    </li>
+                    </li>   -->
                     <li>
                         <a href="<?php echo base_url(); ?>Registration/batchlist">
                             Batch List
@@ -334,7 +334,7 @@
                         </a>
                     </li>
                       <li>
-                        <a href="<?php echo base_url(); ?>/Registration/Reg_Cards_Printing_9th">
+                        <a href="<?php echo base_url(); ?>Registration/Reg_Cards_Printing_9th">
                             Registration Cards
                         </a>
                     </li>
