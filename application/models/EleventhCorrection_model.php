@@ -63,24 +63,9 @@
         $fname =strtoupper($data['Fname']);
         $BForm = $data['BForm'];
         $FNIC = $data['FNIC'];
+     
         $Dob = $data['Dob'];
-        
-      if(($data['RegGrp'] == 1) or ($data['RegGrp'] == 7) or ($data['RegGrp'] == 8) )
-        {
-            $grp_cd = 1;    
-        }
-        else if($data['RegGrp'] == 2 )
-        {
-            $grp_cd = 2;        
-        }
-        else if($data['RegGrp'] == 5 )
-        {
-            $grp_cd = 5;        
-        }
-        else{
-            $grp_cd = 0;   
-               
-        }
+      $grp_cd = $data['RegGrp'];
        
            // $reg_grp = $data['RegGrp']; 
        

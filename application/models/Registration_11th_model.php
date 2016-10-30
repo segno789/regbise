@@ -92,6 +92,21 @@ class Registration_11th_model extends CI_Model
         return  true;
 
     }
+      public function forwarding_pdf_final($fetch_data)
+    {
+        //DebugBreak();
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $query = $this->db->query("Registration..sp_Forwading_letter_final_11TH $Inst_cd");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function Insert_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  
     {
         //  DebugBreak();
@@ -152,7 +167,7 @@ class Registration_11th_model extends CI_Model
       //  DebugBreak();
       //  DebugBreak();
       if($OldBrd == 1 )
-      {
+      {            
           $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
           $rowcount = $query->num_rows();
           if($rowcount > 0)
@@ -232,48 +247,6 @@ class Registration_11th_model extends CI_Model
         if($rowcount > 0)
         {
             return $query->result_array();
-        }
-        else
-        {
-            return  false;
-        }
-    }
-     public function forwarding_pdf_final($fetch_data)
-    {
-        //DebugBreak();
-        $Inst_cd = $fetch_data['Inst_cd'];
-        $query = $this->db->query("Registration..sp_Forwading_letter_final_11TH $Inst_cd");
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-            return $query->result_array();
-        }
-        else
-        {
-            return  false;
-        }
-    }
-        public function readmission_check($User_info_data)
-    {
-        //DebugBreak();
-        $Inst_cd = $User_info_data['Inst_Id'];
-        $RollNo = $User_info_data['RollNo'];
-        $spl_cd = $User_info_data['spl_case'];
-
-        // $forms_id = $User_info_data['forms_id'];
-
-        $where = ' (spl_cd =  17 OR  spl_cd = 70 OR status=4 OR status=2)';
-        $this->db->where('rno', $RollNo);
-        //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
-        $query = $this->db->where($where);
-        $query = $this->db->get(RE_ADMISSION_TBL11);
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-
-            $result_1 = $query->result_array();
-
-            return  $result_1;
         }
         else
         {
@@ -369,6 +342,7 @@ class Registration_11th_model extends CI_Model
         $sub5 = $data['sub5'];
         $sub6 = $data['sub6'];
         $sub7 = $data['sub7'];
+        $sub8 = $data['sub8'];
         $sub1ap1 = $data['sub1ap1'];
         $sub2ap1 = $data['sub2ap1'];
         $sub3ap1 = $data['sub3ap1'];
@@ -376,6 +350,7 @@ class Registration_11th_model extends CI_Model
         $sub5ap1 = $data['sub5ap1'];
         $sub6ap1 = $data['sub6ap1'];
         $sub7ap1 = $data['sub7ap1'];
+        $sub8ap1 = $data['sub8ap1'];
         $UrbanRural = $data['ruralOrurban'];
         $Inst_cd = $data['Inst_cd'];
         $formno = $data['FormNo'];
@@ -545,15 +520,20 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-   /* public function readmission_check($User_info_data)
+    public function readmission_check($User_info_data)
     {
-        // DebugBreak();
+        //DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
         $RollNo = $User_info_data['RollNo'];
         $spl_cd = $User_info_data['spl_case'];
 
         // $forms_id = $User_info_data['forms_id'];
-        $query = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $RollNo,'spl_cd' => 17,'Coll_cd'=>$Inst_cd,'class'=>11,'Iyear'=>2016,'sess'=>1));
+
+        $where = ' (spl_cd =  17 OR  spl_cd = 70 OR status=4 OR status=2)';
+        $this->db->where('rno', $RollNo);
+        //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
+        $query = $this->db->where($where);
+        $query = $this->db->get(RE_ADMISSION_TBL11);
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -566,7 +546,7 @@ class Registration_11th_model extends CI_Model
         {
             return  false;
         }
-    }   */
+    }
     public function user_info_Formwise($User_info_data)
     {
         // DebugBreak();
@@ -607,7 +587,7 @@ class Registration_11th_model extends CI_Model
         $resultarr = $q2->result_array();
         return $resultarr ;
     }
-    public function Batch_Insertion($data)
+      public function Batch_Insertion($data)
     {
         // DebugBreak();
 

@@ -11,7 +11,7 @@ class BiseCorrection extends CI_Controller {
             // redirect('login/biselogin');
         }
     }
-    public function migration9th()
+        public function migration9th()
     {
         $this->load->helper('url');
         $data = array(
@@ -30,41 +30,10 @@ class BiseCorrection extends CI_Controller {
         else{
             $error['excep'] = '';
         }
-       // DebugBreak();
         $data['migration'] = $this->BiseCorrections_model->getmigration(9);
-        $data['migration1'] = $this->BiseCorrections_model->getmigrationonline(9);
-        $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/9thCorrection/migration9th.php',$error);
-        $this->load->view('common/footer.php');
-    }
-   public function migration11th()
-    {
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '40',
-        );
-        $this->load->library('session');
-       // $this->output->enable_profiler(TRUE);
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-         //DebugBreak();
-        if($this->session->flashdata('NewEnrolment_error')){
-
-            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
-            $error['excep'] = $error['excep']['excep'];
-        }
-        else{
-            $error['excep'] = '';
-        }
-        $data['migration'] = $this->BiseCorrections_model->getmigration(11);
-        $data['migration1'] = $this->BiseCorrections_model->getmigrationonline(11);
-        $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/11thCorrection/migration11th.php',$error);
         $this->load->view('common/footer.php');
     }
     public function migration10th()
@@ -87,39 +56,9 @@ class BiseCorrection extends CI_Controller {
             $error['excep'] = '';
         }
         $data['migration'] = $this->BiseCorrections_model->getmigration(10);
-        $data['migration1'] = $this->BiseCorrections_model->getmigrationonline(10);
-        $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/9thCorrection/migration10th.php',$error);
-        $this->load->view('common/footer.php');
-    }
-    public function migration12th()
-    {
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '40',
-        );
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
-        if($this->session->flashdata('NewEnrolment_error')){
-
-            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
-            $error['excep'] = $error['excep']['excep'];
-        }
-        else{
-            $error['excep'] = '';
-        }
-        $data['migration'] = $this->BiseCorrections_model->getmigration(12);
-        $data['migration1'] = $this->BiseCorrections_model->getmigrationonline(12);
-        $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/11thCorrection/migration12th.php',$error);
         $this->load->view('common/footer.php');
     }
     public function listmigration9th()
@@ -143,40 +82,9 @@ class BiseCorrection extends CI_Controller {
             $error['excep'] = '';
         }
         $data['migration'] = $this->BiseCorrections_model->getlistmigration(9);
-        $data['migration1'] = $this->BiseCorrections_model->getlistmigrationonline(9);
-          $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/9thCorrection/ListMir9th.php',$error);
-        $this->load->view('common/footer.php');
-    }
-     public function listmigration11th()
-    {
-        // DebugBreak();
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '40',
-        );
-        
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
-        if($this->session->flashdata('NewEnrolment_error')){
-
-            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
-            $error['excep'] = $error['excep']['excep'];
-        }
-        else{
-            $error['excep'] = '';
-        }
-        $data['migration'] = $this->BiseCorrections_model->getlistmigration(11);
-        $data['migration1'] = $this->BiseCorrections_model->getlistmigrationonline(11);
-        $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/11thCorrection/ListMir11th.php',$error);
         $this->load->view('common/footer.php');
     }
     public function listmigration10th()
@@ -205,36 +113,9 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/ListMir10th.php',$error);
         $this->load->view('common/footer.php');
     }
-   public function listmigration12th()
-    {
-        // DebugBreak();
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '40',
-        );
-        // $this->output->enable_profiler(TRUE);
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
-        if($this->session->flashdata('NewEnrolment_error')){
-
-            $error['excep'] = $this->session->flashdata('NewEnrolment_error');
-            $error['excep'] = $error['excep']['excep'];
-        }
-        else{
-            $error['excep'] = '';
-        }
-        $data['migration'] = $this->BiseCorrections_model->getlistmigration(12);
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/11thCorrection/ListMir12th.php',$error);
-        $this->load->view('common/footer.php');
-    }
     public function migrate()
     {
-         //DebugBreak();
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -292,248 +173,6 @@ class BiseCorrection extends CI_Controller {
                 redirect('BiseCorrection/migration9th/');
             }
         }
-        else if($isclass == 11)
-        {
-            if($migrateto != '')
-            {
-                $oldinst_cd = substr($formno, 0, 6);
-                $newinst_cd    = $migrateto;
-                $formnopic = $formno.'.jpg'; 
-            }
-            else
-            {
-                $formno =  $_POST['txtformNo_search'];
-                $oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
-                $newinst_cd    = $_POST['txtinst_search'];
-                $formnopic = @$_POST['txtformNo_search'].'.jpg';
-
-            }
-               $app_no = $this->uri->segment(6);
-            $isupadte = $this->BiseCorrections_model->update11MigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,1);
-
-            if($isupadte >0)
-            {
-                $base_path = IMAGE_PATH11.$oldinst_cd.'/'.$formnopic;
-                $copyimg = IMAGE_PATH11.$newinst_cd.'/'.$formnopic;;
-
-                if (!(copy($base_path, $copyimg))) 
-                {
-                    $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-                    $this->session->set_flashdata('NewEnrolment_error',$data);
-                    redirect('BiseCorrection/migration11th/');
-                }
-                else
-                {
-                    $data['excep'] = 'success';
-                    $this->session->set_flashdata('NewEnrolment_error',$data);
-                    redirect('BiseCorrection/migration11th/');
-                }  
-            }
-
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration11th/');
-            }
-        }
-        else if($isclass == 10)
-        {     
-             $app_no = $this->uri->segment(6);
-            if($migrateto != '')
-            {
-                //$oldinst_cd = substr($formno, 0, 6);
-                $newinst_cd    = $migrateto;
-                $formnopic = $formno.'.jpg'; 
-            }
-            else
-            {
-                $formno =  $_POST['txtformNo_search'];
-                //$oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
-                $newinst_cd    = $_POST['txtinst_search'];
-                $formnopic = @$_POST['txtformNo_search'].'.jpg';
-
-            }
-              if($app_no > 0)
-              {
-                  $isupdate =  3;
-                  $formno = $app_no;
-              }
-              else
-              {
-                 $isupdate =  1;  
-              }
-            $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],$isupdate,$newinst_cd);
-
-            if($isupadte >0)
-            {
-
-                $data['excep'] = 'success';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration10th/');
-
-            }
-
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration10th/');
-            } 
-        }
-        else if($isclass == 12)
-        {
-              $app_no = $this->uri->segment(6);
-            if($migrateto != '')
-            {
-                //$oldinst_cd = substr($formno, 0, 6);
-                $newinst_cd    = $migrateto;
-                $formnopic = $formno.'.jpg'; 
-            }
-            else
-            {
-                $formno =  $_POST['txtformNo_search'];
-                //$oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
-                $newinst_cd    = $_POST['txtinst_search'];
-                $formnopic = @$_POST['txtformNo_search'].'.jpg';
-
-            }
-               if($app_no > 0)
-              {
-                  $isupdate =  3;
-                  $formno = $app_no;
-              }
-              else
-              {
-                 $isupdate =  1;  
-              }
-            $isupadte = $this->BiseCorrections_model->update12MigData($formno,$userinfo['Inst_Id'],$isupdate,$newinst_cd);
-
-            if($isupadte >0)
-            {
-
-                $data['excep'] = 'success';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration12th/');
-
-            }
-
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration12th/');
-            } 
-        }
-
-    }
-    public function migrateonline()
-    {
-
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '4',
-        );
-        $isclass = $this->uri->segment(3);
-        $formno = $this->uri->segment(4);
-        $migrateto = $this->uri->segment(5);
-        $app_no = $this->uri->segment(6);
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        //DebugBreak();
-        if($isclass == 9)
-        {
-            if($migrateto != '')
-            {
-                $oldinst_cd = substr($formno, 0, 6);
-                $newinst_cd    = $migrateto;
-                $formnopic = $formno.'.jpg'; 
-            }
-            else
-            {
-                $formno =  $_POST['txtformNo_search'];
-                $oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
-                $newinst_cd    = $_POST['txtinst_search'];
-                $formnopic = @$_POST['txtformNo_search'].'.jpg';
-
-            }
-
-            $isupadte = $this->BiseCorrections_model->updateMigDataOnline($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,1);
-            //$isupadte = $this->BiseCorrections_model->updateMigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id']);
-
-            if($isupadte >0)
-            {
-                $base_path = IMAGE_PATH.$oldinst_cd.'/'.$formnopic;
-                $copyimg = IMAGE_PATH.$newinst_cd.'/'.$formnopic;;
-
-                if (!(copy($base_path, $copyimg))) 
-                {
-                    $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-                    $this->session->set_flashdata('NewEnrolment_error',$data);
-                    redirect('BiseCorrection/migration9th/');
-                }
-                else
-                {
-                    $data['excep'] = 'success';
-                    $this->session->set_flashdata('NewEnrolment_error',$data);
-                    redirect('BiseCorrection/migration9th/');
-                }  
-            }
-
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration9th/');
-            }
-        }
-        else if($isclass == 11)
-        {
-            if($migrateto != '')
-            {
-                $oldinst_cd = substr($formno, 0, 6);
-                $newinst_cd    = $migrateto;
-                $formnopic = $formno.'.jpg'; 
-            }
-            else
-            {
-                $formno =  $_POST['txtformNo_search'];
-                $oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
-                $newinst_cd    = $_POST['txtinst_search'];
-                $formnopic = @$_POST['txtformNo_search'].'.jpg';
-
-            }
-
-            $isupadte = $this->BiseCorrections_model->update11MigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id']);
-
-            if($isupadte >0)
-            {
-                $base_path = IMAGE_PATH.$oldinst_cd.'/'.$formnopic;
-                $copyimg = IMAGE_PATH.$newinst_cd.'/'.$formnopic;;
-
-                if (!(copy($base_path, $copyimg))) 
-                {
-                    $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-                    $this->session->set_flashdata('NewEnrolment_error',$data);
-                    redirect('BiseCorrection/migration11th/');
-                }
-                else
-                {
-                    $data['excep'] = 'success';
-                    $this->session->set_flashdata('NewEnrolment_error',$data);
-                    redirect('BiseCorrection/migration11th/');
-                }  
-            }
-
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration11th/');
-            }
-        }
         else if($isclass == 10)
         {
             if($migrateto != '')
@@ -569,43 +208,9 @@ class BiseCorrection extends CI_Controller {
                 redirect('BiseCorrection/migration10th/');
             } 
         }
-        else if($isclass == 12)
-        {
-            if($migrateto != '')
-            {
-                //$oldinst_cd = substr($formno, 0, 6);
-                $newinst_cd    = $migrateto;
-                $formnopic = $formno.'.jpg'; 
-            }
-            else
-            {
-                $formno =  $_POST['txtformNo_search'];
-                //$oldinst_cd = substr($_POST['txtformNo_search'], 0, 6);
-                $newinst_cd    = $_POST['txtinst_search'];
-                $formnopic = @$_POST['txtformNo_search'].'.jpg';
-
-            }
-
-            $isupadte = $this->BiseCorrections_model->update12MigData($formno,$userinfo['Inst_Id'],1,$newinst_cd);
-
-            if($isupadte >0)
-            {
-
-                $data['excep'] = 'success';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration12th/');
-
-            }
-
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration12th/');
-            } 
-        }
 
     }
+
     public function restoreMigration()
     {
 
@@ -616,7 +221,6 @@ class BiseCorrection extends CI_Controller {
         $isclass = $this->uri->segment(3);
         $formno = $this->uri->segment(4);
         $migrateto = $this->uri->segment(5);
-        $app_no = $this->uri->segment(6);
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -628,16 +232,8 @@ class BiseCorrection extends CI_Controller {
             {
                 $oldinst_cd = 0;
                 $newinst_cd    = $migrateto;
-            }               
-           
-            if($app_no >0)
-            {
-                $isupadte = $this->BiseCorrections_model->updateMigDataOnline($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,NULL);
             }
-            else
-            {
-                $isupadte = $this->BiseCorrections_model->updateMigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id']);
-            }
+            $isupadte = $this->BiseCorrections_model->updateMigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id']);
 
             if($isupadte >0)
             {
@@ -656,18 +252,7 @@ class BiseCorrection extends CI_Controller {
         else if($isclass == 10)
         {
 
-            
-            if($app_no >0)
-            {
-                $isupadte = 4;
-                $formno = $app_no;
-            }   
-            else
-            {
-                $isupadte = 2;
-            }
-            
-            $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],$isupadte,$migrateto);
+            $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],2);
 
             if($isupadte >0)
             {
@@ -681,74 +266,6 @@ class BiseCorrection extends CI_Controller {
                 $data['excep'] = 'Update Query not execute.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/listmigration10th/');
-            }
-        }
-
-    }
-    public function restoreMigration11()
-    {
-         
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '40',
-        );
-        $isclass = $this->uri->segment(3);
-        $formno = $this->uri->segment(4);
-        $migrateto = $this->uri->segment(5);
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-           $app_no = $this->uri->segment(6);
-        if($isclass == 11)
-        {
-            if($migrateto != '')
-            {
-                $oldinst_cd = 0;
-                $newinst_cd    = $migrateto;
-            }
-            
-            $isupadte = $this->BiseCorrections_model->update11MigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,NULL);
-
-            if($isupadte >0)
-            {
-
-                $data['excep'] = 'success';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/listmigration11th/');
-            }
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/listmigration11th/');
-            }
-        }
-        else if($isclass == 12)
-        {   
-            if($app_no >0)
-            {
-                $isupadte = 4;
-                $formno =    $app_no;
-            }
-            else
-            {
-                $isupadte = 2;
-            }
-            $isupadte = $this->BiseCorrections_model->update12MigData($formno,$userinfo['Inst_Id'],$isupadte,$migrateto);
-
-            if($isupadte >0)
-            {
-
-                $data['excep'] = 'success';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/listmigration12th/');
-            }
-            else
-            {
-                $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/listmigration12th/');
             }
         }
 
@@ -773,7 +290,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
     
-       public function result11thcorrections()
+     public function result11thcorrections()
     {
         $this->load->helper('url');
         $data = array(
@@ -1066,21 +583,6 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
-       public function reg11thcorrections()
-    {
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '13',
-        );
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/11thCorrection/reg9thcorrections.php');
-        $this->load->view('common/footer.php');
-    }
     public function reg9thcorrectionapp()
     {
         $this->load->helper('url');
@@ -1132,7 +634,21 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
-    
+       public function reg11thcorrections()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/reg9thcorrections.php');
+        $this->load->view('common/footer.php');
+    }
      public function reg11thcorrectionapp()
     {
         $this->load->helper('url');
@@ -1183,7 +699,6 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/11thCorrection/reg9thcorrapp_verified.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }
-    
     public function BatchRelease()
     {
         $this->load->helper('url');
@@ -1582,7 +1097,6 @@ class BiseCorrection extends CI_Controller {
 
         $appdata = $this->BiseCorrections_model->get9thCorrectionDataById($BatchId);
 
-      
 
         if($appdata[0]['PicFee']>0)
         {
@@ -1598,13 +1112,11 @@ class BiseCorrection extends CI_Controller {
 
             copy($copy_path.$picPath, $target_path.$picPath);
 
-            //$appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
-
         }
-
+          $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
         $status = array('data'=>$this->BiseCorrections_model->reg9thCorrection_UPDATE($fetchdata));
 
-         $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
+
         if($status == true){
 
             $error_msg= "success";
@@ -1622,7 +1134,6 @@ class BiseCorrection extends CI_Controller {
 
 
     }
-
       public function correction_update11($BatchId)
     {
 
@@ -1677,7 +1188,6 @@ class BiseCorrection extends CI_Controller {
 
 
     }
-    
     public function BatchRelease_update($BatchId, $Inst_Cd)
     {
 
@@ -2229,7 +1739,7 @@ class BiseCorrection extends CI_Controller {
 
     private function generatepath($rno,$class,$year,$sess)
     {
-      $basepath = DIRPATHMIG2;
+      $basepath = 'F:\xampp\htdocs\Share Images\OldPics';
       $clsvr = '';
       $picyear= substr($year, -2);
       $folderno = '';

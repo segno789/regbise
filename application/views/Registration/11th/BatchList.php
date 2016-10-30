@@ -65,7 +65,7 @@
                                       <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="ChallanForm_11th('.$vals['Batch_ID'].')">Download Challan Form</button>
                                     <button type="button" class="btn btn-info" value="'.$vals['Batch_ID'].'" onclick="RevenueForm('.$vals['Batch_ID'].')">Revenue Form</button>';
                                     if($vals['flag']==0){
-                                     echo '<button type="button" class="btn btn-danger" value="'.$vals['Batch_ID'].'" onclick="ReleaseForm('.$vals['Batch_ID'].')">Release Batch</button>';   
+                                    // echo '<button type="button" class="btn btn-danger" value="'.$vals['Batch_ID'].'" onclick="ReleaseForm('.$vals['Batch_ID'].')">Release Batch</button>';   
                                     }
                                      echo '
                                     </td>';

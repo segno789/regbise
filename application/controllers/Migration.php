@@ -17,7 +17,6 @@ class Migration extends CI_Controller {
     * map to /index.php/welcome/<method_name>
     * @see http://codeigniter.com/user_guide/general/urls.html
     */
-     
     function __construct()
     {
         parent::__construct();
@@ -67,46 +66,6 @@ class Migration extends CI_Controller {
 
 
     }
-    public function std9thclass_byRollNo()
-    {
-        //  DebugBreak();
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $data = array(
-            'isselected' => '10',
-
-        );
-        $msg = $this->uri->segment(3);
-
-
-
-        if($msg == FALSE){
-
-            $error_msg = $this->session->flashdata('error');    
-        }
-        else{
-            $error_msg = $msg;
-        }
-
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Migration_model');
-        //  $error['grp_cd'] = $user['grp_cd'];
-        $RegStdData = array('data'=>$this->Migration_model->std9thclass_byrollno($user['Inst_Id']));
-        $RegStdData['msg_status'] = $error_msg;
-                //$rno = $RegStdData['data']['rno']
-        
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('migration/std9thclass_byRollNo.php',$RegStdData);
-        $this->load->view('common/footer.php');
-
-
-
-    }
     public function get9threalease()
     {
 
@@ -140,44 +99,6 @@ class Migration extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('migration/Releasestd9thclass.php',$RegStdData);
-        $this->load->view('common/footer.php');
-
-
-
-    }
-    public function get9threalease_byRollNo()
-    {
-
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $data = array(
-            'isselected' => '10',
-
-        );
-        $msg = $this->uri->segment(3);
-
-
-
-        if($msg == FALSE){
-
-            $error_msg = $this->session->flashdata('error');    
-        }
-        else{
-            $error_msg = $msg;
-        }
-
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Migration_model');
-        //  $error['grp_cd'] = $user['grp_cd'];  
-        $RegStdData = array('data'=>$this->Migration_model->getrelease9thstd_byRollNo($user['Inst_Id']));
-        $RegStdData['msg_status'] = $error_msg;
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('migration/Releasestd9thclass_byRollNo.php',$RegStdData);
         $this->load->view('common/footer.php');
 
 
@@ -222,45 +143,6 @@ class Migration extends CI_Controller {
 
 
     }
-     public function get11threalease_byRollNo()
-    {
-
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $data = array(
-            'isselected' => '10',
-
-        );
-        $msg = $this->uri->segment(3);
-
-
-
-        if($msg == FALSE){
-
-            $error_msg = $this->session->flashdata('error');    
-        }
-        else{
-            $error_msg = $msg;
-        }
-
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Migration_model');
-        
-        //  $error['grp_cd'] = $user['grp_cd'];
-        $RegStdData = array('data'=>$this->Migration_model->getrelease9thstd_byRollNo($user['Inst_Id']));
-        $RegStdData['msg_status'] = $error_msg;
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('migration/Releasestd11thclass_byRollNo.php',$RegStdData);
-        $this->load->view('common/footer.php');
-
-
-
-    }
     public function updatefrom()
     {
        
@@ -273,7 +155,12 @@ class Migration extends CI_Controller {
         $data = array(
             'isselected' => '10',
         );
-        
+          if($_POST['migrateto'] == -1)
+        {
+            $allinputdata['excep'] = 'Please select Migration Institute.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Migration/release_stdForm/');
+        }
         $this->load->model('Migration_model');
         $insertinfo = array(
                     "formno"  =>$_POST['formno'],
@@ -375,44 +262,6 @@ class Migration extends CI_Controller {
         }
         
     }
-    public function updatefrom11th_byRollNo()
-    {
-       
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $Inst_Id = $userinfo['Inst_Id'];
-        $isReAdm = 0;
-        $year = 0;
-        $data = array(
-            'isselected' => '10',
-        );
-         DebugBreak();
-        $this->load->model('Migration_model');
-        $insertinfo = array(
-                    "rno"  =>$_POST['rno'],
-                    "name"    =>$_POST['cand_name'],
-                    "fname"   =>$_POST['father_name'],
-                    "fnic"    =>$_POST['fnic'],
-                    "bform"   =>$_POST['bform'],
-                    "migto"   =>$_POST['migrateto'],
-                    "sex"   =>$_POST['sex'],
-                    "migfrom" =>$Inst_Id ,
-                    "myclass"=>11
-        );
-        $datainfo = $this->Migration_model->updatemigratefrom_byRollNo($insertinfo);
-        if($datainfo == 0)
-        {
-            $allinputdata['excep'] = 'Your Form is not saved.';
-            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-            redirect('Migration/release_stdForm11th/');
-        }
-        else
-        {
-            redirect('Migration/get11threalease_byRollNo/');
-        }
-        
-    }
     public function release_stdForm($formno)
     {    
                  //DebugBreak();
@@ -454,47 +303,6 @@ class Migration extends CI_Controller {
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
-     public function release_stdForm_byRollNo($formno)
-    {    
-                 //DebugBreak();
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $Inst_Id = $userinfo['Inst_Id'];
-        $this->load->view('common/header.php',$userinfo);
-        $isReAdm = 0;
-        $year = 0;
-        
-        $data = array(
-            'isselected' => '10',
-        );
-        
-        if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
-
-            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
-            $RegStdData['isReAdm']=0;
-            $RegStdData['Oldrno']=0;
-            $RegStdData['install']=$this->tblmainstall();
-
-
-        }
-        else
-        {
-            
-            $this->load->model('Registration_model');
-            $year = 2015;
-            $datainfo = $this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id);
-            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" => $this->tblmainstall());  
-        }
-        
-
-
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('migration/9thmigration_form_byRollNo.php',$RegStdData);   
-        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
-
-    }
     public function release_stdForm11th($formno)
     {    
                  //DebugBreak();
@@ -502,21 +310,24 @@ class Migration extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
+        $dist = $userinfo['dist'];  
+        $gender = $userinfo['gender'];  
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
         $year = 0;
         
         $data = array(
             'isselected' => '10',
-        );
-        
+        );   
+          $this->load->model('migration_model');    
+             $tblmainstall11 = $this->migration_model->tblmainstall11($dist,$gender);
         if($this->session->flashdata('NewEnrolment_error')){
             //DebugBreak();
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $RegStdData['isReAdm']=0;
             $RegStdData['Oldrno']=0;
-            $RegStdData['install']=$this->tblmainstall11();
+            $RegStdData['install']=$tblmainstall11;
 
 
         }
@@ -526,7 +337,7 @@ class Migration extends CI_Controller {
             $this->load->model('Registration_11th_model');
             $year = 2016;
             $datainfo = $this->Registration_11th_model->EditEnrolement_data($formno,$year,$Inst_Id);
-            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" => $this->tblmainstall11());  
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" =>$tblmainstall11);  
         }
         
 
@@ -546,18 +357,20 @@ class Migration extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
         $year = 0;
-        
+        $dist = $userinfo['dist'];  
+        $gender = $userinfo['gender'];  
         $data = array(
             'isselected' => '10',
         );
-        
+            $this->load->model('migration_model');    
+             $tblmainstall11 = $this->migration_model->tblmainstall11($dist,$gender);
         if($this->session->flashdata('NewEnrolment_error')){
             //DebugBreak();
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $RegStdData['isReAdm']=0;
             $RegStdData['Oldrno']=0;
-            $RegStdData['install']=$this->tblmainstall11();
+            $RegStdData['install']=$tblmainstall11;
 
 
         }
@@ -567,7 +380,20 @@ class Migration extends CI_Controller {
           $this->load->model('Migration_model');
             $year = 2015;
             $datainfo = $this->Migration_model->readmission_check($formno);
-            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" => $this->tblmainstall11());  
+              $path = $this->generatepath($datainfo[0]['rno'],$datainfo[0]['class'],$datainfo[0]['Iyear'],$datainfo[0]['sess']);
+           $isexit = file_exists($path);
+           if(!file_exists($path))
+           {
+               $datainfo[0]['PicPath']  = 'Your Picture is missing' ;
+           }
+           else
+           {
+               $type = pathinfo($path, PATHINFO_EXTENSION);
+               $data1 = file_get_contents($path);
+               $datainfo[0]['PicPath'] = 'data:image/' . $type . ';base64,' . base64_encode($data1);
+           }
+            
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" => $tblmainstall11); 
         }
         
 
@@ -615,44 +441,6 @@ class Migration extends CI_Controller {
 
 
     }
-     public function std11thclass_byRollNo()
-    {
-
-        $this->load->library('session');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $data = array(
-            'isselected' => '10',
-
-        );
-        $msg = $this->uri->segment(3);
-
-
-
-        if($msg == FALSE){
-
-            $error_msg = $this->session->flashdata('error');    
-        }
-        else{
-            $error_msg = $msg;
-        }
-
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Migration_model');
-        //  $error['grp_cd'] = $user['grp_cd'];
-        $RegStdData = array('data'=>$this->Migration_model->std11thclass_byRollNo($user['Inst_Id']));
-        $RegStdData['msg_status'] = $error_msg;
-        $userinfo = $Logged_In_Array['logged_in'];
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('migration/std11thclass_byRollNo.php',$RegStdData);
-        $this->load->view('common/footer.php');
-
-
-
-    }
     
     public function Print_migration_Form_Final()
     {
@@ -673,7 +461,7 @@ class Migration extends CI_Controller {
 
         if(empty($result['data'])){
        
-            $this->session->get9threalease('error', $Condition);
+            $this->session->set_flashdata('error', $Condition);
             redirect('Migration/FormPrinting');
             return;
 
@@ -790,284 +578,7 @@ class Migration extends CI_Controller {
             $pdf->SetXY(1.7,$Y+2.4);
             $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
 
-            $pdf->Image(base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
-             //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
-            //========================================  Exam Info ===============================================================================            
-           
-            $Y = $Y+2.2;
-            $x = 1.05;
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(0.2,1.28+$Y);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'Migration Information ',1,0,'L',1);
-           
-           $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(0.5,1.65+$Y);
-            $pdf->Cell( 0.5,0.5,"Migration From:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,1.80+$Y);
-            $pdf->MultiCell(7,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
-           // $pdf->Cell(0.5,0.5,  '',0,'L');
-           
-           
-           $pdf->SetXY(0.5,$Y+2.2);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Migration To:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,$Y+2.35);
-           
-            $pdf->MultiCell(7,0.2,  $data['Migrated_to']. "-". $data['Migrated_name'],0,'L');    
-           
-           
-            $sY = -0.3;//0.5;
-            $pdf->SetXY(0.2,6.1+$sY);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
-            // DebugBreak();
-             $grp_name = $data["grp_cd"];
-            switch ($grp_name) {
-                case '1':
-                    $grp_name = 'SCIENCE WITH BIOLOGY';
-                    break;
-                case '7':
-                    $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
-                    break;
-                case '8':
-                    $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
-                    break;
-                case '2':
-                    $grp_name = 'GENERAL';
-                    break;
-                case '5':
-                    $grp_name = 'DEAF AND DUMB';
-                    break;
-                default:
-                $grp_name = "NO GROUP SELECTED";
-            }
-            
-             $pdf->SetXY(0.2,6.5+$sY);
-           // $pdf->SetFillColor(240,240,240);
-           $pdf->SetFont('Arial','BU',12);
-            $pdf->Cell(8,0.3,'Group:  '.$grp_name,0,'L');
-               $y = $y-1.8;
-            
-             $pdf->SetFont('Arial','B',9);  
-                $pdf->SetFont('Arial','',8);
-                $pdf->SetXY(0.5,7.05+$y);
-                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
-
-               /* $pdf->SetXY(3+$x,7.05+$y);
-                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
-                                                                           */
-                /*$pdf->SetXY(3+$x,7.05+$y);
-                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
-                //------------- sub 2 & 6
-                $pdf->SetXY(0.5,7.35+$y);
-                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
-               /* $pdf->SetXY(3+$x,7.35+$y);
-                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');    */
-                /*$pdf->SetXY(3+$x,7.35+$y);
-                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
-                //------------- sub 3 & 7
-                $pdf->SetXY(0.5,7.70+$y);
-                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
-                /*$pdf->SetXY(3+$x,7.70+$y);
-                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R');   */
-                /*$pdf->SetXY(3+$x,7.70+$y);
-                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
-                //------------- sub 4 & 8
-                $pdf->SetXY(0.5,8.05+$y);
-                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-               /* $pdf->SetXY(3+$x,8.05+$y);
-                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');  */
-                //-----------------
-
-                $pdf->SetXY(0.5,8.40+$y);
-                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
-
-               /* $pdf->SetXY(3+$x,8.40+$y);
-                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');     */
-
-                //-------------------------
-                $pdf->SetXY(0.5,8.75+$y);
-                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
-
-               /* $pdf->SetXY(3+$x,8.75+$y);
-                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R'); */
-
-                //------------------------
-
-                $pdf->SetXY(0.5,9.10+$y);
-                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
-
-               /* $pdf->SetXY(3+$x,9.10+$y);
-                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
-
-                //------------------------------
-
-                $pdf->SetXY(0.5,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-
-              /*  $pdf->SetXY(3+$x,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');   */
-            
-
-      
-
-           /*  
-            $pdf->SetXY(0.5,  10.2+$y);
-            $date = strtotime($data['edate']); 
-            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');*/
-            $pdf->SetFont('Arial','UI',10); 
-            $pdf->SetXY(4.6,  10.2+$y);
-            $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
-            //date_format($$data['EDate'], 'd/m/Y H:i:s');
-
-           $pdf->SetXY(0.5,  10.2+$y);
-            $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
-
-            //======================================================================================
-        }
-
-        $pdf->Output($data['app_No'].'.pdf', 'I');
-    }
-    public function Print_migration_Form_Final_byRollNo()
-    {
-
-          //DebugBreak();
-        $AppNo = $this->uri->segment(3);
-
-        $this->load->library('session');
-
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Migration_model');
-
-     
-        $result = array('data'=>$this->Migration_model->getinfoAll_byRollNo($AppNo));
-        //Print_Form_Formnowise
-
-
-        if(empty($result['data'])){
-       
-            $this->session->get9threalease('error', $Condition);
-            redirect('Migration/FormPrinting');
-            return;
-
-        }
-
-
-        $this->load->library('PDF_Rotate');
-
-
-        $pdf = new PDF_Rotate('P','in',"A4");
-        //      $this->load->library('PDFF');
-        //        $pdf=new PDFF('P','in',"A4");  
-        $pdf->AliasNbPages();
-        $pdf->SetMargins(0.5,0.5,0.5);
-        //$grp_cd = $this->uri->segment(3);
-
-        $pdf->SetTitle('Print Migration From');
-
-        $fontSize = 10;
-        $marge    = .4;   // between barcode and hri in pixel
-        $x        = 7.5;  // barcode center
-        $y        = 1.2;  // barcode center
-        $height   = 0.35;   // barcode height in 1D ; module size in 2D
-        $width    = .013;  // barcode height in 1D ; not use in 2D
-        $angle    = 0;   // rotation in degrees
-
-        $type     = 'code128';
-        $black    = '000000'; // color in hex
-        //DebugBreak();
-        $result = $result['data'];
-        //if(!empty($result)):
-        foreach ($result as $key=>$data) 
-        {
-
-            //First Page ---class instantiation    
-            //$pdf = new FPDF_BARCODE("P","in","A4");
-            $pdf->AddPage();
-            $Y = 0.5;
-            $pdf->SetFillColor(0,0,0);
-            $pdf->SetDrawColor(0,0,0); 
-            $temp = $data['app_No'].'@09@2016@1';
-            $image =  $this->set_barcode($temp);
-            $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
-            $pdf->SetFont('Arial','U',16);
-            $pdf->SetXY( 1.2,0.2);
-            $pdf->Cell(0, 0.2, "Board Of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
-            $pdf->Image(base_url()."assets/img/logo.jpg",0.35,0.2, 0.75,0.75, "JPG", "http://www.bisegrw.com");
-
-
-            $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(1.7,0.4);
-            $pdf->Cell(0, 0.25, " Migration FORM FOR CLASS ".corr_bank_chall_class." SESSION 2016-2018", 0.25, "C");
-            //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
-            //--------------- Proof Read
-            $ProofReed = "Application No. ".$data['app_No'];
-            $pdf->SetXY(3,0.8);
-            $pdf->SetFont("Arial",'B',12);
-            $pdf->Cell(0, 0.25, $ProofReed  ,0,'C');
-
-            //--------------------------- Form No & Rno
-            $pdf->SetXY(0.2,0.5+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Form No: _______________",0,'L');
-
-            $pdf->SetXY(0.8,0.5+$Y);
-            $pdf->SetFont('Arial','IB',12);
-            $pdf->Cell( 0.5,0.5,$data['Formno'],0,'L');
-
-            //--------------------------- Institution Code and Name   $user['Inst_Id']. "-". $user['inst_Name']
-            $pdf->SetXY(0.2,0.75+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
-
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(1.75,0.92+$Y);
-            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
-            $pdf->MultiCell(6,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
-
-            //------ Picture Box on Centre      
-            $Y = $Y+0.1;
-            $x = 1.05;
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(0.2,1.28+$Y);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'Personal Information ',1,0,'L',1);
-            //------------- Personal Infor Box
-            //====================================================================================================================
-
-           
-            //  $Y = $Y+0.1;
-
-
-
-            $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(0.5,1.65+$Y);
-            $pdf->Cell( 0.5,0.5,"Candidate Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,1.65+$Y);
-            $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
-
-             $pdf->SetXY(0.5,$Y+2);
-           // $pdf->SetXY(3.5+$x,1.65+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Father Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,$Y+2);
-            $pdf->Cell(0.5,0.5, strtoupper(@$data["fname"]),0,'L');
-
-
-            $pdf->SetXY(0.5,$Y+2.4);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Father CNIC:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,$Y+2.4);
-            $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
-
-            $pdf->Image(base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
+            $pdf->Image(IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"],4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
              //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
             //========================================  Exam Info ===============================================================================            
            
@@ -1455,295 +966,7 @@ class Migration extends CI_Controller {
                 //------------------------
 
                 $pdf->SetXY(0.5,9.10+$y);
-                if(isset($data['sub7_NAME']))
-                {
                 $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
-                }
-                else{ $pdf->Cell(0.5,0.5, '',0,'R'); }
-
-               /* $pdf->SetXY(3+$x,9.10+$y);
-                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
-
-                //------------------------------
-
-               // $pdf->SetXY(0.5,9.45+$y);
-              //  $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
-
-              /*  $pdf->SetXY(3+$x,9.45+$y);
-                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');   */
-            
-
-      
-
-           /*  
-            $pdf->SetXY(0.5,  10.2+$y);
-            $date = strtotime($data['edate']); 
-            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');*/
-            $pdf->SetFont('Arial','UI',10); 
-            $pdf->SetXY(4.6,  10.2+$y);
-            $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
-            //date_format($$data['EDate'], 'd/m/Y H:i:s');
-
-           $pdf->SetXY(0.5,  10.2+$y);
-            $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
-
-            //======================================================================================
-        }
-
-        $pdf->Output($data['app_No'].'.pdf', 'I');
-    }
-     public function Print_migration_Form_Final11th_byRollNo()
-    {
-
-          //DebugBreak();
-        $AppNo = $this->uri->segment(3);
-
-        $this->load->library('session');
-
-        $Logged_In_Array = $this->session->all_userdata();
-        $user = $Logged_In_Array['logged_in'];
-        $this->load->model('Migration_model');
-
-     
-        $result = array('data'=>$this->Migration_model->getinfoAll_byRollNo($AppNo));
-        //Print_Form_Formnowise
-
-
-        if(empty($result['data'])){
-       
-            $this->session->get11threalease('error', $Condition);
-            redirect('Migration/FormPrinting');
-            return;
-
-        }
-
-
-        $this->load->library('PDF_Rotate');
-
-
-        $pdf = new PDF_Rotate('P','in',"A4");
-        //      $this->load->library('PDFF');
-        //        $pdf=new PDFF('P','in',"A4");  
-        $pdf->AliasNbPages();
-        $pdf->SetMargins(0.5,0.5,0.5);
-        //$grp_cd = $this->uri->segment(3);
-
-        $pdf->SetTitle('Print Migration From');
-
-        $fontSize = 10;
-        $marge    = .4;   // between barcode and hri in pixel
-        $x        = 7.5;  // barcode center
-        $y        = 1.2;  // barcode center
-        $height   = 0.35;   // barcode height in 1D ; module size in 2D
-        $width    = .013;  // barcode height in 1D ; not use in 2D
-        $angle    = 0;   // rotation in degrees
-
-        $type     = 'code128';
-        $black    = '000000'; // color in hex
-     //   DebugBreak();
-        $result = $result['data'];
-        //if(!empty($result)):
-        foreach ($result as $key=>$data) 
-        {
-
-            //First Page ---class instantiation    
-            //$pdf = new FPDF_BARCODE("P","in","A4");
-            $pdf->AddPage();
-            $Y = 0.5;
-            $pdf->SetFillColor(0,0,0);
-            $pdf->SetDrawColor(0,0,0); 
-            $temp = $data['app_No'].'@11@2016@1';
-            $image =  $this->set_barcode($temp);
-            $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
-            $pdf->SetFont('Arial','U',16);
-            $pdf->SetXY( 1.2,0.2);
-            $pdf->Cell(0, 0.2, "Board Of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
-            $pdf->Image(base_url()."assets/img/logo.jpg",0.35,0.2, 0.75,0.75, "JPG", "http://www.bisegrw.com");
-
-
-            $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(1.7,0.4);
-            $pdf->Cell(0, 0.25, " Migration FORM FOR CLASS ".$data['class'].'TH'." SESSION 2016-2018", 0.25, "C");
-            //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
-            //--------------- Proof Read
-            $ProofReed = "Application No. ".$data['app_No'];
-            $pdf->SetXY(3,0.8);
-            $pdf->SetFont("Arial",'B',12);
-            $pdf->Cell(0, 0.25, $ProofReed  ,0,'C');
-
-            //--------------------------- Form No & Rno
-            $pdf->SetXY(0.2,0.5+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Form No: _______________",0,'L');
-
-            $pdf->SetXY(0.8,0.5+$Y);
-            $pdf->SetFont('Arial','IB',12);
-            $pdf->Cell( 0.5,0.5,$data['Formno'],0,'L');
-
-            //--------------------------- Institution Code and Name   $user['Inst_Id']. "-". $user['inst_Name']
-            $pdf->SetXY(0.2,0.75+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
-
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(1.75,0.92+$Y);
-            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
-            $pdf->MultiCell(6,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
-
-            //------ Picture Box on Centre      
-            $Y = $Y+0.1;
-            $x = 1.05;
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(0.2,1.28+$Y);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'Personal Information ',1,0,'L',1);
-            //------------- Personal Infor Box
-            //====================================================================================================================
-
-           
-            //  $Y = $Y+0.1;
-
-
-
-            $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(0.5,1.65+$Y);
-            $pdf->Cell( 0.5,0.5,"Candidate Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,1.65+$Y);
-            $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
-
-             $pdf->SetXY(0.5,$Y+2);
-           // $pdf->SetXY(3.5+$x,1.65+$Y);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Father Name:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,$Y+2);
-            $pdf->Cell(0.5,0.5, strtoupper(@$data["fname"]),0,'L');
-
-
-            $pdf->SetXY(0.5,$Y+2.4);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Father CNIC:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,$Y+2.4);
-            $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
-
-            //$pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],4.5,1.79+$Y , 0.95, 1.0, "JPG"); //
-             $pdf->Image( base_url().'uploads/download.jpg',4.5,1.79+$Y , 0.95, 1.0, "JPG");  
-            //========================================  Exam Info ===============================================================================            
-           
-            $Y = $Y+2.2;
-            $x = 1.05;
-            $pdf->SetFont('Arial','B',10);
-            $pdf->SetXY(0.2,1.28+$Y);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'Migration Information ',1,0,'L',1);
-           
-           $pdf->SetFont('Arial','',10);
-            $pdf->SetXY(0.5,1.65+$Y);
-            $pdf->Cell( 0.5,0.5,"Migration From:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,1.80+$Y);
-            $pdf->MultiCell(7,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
-           // $pdf->Cell(0.5,0.5,  '',0,'L');
-           
-           
-           $pdf->SetXY(0.5,$Y+2.2);
-            $pdf->SetFont('Arial','',10);
-            $pdf->Cell( 0.5,0.5,"Migration To:",0,'L');
-            $pdf->SetFont('Arial','B',9);
-            $pdf->SetXY(1.7,$Y+2.35);
-           
-            $pdf->MultiCell(7,0.2,  $data['Migrated_to']. "-". $data['Migrated_name'],0,'L');    
-           
-           
-            $sY = -0.3;//0.5;
-            $pdf->SetXY(0.2,6.1+$sY);
-            $pdf->SetFillColor(240,240,240);
-            $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
-            // DebugBreak();
-             $grp_name = $data["grp_cd"];
-            switch ($grp_name) {
-                    case '1':
-                        $grp_name = 'Pre-Medical';
-                        break;
-                    case '2':
-                        $grp_name = 'Pre-Engineering';
-                        break;
-                    case '3':
-                        $grp_name = 'Humanities';
-                        break;
-                    case '4':
-                        $grp_name = 'General Science';
-                        break;
-                    case '5':
-                        $grp_name = 'Commerce';
-                        break;
-                    case '6':
-                        $grp_name = 'Home Economics';
-                        break;
-                    default:
-                        $grp_name = "No Group Selected.";
-                }
-            
-             $pdf->SetXY(0.2,6.5+$sY);
-           // $pdf->SetFillColor(240,240,240);
-           $pdf->SetFont('Arial','BU',12);
-            $pdf->Cell(8,0.3,'Group:  '.$grp_name,0,'L');
-               $y = $y-1.8;
-            
-             $pdf->SetFont('Arial','B',9);  
-                $pdf->SetFont('Arial','',8);
-                $pdf->SetXY(0.5,7.05+$y);
-                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
-
-               /* $pdf->SetXY(3+$x,7.05+$y);
-                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
-                                                                           */
-                /*$pdf->SetXY(3+$x,7.05+$y);
-                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
-                //------------- sub 2 & 6
-                $pdf->SetXY(0.5,7.35+$y);
-                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
-               /* $pdf->SetXY(3+$x,7.35+$y);
-                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');    */
-                /*$pdf->SetXY(3+$x,7.35+$y);
-                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
-                //------------- sub 3 & 7
-                $pdf->SetXY(0.5,7.70+$y);
-                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
-                /*$pdf->SetXY(3+$x,7.70+$y);
-                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R');   */
-                /*$pdf->SetXY(3+$x,7.70+$y);
-                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
-                //------------- sub 4 & 8
-                $pdf->SetXY(0.5,8.05+$y);
-                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
-               /* $pdf->SetXY(3+$x,8.05+$y);
-                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');  */
-                //-----------------
-
-                $pdf->SetXY(0.5,8.40+$y);
-                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
-
-               /* $pdf->SetXY(3+$x,8.40+$y);
-                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');     */
-
-                //-------------------------
-                $pdf->SetXY(0.5,8.75+$y);
-                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
-
-               /* $pdf->SetXY(3+$x,8.75+$y);
-                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R'); */
-
-                //------------------------
-
-                $pdf->SetXY(0.5,9.10+$y);
-                if(isset($data['sub7_NAME']))
-                {
-                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
-                }
-                else{ $pdf->Cell(0.5,0.5, '',0,'R'); }
 
                /* $pdf->SetXY(3+$x,9.10+$y);
                 $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
@@ -2032,6 +1255,824 @@ class Migration extends CI_Controller {
         //  }
 
         //  $pdf->Output($data["Sch_cd"].'.pdf', 'I');
+    }
+    
+     public function std9thclass_byRollNo()
+    {
+        //  DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '10',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+        //  $error['grp_cd'] = $user['grp_cd'];
+        $RegStdData = array('data'=>$this->Migration_model->std9thclass_byrollno($user['Inst_Id']));
+        $RegStdData['msg_status'] = $error_msg;
+                //$rno = $RegStdData['data']['rno']
+        
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/std9thclass_byRollNo.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
+    
+       public function get9threalease_byRollNo()
+    {
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '10',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+        //  $error['grp_cd'] = $user['grp_cd'];  
+        $RegStdData = array('data'=>$this->Migration_model->getrelease9thstd_byRollNo($user['Inst_Id']));
+        $RegStdData['msg_status'] = $error_msg;
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/Releasestd9thclass_byRollNo.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
+     public function get11threalease_byRollNo()
+    {
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '10',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+        
+        //  $error['grp_cd'] = $user['grp_cd'];
+        $RegStdData = array('data'=>$this->Migration_model->getrelease9thstd_byRollNo($user['Inst_Id']));
+        $RegStdData['msg_status'] = $error_msg;
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/Releasestd11thclass_byRollNo.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
+     public function updatefrom11th_byRollNo()
+    {
+       
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $Inst_Id = $userinfo['Inst_Id'];
+        $isReAdm = 0;
+        $year = 0;
+        $data = array(
+            'isselected' => '10',
+        );
+        $this->load->model('Migration_model');
+        $insertinfo = array(
+                    "rno"  =>$_POST['rno'],
+                    "name"    =>$_POST['cand_name'],
+                    "fname"   =>$_POST['father_name'],
+                    "fnic"    =>$_POST['fnic'],
+                    "bform"   =>$_POST['bform'],
+                    "migto"   =>$_POST['migrateto'],
+                    "sex"   =>$_POST['sex'],
+                    "migfrom" =>$Inst_Id ,
+                    "myclass"=>11
+        );
+        $datainfo = $this->Migration_model->updatemigratefrom_byRollNo($insertinfo);
+        if($datainfo == 0)
+        {
+            $allinputdata['excep'] = 'Your Form is not saved.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Migration/release_stdForm11th/');
+        }
+        else
+        {
+            redirect('Migration/get11threalease_byRollNo/');
+        }
+        
+    }
+      public function release_stdForm_byRollNo($formno)
+    {    
+                 //DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $Inst_Id = $userinfo['Inst_Id'];
+        $this->load->view('common/header.php',$userinfo);
+        $isReAdm = 0;
+        $year = 0;
+        
+        $data = array(
+            'isselected' => '10',
+        );
+        
+        if($this->session->flashdata('NewEnrolment_error')){
+            //DebugBreak();
+
+            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+            $RegStdData['isReAdm']=0;
+            $RegStdData['Oldrno']=0;
+            $RegStdData['install']=$this->tblmainstall();
+
+
+        }
+        else
+        {
+            
+            $this->load->model('Registration_model');
+            $year = 2015;
+            $datainfo = $this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id);
+            
+           // print_r($datainfo)               ;
+            
+           $path = $this->generatepath($datainfo[0]['rno'],$datainfo[0]['class'],$datainfo[0]['Iyear'],$datainfo[0]['sess']);
+           $isexit = file_exists($path);
+           if(!file_exists($path))
+           {
+               $datainfo[0]['PicPath']  = 'Your Picture is missing' ;
+           }
+           else
+           {
+               $type = pathinfo($path, PATHINFO_EXTENSION);
+               $data1 = file_get_contents($path);
+               $datainfo[0]['PicPath'] = 'data:image/' . $type . ';base64,' . base64_encode($data1);
+           }
+            
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>0,'Oldrno'=>0,"install" => $this->tblmainstall());  
+        }
+        
+
+
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/9thmigration_form_byRollNo.php',$RegStdData);   
+        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
+
+    }
+    
+        public function std11thclass_byRollNo()
+    {
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $data = array(
+            'isselected' => '10',
+
+        );
+        $msg = $this->uri->segment(3);
+
+
+
+        if($msg == FALSE){
+
+            $error_msg = $this->session->flashdata('error');    
+        }
+        else{
+            $error_msg = $msg;
+        }
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+        //  $error['grp_cd'] = $user['grp_cd'];
+        $RegStdData = array('data'=>$this->Migration_model->std11thclass_byRollNo($user['Inst_Id']));
+        $RegStdData['msg_status'] = $error_msg;
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('migration/std11thclass_byRollNo.php',$RegStdData);
+        $this->load->view('common/footer.php');
+
+
+
+    }
+     public function Print_migration_Form_Final_byRollNo()
+    {
+
+          //DebugBreak();
+        $AppNo = $this->uri->segment(3);
+
+        $this->load->library('session');
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+
+     
+        $result = array('data'=>$this->Migration_model->getinfoAll_byRollNo($AppNo));
+        //Print_Form_Formnowise
+
+
+        if(empty($result['data'])){
+       
+            $this->session->get9threalease('error', $Condition);
+            redirect('Migration/FormPrinting');
+            return;
+
+        }
+
+            $result = $result['data'];
+         //   print_r($result)     ;
+        $path = $this->generatepath($result[0]['Rno'],$result[0]['class'],$result[0]['iyear'],$result[0]['sess']);
+         //  die;
+
+        $this->load->library('PDF_Rotate');
+
+
+        $pdf = new PDF_Rotate('P','in',"A4");
+        //      $this->load->library('PDFF');
+        //        $pdf=new PDFF('P','in',"A4");  
+        $pdf->AliasNbPages();
+        $pdf->SetMargins(0.5,0.5,0.5);
+        //$grp_cd = $this->uri->segment(3);
+
+        $pdf->SetTitle('Print Migration From');
+
+        $fontSize = 10;
+        $marge    = .4;   // between barcode and hri in pixel
+        $x        = 7.5;  // barcode center
+        $y        = 1.2;  // barcode center
+        $height   = 0.35;   // barcode height in 1D ; module size in 2D
+        $width    = .013;  // barcode height in 1D ; not use in 2D
+        $angle    = 0;   // rotation in degrees
+
+        $type     = 'code128';
+        $black    = '000000'; // color in hex
+        //DebugBreak();
+      
+        //if(!empty($result)):
+        foreach ($result as $key=>$data) 
+        {
+
+            //First Page ---class instantiation    
+            //$pdf = new FPDF_BARCODE("P","in","A4");
+            $pdf->AddPage();
+            $Y = 0.5;
+            $pdf->SetFillColor(0,0,0);
+            $pdf->SetDrawColor(0,0,0); 
+            $temp = $data['app_No'].'@09@2015@1';
+            $image =  $this->set_barcode($temp);
+            $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
+            $pdf->SetFont('Arial','U',16);
+            $pdf->SetXY( 1.2,0.2);
+            $pdf->Cell(0, 0.2, "Board Of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
+            $pdf->Image(base_url()."assets/img/logo.jpg",0.35,0.2, 0.75,0.75, "JPG", "http://www.bisegrw.com");
+
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(1.7,0.4);
+            $pdf->Cell(0, 0.25, " Migration FORM FOR CLASS ".corr_bank_chall_class." SESSION 2015-2017", 0.25, "C");
+            //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
+            //--------------- Proof Read
+            $ProofReed = "Application No. ".$data['app_No'];
+            $pdf->SetXY(3,0.8);
+            $pdf->SetFont("Arial",'B',12);
+            $pdf->Cell(0, 0.25, $ProofReed  ,0,'C');
+
+            //--------------------------- Form No & Rno
+            $pdf->SetXY(0.2,0.5+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Roll No: _______________",0,'L');
+
+            $pdf->SetXY(0.8,0.5+$Y);
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->Cell( 0.5,0.5,$data['Rno'],0,'L');
+
+            //--------------------------- Institution Code and Name   $user['Inst_Id']. "-". $user['inst_Name']
+            $pdf->SetXY(0.2,0.75+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
+
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.75,0.92+$Y);
+            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
+            $pdf->MultiCell(6,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+
+            //------ Picture Box on Centre      
+            $Y = $Y+0.1;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Personal Information ',1,0,'L',1);
+            //------------- Personal Infor Box
+            //====================================================================================================================
+
+           
+            //  $Y = $Y+0.1;
+
+
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Candidate Name:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.65+$Y);
+            $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
+
+             $pdf->SetXY(0.5,$Y+2);
+           // $pdf->SetXY(3.5+$x,1.65+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father Name:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2);
+            $pdf->Cell(0.5,0.5, strtoupper(@$data["fname"]),0,'L');
+
+
+            $pdf->SetXY(0.5,$Y+2.4);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father CNIC:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.4);
+            $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
+
+            $pdf->Image($path,4.5,1.79+$Y , 0.95, 1.0, "JPG"); //IMAGE_PATH.$data["Sch_cd"].'/'.$data["PicPath"]
+             //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
+            //========================================  Exam Info ===============================================================================            
+           
+            $Y = $Y+2.2;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Migration Information ',1,0,'L',1);
+           
+           $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Migration From:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.80+$Y);
+            $pdf->MultiCell(7,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+           // $pdf->Cell(0.5,0.5,  '',0,'L');
+           
+           
+           $pdf->SetXY(0.5,$Y+2.2);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Migration To:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.35);
+           
+            $pdf->MultiCell(7,0.2,  $data['Migrated_to']. "-". $data['Migrated_name'],0,'L');    
+           
+           
+            $sY = -0.3;//0.5;
+            $pdf->SetXY(0.2,6.1+$sY);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
+            // DebugBreak();
+             $grp_name = $data["grp_cd"];
+            switch ($grp_name) {
+                case '1':
+                    $grp_name = 'SCIENCE WITH BIOLOGY';
+                    break;
+                case '7':
+                    $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
+                    break;
+                case '8':
+                    $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
+                    break;
+                case '2':
+                    $grp_name = 'GENERAL';
+                    break;
+                case '5':
+                    $grp_name = 'DEAF AND DUMB';
+                    break;
+                default:
+                $grp_name = "NO GROUP SELECTED";
+            }
+            
+             $pdf->SetXY(0.2,6.5+$sY);
+           // $pdf->SetFillColor(240,240,240);
+           $pdf->SetFont('Arial','BU',12);
+            $pdf->Cell(8,0.3,'Group:  '.$grp_name,0,'L');
+               $y = $y-1.8;
+            
+             $pdf->SetFont('Arial','B',9);  
+                $pdf->SetFont('Arial','',8);
+                $pdf->SetXY(0.5,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
+                                                                           */
+                /*$pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
+                //------------- sub 2 & 6
+                $pdf->SetXY(0.5,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');    */
+                /*$pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
+                //------------- sub 3 & 7
+                $pdf->SetXY(0.5,7.70+$y);
+                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R');   */
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
+                //------------- sub 4 & 8
+                $pdf->SetXY(0.5,8.05+$y);
+                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,8.05+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');  */
+                //-----------------
+
+                $pdf->SetXY(0.5,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');     */
+
+                //-------------------------
+                $pdf->SetXY(0.5,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R'); */
+
+                //------------------------
+
+                $pdf->SetXY(0.5,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
+
+                //------------------------------
+
+                $pdf->SetXY(0.5,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+
+              /*  $pdf->SetXY(3+$x,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');   */
+            
+
+      
+
+           /*  
+            $pdf->SetXY(0.5,  10.2+$y);
+            $date = strtotime($data['edate']); 
+            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');*/
+            $pdf->SetFont('Arial','UI',10); 
+            $pdf->SetXY(4.6,  10.2+$y);
+            $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
+            //date_format($$data['EDate'], 'd/m/Y H:i:s');
+
+           $pdf->SetXY(0.5,  10.2+$y);
+            $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
+
+            //======================================================================================
+        }
+
+        $pdf->Output($data['app_No'].'.pdf', 'I');
+    }
+      public function Print_migration_Form_Final11th_byRollNo()
+    {
+
+          //DebugBreak();
+        $AppNo = $this->uri->segment(3);
+
+        $this->load->library('session');
+
+        $Logged_In_Array = $this->session->all_userdata();
+        $user = $Logged_In_Array['logged_in'];
+        $this->load->model('Migration_model');
+
+     
+        $result = array('data'=>$this->Migration_model->getinfoAll_byRollNo($AppNo));
+        //Print_Form_Formnowise
+
+
+        if(empty($result['data'])){
+       
+            $this->session->get11threalease('error', $Condition);
+            redirect('Migration/FormPrinting');
+            return;
+
+        }
+           $result = $result['data'];
+         //   print_r($result)     ;
+        $path = $this->generatepath($result[0]['Rno'],$result[0]['class'],$result[0]['iyear'],$result[0]['sess']);
+
+        $this->load->library('PDF_Rotate');
+
+
+        $pdf = new PDF_Rotate('P','in',"A4");
+        //      $this->load->library('PDFF');
+        //        $pdf=new PDFF('P','in',"A4");  
+        $pdf->AliasNbPages();
+        $pdf->SetMargins(0.5,0.5,0.5);
+        //$grp_cd = $this->uri->segment(3);
+
+        $pdf->SetTitle('Print Migration From');
+
+        $fontSize = 10;
+        $marge    = .4;   // between barcode and hri in pixel
+        $x        = 7.5;  // barcode center
+        $y        = 1.2;  // barcode center
+        $height   = 0.35;   // barcode height in 1D ; module size in 2D
+        $width    = .013;  // barcode height in 1D ; not use in 2D
+        $angle    = 0;   // rotation in degrees
+
+        $type     = 'code128';
+        $black    = '000000'; // color in hex
+     //   DebugBreak();
+        //if(!empty($result)):
+        foreach ($result as $key=>$data) 
+        {
+
+            //First Page ---class instantiation    
+            //$pdf = new FPDF_BARCODE("P","in","A4");
+            $pdf->AddPage();
+            $Y = 0.5;
+            $pdf->SetFillColor(0,0,0);
+            $pdf->SetDrawColor(0,0,0); 
+            $temp = $data['app_No'].'@11@2016@1';
+            $image =  $this->set_barcode($temp);
+            $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
+            $pdf->SetFont('Arial','U',16);
+            $pdf->SetXY( 1.2,0.2);
+            $pdf->Cell(0, 0.2, "Board Of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
+            $pdf->Image(base_url()."assets/img/logo.jpg",0.35,0.2, 0.75,0.75, "JPG", "http://www.bisegrw.com");
+
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(1.7,0.4);
+            $pdf->Cell(0, 0.25, " Migration FORM FOR CLASS ".$data['class'].'TH'." SESSION 2015-2017", 0.25, "C");
+            //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
+            //--------------- Proof Read
+            $ProofReed = "Application No. ".$data['app_No'];
+            $pdf->SetXY(3,0.8);
+            $pdf->SetFont("Arial",'B',12);
+            $pdf->Cell(0, 0.25, $ProofReed  ,0,'C');
+
+            //--------------------------- Form No & Rno
+            $pdf->SetXY(0.2,0.5+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Roll No: _______________",0,'L');
+
+            $pdf->SetXY(0.8,0.5+$Y);
+            $pdf->SetFont('Arial','IB',12);
+            $pdf->Cell( 0.5,0.5,$data['Rno'],0,'L');
+
+            //--------------------------- Institution Code and Name   $user['Inst_Id']. "-". $user['inst_Name']
+            $pdf->SetXY(0.2,0.75+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Institution Code/Name:",0,'L');
+
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(1.75,0.92+$Y);
+            // $pdf->MultiCell(20, .5, $user['Inst_Id']."-".$user['inst_Name'], 0);
+            $pdf->MultiCell(6,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+
+            //------ Picture Box on Centre      
+            $Y = $Y+0.1;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Personal Information ',1,0,'L',1);
+            //------------- Personal Infor Box
+            //====================================================================================================================
+
+           
+            //  $Y = $Y+0.1;
+
+
+
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Candidate Name:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.65+$Y);
+            $pdf->Cell(0.5,0.5,  strtoupper($data["name"]),0,'L');
+
+             $pdf->SetXY(0.5,$Y+2);
+           // $pdf->SetXY(3.5+$x,1.65+$Y);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father Name:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2);
+            $pdf->Cell(0.5,0.5, strtoupper(@$data["fname"]),0,'L');
+
+
+            $pdf->SetXY(0.5,$Y+2.4);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Father CNIC:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.4);
+            $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
+
+            //$pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],4.5,1.79+$Y , 0.95, 1.0, "JPG"); //
+             $pdf->Image( $path,4.5,1.79+$Y , 0.95, 1.0, "JPG");  
+            //========================================  Exam Info ===============================================================================            
+           
+            $Y = $Y+2.2;
+            $x = 1.05;
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetXY(0.2,1.28+$Y);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'Migration Information ',1,0,'L',1);
+           
+           $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(0.5,1.65+$Y);
+            $pdf->Cell( 0.5,0.5,"Migration From:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,1.80+$Y);
+            $pdf->MultiCell(7,0.2,  $user['Inst_Id']. "-". $user['inst_Name'],0,'L');    
+           // $pdf->Cell(0.5,0.5,  '',0,'L');
+           
+           
+           $pdf->SetXY(0.5,$Y+2.2);
+            $pdf->SetFont('Arial','',10);
+            $pdf->Cell( 0.5,0.5,"Migration To:",0,'L');
+            $pdf->SetFont('Arial','B',9);
+            $pdf->SetXY(1.7,$Y+2.35);
+           
+            $pdf->MultiCell(7,0.2,  $data['Migrated_to']. "-". $data['Migrated_name'],0,'L');    
+           
+           
+            $sY = -0.3;//0.5;
+            $pdf->SetXY(0.2,6.1+$sY);
+            $pdf->SetFillColor(240,240,240);
+            $pdf->Cell(8,0.3,'SUBJECT INFORMATION',1,0,'L',1);
+            // DebugBreak();
+             $grp_name = $data["grp_cd"];
+            switch ($grp_name) {
+                    case '1':
+                        $grp_name = 'Pre-Medical';
+                        break;
+                    case '2':
+                        $grp_name = 'Pre-Engineering';
+                        break;
+                    case '3':
+                        $grp_name = 'Humanities';
+                        break;
+                    case '4':
+                        $grp_name = 'General Science';
+                        break;
+                    case '5':
+                        $grp_name = 'Commerce';
+                        break;
+                    case '6':
+                        $grp_name = 'Home Economics';
+                        break;
+                    default:
+                        $grp_name = "No Group Selected.";
+                }
+            
+             $pdf->SetXY(0.2,6.5+$sY);
+           // $pdf->SetFillColor(240,240,240);
+           $pdf->SetFont('Arial','BU',12);
+            $pdf->Cell(8,0.3,'Group:  '.$grp_name,0,'L');
+               $y = $y-1.8;
+            
+             $pdf->SetFont('Arial','B',9);  
+                $pdf->SetFont('Arial','',8);
+                $pdf->SetXY(0.5,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.($data['sub1_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '1. '.(@$data['N_sub1_NAME']),0,'L');
+                                                                           */
+                /*$pdf->SetXY(3+$x,7.05+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');*/
+                //------------- sub 2 & 6
+                $pdf->SetXY(0.5,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.($data['sub2_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '2. '.(@$data['N_sub2_NAME']),0,'R');    */
+                /*$pdf->SetXY(3+$x,7.35+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');*/
+                //------------- sub 3 & 7
+                $pdf->SetXY(0.5,7.70+$y);
+                $pdf->Cell(0.5,0.5,  '3. '.($data['sub3_NAME']),0,'L');
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub3_NAME']),0,'R');   */
+                /*$pdf->SetXY(3+$x,7.70+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');*/
+                //------------- sub 4 & 8
+                $pdf->SetXY(0.5,8.05+$y);
+                $pdf->Cell(0.5,0.5, '4. '.($data['sub4_NAME']),0,'L');
+               /* $pdf->SetXY(3+$x,8.05+$y);
+                $pdf->Cell(0.5,0.5, '3. '.($data['N_sub4_NAME']),0,'L');  */
+                //-----------------
+
+                $pdf->SetXY(0.5,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['sub5_NAME']),0,'L');
+
+               /* $pdf->SetXY(3+$x,8.40+$y);
+                $pdf->Cell(0.5,0.5, '5. '.($data['N_sub5_NAME']),0,'L');     */
+
+                //-------------------------
+                $pdf->SetXY(0.5,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['sub6_NAME']),0,'R');
+
+               /* $pdf->SetXY(3+$x,8.75+$y);
+                $pdf->Cell(0.5,0.5, '6. '.($data['N_sub6_NAME']),0,'R'); */
+
+                //------------------------
+
+                $pdf->SetXY(0.5,9.10+$y);
+                if(isset($data['sub7_NAME']))
+                {
+                $pdf->Cell(0.5,0.5, '7. '.($data['sub7_NAME']),0,'R');
+                }
+                else{ $pdf->Cell(0.5,0.5, '',0,'R'); }
+
+               /* $pdf->SetXY(3+$x,9.10+$y);
+                $pdf->Cell(0.5,0.5, '7. '.($data['N_sub7_NAME']),0,'R');   */
+
+                //------------------------------
+
+               // $pdf->SetXY(0.5,9.45+$y);
+              //  $pdf->Cell(0.5,0.5, '8. '.($data['sub8_NAME']),0,'L');
+
+              /*  $pdf->SetXY(3+$x,9.45+$y);
+                $pdf->Cell(0.5,0.5, '8. '.($data['N_sub8_NAME']),0,'L');   */
+            
+
+      
+
+           /*  
+            $pdf->SetXY(0.5,  10.2+$y);
+            $date = strtotime($data['edate']); 
+            $pdf->Cell(8,0.24,'Feeding Date: '. date('d-m-Y h:i:s a', $date) ,0,'L','');*/
+            $pdf->SetFont('Arial','UI',10); 
+            $pdf->SetXY(4.6,  10.2+$y);
+            $pdf->Cell(8,0.24,'Signature & Official stamp of the Head of the Institute: ' ,0,'L','');
+            //date_format($$data['EDate'], 'd/m/Y H:i:s');
+
+           $pdf->SetXY(0.5,  10.2+$y);
+            $pdf->Cell(8,0.24,'Print Date: '. date('d-m-Y h:i:s a'),0,'L','');
+
+            //======================================================================================
+        }
+
+        $pdf->Output($data['app_No'].'.pdf', 'I');
     }
     public function commonheader($data)
     {
@@ -5335,5 +5376,86 @@ class Migration extends CI_Controller {
         $store_image = imagepng($file,BARCODE_PATH."{$code}.png");
         return $code.'.png';
 
+    }
+      private function generatepath($rno,$class,$year,$sess)
+    {
+        $basepath = DIRPATHMIG2;
+        $clsvr = '';
+        $picyear= substr($year, -2);
+        $folderno = '';
+        if($class == 10  OR $class == 9)
+        {
+            $clsvr = 'MA'; 
+
+        }
+        else if($class == 12  OR $class == 11)
+        {
+            $clsvr = 'IA';
+        }
+
+        if($rno>=100001 && $rno<=150000)
+        {
+            $folderno = '1st';
+        }
+        else if($rno>=150001 && $rno<=200000)
+        {
+            $folderno = '2nd';
+        }
+        else if($rno>=200001 && $rno<=250000)
+        {
+            $folderno = '3rd';
+        }
+        else if($rno>=250001 && $rno<=300000)
+        {
+            $folderno = '4th';
+        }
+        else if($rno>=300001 && $rno<=350000)
+        {
+            if($class ==  10 OR $class ==  9)
+            $folderno = '5th';
+            else if($class ==  12 OR $class ==  11)
+            $folderno = '6th';
+        }
+        else if($rno>=350001 && $rno<400000)
+        {
+             if($class ==  10 OR $class ==  9)
+            $folderno = '6th';
+            else if($class ==  12 OR $class ==  11)
+            $folderno = '7th';
+        }
+        else if($rno>=400001 && $rno<=450000)
+        {
+            if($class ==  10 OR $class ==  9)
+            $folderno = '7th';
+            else if($class ==  12 OR $class ==  11)
+            $folderno = '8th';
+           
+        }
+        else if($rno>=450001 && $rno<=500000)
+        {
+             if($class ==  10 OR $class ==  9)
+            $folderno = '8th';
+            else if($class ==  12 OR $class ==  11)
+            $folderno = '9th';
+        }
+        else if($rno>=500001 && $rno<550000)
+        {
+            $folderno = '9th';
+        }
+        else if($rno>=550001 && $rno<600000)
+        {
+            $folderno = '10th';
+        }
+         else if($rno>=600001 && $rno<650000)
+        {
+            $folderno = '11th';
+        }
+
+
+        $pic = 'Pic'.$picyear.'-'.$clsvr ;
+
+        $foldername =   $clsvr.  $folderno .$picyear;
+        $basepath =  $basepath.'\\'.$pic.'\\'. $foldername.'\\';
+        return  $basepath.$rno.".jpg";
     }
 }

@@ -12,7 +12,7 @@
                     </div>
                     <div class="widget-body">
                         <h4>
-                            View All Submited Forms:   
+                            View All Submited Forms:
                             </br>
                             <img src="../assets/img/OnlineCorrectoin.jpg" alt="" style="    margin-left: 225px;">
                         </h4>

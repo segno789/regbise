@@ -156,7 +156,7 @@ class Registration_model extends CI_Model
         $query = $this->db->query("Registration..MA_P1_Reg_Adm2016_sp_insert '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,                                           $sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,0,0,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
 
-        return $query->result_array();
+         return $query->result_array();
     }      
     public function EditPicEnrolement($inst_cd)
     {
@@ -246,20 +246,39 @@ class Registration_model extends CI_Model
         $regoldclass = $data['regoldclass'];
         $regoldyear = $data['regoldyear'];
         $isreadm = $data['isreadm'];
-        //  DebugBreak();
+      //  DebugBreak();
         $query = $this->db->query("Registration..MA_P1_Reg_Adm2016_sp_Update '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$sex,$rel,'$addr',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$regoldrno,$regoldclass,$regoldyear,$regoldsess,$isreadm");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
-        return $query->result_array();
-        // return true;
+         return $query->result_array();
+       // return true;
     }
     public function EditEnrolement($inst_cd)
     {
 
+        // DebugBreak();
+        //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
+        //sp_get_regInfo_spl_case
+
         $query = $this->db->query("Registration..sp_get_regInfo $inst_cd,9,2016,1");    
+
+
+
+
+
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
             return $query->result_array();
+            // $q1 = array('stdinfo'=>$query->result_array()) ;
+            //            for($i= 0; $i<$rowcount; $i++){
+            //            $q1['stdinfo'][$i]['sub1'];
+            //            }
+            //            $q1['stdinfo']['sub1'];
+            //            $q2 = $this->db->query("select SUB_ABR from tblsubject_newschm where SUB_CD in (1,2,3,4,5)");
+            //            $q2 = array('stdinfo_sub'=>$q2->result_array()) ;
+            //            $query = array('stdinfo_reg'=>$q1,'stdinfo_sub'=>$q2);
+
+
         }
         else
         {
@@ -268,48 +287,30 @@ class Registration_model extends CI_Model
     }
     public function ReleaseBatch_INSERT($allinputdata){
         // DebugBreak();
-        $Inst_cd = $allinputdata['Inst_Id'];
-        $batchid = $allinputdata['batchId'];
-        $reason = $allinputdata['reason'];
-        $branch = $allinputdata['branch'];
-        $challan = $allinputdata['challan'];
-        $amount = $allinputdata['amount'];
-        $date = $allinputdata['date'];
-
-        $query = $this->db->query("Registration..ReleaseBatch_INSERT $Inst_cd,$batchid,'$reason','$branch',$challan,$amount,'$date'");
+         $Inst_cd = $allinputdata['Inst_Id'];
+         $batchid = $allinputdata['batchId'];
+         $reason = $allinputdata['reason'];
+         $branch = $allinputdata['branch'];
+         $challan = $allinputdata['challan'];
+         $amount = $allinputdata['amount'];
+         $date = $allinputdata['date'];
+         
+          $query = $this->db->query("Registration..ReleaseBatch_INSERT $Inst_cd,$batchid,'$reason','$branch',$challan,$amount,'$date'");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
-    }
-
-    public function Print_challan_Form($fetch_data)
-    {
-        $Inst_cd = $fetch_data['Inst_cd'];
-        $Batch_Id = $fetch_data['Batch_Id'];
-
-        // DebugBreak();
-        $query = $this->db->query("Registration..sp_get_Registration_9th_regular_Batch_challan $Inst_cd,$Batch_Id");
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-            return $query->result_array();
-        }
-        else
-        {
-            return  false;
-        }
     }
     public function EditEnrolement_data($formno,$year,$inst_cd)
     {
 
-        //  DebugBreak(); 
-        if($year == 2015){
-            $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
-        }
-        else{
-            $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
-        }
-
-
+       //  DebugBreak(); 
+         if($year == 2015){
+        $query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' =>9, 'iyear' => 2016, 'regpvt'=>1,'formNo'=>$formno));     
+         }
+         else{
+        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>$year,'sess'=>1));     
+         }
+        
+        
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -328,13 +329,13 @@ class Registration_model extends CI_Model
         return true;
 
     }
-    public function GetFormNo($Inst_Id)
+     public function GetFormNo($Inst_Id)
     {
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno = $this->db->get_where('Registration..MA_P1_Reg_Adm2016', array('sch_cd' => $Inst_Id));
         $rowcount = $formno->num_rows();
-        //$rowcount = 1258;
+//$rowcount = 1258;
         if($rowcount == 0 )
         {
             $formno =  ($Inst_Id.'0001' );
@@ -356,7 +357,7 @@ class Registration_model extends CI_Model
             {
                 $formno = $row[0]['formno']+1;
             }
-
+            
             return $formno;
         }
 
@@ -400,11 +401,11 @@ class Registration_model extends CI_Model
             return  false;
         }
     }
-    public function getuser_info($User_info_data)
+     public function getuser_info($User_info_data)
     {
         // DebugBreak();
         $Inst_cd = $User_info_data['Inst_Id'];
-
+        
         $query = $this->db->get_where('Admission_online..tblinstitutes_all',  array('Inst_cd' => $Inst_cd));
         $rowcount = $query->num_rows();
         if($rowcount > 0)
@@ -420,16 +421,16 @@ class Registration_model extends CI_Model
     }
     public function readmission_check($User_info_data)
     {
-
+        
         $Inst_cd = $User_info_data['Inst_Id'];
         $RollNo = $User_info_data['RollNo'];
         $spl_cd = $User_info_data['spl_case'];
 
         // $forms_id = $User_info_data['forms_id'];
-
+        
         $where = ' (spl_cd =  17 OR  spl_cd = 70 OR status=4 OR status=2)';
         $this->db->where('rno', $RollNo);
-        //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
+     //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
         $query = $this->db->where($where);
         $query = $this->db->get(RE_ADMISSION_TBL);
         $rowcount = $query->num_rows();
@@ -437,7 +438,7 @@ class Registration_model extends CI_Model
         {
 
             $result_1 = $query->result_array();
-
+           
             return  $result_1;
         }
         else
@@ -589,7 +590,24 @@ class Registration_model extends CI_Model
             return  false;
         }
     }
-    public function forwarding_pdf_final($fetch_data)
+     public function Print_challan_Form($fetch_data)
+    {
+        $Inst_cd = $fetch_data['Inst_cd'];
+        $Batch_Id = $fetch_data['Batch_Id'];
+
+        // DebugBreak();
+        $query = $this->db->query("Registration..sp_get_Registration_9th_regular_Batch_challan $Inst_cd,$Batch_Id");
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+       public function forwarding_pdf_final($fetch_data)
     {
         //DebugBreak();
         $Inst_cd = $fetch_data['Inst_cd'];
@@ -604,7 +622,6 @@ class Registration_model extends CI_Model
             return  false;
         }
     }
-    
     public function Spl_case_std_list($myinfo)
     {
 

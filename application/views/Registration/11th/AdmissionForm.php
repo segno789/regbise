@@ -116,7 +116,7 @@
                                         Speciality:
                                     </label> 
                                     <select id="speciality"  class="span3" name="speciality">
-                                        <option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option> <option value='2'>Board Employee</option>
+                                        <option value='0' selected='selected'>None</option>  <option value='1'>Deaf &amp; Dumb</option><option value='3'>Blind</option> <option value='2'>Board Employee</option>
                                     </select>
                                 </div>
                             </div>

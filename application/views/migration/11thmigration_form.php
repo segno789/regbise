@@ -91,7 +91,7 @@
                                      <?php 
                                             foreach($install  as $key => $value)
                                             {
-                                                echo  '<option value="'.$key.'"> '.$key.'-'.$value.'</option>'; 
+                                                echo  '<option value="'.$value['inst_cd'].'"> '.$value['inst_cd'].'-'.$value['name'].'</option>'; 
 
                                             }
 

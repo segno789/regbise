@@ -1,3 +1,75 @@
+<?php
+     function generatepath($rno,$class,$year,$sess)
+    {
+      $basepath = DIRPATH;
+      $clsvr = '';
+      $picyear= substr($year, -2);
+      $folderno = '';
+      if($class == 10  OR $class == 9)
+      {
+         $clsvr = 'MA'; 
+        
+      }
+      else if($class == 12  OR $class == 11)
+      {
+          $clsvr = 'IA';
+      }
+
+      if($rno>100001 && $rno<=150000)
+      {
+          $folderno = '1st';
+      }
+      else if($rno>150001 && $rno<=200000)
+      {
+          $folderno = '2nd';
+      }
+      else if($rno>200001 && $rno<=250000)
+      {
+          $folderno = '3rd';
+      }
+      else if($rno>250001 && $rno<=300000)
+      {
+          $folderno = '4th';
+      }
+      else if($rno>300001 && $rno<=350000)
+      {
+          $folderno = '5th';
+      }
+      else if($rno>350001 && $rno<400000)
+      {
+          $folderno = '6th';
+      }
+      else if($rno>400001 && $rno<=450000)
+      {
+          $folderno = '7th';
+      }
+      else if($rno>450001 && $rno<=450000)
+      {
+          $folderno = '8th';
+      }
+      else if($rno>450001 && $rno<500000)
+      {
+          $folderno = '9th';
+      }
+      else if($rno>500001 && $rno<550000)
+      {
+          $folderno = '10th';
+      }
+      else if($rno>550001 && $rno<600000)
+      {
+          $folderno = '11th';
+      }
+      
+      
+      $pic = 'Pic'.$picyear.'-'.$clsvr ;
+      
+      $foldername =   $clsvr.  $folderno .$picyear;
+      $basepath =  $basepath.'\\'.$pic.'\\'. $foldername.'\\';
+        return  $basepath;
+    }
+
+?>
+
 <div class="dashboard-wrapper class wysihtml5-supported" style="background: white;">
 <div class="left-sidebar">
     <div class="row-fluid">
@@ -5,17 +77,17 @@
             <div class="widget">
                 <div class="widget-header">
                     <div class="title">
-                        11th Migration by Form No.<a id="redgForm" data-original-title=""></a>
+                        10th Migration by Roll No.<a id="redgForm" data-original-title=""></a>
                     </div>
                 </div>
-             <!--   <div class="widget-body">
-                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/11" method="post" enctype="multipart/form-data">
+                <div class="widget-body">
+                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/10" method="post" enctype="multipart/form-data">
                         <div class='control-group'>
                             <div class='controls controls-row'>
                                 <label class='control-label span2' >
-                                    FORM NO:
+                                    Roll Number:
                                 </label>
-                                <input class='span3' type='number' id='txtformNo_search' style='text-transform: uppercase;' name='txtformNo_search' placeholder='FORM NO.' maxlength="10"  required='required' oninput="maxLengthCheck(this)">
+                                <input class='span3' type='number' id='txtformNo_search' style='text-transform: uppercase;' name='txtformNo_search' placeholder='Roll Number.' maxlength='6' min='100001' max="399999"  required='required' oninput="maxLengthCheck(this)">
                                   <label class='control-label span2' >
                                    Inst. Code:
                                 </label>
@@ -34,11 +106,11 @@
                         </div>
 
                     </form>
-                </div>    -->
+                </div>
                 
                   <div class="widget-body">
                         <h4>
-                            All OneWindow 11th Migration Forms:
+                            All OneWindow 10th Migration Forms:
                         </h4>
                         <hr>
                         <div id="dt_example" class="example_alt_pagination">
@@ -49,10 +121,7 @@
                                             Sr.No.
                                         </th>
                                         <th style="width:5%">
-                                            Form No.
-                                        </th>
-                                        <th style="width:5%">
-                                            Application No.
+                                            Roll No.
                                         </th>
                                         <th style="width:10%">
                                             Name
@@ -60,15 +129,10 @@
                                         <th style="width:10%">
                                             Father's Name
                                         </th>
-                                       <!-- <th style="width:6%" class="hidden-phone">
-                                            DOB
-                                        </th>  -->
-                                        <th style="width:10%" class="hidden-phone">
-                                            Subject Group
-                                        </th>
-                                         <th style="width:5%" class="hidden-phone">
+                                          <th style="width:5%">
                                             Picture
                                         </th>
+                                      
                                         <th style="width:8%" class="hidden-phone" >
                                             Action
                                         </th>
@@ -83,50 +147,19 @@
                                         $grp_name='';                             
                                         foreach($migration as $key=>$vals):
                                         $n++;
-                                        $formno = !empty($vals["Formno"])?$vals["Formno"]:"N/A";
-                                        $app_no = !empty($vals["app_no"])?$vals["app_no"]:"N/A";
-                                         $app_txt = $app_no;
-                                         if($app_no == 'N/A')
-                                         {
-                                           $app_txt =  -1;  
-                                         }
-                                        $grp_name = $vals["RegGrp"];
-                                        switch ($grp_name) {
-                                                            case '1':
-                                                                $grp_name = 'Pre-Medical';
-                                                                break;
-                                                            case '2':
-                                                                $grp_name = 'Pre-Engineering';
-                                                                break;
-                                                            case '3':
-                                                                $grp_name = 'Humanities';
-                                                                break;
-                                                            case '4':
-                                                                $grp_name = 'General Science';
-                                                                break;
-                                                            case '5':
-                                                                $grp_name = 'Commerce';
-                                                                break;
-                                                            case '6':
-                                                                $grp_name = 'Home Economics';
-                                                                break;
-                                                            default:
-                                                                $grp_name = "No Group Selected.";
-                                                        }
-
+                                        $formno = !empty($vals["rno"])?$vals["rno"]:"N/A";
+                                        $path = generatepath($vals["rno"],9,2016,1).$vals["rno"].'.jpg';
+                                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                                        $data = file_get_contents($path);
+                                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                                         echo '<tr  >
                                         <td>'.$n.'</td>
                                         <td>'.$formno.'</td>
-                                        <td>'.$app_no.'</td>
                                         <td>'.$vals["name"].'</td>
-                                        <td>'.$vals["fname"].'</td>
-                                       
-                                        <td>'.$grp_name.'</td>
+                                        <td>'.$vals["fname"].'</td>';
 
-                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$vals['Migrated_From'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
-
-                                        echo'<td>
-                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].','.$app_txt.')">Update Migrate</button>
+                                        echo'<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"></td><td>
+                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].')">Update Migrate</button>
                                         </td>
                                         </tr>';
                                         endforeach;
@@ -163,13 +196,13 @@
             }
         });
     }
-      function maxLengthCheck(object)
+    function maxLengthCheck(object)
   {
     if (object.value.length > object.maxLength)
       object.value = object.value.slice(0, object.maxLength)
   }
-    function migrateto(formno,inst_cd,app_no)
+    function migrateto(formno,inst_cd)
     {
-        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/11/"+formno+"/"+inst_cd+'/'+app_no; 
+        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/10/"+formno+"/"+inst_cd; 
     }
 </script>
