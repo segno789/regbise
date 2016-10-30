@@ -1961,6 +1961,8 @@ if(isReadm == 0)
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
 
+        
+        debugger;
 
         if((sub7 == sub8)|| (sub7 == sub6))
         {
@@ -1969,14 +1971,29 @@ if(isReadm == 0)
             return;
         }
         var valtext = 0;
+        var vals = 0;
+        var vals2 = 0;
         for(var i =0 ; i<langascd.length; i++)
         {
             if(sub8 == langascd[i])
-            {
-                valtext =1;
+            {  
+                vals =1;
             }
+            
         }
-        if(valtext>0)
+        for(var i =0 ; i<langascd.length; i++)
+        {
+            if(sub7 == langascd[i])
+            {  
+                vals2 =1;
+            }
+            
+        }
+        if(vals > 0 && vals2 > 0)
+        {
+            valtext = 1;
+        }
+        if(valtext>0 )
         {
             alertify.error("Please choose Different Subjects as Double Language is not allowed" );
             $("#sub7").val('0');  
@@ -2002,14 +2019,28 @@ if(isReadm == 0)
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-
-        var valtext = 0;
+         var valtext = 0;
+       var vals = 0;
+        var vals2 = 0;
+        for(var i =0 ; i<langascd.length; i++)
+        {
+            if(sub8 == langascd[i])
+            {  
+                vals =1;
+            }
+            
+        }
         for(var i =0 ; i<langascd.length; i++)
         {
             if(sub7 == langascd[i])
-            {
-                valtext =1;
+            {  
+                vals2 =1;
             }
+            
+        }
+        if(vals > 0 && vals2 > 0)
+        {
+            valtext = 1;
         }
         if(valtext>0)
         {

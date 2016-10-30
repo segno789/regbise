@@ -2214,21 +2214,21 @@ class Registration extends CI_Controller {
         $displayfeetitle[] =  'Total Processing Fee';    
 
         $feestructure[]    =  $result[0]['Total_RegistrationFee'];   
-        $displayfeetitle[] =  'Total Admission Fee';   
+        $displayfeetitle[] =  'Total Registration Fee';   
 
         $feestructure[]    =  $result[0]['Total_LateRegistrationFee']; 
-        $displayfeetitle[] =  'Total Late Admission Fee'; 
+        $displayfeetitle[] =  'Total Late Registration Fee'; 
         /* $feestructure[]    =  $result[0]['TotalCertificateFee']; 
         $displayfeetitle[] =  'Total Certificate Fee';  */  
 
         $turn=1;     
         $pdf=new PDF_RotateWithOutPage("P","in","A4");
         $pdf->AliasNbPages();
-        $pdf->SetTitle("Challan Form | Admission inter 2016 Supplemantry Batch Form Fee");
+        $pdf->SetTitle("Challan Form | Registration 9th 2016-2018 Batch Form Fee");
         $pdf->SetMargins(0.5,0.5,0.5);
         $pdf->AddPage();
         $generatingpdf=false;
-        $challanCopy=array(1=>"Depositor Copy",  2=>"Admission Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
+        $challanCopy=array(1=>"Depositor Copy",  2=>"Registration Branch Copy",3=>"Bank Copy", 4=>"Board Copy",);
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Admission Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
         $challanNo = $result[0]['Challan_No']; 
 
@@ -2312,7 +2312,7 @@ class Registration extends CI_Controller {
         //  $pdf->SetDrawColor(0,0,0);
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
-
+     //  DebugBreak();
         $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@09@2016@1';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
@@ -2321,6 +2321,7 @@ class Registration extends CI_Controller {
         $yy = 0.05;
         $dyy = 0.1;
         $corcnt = 0;
+        $lastdate = date("d-m-Y", strtotime($lastdate));
         for ($j=1;$j<=4;$j++) 
         {
 
@@ -2375,7 +2376,7 @@ class Registration extends CI_Controller {
             $pdf->SetFillColor(255,255,255);
             $pdf->SetTextColor(255,255,255);
             $pdf->SetXY(0.5,$y+$dy-0.01);
-            $pdf->Cell(0, 0.25, "Due Date: ".$user_info['rule_fee'][0]['End_Date'], 0.25, "C");
+            $pdf->Cell(0, 0.25, "Due Date: ".$lastdate, 0.25, "C");
             $pdf->SetTextColor(0,0,0);
             $pdf->SetFont('Arial','BI',8);
             $pdf->SetXY(2.0,$y+$dy-0.04);
@@ -3360,7 +3361,7 @@ class Registration extends CI_Controller {
         
         $boxWidth = 2.9;
         
-        
+         
         
          $pdf->SetXY($xx,$yy);
         $pdf->SetFillColor(240,240,240);
