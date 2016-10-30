@@ -542,7 +542,6 @@ class Registration extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $this->commonheader($userinfo);
         $error = array();
-
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
