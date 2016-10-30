@@ -1834,7 +1834,7 @@ class Registration extends CI_Controller {
         //DebugBreak();
         if(!( $this->session->flashdata('error'))){
 
-            $error_msg = "0";    
+            $error_msg = "";    
         }
         else{
             $error_msg = $this->session->flashdata('error');
@@ -1850,7 +1850,7 @@ class Registration extends CI_Controller {
         $error['excep'] = '';
         $error['gender'] = $userinfo['gender'];
         $error['isrural'] = $userinfo['isrural'];
-        $error['error_msg'] = $error_msg;
+        $error['error'] = $error_msg;
         $this->commonheader($data);
         $this->load->view('Registration/9th/FormPrinting.php',$error);
         // $this->load->view('common/footer.php');
@@ -1861,7 +1861,7 @@ class Registration extends CI_Controller {
     public function Reg_Cards_Printing_9th()
     {
 
-        $this->load->library('session');
+         $this->load->library('session');
       //  DebugBreak();
         if(!( $this->session->flashdata('error'))){
 
@@ -1887,7 +1887,6 @@ class Registration extends CI_Controller {
         //$this->load->view('common/footer.php');
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js")));
 
-        //$this->load->model('Registration_model');
     }
     public function Reg_Cards_Printing_9th_PDF()
     {
@@ -1951,8 +1950,7 @@ class Registration extends CI_Controller {
             return;
 
         }
-        $temp = $user['Inst_Id'].'09-2016-18';
-        $image =  $this->set_barcode($temp);
+       
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
         $this->load->library('PDF_Rotate');
@@ -1968,6 +1966,16 @@ class Registration extends CI_Controller {
         $inc=0 ;
         foreach ($result as $key=>$data) 
         {
+           // DebugBreak();
+            
+            if($data['strRegNo'] == NULL)
+            {
+               $data['strRegNo'] = $this->Registration_model->generateStrNo($data['sex'],$data['formNo']) ;
+            }
+            
+            $temp = str_replace("-","",$data['strRegNo']).'@09@2016-18';
+            $image =  $this->set_barcode($temp);
+            
             $generatingpdf=true;
             if($turn==1){$pdf->AddPage(); $dy=0.1;} else {
                 if($turn==2){$dy=3.8;} else {$dy=7.5; $turn=0;}
@@ -1987,7 +1995,7 @@ class Registration extends CI_Controller {
             $pdf->Cell(0, 0.25, "".Reg_Cards_9th_Heading." REGULAR STUDENT REGISTRATION CARD SESSION (".CURRENT_SESS.")", 0.25, "C");
 
             $pdf->SetDrawColor(0,0,0);
-            //$pdf->PrintBarcode(6.2,0.25+$dy,trim(str_replace("-","",$data['StrRegNo'])),0.25,0.013);    
+          //  $pdf->PrintBarcode(6.2,0.25+$dy,trim(str_replace("-","",$data['strRegNo'])),0.25,0.013);    
 
             //--------------------------- Form No & Rno
             $pdf->SetXY(6,$y+$dy+0.1);
@@ -2008,6 +2016,9 @@ class Registration extends CI_Controller {
             $pdf->Cell(0.5,0.5, $data['strRegNo'],0,'L');    
             //$pdf->Cell(0.5,0.5, $data['StrRegNo'],0,'L');    
 
+            $pdf->Image(BARCODE_PATH.$image,4.1,$y+0.23+$dy, 1.8, 0.20, "PNG"); 
+            
+            
             //--------------------------- Institution Code and Name  
             $pdf->SetXY(0.2,$y+0.35+$dy);
             $pdf->SetFont('Arial','',10);
@@ -2588,7 +2599,7 @@ class Registration extends CI_Controller {
             return;
 
         }
-        $temp = $user['Inst_Id'].'09-2016-18';
+        $temp = $user['Inst_Id'].'@09@2016@18';
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -2793,7 +2804,7 @@ class Registration extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Registration_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-        $temp = $user['Inst_Id'].'09-2016-18';
+        $temp = $user['Inst_Id'].'@09@2016-18';
         $image =  $this->set_barcode($temp);
 
           //DebugBreak();    
@@ -3211,7 +3222,7 @@ class Registration extends CI_Controller {
         $result = array('data'=>$this->Registration_model->forwarding_pdf_final($fetch_data),'inst_Name'=>$user['inst_Name']);    
 
         if(empty($result['data'])){
-        $this->session->set_flashdata('error', $Condition);
+        $this->session->set_flashdata('error', 'No Record Found');
         redirect('Registration/FormPrinting');
         return; }
 

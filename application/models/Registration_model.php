@@ -705,5 +705,34 @@ class Registration_model extends CI_Model
             return false;
         }
     }
+    
+    public function generateStrNo($sex,$fromno)
+    {
+        $query = $this->db->query("select max(regno) as regno from Registration..regcard9th where sex=$sex ");
+        $maxnumber = $query->result_array()[0]['regno'];
+        $maxnumber = $maxnumber+1;
+        $data2 = array(
+            'regno'=>$maxnumber,
+            'sex'=>$maxnumber,
+            'formno'=>$fromno,
+            'strRegNo'=>'2-1-'.$maxnumber.'-16',
+        );
+        $res = $this->db->insert("Registration..regcard9th", $data2);
+
+
+        $data2 = array(
+            'strRegNo'=>'2-1-'.$maxnumber.'-16',
+        );
+        $this->db->where('formno',$fromno);
+        $res =  $this->db->update("Registration..MA_P1_Reg_Adm2016", $data2);
+
+        if ($res === FALSE) {
+            return -1; // Or do whatever you gotta do here to raise an error
+        } else {
+            return '2-1-'.$maxnumber.'-16';
+        }  
+
+         
+    }
 }
 ?>
