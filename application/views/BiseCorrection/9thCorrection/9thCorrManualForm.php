@@ -19,12 +19,16 @@ header("Pragma: no-cache");
                     </div>
                     <div class="widget-body">
 
-                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/Registration/NewEnrolment_update" method="post" enctype="multipart/form-data">
-                       
+                        <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>/index.php/BiseCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
+                                <?php
+                                
+                           $Inst_Id= $grp_cd->Inst_cd;
+                                 ?>
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
-                                <div class="controls controls-row"> 
+                                <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
+                                    <input type="hidden" class="span2 hidden" id="Inst_Id" name="Inst_Id" value="<?php echo $Inst_Id; ?>">
                                      <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
                                       <img src="<?=base_url()?>assets/img/upalodimage.jpg" alt="" >
                                     </label> 
@@ -47,11 +51,11 @@ header("Pragma: no-cache");
                                     Candidate Name :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?>  >
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  //if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?>  >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60" value="<?php echo  $data['0']['Fname']; ?>" <?php //if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -65,7 +69,7 @@ header("Pragma: no-cache");
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?> required="required">
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1" value="<?php echo  $data['0']['FNIC']; ?>" <?php //if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'";  ?> required="required">
                                 </div>
                             </div>
 
@@ -80,7 +84,7 @@ header("Pragma: no-cache");
                                     $source = $data['0']['Dob'];;
                                     $date = new DateTime($source);
                                     echo $date->format('d-m-Y'); 
-                                     ?>" required="required" readonly="readonly"  <?php if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'"; ?> >
+                                     ?>" required="required" readonly="readonly"  <?php //if($isReAdm==1 || $isReAdm==2) echo "readonly='readonly'"; ?> >
 
                                     <label class="control-label span2" >
                                         Mobile Number :
@@ -285,8 +289,9 @@ header("Pragma: no-cache");
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group">
                                     <?php
-                                   // DebugBreak();
+                                  //  DebugBreak();
                                         $grp = $data[0]['RegGrp'];
+                                        $grp_cd =   $grp_cd->allowed_mGrp;
                                           $subgroups =  split(',',$grp_cd);
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )

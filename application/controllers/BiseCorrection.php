@@ -939,6 +939,7 @@ class BiseCorrection extends CI_Controller {
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
+            
             //  $isReAdm = $RegStdData['data'][0]['isreadm'];
             //  $RegStdData['isReAdm']=$isReAdm;
             //  $RegStdData['Oldrno']=0;
@@ -948,6 +949,22 @@ class BiseCorrection extends CI_Controller {
         else{
             $error['excep'] = '';
         }
+        if($this->session->flashdata('error_manualentry9th')){
+            //DebugBreak();
+
+            //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
+           
+            $error['error_manualentry9th']='Updated Successfully';
+            //  $isReAdm = $RegStdData['data'][0]['isreadm'];
+            //  $RegStdData['isReAdm']=$isReAdm;
+            //  $RegStdData['Oldrno']=0;
+
+
+        }
+        else{
+            $error['error_manualentry9th']= '';
+        }
+        //error_manualentry9th
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
@@ -990,12 +1007,13 @@ class BiseCorrection extends CI_Controller {
                 $year = 2015;
             }
             else{
-                $isReAdm = 1;
+                $isReAdm = 0;
                 $year = 2016;    
             }
+          //  DebugBreak();
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data($formno);
             $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['Sch_cd']);
-            $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['Sch_cd']);
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['Sch_cd'],'grp_cd'=>$inst_name[0]);
         }
         if($RegStdData['data'] == FALSE)
         {
@@ -1005,14 +1023,350 @@ class BiseCorrection extends CI_Controller {
             return;
         }
         $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/9thCorrection/Edit_Enrolement_form.php',$RegStdData);   
+        $this->load->view('BiseCorrection/9thCorrection/9thCorrManualForm.php',$RegStdData);   
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
-    
-    
-    
-    
+     public function NewEnrolment_update()
+    {
+       
+//          DebugBreak();
+        $this->load->model('Registration_model');
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $userinfo['isselected'] = 8;
+        $Inst_Id = $userinfo['Inst_Id'];
+        $this->commonheader($userinfo);
+        if (!isset($Inst_Id))
+        {
+            //$error['excep'][1] = 'Please Login!';
+            $this->load->view('login/login.php');
+        }
+        $error = array();
+        $Inst_Id = @$_POST['Inst_Id'];
+        // DebugBreak();
+        $formno =  $_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
+        $sub1ap1 = 0;
+        $sub2ap1 = 0;
+        $sub3ap1 = 0;
+        $sub4ap1 = 0;
+        $sub5ap1 = 0;
+        $sub6ap1 = 0;
+        $sub7ap1 = 0;
+        $sub8ap1 = 0;
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1;    
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;    
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+        }
+        if(@$_POST['sub7'] != 0)
+        {
+            $sub7ap1 = 1;    
+        }
+        if(@$_POST['sub8'] != 0)
+        {
+            $sub8ap1 = 1;    
+        }
+         $target_path = IMAGE_PATH.$Inst_Id.'/';
+        // $target_path = '../uploads2/'.$Inst_Id.'/';
+        if (!file_exists($target_path)){
+
+            mkdir($target_path);
+        }
+
+       // DebugBreak();
+        if(@$_POST['IsReAdm'] == '1')
+        {
+
+
+            $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>@$_POST['OldRno'],'spl_case'=>17);
+            $user_info  =  $this->Registration_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
+
+            if($user_info == false)
+            {
+                $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 9th Branch Before proceeding!');
+                redirect('Registration/ReAdmission');
+                return;
+            }
+            // DebugBreak();
+            $allinputdata = array('CellNo'=>@$_POST['mob_number'],
+                'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
+                'speciality'=>@$_POST['speciality'],'markOfIden'=>@$_POST['MarkOfIden'],
+                'med'=>@$_POST['medium'],'nat'=>@$_POST['nationality'],
+                'sex'=>@$_POST['gender'],'Ishafiz'=>@$_POST['hafiz'],
+                'rel'=>@$_POST['religion'],'RegGrp'=>@$_POST['std_group'],
+                'addr'=>@$_POST['address'],
+                'RuralORUrban'=>@$_POST['UrbanRural'],'sub1'=>@$_POST['sub1'],
+                'sub2'=>@$_POST['sub2'],'sub3'=>@$_POST['sub3'],
+                'sub4'=>@$_POST['sub4'],'sub5'=>@$_POST['sub5'],
+                'sub6'=>@$_POST['sub6'],'sub7'=>@$_POST['sub7'],
+                'sub8'=>@$_POST['sub8'],'PicPath'=>$config['file_name'],'formNo'=>$formno,
+                'sub1ap1' => ($sub1ap1),
+                'sub2ap1' => ($sub2ap1),
+                'sub3ap1' => ($sub3ap1),
+                'sub4ap1' => ($sub4ap1),
+                'sub5ap1' => ($sub5ap1),
+                'sub6ap1' => ($sub6ap1),
+                'sub7ap1' => ($sub7ap1),
+                'sub8ap1' => ($sub8ap1),
+
+            );
+            $allinputdata['name']= $user_info[0]['name'];
+            $allinputdata['Fname']= $user_info[0]['Fname'];
+            $allinputdata['BForm']= $user_info[0]['BForm'];
+            $allinputdata['FNIC']= $user_info[0]['FNIC'];
+            $allinputdata['Dob']= $user_info[0]['Dob'];
+            $allinputdata['regoldrno']= $user_info[0]['rno'];
+            $allinputdata['regoldsess']= $user_info[0]['sess'];
+            $allinputdata['regoldclass']= $user_info[0]['class'];
+            $allinputdata['regoldyear']= $user_info[0]['Iyear'];
+            $allinputdata['isreadm']= 1;
+            $formno = $this->Registration_model->GetFormNo($Inst_Id);
+            $allinputdata['formNo']= $formno;
+            //DebugBreak();
+
+        }
+        else{
+            $allinputdata = array('name'=>@$_POST['cand_name'],'Fname'=>@$_POST['father_name'],
+                'BForm'=>@$_POST['bay_form'],'FNIC'=>@$_POST['father_cnic'],
+                'Dob'=>@$_POST['dob'],'CellNo'=>@$_POST['mob_number'],
+                'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
+                'speciality'=>@$_POST['speciality'],'markOfIden'=>@$_POST['MarkOfIden'],
+                'med'=>@$_POST['medium'],'nat'=>@$_POST['nationality'],
+                'sex'=>@$_POST['gender'],'Ishafiz'=>@$_POST['hafiz'],
+                'rel'=>@$_POST['religion'],'RegGrp'=>@$_POST['std_group'],
+                'addr'=>@$_POST['address'],
+                'RuralORUrban'=>@$_POST['UrbanRural'],'sub1'=>@$_POST['sub1'],
+                'sub2'=>@$_POST['sub2'],'sub3'=>@$_POST['sub3'],
+                'sub4'=>@$_POST['sub4'],'sub5'=>@$_POST['sub5'],
+                'sub6'=>@$_POST['sub6'],'sub7'=>@$_POST['sub7'],
+                'sub8'=>@$_POST['sub8'],'PicPath'=>$config['file_name'],'formNo'=>@$_POST['formNo'],
+                'sub1ap1' => ($sub1ap1),
+                'sub2ap1' => ($sub2ap1),
+                'sub3ap1' => ($sub3ap1),
+                'sub4ap1' => ($sub4ap1),
+                'sub5ap1' => ($sub5ap1),
+                'sub6ap1' => ($sub6ap1),
+                'sub7ap1' => ($sub7ap1),
+                'sub8ap1' => ($sub8ap1),
+            );
+            $allinputdata['regoldrno']= 0;
+            $allinputdata['regoldsess']= 0;
+            $allinputdata['regoldclass']=0;
+            $allinputdata['regoldyear']= 0;
+            $allinputdata['isreadm']= $_POST['IsReAdm'];
+        }
+
+      
+      
+        $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg';
+        $config['max_size']      = '20';
+        // $config['max_width']     = '260';
+        // $config['max_height']    = '290';
+        $config['min_width']     = '110';
+        $config['min_height']    = '100';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
+
+        $filepath = $target_path. $config['file_name']  ;
+     
+
+
+        //$config['new_image']    = $formno.'.JPEG';
+        $this->load->library('upload', $config);
+
+         $check = getimagesize($_FILES["image"]["tmp_name"]);
+         $this->upload->initialize($config);
+
+         if($check !== false) {
+
+             $file_size = round($_FILES['image']['size']/1024, 2);
+             if($file_size<=20 && $file_size>=4)
+             {
+
+                 if ( !$this->upload->do_upload('image',True))
+                 {
+                     if($this->upload->error_msg[0] != "")
+                     {
+                         $error['excep']= $this->upload->error_msg[0];
+                         $allinputdata['excep'] = $this->upload->error_msg[0];
+                         $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                         redirect('Registration/NewEnrolment_EditForm/'.$formno);
+                         return;
+
+                     }
+
+                 }
+             }
+             else
+             {
+                 $allinputdata['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                 //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                 redirect('Registration/NewEnrolment_EditForm/'.$formno);
+
+             }
+
+
+         }
+         else
+         {
+             $check = getimagesize($filepath);
+             if($check === false)
+             {
+                 $allinputdata['excep'] = 'Please Upload Your Picture';
+                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                 redirect('Registration/NewEnrolment_EditForm/'.$formno);
+                 return;
+             }
+         }
+
+
+        //DebugBreak();
+        $this->frmvalidation9th('NewEnrolment_EditForm/'.$formno,$allinputdata,1);
+
+        /*  $a = getimagesize($filepath);
+        if($a[2]!=2)
+        {
+        $this->convertImage($filepath,$filepath,100,$a['mime']);
+        }*/
+
+        // $name = 'Waseem Saleem'; Edit_Enrolement_form
+        // $fname = 'Muhammad Saleem'; 
+        $sub1ap1 = 0;
+        $sub2ap1 = 0;
+        $sub3ap1 = 0;
+        $sub4ap1 = 0;
+        $sub5ap1 = 0;
+        $sub6ap1 = 0;
+        $sub7ap1 = 0;
+        $sub8ap1 = 0;
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1;    
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;    
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+        }
+        if(@$_POST['sub7'] != 0)
+        {
+            $sub7ap1 = 1;    
+        }
+        if(@$_POST['sub8'] != 0)
+        {
+            $sub8ap1 = 1;    
+        }
+       // DebugBreak();
+        $data = array(
+            'name' =>$this->input->post('cand_name'),
+            'Fname' =>$this->input->post('father_name'),
+            'BForm' =>$this->input->post('bay_form'),
+            'FNIC' =>$this->input->post('father_cnic'),
+            'Dob' =>$this->input->post('dob'),
+            'CellNo' =>$this->input->post('mob_number'),
+            'medium' =>$this->input->post('medium'),
+            'Inst_Rno' =>$this->input->post('Inst_Rno'),
+            'MarkOfIden' =>$this->input->post('MarkOfIden'),
+            'Speciality' =>$this->input->post('speciality'),
+            'nat' =>$this->input->post('nationality'),
+            'sex' =>$this->input->post('gender'),
+            'IsHafiz' =>$this->input->post('hafiz'),
+            'rel' =>$this->input->post('religion'),
+            'addr' =>$this->input->post('address'),
+            'grp_cd' =>$this->input->post('std_group'),
+            'sub1' =>$this->input->post('sub1'),
+            'sub2' =>$this->input->post('sub2'),
+            'sub3' =>$this->input->post('sub3'),
+            'sub4' =>$this->input->post('sub4'),
+            'sub5' =>$this->input->post('sub5'),
+            'sub6' =>$this->input->post('sub6'),
+            'sub7' =>$this->input->post('sub7'),
+            'sub8' =>$this->input->post('sub8'),
+            'sub1ap1' => ($sub1ap1),
+            'sub2ap1' => ($sub2ap1),
+            'sub3ap1' => ($sub3ap1),
+            'sub4ap1' => ($sub4ap1),
+            'sub5ap1' => ($sub5ap1),
+            'sub6ap1' => ($sub6ap1),
+            'sub7ap1' => ($sub7ap1),
+            'sub8ap1' => ($sub8ap1),
+            'UrbanRural' =>$this->input->post('UrbanRural'),
+            'Inst_cd' =>($Inst_Id),
+            'FormNo' =>($formno),
+            'regoldrno' =>($allinputdata['regoldrno']),
+            'regoldsess' =>($allinputdata['regoldsess']),
+            'regoldclass' =>( $allinputdata['regoldclass']),
+            'regoldyear' =>( $allinputdata['regoldyear']),
+            'isreadm'=>($allinputdata['isreadm'])
+            
+
+
+
+        );
+        $logedIn = $this->Registration_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
+        if($logedIn[0]['error'] != 'false')
+        {  
+
+            $this->session->set_flashdata('error_manualentry9th', 'success');
+            redirect('BiseCorrection/search_Form');
+            return;
+
+            echo 'Data Saved Successfully !';
+
+        }
+        else
+        {     
+            $allinputdata['excep'] = 'An error has occoured. Please try again later. ';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('BiseCorrection/NewEnrolment_EditForm/'.$formno);
+            return;
+            echo 'Data NOT Saved Successfully !';
+
+        } 
+
+
+
+        $this->load->view('common/footer.php');
+    }
     public function Delete_candidate_UPDATE()
     {
 
@@ -1798,6 +2152,475 @@ class BiseCorrection extends CI_Controller {
 
         return 1;
     }
+     function frmvalidation9th($viewName,$allinputdata,$isupdate)
+    {
+        $_POST['address']  = str_replace("'", "", $_POST['address'] );
+        $subjectslang = array('22','23','36','34','35');
+        $subjectshis = array('20','21','19');
+
+        $cntzero = substr_count(@$_POST['bay_form'],"0");
+        $cntone = substr_count(@$_POST['bay_form'],"1");
+        $cnttwo = substr_count(@$_POST['bay_form'],"2");
+        $cntthr = substr_count(@$_POST['bay_form'],"3");
+        $cntfour = substr_count(@$_POST['bay_form'],"4");
+        $cntfive = substr_count(@$_POST['bay_form'],"5");
+        $cntsix = substr_count(@$_POST['bay_form'],"6");
+        $cntseven = substr_count(@$_POST['bay_form'],"7");
+        $cnteight = substr_count(@$_POST['bay_form'],"8");
+        $cntnine = substr_count(@$_POST['bay_form'],"9");
+
+       // DebugBreak();
+        if(@$_POST['dob'] != null || $allinputdata['Dob'] != null)
+        {
+            $date = new DateTime(@$_POST['dob']);
+            $convert_dob = $date->format('Y-m-d');     
+        }
+
+        if(@$_POST['cand_name'] == ''  || ($allinputdata['name'] == '' && $isupdate ==1)  )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Name';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration/'.$viewName);
+            return;
+
+        }
+        //(strpos($a, 'are') !== false)
+        /* if ((strpos(@$_POST['cand_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOHD') !== false) || (strpos(@$_POST['cand_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['cand_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['cand_name'], 'MOOHAMAD') !== false))
+        {
+        $allinputdata['excep'] = 'MUHAMMAD Spelling is not Correct in Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration/'.$viewName);
+        return;
+
+        }
+
+        else*/ if (@$_POST['father_name'] == ''  || ($allinputdata['Fname'] == '' && $isupdate ==1) )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Father Name';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration/'.$viewName);
+            return;
+
+        }
+        /*  if ((strpos(@$_POST['father_name'], 'MOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MUHAMAD') !== false) || (strpos(@$_POST['father_name'], 'MOOHAMMAD') !== false)|| (strpos(@$_POST['father_name'], 'MOOHAMAD') !== false))
+        {
+        $allinputdata['excep'] = 'MUHAMMAD Spelling is not Correct in Fathers Name';
+        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+        redirect('Registration/'.$viewName);
+        return;
+
+        }*/
+
+        else if(@$_POST['bay_form'] == ''  || ($allinputdata['BForm'] == '' && $isupdate ==1) )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration/'.$viewName);
+            return;
+
+
+        }
+        else if( (@$_POST['bay_form'] == '00000-0000000-0') || (@$_POST['bay_form'] == '11111-1111111-1') || (@$_POST['bay_form'] == '22222-2222222-2') || (@$_POST['bay_form'] == '33333-3333333-3') || (@$_POST['bay_form'] == '44444-4444444-4')
+            || (@$_POST['bay_form'] == '55555-5555555-5') || (@$_POST['bay_form'] == '66666-6666666-6') || (@$_POST['bay_form'] == '77777-7777777-7') || (@$_POST['bay_form'] == '88888-8888888-8') || (@$_POST['bay_form'] == '99999-9999999-9') ||
+            (@$_POST['bay_form'] == '00000-1111111-0') || (@$_POST['bay_form'] == '00000-1111111-1') || (@$_POST['bay_form'] == '00000-0000000-1' || $cntzero >7 || $cntone >7 || $cnttwo >7 || $cntfour >7 || $cntthr >7 || $cntfive >7 || $cntsix >7 || $cntseven >7 || $cnteight >7 || $cntnine >7)
+            )
+            {
+                $allinputdata['excep'] = 'Please Enter Your Correct Bay Form No.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
+            {
+            // DebugBreak();
+            $allinputdata['excep'] = 'This Bay Form is already Feeded.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('Registration/'.$viewName);
+            return;
+
+
+
+            }*/
+            else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
+            {
+                // DebugBreak();
+                if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true )
+                {
+                    // DebugBreak();
+                    $allinputdata['excep'] = 'This Bay Form is already Feeded.';
+                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                    redirect('Registration/'.$viewName);
+                    return;
+                }
+             /*   else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
+                {
+                    // DebugBreak();
+                    $allinputdata['excep'] = 'This Form is already Feeded.';
+                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                    redirect('Registration/'.$viewName);
+                    return;
+                }      */
+            }
+            /*else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
+            {
+                // DebugBreak();
+                $allinputdata['excep'] = 'This Form is already Feeded.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+
+
+            }
+            else if($this->Registration_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0 )
+            {
+                // DebugBreak();
+                $allinputdata['excep'] = 'This Form is already Feeded.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+
+
+            }                */
+
+            else if(@$_POST['father_cnic'] == '' || ($allinputdata['FNIC'] == '' && $isupdate ==1)  )
+            {
+                $allinputdata['excep'] = 'Please Enter Your Father CNIC';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+
+            }
+            else if((@$_POST['bay_form'] == @$_POST['father_cnic']) || (@$_POST['father_cnic'] == @$_POST['bay_form']) )
+            {
+                $allinputdata['excep'] = 'Your Bay Form and FNIC No. are not same';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+
+            }
+            else if (@$_POST['dob'] == ''  || ($allinputdata['Dob'] == ''   && $isupdate ==1) )
+            {
+                $allinputdata['excep'] = 'Please Enter Your  Date of Birth';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if(@$_POST['mob_number'] == '')
+            {
+                $allinputdata['excep'] = 'Please Enter Your Mobile Number';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if(@$_POST['medium'] == 0)
+            {
+                $allinputdata['excep'] = 'Please Select Your Medium';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if(@$_POST['Inst_Rno']== '')
+            { 
+                $allinputdata['excep'] = 'Please Enter Your Roll Number';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if(@$_POST['MarkOfIden']== '')
+            {
+                $allinputdata['excep'] = 'Please Enter Your Mark of Identification';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+
+            /* else if((@$_POST['speciality'] != '0')or (@$_POST['speciality'] != '1') or (@$_POST['speciality'] != '2'))
+            {
+            $error['excep'] = 'Please Enter Your Speciality';
+            $this->load->view('Registration/9th/NewEnrolment.php',$error);
+            }*/
+            else if((@$_POST['medium'] != '1') and (@$_POST['medium'] != '2') )
+            {
+                $allinputdata['excep'] = 'Please Select Your medium';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['nationality'] != '1') and (@$_POST['nationality'] != '2') )
+            {
+                $allinputdata['excep'] = 'Please Select Your Nationality';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['gender'] != '1') and (@$_POST['gender'] != '2'))
+            {
+                $allinputdata['excep'] = 'Please Select Your Gender';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['hafiz']!= '1') and (@$_POST['hafiz']!= '2'))
+            {
+                $allinputdata['excep'] = 'Please Select Your Hafiz-e-Quran option';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['religion'] != '1') and (@$_POST['religion'] != '2'))
+            {
+                $allinputdata['excep'] = 'Please Select Your religion';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['UrbanRural'] != '1') and (@$_POST['UrbanRural'] != '2'))
+            {
+                $allinputdata['excep'] = 'Please Select Your Residency';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if(@$_POST['address'] =='')
+            {
+                $allinputdata['excep'] = 'Please Enter Your Address';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if(@$_POST['std_group'] == 0)
+            {
+                $allinputdata['excep'] = 'Please Select Your Study Group';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['std_group'] == 1) && ((@$_POST['sub5']!=5) || (@$_POST['sub6']!=6)||(@$_POST['sub7']!=7)|| (@$_POST['sub8']!=8)))
+            {
+
+                $allinputdata['excep'] = 'Subjects not according to Group';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['std_group'] == 7)&& ((@$_POST['sub5']!=5) || (@$_POST['sub6']!=6)||(@$_POST['sub7']!=7)|| (@$_POST['sub8']!=78)))
+            {
+
+                $allinputdata['excep'] = 'Subjects not according to Group';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['std_group'] == 8)&& ((@$_POST['sub5']!=5) || (@$_POST['sub6']!=6)||(@$_POST['sub7']!=7)|| (@$_POST['sub8']!=43)))
+            {
+
+                $allinputdata['excep'] = 'Subjects not according to Group';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+            else if((@$_POST['std_group'] == 2) && ((@$_POST['sub5']==5) || (@$_POST['sub6']==6)||(@$_POST['sub7']==7)|| (@$_POST['sub8']==43) || (@$_POST['sub8']==8)))
+            {
+                $allinputdata['excep'] = 'Subjects not according to Group';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+
+            else if((@$_POST['std_group'] == 5)&& ((@$_POST['sub5']==5) || (@$_POST['sub6']==6)||(@$_POST['sub7']==7)|| (@$_POST['sub8']==43) || (@$_POST['sub8']==8)))
+            {
+                $allinputdata['excep'] = 'Subjects not according to Group';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration/'.$viewName);
+                return;
+
+            }
+
+            else if((@$_POST['sub1'] == @$_POST['sub2']) ||(@$_POST['sub1'] == @$_POST['sub3'])||(@$_POST['sub1'] == @$_POST['sub4'])||(@$_POST['sub1'] == @$_POST['sub5'])||(@$_POST['sub1'] == @$_POST['sub6'])||(@$_POST['sub1'] == @$_POST['sub7'])||
+                (@$_POST['sub1'] == @$_POST['sub8']))
+                {
+                    $allinputdata['excep'] = 'Please Select Different Subjects';
+                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                    redirect('Registration/'.$viewName);
+                    return;
+
+                }
+                else if((@$_POST['sub2'] == @$_POST['sub1']) ||(@$_POST['sub2'] == @$_POST['sub3'])||(@$_POST['sub2'] == @$_POST['sub4'])||(@$_POST['sub2'] == @$_POST['sub5'])||(@$_POST['sub2'] == @$_POST['sub6'])||(@$_POST['sub2'] == @$_POST['sub7'])                         ||(@$_POST['sub2'] == @$_POST['sub8'])
+                    )
+                    {
+                        $allinputdata['excep'] = 'Please Select Different Subjects';
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                        redirect('Registration/'.$viewName);
+                        return;
+
+                    }
+                    else if((@$_POST['sub3'] == @$_POST['sub1']) ||(@$_POST['sub3'] == @$_POST['sub2'])||(@$_POST['sub3'] == @$_POST['sub4'])||(@$_POST['sub3'] == @$_POST['sub5'])||(@$_POST['sub3'] == @$_POST['sub6'])||(@$_POST['sub3'] == @$_POST['sub7'])||(@$_POST['sub3'] == @$_POST['sub8'])
+                        )
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if((@$_POST['sub4'] == @$_POST['sub1']) ||(@$_POST['sub4'] == @$_POST['sub3'])||(@$_POST['sub4'] == @$_POST['sub2'])||(@$_POST['sub4'] == @$_POST['sub5'])||(@$_POST['sub4'] == @$_POST['sub6'])||(@$_POST['sub4'] == @$_POST[                                 'sub7'])||(@$_POST['sub4'] == @$_POST['sub8']))
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if((@$_POST['sub5'] == @$_POST['sub1']) ||(@$_POST['sub5'] == @$_POST['sub3'])||(@$_POST['sub5'] == @$_POST['sub4'])||(@$_POST['sub5'] == @$_POST['sub2'])||(@$_POST['sub5'] == @$_POST['sub6'])||(@$_POST['sub5'] == @$_POST['sub7'])||(@$_POST['sub5'] == @$_POST['sub8']))
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if((@$_POST['sub6'] == @$_POST['sub1']) ||(@$_POST['sub6'] == @$_POST['sub3'])||(@$_POST['sub6'] == @$_POST['sub4'])||(@$_POST['sub6'] == @$_POST['sub5'])||(@$_POST['sub6'] == @$_POST['sub2'])||(@$_POST['sub6'] ==                                          @$_POST['sub7'])||(@$_POST['sub6'] == @$_POST['sub8']))
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if((@$_POST['sub7'] == @$_POST['sub1']) ||(@$_POST['sub7'] == @$_POST['sub3'])||(@$_POST['sub7'] == @$_POST['sub4'])||(@$_POST['sub7'] == @$_POST['sub5'])||(@$_POST['sub7'] == @$_POST['sub6'])||(@$_POST['sub7'] == @$_POST['sub2'])||(@$_POST['sub7'] == @$_POST['sub8']))
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if((@$_POST['sub8'] == @$_POST['sub1']) ||(@$_POST['sub8'] == @$_POST['sub3'])||(@$_POST['sub8'] == @$_POST['sub4'])||(@$_POST['sub8'] == @$_POST['sub5'])||(@$_POST['sub8'] == @$_POST['sub6'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if (in_array($_POST['sub8'], $subjectslang) && in_array($_POST['sub7'], $subjectslang))
+                        {
+                            $allinputdata['excep'] = 'Double Language is not Allowed Please choose a different Subject';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+                        }
+                        else if (in_array($_POST['sub8'], $subjectshis) && in_array($_POST['sub7'], $subjectshis))
+                        {
+                            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+                        }
+                        else if(@$_POST['sub6'] == @$_POST['sub8'])
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if(@$_POST['sub7'] == @$_POST['sub8'])
+                        {
+                            $allinputdata['excep'] = 'Please Select Different Subjects';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+
+                        else if(@$_POST['sub1'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 1';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if(@$_POST['sub2'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 2';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+                        }
+                        else if(@$_POST['sub3'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 3';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if(@$_POST['sub4'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 4';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+
+                        else if(@$_POST['sub5'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 5';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if(@$_POST['sub6'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 6';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if(@$_POST['sub7'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 7';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+                        else if(@$_POST['sub8'] == 0)
+                        {
+                            $allinputdata['excep'] = 'Please Select Subject 8';
+                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                            redirect('Registration/'.$viewName);
+                            return;
+
+                        }
+    } 
     function frmvalidation($viewName,$allinputdata,$isupdate)
     {
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
