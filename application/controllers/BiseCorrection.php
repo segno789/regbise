@@ -1010,11 +1010,12 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-          //  DebugBreak();
+           
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data($formno);
             $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['Sch_cd']);
             $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['Sch_cd'],'grp_cd'=>$inst_name[0]);
         }
+         DebugBreak();
         if($RegStdData['data'] == FALSE)
         {
             $this->session->set_flashdata('NewEnrolment_error','error');
