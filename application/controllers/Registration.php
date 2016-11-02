@@ -537,7 +537,7 @@ class Registration extends CI_Controller {
 
 
         $this->load->model('Registration_model');
-        // DebugBreak();
+         DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];

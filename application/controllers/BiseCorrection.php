@@ -1009,6 +1009,10 @@ class BiseCorrection extends CI_Controller {
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
+    
+    
+    
+    
     public function Delete_candidate_UPDATE()
     {
 
