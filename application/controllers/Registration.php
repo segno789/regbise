@@ -1344,6 +1344,7 @@ class Registration extends CI_Controller {
         );
         $userinfo['isselected'] = 2;
         $Inst_Id = $userinfo['Inst_Id'];
+        $Insgender = $userinfo['gender'];
         $this->load->view('common/header.php',$userinfo);
         $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>$RollNo,'spl_case'=>17);
         $user_info  =  $this->Registration_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
@@ -1353,6 +1354,22 @@ class Registration extends CI_Controller {
             $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from 9th Branch Before proceeding!');
             redirect('Registration/ReAdmission');
             return;
+        }
+        else if($Insgender != $user_info[0]['sex'])
+        {
+            if($Insgender ==  2)
+            {  
+                $this->session->set_flashdata('error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD!');
+
+            }
+
+            else
+            {
+                $this->session->set_flashdata('error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE FEMALE CANDIDATE RECORD!');
+            }
+            redirect('Registration/ReAdmission');
+            return;
+            
         }
         else
         {
@@ -2324,7 +2341,7 @@ class Registration extends CI_Controller {
         // $temp = $user['Inst_Id'].'11-2017-19';
         //$image =  $this->set_barcode($temp);
      //  DebugBreak();
-        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id.'@09@2016@1';
+        $temp = $challanNo.'@'.$user['Inst_Id'].'@'.$Batch_Id;
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -2349,9 +2366,9 @@ class Registration extends CI_Controller {
             $pdf->SetXY(1.0,$yy+$dyy);
             //   DebugBreak();
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
-            $pdf->Image(base_url()."assets/img/icon2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
+            $pdf->Image("assets/img/icon2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
-            $pdf->Image(base_url().BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
+            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.9,0.22,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
 
@@ -3541,7 +3558,7 @@ class Registration extends CI_Controller {
         $cnteight = substr_count(@$_POST['bay_form'],"8");
         $cntnine = substr_count(@$_POST['bay_form'],"9");
 
-
+        DebugBreak();
         if(@$_POST['dob'] != null || $allinputdata['Dob'] != null)
         {
             $date = new DateTime(@$_POST['dob']);

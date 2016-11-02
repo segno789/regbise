@@ -21,7 +21,7 @@
                                     <label class="control-label span2" >
 
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php   if($isReAdm==1) {} else{echo base_url().IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php   if($isReAdm==1) {} else{echo '/'.IMAGE_PATH11.$Inst_Id.'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -40,7 +40,7 @@
                                     Candidate Name:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($data['0']['Brd_cd']==1 ) { echo 'readonly="readonly"'; } ?>  >
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  $data['0']['name']; ?>" <?php  if($data['0']['Brd_cd']==1 ) { echo 'readonly="readonly"'; } ?>  required="required" >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
@@ -52,7 +52,7 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?>>
+                                    <input class="span3"  type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?> required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
@@ -134,6 +134,7 @@
                                 </label>
                                 <div class="controls controls-row">  
                                     <?php
+                                   // DebugBreak();
                                     $nat = $data[0]['nat'];
                                     if($nat == 1)
                                     {
@@ -144,6 +145,11 @@
                                     {
                                         echo  "<label class='radio inline span1'><input type='radio' value='1' id='nationality'  name='nationality'> Pakistani
                                         </label><label class='radio inline span2'><input type='radio'  id='nationality1' checked='checked' value='2' name='nationality'>  Non Pakistani</label>" ;
+                                    }
+                                    else 
+                                    {
+                                         echo  " <label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani
+                                        </label><label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'>  Non Pakistani</label>" ; 
                                     }
                                     ?>
                                         <input type="hidden" name="matric_sub1" id="matric_sub1" value="<?php  echo $data[0]['sub1']; ?>">
@@ -209,6 +215,11 @@
                                         echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1'  name='religion'> Muslim
                                         </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' checked='checked' name='religion'> Non Muslim</label>" ;
                                     }
+                                    else
+                                    {
+                                       echo " <label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class' value='2' name='religion'> Non Muslim</label>" ;  
+                                    }
                                     ?>
 
                                 </div>
@@ -235,6 +246,7 @@
                                 ?>
 
                             </div>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Address :
@@ -246,6 +258,76 @@
                                 </div>
                             </div>
                             <hr>
+                            <?php if($data['0']['oldbr'] != 1) {?>
+                            <div class="control-group">
+                                <h4 class="span4">SSC Exam Information :</h4>
+                                <div class="controls controls-row">
+                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
+                                    <label class="control-label span2">
+
+                                    </label> 
+
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label class="control-label span1">
+                                    SSC Roll No. :
+                                </label>
+                                <div class="controls controls-row">
+                                    <input type="text"  id="oldRno" class="span3" name="OldRno" maxlength="6" required="required"  value="" maxlength="10">
+                                    <label class="control-label span1" style="margin-left:11%;">
+                                        SSC Year :
+                                    </label>
+                                    <select id="oldYear" class="span3" name="OldYear">
+                                        <?php
+                                        // DebugBreak();
+
+
+
+                                        $current_year = date("Y");
+                                        $prev_year = date("Y",strtotime("-1 year"));
+
+                                        if($gender== 1){ ?>
+                                            <option value="<?php echo $prev_year; ?>" ><?php echo $prev_year; ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-2 year")); ?>" ><?php echo date("Y",strtotime("-2 year")); ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-3 year")); ?>" ><?php echo date("Y",strtotime("-3 year")); ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-4 year")); ?>" ><?php echo date("Y",strtotime("-4 year")); ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-5 year")); ?>" ><?php echo date("Y",strtotime("-5 year")); ?></option>  
+                                            <?php }
+                                        else{?>
+                                            <option value="<?php echo $prev_year; ?>" ><?php echo $prev_year; ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-2 year")); ?>" ><?php echo date("Y",strtotime("-2 year")); ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-3 year")); ?>" ><?php echo date("Y",strtotime("-3 year")); ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-4 year")); ?>" ><?php echo date("Y",strtotime("-4 year")); ?></option>  
+                                            <option value="<?php echo date("Y",strtotime("-5 year")); ?>" ><?php echo date("Y",strtotime("-5 year")); ?></option>  
+                                            <?php }    
+                                        ?>
+
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span1">
+                                    SSC Session :
+                                </label>
+                                <div class="controls controls-row">
+                                    <select id="oldSess" class="span3" name="OldSess">
+                                        <option value="1" >Annual</option>
+                                        <option value="2">Supplementary</option>
+                                    </select>
+
+                                    <label class="control-label span1" style="margin-left:11%;">
+                                        SSC Board:
+                                    </label>
+                                    <select id="sec_board" class="span3" name="OldBrd">
+                                        <option value="1">BISE, GUJRANWALA</option><option value="2">BISE,  LAHORE</option><option value="3">BISE,  RAWALPINDI</option><option value="4">BISE,  MULTAN</option><option value="5">BISE,  FAISALABAD</option><option value="6">BISE,  BAHAWALPUR</option><option value="7">BISE,  SARGODHA</option><option value="8">BISE,  DERA GHAZI KHAN</option><option value="9">FBISE, ISLAMABAD</option><option value="10">BISE, MIRPUR</option><option value="11">BISE, ABBOTTABAD</option><option value="12">BISE, PESHAWAR</option><option value="13">BSE, KARACHI</option><option value="14">BISE, QUETTA</option><option value="15">BISE, MARDAN</option><option value="17">CAMBRIDGE</option><option value="18">AIOU, ISLAMABAD</option><option value="19">BISE, KOHAT</option><option value="20">KARAKURUM</option><option value="21">MALAKAN</option><option value="22">BISE, BANNU</option><option value="23">BISE, D.I.KHAN</option><option value="24">AKUEB, KARACHI</option><option value="25">BISE, HYDERABAD</option><option value="26">BISE, LARKANA</option><option value="27">BISE, MIRPUR(SINDH)</option><option value="28">BISE, SUKKUR</option><option value="29">BISE, SWAT</option><option value="30">SBTE KARACHI</option><option value="31">PBTE, LAHORE</option><option value="32">AFBHE RAWALPINDI</option><option value="33">BIE, KARACHI</option><option value="34">BISE SAHIWAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <?php }?>
                             <div class="control-group">
                                 <h4 class="span4">Exam Information :</h4>
                                 <div class="controls controls-row">
@@ -513,11 +595,14 @@
 
                             <div class="form-actions no-margin">
                                 <input type="hidden"   value="<?php  echo $data[0]['FormNo']; ?>"  name="formNo">
-                                <input type="hidden"   value="<?php  echo $data[0]['Brd_cd']; ?>"  name="OldBrd">
+                                
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
+                                <?php if($data['0']['oldbr'] == 1) {?>
+                                <input type="hidden"   value="<?php  echo $data[0]['Brd_cd']; ?>"  name="OldBrd">
                                 <input type="hidden"   value="<?php  echo $data[0]['matRno'];  ?>"  name="OldRno">
                                 <input type="hidden"   value="<?php  echo $data[0]['yearOfPass']; ?>"  name="OldYear">
                                 <input type="hidden"   value="<?php  echo $data[0]['sessOfPass']; ?>"  name="OldSess">
+                                <?php }?>
                                 <input type="hidden"   value="<?php  echo $data[0]['rno']; ?>"  name="iOldRno">
                                 <input type="hidden"   value="<?php  echo $data[0]['Iyear']; ?>"  name="iOldYear">
                                 <input type="hidden"   value="<?php  echo $data[0]['sess']; ?>"  name="iOldSess">
@@ -538,7 +623,7 @@
 
 
                             function checks(){
-
+                                 debugger;
                                 var status  =  check_NewEnrol_validation_11th();
                                 if(status == 0)
                                 {

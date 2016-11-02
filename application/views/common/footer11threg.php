@@ -824,46 +824,7 @@ debugger;
             $('#father_cnic').focus();  
             return status; 
         }
-
-        else if(dob == "" || dob.length == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
-            alertify.error("Please Enter your Date of Birth") 
-            $('#dob').focus(); 
-            return status;  
-        }
-
-        else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
-            alertify.error("Please Enter your Mobile No.") 
-            $('#mob_number').focus();   
-            return status;  
-        }
-
-        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
-            alertify.error("Please Enter your Mark of Indentification") 
-            $('#MarkOfIden').focus();   
-            return status;  
-        }
-        else if(address == "" || address == 0 || address.length ==undefined )
-        {
-            $('#ErrMsg').show(); 
-            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
-            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
-            alertify.error("Please Enter your Address")
-            $('#address').focus(); 
-            return status;    
-        }
-        else   if ($("#std_group").find('option:selected').val() < 1) 
+             else   if ($("#std_group").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -873,7 +834,7 @@ debugger;
             $("#std_group").focus();
             return status;  
         }
-        else   if ($("#sub3").find('option:selected').val() < 1) 
+         else   if ($("#sub3").find('option:selected').val() < 1) 
         {
             // $('#ErrMsg').show(); 
             alertify.error('Please select your Study Group '); 
@@ -924,6 +885,46 @@ debugger;
             $("#sub7").focus();
             return status;  
         }
+       
+
+        else if(mobNo == "" || mobNo == 0 || mobNo == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            // $('#ErrMsg').html("<b>Please Enter your Mobile No.</b>"); 
+            alertify.error("Please Enter your Mobile No.") 
+            $('#mob_number').focus();   
+            return status;  
+        }
+
+        else if(MarkOfIdent == "" || MarkOfIdent == 0 || MarkOfIdent == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Mark of Indentification</b>"); 
+            alertify.error("Please Enter your Mark of Indentification") 
+            $('#MarkOfIden').focus();   
+            return status;  
+        }
+        else if(address == "" || address == 0 || address.length ==undefined )
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            $('#ErrMsg').html("<b>Please Enter your Address</b>"); 
+            alertify.error("Please Enter your Address")
+            $('#address').focus(); 
+            return status;    
+        }
+          else if(dob == "" || dob.length == undefined)
+        {
+            $('#ErrMsg').show(); 
+            $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
+            //$('#ErrMsg').html("<b>Please Enter your Date of Birth</b>"); 
+            alertify.error("Please Enter your Date of Birth") 
+            $('#dob').focus(); 
+            return status;  
+        }           
+       
        /*else if(NationalityVal != 2 || NationalityVal != 1){
             $('#ErrMsg').show();  
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1688,7 +1689,7 @@ debugger;
 
         // Check Religion and select sub........
       //  $("#sub3").empty();
-        var Religion = $("input[name=religion]:checked").val();
+        var Religion = $("input[type=radio][name=religion]:checked").val();
         //console.log(Religion);
     /*    console.log(Religion);
         if(Religion == "1")

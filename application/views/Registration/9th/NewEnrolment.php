@@ -1,3 +1,11 @@
+
+<?php 
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -32,7 +40,7 @@
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="image"  onchange="return readURL(this);">
+                                    <input type="file" class="span4" id="image" name="image"  >
                                 </div>
                             </div>
                             <div class="control-group">
@@ -542,7 +550,6 @@
                             </div>
 
 
-                        
                         </form>
 
 

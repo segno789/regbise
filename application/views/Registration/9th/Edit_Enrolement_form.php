@@ -1,3 +1,11 @@
+
+<?php 
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
 <div class="dashboard-wrapper class wysihtml5-supported">
     <div class="left-sidebar">
         <div class="row-fluid">
@@ -20,7 +28,7 @@
                                      <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
                                       <img src="<?=base_url()?>assets/img/upalodimage.jpg" alt="" >
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -31,7 +39,7 @@
                                     <label class="control-label span2">
                                         Image :  
                                     </label> 
-                                    <input type="file" class="span4" id="image" name="image" onchange="readURL_corr(this)">
+                                    <input type="file" class="span4" id="image" name="image">
                                 </div>
                             </div>
                             <div class="control-group">

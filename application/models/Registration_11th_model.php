@@ -165,7 +165,7 @@ class Registration_11th_model extends CI_Model
            $iOldSess =  0;
       //  $pic_base_65 = $data['Image'];
       //  DebugBreak();
-      //  DebugBreak();
+        DebugBreak();
       if($OldBrd == 1 )
       {            
           $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
@@ -780,6 +780,34 @@ class Registration_11th_model extends CI_Model
 
 
 
+    }
+       public function generateStrNo($sex,$fromno)
+    {
+        $query = $this->db->query("select max(regno) as regno from Registration..regcard11th where sex=$sex ");
+        $maxnumber = $query->result_array()[0]['regno'];
+        $maxnumber = $maxnumber+1;
+        $data2 = array(
+            'regno'=>$maxnumber,
+            'sex'=>$maxnumber,
+            'formno'=>$fromno,
+            'strRegNo'=>'2-1-'.$maxnumber.'-16',
+        );
+        $res = $this->db->insert("Registration..regcard11th", $data2);
+
+
+        $data2 = array(
+            'strRegNo'=>'2-1-'.$maxnumber.'-16',
+        );
+        $this->db->where('formno',$fromno);
+        $res =  $this->db->update("Registration..IA_P1_Reg_Adm2016", $data2);
+
+        if ($res === FALSE) {
+            return -1; // Or do whatever you gotta do here to raise an error
+        } else {
+            return '2-2-'.$maxnumber.'-16';
+        }  
+
+         
     }
 
 }

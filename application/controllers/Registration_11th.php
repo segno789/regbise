@@ -215,14 +215,20 @@ class Registration_11th extends CI_Controller {
     }
      public function ReAdmission_check()
     {
-        //DebugBreak();
-        $RollNo = @$_POST['oldRno'];//$this->uri->segment(3);
+        DebugBreak();
+        $RollNo = @$_POST['oldRno'];
+        $oldBrd_cd = @$_POST['oldBrd_cd'];
+        $oldSess = @$_POST['oldSess'];
+        $oldYear = @$_POST['oldYear'];
+        
+        //$this->uri->segment(3);
         //$Spl_case = $this->uri->segment(4);
 
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
+         $Insgender = $userinfo['gender'];
         $data = array(
             'isselected' => '6',
         );
@@ -230,13 +236,32 @@ class Registration_11th extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
         $User_info_data = array('Inst_Id'=>$Inst_Id,'RollNo'=>$RollNo,'spl_case'=>17);
-        $user_info  =  $this->Registration_11th_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
+        
+        if($oldBrd_cd ==  1)
+        {
+           $user_info  =  $this->Registration_11th_model->readmission_check($User_info_data); //$db->first("SELECT * FROM  Admission_online..tblinstitutes_all WHERE Inst_Cd = " .$user->inst_cd);
 
         if($user_info == false)
         {
             $this->session->set_flashdata('error', 'This Roll No. Result is not cancelled. Please Cancel result from INTER PART-I Branch Before proceeding!');
             redirect('Registration_11th/ReAdmission');
             return;
+        }
+          else if($Insgender != $user_info[0]['sex'])
+        {
+            if($Insgender ==  2)
+            {  
+                $this->session->set_flashdata('error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE MALE CANDIDATE RECORD!');
+
+            }
+
+            else
+            {
+                $this->session->set_flashdata('error', 'GENDER CONTRADICTION! YOUR INSTITUTE CAN NOT SAVE FEMALE CANDIDATE RECORD!');
+            }
+            redirect('Registration_11th/ReAdmission');
+            return;
+            
         }
         else
         {
@@ -248,6 +273,27 @@ class Registration_11th extends CI_Controller {
             $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
             $RegStdData['data'][0]=$user_info[0];
             $RegStdData['data'][0]['CellNo'] = $RegStdData['data'][0]['MobNo'];
+              $RegStdData['data'][0]['oldbr'] = 1;
+            $filledinfo['error'] = "";
+            //$this->session->set_flashdata('isReAdm','1');
+            $this->load->view('common/menu.php',$data);
+            $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
+            $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
+        }  
+        }
+        else  if($oldBrd_cd >  1)
+        {    $formno = '';
+            $OldRno = $RollNo;
+            $year = 2016;
+
+            $RegStdData = array('isReAdm'=>'1','Oldrno'=>$OldRno);
+            $RegStdData['data'][0]  =  '';
+            $RegStdData['data'][0]['CellNo'] = '';
+            $RegStdData['data'][0]['rno'] = $RollNo;
+            $RegStdData['data'][0]['Iyear'] = $oldYear;
+            $RegStdData['data'][0]['sess'] = $oldSess;
+            $RegStdData['data'][0]['oldbr'] = $oldBrd_cd;
+            $RegStdData['data'][0]['sex'] = $Insgender;
 
             $filledinfo['error'] = "";
             //$this->session->set_flashdata('isReAdm','1');
@@ -255,6 +301,11 @@ class Registration_11th extends CI_Controller {
             $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
             $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
         }
+         else
+        {
+             redirect('Registration_11th/ReAdmission');
+        }
+       
     }
      public function Incomplete_inst_info_INSERT(){
         //DebugBreak();
@@ -702,7 +753,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-      //  DebugBreak();
+       // DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -860,6 +911,9 @@ class Registration_11th extends CI_Controller {
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Registration_11th/'.$viewName);
             return;*/
+            
+            $this->frmvalidation('ReAdmission_check',$data,0);
+
          $target_path = IMAGE_PATH11;
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
@@ -959,8 +1013,7 @@ class Registration_11th extends CI_Controller {
 
         $encoded_data = base64_encode($contents);*/
         
-        $this->frmvalidation('Get_students_record',$data,0);
-
+        
        // DebugBreak();
         $type = pathinfo($filepath, PATHINFO_EXTENSION);
         $pic_data = file_get_contents($filepath);
@@ -1987,13 +2040,22 @@ class Registration_11th extends CI_Controller {
         $pdf = new PDF_Rotate('P','in',"A4");
         //$pdf=new FPDF_BARCODE("P","in","A4");
         $pdf->SetMargins(0.5,1.2,0.5);
-
+      $pdf->AliasNbPages();
 
         $generatingpdf=false;
         $result = $result['data'] ;
         $inc=0 ;
         foreach ($result as $key=>$data) 
         {
+            
+            if($data['strRegNo'] == NULL)
+            {
+               $data['strRegNo'] = $this->Registration_11th_model->generateStrNo($data['sex'],$data['formNo']) ;
+            }
+            
+            $temp = str_replace("-","",$data['strRegNo']).'@11@2016-18';
+            $image =  $this->set_barcode($temp);
+            
             $generatingpdf=true;
             if($turn==1){$pdf->AddPage(); $dy=0.1;} else {
                 if($turn==2){$dy=3.8;} else {$dy=7.5; $turn=0;}
@@ -2031,9 +2093,12 @@ class Registration_11th extends CI_Controller {
 
             $pdf->SetFont('Arial','IB',12);
             $pdf->SetXY(2.6,$y+0.08+$dy);
-            $pdf->Cell(0.5,0.5, '2016-343433',0,'L');    
+            $pdf->Cell(0.5,0.5, $data['strRegNo'],0,'L');    
             //$pdf->Cell(0.5,0.5, $data['StrRegNo'],0,'L');    
 
+            $pdf->Image(BARCODE_PATH.$image,4.1,$y+0.23+$dy, 1.8, 0.20, "PNG"); 
+            
+            
             //--------------------------- Institution Code and Name  
             $pdf->SetXY(0.2,$y+0.3+$dy);
             $pdf->SetFont('Arial','',10);
@@ -2182,14 +2247,14 @@ class Registration_11th extends CI_Controller {
             $pdf->Cell(0.5,0.5, 'Head of the Institution: ___________________',0,'L');
             $pdf->SetXY(5.8,$y+$dy);
             $pdf->Cell(0.5,0.5, 'Secretary: _________________',0,'L');    
-
+                 $pdf->Image('assets/img/sec_sign.png',6.5,$y+$dy-.2, .96, .6, "png");
             if ($turn>1){
                 $y += 0.5;
                 $pdf->Image(base_url()."assets/img/cut_line.png",0.3,$y+$dy, 7.5,0.15, "PNG");
             }
             if ($inc >4)
             {
-                break;
+              //  break;
             }
 
         }    

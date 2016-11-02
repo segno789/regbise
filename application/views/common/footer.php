@@ -1962,7 +1962,6 @@ if(isReadm == 0)
         var sub8 = $("#sub8").val();
 
         
-        debugger;
 
         if((sub7 == sub8)|| (sub7 == sub6))
         {
@@ -2847,7 +2846,7 @@ if(isReadm == 0)
         }
         else  if (excep_Invalid_formno != "")
         {
-             alertify.error("Invalid Form No. Please write Valid Form No.");
+            // alertify.error("Invalid Form No. Please write Valid Form No.");
         }
         else  if(restore_msg!="")
         {

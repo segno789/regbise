@@ -705,8 +705,7 @@ class Registration_model extends CI_Model
             return false;
         }
     }
-    
-    public function generateStrNo($sex,$fromno)
+     public function generateStrNo($sex,$fromno)
     {
         $query = $this->db->query("select max(regno) as regno from Registration..regcard9th where sex=$sex ");
         $maxnumber = $query->result_array()[0]['regno'];
