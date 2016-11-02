@@ -1555,7 +1555,8 @@ class Registration extends CI_Controller {
       //  DebugBreak();
         if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-             $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['readmfine']   =  $userinfo['isSpecial_Fee']['readmfine']; 
             $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -1615,7 +1616,7 @@ class Registration extends CI_Controller {
                     $reg_fee = 0;
                      if($v['IsReAdm']==1)
                     {
-                        $Lreg_fee = 500; 
+                        $Lreg_fee = $rule_fee[0]['readmfine']; 
                     }
                     else
                     {
@@ -1628,7 +1629,7 @@ class Registration extends CI_Controller {
                     $reg_fee = $rule_fee[0]['Reg_Fee'];
                       if($v['IsReAdm']==1)
                     {
-                        $Lreg_fee = 500; 
+                        $Lreg_fee = $rule_fee[0]['readmfine']; 
                     }
                     else
                     {
@@ -1718,6 +1719,7 @@ class Registration extends CI_Controller {
            
 
             $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['readmfine']   =  $userinfo['isSpecial_Fee']['readmfine']; 
             $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
               $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -1781,7 +1783,7 @@ class Registration extends CI_Controller {
                 {
                     if($v['IsReAdm']==1)
                     {
-                        $Lreg_fee = 500; 
+                        $Lreg_fee = $rule_fee[0]['readmfine']; 
                     }
                     else
                     {
@@ -1795,7 +1797,7 @@ class Registration extends CI_Controller {
                 {
                     if($v['IsReAdm']==1)
                     {
-                        $Lreg_fee = 500; 
+                        $Lreg_fee = $rule_fee[0]['readmfine']; 
                     }
                     else
                     {
@@ -2273,6 +2275,7 @@ class Registration extends CI_Controller {
         if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
             $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['readmfine']   =  $user['isSpecial_Fee']['readmfine']; 
             $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -2835,7 +2838,8 @@ class Registration extends CI_Controller {
 
         if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
+            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee'];
+            $rule_fee[0]['readmfine']   =  $user['isSpecial_Fee']['readmfine'];             
             $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
