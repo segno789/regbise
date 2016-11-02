@@ -922,6 +922,39 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
         $this->load->view('common/footer.php');
     }
+    
+     public function search_Form()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        // DebugBreak();
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        if($this->session->flashdata('NewEnrolment_error')){
+            //DebugBreak();
+
+            //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
+            $error['excep'] = 'Your Form No. is Invalid.';
+            //  $isReAdm = $RegStdData['data'][0]['isreadm'];
+            //  $RegStdData['isReAdm']=$isReAdm;
+            //  $RegStdData['Oldrno']=0;
+
+
+        }
+        else{
+            $error['excep'] = '';
+        }
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
+        $this->load->view('common/footer.php');
+    }
+    
+    
     public function NewEnrolment_EditForm()
     {    
         //DebugBreak();
