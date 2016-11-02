@@ -352,7 +352,7 @@ class BiseCorrections_model extends CI_Model
         }
     }
     public function GetInstNamebyId($isnt){
-        $this->db->select('Name');
+        $this->db->select('Name,allowed_mGrp,allowed_iGrp,edu_lvl,Inst_cd');
         $this->db->from('Admission_Online..tblInstitutes_all');
         $where = '(edu_lvl=1 or edu_lvl = 3)';
         $this->db->where('IsActive', 1);

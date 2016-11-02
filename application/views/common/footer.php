@@ -1347,6 +1347,10 @@ if(isReadm == 0)
         })
   
         var error = "<?php echo @$error; ?>";
+        var error_manual9th = "<?php  echo @$error_manualentry9th; ?>";
+        if(error_manual9th == "Updated Successfully"){
+            alertify.success(error_manual9th);
+        }
         if(error != ""){
             alertify.error(error);
         }
