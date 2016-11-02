@@ -1007,7 +1007,7 @@ class BiseCorrection extends CI_Controller {
                 $year = 2015;
             }
             else{
-                $isReAdm = 0;
+                $isReAdm = 1;
                 $year = 2016;    
             }
           //  DebugBreak();
@@ -1020,6 +1020,61 @@ class BiseCorrection extends CI_Controller {
             $this->session->set_flashdata('NewEnrolment_error','error');
             //  echo '<pre>'; print_r($allinputdata['excep']);exit();
             redirect('BiseCorrection/Delete_Form/');
+            return;
+        }
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/Edit_Enrolement_form.php',$RegStdData);   
+        $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
+
+    }
+     public function NewEnrolment_EditForm9th_manual_corr()
+    {    
+        DebugBreak();
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $Inst_Id = $userinfo['Inst_Id'];
+        $this->load->view('common/header.php',$userinfo);
+        $formno = $_POST['txtformNo_search'];
+        if($formno == ""){
+            return;
+        }
+        $isReAdm = 0;
+        $year = 0;
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->model('BiseCorrections_model');
+        if($this->session->flashdata('NewEnrolment_error')){
+            //DebugBreak();
+
+            $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+            $isReAdm = $RegStdData['data'][0]['isreadm'];
+            $RegStdData['isReAdm']=$isReAdm;
+            $RegStdData['Oldrno']=0;
+
+        }
+        else{
+            $error['excep'] = '';
+
+            if($this->session->flashdata('IsReAdm')){
+                $isReAdm = 1;
+                $year = 2015;
+            }
+            else{
+                $isReAdm = 0;
+                $year = 2016;    
+            }
+          //  DebugBreak();
+            $datainfo = $this->BiseCorrections_model->EditEnrolement_data($formno);
+            $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['Sch_cd']);
+            $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['Sch_cd'],'grp_cd'=>$inst_name[0]);
+        }
+        if($RegStdData['data'] == FALSE)
+        {
+            $this->session->set_flashdata('NewEnrolment_error','error');
+            //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+            redirect('BiseCorrection/search_Form/');
             return;
         }
         $this->load->view('common/menu.php',$data);
@@ -1045,6 +1100,7 @@ class BiseCorrection extends CI_Controller {
             $this->load->view('login/login.php');
         }
         $error = array();
+        $ckpo =$Inst_Id;
         $Inst_Id = @$_POST['Inst_Id'];
         // DebugBreak();
         $formno =  $_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
@@ -1331,6 +1387,7 @@ class BiseCorrection extends CI_Controller {
             'sub8ap1' => ($sub8ap1),
             'UrbanRural' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
+            'ckpo' =>($ckpo),
             'FormNo' =>($formno),
             'regoldrno' =>($allinputdata['regoldrno']),
             'regoldsess' =>($allinputdata['regoldsess']),

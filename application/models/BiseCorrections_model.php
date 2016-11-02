@@ -363,6 +363,7 @@ class BiseCorrections_model extends CI_Model
         $result_1 = $this->db->get()->result();
         return $result_1;
     }
+    
     public function GetAllInstList(){
         $this->db->select('Inst_cd, Name');
         $this->db->from('Admission_Online..tblInstitutes_all');
