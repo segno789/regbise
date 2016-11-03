@@ -1233,9 +1233,7 @@ class BiseCorrection extends CI_Controller {
             $allinputdata['regoldyear']= 0;
             $allinputdata['isreadm']= $_POST['IsReAdm'];
         }
-
-      
-      
+       
         $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
@@ -1245,11 +1243,7 @@ class BiseCorrection extends CI_Controller {
         $config['min_height']    = '100';
         $config['overwrite']     = TRUE;
         $config['file_name']     = $formno.'.jpg';
-
         $filepath = $target_path. $config['file_name']  ;
-     
-
-
         //$config['new_image']    = $formno.'.JPEG';
         $this->load->library('upload', $config);
 
@@ -1269,7 +1263,7 @@ class BiseCorrection extends CI_Controller {
                          $error['excep']= $this->upload->error_msg[0];
                          $allinputdata['excep'] = $this->upload->error_msg[0];
                          $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                         redirect('Registration/NewEnrolment_EditForm/'.$formno);
+                         redirect('BiseCorrection/NewEnrolment_EditForm/'.$formno);
                          return;
 
                      }
@@ -1281,7 +1275,7 @@ class BiseCorrection extends CI_Controller {
                  $allinputdata['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
                  $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                  //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-                 redirect('Registration/NewEnrolment_EditForm/'.$formno);
+                 redirect('BiseCorrection/NewEnrolment_EditForm/');
 
              }
 
@@ -1294,14 +1288,14 @@ class BiseCorrection extends CI_Controller {
              {
                  $allinputdata['excep'] = 'Please Upload Your Picture';
                  $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                 redirect('Registration/NewEnrolment_EditForm/'.$formno);
+                 redirect('BiseCorrection/NewEnrolment_EditForm/');
                  return;
              }
          }
 
 
         //DebugBreak();
-        $this->frmvalidation9th('NewEnrolment_EditForm/'.$formno,$allinputdata,1);
+       // $this->frmvalidation9th('NewEnrolment_EditForm/'.$formno,$allinputdata,1);
 
         /*  $a = getimagesize($filepath);
         if($a[2]!=2)
@@ -1514,6 +1508,498 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
+    
+     public function otherboard10th()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/Matric/OtherBoard10th.php');
+        $this->load->view('common/Otherboard10thfooter.php');
+    }
+    
+      public function NewEnrolment_insert_OtherBoard10th(){
+
+
+       // DebugBreak();
+        $this->load->model('BiseCorrections_model');
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $userinfo['isselected'] = 2;
+        $Inst_Id_other = @$_POST['inst_cd_other'];
+        $ckpo = $userinfo['Inst_Id'];
+        $this->commonheader($userinfo);
+        $error = array();
+
+        $formno = $this->BiseCorrections_model->GetFormNo($Inst_Id_other);
+        $dob = @$_POST['dob'];
+
+        $allinputdata = array('cand_name'=>@$_POST['cand_name'],
+            'father_name'=>@$_POST['father_name'],
+            'bay_form'=>@$_POST['bay_form'],
+            'father_cnic'=>@$_POST['father_cnic'],
+            'Dob'=>@$_POST['dob'],
+            'mob_number'=>@$_POST['mob_number'],
+            'medium'=>@$_POST['medium'],
+            'speciality'=>@$_POST['speciality'],
+            'MarkOfIden'=>@$_POST['MarkOfIden'],
+            'medium'=>@$_POST['medium'],
+            'nationality'=>@$_POST['nationality'],
+            'gender'=>@$_POST['gend'],
+            'hafiz'=>@$_POST['hafiz'],
+            'religion'=>@$_POST['religion'],
+            'std_group'=>@$_POST['std_group'],
+            'address'=>@$_POST['address'],
+            'UrbanRural'=>@$_POST['UrbanRural'],
+            'dist'=>@$_POST['pvtinfo_dist'],
+            'teh'=>@$_POST['pvtinfo_teh'],
+            'zone'=>@$_POST['pvtZone'],
+            'oldrno'=>@$_POST['oldrno'],
+            'oldsess'=>@$_POST['oldsess'],
+            'oldyear'=>@$_POST['oldyear'],
+            'oldboard'=>@$_POST['oldboard'],
+            'oldClass'=>@$_POST['oldClass'],
+            'cattype' => @$_POST['category'],
+            'sub1'=>@$_POST['sub1'],
+            'sub2'=>@$_POST['sub2'],
+            'sub3'=>@$_POST['sub3'],
+            'sub4'=>@$_POST['sub4'],
+            'sub5'=>@$_POST['sub5'],
+            'sub6'=>@$_POST['sub6'],
+            'sub7'=>@$_POST['sub7'],
+            'sub8'=>@$_POST['sub8'],
+            'sub1p2'=>@$_POST['sub1p2'],
+            'sub2p2'=>@$_POST['sub2p2'],
+            'sub3p2'=>@$_POST['sub3p2'],
+            'sub4p2'=>@$_POST['sub4p2'],
+            'sub5p2'=>@$_POST['sub5p2'],
+            'sub6p2'=>@$_POST['sub6p2'],
+            'sub7p2'=>@$_POST['sub7p2'],
+            'sub8p2'=>@$_POST['sub8p2'],
+        );
+
+       
+        $sub1 = 0;
+        $sub2 = 0;
+        $sub3 = 0;
+        $sub4 = 0;
+        $sub5 = 0;
+        $sub6 = 0;
+        $sub7 = 0;
+        $sub8 = 0;
+        $sub1ap1 = 0;
+        $sub2ap1 = 0;
+        $sub3ap1 = 0;
+        $sub4ap1 = 0;
+        $sub5ap1 = 0;
+        $sub6ap1 = 0;
+        $sub7ap1 = 0;
+        $sub8ap1 = 0;
+        $sub1ap2 = 0;
+        $sub2ap2 = 0;
+        $sub3ap2 = 0;
+        $sub4ap2 = 0;
+        $sub5ap2 = 0;
+        $sub6ap2 = 0;
+        $sub7ap2 = 0;
+        $sub8ap2 = 0;
+
+        $is9th = 0;
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1; 
+            $sub1 =  $_POST['sub1'];   
+            $is9th = 1;
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+            $sub2 =  $_POST['sub2'];
+            $is9th = 1;
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;   
+            $sub3 =  $_POST['sub3'];
+            $is9th = 1;
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+            $sub4 =  $_POST['sub4'];
+            $is9th = 1;
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+            $sub5 =  $_POST['sub5'];
+            $is9th = 1;
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+            $sub6 =  $_POST['sub6'];
+            $is9th = 1;
+        }
+        if(@$_POST['sub7'] != 0)
+        {
+            $sub7ap1 = 1;    
+            $sub7 =  $_POST['sub7'];
+            $is9th = 1;
+        }
+        if(@$_POST['sub8'] != 0)
+        {
+            $sub8ap1 = 1;    
+            $sub8 =  $_POST['sub8'];
+            $is9th = 1;
+        }
+
+        if(@$_POST['sub1p2'] != 0)
+        {
+            $sub1ap2 = 1; 
+            $sub1 =  $_POST['sub1p2'];  
+        }
+        if(@$_POST['sub2p2'] != 0)
+        {
+            $sub2ap2 = 1; 
+            $sub2 =  $_POST['sub2p2'];    
+        }
+        if(@$_POST['sub3p2'] != 0)
+        {
+            $sub3ap2 = 1;  
+            $sub3 =  $_POST['sub3p2'];    
+        }
+        if(@$_POST['sub4p2'] != 0)
+        {
+            $sub4ap2 = 1; 
+            $sub4 =  $_POST['sub4p2'];     
+        }
+        if(@$_POST['sub5p2'] != 0)
+        {
+            $sub5ap2 = 1;    
+            $sub5 =  $_POST['sub5p2'];  
+        }
+        if(@$_POST['sub6p2'] != 0)
+        {
+            $sub6ap2 = 1;    
+            $sub6 =  $_POST['sub6p2'];  
+        }
+        if(@$_POST['sub7p2'] != 0)
+        {
+            $sub7ap2 = 1;    
+            $sub7 =  $_POST['sub7p2'];  
+        }
+        if(@$_POST['sub8p2'] != 0)
+        {
+            $sub8ap2 = 1;    
+            $sub8 =  $_POST['sub8p2'];  
+        }
+
+        //  DebugBreak();
+        $cattype = @$_POST['category'];
+        $examtype = "";
+        $marksImp = @$_POST['ddlMarksImproveoptions'];
+
+      //  DebugBreak();
+
+          if($is9th == 1)
+          {
+          $examtype = 3;
+          $cat09 = 0;
+          $cat10 = 1;
+          }
+          else
+          {
+          $examtype = 2;
+          $cat09 = 1;
+        $cat10 = 1;
+          }
+        
+        $Speciality = $this->input->post('speciality');
+        $grp_cd = $this->input->post('std_group');
+        $per_grp = $this->input->post('pergrp');
+
+        if($grp_cd == '1' || $grp_cd == '7' || $grp_cd == '8'){
+            $grp_cd = '1';
+        }
+        else if($grp_cd == '2' )
+        {
+            $grp_cd = '2';        
+        }
+        else if($grp_cd == '5')
+        {
+            $grp_cd = '5';        
+        }
+
+        $practical_Sub = array(
+            'PHY'=>'6',
+            'CHM'=>'7',
+            'BIO'=>'8',
+            'ART&MD'=>'18',
+            'F&N'=>'27',
+            'AHE'=>'28',
+            'C&T'=>'30',
+            'HPD'=>'40',
+            'EW'=>'43',
+            'COM'=>'45',
+            'AGR'=>'46',
+            'WW(FM)'=>'48',
+            'CM'=>'68',
+            'DRAW'=>'69',
+            'EMB'=>'70',
+            'TAIL'=>'72',
+            'TYPE'=>'73',
+            'CSC'=>'78',
+            'WW(BM)'=>'79',
+            'POUL'=>'83',
+            'R/AC'=>'88',
+            'F/FRM'=>'89',
+            'CHW'=>'90',
+            'CSC/D'=>'93',
+            'HPD/D'=>'94'
+        );
+        // DebugBreak();
+        $ispractical = 0;
+        if($per_grp == 1)
+        {
+            $ispractical =1;
+        }
+        if(array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) ||
+         array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub))
+        {
+            $ispractical =1;
+        }
+
+
+
+        /*$AdmFee = $this->BiseCorrections_model->getrulefee($ispractical);//$this->makefee($cat,$Speciality,$sub7,$sub8,$grp_cd,$per_grp);
+        $AdmFeeCatWise = '1300';
+        if($cat09 != 0 && $cat10 != 0)
+        {
+            $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
+        }
+        else if(($cat09 == 0 && $cat10 != 0) || ($cat09 != 0 && $cat10 == 0))
+        {
+            $AdmFeeCatWise = $AdmFee[0]['PVT_Amount'];
+        }
+        else if($cat09 == 0 && $cat10 == 0)
+        {
+            return;
+        }
+
+        if($Speciality > 0)
+        {
+           $AdmFeeCatWise = 0; 
+        }
+        $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
+        // DebugBreak();  */
+
+        $oldsess = @$_POST['oldsess'];
+        if($oldsess == 'Annual'){
+            $oldsess =  1;    
+        }
+        else if($oldsess == 'Supplementary'){
+            $oldsess =  2;    
+        }
+        
+       $addre =  str_replace("'", "", $this->input->post('address'));
+       $data = array(
+            'name' =>$this->input->post('cand_name'),
+            'Fname' =>$this->input->post('father_name'),
+            'BForm' =>$this->input->post('bay_form'),
+            'FNIC' =>$this->input->post('father_cnic'),
+            'Dob' =>$this->input->post('dob'),
+            'MobNo' =>$this->input->post('mob_number'),
+            'medium' =>$this->input->post('medium'),
+            'Inst_cd_other' =>$this->input->post('inst_cd_other'),
+            'markOfIden' =>$this->input->post('MarkOfIden'),
+            'Speciality' => ($Speciality),
+            'nat' =>$this->input->post('nationality'),
+            'sex' =>$this->input->post('gender'),
+            'IsHafiz' =>$this->input->post('hafiz'),
+            'rel' =>$this->input->post('religion'),
+            'addr' =>$addre,
+            'grp_cd' => $grp_cd,
+            'sub1' =>$sub1,
+            'sub2' =>$sub2,
+            'sub3' =>$sub3,
+            'sub4' =>$sub4,
+            'sub5' =>$sub5,
+            'sub6' =>$sub6,
+            'sub7' => $sub7,
+            'sub8' => $sub8,
+            'sub1ap1' => ($sub1ap1),
+            'sub2ap1' => ($sub2ap1),
+            'sub3ap1' => ($sub3ap1),
+            'sub4ap1' => ($sub4ap1),
+            'sub5ap1' => ($sub5ap1),
+            'sub6ap1' => ($sub6ap1),
+            'sub7ap1' => ($sub7ap1),
+            'sub8ap1' => ($sub8ap1),
+            'sub1ap2' => ($sub1ap2),
+            'sub2ap2' => ($sub2ap2),
+            'sub3ap2' => ($sub3ap2),
+            'sub4ap2' => ($sub4ap2),
+            'sub5ap2' => ($sub5ap2),
+            'sub6ap2' => ($sub6ap2),
+            'sub7ap2' => ($sub7ap2),
+            'sub8ap2' => ($sub8ap2),
+            'RuralORUrban' =>$this->input->post('UrbanRural'),
+            'prevResult' =>$this->input->post('prevResult'),
+            'FormNo' =>($formno),
+            'cat09' =>$cat09,
+            'cat10' =>$cat10,
+            'dist'=>@$_POST['pvtinfo_dist'],
+            'teh'=>@$_POST['pvtinfo_teh'],
+            'zone'=>@$_POST['pvtZone'],
+            'Reggrp'=>"1",
+            'rno'=>@$_POST['oldrno'],
+            'sess'=>$oldsess,
+            'Iyear'=>@$_POST['oldyear'],
+            'Brd_cd'=>@$_POST['oldboard'],
+            'schm'=>1,
+            'exam_type'=>$examtype,
+            'spl_cd'=>@$data[0]['spl_cd'],
+            'picpath'=>@$_POST['pic'],
+            'ckpo'=>@$ckpo
+           
+
+        );
+        
+        
+          DebugBreak();
+         $target_path = IMAGE_PATH_OTHER_BOARD_10TH.$Inst_Id_other.'/';
+        if (!file_exists($target_path)){
+
+        mkdir($target_path);
+        }
+
+       // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
+      $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        //$copyimg = $target_path.$formno.'.jpg';
+       
+        
+      $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg';
+        $config['max_size']      = '20';
+        $config['min_size']      = '4';
+        //  $config['max_width']     = '260';
+        // $config['max_height']    = '290';
+        $config['min_width']     = '110';
+        $config['min_height']    = '100';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
+
+        $filepath = $target_path. $config['file_name']  ;
+
+        //$config['new_image']    = $formno.'.JPEG';
+
+        $this->load->library('upload', $config);
+        // DebugBreak();
+        $check = getimagesize($_FILES["pic"]["tmp_name"]);
+        $this->upload->initialize($config);
+
+        if($check !== false) {
+
+            $file_size = round($_FILES['pic']['size']/1024, 2);
+            if($file_size<=20 && $file_size>=4)
+            {
+                if ( !$this->upload->do_upload('pic',true))
+                {
+                    if($this->upload->error_msg[0] != "")
+                    {
+                        $error['excep']= $this->upload->error_msg[0];
+                        $data['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$data);
+                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                        redirect('Admission_9th_pvt/NewEnrolment/');
+                        return;
+
+                    }
+
+
+                }
+            }
+            else
+            {
+                $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                redirect('Admission_9th_pvt/NewEnrolment/');
+
+            }
+        }
+        else
+        {
+            // $check = getimagesize($filepath);
+            if($check === false)
+            {
+                $data['excep'] = 'Please Upload Your Picture';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('Admission_9th_pvt/NewEnrolment/');
+                return;
+            }
+        }
+        $this->frmvalidation('Pre_Matric_data',$data,0);       
+        //DebugBreak();*/
+        $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement($data);
+
+
+
+        if($logedIn != false)
+        {
+            $allinputdata = "";
+            $allinputdata['excep'] = 'success';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            $msg = $formno;                                           
+            redirect('BiseCorrection/otherboard10th');
+        }
+        else
+        {     
+            $allinputdata = "";
+            $allinputdata['excep'] = 'An error has occoured. Please try again later. ';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('BiseCorrection/otherboard10th');
+            return;
+            echo 'Data NOT Saved Successfully !';
+        } 
+        $this->load->view('common/footer.php');
+    }
+    
+    
+            public function getzone(){
+       // DebugBreak();
+        $data = array(
+            'tehCode' => $this->input->post('tehCode'),
+        );
+
+        $tehCode = $data['tehCode'];
+        $this->load->model('BiseCorrections_model');
+        $value = array('teh'=> $this->BiseCorrections_model->getzone($tehCode)) ;
+        echo json_encode($value);
+
+    }
+
+    public function getcenter(){
+        //DebugBreak();
+        $data = array(
+            'zoneCode' => $this->input->post('pvtZone'),
+            'gen' => $this->input->post('gend'),
+        );
+
+        $this->load->model('BiseCorrections_model');
+        $value = array('center'=> $this->BiseCorrections_model->getcenter($data)) ;
+        echo json_encode($value);
+
+    }
        public function reg11thcorrections()
     {
         $this->load->helper('url');

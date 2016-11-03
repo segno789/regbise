@@ -375,6 +375,165 @@ class BiseCorrections_model extends CI_Model
         $result_1 = $this->db->get()->result();
         return $result_1;
     }
+     public function getzone($tehcd)
+    {
+
+        $query = $this->db->get_where('matric_new..tblZones', array('mYear' => 2016,'Class' => 10,'Sess'=>2, 'teh_cd' => $tehcd));
+        // //DebugBreak();
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+      public function GetFormNo($inst_cd){
+       // DebugBreak();
+        $this->db->select('formno');
+        $this->db->order_by("formno", "DESC");
+        $formno =$this->db->get_where('Admission_online..tblAdmissionDataForSSC_otherBoard',array('Sch_cd'=>$inst_cd)); //
+        $rowcount = $formno->num_rows();
+
+        if($rowcount == 0 )
+        {
+        
+        $this->db->select('formno');
+        $this->db->order_by("formno", "DESC");
+        $formno =$this->db->get_where('Admission_online..MSAdm2016',array('Sch_cd'=>$inst_cd)); //tblAdmissionDataForSSC_otherBoard
+        $rowcount = $formno->num_rows();
+            $row  = $formno->result_array();
+            $formno = $row[0]['formno']+1; //formnovalid+1;
+            return $formno;
+        }
+        else
+        {
+            $row  = $formno->result_array();
+            $formno = $row[0]['formno']+1;
+            return $formno;
+        }
+
+    }
+      public function Insert_NewEnorlement($data)
+    {    
+        
+        $name = strtoupper($data['name']);
+        $fname =strtoupper($data['Fname']);
+        $BForm = $data['BForm'];
+        $FNIC = $data['FNIC'];
+        $Dob = $data['Dob'];
+        $CellNo = $data['MobNo'];
+        $medium = $data['medium'];
+        $prevresult = strtoupper(@$data['prevResult']);
+        $MarkOfIden =strtoupper(@$data['markOfIden']);
+        $Speciality = $data['Speciality'];
+        $nat = $data['nat'];
+        $sex = $data['sex'];
+        $IsHafiz = $data['IsHafiz'];
+        $rel = $data['rel'];        
+        $addr =strtoupper($data['addr']) ;
+
+        if(($data['grp_cd'] == 1) || ($data['grp_cd'] == 7) || ($data['grp_cd'] == 8) )
+        {
+            $grp_cd = 1;    
+        }
+        else if($data['grp_cd'] == 2 )
+        {
+            $grp_cd = 2;        
+        }
+        else if($data['grp_cd'] == 5 )
+        {
+            $grp_cd = 5;        
+        }
+        else if ($data['grp_cd']==4)
+        {
+            $grp_cd = 4;        
+        }
+
+        $sub1= $data['sub1'];
+        $sub2 = $data['sub2'];
+        $sub3 = $data['sub3'];
+        $sub4 = $data['sub4'];
+        $sub5 = $data['sub5'];
+        $sub6 = $data['sub6'];
+        $sub7 = $data['sub7'];
+        $sub8 = $data['sub8'];
+       
+
+        $sub1ap1 = $data['sub1ap1'];
+        $sub2ap1 = $data['sub2ap1'];
+        $sub3ap1 = $data['sub3ap1'];
+        $sub4ap1 = $data['sub4ap1'];
+        $sub5ap1 = $data['sub5ap1'];
+        $sub6ap1 = $data['sub6ap1'];
+        $sub7ap1 = $data['sub7ap1'];
+        $sub8ap1 = $data['sub8ap1'];
+
+        $UrbanRural = $data['RuralORUrban'];
+        $Inst_cd = $data['Inst_cd_other'];
+        $formno = $data['FormNo'];
+        $RegGrp = $data['grp_cd'];
+        $sub1ap2 =  $data['sub1ap2'];
+        $sub2ap2 =  $data['sub2ap2'];
+        $sub3ap2 =  $data['sub3ap2'];
+        $sub4ap2 =  $data['sub4ap2'];
+        $sub5ap2 =  $data['sub5ap2'];
+        $sub6ap2 =  $data['sub6ap2'];
+        $sub7ap2 =  $data['sub7ap2'];
+        $sub8ap2 =  $data['sub8ap2'];
+                                  
+        $cat09 = $data['cat09'];     
+        $cat10 = $data['cat10'];     
+
+        //-------Marks Improve CAT --------\\
+        $dist_cd =  $data['dist'];
+        $teh_cd =  $data['teh'];
+        $zone_cd =  $data['zone'];
+        $oldrno =  $data['rno'];
+        $oldyear =  $data['Iyear'];
+        $oldsess =  $data['sess'];
+         $ckpo = $data['ckpo'];
+    
+          $exam_type = $data['exam_type'];
+        $Brd_cd =  @$data['Brd_cd'];
+
+  
+        //$old_class =  @$data['class'];
+
+        /*$AdmProcFee =  @$data['AdmProcessFee'];
+
+        $AdmFee = @$data['AdmFee'];
+
+        $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
+
+
+        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',10,2016,2,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,$prevresult,$ckpo,$exam_type");
+        return true;
+    }
+    public function getcenter($data){
+                   
+                   
+             
+        $zone = $data['zoneCode'];
+        $gend = $data['gen'];
+        
+        $where = " mYear = 2016  AND class = 10 AND  sess = 2 AND Zone_cd =  $zone ";      // AND  (cent_Gen = $gend OR cent_Gen = 3) 
+        $query = $this->db->query("SELECT * FROM matric_new..tblcentre WHERE $where");
+
+        //$query = $this->db->get_where('matric_new..tblcentre', array('mYear' => 2016,'class' => 10,'sess'=>2, 'Zone_cd' => $zone, 'cent_Gen' => $gend)); 
+        //DebugBreak();
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function Insert_SpecPermison($data)
     {
         $query = $this->db->insert('Registration..inst_Special_Permission_9th', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));

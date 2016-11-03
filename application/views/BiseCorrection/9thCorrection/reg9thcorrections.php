@@ -26,6 +26,9 @@
                         <a href="<?php echo base_url(); ?>index.php/BiseCorrection/search_Form"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>9th Mannual Correction</a>
                         </div>   
                         <div class="shortcutHome">
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/otherboard10th"><img src="<?php echo base_url();?>assets/img/reports.png"><br>10th Other Board Forms</a>
+                        </div>  
+                        <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>9th Corrections Applications</a>
                         </div>
                           <div class="shortcutHome">
