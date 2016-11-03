@@ -22,8 +22,8 @@
                         <!--  <div class="shortcutHome">
                         <a href="GetInfo.php"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>Re-Admission</a>
                         </div>  -->   
-                         <div class="shortcutHome">
-                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/search_Form"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>9th Mannual Correction</a>
+                        <div class="shortcutHome">
+                            <a href="<?php echo base_url(); ?>index.php/BiseCorrection/search_Form"><img src="<?php echo base_url();?>assets/img/enrolment.png"><br>9th Mannual Correction</a>
                         </div>   
                         <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>index.php/BiseCorrection/reg9thcorrectionapp"><img src="<?php echo base_url();?>assets/img/edit_form.png"><br>9th Corrections Applications</a>

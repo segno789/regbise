@@ -967,7 +967,7 @@ class BiseCorrection extends CI_Controller {
         //error_manualentry9th
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
+        $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno_mn.php',$error);
         $this->load->view('common/footer.php');
     }
     
@@ -1015,7 +1015,7 @@ class BiseCorrection extends CI_Controller {
             $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['Sch_cd']);
             $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['Sch_cd'],'grp_cd'=>$inst_name[0]);
         }
-         DebugBreak();
+        // DebugBreak();
         if($RegStdData['data'] == FALSE)
         {
             $this->session->set_flashdata('NewEnrolment_error','error');

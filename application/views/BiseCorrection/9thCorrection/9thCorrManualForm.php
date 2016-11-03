@@ -32,7 +32,7 @@ header("Pragma: no-cache");
                                      <label class="control-label span2" style="width: 411px;margin-left: -199px;" >
                                       <img src="<?=base_url()?>assets/img/upalodimage.jpg" alt="" >
                                     </label> 
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo '/'.IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo '/'.IMAGE_PATH.$data['0']['Sch_cd'].'/'.$data[0]['PicPath'].'?'.rand(10000,1000000); } ?>" alt="Candidate Image">
                                 </div>
                             </div>
                             <div class="control-group">
