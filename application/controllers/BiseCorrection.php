@@ -1030,15 +1030,15 @@ class BiseCorrection extends CI_Controller {
     }
      public function NewEnrolment_EditForm9th_manual_corr()
     {    
-       // DebugBreak();
+        //DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
-        $formno = $_POST['txtformNo_search'];
+        $formno = @$_POST['txtformNo_search'];
         if($formno == ""){
-            return;
+             $formno = $this->uri->segment(3);
         }
         $isReAdm = 0;
         $year = 0;
@@ -3213,6 +3213,33 @@ class BiseCorrection extends CI_Controller {
       $basepath =  $basepath.'\\'.$pic.'\\'. $foldername;
          
     }
+    
+    public function searchbyinst()
+    {
+      $this->load->helper('url');
+      $data = array(
+          'isselected' => '15',
+      );
+      $this->load->library('session');
+      $this->load->model('BiseCorrections_model');
+      $Logged_In_Array = $this->session->all_userdata();
+      $userinfo = $Logged_In_Array['logged_in'];
+   
+      if(!empty($_POST))
+      {
+            // DebugBreak();
+       $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst($_POST['txtformNo_search']);
+      }
+      
+      
+      //error_manualentry9th
+      $this->load->view('common/header.php',$userinfo);
+      $this->load->view('common/menu.php',$data);
+      $this->load->view('BiseCorrection/9thCorrection/SrchByInstCD.php',$error);
+      $this->load->view('common/footer.php');
+    }
+    
+    
 }
 
 /* End of file example.php */

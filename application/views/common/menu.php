@@ -251,6 +251,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst">
+                            9th Search By Inst. Code
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrectionapp_verified">
                             Verified Correction  
                         </a>

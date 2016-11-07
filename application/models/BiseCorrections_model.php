@@ -351,6 +351,22 @@ class BiseCorrections_model extends CI_Model
             return  false;
         }
     }
+    public function EditEnrolementByinst($sch_cd)
+    {
+
+        //  DebugBreak();
+
+        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('sch_cd' => $sch_cd,'class'=>9,'iyear'=>2016,'sess'=>1, 'isdeleted'=>0));     
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
     public function GetInstNamebyId($isnt){
         $this->db->select('Name,allowed_mGrp,allowed_iGrp,edu_lvl,Inst_cd');
         $this->db->from('Admission_Online..tblInstitutes_all');
@@ -618,7 +634,7 @@ class BiseCorrections_model extends CI_Model
             return $this->db->affected_rows();
         }
     }
-    public function update10MigData($formno,$kpo,$isupdate,$newinst_cd){
+   public function update10MigData($formno,$kpo,$isupdate,$newinst_cd){
        //   DebugBreak();
         if($isupdate == 1)
         {
@@ -740,9 +756,7 @@ class BiseCorrections_model extends CI_Model
             return $this->db->affected_rows();
         }
     }
-
-    
-    public function getstdrecord($rno)
+   public function getstdrecord($rno)
     {
           $this->db->select('name, fname, rno,class,iyear,sess,sch_cd');
         $this->db->from(TBLMIGRATION4);

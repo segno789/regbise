@@ -1398,7 +1398,6 @@ class Registration extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $data = array(
             'isselected' => '2',
-
         );
         $msg = $this->uri->segment(3);
 
@@ -2816,7 +2815,7 @@ class Registration extends CI_Controller {
         $pdf->Output($data["Sch_cd"].'.pdf', 'I');
     }
     public function revenue_pdf()
-    {    //DebugBreak();
+    {    DebugBreak();
 
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
@@ -2876,12 +2875,12 @@ class Registration extends CI_Controller {
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
           //  DebugBreak();
-            if(ISREADMISSION == 1)
+          /*  if(ISREADMISSION == 1)
             {
                 $rule_fee  =  $this->Registration_model->getreulefee(1);
                 $rule_fee[0]['isfine'] = 1; 
                 $isfine = 1;
-            }
+            }    */
         
             
             
