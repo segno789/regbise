@@ -165,8 +165,8 @@ class Registration_11th_model extends CI_Model
            $iOldSess =  0;
       //  $pic_base_65 = $data['Image'];
       //  DebugBreak();
-        DebugBreak();
-      if($OldBrd == 1 )
+      //  DebugBreak();
+     if($OldBrd == 1 && $IsReAdm !=1)
       {            
           $query = $this->db->query("Registration..Prev_Get_Student_Matric $OldRno,$OldYear,$OldSess,$OldBrd");
           $rowcount = $query->num_rows();

@@ -54,7 +54,7 @@
                                     $grp_name='';                             
                                     foreach($data as $key=>$vals):
                                     $n++;
-                                    $formno = !empty($vals["formNo"])?$vals["formNo"]:"N/A";
+                                    $formno = !empty($vals["FormNo"])?$vals["FormNo"]:"N/A";
                                     $grp_name = $vals["RegGrp"];
                                     switch ($grp_name) {
                                         case '1':
@@ -84,10 +84,10 @@
                                     <td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>
                                     <td>'.$grp_name.'</td>
                                     
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH.$vals['Sch_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH11.$vals['coll_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
-                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="Restore_Deleted_Form_BiseAdmin('.$formno.')">Restore DELETED Form</button>
+                                    <button type="button" class="btn btn-info" value="'.$formno.'" onclick="Restore_Deleted_Form_BiseAdmin11('.$formno.')">Restore DELETED Form</button>
                                     </td>
                                     </tr>';
                                     endforeach;

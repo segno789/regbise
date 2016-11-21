@@ -537,7 +537,7 @@ class Registration extends CI_Controller {
 
 
         $this->load->model('Registration_model');
-         DebugBreak();
+        // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1398,6 +1398,7 @@ class Registration extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $data = array(
             'isselected' => '2',
+
         );
         $msg = $this->uri->segment(3);
 
@@ -1554,8 +1555,8 @@ class Registration extends CI_Controller {
       //  DebugBreak();
         if($userinfo['isSpecial']==1 && date('Y-m-d',strtotime($userinfo['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
-            $rule_fee[0]['readmfine']   =  $userinfo['isSpecial_Fee']['readmfine']; 
+             $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee'];
+             $rule_fee[0]['readmfine']   =  $userinfo['isSpecial_Fee']['readmfine']; 
             $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -1638,7 +1639,7 @@ class Registration extends CI_Controller {
 
                 }
                 
-                if($v["Spec"] == 1 || $v["Spec"] ==  2)
+                if($v["Spec"] == 1 )
                 {
                     $reg_fee = 0;
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
@@ -1662,7 +1663,10 @@ class Registration extends CI_Controller {
 
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
         }
-
+         if($Lreg_fee == '')
+          {
+              $Lreg_fee = 0;
+          }
 
         $forms_id   = implode(",",$ids);        
         $tot_fee     = $Totalprocessing_fee+$TotalRegFee+$TotalLatefee;
@@ -1718,7 +1722,7 @@ class Registration extends CI_Controller {
            
 
             $rule_fee[0]['Fine']   =  $userinfo['isSpecial_Fee']['SpecialFee']; 
-            $rule_fee[0]['readmfine']   =  $userinfo['isSpecial_Fee']['readmfine']; 
+            $rule_fee[0]['readmfine']   =  $userinfo['isSpecial_Fee']['readmfine'];
             $rule_fee[0]['Reg_Processing_Fee']   =  $userinfo['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $userinfo['isSpecial_Fee']['RegFee']; 
               $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -1808,8 +1812,8 @@ class Registration extends CI_Controller {
 
                 }
                
-                
-                if($v["Spec"] == 1 || $v["Spec"] ==  2)
+                     // || $v["Spec"] ==  2
+                if($v["Spec"] == 1 )
                 {
                     $reg_fee = 0;
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
@@ -1833,8 +1837,11 @@ class Registration extends CI_Controller {
 
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
         }
-
-
+          if($Lreg_fee == '')
+          {
+              $Lreg_fee = 0;
+          }
+        //echo  $Lreg_fee ; exit();
         $forms_id   = implode(",",$ids);        
         $tot_fee     = $Totalprocessing_fee+$TotalRegFee+$TotalLatefee;
         // $challan_No = 0;
@@ -2274,7 +2281,6 @@ class Registration extends CI_Controller {
         if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
             $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
-            $rule_fee[0]['readmfine']   =  $user['isSpecial_Fee']['readmfine']; 
             $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -2815,7 +2821,7 @@ class Registration extends CI_Controller {
         $pdf->Output($data["Sch_cd"].'.pdf', 'I');
     }
     public function revenue_pdf()
-    {    DebugBreak();
+    {    //DebugBreak();
 
         $Batch_Id = $this->uri->segment(3);
         $this->load->library('session');
@@ -2837,8 +2843,7 @@ class Registration extends CI_Controller {
 
         if($user['isSpecial']==1 && date('Y-m-d',strtotime($user['isSpecial_Fee']['FeedingDate']))>=date('Y-m-d')  )
         {
-            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee'];
-            $rule_fee[0]['readmfine']   =  $user['isSpecial_Fee']['readmfine'];             
+            $rule_fee[0]['Fine']   =  $user['isSpecial_Fee']['SpecialFee']; 
             $rule_fee[0]['Reg_Processing_Fee']   =  $user['isSpecial_Fee']['ProcessingFee']; 
             $rule_fee[0]['Reg_Fee']   =  $user['isSpecial_Fee']['RegFee']; 
             $rule_fee[0]['Rule_Fee_ID']   = 0; 
@@ -2875,12 +2880,12 @@ class Registration extends CI_Controller {
                 $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
             }
           //  DebugBreak();
-          /*  if(ISREADMISSION == 1)
+           /* if(ISREADMISSION == 1)
             {
                 $rule_fee  =  $this->Registration_model->getreulefee(1);
                 $rule_fee[0]['isfine'] = 1; 
                 $isfine = 1;
-            }    */
+            }   */
         
             
             
@@ -3561,7 +3566,7 @@ class Registration extends CI_Controller {
         $cnteight = substr_count(@$_POST['bay_form'],"8");
         $cntnine = substr_count(@$_POST['bay_form'],"9");
 
-        DebugBreak();
+
         if(@$_POST['dob'] != null || $allinputdata['Dob'] != null)
         {
             $date = new DateTime(@$_POST['dob']);
