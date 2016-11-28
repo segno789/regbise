@@ -742,7 +742,7 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_insert()
     {
-        
+        DebugBreak();
         $this->load->model('Registration_11th_model');
        
         $this->load->library('session');

@@ -891,7 +891,8 @@ class BiseCorrections_model extends CI_Model
         $AdmFee = @$data['AdmFee'];
 
         $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
-
+$IsHafiz = 0;
+$RegGrp = 0;
 
         $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
         return true;
@@ -930,7 +931,7 @@ class BiseCorrections_model extends CI_Model
         $result_1 = $this->db->get()->result();
         return $result_1;
     }
-    public function get9thcancel()
+      public function get9thcancel()
     {
        // DebugBreak();
         $query = $this->db->query("SELECT   t1.formno,t1.name,t1.fname, CONVERT(varchar(10), t1.dob, 105) RegDob,t1.fnic,t1.                                      bform,t1.sch_cd,t3.name,t2.rno,t2.name,t2.fname,t2.dob,t2.fnic,t2.bform
@@ -963,7 +964,7 @@ class BiseCorrections_model extends CI_Model
     {
        // DebugBreak();
             $data2 = array(
-                'isdeleted'=>NULL,
+                'isdeleted'=>0,
                 'ckpo'=>$kpo,
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
@@ -978,6 +979,5 @@ class BiseCorrections_model extends CI_Model
         }
     }
     
-  
 }
 ?>

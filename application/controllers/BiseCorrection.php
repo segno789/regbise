@@ -3646,7 +3646,7 @@ class BiseCorrection extends CI_Controller {
        
        
       $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['max_size']      = '20';
         $config['min_size']      = '4';
         //  $config['max_width']     = '260';
@@ -3793,8 +3793,7 @@ class BiseCorrection extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-   
-   public function result9thCancel()
+       public function result9thCancel()
     {
         $this->load->helper('url');
         $data = array(

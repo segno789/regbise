@@ -462,13 +462,12 @@ class Registration_11th_model extends CI_Model
     }
     public function GetFormNo($Inst_Id)
     {
-        // DebugBreak();
+         //DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('coll_cd' => $Inst_Id));
         $rowcount = $formno->num_rows();
-
-        if($rowcount == 0 )
+if($rowcount == 0 )
         {
             $formno =  ($Inst_Id.'0001' );
             return $formno;
@@ -476,7 +475,20 @@ class Registration_11th_model extends CI_Model
         else
         {
             $row  = $formno->result_array();
-            $formno = $row[0]['formno']+1;
+            
+            $fromno = $row[0]['formno'];
+           // $count =  substr($fromno, -4);
+            $inst_cd = substr($fromno, 0, 6);
+            if($inst_cd != $Inst_Id)
+            {
+                $row = $Inst_Id.str_pad($rowcount, 4, '0', STR_PAD_LEFT); 
+                $formno = $row+2;   
+            }
+            else
+            {
+                $formno = $row[0]['formno']+1;
+            }
+            
             return $formno;
         }
 
@@ -671,7 +683,7 @@ class Registration_11th_model extends CI_Model
         $Inst_cd = $fetch_data['Inst_cd'];
         $Batch_Id = $fetch_data['Batch_Id'];
 
-        $this->db->select('name, Fname, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee');
+        $this->db->select('name, Fname, IsReAdm,regFee,RegProcessFee,RegFineFee,RegTotalFee,yearOfPass,sessOfPass');
         $this->db->from('Registration..IA_P1_Reg_Adm2016');
         $this->db->where(array('Coll_cd' => $Inst_cd,'Batch_ID'=>$Batch_Id));
         $result_1 = $this->db->get()->result();
