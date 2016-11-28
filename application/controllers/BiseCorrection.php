@@ -1528,7 +1528,7 @@ class BiseCorrection extends CI_Controller {
       public function NewEnrolment_insert_OtherBoard10th(){
 
 
-       // DebugBreak();
+        DebugBreak();
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
