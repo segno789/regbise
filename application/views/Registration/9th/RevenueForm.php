@@ -123,7 +123,7 @@
     </tr>
 
     <?php
-  //DebugBreak();
+    DebugBreak();
     $n = 0; 
     $data['batch_info'][0]["Total_LateRegistrationFee"] = 0;
     foreach ($data['stdinfo'] as $key=>$vals) {

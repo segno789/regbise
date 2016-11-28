@@ -36,7 +36,7 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('GET_PRIVATE_IMAGE_PATH_COPY','');
-define('IMAGE_PATH_OTHER_BOARD_10TH', 'uploads/2016/other/10/');
+define('IMAGE_PATH_OTHER_BOARD_10TH', 'uploads/2016/other/');
 
 define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
@@ -89,6 +89,8 @@ define('TBLMIGRATIONTESTING3','Registration..tblMig');
 define('DIRPATH','C:\inetpub\vhosts\bisegrw.com\ssc.bisegrw.com\oldPics'); 
 define('DIRPATHMIG','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\\'); 
 define('TBLMIGRATION4','matric_new..vw9th16'); 
+
+
 
 
 

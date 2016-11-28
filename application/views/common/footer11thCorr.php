@@ -710,7 +710,7 @@ if(isset($files)){
     }
     var sub3_Non_Muslim = 
     {
-        61 : 'ETHICS',
+        51 : 'ETHICS',
         92  :'Islamic Education'
     }
     var sub5_Hum = 
@@ -1893,6 +1893,8 @@ if(isset($files)){
         $("#corr_sub1 option[value='2']").attr("selected","selected");
         $("#corr_sub2").append(new Option('English',1));
         $("#corr_sub2 option[value='1']").attr("selected","selected");
+        $("#corr_sub3").append(new Option('ETHICS',51));
+       
         $("#corr_sub3").append(new Option('Islamic Education',92));
         $("#corr_sub3 option[value='92']").attr("selected","selected");
         $("#corr_sub4").append(new Option('Physics',47));

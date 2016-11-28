@@ -215,7 +215,7 @@ class Registration_11th extends CI_Controller {
     }
      public function ReAdmission_check()
     {
-        DebugBreak();
+       // DebugBreak();
         $RollNo = @$_POST['oldRno'];
         $oldBrd_cd = @$_POST['oldBrd_cd'];
         $oldSess = @$_POST['oldSess'];
@@ -301,7 +301,7 @@ class Registration_11th extends CI_Controller {
             $this->load->view('Registration/11th/ReAdm_Form.php',$RegStdData);   
             $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
         }
-         else
+        else
         {
              redirect('Registration_11th/ReAdmission');
         }
@@ -742,7 +742,7 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_insert()
     {
-        
+        DebugBreak();
         $this->load->model('Registration_11th_model');
        
         $this->load->library('session');
@@ -753,7 +753,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-       // DebugBreak();
+      //  DebugBreak();
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -911,9 +911,6 @@ class Registration_11th extends CI_Controller {
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('Registration_11th/'.$viewName);
             return;*/
-            
-            $this->frmvalidation('ReAdmission_check',$data,0);
-
          $target_path = IMAGE_PATH11;
         // $target_path = '../uploads2/'.$Inst_Id.'/';
         if (!file_exists($target_path)){
@@ -1013,7 +1010,8 @@ class Registration_11th extends CI_Controller {
 
         $encoded_data = base64_encode($contents);*/
         
-        
+        $this->frmvalidation('Get_students_record',$data,0);
+
        // DebugBreak();
         $type = pathinfo($filepath, PATHINFO_EXTENSION);
         $pic_data = file_get_contents($filepath);
@@ -2026,11 +2024,11 @@ class Registration_11th extends CI_Controller {
         // DebugBreak();
         if(empty($result['data'])){
             $this->session->set_flashdata('error', $Condition);
-            redirect('Registration_11th/FormPrinting');
+            redirect('Registration_11th/Reg_Cards_Printing_11th');
             return;
 
         }
-        $temp = $user['Inst_Id'].'09-2016-18';
+        $temp = $user['Inst_Id'].'@11@2016-18';
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -2155,18 +2153,18 @@ class Registration_11th extends CI_Controller {
             $y += 0.2;
             $pdf->SetXY(0.5,$y+$dy);
             $pdf->SetFont('Arial','',10);
-            $pdf->Cell(0.5,0.5,"Bay Form No:",0,'L');
+            $pdf->Cell(0.5,0.5,"Father's CNIC:",0,'L');
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(1.5,$y+$dy);
-            $pdf->Cell(0.5,0.5,$data["BForm"],0,'L');     
+            $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');     
             //    $pdf->Cell(0.5,0.5,$data["Rel"]==1?"Muslim":"Non-Muslim",0,'L');
 
-            $pdf->SetXY(3.5+$x,$y+$dy);
+           /* $pdf->SetXY(3.5+$x,$y+$dy);
             $pdf->SetFont('Arial','',10);
             $pdf->Cell( 0.5,0.5,"Father's CNIC:",0,'L');
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(4.5+$x,$y+$dy);
-            $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');     
+            $pdf->Cell(0.5,0.5,$data["FNIC"],0,'L');   */  
             //========================================  Identification Mark
             $y += 0.2;
             $pdf->SetXY(0.5,$y+$dy);
@@ -2336,7 +2334,7 @@ class Registration_11th extends CI_Controller {
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 100;
         $reg_fee           = 1000;
-        $reLreg_fee          = 500;
+        $reLreg_fee          = 1000;
         $TotalRegFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2422,7 +2420,23 @@ class Registration_11th extends CI_Controller {
                     }
                     else
                     {
-                        $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                         if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                        {
+                            if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+                            {
+                                $Lreg_fee = 0; 
+                            }
+                            else
+                            {
+                              $Lreg_fee = 500;  
+                            }
+                           
+                        }
+                        else
+                        {
+                           $TotalLatefee = $TotalLatefee + $Lreg_fee; 
+                        }
+                        
                     }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
                 } 
@@ -2437,7 +2451,22 @@ class Registration_11th extends CI_Controller {
                 }
                 else
                 {
-                    $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                      if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                        {
+                            if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+                            {
+                                $Lreg_fee = 0; 
+                            }
+                            else
+                            {
+                              $Lreg_fee = 500;  
+                            }
+                        }
+                        else
+                        {
+                            $TotalLatefee = $TotalLatefee + $Lreg_fee;
+                        }
+                    
                 }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
@@ -2487,7 +2516,7 @@ class Registration_11th extends CI_Controller {
         /*====================  Counting Fee  ==============================*/
         $processing_fee = 0;
         $reg_fee           = 1000;
-        $reLreg_fee          = 500;
+        $reLreg_fee          = 1000;
         $TotalRegFee = 0;
         $TotalLatefee = 0;
         $Totalprocessing_fee = 0;
@@ -2527,7 +2556,6 @@ class Registration_11th extends CI_Controller {
         if($is_gov == 1)
         {
             $reg_fee = $rule_fee[0]['Reg_Fee'];
-
             $Lreg_fee = $rule_fee[0]['Fine'];
             $processing_fee = $rule_fee[0]['Reg_Processing_Fee'];
         }
@@ -2572,7 +2600,23 @@ class Registration_11th extends CI_Controller {
                         $TotalLatefee = $TotalLatefee + $reLreg_fee;
                     }
                     else
-                    {     $Lreg_fee = $rule_fee[0]['Fine'];
+                    {     
+                        if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                        {
+                             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+                            {
+                                $Lreg_fee = 0; 
+                            }
+                            else
+                            {
+                              $Lreg_fee = 500;  
+                            }
+                        }
+                        else
+                        {
+                            $Lreg_fee = $rule_fee[0]['Fine'];
+                        }
+                        
                         $TotalLatefee = $TotalLatefee + $Lreg_fee;
                     }
                     $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
@@ -2587,7 +2631,24 @@ class Registration_11th extends CI_Controller {
                     $TotalLatefee = $TotalLatefee + $reLreg_fee;
                 }
                 else
-                {     $Lreg_fee = $rule_fee[0]['Fine'];
+                {     
+                     if($v["yearOfPass"] == 2016 && $v["sessOfPass"] ==2)
+                        {
+                             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
+                            {
+                                $Lreg_fee = 0; 
+                            }
+                            else
+                            {
+                              $Lreg_fee = 500;  
+                            }
+                        }
+                        else
+                        {
+                            $Lreg_fee = $rule_fee[0]['Fine'];
+                        }
+                    
+                    
                     $TotalLatefee = $TotalLatefee + $Lreg_fee;
                 }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
@@ -2673,7 +2734,7 @@ class Registration_11th extends CI_Controller {
             return;
 
         }
-        $temp = $user['Inst_Id'].'09-2016-18';
+        $temp = $user['Inst_Id'].'@11@2016-18';
         $image =  $this->set_barcode($temp);
         // $pdf->Image(base_url().'assets/pdfs/'.'/'.$image,6.3,0.5, 1.8, 0.20, "PNG");
         //$studeninfo['data']['info'][0]['barcode'] = $image;
@@ -2915,7 +2976,7 @@ class Registration_11th extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Registration_11th_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-        $temp = $user['Inst_Id'].'11-2017-19';
+        $temp = $user['Inst_Id'].'@11@2016-18';
         $image =  $this->set_barcode($temp);
         $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image);
         $this->load->view('Registration/11th/RevenueForm.php',$data);
@@ -3095,7 +3156,7 @@ class Registration_11th extends CI_Controller {
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
 
-            $temp = $data['FormNo'].'@09@2016@1';
+            $temp = $data['FormNo'].'@11@2016@1';
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
             $pdf->SetFont('Arial','U',16);
@@ -3578,7 +3639,7 @@ class Registration_11th extends CI_Controller {
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
             $pdf->Image(base_url()."assets/img/logo.jpg",0.30,$yy+$dyy, 0.50,0.50, "JPG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
-            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
+            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.9,0.22,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
 
@@ -3832,6 +3893,17 @@ class Registration_11th extends CI_Controller {
 
 
         }
+      /*   else if( (@$_POST['bay_form'] == '00000-0000000-0') || (@$_POST['bay_form'] == '11111-1111111-1') || (@$_POST['bay_form'] == '22222-2222222-2') || (@$_POST['bay_form'] == '33333-3333333-3') || (@$_POST['bay_form'] == '44444-4444444-4')
+            || (@$_POST['bay_form'] == '55555-5555555-5') || (@$_POST['bay_form'] == '66666-6666666-6') || (@$_POST['bay_form'] == '77777-7777777-7') || (@$_POST['bay_form'] == '88888-8888888-8') || (@$_POST['bay_form'] == '99999-9999999-9') ||
+            (@$_POST['bay_form'] == '00000-1111111-0') || (@$_POST['bay_form'] == '00000-1111111-1') || (@$_POST['bay_form'] == '00000-0000000-1' || $cntzero >7 || $cntone >7 || $cnttwo >7 || $cntfour >7 || $cntthr >7 || $cntfive >7 || $cntsix >7 || $cntseven >7 || $cnteight >7 || $cntnine >7)
+            )
+            {
+                $allinputdata['excep'] = 'Please Enter Your Correct Bay Form No.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                redirect('Registration_11th/'.$viewName);
+                return;
+
+            }        */
     /*    else if( (@$_POST['bay_form'] == '00000-0000000-0') || (@$_POST['bay_form'] == '11111-1111111-1') || (@$_POST['bay_form'] == '22222-2222222-2') || (@$_POST['bay_form'] == '33333-3333333-3') || (@$_POST['bay_form'] == '44444-4444444-4')
             || (@$_POST['bay_form'] == '55555-5555555-5') || (@$_POST['bay_form'] == '66666-6666666-6') || (@$_POST['bay_form'] == '77777-7777777-7') || (@$_POST['bay_form'] == '88888-8888888-8') || (@$_POST['bay_form'] == '99999-9999999-9') ||
             (@$_POST['bay_form'] == '00000-1111111-0') || (@$_POST['bay_form'] == '00000-1111111-1') || (@$_POST['bay_form'] == '00000-0000000-1' || $cntzero >7 || $cntone >7 || $cnttwo >7 || $cntfour >7 || $cntthr >7 || $cntfive >7 || $cntsix >7 || $cntseven >7 || $cnteight >7 || $cntnine >7)

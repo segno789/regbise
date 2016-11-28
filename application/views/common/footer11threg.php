@@ -750,7 +750,7 @@ debugger;
         $("#sub6").append(new Option('Statistics',18));
         $("#sub6 option[value='83']").attr("selected","selected");
     }
-    function  check_NewEnrol_validation_11th(){
+     function  check_NewEnrol_validation_11th(){
        // 
         var name =  $('#cand_name').val();
         var fName = $('#father_name').val();
@@ -1689,7 +1689,7 @@ debugger;
 
         // Check Religion and select sub........
       //  $("#sub3").empty();
-        var Religion = $("input[type=radio][name=religion]:checked").val();
+        var Religion = $("input[name=religion]:checked").val();
         //console.log(Religion);
     /*    console.log(Religion);
         if(Religion == "1")

@@ -1,5 +1,11 @@
-<html>
-    <body>
+
+<?php 
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
         <div class="container-fluid">
         <div class="dashboard-container">
         <div class="top-nav">
@@ -41,6 +47,18 @@
                             Migration
                         </a>
                     </li>
+                    <?php }
+
+                else if($isselected == '15' ){?>
+
+                    
+                       <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/search_Form" class="<?php if($isselected == '13') {echo 'selected';}?>" >
+                            <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
+                            9th Correction
+                        </a>
+                    </li>
+                    
                     <?php }
 
                 else if(($isselected == '2' OR $isselected == '7' OR $isselected == '10')  && $edu_lvl == 1 ){?>
@@ -121,12 +139,12 @@
                           11th Migration
                         </a>
                     </li>
-                    <li>
+                  <!--  <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
                             Spec. Permission
                         </a>
-                    </li>
+                    </li>      -->
             
                    <?php } ?>
             </ul>
@@ -219,11 +237,17 @@
                             11th Result Cards(2016)  
                         </a>
                     </li>
-                  <!--   <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/Delete_Form">
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Delete_Form11">
                             Delete Candidate  
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form11">
+                            Restore Candidate  
+                        </a>
+                    </li>
+                  <!--  
                        <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form">
                             Restore Candidate  
@@ -245,9 +269,16 @@
                 <ul >
                     <li><a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections"   data-original-title="" class="<?php if($isselected == '2') {echo 'heading';}?>">9th Registration</a></li>
 
+                    
+                    
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrectionapp">
                             9th Correction Applications
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst">
+                            9th Search By Inst. Code
                         </a>
                     </li>
                     <li>
@@ -269,7 +300,12 @@
                         <a href="<?php echo base_url(); ?>BiseCorrection/result9thcorrections">
                             9th Result Cards(2016)  
                         </a>
-                    </li>
+                    </li> 
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/result9thcancel">
+                            9th Result Cancel(2016)  
+                        </a>
+                    </li> 
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
@@ -278,7 +314,26 @@
             
             
             <?php }
-            
+                    if($isselected == '15') { 
+                ?>
+                <ul >
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/search_Form"  data-original-title="" class="<?php if($isselected == '15') {echo 'heading';}?>">9th Correction</a></li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst">
+                            9th Search By Inst. Code
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/otherboard10th">
+                            9th other Board
+                        </a>
+                    </li>
+                    <!-- <li>
+                    <a href="#notifications">
+                    Notifications
+                    </a>
+                    </li>         -->
+                </ul> <?php }
             if($isselected == '1') { 
                 ?>
                 <ul >
@@ -318,11 +373,11 @@
                         </li>
                         <?php }?>
 
-                    <!--<li>
+                    <li>
                         <a href="<?php echo base_url(); ?>Registration/EditPicForms">
                             Edit Pictures Forms
                         </a>
-                    </li>   -->
+                    </li>   
                     <li>
                         <a href="<?php echo base_url(); ?>Registration/batchlist">
                             Batch List
@@ -508,6 +563,13 @@
                             Batch List
                         </a>
                     </li>
+                    <?php if($Inst_Id == 399903 || $Inst_Id == 399902) {?>
+                            <li>
+                        <a href="<?php echo base_url(); ?>Registration_11th/Reg_Cards_Printing_11th">
+                            Registration Cards
+                        </a>
+                    </li>
+                    <?php }?>
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th/FormPrinting">
                             Form Printing
@@ -672,5 +734,4 @@
                 </ul>
             </div>
         </div>
-    </body>
-</html>
+

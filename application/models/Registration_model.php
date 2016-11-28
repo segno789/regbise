@@ -239,7 +239,14 @@ class Registration_model extends CI_Model
         $sub8ap1 = $data['sub8ap1'];
         $UrbanRural = $data['UrbanRural'];
         $Inst_cd = $data['Inst_cd'];
-        if(!isset($data['ckpo']))
+        $formno = $data['FormNo'];
+        $RegGrp = $data['grp_cd'];
+        $regoldrno = $data['regoldrno'];
+        $regoldsess = $data['regoldsess'];
+        $regoldclass = $data['regoldclass'];
+        $regoldyear = $data['regoldyear'];
+        $isreadm = $data['isreadm'];
+         if(!isset($data['ckpo']))
         {
         $ckpo = 0;
         }
@@ -248,14 +255,6 @@ class Registration_model extends CI_Model
         $ckpo = @$data['ckpo'];
         
         }
-        
-        $formno = $data['FormNo'];
-        $RegGrp = $data['grp_cd'];
-        $regoldrno = $data['regoldrno'];
-        $regoldsess = $data['regoldsess'];
-        $regoldclass = $data['regoldclass'];
-        $regoldyear = $data['regoldyear'];
-        $isreadm = $data['isreadm'];
       //  DebugBreak();
         $query = $this->db->query("Registration..MA_P1_Reg_Adm2016_sp_Update '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$sex,$rel,'$addr',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,0,0,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$regoldrno,$regoldclass,$regoldyear,$regoldsess,$isreadm,$ckpo");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
@@ -361,7 +360,7 @@ class Registration_model extends CI_Model
             if($inst_cd != $Inst_Id)
             {
                 $row = $Inst_Id.str_pad($rowcount, 4, '0', STR_PAD_LEFT); 
-                $formno = $row+1;   
+                $formno = $row+2;   
             }
             else
             {
@@ -508,7 +507,7 @@ class Registration_model extends CI_Model
         $Totalprocessing_fee = $data['Totalprocessing_fee'];
         $forms_id = $data['forms_id'];
         $todaydate = $data['todaydate'];
-        $total_std = $data['total_std'];
+        $total_std = $data['total_std']; 
         //        EXEC Batch_Create @Inst_Cd = ".$user->inst_cd.",@UserId = ".$user->get_currentUser_ID()."@Amount = ".$tot_fee.",@Total_ProcessingFee = ".$prs_fee.",@Total_RegistrationFee = ".$reg_fee.",@Total_LateRegistrationFee =".$late_fee.",@Total_LateAdmissionFee = 0,@Valid_Date = '$today',@form_ids = '$forms_id'"
         $query = $this->db->query("Registration..Batch_Create_9th_2016 $inst_cd,$reg_fee,$fine,$processing_fee,$total_std,$total_fee,$TotalRegFee,$Totalprocessing_fee,$TotalLatefee,'$todaydate','$forms_id'");
     }

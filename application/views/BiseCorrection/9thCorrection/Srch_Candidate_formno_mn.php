@@ -9,7 +9,7 @@
                         </div>
                     </div>
                     <div class="widget-body">
-                     <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/index.php/BiseCorrection/NewEnrolment_EditForm" method="post" enctype="multipart/form-data">
+                     <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>/index.php/BiseCorrection/NewEnrolment_EditForm9th_manual_corr" method="post" enctype="multipart/form-data">
                   
                    
           

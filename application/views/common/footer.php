@@ -86,15 +86,29 @@ if(isset($files)){
     }
     
     function readURL_corr(input) {
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
+       // debugger;
+       var  fileName = input.files[0].name
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 
-    reader.onload = function (e) {
-    $('#corr_image').attr('src', e.target.result);
-    }
 
-    reader.readAsDataURL(input.files[0]);
-    }
+        if(ext.toLowerCase() != "jpg" )
+        {
+            alertify.error("Please uplaod only .JPG Files!"); 
+           
+        }
+        else
+        {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#corr_image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            } 
+        }
+       
     }
 
     /*$("#corr_image").change(function(){
@@ -215,90 +229,87 @@ if(isset($files)){
 
     });
     $("#btnsubmitUpdateEnrol").click(function(){
-    
-        // alert('hello');
-        debugger;
-        //alert(c1);
-         var corr_cand_name = $("#corr_cand_name").val();
+
+        var corr_cand_name = $("#corr_cand_name").val();
         var corr_father_name = $("#corr_father_name").val();
         var corr_dob = $("#corr_dob").val();
         var corr_bay_form = $("#corr_bay_form").val();
         var corr_father_cnic = $("#corr_father_cnic").val();
-         var corr_std_group = $("#corr_std_group option:selected").text();
-         var corr_std_group_val = $("#corr_std_group option:selected").val();
-           var std_group = $("#std_group option:selected").text();
-           
+        var corr_std_group = $("#corr_std_group option:selected").text();
+        var corr_std_group_val = $("#corr_std_group option:selected").val();
+        var std_group = $("#std_group option:selected").text();
+
         var check_checkbox = 0;
         var corr_type = 0;
-            if ($("#c0").prop('checked')==true){ 
+        if ($("#c0").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 1;
-            }if ($("#c1").prop('checked')==true){ 
+        }if ($("#c1").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 2;
-            }if ($("#c2").prop('checked')==true){ 
+        }if ($("#c2").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 3;
-            }if ($("#c3").prop('checked')==true){ 
+        }if ($("#c3").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 4;
-            }if ($("#c4").prop('checked')==true){ 
+        }if ($("#c4").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 5;
-            }if ($("#c5").prop('checked')==true){ 
+        }if ($("#c5").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 6;
-            }if ($("#c6").prop('checked')==true){ 
+        }if ($("#c6").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 7;
-            }if ($("#c7").prop('checked')==true){ 
+        }if ($("#c7").prop('checked')==true){ 
             //    alert('at lease one checked');
             check_checkbox =1;
             corr_type = 8;
-            }
-       
-            if(corr_type == 1 && corr_cand_name=='')
-            {
+        }
+
+        if(corr_type == 1 && corr_cand_name=='')
+        {
             alertify.error("Please write correct Name!");
             $("#corr_cand_name").focus();
             return false;
-            }
-           if(corr_type == 2 && corr_father_name=='')
-            {
+        }
+        if(corr_type == 2 && corr_father_name=='')
+        {
             alertify.error("Please write correct Father's Name!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 3 && corr_dob=='')
-            {
+        }
+        if(corr_type == 3 && corr_dob=='')
+        {
             alertify.error("Please write correct Date of Birth!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 4 && corr_bay_form=='')
-            {
+        }
+        if(corr_type == 4 && corr_bay_form=='')
+        {
             alertify.error("Please write correct Bay-Form No.!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(corr_type == 5 && corr_father_cnic=='')
-            {
+        }
+        if(corr_type == 5 && corr_father_cnic=='')
+        {
             alertify.error("Please write correct Father CNIC!");
             $("#corr_cand_name").focus();
             return false;
-            }
-            if(check_checkbox ==0)
-            {
+        }
+        if(check_checkbox ==0)
+        {
             alertify.error("Please Choose Correction First!");
-             return false;
-            }
+            return false;
+        }
         var sub1 = $("#sub1 option:selected").text();
         var sub2 = $("#sub2 option:selected").text();
         var sub3 = $("#sub3 option:selected").text();
@@ -324,54 +335,54 @@ if(isset($files)){
         var sub7_match =0;
         var sub8_match =0;
         debugger;
-            if(corr_type == 6 )
+        if(corr_type == 6 )
+        {
+            //&& corr_std_group_val==0
+            if((corr_std_group== std_group))
             {
-                //&& corr_std_group_val==0
-                if((corr_std_group== std_group))
+                if(sub1==corr_sub1)
                 {
-                    if(sub1==corr_sub1)
-                    {
-                       sub1_match=1 
-                    }
-                    if(sub2==corr_sub2)
-                    {
-                       sub2_match=1 
-                    }
-                    if(sub3==corr_sub3)
-                    {
-                       sub3_match=1 
-                    }
-                    if(sub4==corr_sub4)
-                    {
-                       sub4_match=1 
-                    }
-                    if(sub5==corr_sub5)
-                    {
-                       sub5_match=1 
-                    }
-                    if(sub6==corr_sub6)
-                    {
-                       sub6_match=1 
-                    }
-                    if(sub7==corr_sub7)
-                    {
-                       sub7_match=1 
-                    }
-                    if(sub8==corr_sub8)
-                    {
-                       sub8_match=1 
-                    }
-                    if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
-                    {
-                         alertify.error("Please select correct Group/Subject First!");
-                         $("#corr_cand_name").focus();
-                         return false;
-                    }
-                    
+                    sub1_match=1 
                 }
-           
+                if(sub2==corr_sub2)
+                {
+                    sub2_match=1 
+                }
+                if(sub3==corr_sub3)
+                {
+                    sub3_match=1 
+                }
+                if(sub4==corr_sub4)
+                {
+                    sub4_match=1 
+                }
+                if(sub5==corr_sub5)
+                {
+                    sub5_match=1 
+                }
+                if(sub6==corr_sub6)
+                {
+                    sub6_match=1 
+                }
+                if(sub7==corr_sub7)
+                {
+                    sub7_match=1 
+                }
+                if(sub8==corr_sub8)
+                {
+                    sub8_match=1 
+                }
+                if(sub1_match==1 && sub2_match==1 && sub3_match==1 && sub4_match==1 && sub5_match==1 && sub6_match==1 && sub7_match==1 && sub8_match==1  )
+                {
+                    alertify.error("Please select correct Group/Subject First!");
+                    $("#corr_cand_name").focus();
+                    return false;
+                }
+
             }
-           
+
+        }
+
         //do something
          
               
@@ -1347,7 +1358,7 @@ if(isReadm == 0)
         })
   
         var error = "<?php echo @$error; ?>";
-        var error_manual9th = "<?php  echo @$error_manualentry9th; ?>";
+         var error_manual9th = "<?php  echo @$error_manualentry9th; ?>";
         if(error_manual9th == "Updated Successfully"){
             alertify.success(error_manual9th);
         }
@@ -1619,6 +1630,22 @@ if(isReadm == 0)
             if (e) {
                 // user clicked "ok"
                 window.location.href ='<?php echo base_url(); ?>BiseCorrection/Restore_form_UPDATE/'+formrno;
+            } else {
+                // user clicked "cancel"
+
+            }
+        });
+        // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
+    }
+     function Restore_Deleted_Form_BiseAdmin11(formrno)
+    {
+        // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
+        var msg = "Are You Sure You want to Restore this Form ?"
+        alertify.confirm(msg, function (e) {
+
+            if (e) {
+                // user clicked "ok"
+                window.location.href ='<?php echo base_url(); ?>BiseCorrection/Restore_form_UPDATE11/'+formrno;
             } else {
                 // user clicked "cancel"
 
@@ -1959,7 +1986,7 @@ if(isReadm == 0)
         console.log('Hi i am sub6 dropdown :) ');
     })
 
-    $("#sub7").change(function(){
+      $("#sub7").change(function(){
         console.log('Hi i am sub7 dropdown :) ');
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
@@ -2848,10 +2875,10 @@ if(isReadm == 0)
         {
             alertify.success("Updated Successfully");
         }
-        else  if (excep_Invalid_formno != "")
+        /*else  if (excep_Invalid_formno != "")
         {
-            // alertify.error("Invalid Form No. Please write Valid Form No.");
-        }
+             alertify.error("Invalid Form No. Please write Valid Form No.");
+        } */
         else  if(restore_msg!="")
         {
             alertify.success(restore_msg);

@@ -14,29 +14,29 @@
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
                                 <div class="controls controls-row">
-                                      <label class="control-label span4">
-                                    <img id="image_upload_preview" style="width:140px; height: 140px;" alt="Candidate Image" />
+                                    <label class="control-label span4">
+                                        <img id="image_upload_preview" style="width:140px; height: 140px;" alt="Candidate Image" />
                                     </label> 
                                     <label class="control-label span1" >
-                                    <input type='file' id="inputFile" name="pic" onchange="return ValidateFileUpload(this);"/>
+                                        <input type='file' id="inputFile" name="pic" onchange="return ValidateFileUpload(this);"/>
                                     </label> <!--echo GET_PRIVATE_IMAGE_PATH. $data[0]['picpath']; -->
-                                   <!-- <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php //echo GET_PRIVATE_IMAGE_PATH. $data[0]['picpath']?>" alt="Candidate Image" />
+                                    <!-- <img id="image_upload_preview" style="width:140px; height: 140px;" src="<?php //echo GET_PRIVATE_IMAGE_PATH. $data[0]['picpath']?>" alt="Candidate Image" />
                                     <input type="hidden" value="  //$data[0]['picpath'] " name="pic"> -->
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label id="ErrMsg" class="control-label span2" style=" text-align: left;"><?php ?></label>
                             </div>
-                             <div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label span1" >
-                                   Institute Code:
+                                    Institute Code:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="inst_cd_other" style="text-transform: uppercase;" name="inst_cd_other" placeholder="Institute Code" maxlength="6"  value="211101">
+                                    <input class="span3"  type="text" id="inst_cd_other" style="text-transform: uppercase;" name="inst_cd_other" placeholder="Institute Code" maxlength="6" required  >
                                     <label class="control-label span2" for="">
-                                       
+
                                     </label> 
-                                  
+
                                 </div>
                             </div>
                             <div class="control-group">
@@ -44,11 +44,11 @@
                                     Candidate Name:
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="ali <?php echo $data[0]['name']; ?>">
+                                    <input class="span3"  type="text" id="cand_name" style="text-transform: uppercase;" name="cand_name" placeholder="Candidate Name" maxlength="60" >
                                     <label class="control-label span2" for="lblfather_name">
                                         Father's Name :
                                     </label> 
-                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60"  value="muhammad ali <?php echo  $data['0']['Fname']; ?>" required="required">
+                                    <input class="span3" id="father_name" name="father_name" style="text-transform: uppercase;" type="text" placeholder="Father's Name" maxlength="60"   required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -56,11 +56,11 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="bay_form" name="bay_form" maxlength="15" placeholder="Bay Form No." value="<?php echo $data['0']['BForm'];?>" <?php if( $data['0']['BForm']>=10) echo "readonly='readonly'";  ?>  required="required" >
+                                    <input class="span3" type="text" id="bay_form" name="bay_form" maxlength="15" placeholder="Bay Form No."  required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
-                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"  value="<?php echo  $data['0']['FNIC'];?>"  required="required" >
+                                    <input class="span3" id="father_cnic" name="father_cnic" type="text" placeholder="34101-1111111-1"   required="required" >
                                 </div>
                             </div>
                             <div class="control-group">
@@ -73,7 +73,7 @@
                                     <label class="control-label span2" >
                                         Mobile Number :
                                     </label> 
-                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789" value="<?php echo  $data['0']['MobNo']; ?> " required="required">
+                                    <input class="span3" id="mob_number" name="mob_number" type="text" placeholder="0300-123456789"  required="required">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -95,8 +95,8 @@
                                         }
                                         ?>
                                     </select>
-                                
-                                 
+
+
                                     <label class="control-label span2" >
                                         Previous Result:
                                     </label> 
@@ -108,7 +108,7 @@
                                     Mark of Identification :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden" value="<?php echo  $data['0']['markOfIden']; ?>" required="required" maxlength="60" >
+                                    <input class="span3" type="text" id="MarkOfIden" style="text-transform: uppercase;" name="MarkOfIden"  required="required" maxlength="60" >
                                     <label class="control-label span2" >
                                         Speciality:
                                     </label> 
@@ -121,7 +121,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="control-group">
                                 <label class="control-label span1" >
                                     Nationality :
@@ -129,25 +129,25 @@
                                 <div class="controls controls-row">  
                                     <?php
                                     $nat = $data[0]['nat'];
-                                   
-                                        echo 
-                                        "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani</label>
-                                        <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'> Non Pakistani</label>";
-                                   
+
+                                    echo 
+                                    "<label class='radio inline span1'><input type='radio' value='1' id='nationality' checked='checked' name='nationality'> Pakistani</label>
+                                    <label class='radio inline span2'><input type='radio'  id='nationality1' value='2' name='nationality'> Non Pakistani</label>";
+
                                     ?>
                                     <label class="control-label span3" style="margin-left: -100px;" for="gender1">
                                         Gender :
                                     </label> 
                                     <?php
                                     $gender = $data[0]['sex'];
-                                    
-                                        echo 
-                                        "<label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'   name='gender'> Male</label> 
-                                        <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  > Female </label> " ;
-                                    
+
+                                    echo 
+                                    "<label class='radio inline span1'><input type='radio' id='gender1' value='1' checked='checked'   name='gender'> Male</label> 
+                                    <label class='radio inline span1'><input type='radio' id='gender2' value='2'  name='gender'  > Female </label> " ;
+
                                     ?>
-                                    <input type="hidden" name="gend" value="<?php echo $gender; ?>">
-                                    <input type="hidden" name="category" id="category" value="<?php echo @$cattype; ?>">
+                                    <input type="hidden" name="gend" >
+                                    <input type="hidden" name="category" id="category" >
 
 
                                 </div>
@@ -164,11 +164,11 @@
                                     </label> 
                                     <?php
                                     $rel = $data[0]['rel'];
-                                   
-                                        echo
-                                        "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
-                                        </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class'  value='2' name='religion'> Non Muslim</label>" ;
-                                   
+
+                                    echo
+                                    "<label class='radio inline span1'><input type='radio' id='religion' class='rel_class' value='1' checked='checked' name='religion'> Muslim
+                                    </label><label class='radio inline span1'><input type='radio' id='religion1' class='rel_class'  value='2' name='religion'> Non Muslim</label>" ;
+
                                     ?>
                                 </div>
                             </div>
@@ -179,10 +179,10 @@
                             <div class="controls controls-row">  
                                 <?php
                                 $resid = $data[0]['RuralORUrban'];
-                               
-                                    echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
-                                    </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
-                               
+
+                                echo " <label class='radio inline span1'><input type='radio' value='1' id='UrbanRural' checked='checked' name='UrbanRural'> Urban
+                                </label><label class='radio inline span2'><input type='radio'  id='UrbanRural' value='2' name='UrbanRural'>  Rural </label>";
+
                                 ?>
 
                             </div>
@@ -210,10 +210,10 @@
                                         Year:
                                     </label> 
                                     <select class="span3"  name="oldyear" id = "oldyear" >
-                                    <option value="2016">2016</option>
-                                    <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
                                     </select>
-                                   
+
                                 </div>
                             </div>
                             <div class="control-group">
@@ -221,111 +221,61 @@
                                     Session :
                                 </label>
                                 <div class="controls controls-row">
-                                <select class="span3" id="oldsess" name="oldsess">
-                                <option value="1">Annual</option>
-                                <option value="2">Supplementary</option>
-                                </select>
-                                   
+                                    <select class="span3" id="oldsess" name="oldsess">
+                                        <option value="1">Annual</option>
+                                        <option value="2">Supplementary</option>
+                                    </select>
+
                                     <label class="control-label span2" >
                                         Board:
                                     </label> 
                                     <select class="span3" id="oldboard" name="oldboard">
-                                                        <option value="1" <?php if(@$oldBrd_cd == 1) echo 'selected' ?>>BISE, GUJRANWALA</option>
-                                                        <option value="2" <?php if(@$oldBrd_cd == 2) echo 'selected' ?>>BISE,  LAHORE</option>
-                                                        <option value="3" <?php if(@$oldBrd_cd == 3) echo 'selected' ?>>BISE,  RAWALPINDI</option>
-                                                        <option value="4" <?php if(@$oldBrd_cd == 4) echo 'selected' ?>>BISE,  MULTAN</option>
-                                                        <option value="5" <?php if(@$oldBrd_cd == 5) echo 'selected' ?>>BISE,  FAISALABAD</option>
-                                                        <option value="6" <?php if(@$oldBrd_cd == 6) echo 'selected' ?>>BISE,  BAHAWALPUR</option>
-                                                        <option value="7" <?php if(@$oldBrd_cd == 7) echo 'selected' ?>>BISE,  SARGODHA</option>
-                                                        <option value="8" <?php if(@$oldBrd_cd == 8) echo 'selected' ?>>BISE,  DERA GHAZI KHAN</option>
-                                                        <option value="9" <?php if(@$oldBrd_cd == 9) echo 'selected' ?>>FBISE, ISLAMABAD</option>
-                                                        <option value="10" <?php if(@$oldBrd_cd == 10) echo 'selected' ?>>BISE, MIRPUR</option>
-                                                        <option value="11" <?php if(@$oldBrd_cd == 11) echo 'selected' ?>>BISE, ABBOTTABAD</option>
-                                                        <option value="12" <?php if(@$oldBrd_cd == 12) echo 'selected' ?>>BISE, PESHAWAR</option>
-                                                        <option value="13" <?php if(@$oldBrd_cd == 13) echo 'selected' ?>>BISE, KARACHI</option>
-                                                        <option value="14" <?php if(@$oldBrd_cd == 14) echo 'selected' ?>>BISE, QUETTA</option>
-                                                        <option value="15" <?php if(@$oldBrd_cd == 15) echo 'selected' ?>>BISE, MARDAN</option>
-                                                        <option value="16" <?php if(@$oldBrd_cd == 16) echo 'selected' ?>>FBISE, ISLAMABAD</option>
-                                                        <option value="17" <?php if(@$oldBrd_cd == 17) echo 'selected' ?>>CAMBRIDGE</option>
-                                                        <option value="18" <?php if(@$oldBrd_cd == 18) echo 'selected' ?>>AIOU, ISLAMABAD</option>
-                                                        <option value="19" <?php if(@$oldBrd_cd == 19) echo 'selected' ?>>BISE, KOHAT</option>
-                                                        <option value="20" <?php if(@$oldBrd_cd == 20) echo 'selected' ?>>KARAKURUM</option>
-                                                        <option value="21" <?php if(@$oldBrd_cd == 21) echo 'selected' ?>>MALAKAN</option>
-                                                        <option value="22" <?php if(@$oldBrd_cd == 22) echo 'selected' ?>>BISE, BANNU</option>
-                                                        <option value="23" <?php if(@$oldBrd_cd == 23) echo 'selected' ?>>BISE, D.I.KHAN</option>
-                                                        <option value="24" <?php if(@$oldBrd_cd == 24) echo 'selected' ?>>AKUEB, KARACHI</option>
-                                                        <option value="25" <?php if(@$oldBrd_cd == 25) echo 'selected' ?>>BISE, HYDERABAD</option>
-                                                        <option value="26" <?php if(@$oldBrd_cd == 26) echo 'selected' ?>>BISE, LARKANA</option>
-                                                        <option value="27" <?php if(@$oldBrd_cd == 27) echo 'selected' ?>>BISE, MIRPUR(SINDH)</option>
-                                                        <option value="28" <?php if(@$oldBrd_cd == 28) echo 'selected' ?>>BISE, SUKKUR</option>
-                                                        <option value="29" <?php if(@$oldBrd_cd == 29) echo 'selected' ?>>BISE, SWAT</option>
-                                                        <option value="30" <?php if(@$oldBrd_cd == 30) echo 'selected' ?>>SBTE KARACHI</option>
-                                                        <option value="31" <?php if(@$oldBrd_cd == 31) echo 'selected' ?>>PBTE, LAHORE</option>
-                                                        <option value="32" <?php if(@$oldBrd_cd == 32) echo 'selected' ?>>AFBHE RAWALPINDI</option>
-                                                        <option value="33" <?php if(@$oldBrd_cd == 33) echo 'selected' ?>>BIE, KARACHI</option>
-                                                        <option value="34" <?php if(@$oldBrd_cd == 34) echo 'selected' ?>>BISE SAHIWAL</option>
-                                                       <!-- <option value="35" <?php if(@$oldBrd_cd == 35) echo 'selected' ?>>ISLAMIC UNIVERSITY</option> -->                               
-                                                    </select>
-                                    
+                                        <option value="2" <?php if(@$oldBrd_cd == 2) echo 'selected' ?>>BISE,  LAHORE</option>
+                                        <option value="3" <?php if(@$oldBrd_cd == 3) echo 'selected' ?>>BISE,  RAWALPINDI</option>
+                                        <option value="4" <?php if(@$oldBrd_cd == 4) echo 'selected' ?>>BISE,  MULTAN</option>
+                                        <option value="5" <?php if(@$oldBrd_cd == 5) echo 'selected' ?>>BISE,  FAISALABAD</option>
+                                        <option value="6" <?php if(@$oldBrd_cd == 6) echo 'selected' ?>>BISE,  BAHAWALPUR</option>
+                                        <option value="7" <?php if(@$oldBrd_cd == 7) echo 'selected' ?>>BISE,  SARGODHA</option>
+                                        <option value="8" <?php if(@$oldBrd_cd == 8) echo 'selected' ?>>BISE,  DERA GHAZI KHAN</option>
+                                        <option value="9" <?php if(@$oldBrd_cd == 9) echo 'selected' ?>>FBISE, ISLAMABAD</option>
+                                        <option value="10" <?php if(@$oldBrd_cd == 10) echo 'selected' ?>>BISE, MIRPUR</option>
+                                        <option value="11" <?php if(@$oldBrd_cd == 11) echo 'selected' ?>>BISE, ABBOTTABAD</option>
+                                        <option value="12" <?php if(@$oldBrd_cd == 12) echo 'selected' ?>>BISE, PESHAWAR</option>
+                                        <option value="13" <?php if(@$oldBrd_cd == 13) echo 'selected' ?>>BISE, KARACHI</option>
+                                        <option value="14" <?php if(@$oldBrd_cd == 14) echo 'selected' ?>>BISE, QUETTA</option>
+                                        <option value="15" <?php if(@$oldBrd_cd == 15) echo 'selected' ?>>BISE, MARDAN</option>
+                                        <option value="16" <?php if(@$oldBrd_cd == 16) echo 'selected' ?>>FBISE, ISLAMABAD</option>
+                                        <option value="17" <?php if(@$oldBrd_cd == 17) echo 'selected' ?>>CAMBRIDGE</option>
+                                        <option value="18" <?php if(@$oldBrd_cd == 18) echo 'selected' ?>>AIOU, ISLAMABAD</option>
+                                        <option value="19" <?php if(@$oldBrd_cd == 19) echo 'selected' ?>>BISE, KOHAT</option>
+                                        <option value="20" <?php if(@$oldBrd_cd == 20) echo 'selected' ?>>KARAKURUM</option>
+                                        <option value="21" <?php if(@$oldBrd_cd == 21) echo 'selected' ?>>MALAKAN</option>
+                                        <option value="22" <?php if(@$oldBrd_cd == 22) echo 'selected' ?>>BISE, BANNU</option>
+                                        <option value="23" <?php if(@$oldBrd_cd == 23) echo 'selected' ?>>BISE, D.I.KHAN</option>
+                                        <option value="24" <?php if(@$oldBrd_cd == 24) echo 'selected' ?>>AKUEB, KARACHI</option>
+                                        <option value="25" <?php if(@$oldBrd_cd == 25) echo 'selected' ?>>BISE, HYDERABAD</option>
+                                        <option value="26" <?php if(@$oldBrd_cd == 26) echo 'selected' ?>>BISE, LARKANA</option>
+                                        <option value="27" <?php if(@$oldBrd_cd == 27) echo 'selected' ?>>BISE, MIRPUR(SINDH)</option>
+                                        <option value="28" <?php if(@$oldBrd_cd == 28) echo 'selected' ?>>BISE, SUKKUR</option>
+                                        <option value="29" <?php if(@$oldBrd_cd == 29) echo 'selected' ?>>BISE, SWAT</option>
+                                        <option value="30" <?php if(@$oldBrd_cd == 30) echo 'selected' ?>>SBTE KARACHI</option>
+                                        <option value="31" <?php if(@$oldBrd_cd == 31) echo 'selected' ?>>PBTE, LAHORE</option>
+                                        <option value="32" <?php if(@$oldBrd_cd == 32) echo 'selected' ?>>AFBHE RAWALPINDI</option>
+                                        <option value="33" <?php if(@$oldBrd_cd == 33) echo 'selected' ?>>BIE, KARACHI</option>
+                                        <option value="34" <?php if(@$oldBrd_cd == 34) echo 'selected' ?>>BISE SAHIWAL</option>
+                                        <!-- <option value="35" <?php if(@$oldBrd_cd == 35) echo 'selected' ?>>ISLAMIC UNIVERSITY</option> -->                               
+                                    </select>
+
                                     <input type="hidden" class="span3" id="oldClass" name="oldClass"  value="<?php echo $data[0]['class'];?>"/>     
                                     <input type="hidden" class="span3" id="oldboardid" name="oldboardid"  value="<?php  echo $data[0]['Brd_cd'];?>"/>     
                                 </div>
                             </div>
-                            <hr>
-                            <div class="control-group">
-                                <h4 class="span4" >Exam Proposed Center Information :</h4>
-                                <div class="controls controls-row">
-                                    <label class="control-label span2">
-
-                                    </label> 
-
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label span1" >
-                                    District :
-                                </label>
-                                <div class="controls controls-row">
-                                    <select class='span3' id='pvtinfo_dist' name='pvtinfo_dist' required='required'>
-                                        <option value='0'>SELECT DISTRICT</option>
-                                        <option value='1'>GUJRANWALA</option>
-                                        <option value='2'>GUJRAT</option>
-                                        <option value='3'>HAFIZABAD</option>
-                                        <option value='4'>MANDI BAHA-UD-DIN</option>
-                                        <option value='5'>NAROWAL</option>
-                                        <option value='6'>SIALKOT</option>
-                                    </select>
-                                    <label class="control-label span2" >
-                                        Tehsil:
-                                    </label> 
-                                    <select class='span3' id='pvtinfo_teh' name='pvtinfo_teh' required='required'>
-                                        <option value='0'>SELECT TEHSIL</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                            <label class="control-label span1" >
-                                Zone :
-                            </label>
-
-                            <div class="controls controls-row">
-                                <select id="pvtZone"  class="span3" name="pvtZone">
-                                    <option value='0'>SELECT ZONE</option>
-
-                                </select>
-                                <!-- <label class="control-label span2" >
-                                Board:
-                                </label> 
-                                <select id="speciality"  class="span3" name="speciality">
-                                <?php echo "<option value='1' selected='selected'>Gujranwala</option>";  ?>
-                                </select>
-                                </div>-->
-                            </div>
+                          
                             <div id="instruction" style="display:none; width:700px" >
-                              <!--  <img src="<?php // echo base_url(); ?>assets/img/admission_form.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
+                                <!--  <img src="<?php // echo base_url(); ?>assets/img/admission_form.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
                                 <img src="<?php //echo base_url(); ?>assets/img/instructions.jpg" border="0" width="10000" height="840" alt="admission_form.jpg"> -->
                             </div>
+                            
                             <hr>
                             <div class="control-group">
                                 <h4 class="span4">Exam Information :</h4>
@@ -343,35 +293,35 @@
                                 </label>
                                 <div class="controls controls-row">
                                     <select id="std_group" class="dropdown span6"  name="std_group">
-                                      <option value="0">SELECT GROUP</option>
-                                       <option value='1' >SCIENCE WITH BIOLOGY</option>
-                                       <option value='7' >SCIENCE  WITH COMPUTER SCIENCE</option>
-                                       <option value='2' >GENERAL</option>
-                                       <option value='5'>DEAF AND DUMB</option>
-                                       <option value='8' >SCIENCE  WITH ELECTRICAL WIRING</option>
-                                      
+                                        <option value="0">SELECT GROUP</option>
+                                        <option value='1' >SCIENCE WITH BIOLOGY</option>
+                                        <option value='7' >SCIENCE  WITH COMPUTER SCIENCE</option>
+                                        <option value='2' >GENERAL</option>
+                                        <option value='5'>DEAF AND DUMB</option>
+                                        <option value='8' >SCIENCE  WITH ELECTRICAL WIRING</option>
+
                                     </select>                                            
                                 </div>
                             </div>
-                            
-                           
-                            
-                            
+
+
+
+
                             <div class="control-group">
                                 <label class="control-label span12" style="width: 366px; font-weight: bold;" >
                                     Choose Subjects(Elective Subjects are Enabled Only)   
                                     </br></br></br>
-                                    
+
                                     <?php
-                                    
-                                    
-                                    
+
+
+
                                     ////DebugBreak();
                                     @$exam_type = $data[0]['exam_type'];
                                     @$grp_cd = $data[0]['grp_cd'];
                                     @$oldcls = $data[0]['class'];
                                     $Status =  $data[0]['status'];
-                                   
+
                                     ?>
                                 </label> 
                             </div>
@@ -419,16 +369,7 @@
 
                                     </select> 
                                 </div>
-                                <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub8"  name="sub8" class="span3 dropdown">
-
-                                    </select>
-                                    <select id="sub8p2"  name="sub8p2" class="span3 dropdown">
-                                    </select>
-                                </div>
+                              
                                 <div class="control row controls-row">
                                     <label class="control-label span1" >
 
@@ -474,17 +415,26 @@
 
                                     </select> 
                                 </div> 
-                                
+                                   <div class="control row controls-row">
+                                    <label class="control-label span1" >
+
+                                    </label>
+                                    <select id="sub8"  name="sub8" class="span3 dropdown">
+
+                                    </select>
+                                    <select id="sub8p2"  name="sub8p2" class="span3 dropdown">
+                                    </select>
+                                </div>
                             </div>
                             <div>
-                               <!-- <input type="hidden" name="oldclass" id="oldclass" value="<?php echo @$oldcls; ?>">
+                                <!-- <input type="hidden" name="oldclass" id="oldclass" value="<?php echo @$oldcls; ?>">
                                 <input type="hidden" name="exam_type" id="exam_type" value="<?php echo @$exam_type = $data[0]['exam_type']; ?>">
                                 <input type="hidden" name="oldexam_type" id="oldexam_type">
                                 <input type="hidden" name="grppre" id="grppre" value="<?php  echo @$grp_cd = $data[0]['grp_cd']; ?>">
-                                
-                                
 
-                                                                                                                                           -->
+
+
+                                -->
                             </div>
                             <div class="form-actions no-margin">
                                 <button type="submit" onclick="return checks()" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info " >
@@ -531,10 +481,7 @@
                                     return false;
                                 } 
                             }
-                            $(window).load(function()
-                                {
-                                    $.fancybox("#instruction");
-                            });
+
                             $(document).ready(function(){
 
                                 var sub1_Pak_options = {
@@ -760,11 +707,11 @@
                                     91:'BEAUTICIAN',
                                     92:'GENERAL MATH',
                                     93:'COMPUTER SCIENCES',
-                                    
+
                                 }
 
                                 var grp_cd ="<?php echo  @$data[0]['grp_cd'] ?>";
-                                
+
 
                                 var sub1 ="<?php echo @$data[0]['sub1']; ?>";
                                 var sub2 = "<?php echo @$data[0]['sub2']; ?>";
@@ -810,8 +757,8 @@
                                 var sub6st2 = "<?php echo @$data[0]['sub6st2']; ?>";
                                 var sub7st2 ="<?php echo @$data[0]['sub7st2']; ?>";
                                 var sub8st2 ="<?php  echo @$data[0]['sub8st2']; ?>";
-                               // debugger;
-                               var Gender = "<?php echo @$gender; ?>";
+                                // debugger;
+                                var Gender = "<?php echo @$gender; ?>";
                                 function remove_subjects()
                                 {
                                     $("#sub5").empty();
@@ -828,20 +775,20 @@
                                     var NationalityVal = $("input[name=nationality]:checked").val();
                                     $('#sub1').empty();
                                     $('#sub1p2').empty();
-                                    
-                                        $.each(sub1_Pak_options, function(val, text) {
-                                        
-                                            $('#sub1').append( new Option(text,val) );
-                                            $('#sub1').append( new Option("NONE",0) );
-                                            $('#sub1p2').append( new Option(text,val) );
-                                        }); 
-                                    
+
+                                    $.each(sub1_Pak_options, function(val, text) {
+
+                                        $('#sub1').append( new Option(text,val) );
+                                        $('#sub1').append( new Option("NONE",0) );
+                                        $('#sub1p2').append( new Option(text,val) );
+                                    }); 
+
                                     if (NationalityVal == "2")
                                     {
                                         console.log("Hi Foreigner Welcom to Pakistan :) ");
                                         $.each(sub1_NonPak_options, function(val, text) {
                                             $('#sub1').append( new Option(text,val) );
-                                             $('#sub1').append( new Option("NONE",0) );
+                                            $('#sub1').append( new Option("NONE",0) );
                                             $('#sub1p2').append( new Option(text,val) );
                                         }); 
                                     }
@@ -856,26 +803,28 @@
                                     var Religion = $("input[name=religion]:checked").val();
                                     //console.log(Religion);
                                     console.log(Religion);
-                                   
-                                        $.each(sub3_Muslim,function(val,text){
-                                            $("#sub3").append(new Option(text,val));
-                                             $("#sub3").append(new Option("NONE",0));
-                                            $("#sub3p2").append(new Option(text,val));
-                                        });
-                                    
+
+                                    $.each(sub3_Muslim,function(val,text){
+                                        $("#sub3").append(new Option(text,val));
+                                        $("#sub3").append(new Option("NONE",0));
+                                        $("#sub3p2").append(new Option(text,val));
+                                    });
+
                                     if(Religion == "2")
                                     {
                                         $.each(sub3_Non_Muslim,function(val,text){
                                             $("#sub3").append(new Option(text,val));
-                                             $("#sub3").append(new Option("NONE",0));
+                                            $("#sub3").append(new Option("NONE",0));
                                             $("#sub3p2").append(new Option(text,val));
                                         });
                                     }
                                     $("#sub4").empty();
                                     $("#sub4p2").empty();
-                                    $("#sub4").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
-                                    $("#sub4").prepend('<option  value="0">NONE</option>');
-                                    $("#sub4p2").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
+                                      $("#sub8").empty();
+                                    $("#sub8p2").empty();
+                                    $("#sub8").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
+                                    $("#sub8").prepend('<option  value="0">NONE</option>');
+                                    $("#sub8p2").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
                                     // Subject 5 ,6 ,7 and 8
                                     $("#sub5").empty();
                                     $("#sub5p2").empty();
@@ -883,40 +832,39 @@
                                     $("#sub6p2").empty();
                                     $("#sub7").empty();
                                     $("#sub7p2").empty();
-                                    $("#sub8").empty();
-                                    $("#sub8p2").empty();
-                                    $("#sub5").append(new Option('MATHEMATICS',5));
+                                  
+                                    $("#sub4").append(new Option('MATHEMATICS',5));
+                                    $("#sub4").append(new Option('NONE',0));
+                                    $("#sub4p2").append(new Option('MATHEMATICS',5));
+                                    $("#sub5").append(new Option('PHYSICS',6));
                                     $("#sub5").append(new Option('NONE',0));
-                                    $("#sub5p2").append(new Option('MATHEMATICS',5));
-                                    $("#sub6").append(new Option('PHYSICS',6));
+                                    $("#sub5p2").append(new Option('PHYSICS',6));
+                                    $("#sub6").append(new Option('CHEMISTRY',7));
                                     $("#sub6").append(new Option('NONE',0));
-                                    $("#sub6p2").append(new Option('PHYSICS',6));
-                                    $("#sub7").append(new Option('CHEMISTRY',7));
-                                    $("#sub7").append(new Option('NONE',0));
-                                    $("#sub7p2").append(new Option('CHEMISTRY',7));
+                                    $("#sub6p2").append(new Option('CHEMISTRY',7));
                                 }
                                 function Hum_Deaf_Subjects()
                                 {
                                     //alert(isElec);
-                                   // var NationalityVal = $("input[name=nationality]:checked").val();
+                                    // var NationalityVal = $("input[name=nationality]:checked").val();
                                     //console.log(NationalityVal);
                                     $('#sub1').empty();
                                     $('#sub1p2').empty();
-                                    
-                                      
-                                        $.each(sub1_Pak_options, function(val, text) {
-                                            $('#sub1').append( new Option(text,val) );
-                                            $('#sub1').append( new Option('NONE',0) );
-                                            $('#sub1p2').append( new Option(text,val) );
-                                        }); 
-                                    
+
+
+                                    $.each(sub1_Pak_options, function(val, text) {
+                                        $('#sub1').append( new Option(text,val) );
+                                        $('#sub1').append( new Option('NONE',0) );
+                                        $('#sub1p2').append( new Option(text,val) );
+                                    }); 
+
                                     /*if (NationalityVal == "2")
                                     {
-                                        console.log("Hi Foreigner Welcom to Pakistan :) ");
-                                        $.each(sub1_NonPak_options, function(val, text) {
-                                            $('#sub1').append( new Option(text,val) );
-                                            $('#sub1p2').append( new Option(text,val) );
-                                        }); 
+                                    console.log("Hi Foreigner Welcom to Pakistan :) ");
+                                    $.each(sub1_NonPak_options, function(val, text) {
+                                    $('#sub1').append( new Option(text,val) );
+                                    $('#sub1p2').append( new Option(text,val) );
+                                    }); 
                                     }     */
                                     $('#sub2').empty();
                                     $('#sub2p2').empty();
@@ -926,47 +874,47 @@
                                     // Check Religion and select sub........
                                     $("#sub3").empty();
                                     $("#sub3p2").empty();
-                                   
-                                        $.each(sub3_Muslim,function(val,text){
-                                            $("#sub3").empty();
-                                            $("#sub3p2").empty();
-                                            $("#sub3").append(new Option(text,val));
-                                            $("#sub3").append(new Option('NONE',0));
-                                            $("#sub3p2").append(new Option(text,val));
-                                        });
-                                   
+
+                                    $.each(sub3_Muslim,function(val,text){
+                                        $("#sub3").empty();
+                                        $("#sub3p2").empty();
+                                        $("#sub3").append(new Option(text,val));
+                                        $("#sub3").append(new Option('NONE',0));
+                                        $("#sub3p2").append(new Option(text,val));
+                                    });
+
                                     /*if(Religion == "2")
                                     {
-                                        $.each(sub3_Non_Muslim,function(val,text){
-                                            $("#sub3").append(new Option(text,val));
-                                            $("#sub3p2").append(new Option(text,val));
-                                            //$("#sub3").prop('selectedIndex', 2);
-                                        });
+                                    $.each(sub3_Non_Muslim,function(val,text){
+                                    $("#sub3").append(new Option(text,val));
+                                    $("#sub3p2").append(new Option(text,val));
+                                    //$("#sub3").prop('selectedIndex', 2);
+                                    });
                                     }          */
                                     $("#sub8").empty();
                                     $("#sub8p2").empty();
                                     $("#sub8").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
                                     $("#sub8").prepend('<option value="0">NONE</option>');
                                     $("#sub8p2").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
-                                    
-                                     $("#sub4").empty();
+
+                                    $("#sub4").empty();
                                     $("#sub4p2").empty();
-                                    
+
                                     $("#sub5").empty();
                                     $("#sub5p2").empty();
                                     $("#sub6").empty();
                                     $("#sub6p2").empty();
                                     $("#sub7").empty();
                                     $("#sub7p2").empty();
-                                   // $("#sub8").empty();
-                                  //  $("#sub8p2").empty();
+                                    // $("#sub8").empty();
+                                    //  $("#sub8p2").empty();
                                 }
                                 var langascd = ['22','23','36','34','35'];
 
                                 // sub 1 change event 
                                 $("#sub1").change(function(){
                                     var sel_sub =$("#sub1").val();
-                                   // $("#sub1p2").val(sel_sub);
+                                    // $("#sub1p2").val(sel_sub);
                                 });
                                 $("#sub1p2").change(function(){
                                     var sel_sub =$("#sub1p2").val();
@@ -975,34 +923,34 @@
                                 // sub 2 change event 
                                 $("#sub2").change(function(){
                                     var sel_sub =$("#sub2").val();
-                                  //  $("#sub2p2").val(sel_sub);
+                                    //  $("#sub2p2").val(sel_sub);
                                 });
                                 $("#sub2p2").change(function(){
                                     var sel_sub =$("#sub2p2").val();
-                                   // $("#sub2").val(sel_sub);
+                                    // $("#sub2").val(sel_sub);
                                 });
                                 // sub 3 change event 
                                 $("#sub3").change(function(){
                                     var sel_sub =$("#sub3").val();
-                                  //  $("#sub3p2").val(sel_sub);
+                                    //  $("#sub3p2").val(sel_sub);
                                 });
                                 $("#sub3p2").change(function(){
                                     var sel_sub =$("#sub3p2").val();
-                                  //  $("#sub3").val(sel_sub);
+                                    //  $("#sub3").val(sel_sub);
                                 });
                                 // sub 4 change event 
                                 $("#sub4").change(function(){
                                     var sel_sub =$("#sub4").val();
-                                 //   $("#sub4p2").val(sel_sub);
+                                    //   $("#sub4p2").val(sel_sub);
                                 });
                                 $("#sub4p2").change(function(){
                                     var sel_sub =$("#sub4p2").val();
-                                 //   $("#sub4").val(sel_sub);
+                                    //   $("#sub4").val(sel_sub);
                                 });
                                 // sub 5 change event 
                                 $("#sub5").change(function(){
                                     var sel_sub =$("#sub5").val();
-                                 //   $("#sub5p2").val(sel_sub);
+                                    //   $("#sub5p2").val(sel_sub);
                                 });
                                 $("#sub5p2").change(function(){
                                     var sel_sub =$("#sub5p2").val();
@@ -1010,7 +958,7 @@
                                 });
                                 // sub 6 change event
                                 $("#sub6").change(function(){
-                                   // debugger;
+                                    // debugger;
                                     var sub6 = $("#sub6").val();
                                     var sub6p2 = $("#sub6p2").val();
                                     var sub7 = $("#sub7").val();
@@ -1019,51 +967,51 @@
                                     var sub8p2 = $("#sub8p2").val();
                                     // if(sub6 !=0 || sub7 != 0 || sub8 != 0 || sub6p2 != 0 || sub7p2 != 0 || sub8p2 != 0)
                                     // {
-                                       if(sub6==0)
-                                       {
-                                       return true;
-                                       }
+                                    if(sub6==0)
+                                    {
+                                        return true;
+                                    }
                                     var a = langascd.indexOf(sub6);
                                     var b = langascd.indexOf(sub6p2);
                                     var d = langascd.indexOf(sub7);
                                     var c = langascd.indexOf(sub7p2);
-                                    
+
                                     if(a >=0  && d>=0)
                                     {
-                                       alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+                                        alertify.error("Please choose Different Subjects as Double Language is not allowed" );
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
                                         $("#sub6").focus();
                                         return;  
                                     }
-                                    
-                                    
-                                  /*  
+
+
+                                    /*  
                                     if((sub6 == sub7))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub6").val('0');
-                                        $("#sub6p2").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub6").val('0');
+                                    $("#sub6p2").val('0');
+                                    return;
                                     }
                                     if((sub6 == sub7p2))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub6").val('0');
-                                        $("#sub6p2").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub6").val('0');
+                                    $("#sub6p2").val('0');
+                                    return;
                                     }*/
                                     if ((sub6 == 19 || sub6p2 == 19) && (sub7 == 20 || sub7p2== 20))
-                                        {
+                                    {
                                         $('#ErrMsg').show(); 
                                         alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-                                       $("#sub6").val('0');
+                                        $("#sub6").val('0');
                                         $("#sub6p2").val('0');
                                         $("#sub6").focus();
                                         return;  
-                                        }    
-                                        if((sub7 == 20 && sub6 == 21) || (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19))
-                                        {
+                                    }    
+                                    if((sub7 == 20 && sub6 == 21) || (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19))
+                                    {
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
@@ -1082,48 +1030,48 @@
                                     var sub8p2 = $("#sub8p2").val();
                                     var ddlMarksImproveoptions = $("#ddlMarksImproveoptions").val();
                                     ////debugger;
-                                    
+
                                     var a = langascd.indexOf(sub6);
                                     var b = langascd.indexOf(sub6p2);
                                     var d = langascd.indexOf(sub7);
                                     var c = langascd.indexOf(sub7p2);
 
-                                   /* if(a >=0  && d>=0)
+                                    /* if(a >=0  && d>=0)
                                     {
-                                        alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-                                        $("#sub6").val('0');
-                                        $("#sub6p2").val('0');
-                                        $("#sub6").focus();
-                                        return;  
+                                    alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+                                    $("#sub6").val('0');
+                                    $("#sub6p2").val('0');
+                                    $("#sub6").focus();
+                                    return;  
                                     }
-                                    
-                                    
+
+
                                     if((sub6p2 == sub7) )
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub6").val('0');
-                                        $("#sub6p2").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub6").val('0');
+                                    $("#sub6p2").val('0');
+                                    return;
                                     }
                                     if((sub6p2 == sub7p2))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub6").val('0');
-                                        $("#sub6p2").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub6").val('0');
+                                    $("#sub6p2").val('0');
+                                    return;
                                     }          */
                                     if ((sub6 == 19 || sub6p2 == 19) && (sub7 == 20 || sub7p2== 20))
-                                        {
+                                    {
                                         $('#ErrMsg').show(); 
                                         alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-                                       $("#sub6").val('0');
+                                        $("#sub6").val('0');
                                         $("#sub6p2").val('0');
                                         $("#sub6").focus();
                                         return;  
-                                        }   
-                                        
-                                        
-                                     if((sub7 == 20 && sub6 == 21)  (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
+                                    }   
+
+
+                                    if((sub7 == 20 && sub6 == 21)  (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
@@ -1135,35 +1083,35 @@
                                     //   console.log('Hi i am sub6 dropdown :) ');
                                 })
                                 $("#sub7").change(function(){
-                                     //debugger;
+                                    //debugger;
                                     //   console.log('Hi i am sub7 dropdown :) ');
                                     var sub6 = $("#sub6").val();
                                     var sub7 = $("#sub7").val();
                                     var sub8 = $("#sub8").val();
-                                
+
                                     var a = langascd.indexOf(sub6);
                                     var d = langascd.indexOf(sub7);
-                                       if(sub7==0)
-                                       {
-                                       return true;
-                                       }
-                                   /* if(a >=0  && d>=0)
+                                    if(sub7==0)
                                     {
-                                        alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-                                         $("#sub7").val('0');
-                                        $("#sub7p2").val('0');
-                                        $("#sub7").focus();
-                                        return;  
+                                        return true;
                                     }
-                                
-                                
+                                    /* if(a >=0  && d>=0)
+                                    {
+                                    alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+                                    $("#sub7").val('0');
+                                    $("#sub7p2").val('0');
+                                    $("#sub7").focus();
+                                    return;  
+                                    }
+
+
                                     // console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
                                     if( (sub7 == sub6))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub7").val('0');
-                                        $("#sub7p2").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub7").val('0');
+                                    $("#sub7p2").val('0');
+                                    return;
                                     }                */
                                     if((sub7 == 20 && sub6 == 21) || (sub7 == 21 && sub6 == 20)  || (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
@@ -1186,19 +1134,19 @@
                                         $("#sub7p2").val('0');  
                                         return;
                                     }
-                                     if ((sub6 == 19 ) && (sub7 == 20) ||(sub6 == 20 ) && (sub7 == 19))
-                                        {
+                                    if ((sub6 == 19 ) && (sub7 == 20) ||(sub6 == 20 ) && (sub7 == 19))
+                                    {
                                         $('#ErrMsg').show(); 
                                         alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-                                       $("#sub7").val('0');
+                                        $("#sub7").val('0');
                                         $("#sub7p2").val('0');
                                         $("#sub7").focus();
                                         return;  
-                                        }    
+                                    }    
                                     $("#sub7p2").val(sub7);
                                 })
                                 $("#sub7p2").change(function(){
-                                   // debugger;
+                                    // debugger;
                                     //console.log('Hi i am sub7 dropdown :) ');
                                     var sub6 = $("#sub6").val();
                                     var sub6p2 = $("#sub6p2").val();
@@ -1207,28 +1155,28 @@
                                     var sub8 = $("#sub8").val();
                                     var sub8p2 = $("#sub8p2").val();
                                     //console.log("sub7 = "+ sub7 + "  sub8 = "+ sub8);
-                                    
+
                                     var a = langascd.indexOf(sub6);
                                     var b = langascd.indexOf(sub6p2);
                                     var d = langascd.indexOf(sub7);
                                     var c = langascd.indexOf(sub7p2);
 
-                                   /* if(a >=0  && d>=0)
+                                    /* if(a >=0  && d>=0)
                                     {
-                                        alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-                                        $("#sub7").val('0');
-                                        $("#sub7p2").val('0');
-                                        $("#sub7").focus();
-                                        return;  
+                                    alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+                                    $("#sub7").val('0');
+                                    $("#sub7p2").val('0');
+                                    $("#sub7").focus();
+                                    return;  
                                     }
 
-                                    
+
                                     if((sub7p2 == sub6)|| (sub7p2 == sub6) || (sub7p2 == sub6p2) || (sub7p2 == sub6p2))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub7p2").val('0');
-                                        $("#sub7").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub7p2").val('0');
+                                    $("#sub7").val('0');
+                                    return;
                                     }          */
                                     if((sub7 == 20 && sub6 == 21) || (sub7 == 21 && sub6 == 20)  || (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
@@ -1263,43 +1211,43 @@
                                         return;
                                     }
                                     if ((sub6 == 19 || sub6p2 == 19) && (sub7 == 20 || sub7p2== 20))
-                                        {
+                                    {
                                         $('#ErrMsg').show(); 
                                         alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-                                       $("#sub7").val('0');
+                                        $("#sub7").val('0');
                                         $("#sub7p2").val('0');
                                         $("#sub7").focus();
                                         return;  
-                                        }    
-                                  //  $("#sub7").val(sub7p2);
+                                    }    
+                                    //  $("#sub7").val(sub7p2);
                                 })
                                 $("#sub8").change(function(){
-                                     debugger;
+                                    debugger;
                                     //   console.log('Hi i am sub8 dropdown :) ');
                                     var sub6 = $("#sub6").val();
                                     var sub8 = $("#sub8").val();
                                     var sub8 = $("#sub8").val();
-                                
+
                                     var a = langascd.indexOf(sub6);
                                     var d = langascd.indexOf(sub8);
 
                                     /*if(a >=0  && d>=0)
                                     {
-                                        alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-                                         $("#sub8").val('0');
-                                        $("#sub8p2").val('0');
-                                        $("#sub8").focus();
-                                        return;  
+                                    alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+                                    $("#sub8").val('0');
+                                    $("#sub8p2").val('0');
+                                    $("#sub8").focus();
+                                    return;  
                                     }
-                                
-                                
+
+
                                     // console.log("sub8 = "+ sub8 + "  sub8 = "+ sub8);
                                     if( (sub8 == sub6))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub8").val('0');
-                                        $("#sub8p2").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub8").val('0');
+                                    $("#sub8p2").val('0');
+                                    return;
                                     }     */
                                     if((sub8 == 20 && sub6 == 21) || (sub8 == 21 && sub6 == 20)  || (sub8 == 19 && sub6 == 20) || (sub8 == 19 && sub6 == 21) || (sub8 == 20 && sub6 == 19) || (sub8 == 21 && sub6 == 19)|| (sub8p2 == 20 && sub6p2 == 21) || (sub8p2 == 21 && sub6p2 == 20)  || (sub8p2 == 19 && sub6p2 == 20) || (sub8p2 == 19 && sub6p2 == 21) || (sub8p2 == 20 && sub6p2 == 19) || (sub8p2 == 21 && sub6p2 == 19)){
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
@@ -1322,19 +1270,19 @@
                                         $("#sub8p2").val('0');  
                                         return;
                                     }
-                                     if ((sub6 == 19 ) && (sub8 == 20) ||(sub6 == 20 ) && (sub8 == 19))
-                                        {
+                                    if ((sub6 == 19 ) && (sub8 == 20) ||(sub6 == 20 ) && (sub8 == 19))
+                                    {
                                         $('#ErrMsg').show(); 
                                         alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-                                       $("#sub8").val('0');
+                                        $("#sub8").val('0');
                                         $("#sub8p2").val('0');
                                         $("#sub8").focus();
                                         return;  
-                                        }    
+                                    }    
                                     $("#sub8p2").val(sub8);
                                 })
                                 $("#sub8p2").change(function(){
-                                   // debugger;
+                                    // debugger;
                                     //console.log('Hi i am sub8 dropdown :) ');
                                     var sub6 = $("#sub6").val();
                                     var sub6p2 = $("#sub6p2").val();
@@ -1343,28 +1291,28 @@
                                     var sub8 = $("#sub8").val();
                                     var sub8p2 = $("#sub8p2").val();
                                     //console.log("sub8 = "+ sub8 + "  sub8 = "+ sub8);
-                                    
+
                                     var a = langascd.indexOf(sub6);
                                     var b = langascd.indexOf(sub6p2);
                                     var d = langascd.indexOf(sub8);
                                     var c = langascd.indexOf(sub8p2);
 
-                                   /* if(a >=0  && d>=0)
+                                    /* if(a >=0  && d>=0)
                                     {
-                                        alertify.error("Please choose Different Subjects as Double Language is not allowed" );
-                                        $("#sub8").val('0');
-                                        $("#sub8p2").val('0');
-                                        $("#sub8").focus();
-                                        return;  
+                                    alertify.error("Please choose Different Subjects as Double Language is not allowed" );
+                                    $("#sub8").val('0');
+                                    $("#sub8p2").val('0');
+                                    $("#sub8").focus();
+                                    return;  
                                     }
 
-                                    
+
                                     if((sub8p2 == sub6)|| (sub8p2 == sub6) || (sub8p2 == sub6p2) || (sub8p2 == sub6p2))
                                     {
-                                        alertify.error("Please choose Different Subjects" );
-                                        $("#sub8p2").val('0');
-                                        $("#sub8").val('0');
-                                        return;
+                                    alertify.error("Please choose Different Subjects" );
+                                    $("#sub8p2").val('0');
+                                    $("#sub8").val('0');
+                                    return;
                                     }        */
                                     if((sub7 == 20 && sub6 == 21) || (sub7 == 21 && sub6 == 20)  || (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
@@ -1399,22 +1347,22 @@
                                         return;
                                     }
                                     if ((sub6 == 19 || sub6p2 == 19) && (sub7 == 20 || sub7p2== 20))
-                                        {
+                                    {
                                         $('#ErrMsg').show(); 
                                         alertify.error('Please select One Subject from ADVANCED ISLAMIC STUDIES / ISLAMIC HISTORY / MUSLIM HISTORY ');                   
-                                       $("#sub7").val('0');
+                                        $("#sub7").val('0');
                                         $("#sub7p2").val('0');
                                         $("#sub7").focus();
                                         return;  
-                                        }    
+                                    }    
                                     $("#sub7").val(sub7p2);
                                 })
-                               
+
                                 function IsFullAppear(){
                                     $("#sub1").empty();
                                     $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub1p2").empty();
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     $("#sub1p2 option[value='" + sub1 + "']").attr("selected","selected");
@@ -1429,7 +1377,7 @@
                                     $("#sub2").empty();
                                     $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
                                     $("#sub2 option[value='" + sub2 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub2p2").empty();
                                     $("#sub2p2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
                                     $("#sub2p2 option[value='" + sub2 + "']").attr("selected","selected");
@@ -1445,11 +1393,11 @@
                                     $("#sub3").empty();
                                     $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
                                     $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-                                 
+
                                     $("#sub3p2").empty();
                                     $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
                                     $("#sub3p2 option[value='" + sub3 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub8").empty();
                                     $("#sub8").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
@@ -1458,66 +1406,66 @@
                                     $("#sub8p2").empty();
                                     $("#sub8p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     $("#sub8p2 option[value='" + sub8 + "']").attr("selected","selected");                                    
-                                    
+
                                     $("#sub4").empty();
                                     $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
                                     $("#sub4 option[value='" + sub4 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub4p2").empty();
                                     $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
                                     $("#sub4p2 option[value='" + sub4 + "']").attr("selected","selected");
-                                   
+
                                     $("#sub5").empty();
                                     $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
                                     $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub5p2").empty();
                                     $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
                                     $("#sub5p2 option[value='" + sub5 + "']").attr("selected","selected");
-                                   
+
                                     $("#sub6").empty();
                                     $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
                                     $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub6p2").empty();
                                     $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
                                     $("#sub6p2 option[value='" + sub1 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub7").empty();
                                     $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
                                     $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub7p2").empty();
                                     $("#sub7p2").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
                                     $("#sub7p2 option[value='" + sub7 + "']").attr("selected","selected");
                                 }
                                 $("#isfullAppear").change( function(){
-                                    
+
                                     //alert("hi i am called :) ");
-                                     var old_exam =  $('#oldexam_type').val();
+                                    var old_exam =  $('#oldexam_type').val();
                                     var crnt_exam =  $('#exam_type').val();
                                     if(this.checked)
                                     {
-                                        
 
-                                    if(crnt_exam == 4 || crnt_exam == 5 || crnt_exam == 6)
-                                    {
-                                        $('#oldexam_type').val(crnt_exam)
-                                        $('#exam_type').val(2)
-                                    }
-                                   
-                                    IsFullAppear();    
+
+                                        if(crnt_exam == 4 || crnt_exam == 5 || crnt_exam == 6)
+                                        {
+                                            $('#oldexam_type').val(crnt_exam)
+                                            $('#exam_type').val(2)
+                                        }
+
+                                        IsFullAppear();    
                                     }
                                     else{
-                                        
-                                 if(crnt_exam == 2 && (old_exam == 4 || old_exam == 5 || old_exam == 6))
-                                    {
-                                        $('#oldexam_type').val(2)
-                                        $('#exam_type').val(old_exam)
-                                    }
+
+                                        if(crnt_exam == 2 && (old_exam == 4 || old_exam == 5 || old_exam == 6))
+                                        {
+                                            $('#oldexam_type').val(2)
+                                            $('#exam_type').val(old_exam)
+                                        }
                                         sub_grp_load();
                                     }
-                                    
+
                                 })
                                 //Category P-1: MARKS IMPROVEMENT
                                 function sub_grp_load(){
@@ -1851,40 +1799,40 @@
                                     $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
                                     $("#sub5p2 option[value='" + sub5 + "']").attr("selected","selected");
 
-                                   // var Gender = $("#gend").val();
-                                      //  debugger;
-                                            //console.log(Religion);
-                                            
-                                        
+                                    // var Gender = $("#gend").val();
+                                    //  debugger;
+                                    //console.log(Religion);
+
+
                                     $("#sub6").empty();
                                     $("#sub6p2").empty();
-                                   
-                                   
+
+
                                     $.each(sub8_Hum,function(val,text){
 
-                                        
+
                                         $("#sub6").append(new Option(text,val));
                                         $("#sub6p2").append(new Option(text,val));
                                     });
-                                     if(Gender == "2")
-                                            {
-                                                $("#sub6").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                                                $("#sub6p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                                               
-                                            }
+                                    if(Gender == "2")
+                                    {
+                                        $("#sub6").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                                        $("#sub6p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+
+                                    }
                                     $("#sub7").empty();
                                     $("#sub7p2").empty();
-                                    
+
                                     $.each(sub7_Hum,function(val,text){
 
                                         $("#sub7").append(new Option(text,val));
                                         $("#sub7p2").append(new Option(text,val));
                                     });
-                                     if(Gender == "2")
-                                            {
-                                                $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                                                $("#sub7p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                                            }
+                                    if(Gender == "2")
+                                    {
+                                        $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                                        $("#sub7p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                                    }
                                     $("#sub8").empty();
                                     $("#sub8").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
@@ -1906,7 +1854,7 @@
                                     $('#lblpart1cat').text('Category P-1: ADDITIONAL')
                                     $('#lblpart2cat').text('Category P-2: ADDITIONAL');  
 
-                                     
+
                                     $.each(additional_sub, function(val, text) {
                                         $('#sub1').hide();
                                         $('#sub1p2').hide();
@@ -1925,7 +1873,7 @@
                                         $('#sub8').append( new Option(text,val) );
                                         $('#sub8p2').append( new Option(text,val) );
                                     }); 
-                                     if(grp_cd == 1 || grp_cd == 7 )
+                                    if(grp_cd == 1 || grp_cd == 7 )
                                     {
                                         $('#sub6').append( new Option('BIOLOGY',8) );
                                         $('#sub6p2').append( new Option('BIOLOGY',8) );
@@ -1935,7 +1883,7 @@
                                         $('#sub8p2').append( new Option('BIOLOGY',8) );
                                         //8:''
                                     } 
-                                  
+
                                 }
 
                                 function AAMA_KHASA_sub_grp_load(){
@@ -1966,8 +1914,8 @@
                                 }                                
 
                                 <?php 
-//DebugBreak();
-                                
+                                //DebugBreak();
+
                                 if($exam_type == 2 && $grp_cd == 1)
                                 {
 
@@ -1980,7 +1928,7 @@
                                 }
                                 else if(($cat09_forAma==4 && $cat10_forAma==4) && (($Status == 2) || ($Status == 4) || ($Status == 3)))
                                 {
-                                    
+
                                     echo "AAMA_KHASA_sub_grp_load()";
                                 }
                                 else if($exam_type == 15 || ($exam_type == 16 && $cattype == 2))
@@ -2000,26 +1948,26 @@
 
                                 function sub_grp_load_P1_supply_PII_full_exam_type_3()
                                 {
-                                   // debugger;
-                                  if(sub1pf1 == "2" || sub1pf1 == "3" )
-                                  {
-                                    $("#sub1").empty();
-                                    $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
-                                   
-                                    $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");  
-                                  }
-                                   $("#sub1").append(new Option('NONE',0));
-                                    
+                                    // debugger;
+                                    if(sub1pf1 == "2" || sub1pf1 == "3" )
+                                    {
+                                        $("#sub1").empty();
+                                        $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
+
+                                        $("#sub1 option[value='" + sub1 + "']").attr("selected","selected");  
+                                    }
+                                    $("#sub1").append(new Option('NONE',0));
+
 
                                     $("#sub1p2").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     $("#sub1p2 option[value='" + sub1 + "']").attr("selected","selected");
                                     //$("#sub1p2").append('<option value='+sub1p2+'>'+sub1p2+'</option>');
                                     if(sub2pf1 == "2" || sub2pf1 == "3")
                                     {
-                                    $("#sub2").empty();
-                                    $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
-                                     
-                                    $("#sub2 option[value='" + sub2 + "']").attr("selected","selected");    
+                                        $("#sub2").empty();
+                                        $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));
+
+                                        $("#sub2 option[value='" + sub2 + "']").attr("selected","selected");    
                                     }
                                     $("#sub2").append(new Option('NONE',0));
 
@@ -2029,12 +1977,12 @@
 
                                     if(sub3pf1 == "2" || sub3pf1 == "3")
                                     {
-                                    $("#sub3").empty();
-                                    $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
-                                    $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");    
-                                   
+                                        $("#sub3").empty();
+                                        $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
+                                        $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");    
+
                                     }
-                                      $("#sub3").append(new Option('NONE',0));
+                                    $("#sub3").append(new Option('NONE',0));
 
                                     $("#sub3p2").empty();
                                     $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
@@ -2042,12 +1990,12 @@
 
                                     if(sub4pf1 == "2" || sub4pf1 == "3")
                                     {
-                                    $("#sub4").empty();
-                                    $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
-                                    $("#sub4 option[value='" + sub4 + "']").attr("selected","selected");    
-                                    
+                                        $("#sub4").empty();
+                                        $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
+                                        $("#sub4 option[value='" + sub4 + "']").attr("selected","selected");    
+
                                     }
-                                     $("#sub4").append(new Option('NONE',0));
+                                    $("#sub4").append(new Option('NONE',0));
 
                                     $("#sub4p2").empty();
                                     $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
@@ -2055,12 +2003,12 @@
 
                                     if(sub5pf1 == "2" || sub5pf1 == "3")
                                     {
-                                    $("#sub5").empty();
-                                    $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
-                                    $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
-                                    
+                                        $("#sub5").empty();
+                                        $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
+                                        $("#sub5 option[value='" + sub5 + "']").attr("selected","selected");
+
                                     }
-                                     $("#sub5").append(new Option('NONE',0)); 
+                                    $("#sub5").append(new Option('NONE',0)); 
 
                                     $("#sub5p2").empty();
                                     $("#sub5p2").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
@@ -2069,10 +2017,10 @@
 
                                     if(sub6pf1 == "2" || sub6pf1 == "3")
                                     {
-                                    $("#sub6").empty();
-                                    $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
-                                    $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");   
-                                      
+                                        $("#sub6").empty();
+                                        $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
+                                        $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");   
+
                                     }
                                     $("#sub6").append(new Option('NONE',0)); 
 
@@ -2080,15 +2028,15 @@
                                     $("#sub6p2").empty();
                                     $("#sub6p2").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
                                     $("#sub6p2 option[value='" + sub6 + "']").attr("selected","selected");
- 
+
                                     if(sub7pf1 == "2" || sub7pf1 == "3")
                                     {
-                                    $("#sub7").empty();
-                                    $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
-                                    $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");    
-                                    
+                                        $("#sub7").empty();
+                                        $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7));
+                                        $("#sub7 option[value='" + sub7 + "']").attr("selected","selected");    
+
                                     }
-                                     $("#sub7").append(new Option('NONE',0)); 
+                                    $("#sub7").append(new Option('NONE',0)); 
 
 
 
@@ -2099,12 +2047,12 @@
 
                                     if(sub8pf1 == "2" || sub8pf1 == "3")
                                     {
-                                    $("#sub8").empty();
-                                    $("#sub8").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
-                                    $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
-                                      
+                                        $("#sub8").empty();
+                                        $("#sub8").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
+                                        $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
+
                                     }
-                                     $("#sub8").append(new Option('NONE',0)); 
+                                    $("#sub8").append(new Option('NONE',0)); 
 
 
 
@@ -2164,7 +2112,7 @@
                                     $("#sub3").empty();
                                     $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
                                     $("#sub3 option[value='" + sub3 + "']").attr("selected","selected");
-                                 
+
                                     $("#sub8").empty();
                                     $("#sub8").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     $("#sub8 option[value='" + sub8 + "']").attr("selected","selected");
@@ -2212,7 +2160,7 @@
                                     }  */
                                     /*  if((sub8pf1 == "1"))
                                     { */
-                                   
+
                                     /* }
                                     else
                                     {
@@ -2254,11 +2202,11 @@
                                     $("#sub3p2").empty();
                                     $("#sub3p2").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
                                     $("#sub3p2 option[value='" + sub3 + "']").attr("selected","selected");
-                                    
-                                     $("#sub8p2").empty();
+
+                                    $("#sub8p2").empty();
                                     $("#sub8p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     $("#sub8p2 option[value='" + sub8 + "']").attr("selected","selected");
-                                    
+
                                     $("#sub4p2").empty();
                                     $("#sub4p2").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
                                     $("#sub4p2 option[value='" + sub4 + "']").attr("selected","selected");
@@ -2307,7 +2255,7 @@
                                     }     */
                                     /*if((sub8pf2 == "1"))
                                     {*/
-                                   
+
                                     /* }
                                     else
                                     {
@@ -2412,7 +2360,7 @@
                                         $("#sub1").append('<option value="0">NONE</option>');
                                         $("#sub1").append(new Option('<?php  echo  array_search($data[0]['sub1'],$subarray); ?>',sub1));
                                     }
-                                   
+
                                     // Subject 2 
                                     if((sub2pf1 == "2" || sub2pf2 == "2"))
                                     {
@@ -2432,7 +2380,7 @@
                                         $("#sub2").append('<option value="0">NONE</option>');
                                         $("#sub2").append(new Option('<?php  echo  array_search($data[0]['sub2'],$subarray); ?>',sub2));  
                                     }
-                                  
+
                                     // subject 3 
                                     if((sub3pf1 == "2" || sub3pf2 == "2"))
                                     {
@@ -2452,7 +2400,7 @@
                                         $("#sub3").append('<option value="0">NONE</option>'); 
                                         $("#sub3").append(new Option('<?php  echo  array_search($data[0]['sub3'],$subarray); ?>',sub3));
                                     }
-                                    
+
                                     if((sub4pf1 == "2" || sub4pf2 == "2"))
                                     {
                                         $("#sub4").empty();
@@ -2471,7 +2419,7 @@
                                         $("#sub4").append('<option value="0">NONE</option>');
                                         $("#sub4").append(new Option('<?php  echo  array_search($data[0]['sub4'],$subarray); ?>',sub4));
                                     }
-                                   
+
                                     if((sub5pf1 == "2" || sub5pf2 == "2"))
                                     {
                                         $("#sub5").empty();
@@ -2496,7 +2444,7 @@
                                         $("#sub5").append('<option value="0">NONE</option>');
                                         $("#sub5").append(new Option('<?php  echo  array_search($data[0]['sub5'],$subarray); ?>',sub5));
                                     }
-                                   
+
                                     if((sub6pf1 == "2" || sub6pf2 == "2"))
                                     {
                                         $("#sub6").empty();
@@ -2515,7 +2463,7 @@
                                         $("#sub6").append('<option value="0">NONE</option>');
                                         $("#sub6").append(new Option('<?php  echo  array_search($data[0]['sub6'],$subarray); ?>',sub6));
                                     }
-                                    
+
                                     if((sub7pf1 == "2" || sub7pf2 == "2"))
                                     {
                                         $("#sub7").empty();
@@ -2534,7 +2482,7 @@
                                         $("#sub7").append('<option value="0">NONE</option>');
                                         $("#sub7").append(new Option('<?php  echo  array_search($data[0]['sub7'],$subarray); ?>',sub7)); 
                                     }
-                                   
+
                                     if((sub8pf1 == "2" || sub8pf2 == "3"))
                                     {
                                         $("#sub8").empty();
@@ -2553,7 +2501,7 @@
                                         $("#sub8p2").append('<option value="0">NONE</option>');
                                         $("#sub8p2").append(new Option('<?php  echo  array_search($data[0]['sub8'],$subarray); ?>',sub8));
                                     }
-                                   
+
                                     // PART II Subjects ....... 
                                 }
                                 $("#ddlMarksImproveoptions").change(function(){
@@ -2583,16 +2531,16 @@
                                 })
 
                                 $('#std_group').change(function(){
-                                     
+
                                     debugger;
 
                                     $("#isfullAppear").attr("check",false);
                                     $("#isfullAppear").attr("disabled",true);
-                                    
+
                                     $("#divIsfullApp").addClass('hide');
                                     $("#isfullAppear").addClass('hide');
-                                    
-                                    
+
+
                                     var sel_group = $('#std_group').val();
                                     var old_exam =  $('#oldexam_type').val();
                                     var crnt_exam =  $('#exam_type').val();
@@ -2633,9 +2581,9 @@
                                             $("#divIsfullApp").removeClass('hide');
                                             $("#isfullAppear").removeClass('hide');
                                             $("#isfullAppear").attr("disabled",false);
-                                               
-                                                
-                                          <?php  echo 'sub_grp_load()'; 
+
+
+                                            <?php  echo 'sub_grp_load()'; 
                                         }                                        
                                         ?>
                                     }
@@ -2645,63 +2593,63 @@
                                         {
                                             // Check Nationality and select appropriate Subject1 against candidate Nationality :)
                                             load_Bio_CS_Sub();
-                                            $("#sub8").append(new Option('BIOLOGY',8));
-                                            $("#sub8").append(new Option('NONE',0));
-                                            $("#sub8p2").append(new Option('BIOLOGY',8));
+                                            $("#sub7").append(new Option('BIOLOGY',8));
+                                            $("#sub7").append(new Option('NONE',0));
+                                            $("#sub7p2").append(new Option('BIOLOGY',8));
                                         }
                                         else if(sel_group == "7")
                                         {
                                             load_Bio_CS_Sub();
-                                            $("#sub8").append(new Option('COMPUTER SCIENCE',78));
-                                            $("#sub8").append(new Option('NONE',0));
-                                            $("#sub8p2").append(new Option('COMPUTER SCIENCE',78));
+                                            $("#sub7").append(new Option('COMPUTER SCIENCE',78));
+                                            $("#sub7").append(new Option('NONE',0));
+                                            $("#sub7p2").append(new Option('COMPUTER SCIENCE',78));
                                         }
                                         else if (sel_group == "8")
                                         {
                                             load_Bio_CS_Sub();
-                                            $("#sub8").append(new Option('ELECTRICAL WIRING (OPT)',43));
-                                            $("#sub8").append(new Option('NONE',0));
-                                            $("#sub8p2").append(new Option('ELECTRICAL WIRING (OPT)',43));
+                                            $("#sub7").append(new Option('ELECTRICAL WIRING (OPT)',43));
+                                            $("#sub7").append(new Option('NONE',0));
+                                            $("#sub7p2").append(new Option('ELECTRICAL WIRING (OPT)',43));
                                             //ELECTRICAL WIRING (OPT)
                                         }
                                         else if(sel_group == "2")
                                         {
                                             Hum_Deaf_Subjects();
-                                            
+
                                             $.each(sub5_Hum,function(val,text){
                                                 $("#sub4").append(new Option(text,val));
-                                               
+
                                                 $("#sub4p2").append(new Option(text,val));
                                             });
-                                             $("#sub4").append(new Option('NONE',0));
-                                             
-                                             
-                                             
+                                            $("#sub4").append(new Option('NONE',0));
+
+
+
                                             $.each(sub6_Hum,function(val,text){
                                                 $("#sub5").append(new Option(text,val));
-                                               
+
                                                 $("#sub5p2").append(new Option(text,val));
                                             });
                                             $("#sub5").append(new Option('NONE',0));
-                                            
-                                            
-                                             
+
+
+
                                             $.each(sub7_Hum,function(val,text){
                                                 $("#sub6").append(new Option(text,val));
-                                               
+
                                                 $("#sub6p2").append(new Option(text,val));
                                             });
                                             $("#sub6").append(new Option('NONE',0));
-                                            
-                                            
-                                           
+
+
+
                                             $.each(sub8_Hum,function(val,text){
                                                 $("#sub7").append(new Option(text,val));
-                                               
+
                                                 $("#sub7p2").append(new Option(text,val));
                                             });
-                                              $("#sub7").append(new Option('NONE',0));
-                                              
+                                            $("#sub7").append(new Option('NONE',0));
+
                                             var Elecgrp ="<?php echo @$grp_cd; ?>";
                                             var isgovt ="<?php echo @$isgovt; ?>";
                                             var b = ['8'];
@@ -2728,7 +2676,7 @@
                                                     // alert("removed");
                                                 }  
                                             }
-                                          //  var Gender = $("#gend").val();
+                                            //  var Gender = $("#gend").val();
                                             debugger;
                                             //console.log(Religion);
                                             if(Gender == "2")

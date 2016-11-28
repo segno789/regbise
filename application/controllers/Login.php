@@ -25,7 +25,7 @@ class Login extends CI_Controller {
             'user_status' => ''                     
 
         );
-        
+     //   DebugBreak();
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
           
