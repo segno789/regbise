@@ -499,7 +499,7 @@ class BiseCorrections_model extends CI_Model
           $exam_type = $data['exam_type'];
         $Brd_cd =  @$data['Brd_cd'];
 
-  
+          DebugBreak();
         //$old_class =  @$data['class'];
 
         /*$AdmProcFee =  @$data['AdmProcessFee'];

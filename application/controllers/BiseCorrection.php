@@ -1710,18 +1710,18 @@ class BiseCorrection extends CI_Controller {
 
       //  DebugBreak();
 
-          if($is9th == 1)
-          {
+      if($is9th == 1)
+      {
           $examtype = 3;
           $cat09 = 0;
           $cat10 = 1;
-          }
-          else
-          {
+      }
+      else
+      {
           $examtype = 2;
           $cat09 = 1;
-        $cat10 = 1;
-          }
+          $cat10 = 1;
+      }
         
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
@@ -1875,7 +1875,7 @@ class BiseCorrection extends CI_Controller {
         );
         
         
-          DebugBreak();
+         // DebugBreak();
          $target_path = IMAGE_PATH_OTHER_BOARD_10TH.$Inst_Id_other.'/';
         if (!file_exists($target_path)){
 
