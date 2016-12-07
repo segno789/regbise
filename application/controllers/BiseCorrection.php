@@ -1576,6 +1576,7 @@ class BiseCorrection extends CI_Controller {
             'regoldyear' =>( $allinputdata['regoldyear']),
             'isreadm'=>($allinputdata['isreadm'])
         );
+       // DebugBreak();
         $logedIn = $this->Registration_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn[0]['error'] != 'false')
         {  
@@ -3346,7 +3347,7 @@ class BiseCorrection extends CI_Controller {
     public function NewEnrolment_insert_OtherBoard10th(){
 
 
-        //DebugBreak();
+        DebugBreak();
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
