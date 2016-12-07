@@ -742,7 +742,7 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_insert()
     {
-        DebugBreak();
+        
         $this->load->model('Registration_11th_model');
        
         $this->load->library('session');
@@ -924,7 +924,7 @@ class Registration_11th extends CI_Controller {
         } 
           // DebugBreak();
         $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['max_size']      = '20';
         $config['max_width']     = '260';
         $config['max_height']    = '290';
@@ -2424,7 +2424,7 @@ class Registration_11th extends CI_Controller {
                         {
                             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                             {
-                                $Lreg_fee = 0; 
+                                $Lreg_fee = 500; 
                             }
                             else
                             {
@@ -2455,7 +2455,7 @@ class Registration_11th extends CI_Controller {
                         {
                             if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                             {
-                                $Lreg_fee = 0; 
+                                $Lreg_fee = 500; 
                             }
                             else
                             {
@@ -2605,7 +2605,7 @@ class Registration_11th extends CI_Controller {
                         {
                              if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                             {
-                                $Lreg_fee = 0; 
+                                $Lreg_fee = 500; 
                             }
                             else
                             {
@@ -2636,7 +2636,7 @@ class Registration_11th extends CI_Controller {
                         {
                              if(date('Y-m-d', strtotime($v["edate"] ))<= $lastdate) 
                             {
-                                $Lreg_fee = 0; 
+                                $Lreg_fee = 500; 
                             }
                             else
                             {
@@ -3279,7 +3279,10 @@ class Registration_11th extends CI_Controller {
             {
                 $spl_casename = 'Board Employee';
             }
-
+            else  if($data["Spec"] == 3)
+            {
+                $spl_casename = 'Blind';
+            }
 
             $pdf->SetXY(0.5,$Y+2.7);
             $pdf->SetFont('Arial','',10);

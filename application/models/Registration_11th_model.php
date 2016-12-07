@@ -460,7 +460,7 @@ class Registration_11th_model extends CI_Model
         return true;
 
     }
-    public function GetFormNo($Inst_Id)
+       public function GetFormNo($Inst_Id)
     {
          //DebugBreak();
         $this->db->select('formno');

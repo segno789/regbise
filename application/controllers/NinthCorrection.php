@@ -425,7 +425,7 @@ class NinthCorrection extends CI_Controller {
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-        $temp = $challanNo.'@'.$result[0]['formNo'].'@09@2016@1';
+        $temp = $challanNo.'@'.$result[0]['AppNo'].'@09@2016@1';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -451,7 +451,7 @@ class NinthCorrection extends CI_Controller {
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
             $pdf->Image(base_url()."assets/img/logo.jpg",0.30,$yy+$dyy, 0.50,0.50, "JPG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
-            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
+            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,2.1,0.22,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
 
@@ -1168,7 +1168,7 @@ class NinthCorrection extends CI_Controller {
             $Y = 0.5;
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
-            $temp = $data['formno'].'@09@2016@1';
+            $temp = $data['AppNo'].'@09@2016@1';
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
             $pdf->SetFont('Arial','U',16);
