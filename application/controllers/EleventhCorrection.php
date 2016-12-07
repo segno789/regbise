@@ -239,7 +239,7 @@ class EleventhCorrection extends CI_Controller {
         $challanMSG=array(1=>"(May be deposited in any HBL Branch)",2=>"(To be sent to the Online Registration Branch Via BISE One Window)", 3=>"(To be retained with HBL)", 4=>"(To be sent to the Board via HBL Branch aloongwith scroll)"  );
         $challanNo = $result[0]['challanNo']; 
 
-        if(date('Y-m-d',strtotime(Correction_Last_Date))>=date('Y-m-d'))
+        if(date('Y-m-d',strtotime(Correction_Last_Date11))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->EleventhCorrection_model->getreulefee(1); 
             $challanDueDate  = date('d-m-Y',strtotime($rule_fee[0]['End_Date'] )) ;
@@ -257,7 +257,7 @@ class EleventhCorrection extends CI_Controller {
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-        $temp = $challanNo.'@'.$result[0]['formNo'].'@'.$result[0]['class'].'@'.$result[0]['Iyear'].'@'.$result[0]['sess'];
+        $temp = $challanNo.'@'.$result[0]['AppNo'].'@'.$result[0]['class'].'@'.$result[0]['Iyear'].'@'.$result[0]['sess'];
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -283,7 +283,7 @@ class EleventhCorrection extends CI_Controller {
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
             $pdf->Image(base_url()."assets/img/logo2.png",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
-            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
+            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,2.1,0.22,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
 
@@ -532,7 +532,7 @@ class EleventhCorrection extends CI_Controller {
         'FNIC' =>$this->input->post('father_cnic'),
         'Dob' =>$this->input->post('dob'),
         'grp_cd' =>$this->input->post('std_group'),*/
-        if(date('Y-m-d',strtotime(Correction_Last_Date))>=date('Y-m-d'))
+        if(date('Y-m-d',strtotime(Correction_Last_Date11))>=date('Y-m-d'))
         {
             $rule_fee   =  $this->EleventhCorrection_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
@@ -994,7 +994,7 @@ class EleventhCorrection extends CI_Controller {
             $Y = 0.5;
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
-            $temp = $data['formno'].'@11@2016@1';
+            $temp = $data['AppNo'].'@11@2016@1';
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
             $pdf->SetFont('Arial','U',16);

@@ -1008,7 +1008,7 @@ class Registration extends CI_Controller {
       
       
         $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['max_size']      = '20';
         // $config['max_width']     = '260';
         // $config['max_height']    = '290';
@@ -2152,7 +2152,8 @@ class Registration extends CI_Controller {
             $pdf->Cell( 0.5,0.5,"Group:",0,'L');
             $pdf->SetFont('Arial','B',10);
             $pdf->SetXY(1.7,$y+$dy);
-            $grp_name = $data["RegGrp"];
+            $grp_name = $data["grp_cd"];
+            $sub8 = $data['sub8'];
             switch ($grp_name) {
                 case '1':
                     $grp_name = 'SCIENCE WITH BIOLOGY';
@@ -2172,6 +2173,18 @@ class Registration extends CI_Controller {
                 default:
                     $grp_name = "No Group Selected.";
             }
+            
+             switch ($sub8) {
+                case '78':
+                    $grp_name = 'SCIENCE  WITH COMPUTER SCIENCE';
+                    break;
+                case '43':
+                    $grp_name = 'SCIENCE  WITH ELECTRICAL WIRING';
+                    break;
+               
+            }
+            
+            
             $pdf->Cell(0.5,0.5, $grp_name,0,'L');
 
             $y += 0.2;
@@ -4031,7 +4044,7 @@ class Registration extends CI_Controller {
         );
         $msg = $this->uri->segment(3);
 
-
+ //echo $this->upload->error_msg[0];exit();
 
         if($msg == FALSE){
 
@@ -4076,8 +4089,9 @@ class Registration extends CI_Controller {
             mkdir($target_path);
         } 
 
+        
         $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['max_size']      = '20';
         $config['min_size']      = '4';
         //  $config['max_width']     = '260';
@@ -4088,7 +4102,9 @@ class Registration extends CI_Controller {
         $config['file_name']     = $formno.'.jpg';
 
         $filepath = $target_path. $config['file_name']  ;
-
+        
+       
+        
         //$config['new_image']    = $formno.'.JPEG';
 
         $this->load->library('upload', $config);
@@ -4099,10 +4115,12 @@ class Registration extends CI_Controller {
         if($check !== false) {
 
             $file_size = round($_FILES['image']['size']/1024, 2);
+       
             if($file_size<=20 && $file_size>=4)
             {
                 if ( !$this->upload->do_upload('image',true))
                 {
+                         
                     if($this->upload->error_msg[0] != "")
                     {
                         $error['excep']= $this->upload->error_msg[0];

@@ -25,7 +25,7 @@ class Login extends CI_Controller {
             'user_status' => ''                     
 
         );
-     //   DebugBreak();
+        
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
           
@@ -61,7 +61,7 @@ class Login extends CI_Controller {
 
                     if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
-                        $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
+                        $logedIn['tbl_inst']['allowed_mGrp'] = $logedIn['tbl_inst']['allowed_mGrp'];//'1,2,7';
                     }
 
 
@@ -92,7 +92,7 @@ class Login extends CI_Controller {
                     }
                     if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
-                        $logedIn['tbl_inst']['allowed_mGrp'] = '1,2,7';
+                        $logedIn['tbl_inst']['allowed_mGrp'] = $logedIn['tbl_inst']['allowed_mGrp'];//'1,2,7';
                     }
 
 
@@ -206,7 +206,7 @@ class Login extends CI_Controller {
                     $sess_array = array(
                         'Inst_Id' => $logedIn['flusers']['inst_cd'] ,
                         'edu_lvl' => $logedIn['tbl_inst']['edu_lvl'],
-                        'inst_Name' => $logedIn['flusers']['inst_name'],
+                        'inst_Name' => $logedIn['tbl_inst']['Name'],
                         'gender' => $logedIn['tbl_inst']['Gender'],
                         'isrural' => $logedIn['tbl_inst']['IsRural'],
                         'grp_cd' => $logedIn['tbl_inst']['allowed_mGrp'],
@@ -272,7 +272,7 @@ class Login extends CI_Controller {
 
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
-            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229)
+            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229 || @$_POST['username'] == 147852 || @$_POST['username'] == 2009 || @$_POST['username'] == 2307)
             {
 
 
@@ -290,7 +290,15 @@ class Login extends CI_Controller {
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
-                    redirect('BiseCorrection/reg9thcorrections'); 
+                  if(@$_POST['username'] == 2009 || @$_POST['username'] == 2307)
+                  {
+                         redirect('BiseCorrection/search_Form'); 
+                  }
+                  else
+                  {
+                    redirect('BiseCorrection/reg9thcorrections');    
+                  }
+                   
                 }
                 else
                 {  

@@ -855,7 +855,7 @@ class Migration extends CI_Controller {
             $pdf->SetXY(1.7,$Y+2.4);
             $pdf->Cell(0.5,0.5,@$data["fnic"],0,'L');    
 
-            $pdf->Image(base_url().IMAGE_PATH11.$data["coll_cd"].'/'.$data["PicPath"],4.5,1.79+$Y , 0.95, 1.0, "JPG"); //
+            $pdf->Image(IMAGE_PATH11.$user['Inst_Id'].'/'.$data["PicPath"],4.5,1.79+$Y , 0.95, 1.0, "JPG"); //
              //$pdf->Image( base_url().'uploads/download.jpg',6.6, 1.55+$Y, 1.0, 1.0, "JPG");  
             //========================================  Exam Info ===============================================================================            
            
@@ -1086,7 +1086,7 @@ class Migration extends CI_Controller {
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
             $pdf->Image(base_url()."assets/img/logo.jpg",0.30,$yy+$dyy, 0.50,0.50, "JPG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
-            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
+            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,2.1,0.22,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
 
