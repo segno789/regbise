@@ -8,7 +8,7 @@
                         11th Migration by Form No.<a id="redgForm" data-original-title=""></a>
                     </div>
                 </div>
-             <!--   <div class="widget-body">
+              <div class="widget-body">
                     <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/11" method="post" enctype="multipart/form-data">
                         <div class='control-group'>
                             <div class='controls controls-row'>
@@ -34,7 +34,7 @@
                         </div>
 
                     </form>
-                </div>    -->
+                </div>    
                 
                   <div class="widget-body">
                         <h4>

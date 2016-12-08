@@ -653,7 +653,11 @@ if(isset($files)){
 debugger;
 //console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
-        if(NationalityVal==2 || matric_sub1.value == 11)
+if(typeof matric_sub1 == 'undefined')
+{
+matric_sub1 = 0
+}
+        if(NationalityVal==2 || ( matric_sub1.value == 11))
         {
             $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
             
@@ -738,7 +742,9 @@ debugger;
         $("#sub3").append(new Option('Islamic Education',92));
         $("#sub3 option[value='92']").attr("selected","selected");
         $("#sub4").append(new Option('Mathematics',19));
+        
         $("#sub4 option[value='19']").attr("selected","selected");
+        
 
         $("#sub5").append(new Option('Physics',47));
         $("#sub5").append(new Option('Economics',11));
@@ -749,6 +755,10 @@ debugger;
         $("#sub6").append(new Option('Economics',11));
         $("#sub6").append(new Option('Statistics',18));
         $("#sub6 option[value='83']").attr("selected","selected");
+        
+        $("#sub4 option[value='<?php echo @$data[0]['sub4']   ?>']").attr("selected","selected"); 
+         $("#sub5 option[value='<?php echo @$data[0]['sub5']   ?>']").attr("selected","selected"); 
+         $("#sub6 option[value='<?php echo @$data[0]['sub6']   ?>']").attr("selected","selected"); 
     }
      function  check_NewEnrol_validation_11th(){
        // 
@@ -1070,13 +1080,18 @@ debugger;
         $("#sub3 option[value='92']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
             $('#sub4').append( new Option(text,val) );
-        }); 
+        });
+        
         $.each(sub6_Hum, function(val, text) {
             $('#sub5').append( new Option(text,val) );
         }); 
+         
         $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
         }); 
+         $("#sub4 option[value='<?php echo @$data[0]['sub4']   ?>']").attr("selected","selected"); 
+         $("#sub5 option[value='<?php echo @$data[0]['sub5']   ?>']").attr("selected","selected"); 
+         $("#sub6 option[value='<?php echo @$data[0]['sub6']   ?>']").attr("selected","selected"); 
         // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
 
     }

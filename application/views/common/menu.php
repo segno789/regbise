@@ -227,6 +227,11 @@ header("Pragma: no-cache");
                             11th Correction Applications
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst11th">
+                            11th Search By Inst. Code
+                        </a>
+                    </li>
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrectionapp_verified">
                             Verified Correction  
