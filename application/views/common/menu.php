@@ -53,9 +53,9 @@ header("Pragma: no-cache");
 
                     
                        <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/search_Form" class="<?php if($isselected == '13') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>BiseCorrection/search_Form" class="<?php if($isselected == '15') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
-                            9th Correction
+                            Correction
                         </a>
                     </li>
                     
@@ -252,6 +252,17 @@ header("Pragma: no-cache");
                             Restore Candidate  
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/otherBoardNOC">
+                             Other Board NOC 
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/regElegibility">
+                             Candidate Elegibility  
+                        </a>
+                    </li>
+                    
                   <!--  
                        <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form">
@@ -322,7 +333,7 @@ header("Pragma: no-cache");
                     if($isselected == '15') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>BiseCorrection/search_Form"  data-original-title="" class="<?php if($isselected == '15') {echo 'heading';}?>">9th Correction</a></li>
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/search_Form"  data-original-title="" class="<?php if($isselected == '15') {echo 'heading';}?>"> Correction</a></li>
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst">
                             9th Search By Inst. Code
@@ -331,6 +342,11 @@ header("Pragma: no-cache");
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/otherboard10th">
                             9th other Board
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst11thcr">
+                            11th Search By Inst. Code
                         </a>
                     </li>
                     <!-- <li>

@@ -21,83 +21,6 @@ class BiseCorrections_model extends CI_Model
             return  false;
         }
     }
-     public function EditEnrolementByinst11th($sch_cd)
-    {
-
-        //  DebugBreak();
-
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('coll_cd' => $sch_cd,'class'=>11,'iyear'=>2016,'sess'=>1, 'isdeleted'=>0));     
-        $rowcount = $query->num_rows();
-        if($rowcount > 0)
-        {
-            return $query->result_array();
-        }
-        else
-        {
-            return  false;
-        }
-    }
-      public function Update_NewEnorlement11th($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  IA_P1_Reg_Adm2016_sp_Update
-    {
-        //DebugBreak();
-        $name =strtoupper($data['name']) ;
-        $fname =strtoupper($data['Fname']);
-        $BForm = $data['BForm'];
-        $FNIC = $data['FNIC'];
-        $Dob = $data['Dob'];
-        $CellNo = $data['MobNo'];
-        $medium = $data['medium'];
-        $Inst_Rno = strtoupper($data['classRno']);
-        $MarkOfIden =strtoupper($data['markOfIden']);
-        $Speciality = $data['Speciality'];
-        $nat = $data['nat'];
-        $sex = $data['sex'];
-        $IsHafiz = $data['Ishafiz'];
-        $rel = $data['rel'];
-        $addr =strtoupper($data['addr']);
-        /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
-        {
-        $grp_cd = 1;    
-        }
-        else if($data['grp_cd'] == 2 )
-        {
-        $grp_cd = 2;        
-        }
-        else if($data['grp_cd'] == 5 )
-        {
-        $grp_cd = 5;        
-        }*/
-        $sub1= $data['sub1'];
-        $sub2 = $data['sub2'];
-        $sub3 = $data['sub3'];
-        $sub4 = $data['sub4'];
-        $sub5 = $data['sub5'];
-        $sub6 = $data['sub6'];
-        $sub7 = $data['sub7'];
-        $sub8 = $data['sub8'];
-        $sub1ap1 = $data['sub1ap1'];
-        $sub2ap1 = $data['sub2ap1'];
-        $sub3ap1 = $data['sub3ap1'];
-        $sub4ap1 = $data['sub4ap1'];
-        $sub5ap1 = $data['sub5ap1'];
-        $sub6ap1 = $data['sub6ap1'];
-        $sub7ap1 = $data['sub7ap1'];
-        $sub8ap1 = $data['sub8ap1'];
-        $UrbanRural = $data['ruralOrurban'];
-        $Inst_cd = $data['Inst_cd'];
-        $formno = $data['FormNo'];
-        $RegGrp = $data['RegGrp'];
-        $regoldrno = $data['regoldrno'];
-        $regoldsess = $data['regoldsess'];
-        $regoldclass = $data['regoldclass'];
-        $regoldyear = $data['regoldyear'];
-        $isreadm = $data['isreadm'];
-        $pic_base_64 = $data['Image'];
-       //  DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64'");
-        //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
-        return true;
-    }
     public function get9thObjectionStdData(){
 
         $table1= 'Registration..maP1blockrnobranch';
@@ -443,6 +366,23 @@ class BiseCorrections_model extends CI_Model
             return  false;
         }
     }
+      public function EditEnrolementByinst11th($sch_cd)
+    {
+
+        //  DebugBreak();
+
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('coll_cd' => $sch_cd,'class'=>11,'iyear'=>2016,'sess'=>1, 'isdeleted'=>0));     
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+     
       public function EditEnrolement_data11($formno)
     {
 
@@ -1055,6 +995,53 @@ $RegGrp = 0;
             return $this->db->affected_rows();
         }
     }
-    
+      public function get11thelegibility($isyes)
+    {
+       // DebugBreak();
+       $table1= 'Registration..tblElegibiltyReg11th';
+
+       $table2= 'Registration..IA_P1_Reg_Adm2016';
+       $this->db->select("$table1.matRno, $table1.yearOfPass,$table1.sessOfPass,$table1.formno,$table1.name,$table1.fname,$table1.InstName,$table1.type,$table1.pkId,$table2.coll_cd");
+       $this->db->from($table2);
+       //join LEFT by default
+       $this->db->join($table1, "$table1.formno=$table2.formno");
+       if($isyes ==  'Yes')
+       {
+           $this->db->where("$table1.active = 1 and $table1.type = 'Other Board NOC' and $table2.coll_cd NOT IN  (399902,399903) and $table2.IsDeleted = 1"); 
+       }
+      else
+      {
+         $this->db->where("$table1.active = 1 and $table1.type <> 'Other Board NOC' and $table2.coll_cd NOT IN  (399902,399903) and $table2.IsDeleted = 1");  
+      }
+       
+        $query = $this->db->get();
+        $rowcount = $this->db->count_all_results();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+    public function updateReg11Data($formno,$pkid,$kpo){
+
+        $data2 = array(
+            'IsDeleted'=>0,
+            'ckpo'=>$kpo,
+            'cdate'=>date('Y-m-d H:i:s'),
+        );
+        $this->db->where('formno',$formno);
+       $res= $this->db->update("Registration..IA_P1_Reg_Adm2016", $data2);
+        
+        $data2 = array(
+            'active'=>0,
+           
+        );
+        $this->db->where('pkid',$pkid);
+       $res= $this->db->update("Registration..tblElegibiltyReg11th", $data2);
+       return $res;
+    }
 }
 ?>
