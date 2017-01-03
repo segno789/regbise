@@ -28,6 +28,9 @@
                           <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>BiseCorrection/verifiedcorrection"><img src="<?php echo base_url();?>assets/img/lists.png"><br>Verified Correction</a>
                         </div>
+                         <div class="shortcutHome">
+                        <a href="<?php echo base_url(); ?>index.php/BiseCorrection/otherboard11th"><img src="<?php echo base_url();?>assets/img/reports.png"><br>11th Other Board Forms</a>
+                        </div> 
                        <!-- <div class="shortcutHome">
                             <a href="<?php echo base_url(); ?>Registration/FormPrinting"><img src="<?php echo base_url();?>assets/img/reports.png"><br>9th Migration </a>
                         </div>
