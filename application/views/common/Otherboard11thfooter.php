@@ -1100,7 +1100,7 @@ matric_sub1 = 0
         $("#sub6p2").empty();
         $("#sub7p2").empty();
         $("#sub7").empty().append('<option selected="selected" value="0">NONE</option>');
-        $("#sub7p2").empty().append('<option selected="selected" value="0">NONE</option>');
+        //$("#sub7p2").empty().append('<option selected="selected" value="0">NONE</option>');
 
           if(NationalityVal==2)
         {
