@@ -41,7 +41,7 @@ define('IMAGE_PATH_OTHER_BOARD_10TH', 'uploads/2016/other/');
 define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
 define('BARCODE_PATH', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE', '2016-09-30');
+define('SINGLE_LAST_DATE', '2017-01-30');
 define('DOUBLE_LAST_DATE', '2016-09-30');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
