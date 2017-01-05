@@ -910,11 +910,92 @@ class BiseCorrections_model extends CI_Model
         $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
 $IsHafiz = 0;
 $RegGrp = 0;
-
-        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
+           DebugBreak();
+        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
         return true;
     }
-     public function GetFormNo($inst_cd){
+    public function Insert_NewEnorlement_11th($data)
+    {    
+        
+        $name = strtoupper($data['name']);
+        $fname =strtoupper($data['Fname']);
+        $BForm = $data['BForm'];
+        $FNIC = $data['FNIC'];
+        $Dob = $data['Dob'];
+        $CellNo = $data['MobNo'];
+        $medium = $data['medium'];
+        $prevresult = strtoupper(@$data['prevResult']);
+        $MarkOfIden =strtoupper(@$data['markOfIden']);
+        $Speciality = $data['Speciality'];
+        $nat = $data['nat'];
+        $sex = $data['sex'];
+        $IsHafiz = $data['IsHafiz'];
+        $rel = $data['rel'];        
+        $addr =strtoupper($data['addr']) ;
+        $sub1= $data['sub1'];
+        $sub2 = $data['sub2'];
+        $sub3 = $data['sub3'];
+        $sub4 = $data['sub4'];
+        $sub5 = $data['sub5'];
+        $sub6 = $data['sub6'];
+        $sub7 = $data['sub7'];
+        $sub8 = $data['sub8'];
+       
+
+        $sub1ap1 = $data['sub1ap1'];
+        $sub2ap1 = $data['sub2ap1'];
+        $sub3ap1 = $data['sub3ap1'];
+        $sub4ap1 = $data['sub4ap1'];
+        $sub5ap1 = $data['sub5ap1'];
+        $sub6ap1 = $data['sub6ap1'];
+        $sub7ap1 = $data['sub7ap1'];
+        $sub8ap1 = $data['sub8ap1'];
+
+        $UrbanRural = $data['RuralORUrban'];
+        $Inst_cd = $data['Inst_cd_other'];
+        $formno = $data['FormNo'];
+        $RegGrp = $data['grp_cd'];
+        $grp_cd = $data['grp_cd'];
+        $sub1ap2 =  $data['sub1ap2'];
+        $sub2ap2 =  $data['sub2ap2'];
+        $sub3ap2 =  $data['sub3ap2'];
+        $sub4ap2 =  $data['sub4ap2'];
+        $sub5ap2 =  $data['sub5ap2'];
+        $sub6ap2 =  $data['sub6ap2'];
+        $sub7ap2 =  $data['sub7ap2'];
+        $sub8ap2 =  $data['sub8ap2'];
+                                  
+        $cat09 = $data['cat09'];     
+        $cat10 = $data['cat10'];     
+
+        //-------Marks Improve CAT --------\\
+        $dist_cd =  $data['dist'];
+        $teh_cd =  $data['teh'];
+        $zone_cd =  $data['zone'];
+        $oldrno =  $data['rno'];
+        $oldyear =  $data['Iyear'];
+        $oldsess =  $data['sess'];
+         $ckpo = $data['ckpo'];
+    
+          $exam_type = $data['exam_type'];
+        $Brd_cd =  @$data['Brd_cd'];
+
+  
+        //$old_class =  @$data['class'];
+
+        /*$AdmProcFee =  @$data['AdmProcessFee'];
+
+        $AdmFee = @$data['AdmFee'];
+
+        $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
+$IsHafiz = 0;
+$RegGrp = 0;
+          DebugBreak();
+        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
+        return true;
+    }
+     public function GetFormNo($inst_cd)
+     {
        // DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
@@ -927,6 +1008,33 @@ $RegGrp = 0;
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno =$this->db->get_where('matric_new..vw9th16',array('Sch_cd'=>$inst_cd)); //tblAdmissionDataForSSC_otherBoard
+        $rowcount = $formno->num_rows();
+            $row  = $formno->result_array();
+            $formno = $row[0]['formno']+1; //formnovalid+1;
+            return $formno;
+        }
+        else
+        {
+            $row  = $formno->result_array();
+            $formno = $row[0]['formno']+1;
+            return $formno;
+        }
+
+    }
+     public function GetFormNo_11th($inst_cd)
+     {
+       // DebugBreak();
+        $this->db->select('formno');
+        $this->db->order_by("formno", "DESC");
+        $formno =$this->db->get_where('Admission_online..tblAdmissionDataForHSSC_otherBoard',array('coll_cd'=>$inst_cd)); //
+        $rowcount = $formno->num_rows();
+
+        if($rowcount == 0 )
+        {
+        
+        $this->db->select('formno');
+        $this->db->order_by("formno", "DESC");
+        $formno =$this->db->get_where('matric_new..vwia1p16',array('coll_cd'=>$inst_cd)); //tblAdmissionDataForSSC_otherBoard
         $rowcount = $formno->num_rows();
             $row  = $formno->result_array();
             $formno = $row[0]['formno']+1; //formnovalid+1;

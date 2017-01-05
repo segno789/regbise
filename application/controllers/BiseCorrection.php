@@ -3863,6 +3863,30 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/Otherboard10thfooter.php');
     }
     
+      public function otherboard11th()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+         if(!( $this->session->flashdata('NewEnrolment_error'))){
+
+            $error_msg = '';  
+        }
+        else{
+            $error_msg = $this->session->flashdata('NewEnrolment_error');
+        }
+        
+        
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/Inter/OtherBoard11th.php',$error_msg);
+        $this->load->view('common/Otherboard11thfooter.php');
+    }
     public function NewEnrolment_insert_OtherBoard10th(){
 
 
@@ -4308,6 +4332,377 @@ class BiseCorrection extends CI_Controller {
             $allinputdata['excep'] = 'An error has occoured. Please try again later. ';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect('BiseCorrection/otherboard10th');
+            return;
+            echo 'Data NOT Saved Successfully !';
+        } 
+        $this->load->view('common/footer.php');
+    }
+     public function NewEnrolment_insert_OtherBoard11th(){
+
+
+        //DebugBreak();
+        $this->load->model('BiseCorrections_model');
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $userinfo['isselected'] = 13;
+        $Inst_Id_other = @$_POST['inst_cd_other'];
+        $ckpo = $userinfo['Inst_Id'];
+        $this->commonheader($userinfo);
+        $error = array();
+
+        $formno = $this->BiseCorrections_model->GetFormNo_11th($Inst_Id_other);
+        $inst_info = $this->BiseCorrections_model->GetInstbyId($Inst_Id_other);
+        $dob = @$_POST['dob'];
+
+        $allinputdata = array('cand_name'=>@$_POST['cand_name'],
+            'father_name'=>@$_POST['father_name'],
+            'bay_form'=>@$_POST['bay_form'],
+            'father_cnic'=>@$_POST['father_cnic'],
+            'Dob'=>@$_POST['dob'],
+            'mob_number'=>@$_POST['mob_number'],
+            'medium'=>@$_POST['medium'],
+            'speciality'=>@$_POST['speciality'],
+            'MarkOfIden'=>@$_POST['MarkOfIden'],
+            'medium'=>@$_POST['medium'],
+            'nationality'=>@$_POST['nationality'],
+            'gender'=>@$_POST['gend'],
+            'hafiz'=>@$_POST['hafiz'],
+            'religion'=>@$_POST['religion'],
+            'std_group'=>@$_POST['std_group'],
+            'address'=>@$_POST['address'],
+            'UrbanRural'=>@$_POST['UrbanRural'],
+            'dist'=>@$_POST['pvtinfo_dist'],
+            'teh'=>@$_POST['pvtinfo_teh'],
+            'zone'=>@$_POST['pvtZone'],
+            'oldrno'=>@$_POST['oldrno'],
+            'oldsess'=>@$_POST['oldsess'],
+            'oldyear'=>@$_POST['oldyear'],
+            'oldboard'=>@$_POST['oldboard'],
+            'oldClass'=>@$_POST['oldClass'],
+            'cattype' => @$_POST['category'],
+            'sub1'=>@$_POST['sub1'],
+            'sub2'=>@$_POST['sub2'],
+            'sub3'=>@$_POST['sub3'],
+            'sub4'=>@$_POST['sub4'],
+            'sub5'=>@$_POST['sub5'],
+            'sub6'=>@$_POST['sub6'],
+            'sub7'=>@$_POST['sub7'],
+            'sub8'=>@$_POST['sub8'],
+            'sub1p2'=>@$_POST['sub1p2'],
+            'sub2p2'=>@$_POST['sub2p2'],
+            'sub3p2'=>@$_POST['sub3p2'],
+            'sub4p2'=>@$_POST['sub4p2'],
+            'sub5p2'=>@$_POST['sub5p2'],
+            'sub6p2'=>@$_POST['sub6p2'],
+            'sub7p2'=>@$_POST['sub7p2'],
+           // 'sub8p2'=>@$_POST['sub8p2'],
+        );
+
+       
+        $sub1 = 0;
+        $sub2 = 0;
+        $sub3 = 0;
+        $sub4 = 0;
+        $sub5 = 0;
+        $sub6 = 0;
+        $sub7 = 0;
+        $sub8 = 0;
+        $sub1ap1 = 0;
+        $sub2ap1 = 0;
+        $sub3ap1 = 0;
+        $sub4ap1 = 0;
+        $sub5ap1 = 0;
+        $sub6ap1 = 0;
+        $sub7ap1 = 0;
+        $sub8ap1 = 0;
+        $sub1ap2 = 0;
+        $sub2ap2 = 0;
+        $sub3ap2 = 0;
+        $sub4ap2 = 0;
+        $sub5ap2 = 0;
+        $sub6ap2 = 0;
+        $sub7ap2 = 0;
+       // $sub8ap2 = 0;
+
+        $is11th = 0;
+        if(@$_POST['sub1'] != 0)
+        {
+            $sub1ap1 = 1; 
+            $sub1 =  $_POST['sub1'];   
+            $is11th = 1;
+        }
+        if(@$_POST['sub2'] != 0)
+        {
+            $sub2ap1 = 1;    
+            $sub2 =  $_POST['sub2'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub3'] != 0)
+        {
+            $sub3ap1 = 1;   
+            $sub3 =  $_POST['sub3'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub4'] != 0)
+        {
+            $sub4ap1 = 1;    
+            $sub4 =  $_POST['sub4'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub5'] != 0)
+        {
+            $sub5ap1 = 1;    
+            $sub5 =  $_POST['sub5'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub6'] != 0)
+        {
+            $sub6ap1 = 1;    
+            $sub6 =  $_POST['sub6'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub7'] != 0)
+        {
+            $sub7ap1 = 1;    
+            $sub7 =  $_POST['sub7'];
+            $is11th = 1;
+        }
+        if(@$_POST['sub3p2'] != 0)
+        {
+            $sub8ap1 = 1;    
+            $sub8 =  $_POST['sub3p2'];
+            //$is11th = 1;
+        }
+
+        if(@$_POST['sub1p2'] != 0)
+        {
+            $sub1ap2 = 1; 
+            $sub1 =  $_POST['sub1p2'];  
+        }
+        if(@$_POST['sub2p2'] != 0)
+        {
+            $sub2ap2 = 1; 
+            $sub2 =  $_POST['sub2p2'];    
+        }
+       
+        if(@$_POST['sub4p2'] != 0)
+        {
+            $sub4ap2 = 1; 
+            $sub4 =  $_POST['sub4p2'];     
+        }
+        if(@$_POST['sub5p2'] != 0)
+        {
+            $sub5ap2 = 1;    
+            $sub5 =  $_POST['sub5p2'];  
+        }
+        if(@$_POST['sub6p2'] != 0)
+        {
+            $sub6ap2 = 1;    
+            $sub6 =  $_POST['sub6p2'];  
+        }
+        if(@$_POST['sub7p2'] != 0)
+        {
+            $sub7ap2 = 1;    
+            $sub7 =  $_POST['sub7p2'];  
+        }
+       /* if(@$_POST['sub8p2'] != 0)
+        {
+            $sub8ap2 = 1;    
+            $sub8 =  $_POST['sub8p2'];  
+        }   */
+
+        //  DebugBreak();
+        $cattype = @$_POST['category'];
+        $examtype = "";
+        $marksImp = @$_POST['ddlMarksImproveoptions'];
+
+      //  DebugBreak();
+
+      if($is11th == 1)
+      {
+          $examtype = 3;
+          $cat09 = 2;
+          $cat10 = 1;
+      }
+      else
+      {
+          $examtype = 1;
+          $cat09 = 0;
+          $cat10 = 1;
+      }
+
+        $Speciality = $this->input->post('speciality');
+        $grp_cd = $this->input->post('std_group');
+        $per_grp = $this->input->post('pergrp');
+        
+        $oldsess = @$_POST['oldsess'];
+        if($oldsess == 'Annual'){
+            $oldsess =  1;    
+        }
+        else if($oldsess == 'Supplementary'){
+            $oldsess =  2;    
+        }
+        
+       $addre =  str_replace("'", "", $this->input->post('address'));
+     
+        
+        
+        //  DebugBreak();
+         $target_path = IMAGE_PATH_OTHER_BOARD_11TH.$Inst_Id_other.'/';
+        if (!file_exists($target_path)){
+
+        mkdir($target_path);
+        }
+
+       // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
+      $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        //$copyimg = $target_path.$formno.'.jpg';
+       
+       
+      $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg|jpeg';
+        $config['max_size']      = '20';
+        $config['min_size']      = '4';
+        //  $config['max_width']     = '260';
+        // $config['max_height']    = '290';
+        $config['min_width']     = '110';
+        $config['min_height']    = '100';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
+
+        $filepath = $target_path.'/'. $config['file_name']  ;
+
+        //$config['new_image']    = $formno.'.JPEG';
+
+        $this->load->library('upload', $config);
+        // DebugBreak();
+        $check = getimagesize($_FILES["pic"]["tmp_name"]);
+        $this->upload->initialize($config);
+
+      /*  if($check !== false) {
+
+            $file_size = round($_FILES['pic']['size']/1024, 2);
+            if($file_size<=20 && $file_size>=4)
+            {
+                if ( !$this->upload->do_upload('pic',true))
+                {
+                    if($this->upload->error_msg[0] != "")
+                    {
+                        $error['excep']= $this->upload->error_msg[0];
+                        $data['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$data);
+                        //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                        redirect('BiseCorrection/otherboard11th/');
+                        return;
+
+                    }
+
+
+                }
+            }
+            else
+            {
+                $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+                redirect('BiseCorrection/otherboard11th/');
+
+            }
+        }
+        else
+        {
+            // $check = getimagesize($filepath);
+            if($check === false)
+            {
+                $data['excep'] = 'Please Upload Your Picture';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/otherboard11th/');
+                return;
+            }
+        }  */
+        
+          $data = array(
+            'name' =>$this->input->post('cand_name'),
+            'Fname' =>$this->input->post('father_name'),
+            'BForm' =>$this->input->post('bay_form'),
+            'FNIC' =>$this->input->post('father_cnic'),
+            'Dob' =>$this->input->post('dob'),
+            'MobNo' =>$this->input->post('mob_number'),
+            'medium' =>$this->input->post('medium'),
+            'Inst_cd_other' =>$this->input->post('inst_cd_other'),
+            'markOfIden' =>$this->input->post('MarkOfIden'),
+            'Speciality' => ($Speciality),
+            'nat' =>$this->input->post('nationality'),
+            'sex' =>$this->input->post('gender'),
+            'IsHafiz' =>$this->input->post('hafiz'),
+            'rel' =>$this->input->post('religion'),
+            'addr' =>$addre,
+            'grp_cd' => $grp_cd,
+            'sub1' =>$sub1,
+            'sub2' =>$sub2,
+            'sub3' =>$sub3,
+            'sub4' =>$sub4,
+            'sub5' =>$sub5,
+            'sub6' =>$sub6,
+            'sub7' => $sub7,
+            'sub8' => $sub8,
+            'sub1ap1' => ($sub1ap1),
+            'sub2ap1' => ($sub2ap1),
+            'sub3ap1' => ($sub3ap1),
+            'sub4ap1' => ($sub4ap1),
+            'sub5ap1' => ($sub5ap1),
+            'sub6ap1' => ($sub6ap1),
+            'sub7ap1' => ($sub7ap1),
+            'sub8ap1' => ($sub8ap1),
+            'sub1ap2' => ($sub1ap2),
+            'sub2ap2' => ($sub2ap2),
+           // 'sub3ap2' => ($sub3ap2),
+            'sub4ap2' => ($sub4ap2),
+            'sub5ap2' => ($sub5ap2),
+            'sub6ap2' => ($sub6ap2),
+            'sub7ap2' => ($sub7ap2),
+            //'sub8ap2' => ($sub8ap2),
+            'RuralORUrban' =>$this->input->post('UrbanRural'),
+            'prevResult' =>$this->input->post('prevResult'),
+            'FormNo' =>($formno),
+            'cat09' =>$cat09,
+            'cat10' =>$cat10,
+            'dist'=>$inst_info[0]->dist_cd,
+            'teh'=>$inst_info[0]->teh_cd,
+            'zone'=>$inst_info[0]->zone_cd,
+            'Reggrp'=>"1",
+            'rno'=>@$_POST['oldrno'],
+            'sess'=>$oldsess,
+            'Iyear'=>@$_POST['oldyear'],
+            'Brd_cd'=>@$_POST['oldboard'],
+            'schm'=>1,
+            'exam_type'=>$examtype,
+            'spl_cd'=>@$data[0]['spl_cd'],
+            'picpath'=>$filepath,
+            'ckpo'=>@$ckpo
+           
+
+        ); 
+        
+        
+        $this->frmvalidation('BiseCorrection/otherboard11th',$data,0);       
+        //DebugBreak();*/
+        $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement_11th($data);
+        if($logedIn != false)
+        {
+            $allinputdata = "";
+            $allinputdata['excep'] = 'success';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            $msg = $formno;                                           
+            redirect('BiseCorrection/otherboard10th');
+        }
+        else
+        {     
+            $allinputdata = "";
+            $allinputdata['excep'] = 'An error has occoured. Please try again later. ';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect('BiseCorrection/otherboard11th');
             return;
             echo 'Data NOT Saved Successfully !';
         } 
