@@ -730,27 +730,31 @@ matric_sub1 = 0
         }
        // $("#sub1").append(new Option('Urdu',2));
        $("#sub1p2").append(new Option('Urdu',2));    
-        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub1 option[value='0']").attr("selected","selected");
         $("#sub1").append(new Option('NONE',0));  
         $("#sub2").append(new Option('English',1));
-        $("#sub2 option[value='1']").attr("selected","selected");
+        
         $("#sub2").append(new Option('NONE',0));  
+        $("#sub2 option[value='0']").attr("selected","selected");
         $("#sub2p2").append(new Option('English',1));
         $("#sub3").append(new Option('Islamic Education',92));
-        $("#sub3 option[value='92']").attr("selected","selected");
+       
         $("#sub3").append(new Option('NONE',0));  
+         $("#sub3 option[value='0']").attr("selected","selected");
          $("#sub3p2").append(new Option('PAKISTAN STUDIES',91));
         $("#sub4").append(new Option('Physics',47));
         $("#sub4p2").append(new Option('Physics',47));
-        $("#sub4 option[value='47']").attr("selected","selected");
+       
         $("#sub4").append(new Option('NONE',0));  
+         $("#sub4 option[value='0']").attr("selected","selected");
         $("#sub5").append(new Option('Chemistry',48));
         $("#sub5p2").append(new Option('Chemistry',48));
-        $("#sub5 option[value='48']").attr("selected","selected");
+       
         $("#sub5").append(new Option('NONE',0));  
+         $("#sub5 option[value='0']").attr("selected","selected");
         $("#sub6").append(new Option('Mathematics',19));
         $("#sub6p2").append(new Option('Mathematics',19));
-        $("#sub6 option[value='19']").attr("selected","selected");
+        $("#sub6 option[value='0']").attr("selected","selected");
         $("#sub6").append(new Option('NONE',0));  
     }
     function load_GenSci()
@@ -783,36 +787,42 @@ matric_sub1 = 0
         else{
             $("#sub1").prepend("<option  value='2'> URDU </option>");
         }
+          $("#sub1").append(new Option('NONE',0));  
        // $("#sub1").append(new Option('Urdu',2));
         $("#sub1p2").append(new Option('Urdu',2)); 
-        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub1 option[value='0']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
         $("#sub2p2").append(new Option('English',1));
-        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub2 option[value='0']").attr("selected","selected");
+        $("#sub2").append(new Option('NONE',0));  
         $("#sub3").append(new Option('Islamic Education',92));
          $("#sub3p2").append(new Option('PAKISTAN STUDIES',91));
-        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub3 option[value='0']").attr("selected","selected");
+        $("#sub3").append(new Option('NONE',0));  
         $("#sub4").append(new Option('Mathematics',19));
         $("#sub4p2").append(new Option('Mathematics',19));
-        $("#sub4 option[value='19']").attr("selected","selected");
+        $("#sub4 option[value='0']").attr("selected","selected");
+        $("#sub4").append(new Option('NONE',0));  
         
 
         $("#sub5").append(new Option('Physics',47));
         $("#sub5").append(new Option('Economics',11));
         $("#sub5").append(new Option('Statistics',18));
+        $("#sub5").append(new Option('NONE',0));  
         $("#sub5p2").append(new Option('Physics',47));
         $("#sub5p2").append(new Option('Economics',11));
         $("#sub5p2").append(new Option('Statistics',18));
-        $("#sub5 option[value='47']").attr("selected","selected");
+        $("#sub5 option[value='0']").attr("selected","selected");
         $("#sub5p2 option[value='47']").attr("selected","selected");
 
         $("#sub6").append(new Option('Computer Science',83));
         $("#sub6").append(new Option('Economics',11));
         $("#sub6").append(new Option('Statistics',18));
+        $("#sub6").append(new Option('NONE',0));  
         $("#sub6p2").append(new Option('Computer Science',83));
         $("#sub6p2").append(new Option('Economics',11));
         $("#sub6p2").append(new Option('Statistics',18));
-        $("#sub6 option[value='83']").attr("selected","selected");
+        $("#sub6 option[value='0']").attr("selected","selected");
         $("#sub6p2 option[value='83']").attr("selected","selected");
         $("#sub4 option[value='<?php echo @$data[0]['sub4']   ?>']").attr("selected","selected"); 
          $("#sub5 option[value='<?php echo @$data[0]['sub5']   ?>']").attr("selected","selected"); 
@@ -1055,32 +1065,40 @@ matric_sub1 = 0
             $("#sub1").prepend("<option  value='2'> URDU </option>");
         }
         //$("#sub1").append(new Option('Urdu',2));
+        $("#sub1").append(new Option('NONE',0));  
         $("#sub1p2").append(new Option('Urdu',2)); 
-        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub1 option[value='0']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
+        $("#sub2").append(new Option('NONE',0));  
         $("#sub2p2").append(new Option('English',1));
-        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub2 option[value='0']").attr("selected","selected");
         $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3").append(new Option('NONE',0));  
          $("#sub3p2").append(new Option('PAKISTAN STUDIES',91));
-        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub3 option[value='0']").attr("selected","selected");
 
 
         $("#sub4").append(new Option('Principles Of Accounting',70));
+        $("#sub4").append(new Option('NONE',0));  
         $("#sub4p2").append(new Option('Principles Of Accounting',70));
-        $("#sub4 option[value='70']").attr("selected","selected");
+        $("#sub4 option[value='0']").attr("selected","selected");
 
         $("#sub5").append(new Option('Principles Of Economics',71));
         $("#sub5p2").append(new Option('Principles Of Economics',71));
-        $("#sub5 option[value='71']").attr("selected","selected");
+        $("#sub5").append(new Option('NONE',0));  
+        $("#sub5 option[value='0']").attr("selected","selected");
 
         $("#sub6").append(new Option('Business Math',80));
+        $("#sub6").append(new Option('NONE',0));  
         $("#sub6p2").append(new Option('Business Math',80));
-        $("#sub6 option[value='80']").attr("selected","selected");
+        $("#sub6 option[value='0']").attr("selected","selected");
 
         $("#sub7").show();
         $("#sub7").append(new Option('Principles Of Commerce',39));
         $("#sub7p2").append(new Option('Principles Of Commerce',39));
-        $("#sub7 option[value='39']").attr("selected","selected");
+        
+        $("#sub7").append(new Option('NONE',0));  
+        $("#sub7 option[value='0']").attr("selected","selected");
     }
 
     function load_HomeEco()
@@ -1112,32 +1130,40 @@ matric_sub1 = 0
             $("#sub1").prepend("<option  value='2'> URDU </option>");
         }
          $("#sub1p2").append(new Option('Urdu',2)); 
+         $("#sub1").append(new Option('NONE',0));  
        // $("#sub1").append(new Option('Urdu',2));
-        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub1 option[value='0']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
+        $("#sub2").append(new Option('NONE',0));  
         $("#sub2p2").append(new Option('English',1));
-        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub2 option[value='0']").attr("selected","selected");
         $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3").append(new Option('NONE',0));  
           $("#sub3p2").append(new Option('PAKISTAN STUDIES',91));
-        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub3 option[value='0']").attr("selected","selected");
 
 
         $("#sub4").append(new Option('CHEMISTRY (Home-Economics Group)',73));
+        $("#sub4").append(new Option('NONE',0));  
         $("#sub4p2").append(new Option('CHEMISTRY (Home-Economics Group)',73));
-        $("#sub4 option[value='48']").attr("selected","selected");
+        $("#sub4 option[value='0']").attr("selected","selected");
 
         $("#sub5").append(new Option('BIOLOGY (Home-Economics Group)',72));
+        $("#sub5").append(new Option('NONE',0));  
         $("#sub5p2").append(new Option('BIOLOGY (Home-Economics Group)',72));
         $("#sub5 option[value='46']").attr("selected","selected");
 
         $("#sub6").append(new Option('Clothing and Textile',75));
+        $("#sub6").append(new Option('NONE',0));  
         $("#sub6p2").append(new Option('Clothing and Textile',75));
-        $("#sub6 option[value='75']").attr("selected","selected");
+        $("#sub6 option[value='0']").attr("selected","selected");
 
         $("#sub7").show();
         $("#sub7").append(new Option('Home Management',76));
         $("#sub7p2").append(new Option('Home Management',76));
-        $("#sub7 option[value='76']").attr("selected","selected");
+      
+        $("#sub7").append(new Option('NONE',0));  
+        $("#sub7 option[value='0']").attr("selected","selected");
     }
 
     function load_Hum(){
@@ -1169,28 +1195,35 @@ matric_sub1 = 0
             $("#sub1").prepend("<option  value='2'> URDU </option>");
         }
        // $("#sub1").append(new Option('Urdu',2));
+       $("#sub1").append(new Option('NONE',0));  
         $("#sub1p2").append(new Option('Urdu',2)); 
-        $("#sub1 option[value='2']").attr("selected","selected");
+        $("#sub1 option[value='0']").attr("selected","selected");
         $("#sub2").append(new Option('English',1));
+        $("#sub2").append(new Option('NONE',0));  
         $("#sub2p2").append(new Option('English',1));
-        $("#sub2 option[value='1']").attr("selected","selected");
+        $("#sub2 option[value='0']").attr("selected","selected");
         $("#sub3").append(new Option('Islamic Education',92));
+        $("#sub3").append(new Option('NONE',0));  
           $("#sub3p2").append(new Option('PAKISTAN STUDIES',91));
-        $("#sub3 option[value='92']").attr("selected","selected");
+        $("#sub3 option[value='0']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
             $('#sub4').append( new Option(text,val) );
             $('#sub4p2').append( new Option(text,val) );
         });
-        
+        $("#sub4").append(new Option('NONE',0));  
+        $("#sub4 option[value='0']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
             $('#sub5').append( new Option(text,val) );
             $('#sub5p2').append( new Option(text,val) );
         }); 
-         
+         $("#sub5").append(new Option('NONE',0));  
+         $("#sub5 option[value='0']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
             $('#sub6p2').append( new Option(text,val) );
         }); 
+        $("#sub6").append(new Option('NONE',0));  
+        $("#sub6 option[value='0']").attr("selected","selected");
          $("#sub4 option[value='<?php echo @$data[0]['sub4']   ?>']").attr("selected","selected"); 
          $("#sub5 option[value='<?php echo @$data[0]['sub5']   ?>']").attr("selected","selected"); 
          $("#sub6 option[value='<?php echo @$data[0]['sub6']   ?>']").attr("selected","selected"); 

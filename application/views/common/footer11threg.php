@@ -292,7 +292,7 @@ if(isset($files)){
     }
     var sub3_Non_Muslim = 
     {
-        51 : 'ETHICS',
+        93 : 'CIVICS FOR NON MUSLIM',
         92  :'Islamic Education'
     }
     var sub5_Hum = 
