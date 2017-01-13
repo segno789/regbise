@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="title">
-                            Inter Admission Form
+                            Inter Admission Form  <h4 class="guidlines blink_text"><?php echo 'Form No:   '.@$formno . '  ';?></h4>
                         </div>
                     </div>
                     <div class="widget-body">

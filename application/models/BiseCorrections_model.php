@@ -399,15 +399,25 @@ class BiseCorrections_model extends CI_Model
             return  false;
         }
     }
-      public function GetInstbyId($isnt){
+      public function GetInstbyId($isnt)
+      {
         $this->db->select('Name,allowed_mGrp,allowed_iGrp,edu_lvl,Inst_cd,IsGovernment,zone_cd,dist_cd,teh_cd');
         $this->db->from('Admission_Online..tblInstitutes_all');
         $where = '(edu_lvl=1 or edu_lvl = 3 OR  edu_lvl =  2)';
         $this->db->where('IsActive', 1);
         $this->db->where('inst_cd', $isnt);
         $this->db->where($where);
-
-
+        $result_1 = $this->db->get()->result();
+        return $result_1;
+    }
+    public function GetInstbyId_11th_otherboard($isnt)
+      {
+        $this->db->select('Name,allowed_mGrp,allowed_iGrp,edu_lvl,Inst_cd,IsGovernment,zone_cd,dist_cd,teh_cd');
+        $this->db->from('Admission_Online..tblInstitutes_all');
+        $where = '(edu_lvl=1 or edu_lvl = 3 OR  edu_lvl =  2)';
+        //$this->db->where('IsActive', 1);
+        $this->db->where('inst_cd', $isnt);
+        $this->db->where($where);
         $result_1 = $this->db->get()->result();
         return $result_1;
     }
@@ -990,7 +1000,7 @@ $RegGrp = 0;
         $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
 $IsHafiz = 0;
 $RegGrp = 0;
-          DebugBreak();
+          //DebugBreak();
         $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
         return true;
     }

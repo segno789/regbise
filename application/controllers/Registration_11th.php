@@ -742,7 +742,7 @@ class Registration_11th extends CI_Controller {
     }
     public function NewEnrolment_insert()
     {
-        
+            DebugBreak();
         $this->load->model('Registration_11th_model');
        
         $this->load->library('session');
@@ -753,7 +753,7 @@ class Registration_11th extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-      //  DebugBreak();
+       
         if (!isset($Inst_Id))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -3829,7 +3829,7 @@ class Registration_11th extends CI_Controller {
     }
      function frmvalidation($viewName,$allinputdata,$isupdate)
     {
-       // DebugBreak();
+        DebugBreak();
          $_POST['address']  = str_replace("'", "", $_POST['address'] );
           $subjectslang = array('22','23','36','34','35');
           $subjectshis = array('20','21','19');
