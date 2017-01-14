@@ -4341,7 +4341,7 @@ class BiseCorrection extends CI_Controller {
        {
 
 
-        DebugBreak();
+       // DebugBreak();
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -4874,7 +4874,7 @@ public function regElegibility()
     
      public function Correction9thReport()
     {
-      //  DebugBreak();
+       // DebugBreak();
       $this->load->model('BiseCorrections_model');
       $info =    $this->BiseCorrections_model->getcorrection9th();
       $this->load->library('pdf_rotate');
@@ -4911,6 +4911,7 @@ public function regElegibility()
            $pdf->MultiCell(8,0.2, "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'],0,'L'); 
           //$pdf->Cell(0, 0.2,  , 0.25, "C"); 
           $instwise =  $this->BiseCorrections_model->getcorrection9thbyinst($info[$i]['inst_cd']);
+                
           for($j = 0 ; $j <count($instwise); $j++)
           {
               if($j == 0)
@@ -4927,16 +4928,50 @@ public function regElegibility()
                   $pdf->SetXY(2.99,$Y);
                   $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
                   $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,'New Value',1,0,'L',1);
+                  $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
+                  $pdf->SetXY(7.6,$Y);
+                  $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
               }
-              $cellheight = .6;
-              $pdf->SetFont('Arial','',10);
+              //$cellheight = .3;
+              $pdf->SetFont('Arial','',8);
+              $corrtype = $this->correctiontype($instwise[$j]['columnName']);
               if($falg == 0)
               {
                   if($j ==  0)
-                      $Y += .2;
+                  {
+                      if ($corrtype == 'Picture Correction')
+                      {
+                          $cellheight =  .6;
+                          $Y += .2; 
+                      }
+                      else
+                      {
+                          $cellheight = .3;
+                          $Y += .2; 
+                      }
+                  }
+                  else if ($corrtype == 'Picture Correction')
+                  {
+                      $cellheight =  .6;
+                    //  $Y += .6;
+                  }
                   else
-                      $Y += .6;
+                  {
+                      if($cellheight ==  .6 )
+                      {
+                          if ($corrtype != 'Picture Correction')
+                          {
+                              $cellheight =  .3;
+                          }
+                          $Y += .6;   
+                      }
+                      else
+                      {
+                          $cellheight =  .3;
+                          $Y += .3;   
+                      }
+                     
+                  }
               }              
               else
               {
@@ -4946,9 +4981,6 @@ public function regElegibility()
               }
               $pdf->SetXY(.2,$Y);
               $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
-
-              $corrtype = $this->correctiontype($instwise[$j]['columnName']);
-              
               if($corrtype == 'Subject Change')
               {
                   $perval = $this->GetSubNameHere($instwise[$j]['PreviousValue']);
@@ -4965,7 +4997,6 @@ public function regElegibility()
                   $perval =  $date->format('d-m-Y'); 
                   $date = new DateTime($instwise[$j]['NewValue']);
                   $newval =  $date->format('d-m-Y'); 
-                  
               }
               else 
               {
@@ -4977,14 +5008,13 @@ public function regElegibility()
 
               $pdf->SetXY(1.63,$Y);
               $pdf->Cell(1.5,$cellheight,$corrtype,1,0,'L',1);
-
               if($corrtype != 'Picture Correction')
               {
                   $pdf->SetXY(2.99,$Y);
                   $pdf->Cell(2.8,$cellheight,$perval,1,0,'L',1);
 
                   $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,$newval,1,0,'L',1);  
+                  $pdf->Cell(2.2,$cellheight,$newval,1,0,'L',1);  
               }
             else
             {
@@ -4992,16 +5022,17 @@ public function regElegibility()
                   $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);
 
                   $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);  
+                  $pdf->Cell(2.2,$cellheight,'',1,0,'L',1);  
 
-               //   $cdate = date('d-m-Y',strtotime($instwise[$j]['cdate']));
-               $date = new DateTime($instwise[$j]['cdate']);
-               $cdate =  $date->format('d-m-Y'); 
-                  $pdf->Image(DIRPATHMIG.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'_'.$cdate.'.jpg',3.2, $Y, 0.65, 0.58, "jpg"); 
+                  //   $cdate = date('d-m-Y',strtotime($instwise[$j]['cdate']));
+                  $date = new DateTime($instwise[$j]['cdate']);
+                  $cdate =  $date->format('d-m-Y'); 
+                 $pdf->Image(DIRPATHMIG.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'_'.$cdate.'.jpg',3.2, $Y, 0.65, 0.58, "jpg"); 
                   $pdf->Image(DIRPATHCOR.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'.jpg',5.8, $Y, 0.65, 0.58, "jpg"); 
             }
-                
-              if($j%16 == 0 && $j != 0 && count($instwise) >17)
+                 $pdf->SetXY(7.6,$Y);
+                  $pdf->Cell(.55,$cellheight,$instwise[$j]['bindno'],1,0,'L',1);
+              if($j%32 == 0 && $j != 0 && count($instwise) >31)
               {
                   $falg = 1;
                   $pdf->AddPage();
@@ -5017,12 +5048,15 @@ public function regElegibility()
                   $pdf->SetXY(2.99,$Y);
                   $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
                   $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,'New Value',1,0,'L',1);
+                  $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
+                    $pdf->SetXY(7.6,$Y);
+                  $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
               }
-             // break;
+           //  break;
           }
-         // break;
-          //  
+         
+         // break; 
+         if($i<count($info)-1)
           $pdf->AddPage();
       }
 

@@ -1179,6 +1179,7 @@ $RegGrp = 0;
          
        $this->db->select('Registration..temp9thcor.inst_cd, admission_online..tblInstitutes_all.name');    
        $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
+        $this->db->where('Registration..temp9thcor.inst_cd', '161149');    
        $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
        $this->db->order_by('Registration..temp9thcor.inst_cd', 'ASC');    
        $query = $this->db->get('Registration..temp9thcor');
@@ -1201,10 +1202,10 @@ $RegGrp = 0;
       public function getcorrection9thbyinst($inst_cd)
      {
          
-       $this->db->select('Registration..temp9thcor.formno, Registration..temp9thcor.columnName,Registration..temp9thcor.PreviousValue,Registration..temp9thcor.NewValue,Registration..temp9thcor.cdate');    
+       $this->db->select('Registration..temp9thcor.formno, Registration..temp9thcor.columnName,Registration..temp9thcor.PreviousValue,Registration..temp9thcor.NewValue,Registration..temp9thcor.cdate,Registration..temp9thcor.bindno');    
       // $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
       // $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
-       $this->db->where('Registration..temp9thcor.inst_cd', $inst_cd);    
+       $this->db->where('Registration..temp9thcor.inst_cd', '161149');    
        $this->db->order_by('Registration..temp9thcor.formno', 'ASC');    
        $query = $this->db->get('Registration..temp9thcor');
 
