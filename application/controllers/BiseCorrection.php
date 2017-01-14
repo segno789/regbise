@@ -4352,7 +4352,7 @@ class BiseCorrection extends CI_Controller {
         $error = array();
 
         $formno = $this->BiseCorrections_model->GetFormNo_11th($Inst_Id_other);
-        $inst_info = $this->BiseCorrections_model->GetInstbyId($Inst_Id_other);
+        $inst_info = $this->BiseCorrections_model->GetInstbyId_11th_otherboard($Inst_Id_other);
         $dob = @$_POST['dob'];
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
@@ -4693,9 +4693,10 @@ class BiseCorrection extends CI_Controller {
         {
             $allinputdata = "";
             $allinputdata['excep'] = 'success';
+            $allinputdata['formno']=$formno;
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             $msg = $formno;                                           
-            redirect('BiseCorrection/otherboard10th');
+            redirect('BiseCorrection/otherboard11th');
         }
         else
         {     
