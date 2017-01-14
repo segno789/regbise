@@ -4589,10 +4589,10 @@ class BiseCorrection extends CI_Controller {
                 if ( !$this->upload->do_upload('pic',true))
                 {
                     if($this->upload->error_msg[0] != "")
-                    {
-                        $error['excep']= $this->upload->error_msg[0];
-                        $data['excep'] = $this->upload->error_msg[0];
-                        $this->session->set_flashdata('NewEnrolment_error',$data);
+                    {        $allinputdata = "";
+                        $allinputdata['excep']= $this->upload->error_msg[0];
+                        $allinputdata['excep'] = $this->upload->error_msg[0];
+                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                         //  echo '<pre>'; print_r($allinputdata['excep']);exit();
                         redirect('BiseCorrection/otherboard11th/');
                         return;
@@ -4604,8 +4604,12 @@ class BiseCorrection extends CI_Controller {
             }
             else
             {
-                $data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
+                //$data['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                $allinputdata = "";
+                $allinputdata['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                $allinputdata['formno'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                
                 //  echo '<pre>'; print_r($allinputdata['excep']);exit();
                 redirect('BiseCorrection/otherboard11th/');
 
@@ -4615,9 +4619,11 @@ class BiseCorrection extends CI_Controller {
         {
             // $check = getimagesize($filepath);
             if($check === false)
-            {
-                $data['excep'] = 'Please Upload Your Picture';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
+            {   
+                $allinputdata = "";
+                $allinputdata['excep'] = 'Please Upload Your Picture';
+            $allinputdata['formno'] = 'Please Upload Your Picture';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('BiseCorrection/otherboard11th/');
                 return;
             }
