@@ -1151,5 +1151,56 @@ $RegGrp = 0;
        $res= $this->db->update("Registration..tblElegibiltyReg11th", $data2);
        return $res;
     }
+    
+     public function getcorrection9th()
+     {
+         
+       $this->db->select('Registration..temp9thcor.inst_cd, admission_online..tblInstitutes_all.name');    
+       $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
+       $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
+       $this->db->order_by('Registration..temp9thcor.inst_cd', 'ASC');    
+       $query = $this->db->get('Registration..temp9thcor');
+
+       if($query->result() == TRUE)    
+       {    
+           foreach($query->result_array() as $row)
+           {
+               $result[] = $row;
+           }
+           return $result;
+       }
+       else
+       {
+           return  false;; 
+       }
+         
+     }
+     
+      public function getcorrection9thbyinst($inst_cd)
+     {
+         
+       $this->db->select('Registration..temp9thcor.formno, Registration..temp9thcor.columnName,Registration..temp9thcor.PreviousValue,Registration..temp9thcor.NewValue,Registration..temp9thcor.cdate');    
+      // $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
+      // $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
+       $this->db->where('Registration..temp9thcor.inst_cd', $inst_cd);    
+       $this->db->order_by('Registration..temp9thcor.formno', 'ASC');    
+       $query = $this->db->get('Registration..temp9thcor');
+
+       if($query->result() == TRUE)    
+       {    
+           foreach($query->result_array() as $row)
+           {
+               $result[] = $row;
+           }
+           return $result;
+       }
+       else
+       {
+           return  false;; 
+       }
+         
+     }
+     
+     
 }
 ?>

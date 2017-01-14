@@ -89,6 +89,7 @@ define('TBLMIGRATION3','Registration..tblMig');
 define('TBLMIGRATIONTESTING3','Registration..tblMig');  
 define('DIRPATH','C:\inetpub\vhosts\bisegrw.com\ssc.bisegrw.com\oldPics'); 
 define('DIRPATHMIG','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\\'); 
+define('DIRPATHCOR','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\correction\\'); 
 define('TBLMIGRATION4','matric_new..vw9th16'); 
 
 
