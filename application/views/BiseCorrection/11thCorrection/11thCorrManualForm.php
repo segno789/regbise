@@ -275,7 +275,17 @@
                                         <?php
                                         // DebugBreak();
                                         $grp = $data[0]['RegGrp'];
+                                        if(@$grp_cd !=  null)
                                         $subgroups =  explode(',',@$grp_cd);
+                                        else
+                                        {
+                                          $subgroups[] = 1; 
+                                          $subgroups[] = 2; 
+                                          $subgroups[] = 3; 
+                                          $subgroups[] = 4; 
+                                        }
+                                       
+                                        
                                         echo "<option value='0' >SELECT GROUP</option>";
                                         if($isReAdm == 1 )
                                         {

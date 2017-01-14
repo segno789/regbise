@@ -322,6 +322,12 @@ header("Pragma: no-cache");
                             9th Result Cancel(2016)  
                         </a>
                     </li> 
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/Correction9thReport">
+                           9th Correction Report  
+                        </a>
+                    </li> 
+                    
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>

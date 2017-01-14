@@ -47,9 +47,9 @@ function Footer()
     //Position at 1.5 cm from bottom
     $this->SetY(-15);
     //Arial italic 8
-    $this->SetFont('Arial','I',8);
+    $this->SetFont('Arial','I',10);
     //Page number
-    $this->Cell(0,29,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,29.5,'Page '.$this->PageNo().'/{nb}',0,0,'C');
 }
 
 function _endpage()

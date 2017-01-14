@@ -42,7 +42,7 @@ define('IMAGE_PATH_OTHER_BOARD_11TH', 'uploads/2016/other/colleges/other/');
 define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
 define('BARCODE_PATH', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE', '2016-09-30');
+define('SINGLE_LAST_DATE', '2017-01-30');
 define('DOUBLE_LAST_DATE', '2016-09-30');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
@@ -89,6 +89,7 @@ define('TBLMIGRATION3','Registration..tblMig');
 define('TBLMIGRATIONTESTING3','Registration..tblMig');  
 define('DIRPATH','C:\inetpub\vhosts\bisegrw.com\ssc.bisegrw.com\oldPics'); 
 define('DIRPATHMIG','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\\'); 
+define('DIRPATHCOR','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\correction\\'); 
 define('TBLMIGRATION4','matric_new..vw9th16'); 
 
 
