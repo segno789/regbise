@@ -506,7 +506,7 @@ $RegGrp = 0;
     }
     public function GetInstbyId_11th_otherboard($isnt)
       {
-        $this->db->select('Name,allowed_mGrp,allowed_iGrp,edu_lvl,Inst_cd,IsGovernment,zone_cd,dist_cd,teh_cd');
+        $this->db->select('Name,allowed_mGrp,allowed_iGrp,edu_lvl,Inst_cd,IsGovernment,zone_cd,dist_cd,teh_cd,izone_cd');
         $this->db->from('Admission_Online..tblInstitutes_all');
         $where = '(edu_lvl=1 or edu_lvl = 3 OR  edu_lvl =  2)';
         //$this->db->where('IsActive', 1);
@@ -1131,7 +1131,7 @@ $RegGrp = 0;
     }
      public function GetFormNo_11th($inst_cd)
      {
-       // DebugBreak();
+        DebugBreak();
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno =$this->db->get_where('Admission_online..tblAdmissionDataForHSSC_otherBoard',array('coll_cd'=>$inst_cd)); //

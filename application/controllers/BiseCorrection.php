@@ -4678,7 +4678,7 @@ class BiseCorrection extends CI_Controller {
             'cat10' =>$cat10,
             'dist'=>$inst_info[0]->dist_cd,
             'teh'=>$inst_info[0]->teh_cd,
-            'zone'=>$inst_info[0]->zone_cd,
+            'zone'=>$inst_info[0]->izone_cd,
             'Reggrp'=>"1",
             'rno'=>@$_POST['oldrno'],
             'sess'=>$oldsess,
