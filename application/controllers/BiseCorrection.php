@@ -1346,8 +1346,8 @@ class BiseCorrection extends CI_Controller {
         $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg';
         $config['max_size']      = '20';
-        $config['max_width']     = '260';
-        $config['max_height']    = '290';
+      /*  $config['max_width']     = '260';
+        $config['max_height']    = '290';*/
         $config['overwrite']     = TRUE;
         $config['file_name']     = $formno.'.jpg';
 
@@ -1402,7 +1402,7 @@ class BiseCorrection extends CI_Controller {
         $data['isReAdm']=$isReAdm;
         $data['Oldrno']=0;
         //$data['Image'] = '';
-        $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
+       // $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
         $logedIn = $this->Registration_11th_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  
@@ -2151,7 +2151,8 @@ class BiseCorrection extends CI_Controller {
       $this->load->view('BiseCorrection/11thCorrection/SrchByInstCD.php',$error);
       $this->load->view('common/footer.php');
     }
-    public function searchbyinst11thcr()
+    
+     public function searchbyinst11thcr()
     {
       $this->load->helper('url');
       $data = array(
@@ -2175,8 +2176,6 @@ class BiseCorrection extends CI_Controller {
       $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDCR.php',$error);
       $this->load->view('common/footer.php');
     }
-    
-    
     public function reg9thcorrections()
     {
         $this->load->helper('url');
@@ -3863,30 +3862,6 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/Otherboard10thfooter.php');
     }
     
-      public function otherboard11th()
-    {
-        $this->load->helper('url');
-        $data = array(
-            'isselected' => '13',
-        );
-        $this->load->library('session');
-        $this->load->model('BiseCorrections_model');
-        $Logged_In_Array = $this->session->all_userdata();
-        $userinfo = $Logged_In_Array['logged_in'];
-         if(!( $this->session->flashdata('NewEnrolment_error'))){
-
-            $error_msg = '';  
-        }
-        else{
-            $error_msg = $this->session->flashdata('NewEnrolment_error');
-        }
-        
-        
-        $this->load->view('common/header.php',$userinfo);
-        $this->load->view('common/menu.php',$data);
-        $this->load->view('BiseCorrection/Inter/OtherBoard11th.php',$error_msg);
-        $this->load->view('common/Otherboard11thfooter.php');
-    }
     public function NewEnrolment_insert_OtherBoard10th(){
 
 
@@ -4337,7 +4312,33 @@ class BiseCorrection extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-     public function NewEnrolment_insert_OtherBoard11th(){
+     
+      public function otherboard11th()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+         if(!( $this->session->flashdata('NewEnrolment_error'))){
+
+            $error_msg = '';  
+        }
+        else{
+            $error_msg = $this->session->flashdata('NewEnrolment_error');
+        }
+        
+        
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/Inter/OtherBoard11th.php',$error_msg);
+        $this->load->view('common/Otherboard11thfooter.php');
+    }
+       public function NewEnrolment_insert_OtherBoard11th()
+       {
 
 
         //DebugBreak();
@@ -4352,7 +4353,7 @@ class BiseCorrection extends CI_Controller {
         $error = array();
 
         $formno = $this->BiseCorrections_model->GetFormNo_11th($Inst_Id_other);
-        $inst_info = $this->BiseCorrections_model->GetInstbyId_11th_otherboard($Inst_Id_other);
+          $inst_info = $this->BiseCorrections_model->GetInstbyId_11th_otherboard($Inst_Id_other);
         $dob = @$_POST['dob'];
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
@@ -4549,29 +4550,29 @@ class BiseCorrection extends CI_Controller {
         
         
         //  DebugBreak();
-         $target_path = IMAGE_PATH_OTHER_BOARD_11TH.$Inst_Id_other.'/';
+         $target_path = IMAGE_PATH_OTHER_BOARD_12TH.$Inst_Id_other;
         if (!file_exists($target_path)){
 
         mkdir($target_path);
         }
 
        // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
-      $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
-        //$copyimg = $target_path.$formno.'.jpg';
-       
-       
-      $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg|jpeg';
-        $config['max_size']      = '20';
-        $config['min_size']      = '4';
-        //  $config['max_width']     = '260';
-        // $config['max_height']    = '290';
-        $config['min_width']     = '110';
-        $config['min_height']    = '100';
-        $config['overwrite']     = TRUE;
-        $config['file_name']     = $formno.'.jpg';
+       $base_path = IMAGE_PATH_OTHER_BOARD_12TH.@$_POST['pic'];
+       //$copyimg = $target_path.$formno.'.jpg';
 
-        $filepath = $target_path.'/'. $config['file_name']  ;
+       $config['upload_path']   = $target_path;
+       $config['allowed_types'] = 'jpg|jpeg';
+       $config['max_size']      = '20';
+       $config['min_size']      = '4';
+       //  $config['max_width']     = '260';
+       // $config['max_height']    = '290';
+     //  $config['min_width']     = '110';
+     //  $config['min_height']    = '100';
+       $config['overwrite']     = TRUE;
+       $config['file_name']     = $formno.'.jpg';
+
+       $filepath = $target_path.'/'. $config['file_name']  ;
+
 
         //$config['new_image']    = $formno.'.JPEG';
 
@@ -4580,7 +4581,7 @@ class BiseCorrection extends CI_Controller {
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         $this->upload->initialize($config);
 
-      /*  if($check !== false) {
+        if($check !== false) {
 
             $file_size = round($_FILES['pic']['size']/1024, 2);
             if($file_size<=20 && $file_size>=4)
@@ -4620,8 +4621,9 @@ class BiseCorrection extends CI_Controller {
                 redirect('BiseCorrection/otherboard11th/');
                 return;
             }
-        }  */
-        
+        }  
+       // echo $filepath;
+//die();
           $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -4693,7 +4695,7 @@ class BiseCorrection extends CI_Controller {
         {
             $allinputdata = "";
             $allinputdata['excep'] = 'success';
-            $allinputdata['formno']=$formno;
+            $allinputdata['formno'] = $formno;
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             $msg = $formno;                                           
             redirect('BiseCorrection/otherboard11th');
@@ -4795,161 +4797,6 @@ public function regElegibility()
         
        // redirect('/BiseCorrection/result11thcorrections');
     }
-    public function Correction9thReport()
-    {
-      //  DebugBreak();
-      $this->load->model('BiseCorrections_model');
-      $info =    $this->BiseCorrections_model->getcorrection9th();
-      $this->load->library('pdf_rotate');
-      $pdf = new pdf_rotate('P','in',"A4");
-      $lmargin =1.5;
-      $rmargin =7.3;
-
-      $pdf->AddPage();
-      $x = 0.55;
-      $Y = -0.2;
-
-      // $pdf->SetAutoPageBreak(.5);
-      $pdf->SetAutoPageBreak(true,0);
-      $pdf->AliasNbPages();
-      $pdf->SetFont('Arial','BU',12);
-      $pdf->SetXY(1,0.2);
-      $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-      $pdf->SetFont('Arial','B',12);
-      $pdf->SetXY(2.0,0.4);
-      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");
-
-      $boxWidth = 150.0;
-      $pdf->SetFillColor(255,255,255);
-      //Table cell Global varibales;
-      $Y = .96;
-      $font = 9;
-      for($i = 0 ; $i<count($info); $i++)
-      {
-          //DebugBreak();
-          $falg = 0;
-          $pdf->SetFont('Arial','',12);
-          $pdf->SetXY(.2,.6);
-          $pdf->Cell(0, 0.2,  "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'], 0.25, "C"); 
-
-          $instwise =  $this->BiseCorrections_model->getcorrection9thbyinst($info[$i]['inst_cd']);
-          for($j = 0 ; $j <count($instwise); $j++)
-          {
-              if($j == 0)
-              {
-                  $Y = .96;
-                  $cellheight = .2;
-                  $pdf->SetFont('Arial','B',$font);
-                  $pdf->SetXY(.2,$Y);
-                  $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
-                  $pdf->SetXY(.73,$Y);
-                  $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
-                  $pdf->SetXY(1.63,$Y);
-                  $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,'New Value',1,0,'L',1);
-              }
-              $cellheight = .6;
-              $pdf->SetFont('Arial','',10);
-              if($falg == 0)
-              {
-                  if($j ==  0)
-                      $Y += .2;
-                  else
-                      $Y += .6;
-              }              
-              else
-              {
-                  
-                  $Y += .2; 
-                  $falg = 0;
-              }
-              $pdf->SetXY(.2,$Y);
-              $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
-
-              $corrtype = $this->correctiontype($instwise[$j]['columnName']);
-              
-              if($corrtype == 'Subject Change')
-              {
-                  $perval = $this->GetSubNameHere($instwise[$j]['PreviousValue']);
-                  $newval = $this->GetSubNameHere($instwise[$j]['NewValue']);
-              }
-              else if($corrtype == 'Group Change')
-              {
-                  $perval = $this->matricgrp($instwise[$j]['PreviousValue']);
-                  $newval = $this->matricgrp($instwise[$j]['NewValue']);
-              }
-              else 
-              {
-                  $perval = $instwise[$j]['PreviousValue'];
-                  $newval = $instwise[$j]['NewValue'];
-              }
-              $pdf->SetXY(.73,$Y);
-              $pdf->Cell(.95,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
-
-              $pdf->SetXY(1.63,$Y);
-              $pdf->Cell(1.5,$cellheight,$corrtype,1,0,'L',1);
-
-              if($corrtype != 'Picture Correction')
-              {
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,$perval,1,0,'L',1);
-
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,$newval,1,0,'L',1);  
-              }
-            else
-            {
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);
-
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);  
-
-                  $pdf->Image(DIRPATH.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'.jpg',3.2, $Y, 0.65, 0.58, "jpg"); 
-                  $pdf->Image(DIRPATHMIG.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'.jpg',5.8, $Y, 0.65, 0.58, "jpg"); 
-            }
-                
-              if($j%16 == 0 && $j != 0)
-              {
-                  $falg = 1;
-                  $pdf->AddPage();
-                  $Y = .25;
-                  $cellheight = .2;
-                  $pdf->SetFont('Arial','B',$font);
-                  $pdf->SetXY(.2,$Y);
-                  $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
-                  $pdf->SetXY(.73,$Y);
-                  $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
-                  $pdf->SetXY(1.63,$Y);
-                  $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.8,$cellheight,'New Value',1,0,'L',1);
-              }
-              break;
-          }
-          break;
-          //  
-
-      }
-
-       $pdf->Output('report.pdf', 'I');
-    } 
-    private function matricgrp($grp_cd)
-    {
-         $ret_val = "";
-        if($grp_cd == 1)  
-            $ret_val = 'SCIENCE'; 
-        else if($grp_cd == 2) 
-            $ret_val='GENERAL';
-            else if($grp_cd == 5) 
-                $ret_val= 'DEAF & DEFECTIVE';
-                return $ret_val;
-    }
     private function generatepath($rno,$class,$year,$sess)
     {
       $basepath = DIRPATHMIG2;
@@ -5017,6 +4864,174 @@ public function regElegibility()
       $foldername =   $clsvr.  $folderno .$picyear;
       $basepath =  $basepath.'\\'.$pic.'\\'. $foldername;
          
+    }
+    
+     public function Correction9thReport()
+    {
+      //  DebugBreak();
+      $this->load->model('BiseCorrections_model');
+      $info =    $this->BiseCorrections_model->getcorrection9th();
+      $this->load->library('pdf_rotate');
+      $pdf = new pdf_rotate('P','in',"A4");
+      $lmargin =1.5;
+      $rmargin =7.3;
+
+      $pdf->AddPage();
+      $x = 0.55;
+      $Y = -0.2;
+
+      // $pdf->SetAutoPageBreak(.5);
+      $pdf->SetAutoPageBreak(true,0);
+      $pdf->AliasNbPages();
+      $pdf->SetFont('Arial','BU',12);
+      $pdf->SetXY(1,0.2);
+      $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+      $pdf->SetFont('Arial','B',12);
+      $pdf->SetXY(2.0,0.4);
+      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");
+
+      $boxWidth = 150.0;
+      $pdf->SetFillColor(255,255,255);
+      //Table cell Global varibales;
+      $Y = .96;
+      $font = 9;
+      for($i = 0 ; $i<count($info); $i++)
+      {
+          //DebugBreak();
+          
+          $falg = 0;
+          $pdf->SetFont('Arial','',10);
+          $pdf->SetXY(.2,.6);
+           $pdf->MultiCell(8,0.2, "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'],0,'L'); 
+          //$pdf->Cell(0, 0.2,  , 0.25, "C"); 
+          $instwise =  $this->BiseCorrections_model->getcorrection9thbyinst($info[$i]['inst_cd']);
+          for($j = 0 ; $j <count($instwise); $j++)
+          {
+              if($j == 0)
+              {
+                  $Y = .96;
+                  $cellheight = .2;
+                  $pdf->SetFont('Arial','B',$font);
+                  $pdf->SetXY(.2,$Y);
+                  $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
+                  $pdf->SetXY(.73,$Y);
+                  $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
+                  $pdf->SetXY(1.63,$Y);
+                  $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
+                  $pdf->SetXY(2.99,$Y);
+                  $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
+                  $pdf->SetXY(5.4,$Y);
+                  $pdf->Cell(2.8,$cellheight,'New Value',1,0,'L',1);
+              }
+              $cellheight = .6;
+              $pdf->SetFont('Arial','',10);
+              if($falg == 0)
+              {
+                  if($j ==  0)
+                      $Y += .2;
+                  else
+                      $Y += .6;
+              }              
+              else
+              {
+                  
+                  $Y += .2; 
+                  $falg = 0;
+              }
+              $pdf->SetXY(.2,$Y);
+              $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
+
+              $corrtype = $this->correctiontype($instwise[$j]['columnName']);
+              
+              if($corrtype == 'Subject Change')
+              {
+                  $perval = $this->GetSubNameHere($instwise[$j]['PreviousValue']);
+                  $newval = $this->GetSubNameHere($instwise[$j]['NewValue']);
+              }
+              else if($corrtype == 'Group Change')
+              {
+                  $perval = $this->matricgrp($instwise[$j]['PreviousValue']);
+                  $newval = $this->matricgrp($instwise[$j]['NewValue']);
+              }
+              else if($corrtype == 'Date of Birth')
+              {
+                  $date = new DateTime($instwise[$j]['PreviousValue']);
+                  $perval =  $date->format('d-m-Y'); 
+                  $date = new DateTime($instwise[$j]['NewValue']);
+                  $newval =  $date->format('d-m-Y'); 
+                  
+              }
+              else 
+              {
+                  $perval = $instwise[$j]['PreviousValue'];
+                  $newval = $instwise[$j]['NewValue'];
+              }
+              $pdf->SetXY(.73,$Y);
+              $pdf->Cell(.95,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
+
+              $pdf->SetXY(1.63,$Y);
+              $pdf->Cell(1.5,$cellheight,$corrtype,1,0,'L',1);
+
+              if($corrtype != 'Picture Correction')
+              {
+                  $pdf->SetXY(2.99,$Y);
+                  $pdf->Cell(2.8,$cellheight,$perval,1,0,'L',1);
+
+                  $pdf->SetXY(5.4,$Y);
+                  $pdf->Cell(2.8,$cellheight,$newval,1,0,'L',1);  
+              }
+            else
+            {
+                  $pdf->SetXY(2.99,$Y);
+                  $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);
+
+                  $pdf->SetXY(5.4,$Y);
+                  $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);  
+
+               //   $cdate = date('d-m-Y',strtotime($instwise[$j]['cdate']));
+               $date = new DateTime($instwise[$j]['cdate']);
+               $cdate =  $date->format('d-m-Y'); 
+                  $pdf->Image(DIRPATHMIG.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'_'.$cdate.'.jpg',3.2, $Y, 0.65, 0.58, "jpg"); 
+                  $pdf->Image(DIRPATHCOR.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'.jpg',5.8, $Y, 0.65, 0.58, "jpg"); 
+            }
+                
+              if($j%16 == 0 && $j != 0 && count($instwise) >17)
+              {
+                  $falg = 1;
+                  $pdf->AddPage();
+                  $Y = .25;
+                  $cellheight = .2;
+                  $pdf->SetFont('Arial','B',$font);
+                  $pdf->SetXY(.2,$Y);
+                  $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
+                  $pdf->SetXY(.73,$Y);
+                  $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
+                  $pdf->SetXY(1.63,$Y);
+                  $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
+                  $pdf->SetXY(2.99,$Y);
+                  $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
+                  $pdf->SetXY(5.4,$Y);
+                  $pdf->Cell(2.8,$cellheight,'New Value',1,0,'L',1);
+              }
+             // break;
+          }
+         // break;
+          //  
+          $pdf->AddPage();
+      }
+
+       $pdf->Output('report.pdf', 'I');
+    } 
+    private function matricgrp($grp_cd)
+    {
+         $ret_val = "";
+        if($grp_cd == 1)  
+            $ret_val = 'SCIENCE'; 
+        else if($grp_cd == 2) 
+            $ret_val='GENERAL';
+            else if($grp_cd == 5) 
+                $ret_val= 'DEAF & DEFECTIVE';
+                return $ret_val;
     }
     function correctiontype($corr)
     {
