@@ -994,7 +994,7 @@ class BiseCorrection extends CI_Controller {
             }
             //DebugBreak();
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data11($formno);
-            $inst_name =  $this->BiseCorrections_model->GetInstbyId($datainfo[0]['coll_cd']);
+            $inst_name =  $this->BiseCorrections_model->GetInstbyId_11th_otherboard($datainfo[0]['coll_cd']);
             
             if($inst_name[0]->IsGovernment == 1)
             {
