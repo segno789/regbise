@@ -476,6 +476,72 @@ $RegGrp = 0;
         $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
         return true;
     }
+      public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  IA_P1_Reg_Adm2016_sp_Update
+    {
+       // DebugBreak();
+        $name =strtoupper($data['name']) ;
+        $fname =strtoupper($data['Fname']);
+        $BForm = $data['BForm'];
+        $FNIC = $data['FNIC'];
+        $Dob = $data['Dob'];
+        $CellNo = $data['MobNo'];
+        $medium = $data['medium'];
+        $Inst_Rno = strtoupper($data['classRno']);
+        $MarkOfIden =strtoupper($data['markOfIden']);
+        $Speciality = $data['Speciality'];
+        $nat = $data['nat'];
+        $sex = $data['sex'];
+        $IsHafiz = $data['Ishafiz'];
+        $rel = $data['rel'];
+        $addr =strtoupper($data['addr']);
+        /* if(($data['grp_cd'] == 1) or ($data['grp_cd'] == 7) or ($data['grp_cd'] == 8) )
+        {
+        $grp_cd = 1;    
+        }
+        else if($data['grp_cd'] == 2 )
+        {
+        $grp_cd = 2;        
+        }
+        else if($data['grp_cd'] == 5 )
+        {
+        $grp_cd = 5;        
+        }*/
+        $sub1= $data['sub1'];
+        $sub2 = $data['sub2'];
+        $sub3 = $data['sub3'];
+        $sub4 = $data['sub4'];
+        $sub5 = $data['sub5'];
+        $sub6 = $data['sub6'];
+        $sub7 = $data['sub7'];
+        $sub8 = $data['sub8'];
+        $sub1ap1 = $data['sub1ap1'];
+        $sub2ap1 = $data['sub2ap1'];
+        $sub3ap1 = $data['sub3ap1'];
+        $sub4ap1 = $data['sub4ap1'];
+        $sub5ap1 = $data['sub5ap1'];
+        $sub6ap1 = $data['sub6ap1'];
+        $sub7ap1 = $data['sub7ap1'];
+        $sub8ap1 = $data['sub8ap1'];
+        $UrbanRural = $data['ruralOrurban'];
+        $Inst_cd = $data['Inst_cd'];
+        $formno = $data['FormNo'];
+        $RegGrp = $data['RegGrp'];
+        $regoldrno = $data['regoldrno'];
+        $regoldsess = $data['regoldsess'];
+        $regoldclass = $data['regoldclass'];
+        $regoldyear = $data['regoldyear'];
+        $isreadm = $data['isreadm'];
+        $SSC_RNo = $data['SSC_RNo'];
+        $SSC_Year = $data['SSC_Year'];
+        $SSC_Sess = $data['SSC_Sess'];
+        $SSC_brd_cd = $data['SSC_brd_cd'];
+        $IsBrdCrt = $data['IsBrdCrt'];
+        $pic_base_64 = $data['Image'];
+       // DebugBreak();
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update_correction '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64','$SSC_RNo',$SSC_Year,$SSC_Sess,$SSC_brd_cd,$IsBrdCrt");
+        //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
+        return true;
+    }
       public function EditEnrolement_data11($formno)
     {
 
