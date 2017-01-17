@@ -1020,7 +1020,7 @@ class BiseCorrection extends CI_Controller {
     {
        
 
-        $this->load->model('Registration_11th_model');
+        $this->load->model('BiseCorrections_model');
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1275,6 +1275,14 @@ class BiseCorrection extends CI_Controller {
         // DebugBreak();   
          $addre =  str_replace("'", "", $this->input->post('address'));
            $addre = preg_replace('/[[:^print:]]/', '', $addre);
+           if(@$_POST['Brd_cd'] != @$_POST['OldBrd'])
+           {
+           $IsBrdCrt = 1;
+           }
+           else
+           {
+           $IsBrdCrt = 0;
+           }
        $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1319,7 +1327,8 @@ class BiseCorrection extends CI_Controller {
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
             'Brd_cd'=>$this->input->post('Brd_cd'),
            // 'Image'=>$encoded_image  ,
-            'PicPath'=>$formno.".jpg"
+            'PicPath'=>$formno.".jpg" ,
+            'IsBrdCrt'=>$IsBrdCrt
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
 
@@ -1328,7 +1337,7 @@ class BiseCorrection extends CI_Controller {
 
         );
         
-      // DebugBreak();
+       //DebugBreak();
         
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         
@@ -1400,10 +1409,10 @@ class BiseCorrection extends CI_Controller {
         }
     
         $data['isReAdm']=$isReAdm;
-        $data['Oldrno']=0;
+      //  $data['Oldrno']=0;
         //$data['Image'] = '';
        // $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
-        $logedIn = $this->Registration_11th_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
+        $logedIn = $this->BiseCorrections_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  
 
@@ -4630,6 +4639,7 @@ class BiseCorrection extends CI_Controller {
         }  
        // echo $filepath;
 //die();
+//DebugBreak();
           $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
