@@ -1020,7 +1020,7 @@ class BiseCorrection extends CI_Controller {
     {
        
 
-        $this->load->model('Registration_11th_model');
+        $this->load->model('BiseCorrections_model');
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1311,6 +1311,7 @@ class BiseCorrection extends CI_Controller {
             'ruralOrurban' =>$this->input->post('UrbanRural'),
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
+            'IsBrdCrt' =>(1),
             
             'SSC_RNo'=>$this->input->post('OldRno'),
             'SSC_Year'=>$this->input->post('OldYear'),
@@ -1328,7 +1329,7 @@ class BiseCorrection extends CI_Controller {
 
         );
         
-      // DebugBreak();
+       //DebugBreak();
         
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         
@@ -1403,7 +1404,7 @@ class BiseCorrection extends CI_Controller {
         $data['Oldrno']=0;
         //$data['Image'] = '';
        // $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
-        $logedIn = $this->Registration_11th_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
+        $logedIn = $this->BiseCorrections_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  
 
@@ -4341,7 +4342,7 @@ class BiseCorrection extends CI_Controller {
        {
 
 
-       // DebugBreak();
+        //DebugBreak();
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -4630,6 +4631,7 @@ class BiseCorrection extends CI_Controller {
         }  
        // echo $filepath;
 //die();
+//DebugBreak();
           $data = array(
             'soldrno' =>$this->input->post('soldrno'),
             'soldyear' =>$this->input->post('soldyear'),
@@ -4682,7 +4684,7 @@ class BiseCorrection extends CI_Controller {
             'cat10' =>$cat10,
             'dist'=>$inst_info[0]->dist_cd,
             'teh'=>$inst_info[0]->teh_cd,
-            'zone'=>$inst_info[0]->zone_cd,
+            'zone'=>$inst_info[0]->izone_cd,
             'Reggrp'=>"1",
             'rno'=>@$_POST['oldrno'],
             'sess'=>$oldsess,
