@@ -994,7 +994,7 @@ class BiseCorrection extends CI_Controller {
             }
             //DebugBreak();
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data11($formno);
-            $inst_name =  $this->BiseCorrections_model->GetInstbyId($datainfo[0]['coll_cd']);
+            $inst_name =  $this->BiseCorrections_model->GetInstbyId_11th_otherboard($datainfo[0]['coll_cd']);
             
             if($inst_name[0]->IsGovernment == 1)
             {
@@ -1020,7 +1020,7 @@ class BiseCorrection extends CI_Controller {
     {
        
 
-        $this->load->model('BiseCorrections_model');
+        $this->load->model('Registration_11th_model');
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1275,14 +1275,6 @@ class BiseCorrection extends CI_Controller {
         // DebugBreak();   
          $addre =  str_replace("'", "", $this->input->post('address'));
            $addre = preg_replace('/[[:^print:]]/', '', $addre);
-           if(@$_POST['Brd_cd'] != @$_POST['OldBrd'])
-           {
-           $IsBrdCrt = 1;
-           }
-           else
-           {
-           $IsBrdCrt = 0;
-           }
        $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -1327,8 +1319,7 @@ class BiseCorrection extends CI_Controller {
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
             'Brd_cd'=>$this->input->post('Brd_cd'),
            // 'Image'=>$encoded_image  ,
-            'PicPath'=>$formno.".jpg" ,
-            'IsBrdCrt'=>$IsBrdCrt
+            'PicPath'=>$formno.".jpg"
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
 
@@ -1337,7 +1328,7 @@ class BiseCorrection extends CI_Controller {
 
         );
         
-       //DebugBreak();
+      // DebugBreak();
         
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         
@@ -1409,10 +1400,10 @@ class BiseCorrection extends CI_Controller {
         }
     
         $data['isReAdm']=$isReAdm;
-      //  $data['Oldrno']=0;
+        $data['Oldrno']=0;
         //$data['Image'] = '';
        // $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
-        $logedIn = $this->BiseCorrections_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
+        $logedIn = $this->Registration_11th_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  
 
@@ -4639,8 +4630,11 @@ class BiseCorrection extends CI_Controller {
         }  
        // echo $filepath;
 //die();
-//DebugBreak();
           $data = array(
+            'soldrno' =>$this->input->post('soldrno'),
+            'soldyear' =>$this->input->post('soldyear'),
+            'soldsess' =>$this->input->post('soldsess'),
+            'sscbrd' =>$this->input->post('soldboard'),
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
             'BForm' =>$this->input->post('bay_form'),
@@ -4688,13 +4682,13 @@ class BiseCorrection extends CI_Controller {
             'cat10' =>$cat10,
             'dist'=>$inst_info[0]->dist_cd,
             'teh'=>$inst_info[0]->teh_cd,
-            'zone'=>$inst_info[0]->izone_cd,
+            'zone'=>$inst_info[0]->zone_cd,
             'Reggrp'=>"1",
             'rno'=>@$_POST['oldrno'],
             'sess'=>$oldsess,
             'Iyear'=>@$_POST['oldyear'],
             'Brd_cd'=>@$_POST['oldboard'],
-            'schm'=>1,
+            'schm'=>4,
             'exam_type'=>$examtype,
             'spl_cd'=>@$data[0]['spl_cd'],
             'picpath'=>$filepath,
@@ -4703,7 +4697,7 @@ class BiseCorrection extends CI_Controller {
 
         ); 
         
-        
+    //   echo  '<pre>'; print_r($data);die;
         $this->frmvalidation('BiseCorrection/otherboard11th',$data,0);       
         //DebugBreak();*/
         $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement_11th($data);
@@ -4902,9 +4896,9 @@ public function regElegibility()
       $pdf->SetFont('Arial','BU',12);
       $pdf->SetXY(1,0.2);
       $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-      $pdf->SetFont('Arial','B',12);
+     /* $pdf->SetFont('Arial','B',12);
       $pdf->SetXY(2.0,0.4);
-      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");
+      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");*/
 
       $boxWidth = 150.0;
       $pdf->SetFillColor(255,255,255);
@@ -4928,6 +4922,11 @@ public function regElegibility()
               {
                   $Y = .96;
                   $cellheight = .2;
+
+                  $pdf->SetFont('Arial','B',12);
+                  $pdf->SetXY(2.0,0.4);
+                  $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");
+                  
                   $pdf->SetFont('Arial','B',$font);
                   $pdf->SetXY(.2,$Y);
                   $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
@@ -5042,12 +5041,16 @@ public function regElegibility()
             }
                  $pdf->SetXY(7.6,$Y);
                   $pdf->Cell(.55,$cellheight,$instwise[$j]['bindno'],1,0,'L',1);
-              if($j%32 == 0 && $j != 0 && count($instwise) >31)
+              if($j%32 == 0 && $j != 0 && count($instwise) >33)
               {
                   $falg = 1;
                   $pdf->AddPage();
+                  
                   $Y = .25;
                   $cellheight = .2;
+                  
+                
+                  
                   $pdf->SetFont('Arial','B',$font);
                   $pdf->SetXY(.2,$Y);
                   $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
@@ -5059,7 +5062,7 @@ public function regElegibility()
                   $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
                   $pdf->SetXY(5.4,$Y);
                   $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
-                    $pdf->SetXY(7.6,$Y);
+                  $pdf->SetXY(7.6,$Y);
                   $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
               }
            //  break;
