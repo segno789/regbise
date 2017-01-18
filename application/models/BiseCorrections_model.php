@@ -459,8 +459,12 @@ class BiseCorrections_model extends CI_Model
         $oldsess =  $data['sess'];
          $ckpo = $data['ckpo'];
     
-          $exam_type = $data['exam_type'];
-        $Brd_cd =  @$data['Brd_cd'];
+         $exam_type = $data['exam_type'];
+         $soldrno = $data['soldrno'];
+         $soldyear = $data['soldyear'];
+         $soldsess = $data['soldsess'];
+         $soldboard = $data['sscbrd'];
+         $Brd_cd =  @$data['Brd_cd'];
 
   
         //$old_class =  @$data['class'];
@@ -473,7 +477,7 @@ class BiseCorrections_model extends CI_Model
 $IsHafiz = 0;
 $RegGrp = 0;
           //DebugBreak();
-        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
+        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type,$soldrno,$soldsess,$soldyear,$soldboard");
         return true;
     }
       public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  IA_P1_Reg_Adm2016_sp_Update
@@ -1245,6 +1249,7 @@ $RegGrp = 0;
          
        $this->db->select('Registration..temp9thcor.inst_cd, admission_online..tblInstitutes_all.name');    
        $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
+        $this->db->where('Registration..temp9thcor.inst_cd', '161149');    
        $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
        $this->db->order_by('Registration..temp9thcor.inst_cd', 'ASC');    
        $query = $this->db->get('Registration..temp9thcor');
@@ -1267,10 +1272,10 @@ $RegGrp = 0;
       public function getcorrection9thbyinst($inst_cd)
      {
          
-       $this->db->select('Registration..temp9thcor.formno, Registration..temp9thcor.columnName,Registration..temp9thcor.PreviousValue,Registration..temp9thcor.NewValue,Registration..temp9thcor.cdate');    
+       $this->db->select('Registration..temp9thcor.formno, Registration..temp9thcor.columnName,Registration..temp9thcor.PreviousValue,Registration..temp9thcor.NewValue,Registration..temp9thcor.cdate,Registration..temp9thcor.bindno');    
       // $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
       // $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
-       $this->db->where('Registration..temp9thcor.inst_cd', $inst_cd);    
+       $this->db->where('Registration..temp9thcor.inst_cd', '161149');    
        $this->db->order_by('Registration..temp9thcor.formno', 'ASC');    
        $query = $this->db->get('Registration..temp9thcor');
 
