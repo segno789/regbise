@@ -272,7 +272,7 @@ class Login extends CI_Controller {
 
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
-            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229 || @$_POST['username'] == 147852 || @$_POST['username'] == 2009 || @$_POST['username'] == 2307)
+            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229 || @$_POST['username'] == 147852 || @$_POST['username'] == 2009 || @$_POST['username'] == 2307 || @$_POST['username'] == 2182)
             {
 
 
@@ -293,6 +293,10 @@ class Login extends CI_Controller {
                   if(@$_POST['username'] == 2009 || @$_POST['username'] == 2307)
                   {
                          redirect('BiseCorrection/search_Form'); 
+                  }
+                  else if(@$_POST['username'] == 2182 )
+                  {
+                       redirect('BiseCorrection/resultFinance9thcorrections');
                   }
                   else
                   {

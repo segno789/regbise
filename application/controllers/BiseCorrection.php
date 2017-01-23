@@ -754,7 +754,22 @@ class BiseCorrection extends CI_Controller {
 
     }
 
-    
+      public function resultFinance9thcorrections()
+    {
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '88',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9thDeactive('Finance Income'));
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+    }
     
     public function result9thcorrections()
     {
@@ -2683,7 +2698,15 @@ class BiseCorrection extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateResData($rno,$userinfo['Inst_Id']));
-        redirect('/BiseCorrection/result9thcorrections');
+        if($userinfo['Inst_Id'] != 2182)
+        {
+            redirect('/BiseCorrection/result9thcorrections');
+        }
+        else
+        {
+              redirect('/BiseCorrection/resultFinance9thcorrections');
+        }
+        
     }
      public function Res11thactive()
     {
