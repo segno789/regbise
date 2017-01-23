@@ -969,7 +969,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_EditForm11th_manual_corr()
     {    
-        //DebugBreak();
+        DebugBreak();
          $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1034,7 +1034,7 @@ class BiseCorrection extends CI_Controller {
       public function NewEnrolment_update11th()
     {
        
-
+         DebugBreak();
         $this->load->model('BiseCorrections_model');
 
         $this->load->library('session');

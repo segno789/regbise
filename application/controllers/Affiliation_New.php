@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Registration_11th extends CI_Controller {
+class Affiliation_New extends CI_Controller {
     /**
     * Index Page for this controller.
     *
@@ -25,7 +25,7 @@ class Registration_11th extends CI_Controller {
         //login method as it can be accessed without user session
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
-            redirect('login');
+            redirect('login_affiliation');
         }
     }
     public function index()
@@ -2325,7 +2325,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-        DebugBreak();
+
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2355,7 +2355,7 @@ class Registration_11th extends CI_Controller {
         $rule_fee = $user_info['rule_fee'];
         if($user_info['info'][0]['affiliation_date'] != null)
         {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['affiliation_date'])) ;
             if(date('Y-m-d')<=$lastdate)
             {
                 $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
@@ -2477,12 +2477,7 @@ class Registration_11th extends CI_Controller {
                 }
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
-              if(date('Y-m-d')<=$lastdate)
-                        {
-                            $Lreg_fee = 0;
-                            $TotalLatefee=0;
-                            $reLreg_fee=0;
-                        }
+
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             if($total_std > 360)
             {
@@ -2504,7 +2499,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-         // DebugBreak();
+        //  DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2548,10 +2543,10 @@ class Registration_11th extends CI_Controller {
         $rule_fee = $user_info['rule_fee'];
         if($user_info['info'][0]['affiliation_date'] != null)
         {
-            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['feedingDate'])) ;
+            $lastdate  = date('Y-m-d',strtotime($user_info['info'][0]['affiliation_date'])) ;
             if(date('Y-m-d')<=$lastdate)
             {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
+                $rule_fee  =  $this->Registration_model->getreulefee(1); 
             }
             else
             {
@@ -2626,7 +2621,6 @@ class Registration_11th extends CI_Controller {
                         }
                         else
                         {
-                        
                             $Lreg_fee = $rule_fee[0]['Fine'];
                         }
 
@@ -2657,7 +2651,7 @@ class Registration_11th extends CI_Controller {
                         }
                     }
                     else
-                    {   
+                    {
                         $Lreg_fee = $rule_fee[0]['Fine'];
                     }
 
@@ -2667,12 +2661,6 @@ class Registration_11th extends CI_Controller {
                 $Totalprocessing_fee = $Totalprocessing_fee + $processing_fee;
             } // end of Else
 
-             if(date('Y-m-d')<=$lastdate)
-                        {
-                            $Lreg_fee = 0;
-                            $TotalLatefee=0;
-                            $reLreg_fee=0;
-                        }
             $netTotal = (int)$netTotal +$reg_fee + $Lreg_fee+$processing_fee;
             if($total_std > 360)
             {
@@ -2681,14 +2669,7 @@ class Registration_11th extends CI_Controller {
 
         }
 
-        $forms_id   = implode(",",$ids); 
-        /* if(date('Y-m-d')<=$lastdate)
-                        {
-                            $Lreg_fee = 0;
-                            $TotalLatefee=0;
-                            $reLreg_fee=0;
-                        }  */
-                            
+        $forms_id   = implode(",",$ids);        
         $tot_fee     = $Totalprocessing_fee+$TotalRegFee+$TotalLatefee;
         // $challan_No = 0;
         $today = date("Y-m-d H:i:s");
