@@ -549,7 +549,7 @@ $RegGrp = 0;
       public function EditEnrolement_data11($formno)
     {
 
-        //  DebugBreak();
+          //DebugBreak();
 
         $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>11,'iyear'=>2016,'sess'=>1));     
         $rowcount = $query->num_rows();
@@ -561,7 +561,18 @@ $RegGrp = 0;
             $brd_cd = $query->result_array[0]['Brd_cd'];
             if($brd_cd == 1)
             {
-            $query = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $matrno,'class'=>10,'iyear'=>$yearOfPass,'sess'=>$sessOfPass));     
+            
+            $query_1 = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $matrno,'class'=>10,'iyear'=>$yearOfPass,'sess'=>$sessOfPass));  
+            $rowcount_1 = $query_1->num_rows();
+            if($rowcount_1>1)
+            {
+                 $query->result_array[0]['name'] = $query_1->result_array[0]['name'];
+                 $query->result_array[0]['Fname'] = $query_1->result_array[0]['Fname'];
+                 //$query->result_array[0]['Dob'] = $query_1->result_array[0]['rno'];
+                 
+            }
+            
+               
             }
             
             return $query->result_array();
