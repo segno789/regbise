@@ -555,6 +555,15 @@ $RegGrp = 0;
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
+            $matrno = $query->result_array[0]['matRno'];
+            $yearOfPass = $query->result_array[0]['yearOfPass'];
+            $sessOfPass = $query->result_array[0]['sessOfPass'];
+            $brd_cd = $query->result_array[0]['Brd_cd'];
+            if($brd_cd == 1)
+            {
+            $query = $this->db->get_where('matric_new..tblbiodata',  array('rno' => $matrno,'class'=>10,'iyear'=>$yearOfPass,'sess'=>$sessOfPass));     
+            }
+            
             return $query->result_array();
         }
         else
