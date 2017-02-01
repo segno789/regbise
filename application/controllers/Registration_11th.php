@@ -2325,7 +2325,7 @@ class Registration_11th extends CI_Controller {
     {
         $RegGrp = $this->uri->segment(3);
         $Spl_case = $this->uri->segment(4);
-        DebugBreak();
+       // DebugBreak();
         $this->load->model('Registration_11th_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();

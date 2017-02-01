@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login_affiliation extends CI_Controller {
 
     /**
     * Index Page for this controller.
@@ -248,14 +248,14 @@ class Login extends CI_Controller {
                 $data = array(
                     'user_status' => 1                     
                 );
-                $this->load->view('login/login.php',$data);
+                $this->load->view('login/login_affiliation.php',$data);
                 return;
 
             }
         }
         else
         {
-            $this->load->view('login/login.php',$data);
+            $this->load->view('login/login_affiliation.php',$data);
              return;
         }
 
