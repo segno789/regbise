@@ -25,7 +25,7 @@ class Login extends CI_Controller {
             'user_status' => ''                     
 
         );
-        
+          // DebugBreak();
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
           
@@ -37,7 +37,7 @@ class Login extends CI_Controller {
              
         if($logedIn != false)
             {  
-
+              
 
                 if($logedIn['flusers']['status'] == 0)
                 {
@@ -100,6 +100,7 @@ class Login extends CI_Controller {
                 }
                 if($isgroup ==-1)
                 {
+                   
                     $this->load->model('RollNoSlip_model');
                     $isdeaf = 0;
                     if($logedIn['tbl_inst']['edu_lvl'] == 1)
@@ -128,79 +129,108 @@ class Login extends CI_Controller {
                         }
 
                     }
+                }
                     $isfeeding = -1;
                     $isinterfeeding = -1;
                     $lastdate = SINGLE_LAST_DATE;
                   //  DebugBreak();
                      
-                    if($logedIn['tbl_inst']['edu_lvl'] == 1 ||  $logedIn['tbl_inst']['edu_lvl'] == 3)
-                    {
-                          if($logedIn['SpecPermission']==1)
-                        {
+                  if($logedIn['tbl_inst']['edu_lvl'] == 2 ||  $logedIn['tbl_inst']['edu_lvl'] == 3 ||   $logedIn['tbl_inst']['edu_lvl'] == 1)
+                  {
+                        //echo $isfeeding;die; 
+                      if($logedIn['SpecPermission']==1)
+                      {
                           $lastdate=  $logedIn['spec_info']['FeedingDate'];
-                            if(date('Y-m-d',strtotime($lastdate))>=date('Y-m-d'))
-                            {
-                                 $isfeeding = 1;
-                            }
-                           else {
-                                 if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
-                                 {
-                                     $isfeeding = 1    ;
-                                     $lastdate = SINGLE_LAST_DATE;
-                                     $logedIn['SpecPermission'] = 0;
-                                 }
-                                 else
-                                 {
-                                     $isfeeding = 0;   
-                                 }
-                                 
-                            }
+
+
+                          if(date('Y-m-d',strtotime($lastdate))>=date('Y-m-d'))
+                          {
+                              if($logedIn['tbl_inst']['edu_lvl'] == 1 )
+                                  {
+                                      $isfeeding =  1;
+                                  }
+                                  else
+                                  {
+                                      $isinterfeeding =1; 
+                                  }
+                             
+                          }
+                          else {
+                              if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                              {
+                                  if($logedIn['tbl_inst']['edu_lvl'] == 1)
+                                  {
+                                      $isfeeding =  1;
+                                  }
+                                  else
+                                  {
+                                    $isinterfeeding =1;  
+                                  }
+                                  
+                                  $lastdate = SINGLE_LAST_DATE;
+                                  $logedIn['SpecPermission'] = 0;
+                              }
+                              else
+                              {
+                                  $isinterfeeding = 0;   
+                              }
+
+                          }
+
+                      }
+                      else
+                      {
+
+
+                          if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
+                          {
+                              $isinterfeeding = 1    ;
+                          }
+                          else if($logedIn['tbl_inst']['feedingDate'] != null)
+                          {
+                              $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
+                              if(date('Y-m-d')<=$lastdate)
+                              {
+
+                                  $isfeeding = 1; 
+                                   $isinterfeeding = 1;
+                              }
+                              else 
+                              {    $lastdate = SINGLE_LAST_DATE;
+                                  $isfeeding = -1;
+                              }
+                          }
+                      }
+                  }  
+                
+                  if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
+                  {
+                      if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE11))>=date('Y-m-d'))
+                      {
+                          $isinterfeeding = 1    ;
+                      }
+                      else if($logedIn['tbl_inst']['feedingDate'] != null)
+                      {               
+                          $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
+                          $spec_lastdate = date('Y-m-d',strtotime($logedIn['spec_info']['FeedingDate']));
+                          if(date('Y-m-d')<=$lastdate || date('Y-m-d')<=$spec_lastdate)
+                          {
+
+                              $isinterfeeding = 1; 
+                          }
+                          else{
+                            $isinterfeeding = -1;
+                          }
+                         /* if()
+                          {
+                           $isinterfeeding = 1;
                             
-                        }
-                        else
-                        {
-                            
-                        
-                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE))>=date('Y-m-d'))
-                        {
-                            $isfeeding = 1    ;
-                        }
-                        else if($logedIn['tbl_inst']['feedingDate'] != null)
-                        {
-                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
-                            if(date('Y-m-d')<=$lastdate)
-                            {
-
-                                $isfeeding = 1; 
-                            }
-                            else 
-                            {    $lastdate = SINGLE_LAST_DATE;
-                                $isfeeding = -1;
-                            }
-                        }
-                        }
-                    }  
-                    if($logedIn['tbl_inst']['edu_lvl'] == 2 || $logedIn['tbl_inst']['edu_lvl'] == 3 )
-                    {
-                        if(date('Y-m-d',strtotime(SINGLE_LAST_DATE11))>=date('Y-m-d') || date('Y-m-d',strtotime(DOUBLE_LAST_DATE11))>=date('Y-m-d'))
-                        {
-                            $isinterfeeding = 1    ;
-                        }
-                        else if($logedIn['tbl_inst']['feedingDate'] != null)
-                        {
-                            $lastdate  = date('Y-m-d',strtotime($logedIn['tbl_inst']['feedingDate'])) ;
-                            if(date('Y-m-d')<=$lastdate)
-                            {
-
-                                $isinterfeeding = 1; 
-                            }
-                            else 
-                            {
-                                $isinterfeeding = -1;
-                            }
-                        }
-                    }
-
+                          }
+                          else{
+                            $isinterfeeding = -1;
+                          }   */
+                      }
+                  }
 
                    // DebugBreak();
                     $sess_array = array(
@@ -241,7 +271,7 @@ class Login extends CI_Controller {
                     {
                         redirect('Registration/');
                     }
-                }
+                
             }
             else
             {  
@@ -272,7 +302,7 @@ class Login extends CI_Controller {
 
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
-            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229 || @$_POST['username'] == 147852 || @$_POST['username'] == 2009 || @$_POST['username'] == 2307)
+            if(@$_POST['username'] == 2222 || @$_POST['username'] == 2303 || @$_POST['username'] == 2229 || @$_POST['username'] == 147852 || @$_POST['username'] == 2009 || @$_POST['username'] == 2307 || @$_POST['username'] == 2077 || @$_POST['username'] == 9208 || @$_POST['username'] == 9175 ||  @$_POST['username'] == 2182 ||   @$_POST['username'] == 9100) 
             {
 
 
@@ -290,9 +320,13 @@ class Login extends CI_Controller {
                     );
                     $this->load->library('session');
                     $this->session->set_userdata('logged_in', $sess_array); 
-                  if(@$_POST['username'] == 2009 || @$_POST['username'] == 2307)
+                  if(@$_POST['username'] == 2009 || @$_POST['username'] == 2307 ||  @$_POST['username'] == 9208 || @$_POST['username'] == 9175)
                   {
-                         redirect('BiseCorrection/search_Form'); 
+                         redirect('BiseCorrection/searchbyinst11thcr'); 
+                  }
+                   else if(@$_POST['username'] == 2182 ||  @$_POST['username'] == 9100)
+                  {
+                       redirect('BiseCorrection/resultFinance9thcorrections');
                   }
                   else
                   {

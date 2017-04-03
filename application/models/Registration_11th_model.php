@@ -253,7 +253,8 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
-     public function IsFeeded($data){
+     public function IsFeeded($data)
+     {
         $rno =  $data['mrollno'];
         $sess = $data['session'];
         $iyear =$data['year'];

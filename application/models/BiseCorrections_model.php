@@ -7,7 +7,7 @@ class BiseCorrections_model extends CI_Model
     }
       public function EditEnrolementByinst($sch_cd)
     {
-
+        
         //  DebugBreak();
 
         $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('sch_cd' => $sch_cd,'class'=>9,'iyear'=>2016,'sess'=>1, 'isdeleted'=>0));     
@@ -549,7 +549,7 @@ $RegGrp = 0;
       public function EditEnrolement_data11($formno)
     {
 
-          //DebugBreak();
+         // DebugBreak();
 
         $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>11,'iyear'=>2016,'sess'=>1));     
         $rowcount = $query->num_rows();
