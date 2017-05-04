@@ -20,17 +20,22 @@ class Login_affiliation extends CI_Controller {
     */
     public function index()
     {
+    
         $this->load->helper('url');
         $data = array(
             'user_status' => ''                     
 
         );
-        
+   // DebugBreak();  
+                     $this->load->view('common/common_affiliation_header.php',$userinfo);
+            $this->load->view('Affiliation/frmGeneral.php',$data);
+            $this->load->view('common/footer.php');
+                return;
         if(@$_POST['username'] != '' && @$_POST['password'] != '')
         {   
           
              $this->load->model('login_model'); 
-             $logedIn = $this->login_model->auth($_POST['username'],$_POST['password']);
+             $logedIn = $this->login_model->auth_affiliation($_POST['username'],$_POST['password']);
              
            
              $isgroup = -1;
@@ -38,8 +43,9 @@ class Login_affiliation extends CI_Controller {
         if($logedIn != false)
             {  
 
-
-                if($logedIn['flusers']['status'] == 0)
+                 $this->load->view('login/frmGeneral.php',$data);
+                return;
+                /*if($logedIn['flusers']['status'] == 0)
                 {
                     $data = array(
                         'user_status' => 3                     
@@ -59,14 +65,14 @@ class Login_affiliation extends CI_Controller {
                     $this->load->view('login/login.php',$data);
                     }          */
 
-                    if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
+                    /*if($logedIn['tbl_inst']['IsGovernment'] ==2 and ($logedIn['tbl_inst']['allowed_mGrp'] == '1,2' || $logedIn['tbl_inst']['allowed_mGrp'] == '2,1' || $logedIn['tbl_inst']['allowed_mGrp'] == '1' || $logedIn['tbl_inst']['allowed_mGrp'] == '2' || $logedIn['tbl_inst']['allowed_mGrp'] == '1,7' || $logedIn['tbl_inst']['allowed_mGrp'] == '7,1'))
                     {
                         $logedIn['tbl_inst']['allowed_mGrp'] = $logedIn['tbl_inst']['allowed_mGrp'];//'1,2,7';
-                    }
+                    }*/
 
 
                 }
-                else if($logedIn['tbl_inst']['edu_lvl'] == 2)
+                /*else if($logedIn['tbl_inst']['edu_lvl'] == 2)
                 {
                     if(($logedIn['tbl_inst']['allowed_iGrp'] == NULL || $logedIn['tbl_inst']['allowed_iGrp'] == 0 || $logedIn['tbl_inst']['allowed_iGrp'] == '') && $logedIn['tbl_inst']['IsGovernment'] ==2)
                     {
@@ -241,21 +247,23 @@ class Login_affiliation extends CI_Controller {
                     {
                         redirect('Registration/');
                     }
-                }
-            }
+                }*/
+            
+   /* }
             else
             {  
                 $data = array(
                     'user_status' => 1                     
                 );
-                $this->load->view('login/login_affiliation.php',$data);
+                $this->load->view('login/frmGeneral.php',$data);
                 return;
 
-            }
+            }*/
         }
         else
-        {
+        {    
             $this->load->view('login/login_affiliation.php',$data);
+            
              return;
         }
 

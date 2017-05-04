@@ -2278,7 +2278,8 @@ class Registration_11th extends CI_Controller {
         }
 
     }
-    public function Profile(){
+    public function Profile()
+    {
 
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
