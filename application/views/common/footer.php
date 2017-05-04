@@ -717,7 +717,12 @@ var isReadm = "<?php  echo @$isReAdm; ?>";
 
 if(isReadm == 0)
     {
-    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();    
+        <?php if($Inst_Id == 111110 || $Inst_Id == 162136 || $Inst_Id == 112024 || $Inst_Id == 161021) {?>
+    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 12, 31),minDate:new Date(1983, 0, 1)}).val();    
+    <?php } else{?>
+        
+         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();   
+    <?php }?>
     }
     
     
@@ -1465,6 +1470,9 @@ if(isReadm == 0)
         }
         else if($("#std_group").val() == "2"){
 
+            
+            
+            
 
             $.each(sub7_Hum,function(val,text){
 
@@ -2193,6 +2201,9 @@ if(isReadm == 0)
         $("#corr_sub7").empty();
         $("#sub8p2").empty();
     }
+    
+   
+    
     $("#std_group").change(function(){
 
 
@@ -2358,6 +2369,7 @@ if(isReadm == 0)
 
                 $("#corr_sub8").append(new Option(text,val));
             });
+            debugger;
             var Elecgrp ="<?php echo @$grp_cd; ?>";
             var isgovt ="<?php echo @$isgovt; ?>";
             var b = ['8'];
@@ -2430,6 +2442,16 @@ if(isReadm == 0)
 
     });
 
+    var Gender = $("#hid_sex").val();
+    //console.log(Religion);
+    if(Gender == "2")
+    {
+
+        $("#corr_sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+        $("#corr_sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+    }
+
+    
     //   $("#registration").validate();
     //$("#cand_name").focus();
     /*
@@ -2516,7 +2538,13 @@ if(isReadm == 0)
             $('#father_cnic').focus();  
             return status; 
         }
+        else if(FNic == bFormNo  )
+        {
 
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }
         else if(dob == "" || dob.length == undefined)
         {
             $('#ErrMsg').show(); 
@@ -2930,6 +2958,17 @@ if(isReadm == 0)
             alertify.error(error_BatchRelease);
         }  
 
+        
+         var Gender = $("input[name=gender]:checked").val();
+    //console.log(Religion);
+    if(Gender == "2")
+    {
+
+        $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+        $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+    }
+    
+        
     <?php if(@$isdashbord == 1) {?>
         /*  $( window ).load(function() {
 

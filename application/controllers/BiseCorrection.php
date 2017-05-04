@@ -754,7 +754,8 @@ class BiseCorrection extends CI_Controller {
 
     }
 
-      public function resultFinance9thcorrections()
+    
+  public function resultFinance9thcorrections()
     {
         $this->load->helper('url');
         $data = array(
@@ -769,8 +770,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
         $this->load->view('common/footer.php');
-    }
-    
+    }    
     public function result9thcorrections()
     {
         $this->load->helper('url');
@@ -1034,7 +1034,7 @@ class BiseCorrection extends CI_Controller {
       public function NewEnrolment_update11th()
     {
        
-        // DebugBreak();
+
         $this->load->model('BiseCorrections_model');
 
         $this->load->library('session');
@@ -2691,20 +2691,21 @@ class BiseCorrection extends CI_Controller {
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateslipData($rno,$userinfo['Inst_Id']));
         redirect('/BiseCorrection/slips9thcorrections');
     }
-    public function Res9thactive()
+     public function Res9thactive()
     {
         $rno = $this->uri->segment(3);
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateResData($rno,$userinfo['Inst_Id']));
-        if($userinfo['Inst_Id'] != 2182)
+        if($userinfo['Inst_Id'] == 2182 || $userinfo['Inst_Id'] == 9100  || $userinfo['Inst_Id'] == 2303 || $userinfo['Inst_Id'] == 2181)
         {
-            redirect('/BiseCorrection/result9thcorrections');
+             redirect('/BiseCorrection/resultFinance9thcorrections');
+           
         }
         else
         {
-              redirect('/BiseCorrection/resultFinance9thcorrections');
+              redirect('/BiseCorrection/result9thcorrections');
         }
         
     }
@@ -4900,6 +4901,153 @@ public function regElegibility()
       $basepath =  $basepath.'\\'.$pic.'\\'. $foldername;
          
     }
+     public function Correction11thReport()
+    {
+       // DebugBreak();
+      $this->load->model('BiseCorrections_model');
+      $info =    $this->BiseCorrections_model->getcorrection11th();
+      $this->load->library('pdf_rotate');
+      $pdf = new pdf_rotate('P','in',"A4");
+      $lmargin =1.5;
+      $rmargin =7.3;
+
+      $pdf->AddPage();
+      $x = 0.55;
+      $Y = -0.2;
+
+      // $pdf->SetAutoPageBreak(.5);
+      $pdf->SetAutoPageBreak(true,0);
+      $pdf->AliasNbPages();
+      $pdf->SetFont('Arial','BU',12);
+      $pdf->SetXY(1,0.2);
+      $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+     /* $pdf->SetFont('Arial','B',12);
+      $pdf->SetXY(2.0,0.4);
+      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");*/
+
+      $boxWidth = 150.0;
+      $pdf->SetFillColor(255,255,255);
+      //Table cell Global varibales;
+      $Y = .96;
+      $font = 9;
+        for($i = 0 ; $i<count($info); $i++)
+        {
+            //DebugBreak();
+
+            if($info[$i]['inst_cd'] != '399903')
+            {
+            $falg = 0;
+            $pdf->SetFont('Arial','',10);
+            $pdf->SetXY(.2,.6);
+            $pdf->MultiCell(8,0.2, "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'],0,'L'); 
+            //$pdf->Cell(0, 0.2,  , 0.25, "C"); 
+            $instwise =  $this->BiseCorrections_model->getcorrection11thbyinst($info[$i]['inst_cd']);
+
+            for($j = 0 ; $j <count($instwise); $j++)
+            {
+                if($j == 0)
+                {
+                    $Y = .96;
+                    $cellheight = .2;
+
+                    $pdf->SetFont('Arial','B',12);
+                    $pdf->SetXY(2.0,0.4);
+                    $pdf->Cell(0, 0.2,  "List of 11th Registration Corrcetion 2016-18 Session", 0.25, "C");
+
+                    $pdf->SetFont('Arial','B',$font);
+                    $pdf->SetXY(.2,$Y);
+                    $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
+                    
+                    $pdf->SetXY(.73,$Y);
+                    $pdf->Cell(1.1,$cellheight,'Rno-Bind-SrNo',1,0,'L',1);
+                    
+                    $pdf->SetXY(1.8,$Y);
+                    $pdf->Cell(.93,$cellheight,'Formno',1,0,'L',1);
+                    
+                    $pdf->SetXY(2.55,$Y);
+                    $pdf->Cell(1.67,$cellheight,'Correction Type',1,0,'L',1);
+                    
+                    $pdf->SetXY(3.8,$Y);
+                    $pdf->Cell(2.3,$cellheight,'Old Value',1,0,'L',1);
+                    
+                    $pdf->SetXY(6,$Y);
+                    $pdf->Cell(2.1,$cellheight,'New Value',1,0,'L',1);
+                    
+                    
+                }
+                //$cellheight = .3;
+                $pdf->SetFont('Arial','',8);
+                $corrtype = $this->correctiontype($instwise[$j]['columnName']);
+                $Y += .2; 
+                $falg = 0;
+                $pdf->SetXY(.2,$Y);
+                $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
+                if($corrtype == 'Subject Change')
+                {
+                    $perval = $this->GetiSubNameHere($instwise[$j]['PreviousValue']);
+                    $newval = $this->GetiSubNameHere($instwise[$j]['NewValue']);
+                }
+                else if($corrtype == 'Group Change')
+                {
+                    $perval = $this->intergrp($instwise[$j]['PreviousValue']);
+                    $newval = $this->intergrp($instwise[$j]['NewValue']);
+                }
+                
+                $pdf->SetXY(.73,$Y);
+                $pdf->Cell(1.1,$cellheight,trim($instwise[$j]['rno']).'-'.$instwise[$j]['bindno'].'-'.$instwise[$j]['srno'],1,0,'L',1);
+
+                $pdf->SetXY(1.8,$Y);
+                $pdf->Cell(.93,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
+
+                $pdf->SetXY(2.55,$Y);
+                $pdf->Cell(1.67,$cellheight,$corrtype,1,0,'L',1);
+                if($corrtype != 'Picture Correction')
+                {
+                    $pdf->SetXY(3.8,$Y);
+                    $pdf->Cell(2.3,$cellheight,$perval,1,0,'L',1);
+
+                    $pdf->SetXY(6,$Y);
+                    $pdf->Cell(2.1,$cellheight,$newval,1,0,'L',1);  
+                }
+
+              
+                if($j%50 == 0 && $j != 0 && count($instwise) >49)
+                {
+                    $falg = 1;
+                    $pdf->AddPage();
+
+                    $Y = .25;
+                    $cellheight = .2;
+                    $pdf->SetFont('Arial','B',$font);
+                    $pdf->SetXY(.2,$Y);
+                    $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
+
+                    $pdf->SetXY(.73,$Y);
+                    $pdf->Cell(1.1,$cellheight,'Rno-Bind-Srno',1,0,'L',1);
+
+                    $pdf->SetXY(1.8,$Y);
+                    $pdf->Cell(.93,$cellheight,'Formno',1,0,'L',1);
+
+                    $pdf->SetXY(2.55,$Y);
+                    $pdf->Cell(1.67,$cellheight,'Correction Type',1,0,'L',1);
+
+                    $pdf->SetXY(3.8,$Y);
+                    $pdf->Cell(2.3,$cellheight,'Old Value',1,0,'L',1);
+
+                    $pdf->SetXY(6,$Y);
+                    $pdf->Cell(2.1,$cellheight,'New Value',1,0,'L',1);
+                }
+             //   break;
+            }
+
+          //   break; 
+            if($i<count($info)-1)
+                $pdf->AddPage();
+            }
+        }
+
+        $pdf->Output('report.pdf', 'I');
+    }
     
      public function Correction9thReport()
     {
@@ -5111,6 +5259,23 @@ public function regElegibility()
                 $ret_val= 'DEAF & DEFECTIVE';
                 return $ret_val;
     }
+      private function intergrp($grp_cd)
+    {
+         $ret_val = "";
+        if($grp_cd == 1)  
+            $ret_val = 'PRE-MEDICAL'; 
+        else if($grp_cd == 2) 
+            $ret_val='PRE-ENGINEERING';
+            else if($grp_cd == 3) 
+                $ret_val= 'HUMANITIES';
+                  else if($grp_cd == 4) 
+                $ret_val= 'GENERAL SCIENCE';
+                  else if($grp_cd == 5) 
+                $ret_val= 'COMMERCE';
+                  else if($grp_cd== 6) 
+                $ret_val= 'HOME ECONOMICS';
+                return $ret_val;
+    }
     function correctiontype($corr)
     {
       $ret_val = "";
@@ -5226,7 +5391,84 @@ else if($_sub_cd == 93)  $ret_val = "COMPUTER SCIENCES_DFD";
 else if($_sub_cd == 94)  $ret_val = "HEALTH & PHYSICAL EDUCATION_DFD";   
                                                                                                                                                                                                                                                                                                                 return $ret_val ;             
     }
-    
+     function  GetiSubNameHere($_sub_cd) {
+$ret_val = "";
+if($_sub_cd == 1)  $ret_val = "ENGLISH";
+else if($_sub_cd == 2)  $ret_val = "URDU";
+else if($_sub_cd == 3)  $ret_val = "BANGALI";
+else if($_sub_cd == 4)  $ret_val = "URDU(ALTERNATIVE EASY COURSE)";
+else if($_sub_cd == 5)  $ret_val = "BENGALI(ALTERNATE EASY COURSE)";
+else if($_sub_cd == 6)  $ret_val = "PAKISTANI CULTURE";
+else if($_sub_cd == 7)  $ret_val = "HISTORY";
+else if($_sub_cd == 8)  $ret_val = "LIBRARY SCIENCE";
+else if($_sub_cd == 9)  $ret_val = "ISLAMIC HISTORY & CULTURE";
+else if($_sub_cd == 10)  $ret_val = "FAZAL ARABIC";
+else if($_sub_cd == 11)  $ret_val = "ECONOMICS";
+else if($_sub_cd == 12)  $ret_val = "GEOGRAPHY";
+else if($_sub_cd == 13)  $ret_val = "MILITARY SCIENCE";
+else if($_sub_cd == 14)  $ret_val = "PHILOSOPHY";
+else if($_sub_cd == 15)  $ret_val = "ISLAMIC STUDIES(ISL-ST. GROUP)";
+else if($_sub_cd == 16)  $ret_val = "PSYCHOLOGY";
+else if($_sub_cd == 17)  $ret_val = "CIVICS";
+else if($_sub_cd == 18)  $ret_val = "STATISTICS";
+else if($_sub_cd == 19)  $ret_val = "MATHEMATICS";
+else if($_sub_cd == 20)  $ret_val = "ISLAMIC STUDIES";
+else if($_sub_cd == 21)  $ret_val = "OUTLINES OF HOME ECONOMICS";
+else if($_sub_cd == 22)  $ret_val = "MUSIC";
+else if($_sub_cd == 23)  $ret_val = "FINE ARTS";
+else if($_sub_cd == 24)  $ret_val = "ARABIC";
+else if($_sub_cd == 25)  $ret_val = "BENGALI";
+else if($_sub_cd == 26)  $ret_val = "BENGALI(ADVANCE)";
+else if($_sub_cd == 27)  $ret_val = "ENGLISH ELECTIVE";
+else if($_sub_cd == 28)  $ret_val = "FRENCH";
+else if($_sub_cd == 29)  $ret_val = "GERMAN";
+else if($_sub_cd == 30)  $ret_val = "LATIN";
+else if($_sub_cd == 32)  $ret_val = "PUNJABI";
+else if($_sub_cd == 33)  $ret_val = "PASHTO";
+else if($_sub_cd == 34)  $ret_val = "PERSIAN";
+else if($_sub_cd == 35)  $ret_val = "SANSKRIT";
+else if($_sub_cd == 36)  $ret_val = "SINDHI";
+else if($_sub_cd == 37)  $ret_val = "URDU (ADVANCE)";
+else if($_sub_cd == 38)  $ret_val = "COMMERCIAL PRACTICE";
+else if($_sub_cd == 39)  $ret_val = "PRINCIPLES OF COMMERCE";
+else if($_sub_cd == 42)  $ret_val = "HEALTH & PHYSICAL EDUCATION";
+else if($_sub_cd == 43)  $ret_val = "EDUCATION";
+else if($_sub_cd == 44)  $ret_val = "GEOLOGY";
+else if($_sub_cd == 45)  $ret_val = "SOCIOLOGY";
+else if($_sub_cd == 46)  $ret_val = "BIOLOGY";
+else if($_sub_cd == 47)  $ret_val = "PHYSICS";
+else if($_sub_cd == 48)  $ret_val = "CHEMISTRY";
+else if($_sub_cd == 52)  $ret_val = "ADEEB ARBI";
+else if($_sub_cd == 53)  $ret_val = "ADEEB URDU";
+else if($_sub_cd == 54)  $ret_val = "FAZAL URDU";
+else if($_sub_cd == 55)  $ret_val = "HISTORY OF PAKISTAN";
+else if($_sub_cd == 56)  $ret_val = "HISTORY OF ISLAM";
+else if($_sub_cd == 57)  $ret_val = "HISTORY OF INDO-PAK";
+else if($_sub_cd == 58)  $ret_val = "HISTORY OF MODREN WORLD";
+else if($_sub_cd == 59)  $ret_val = "APPLIED ART  (H-Eco Group)";
+else if($_sub_cd == 60)  $ret_val = "FOOD & NUTRITION (H-Eco Group)";
+else if($_sub_cd == 61)  $ret_val = "CHILD DEVELOPMENT AND FAMILY LIVING (H-Eco Group)";
+else if($_sub_cd == 70)  $ret_val = "PRINCIPLES OF ACCOUNTING";
+else if($_sub_cd == 71)  $ret_val = "PRINCIPLES OF ECONOMICS";
+else if($_sub_cd == 72)  $ret_val = "BIOLOGY (H-Eco Group)";
+else if($_sub_cd == 73)  $ret_val = "CHEMISTRY (H-Eco Group)";
+else if($_sub_cd == 75)  $ret_val = "CLOTHING & TEXTILE (H-Eco Group)";
+else if($_sub_cd == 76)  $ret_val = "HOME MANAGEMNET  (H-Eco Group)";
+else if($_sub_cd == 79)  $ret_val = "NURSING";
+else if($_sub_cd == 80)  $ret_val = "BUSINESS MATH";
+else if($_sub_cd == 83)  $ret_val = "COMPUTER SCIENCE";
+else if($_sub_cd == 90)  $ret_val = "AGRICULTURE";
+else if($_sub_cd == 91)  $ret_val = "PAKISTAN STUDIES";
+else if($_sub_cd == 92)  $ret_val = "ISLAMIC EDUCATION";
+else if($_sub_cd == 93)  $ret_val = "CIVICS FOR NON MUSLIM";
+else if($_sub_cd == 94)  $ret_val = "COMMERCIAL GEOGRAPHY";
+else if($_sub_cd == 95)  $ret_val = "BANKING";
+else if($_sub_cd == 96)  $ret_val = "TYPING";
+else if($_sub_cd == 97)  $ret_val = "BUSINESS STATISTICS";
+else if($_sub_cd == 98)  $ret_val = "COMPUTER STUDIES";
+else if($_sub_cd == 99)  $ret_val = "BOOK KEEPING & ACCOUNTANCY";
+return $ret_val ;         
+    }
 }
 
 /* End of file example.php */

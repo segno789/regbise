@@ -87,7 +87,7 @@
                                     <td>'.$vals["Fname"].'</td>
                                     <td>'.$grp_name.'</td>
                                     <td>'.$vals["sub1_abr"].','.$vals["sub2_abr"].','.$vals["sub3_abr"].','.$vals["sub4_abr"].','.$vals["sub5_abr"].','.$vals["sub6_abr"].','.$vals["sub7_abr"].'</td>
-                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$Inst_Id.'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                     <td><img id="previewImg" style="width:40px; height: 40px;" src="/'.IMAGE_PATH11.$Inst_Id.'/'.$vals['PicPath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>';
                                     
                                     echo'<td>
                                     <button type="button" class="btn btn-info" value="'.$formno.'" onclick="releasemForm11th('.$formno.')">Release</button>

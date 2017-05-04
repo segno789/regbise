@@ -266,6 +266,9 @@ if(isset($files)){
 <script type="">
 
     var isotherboard = '<?php echo @$data[0]['SSC_brd_cd']; ?>';
+    var sub4_reg = '<?php echo @$data[0]['sub4']; ?>';
+    var sub5_reg = '<?php echo @$data[0]['sub5']; ?>';
+    var sub6_reg = '<?php echo @$data[0]['sub6']; ?>';
     //
     if(isotherboard != 1)
     {
@@ -290,7 +293,7 @@ if(isset($files)){
     {
         92 :'Islamic Education'
     }
-    var sub3_Non_Muslim = 
+   var sub3_Non_Muslim = 
     {
         93 : 'CIVICS FOR NON MUSLIM',
         92  :'Islamic Education'
@@ -653,11 +656,7 @@ if(isset($files)){
 debugger;
 //console.log('matric_sub1.value = ' +matric_sub1.value + '  and Nationaliy = '+ NationalityVal);
 
-if(typeof matric_sub1 == 'undefined')
-{
-matric_sub1 = 0
-}
-        if(NationalityVal==2 || ( matric_sub1.value == 11))
+        if(NationalityVal==2 || matric_sub1.value == 11)
         {
             $("#sub1").prepend("<option selected='selected' value='6'>PAKISTANI CULTURE</option>");
             
@@ -742,10 +741,12 @@ matric_sub1 = 0
         $("#sub3").append(new Option('Islamic Education',92));
         $("#sub3 option[value='92']").attr("selected","selected");
         $("#sub4").append(new Option('Mathematics',19));
-        
+      
         $("#sub4 option[value='19']").attr("selected","selected");
-        
 
+        
+        
+        
         $("#sub5").append(new Option('Physics',47));
         $("#sub5").append(new Option('Economics',11));
         $("#sub5").append(new Option('Statistics',18));
@@ -756,9 +757,20 @@ matric_sub1 = 0
         $("#sub6").append(new Option('Statistics',18));
         $("#sub6 option[value='83']").attr("selected","selected");
         
-        $("#sub4 option[value='<?php echo @$data[0]['sub4']   ?>']").attr("selected","selected"); 
-         $("#sub5 option[value='<?php echo @$data[0]['sub5']   ?>']").attr("selected","selected"); 
-         $("#sub6 option[value='<?php echo @$data[0]['sub6']   ?>']").attr("selected","selected"); 
+        if(sub4_reg != '')
+         {
+            $("#sub4 option[value='"+sub4_reg+"']").attr("selected","selected"); 
+         }
+         if(sub5_reg != '')
+         {
+            $("#sub5 option[value='"+sub5_reg+"']").attr("selected","selected"); 
+         }
+          if(sub6_reg != '')
+         {
+            $("#sub6 option[value='"+sub6_reg+"']").attr("selected","selected"); 
+         }
+        
+        
     }
      function  check_NewEnrol_validation_11th(){
        // 
@@ -834,7 +846,14 @@ matric_sub1 = 0
             $('#father_cnic').focus();  
             return status; 
         }
-             else   if ($("#std_group").find('option:selected').val() < 1) 
+       /* else if(FNic == bFormNo  )
+        {
+
+            alertify.error("B-form Number and Father CNIC cannot be same.") 
+            $('#bay_form').focus();   
+            return status; 
+        }*/
+        else   if ($("#std_group").find('option:selected').val() < 1) 
         {
             $('#ErrMsg').show(); 
             $("#ErrMsg").css({ backgroundColor: '#FEFAFB', color: '#F00' });
@@ -1080,18 +1099,28 @@ matric_sub1 = 0
         $("#sub3 option[value='92']").attr("selected","selected");
         $.each(sub6_Hum, function(val, text) {
             $('#sub4').append( new Option(text,val) );
-        });
+        }); 
         
         $.each(sub6_Hum, function(val, text) {
             $('#sub5').append( new Option(text,val) );
         }); 
-         
         $.each(sub6_Hum, function(val, text) {
             $('#sub6').append( new Option(text,val) );
-        }); 
-         $("#sub4 option[value='<?php echo @$data[0]['sub4']   ?>']").attr("selected","selected"); 
-         $("#sub5 option[value='<?php echo @$data[0]['sub5']   ?>']").attr("selected","selected"); 
-         $("#sub6 option[value='<?php echo @$data[0]['sub6']   ?>']").attr("selected","selected"); 
+        });
+        
+         if(sub4_reg != '')
+         {
+            $("#sub4 option[value='"+sub4_reg+"']").attr("selected","selected"); 
+         }
+         if(sub5_reg != '')
+         {
+            $("#sub5 option[value='"+sub5_reg+"']").attr("selected","selected"); 
+         }
+          if(sub6_reg != '')
+         {
+            $("#sub6 option[value='"+sub6_reg+"']").attr("selected","selected"); 
+         }
+         
         // $("#sub6 option[value='" + sub1 + "']").attr("selected","selected");
 
     }
@@ -2001,7 +2030,13 @@ matric_sub1 = 0
             $('#father_cnic').focus();  
             return status; 
         }
-
+  else if(FNic == bFormNo  )
+                                {
+                                   
+                                    alertify.error("B-form Number and Father CNIC cannot be same.") 
+                                    $('#bay_form').focus();   
+                                    return status; 
+                                }
         /* else if(dob == "" || dob.length == undefined)
         {
         $('#ErrMsg').show(); 

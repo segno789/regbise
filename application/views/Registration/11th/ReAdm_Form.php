@@ -52,7 +52,7 @@
                                     Bay Form No :
                                 </label>
                                 <div class="controls controls-row">
-                                    <input class="span3"  type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($data['0']['Brd_cd']==1) echo "readonly='readonly'";  ?> required="required" >
+                                    <input class="span3"  type="text" id="bay_form" name="bay_form" placeholder="Bay Form No." value="<?php echo  $data['0']['BForm']; ?>" required="required" <?php if($data['0']['Brd_cd']==1 && $data['0']['BForm'] != '00000-0000000-0') echo "readonly='readonly'";  ?> required="required" >
                                     <label class="control-label span2" for="father_cnic">
                                         Father's CNIC :
                                     </label> 
@@ -598,7 +598,7 @@
                                 
                                 <input type="hidden"   value="<?php  echo $isReAdm; ?>"  name="IsReAdm">
                                 <?php if($data['0']['oldbr'] == 1) {?>
-                                <input type="hidden"   value="<?php  echo $data[0]['Brd_cd']; ?>"  name="OldBrd">
+                                <input type="hidden"   value="<?php  echo $data[0]['oldbr']; ?>"  name="OldBrd">
                                 <input type="hidden"   value="<?php  echo $data[0]['matRno'];  ?>"  name="OldRno">
                                 <input type="hidden"   value="<?php  echo $data[0]['yearOfPass']; ?>"  name="OldYear">
                                 <input type="hidden"   value="<?php  echo $data[0]['sessOfPass']; ?>"  name="OldSess">

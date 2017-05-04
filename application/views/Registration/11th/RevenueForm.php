@@ -106,18 +106,21 @@
     </tr>
 
     <?php
-   // DebugBreak();
+    //DebugBreak();
     $n = 0; 
+    $regfine =  0;
     foreach ($data['stdinfo'] as $key=>$vals) {
         $n++;
-        if($vals->RegFineFee == '')
+        $vals->RegFineFee = 4000;
+        $regfine = $regfine+4000;
+       /* if($vals->RegFineFee == '')
         {
             $vals->RegFineFee = 0;
         }
         if($vals->yearOfPass == 2016 && $vals->sessOfPass == 2)
         {
             $vals->RegFineFee = 0;
-        }
+        }*/
         ?>
         <tr>
             <td class="td" style="text-align:center;font-weight:bold;"><?php echo $n;?></td>
@@ -128,7 +131,7 @@
             <td class="td" style="text-align:center !important;"><?php echo $vals->regFee ;?></td>
             <td class="td" style="text-align:center !important;"><?php echo $vals->RegFineFee;?></td>
             <td class="td" style="text-align:center !important;"><?php echo $vals->RegProcessFee;?></td>
-            <td class="td" style="text-align:center !important;"><?php echo $vals->RegTotalFee?></td>
+            <td class="td" style="text-align:center !important;"><?php echo $vals->regFee+$vals->RegFineFee+$vals->RegProcessFee?></td>
 
         </tr>
         <?php
@@ -140,7 +143,7 @@
         <!--    <th class="th">&nbsp;</th> -->
         <th class="th">Total :</th>
         <th class="th"><?php echo  $data['batch_info'][0]["Total_RegistrationFee"];;?></th>
-        <th class="th"><?php echo $data['batch_info'][0]["Total_LateRegistrationFee"];;?></th>
+        <th class="th"><?php echo $regfine;;?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Total_ProcessingFee"];?></th>
         <th class="th"><?php echo $data['batch_info'][0]["Amount"];?></th>
     </tr>

@@ -271,6 +271,24 @@ class Registration_11th_model extends CI_Model
             return  false;
         }
     }
+     public function IsReFeeded($data){
+        $rno =  $data['mrollno'];
+        $sess = $data['session'];
+        $iyear =$data['year'];
+        $brd = $data['board'];
+      //  DebugBreak();
+        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016', array('oldRno_reg' => "$rno", 'oldYear_reg'=>$iyear,'oldSess_reg'=>$sess,'IsDeleted'=>0));
+        // DebugBreak();
+        $rowcount = $query->num_rows();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
      public function InstName($instCode)
     {
        // DebugBreak();
@@ -541,7 +559,7 @@ if($rowcount == 0 )
 
         // $forms_id = $User_info_data['forms_id'];
 
-        $where = ' (spl_cd =  17 OR  spl_cd = 70 OR status=4 OR status=2)';
+        $where = ' (spl_cd =  17 OR  spl_cd = 70  OR status=4 OR status=5 OR status=2)  ';
         $this->db->where('rno', $RollNo);
         //   $query = $this->db->get_where(RE_ADMISSION_TBL,  array('rno' => $RollNo));
         $query = $this->db->where($where);

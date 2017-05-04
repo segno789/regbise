@@ -811,6 +811,7 @@ $RegGrp = 0;
         $result = $q2->result_array();
         return $result;
     }
+   
     public function updateMigData($formno,$newInst,$oldInst,$kpo)
     {
 
@@ -1288,7 +1289,54 @@ $RegGrp = 0;
        }
          
      }
-     
+         public function getcorrection11th()
+     {
+         
+       $this->db->select('Registration..temp11thcor.inst_cd, admission_online..tblInstitutes_all.name');    
+       $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp11thcor.inst_cd');    
+        //$this->db->where('Registration..temp11thcor.inst_cd', '211001');    
+       $this->db->group_by('Registration..temp11thcor.inst_cd,admission_online..tblInstitutes_all.name');
+       $this->db->order_by('Registration..temp11thcor.inst_cd', 'ASC');    
+       $query = $this->db->get('Registration..temp11thcor');
+
+       if($query->result() == TRUE)    
+       {    
+           foreach($query->result_array() as $row)
+           {
+               $result[] = $row;
+}
+           return $result;
+       }
+       else
+       {
+           return  false;; 
+       }
+         
+     }
+       public function getcorrection11thbyinst($inst_cd)
+     {
+         
+       $this->db->select('Registration..temp11thcor.formno, Registration..temp11thcor.columnName,Registration..temp11thcor.PreviousValue,Registration..temp11thcor.NewValue,Registration..temp11thcor.cdate,Registration..temp11thcor.bindno,Registration..temp11thcor.rno,Registration..temp11thcor.srno');    
+      // $this->db->join('admission_online..tblInstitutes_all', 'admission_online..tblInstitutes_all.inst_cd=Registration..temp9thcor.inst_cd');    
+      // $this->db->group_by('Registration..temp9thcor.inst_cd,admission_online..tblInstitutes_all.name');
+       $this->db->where('Registration..temp11thcor.inst_cd', $inst_cd);    
+       $this->db->order_by('Registration..temp11thcor.formno', 'ASC');    
+       $query = $this->db->get('Registration..temp11thcor');
+
+       if($query->result() == TRUE)    
+       {    
+           foreach($query->result_array() as $row)
+           {
+               $result[] = $row;
+           }
+           return $result;
+       }
+       else
+       {
+           return  false;; 
+       }
+         
+     }
       public function getcorrection9thbyinst($inst_cd)
      {
          

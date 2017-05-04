@@ -23,19 +23,19 @@ header("Pragma: no-cache");
                             9th Registration
                         </a>
                     </li>
-                    <li>
+                  <!--  <li>
                         <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
                         </a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="<?php echo base_url(); ?>Registration_11th" class="<?php if($isselected == '6') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             11th Registration
                         </a>
                     </li>
-                      <li>
+                    <!--  <li>
                         <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             11th Correction
@@ -46,16 +46,16 @@ header("Pragma: no-cache");
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Migration
                         </a>
-                    </li>
+                    </li>-->
                     <?php }
 
                 else if($isselected == '15' ){?>
 
                     
                        <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/search_Form" class="<?php if($isselected == '15') {echo 'selected';}?>" >
+                        <a href="<?php echo base_url(); ?>BiseCorrection/search_Form" class="<?php if($isselected == '13') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
-                            Correction
+                             Correction
                         </a>
                     </li>
                     
@@ -69,12 +69,12 @@ header("Pragma: no-cache");
                             Registration
                         </a>
                     </li>
-                       <li>
+                       <!--<li>
                         <a href="<?php echo base_url(); ?>NinthCorrection/EditForms" class="<?php if($isselected == '7') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
                             9th Correction
                         </a>
-                    </li>
+                    </li>-->
                    <!--  <li>
                         <a href="<?php echo base_url(); ?>migration/std9thclass" class="<?php if($isselected == '10') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
@@ -91,7 +91,7 @@ header("Pragma: no-cache");
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Registration
                         </a>
-                    </li>
+                   <!-- </li>
                         <li>
                         <a href="<?php echo base_url(); ?>EleventhCorrection/EditForms" class="<?php if($isselected == '12') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0c4;"></div>
@@ -103,30 +103,30 @@ header("Pragma: no-cache");
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             Migration
                         </a>
-                    </li> 
+                    </li> -->
                     <?php } 
                     
                     if($isselected == '0' OR $isselected == '8'  OR $isselected == '11'  OR $isselected == '4' OR $isselected == '13'  OR $isselected == '40'){?>
                 
-                    <li>
+                  <!--  <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thcorrections" class="<?php if($isselected == '8') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Correction
                         </a>
-                    </li>
+                    </li>-->
                        
-                 <!--   <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg9thbatch" class="<?php if($isselected == '0') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
                             9th Reg. Batch
                         </a>
-                    </li>-->
-                     <li>
+                    </li>
+                    <!-- <li>
                         <a style="width: 115px;" href="<?php echo base_url(); ?>BiseCorrection/migration9th" class="<?php if($isselected == '4') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe032;"> </div>
                            9th Migration
                         </a>
-                    </li>
+                    </li>-->
                       <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrections" class="<?php if($isselected == '13') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
@@ -227,14 +227,14 @@ header("Pragma: no-cache");
                             11th Correction Applications
                         </a>
                     </li>
-                     <li>
-                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst11th">
-                            11th Search By Inst. Code
-                        </a>
-                    </li>
                     <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/reg11thcorrectionapp_verified">
                             Verified Correction  
+                        </a>
+                    </li>
+                      <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst11th">
+                            11th Search By Inst. Code
                         </a>
                     </li>
                      <li>
@@ -257,12 +257,11 @@ header("Pragma: no-cache");
                              Other Board NOC 
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/regElegibility">
                              Candidate Elegibility  
                         </a>
                     </li>
-                    
                   <!--  
                        <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/Restore_form">
@@ -317,7 +316,7 @@ header("Pragma: no-cache");
                             9th Result Cards(2016)  
                         </a>
                     </li> 
-                     <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/result9thcancel">
                             9th Result Cancel(2016)  
                         </a>
@@ -327,7 +326,6 @@ header("Pragma: no-cache");
                            9th Correction Report  
                         </a>
                     </li> 
-                    
                     <li>
                         <a onclick="return logout();">Logout</a>
                     </li>
@@ -339,8 +337,8 @@ header("Pragma: no-cache");
                     if($isselected == '15') { 
                 ?>
                 <ul >
-                    <li><a href="<?php echo base_url(); ?>BiseCorrection/search_Form"  data-original-title="" class="<?php if($isselected == '15') {echo 'heading';}?>"> Correction</a></li>
-                    <li>
+                    <li><a href="<?php echo base_url(); ?>BiseCorrection/search_Form"  data-original-title="" class="<?php if($isselected == '15') {echo 'heading';}?>">Correction</a></li>
+                    <!--<li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst">
                             9th Search By Inst. Code
                         </a>
@@ -349,10 +347,15 @@ header("Pragma: no-cache");
                         <a href="<?php echo base_url(); ?>BiseCorrection/otherboard10th">
                             9th other Board
                         </a>
-                    </li>
-                     <li>
+                    </li>-->
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/searchbyinst11thcr">
                             11th Search By Inst. Code
+                        </a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/otherboard11th">
+                            11th other Board
                         </a>
                     </li>
                     <!-- <li>
