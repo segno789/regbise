@@ -139,12 +139,12 @@ header("Pragma: no-cache");
                           11th Migration
                         </a>
                     </li>
-                  <!--  <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
                             Spec. Permission
                         </a>
-                    </li>      -->
+                    </li>      
             
                    <?php } ?>
             </ul>
