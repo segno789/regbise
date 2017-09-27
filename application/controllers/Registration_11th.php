@@ -30,7 +30,7 @@ class Registration_11th extends CI_Controller {
     }
     public function index()
     {
-        //  DebugBreak(); 
+        //DebugBreak(); 
         $msg = $this->uri->segment(3);
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -187,9 +187,8 @@ class Registration_11th extends CI_Controller {
                 $this->load->view('common/footer.php');    
             } 
         }
-
-
-    }
+        
+         }
     public function ReAdmission()
     {
         $this->load->library('session');
@@ -537,7 +536,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Get_students_record()
     {
-        //  DebugBreak();
+       //  DebugBreak();
 
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -618,8 +617,10 @@ class Registration_11th extends CI_Controller {
 
                 $spl_cd = $RegStdData['data'][0]['spl_cd'];
                 $msg = $RegStdData['data'][0]['Mesg'];
+                $msg = "";
                 $SpacialCase = $RegStdData['data'][0]['SpacialCase'];
                 $status = $RegStdData['data'][0]['status'];
+                $status = 1;
                 $cand_gender = $RegStdData['data'][0]['Gender'];
                 $inst_userinfo_gender = $userinfo['gender'];
             }
@@ -657,13 +658,13 @@ class Registration_11th extends CI_Controller {
             redirect('Registration_11th/Students_matricInfo');
             return;
         }
-        else if($msg != '')
+      else if($msg != '')
         {
             $this->session->set_flashdata('matric_error', $msg);
             redirect('Registration_11th/Students_matricInfo');
             return;
 
-        }
+        }   
         else  if($cand_gender != $inst_userinfo_gender)
         {
             if($cand_gender==1 && $inst_userinfo_gender == 2)
@@ -1803,7 +1804,7 @@ class Registration_11th extends CI_Controller {
         $pdf->SetXY($xx,$yy);
         $pdf->SetFont('Arial','B',11);
         $pdf->Cell($boxWidth-2.2,$boxhieght,'',1,0,'C',1);
-
+         
         $pdf->Cell($boxWidth-0.7    ,$boxhieght,'Total:',1,0,'L',1);
         // $pdf->Cell($boxWidth-1.8,0.2,$result['data'][0]['latetotalFee'],1,0,'C',1);
         // $pdf->Cell($boxWidth-1.7,0.2,$result['data'][0]['wlatetotalFee'],1,0,'C',1);
@@ -2368,7 +2369,7 @@ class Registration_11th extends CI_Controller {
         }
         else 
         {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
 
 
@@ -2505,7 +2506,7 @@ class Registration_11th extends CI_Controller {
     }
     public function Make_Batch_Formwise()
     {
-         // DebugBreak();
+          DebugBreak();
         if(!empty($_POST["chk"]))
         {
 
@@ -2556,12 +2557,12 @@ class Registration_11th extends CI_Controller {
             }
             else
             {
-                $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+                $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             }
         }
         else 
         {
-            $rule_fee  =  $this->Registration_11th_model->getreulefee(2); 
+            $rule_fee  =  $this->Registration_11th_model->getreulefee(1); 
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
 
 
@@ -3003,7 +3004,7 @@ class Registration_11th extends CI_Controller {
         $user = $Logged_In_Array['logged_in'];
         $this->load->model('Registration_11th_model');
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'Batch_Id'=>$Batch_Id);
-        $temp = $user['Inst_Id'].'@11@2016-18';
+        $temp = $user['Inst_Id'].'@11@2017-19';
         $image =  $this->set_barcode($temp);
         $data = array('data'=>$this->Registration_11th_model->revenue_pdf($fetch_data),'inst_Name'=>$user['inst_Name'],'inst_cd'=>$user['Inst_Id'],'barcode'=>$image);
         $this->load->view('Registration/11th/RevenueForm.php',$data);
@@ -3113,7 +3114,7 @@ class Registration_11th extends CI_Controller {
     public function Print_Registration_Form_Proofreading_Groupwise()
     {
 
-        //  DebugBreak();
+          DebugBreak();
         $Condition = $this->uri->segment(4);
 
         $this->load->library('session');

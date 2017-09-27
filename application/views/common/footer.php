@@ -19,6 +19,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fancybox.pack.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/chosen.jquery.min.js"></script>
 
 <?php 
 if(isset($files)){
@@ -27,19 +28,19 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="">
+<script type="text/javascript">
 
 
-   /* function preventBack(){window.history.forward();}
+    /* function preventBack(){window.history.forward();}
     setTimeout("preventBack()", 0);
     window.onunload=function(){null};*/
 
- function releasemForm(formrno)
+    function releasemForm(formrno)
     {
-     
+
         window.location.href = '<?=base_url()?>/migration/release_stdForm/'+formrno
     }
-    
+
     /*function showMyImage(fileInput) {
     debugger;
     var files = fileInput.files;
@@ -61,22 +62,22 @@ if(isset($files)){
     }    */
     /*    }*/
     function  check_migration_validation(){
-       
+
         var grp_cd = $('#migrateto').val();
-      
+
         var status = 0;
-      
 
-       
 
-           if ($("#migrateto").find('option:selected').val() < 1) 
+
+
+        if ($("#migrateto").find('option:selected').val() < 1) 
         {
-           alertify.error("Please Select Migrate To Inst.") ;
+            alertify.error("Please Select Migrate To Inst.") ;
             // alert('Study Group not selected ');                          
             $("#migrateto").focus();
             return status;  
         }
-     
+
         status = 1;
         return status;
 
@@ -84,17 +85,17 @@ if(isset($files)){
 
 
     }
-    
+
     function readURL_corr(input) {
-       // debugger;
-       var  fileName = input.files[0].name
+        // debugger;
+        var  fileName = input.files[0].name
         var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 
 
         if(ext.toLowerCase() != "jpg" )
         {
             alertify.error("Please uplaod only .JPG Files!"); 
-           
+
         }
         else
         {
@@ -108,7 +109,7 @@ if(isset($files)){
                 reader.readAsDataURL(input.files[0]);
             } 
         }
-       
+
     }
 
     /*$("#corr_image").change(function(){
@@ -134,7 +135,11 @@ if(isset($files)){
     return false;
     }
     }*/
+    
     $(document).ready(function () {
+
+        $(".chosen-single").chosen({no_results_text: "Oops, nothing found!"}); 
+
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "bAutoWidth" : false,
@@ -145,7 +150,8 @@ if(isset($files)){
             "bAutoWidth" : false,
             "cache": false
         });
-
+          
+        
         $("#c0").click(function(){
 
             if($(this).is(":checked")){
@@ -384,67 +390,67 @@ if(isset($files)){
         }
 
         //do something
-         
-              
-    
-   
+
+
+
+
         //if()
         var formno = $("#lblFormNo").text();
-       
-      
-       
-       
+
+
+
+
         var corr_pic_src = $("#corr_previewImg").attr('src');
-      //  alert(corr_pic_src);
-      $('#div_confirmation').html('');
+        //  alert(corr_pic_src);
+        $('#div_confirmation').html('');
         $('#div_confirmation').append(' <h3 class="welcome_note">View Your Correction Application Form</h3><br>  <div class="widget">                    <div class="widget-header" id="lblFormNo">                        <div class="title">   <h3>                      Form No.   <?php                                       echo @$data[0]['formNo'];                                       ?>                       </h3> </div>                    </div>                    <div class="widget-body"><div class="control-group">                                <h4 class="span4">Personal Information :</h4>                                <div class="controls controls-row">                                                                                                    </div>                            </div> '); 
-        
-        
+
+
         var chkBoxArray = [];
         $('.corr_check_box:checked').each(function() {
             chkBoxArray.push($(this).val());
-               if($(this).val() == '7')
+            if($(this).val() == '7')
             {
-               $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
+                $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
             if($(this).val() == '1')
             {
                 $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2 " >                                    Candidate Name :                                </label>                          <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;    font-size: 10px;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?>  >                                <label class="control-label span1 "> TO </label>     <input class="span2" name="corr_cand_name" style="text-transform: uppercase; " readonly="readonly" type="text" value="'+corr_cand_name+'" >                                </div>                            </div>');
-                             
+
             }
-              if($(this).val() == '2')
+            if($(this).val() == '2')
             {
-                  $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                    Father Name :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_name" name="father_name" style="text-transform: uppercase;     font-size: 10px;" type="text" placeholder="Father Name" maxlength="60" value="<?php echo @$data['0']['Fname']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_name+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '3')
+            if($(this).val() == '3')
             {
                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Date of Birth:(dd-mm-yyyy)<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="dob" name="dob" placeholder="DOB" style="text-transform: uppercase;     font-size: 10px;" type="text"  value="<?php  $source = @$data['0']['Dob']; @$date = new DateTime(@$source); echo @$date->format('d-m-Y'); ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_dob" readonly="readonly" value="'+corr_dob+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '4')
+            if($(this).val() == '4')
             {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['BForm']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_bay_form+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Bay Form No : <!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="bay_form" name="bay_form" style="text-transform: uppercase;     font-size: 10px;" type="text"maxlength="60" value="<?php echo  @$data['0']['BForm']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2" type="text"  style="text-transform: uppercase; " name="corr_father_cnic" value="'+corr_bay_form+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '5')
+            if($(this).val() == '5')
             {
-                 $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
+                $('#div_confirmation').append('    <div class="control-group">                                <label class="control-label span2" >                                     Father CNIC :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="father_cnic" name="father_cnic" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="<?php echo  @$data['0']['FNIC']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?> required="required">                                                                <label class="control-label span1" >TO</label>                                     <input readonly="readonly" class="span2"  type="text"  style="text-transform: uppercase; " name="corr_father_name" value="'+corr_father_cnic+'"  maxlength="60">                                </div>                            </div>  '); 
             }
-              if($(this).val() == '6')
+            if($(this).val() == '6')
             {
                 $('#div_confirmation').append('<div class="control-group">                                <h4 class="span4">Exam Information :</h4>                                <div class="controls controls-row">                                    <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">                                                                  </div>                            </div>  <div class="control-group">                                <label class="control-label span2" >                                    Current Group :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+std_group+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_std_group+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                 <div class="control-group">                                <label class="control-label span2" >                                    Subject 1 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub1+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub1+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                    <div class="control-group">                                <label class="control-label span2" >                                    Subject 2 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub2+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub2+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 3 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub3+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub3+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 4 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub4+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2" type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub4+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 5 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub5+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub5+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                  <div class="control-group">                                <label class="control-label span2" >                                    Subject 6 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub6+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub6+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                   <div class="control-group">                                <label class="control-label span2" >                                    Subject 7 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="std_group" name="std_group" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub7+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_std_group" value="'+corr_sub7+'" disabled="disabled"  maxlength="60">                                </div>                            </div>                                                                                                                                                                                                          <div class="control-group">                                <label class="control-label span2" >                                    Subject 8 :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <input class="span2" readonly="readonly" id="sub8" name="sub8" style="text-transform: uppercase;     font-size: 10px;" type="text" maxlength="60" value="'+sub8+'" required="required">                                                                <label class="control-label span1" >TO</label>                                     <input class="span2"  type="text"  style="text-transform: uppercase; " name="corr_sub8" value="'+corr_sub8+'" disabled="disabled"  maxlength="60">                                </div>                            </div>             ');
             }
-           
-            
+
+
         });
-         $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
-         $("#btnsubmitConfirmation").click(function(){
-       // alert('called');
-        $("#corr_form").submit();
-    })
-         $.fancybox("#div_confirmation");
+        $('#div_confirmation').append('<button type="button" id="btnsubmitConfirmation" name="btnsubmitUpdateEnrol" class="btn btn-large btn-info offset2" >                                    Apply for Correction                                </button>                                <input type="button" class="btn btn-large btn-danger" value="Edit Correction Form" id="btnCancel" name="btnCancel" onclick="return CancelAlert_confirmation_form();" >');
+        $("#btnsubmitConfirmation").click(function(){
+            // alert('called');
+            $("#corr_form").submit();
+        })
+        $.fancybox("#div_confirmation");
         // alert(chkBoxArray);
         //  $.fancybox("#div_confirmation");
         // $("#div_confirmation").fancybox();
     })
-    
+
 </script>
 <script type="">
     function isValidEmailAddress(emailAddress) {
@@ -538,7 +544,7 @@ if(isset($files)){
 
         window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
     }
-    
+
     function SpecPermission_INSERT()
     {
         var inst_cd  = $("#inst_cd").val();
@@ -552,31 +558,36 @@ if(isset($files)){
             $('#inst_cd').focus();
             return false; 
         }
-        if(feeding_date == "")
+       else if(feeding_date == "")
         {
             alertify.error("Please write Feeding Date.");
             $('#txt_FeedingDate').focus();
             return false; 
         }
-        if(regfee == 0 || regfee == "")
+       else if(regfee == 0 || regfee == "")
         {
             alertify.error("Please write Registration Fee.");
             $('#Reg_fee').focus();
             return false; 
         }
-        if(Proc_fee == 0 || Proc_fee == "")
+       else if(Proc_fee == 0 || Proc_fee == "")
         {
             alertify.error("Please Processing Fee.");
             $('#Proc_Fee').focus();
             return false; 
         }
-       /* if(spec_fee == 0 || spec_fee == "")
+       alertify.log("Please wait while your request has been processing.");
+       $("#SpecForm").submit();
+        $('[name="btnsubmitNewEnrol"]').prop('disabled', true);
+         $('[name="btnsubmitNewEnrol"]').text("Please wait...");
+        return true;
+        /* if(spec_fee == 0 || spec_fee == "")
         {
-            alertify.error("Please Write Special Fee.");
-            $('#Spec_Fee').focus();
-            return false; 
+        alertify.error("Please Write Special Fee.");
+        $('#Spec_Fee').focus();
+        return false; 
         }    */
-        
+
     }
     function BatchRelease_INSERT()
     {
@@ -695,39 +706,39 @@ if(isset($files)){
             $('.mPageloader').hide();
         }
     }
-     function CancelAlert_confirmation_form()
-                            {
-                                var msg = "Are You Sure You want to Cancel this Form ?"
-                                alertify.confirm(msg, function (e) {
-                                    if (e) {
-                                        // user clicked "ok"
-                                        parent.$.fancybox.close();
-                                       // window.location.href ='<?php echo base_url(); ?>Registration/EditForms';
-                                    } else {
-                                        // user clicked "cancel"
+    function CancelAlert_confirmation_form()
+    {
+        var msg = "Are You Sure You want to Cancel this Form ?"
+        alertify.confirm(msg, function (e) {
+            if (e) {
+                // user clicked "ok"
+                parent.$.fancybox.close();
+                // window.location.href ='<?php echo base_url(); ?>Registration/EditForms';
+            } else {
+                // user clicked "cancel"
 
-                                    }
-                                });
-                            }
+            }
+        });
+    }
 </script>
 
 <script type="">
 
-var isReadm = "<?php  echo @$isReAdm; ?>";
+    var isReadm = "<?php  echo @$isReAdm; ?>";
 
-if(isReadm == 0)
+    if(isReadm == 0)
     {
         <?php if($Inst_Id == 111110 || $Inst_Id == 162136 || $Inst_Id == 112024 || $Inst_Id == 161021) {?>
-    $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 12, 31),minDate:new Date(1983, 0, 1)}).val();    
-    <?php } else{?>
-        
-         $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();   
-    <?php }?>
+            $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 12, 31),minDate:new Date(1983, 0, 1)}).val();    
+            <?php } else{?>
+
+            $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();   
+            <?php }?>
     }
-    
-    
-    
-     //var date2 = $('.pickupDate').datepicker('getDate', '+1d'); 
+
+
+
+    //var date2 = $('.pickupDate').datepicker('getDate', '+1d'); 
     $( "#txt_FeedingDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:"+10D",minDate:-0}).val();
     $( "#corr_dob" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, maxDate:new Date(2004, 7, 1),minDate:new Date(1983, 0, 1)}).val();
     $( "#batch_real_PaidDate" ).datepicker({ dateFormat: 'dd-mm-yy',changeMonth: true, changeYear: true, startDate:new Date(),maxDate:new Date(),minDate: -60 }).val();
@@ -891,19 +902,19 @@ if(isReadm == 0)
         $('#sub8').empty();
         window.location.href = '<?=base_url()?>/Registration/NewEnrolment_EditForm/'+formrno
     }
-      function releasemForm11th(formrno)
+    function releasemForm11th(formrno)
     {
-     
+
         window.location.href = '<?=base_url()?>/migration/release_stdForm11th/'+formrno
     }
-      function releasemForm11th_byRollNo(formrno)
+    function releasemForm11th_byRollNo(formrno)
     {
-     
+
         window.location.href = '<?=base_url()?>/migration/release_stdForm11th_byRollNo/'+formrno
     }
-      function releasemForm_byRollNo(formrno)
+    function releasemForm_byRollNo(formrno)
     {
-     
+
         window.location.href = '<?=base_url()?>/migration/release_stdForm_byRollNo/'+formrno
     }
     function ReturnForm(Batch_ID)
@@ -922,13 +933,13 @@ if(isReadm == 0)
     function ReturnForm_ProofReading_Formnowise(startformno,endformno){
         window.location.href = '<?=base_url()?>/Registration/return_pdf/'+startformno + '/5' +'/'+endformno+'/';
     }
-     function Print_RegCards_groupwise(grp_cd){
+    function Print_RegCards_groupwise(grp_cd){
         window.location.href = '<?=base_url()?>Registration/Reg_Cards_Printing_9th_PDF/'+grp_cd + '/2'
     }
     function Print_RegCards_Formnowise(startformno,endformno){
         window.location.href = '<?=base_url()?>Registration/Reg_Cards_Printing_9th_PDF/'+startformno + '/3' +'/'+endformno +'/';
     }
-   function ChallanForm_Reg9th_Regular(Batch_ID)
+    function ChallanForm_Reg9th_Regular(Batch_ID)
     {
         window.location.href = '<?=base_url()?>Registration/ChallanForm_Reg9th_Regular/'+Batch_ID
     }
@@ -938,10 +949,10 @@ if(isReadm == 0)
     function Print_Registration_Form_Proofreading_Formnowise(startformno,endformno){
         window.location.href =  '<?=base_url()?>/Registration/Print_Registration_Form_Proofreading_Groupwise/'+startformno + '/2' +'/'+endformno+'/';
     }
-       $('#print_regCards').click( function(){
+    $('#print_regCards').click( function(){
         var option =  $('input[type=radio][name=opt]:checked').val(); 
-         //alert(option);
-       //  return;
+        //alert(option);
+        //  return;
         if(option == "1")
         {
             var std_group = $('#std_group').val();
@@ -1120,7 +1131,7 @@ if(isReadm == 0)
     function valid_delete_form()
     {
         var formno = $('#txtformNo_search').val();
-       
+
         if(formno == "" || formno.length < 4 || formno.length > 10){
             alertify.error("Please write Valid Form No.");
             $('#txtformNo_search').focus();
@@ -1151,7 +1162,7 @@ if(isReadm == 0)
         });
 
     }
-    
+
     function Verified_Update(Batch_ID)
     {
         var msg = "Are You Sure You want to update ?"
@@ -1167,7 +1178,7 @@ if(isReadm == 0)
         });
 
     }
-       function Verified11_Update(Batch_ID)
+    function Verified11_Update(Batch_ID)
     {
         var msg = "Are You Sure You want to update ?"
         alertify.confirm(msg, function (e) {
@@ -1230,7 +1241,7 @@ if(isReadm == 0)
         $("#sub3").empty();
         var Religion = $("input[name=religion]:checked").val();
         //console.log(Religion);
-      //  console.log(Religion);
+        //  console.log(Religion);
         if(Religion == "1")
         {
 
@@ -1345,25 +1356,25 @@ if(isReadm == 0)
 
         $("#deleteForm").submit(function (e){
             e.preventDefault(); 
-             var msg = "Are You Sure You want to DELETE this Form ?"
-     alertify.confirm(msg, function (e) 
-     {
-         
-    if (e) {
-        // user clicked "ok"
-      window.location.href ='<?php echo base_url(); ?>BiseCorrection/Delete_Form';
-       $("#deleteForm")[0].submit();
-    } else {
-        
-        // user clicked "cancel"
-        
-    }
-    
-});  
+            var msg = "Are You Sure You want to DELETE this Form ?"
+            alertify.confirm(msg, function (e) 
+                {
+
+                    if (e) {
+                        // user clicked "ok"
+                        window.location.href ='<?php echo base_url(); ?>BiseCorrection/Delete_Form';
+                        $("#deleteForm")[0].submit();
+                    } else {
+
+                        // user clicked "cancel"
+
+                    }
+
+            });  
         })
-  
+
         var error = "<?php echo @$error; ?>";
-         var error_manual9th = "<?php  echo @$error_manualentry9th; ?>";
+        var error_manual9th = "<?php  echo @$error_manualentry9th; ?>";
         if(error_manual9th == "Updated Successfully"){
             alertify.success(error_manual9th);
         }
@@ -1470,9 +1481,9 @@ if(isReadm == 0)
         }
         else if($("#std_group").val() == "2"){
 
-            
-            
-            
+
+
+
 
             $.each(sub7_Hum,function(val,text){
 
@@ -1520,7 +1531,7 @@ if(isReadm == 0)
             $("#corr_sub8").val(sub8_selected);
 
         }
-        
+
         var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep['excep'];}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
@@ -1629,7 +1640,7 @@ if(isReadm == 0)
         });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-       function Restore_Deleted_Form_BiseAdmin(formrno)
+    function Restore_Deleted_Form_BiseAdmin(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Restore this Form ?"
@@ -1645,7 +1656,7 @@ if(isReadm == 0)
         });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function Restore_Deleted_Form_BiseAdmin11(formrno)
+    function Restore_Deleted_Form_BiseAdmin11(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Restore this Form ?"
@@ -1661,7 +1672,7 @@ if(isReadm == 0)
         });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function Correction_form_11th(formrno)
+    function Correction_form_11th(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Apply for Correction to this Form ?"
@@ -1693,39 +1704,39 @@ if(isReadm == 0)
         });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-        function download_corr_form(formrno)
+    function download_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
         //alertify.confirm(msg, function (e) {
 
-         //   if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_correction_Form_Final/'+formrno;
+        //   if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_correction_Form_Final/'+formrno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
         //    }
-      //  });
+        //  });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function download_challan_form(formrno)
+    function download_challan_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        //  alertify.confirm(msg, function (e) {
 
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_challan_Form/'+formrno;
+        //     if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>NinthCorrection/Print_challan_Form/'+formrno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
-          //  }
-       // });
+        //  }
+        // });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function download_Branch_corr_form(formrno)
+    function download_Branch_corr_form(formrno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
         var msg = "Are You Sure You want to Apply for Correction to this Form ?"
@@ -1741,20 +1752,20 @@ if(isReadm == 0)
         });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
-     function Corr_App_Delete(Appno)
+    function Corr_App_Delete(Appno)
     {
         // var msg = "<img src='<?php echo base_url(); ?>assets/img/note_for_batch.jpg' alt='logo' style='width:800px; height: auto;' />"
-       // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
-      //  alertify.confirm(msg, function (e) {
+        // var msg = "Are You Sure You want to Apply for Correction to this Form ?"
+        //  alertify.confirm(msg, function (e) {
 
-       //     if (e) {
-                // user clicked "ok"
-                window.location.href ='<?php echo base_url(); ?>NinthCorrection/Corr_App_Delete/'+Appno;
+        //     if (e) {
+        // user clicked "ok"
+        window.location.href ='<?php echo base_url(); ?>NinthCorrection/Corr_App_Delete/'+Appno;
         //    } else {
-                // user clicked "cancel"
+        // user clicked "cancel"
 
-          //  }
-       // });
+        //  }
+        // });
         // window.location.href = '<?=base_url()?>RollNoSlip/MatricRollNo/'+formrno
     }
     function downloadslip9th(rno)
@@ -1994,13 +2005,13 @@ if(isReadm == 0)
         console.log('Hi i am sub6 dropdown :) ');
     })
 
-      $("#sub7").change(function(){
+    $("#sub7").change(function(){
         console.log('Hi i am sub7 dropdown :) ');
         var sub6 = $("#sub6").val();
         var sub7 = $("#sub7").val();
         var sub8 = $("#sub8").val();
 
-        
+
 
         if((sub7 == sub8)|| (sub7 == sub6))
         {
@@ -2017,7 +2028,7 @@ if(isReadm == 0)
             {  
                 vals =1;
             }
-            
+
         }
         for(var i =0 ; i<langascd.length; i++)
         {
@@ -2025,7 +2036,7 @@ if(isReadm == 0)
             {  
                 vals2 =1;
             }
-            
+
         }
         if(vals > 0 && vals2 > 0)
         {
@@ -2057,8 +2068,8 @@ if(isReadm == 0)
             // $("sub8")[0].selectedIndex = 0;
             return;
         }
-         var valtext = 0;
-       var vals = 0;
+        var valtext = 0;
+        var vals = 0;
         var vals2 = 0;
         for(var i =0 ; i<langascd.length; i++)
         {
@@ -2066,7 +2077,7 @@ if(isReadm == 0)
             {  
                 vals =1;
             }
-            
+
         }
         for(var i =0 ; i<langascd.length; i++)
         {
@@ -2074,7 +2085,7 @@ if(isReadm == 0)
             {  
                 vals2 =1;
             }
-            
+
         }
         if(vals > 0 && vals2 > 0)
         {
@@ -2201,9 +2212,9 @@ if(isReadm == 0)
         $("#corr_sub7").empty();
         $("#sub8p2").empty();
     }
-    
-   
-    
+
+
+
     $("#std_group").change(function(){
 
 
@@ -2451,7 +2462,7 @@ if(isReadm == 0)
         $("#corr_sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
     }
 
-    
+
     //   $("#registration").validate();
     //$("#cand_name").focus();
     /*
@@ -2891,75 +2902,75 @@ if(isReadm == 0)
     {
         $( "#uplodpics" ).submit();
     }
-           var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
-        var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
-        var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
-        var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
-        var spec_case_inst = "<?php   echo @$msg; ?>"
-        var excep_Invalid_formno = "<?php  echo @$excep; ?>"
-        var restore_msg = "<?php   echo  @$restore_msg; ?>"
-        
-         if (excep_Invalid_formno == "success")
-        {
-            alertify.success("Updated Successfully");
-        }
-        /*else  if (excep_Invalid_formno != "")
-        {
-             alertify.error("Invalid Form No. Please write Valid Form No.");
-        } */
-        else  if(restore_msg!="")
-        {
-            alertify.success(restore_msg);
-        }
-        
-        if(restore_msg!="")
-        {
-             alertify.success(restore_msg);
-        }
-       
-        if(spec_case_inst == "Saved")
-        {
-             alertify.success("Saved Successfully");
-        }
-        else if (spec_case_inst == "'Not Saved")
-        {
-             alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
-        }
-        if(BatchRelease_Op != "")
-        {
-            if(BatchRelease_Op == "success")
-            {
-                alertify.success("Batch Release Successfully");    
-            }
-            else if(BatchRelease_Op == "Fail")
-            {
-                alertify.error("A Problem occur, Please Try Again later.");
-            }
+    var error_BatchRelease = "<?php  echo @$BatchRelease_excep; ?>";
+    var success_BatchRelease = "<?php  echo @$errors['BatchRelease_excep']; ?>";
+    var BatchRelease_Op = "<?php  echo @$errors_RB_update; ?>";
+    var BatchRestore_Op = "<?php  echo @$errors_RB_restore; ?>";
+    var spec_case_inst = "<?php   echo @$msg; ?>"
+    var excep_Invalid_formno = "<?php  echo @$excep; ?>"
+    var restore_msg = "<?php   echo  @$restore_msg; ?>"
 
-        } 
-        if(BatchRestore_Op != "")
-        {
-            if(BatchRelease_Op == "success")
-            {
-                alertify.success("Batch Restored Successfully");    
-            }
-            else if(BatchRelease_Op == "Fail")
-            {
-                alertify.error("A Problem occur, Please Try Again later.");
-            }
+    if (excep_Invalid_formno == "success")
+    {
+        alertify.success("Updated Successfully");
+    }
+    /*else  if (excep_Invalid_formno != "")
+    {
+    alertify.error("Invalid Form No. Please write Valid Form No.");
+    } */
+    else  if(restore_msg!="")
+    {
+        alertify.success(restore_msg);
+    }
 
-        } 
-        if(success_BatchRelease != "")
-        {
-            alertify.success(success_BatchRelease);
-        } 
-        if(error_BatchRelease != "")
-        {
-            alertify.error(error_BatchRelease);
-        }  
+    if(restore_msg!="")
+    {
+        alertify.success(restore_msg);
+    }
 
-        
-         var Gender = $("input[name=gender]:checked").val();
+    if(spec_case_inst == "Saved")
+    {
+        alertify.success("Saved Successfully");
+    }
+    else if (spec_case_inst == "'Not Saved")
+    {
+        alertify.error("NOT SAVED due to some Problem, Please Try Again later.");
+    }
+    if(BatchRelease_Op != "")
+    {
+        if(BatchRelease_Op == "success")
+        {
+            alertify.success("Batch Release Successfully");    
+        }
+        else if(BatchRelease_Op == "Fail")
+        {
+            alertify.error("A Problem occur, Please Try Again later.");
+        }
+
+    } 
+    if(BatchRestore_Op != "")
+    {
+        if(BatchRelease_Op == "success")
+        {
+            alertify.success("Batch Restored Successfully");    
+        }
+        else if(BatchRelease_Op == "Fail")
+        {
+            alertify.error("A Problem occur, Please Try Again later.");
+        }
+
+    } 
+    if(success_BatchRelease != "")
+    {
+        alertify.success(success_BatchRelease);
+    } 
+    if(error_BatchRelease != "")
+    {
+        alertify.error(error_BatchRelease);
+    }  
+
+
+    var Gender = $("input[name=gender]:checked").val();
     //console.log(Religion);
     if(Gender == "2")
     {
@@ -2967,8 +2978,8 @@ if(isReadm == 0)
         $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
         $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
     }
-    
-        
+
+
     <?php if(@$isdashbord == 1) {?>
         /*  $( window ).load(function() {
 

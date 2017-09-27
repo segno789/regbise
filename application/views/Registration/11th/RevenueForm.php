@@ -111,8 +111,10 @@
     $regfine =  0;
     foreach ($data['stdinfo'] as $key=>$vals) {
         $n++;
-        $vals->RegFineFee = 4000;
-        $regfine = $regfine+4000;
+       // $vals->RegFineFee = 4000;
+        $vals->RegFineFee = 0;
+        //$regfine = $regfine+4000;
+        $regfine = $regfine+0;
        /* if($vals->RegFineFee == '')
         {
             $vals->RegFineFee = 0;

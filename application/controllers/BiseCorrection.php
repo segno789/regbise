@@ -8,7 +8,7 @@ class BiseCorrection extends CI_Controller {
 
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
-            // redirect('login/biselogin');
+             redirect('login/biselogin');
         }
     }
     public function migration9th()
@@ -877,11 +877,12 @@ class BiseCorrection extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-        //   DebugBreak();
+         //  DebugBreak();
         if (!isset($kpo))
         {
             //$error['excep'][1] = 'Please Login!';
-            $this->load->view('login/login.php');
+            $this->load->view('login/biselogin.php');
+            return;
         }
         $lastdate  = date('Y-m-d',strtotime(@$_POST['txt_FeedingDate'])) ;
         $data = array(
@@ -2328,6 +2329,7 @@ class BiseCorrection extends CI_Controller {
 
     public function BatchRelease()
     {
+        // DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '0',
@@ -2720,7 +2722,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function correction_update($BatchId)
     {
-
+       //  DebugBreak();
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();

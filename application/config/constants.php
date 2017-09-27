@@ -47,26 +47,27 @@ define('DOUBLE_LAST_DATE', '2016-09-30');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
 define('ISREADMISSION', '1');
+define('YEAR','2017');
 
 
 //===========================================================
 define('IMAGE_PATH11', 'uploads/2016/colleges/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
-define('SINGLE_LAST_DATE11', '2016-11-08');
-define('DOUBLE_LAST_DATE11', '2016-11-08');
+define('SINGLE_LAST_DATE11', '2017-11-08');
+define('DOUBLE_LAST_DATE11', '2017-11-08');
 
 //================ Ninth Correction variables ========================
-define('Correction_Last_Date','2016-10-31');
+define('Correction_Last_Date','2017-10-31');
 define('Corr_ApplicationNo','30000');
 define('Corr_ApplicationNo11','10000');
 define('CORR_IMAGE_PATH', 'uploads/correction/');
 define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
 
-define('session_year','2016-2018');
+define('session_year','2017-2019');
 define('corr_bank_chall_class','9TH');
 define('return_pdf_isPicture','1');
-define('CURRENT_SESS','2016-2018'); 
+define('CURRENT_SESS','2017-2019'); 
 define('Reg_Cards_9th_Heading','SECONDARY SCHOOL'); 
 define('Reg_Cards_11th_Heading','HIGHER SECONDARY SCHOOL'); 
 define('TITLE','Online 11th/9th Registration'); 
@@ -75,7 +76,7 @@ define('TITLE_Affiliation','Online Affiliation for SSC and HSSC');
    
 //===============11th challan varaible
 define('corr_bank_chall_class1','11th');
-define('CURRENT_SESS1','2016-2018'); 
+define('CURRENT_SESS1','2017-2019'); 
 
 //================ Migration variables ========================
 
