@@ -547,12 +547,23 @@ $RegGrp = 0;
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }
-      public function EditEnrolement_data11($formno)
+      public function EditEnrolement_data11($data)
     {
 
-         // DebugBreak();
+         //DebugBreak();
 
-        $query = $this->db->get_where('Registration..tblreg11th',  array('formNo' => $formno,'class'=>11,'iyear'=>YEAR,'sess'=>1));     
+          if($data['formno'] != "")
+          {
+        $query = $this->db->get_where('Registration..tblreg11th',  array('formNo' => $data['formno'],'class'=>11,'iyear'=>YEAR,'sess'=>1));   
+          }
+          else
+          {
+          $query = $this->db->get_where('Registration..tblreg11th',  array('matRno' => $data['matrno'],'yearOfPass'=>$data['year'],'sessOfPass'=>$data['sess'],'Brd_cd'=>$data['brd'],'class'=>11,'iyear'=>YEAR,'sess'=>1)); 
+          }
+        
+            
+        
+            
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

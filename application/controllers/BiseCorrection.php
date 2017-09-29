@@ -892,6 +892,7 @@ class BiseCorrection extends CI_Controller {
             'RegFee'=>@$_POST['Reg_fee'],
             'ProcessingFee'=>@$_POST['Proc_Fee'],
             'SpecialFee'=>@$_POST['Spec_Fee'],
+            'readmfine'=>@$_POST['Spec_Fee'],
             'Isactive'=>@$_POST['IsActivated'],
             'Kpo'=>$kpo
 
@@ -944,7 +945,7 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '13',
         );
-        // DebugBreak();
+//         DebugBreak();
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1009,7 +1010,7 @@ class BiseCorrection extends CI_Controller {
                 $year = 2016;    
             }
             //DebugBreak();
-            $datainfo = $this->BiseCorrections_model->EditEnrolement_data11($formno);
+            $datainfo = $this->BiseCorrections_model->EditEnrolement_data11(array('formno'=>$formno, 'matrno'=>'', 'year'=>'', 'sess'=>'', 'brd'=>''));
             $inst_name =  $this->BiseCorrections_model->GetInstbyId_11th_otherboard($datainfo[0]['coll_cd']);
             
             if($inst_name[0]->IsGovernment == 1)
@@ -1439,14 +1440,30 @@ class BiseCorrection extends CI_Controller {
     }
       public function NewEnrolment_EditForm11()
     {    
-        //DebugBreak();
+       // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
+        $formno = $this->uri->segment(3);
+        if(isset($formno))
+        {
+        $matrno = "";
+        $matyear = "";
+        $sess = "";
+        $brd = "";
+        }
+        else
+        {
+        $matrno = $_POST['txtmatricRollno_search'];
+        $matyear = $_POST['txtmatricYear_search'];
+        $sess = $_POST['txtmatricSess_search'];
+        $brd = $_POST['txtmatricBrd_search'];
         $formno = $_POST['txtformNo_search'];
-        if($formno == ""){
+        }
+        if($formno == "" && $matrno == "")
+        {
             return;
         }
         $isReAdm = 0;
@@ -1476,7 +1493,7 @@ class BiseCorrection extends CI_Controller {
                 $year = 2016;    
             }
            
-            $datainfo = $this->BiseCorrections_model->EditEnrolement_data11($formno);
+            $datainfo = $this->BiseCorrections_model->EditEnrolement_data11(array('formno'=>$formno, 'matrno'=>$matrno, 'year'=>$matyear, 'sess'=>$sess, 'brd'=>$brd ));
             $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['coll_cd']);
             $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['coll_cd'],'grp_cd'=>$inst_name[0]);
         }
@@ -1485,7 +1502,7 @@ class BiseCorrection extends CI_Controller {
         {
             $this->session->set_flashdata('NewEnrolment_error','error');
             //  echo '<pre>'; print_r($allinputdata['excep']);exit();
-            redirect('BiseCorrection/Delete_Form/');
+            redirect('BiseCorrection/Delete_Form11/');
             return;
         }
         $this->load->view('common/menu.php',$data);
@@ -2191,6 +2208,30 @@ class BiseCorrection extends CI_Controller {
       $this->load->view('common/header.php',$userinfo);
       $this->load->view('common/menu.php',$data);
       $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDCR.php',$error);
+      $this->load->view('common/footer.php');
+    }
+     public function searchbyinst11thDelete_candidate()
+    {
+      $this->load->helper('url');
+      $data = array(
+          'isselected' => '13',
+      );
+      $this->load->library('session');
+      $this->load->model('BiseCorrections_model');
+      $Logged_In_Array = $this->session->all_userdata();
+      $userinfo = $Logged_In_Array['logged_in'];
+   
+      if(!empty($_POST))
+      {
+            // DebugBreak();
+       $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
+      }
+      
+      
+      //error_manualentry9th
+      $this->load->view('common/header.php',$userinfo);
+      $this->load->view('common/menu.php',$data);
+      $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDdelete.php',$error);
       $this->load->view('common/footer.php');
     }
     public function reg9thcorrections()

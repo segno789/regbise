@@ -41,11 +41,11 @@
                     <select  class="span3 chosen-single chosen-default chosen-select" id="inst_cd" name="inst_cd" style="width: 509px;    font-size: 20px;    background-color: cornsilk;">
                         <option value="0" selected="selected"> Search Institute... </option> 
                         <?php 
-                        //DebugBreak();            
+                        //DebugBreak();   && ($inst->Inst_cd != 399903)          
 
                         foreach($Inst_data as $inst)
                         {
-                            if( ($inst->Inst_cd != 399901) && ($inst->Inst_cd != 399902) && ($inst->Inst_cd != 399903)  && ($inst->Inst_cd != 999999))
+                            if( ($inst->Inst_cd != 399901) && ($inst->Inst_cd != 399902)  && ($inst->Inst_cd != 999999))
                             {?>
                                 <option value="<?php echo $inst->Inst_cd ; ?>"> <?php echo $inst->Inst_cd.'-'.$inst->Name; ?> </option>
                                 <?php } }

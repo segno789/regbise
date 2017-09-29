@@ -576,10 +576,16 @@ if(isset($files)){
             $('#Proc_Fee').focus();
             return false; 
         }
+        else if(spec_fee == "")
+        {
+        alertify.error("Please Write Special Fee.");
+        $('#Spec_Fee').focus();
+        return false; 
+        }  
        alertify.log("Please wait while your request has been processing.");
-       $("#SpecForm").submit();
+        $("#SpecForm").submit();
         $('[name="btnsubmitNewEnrol"]').prop('disabled', true);
-         $('[name="btnsubmitNewEnrol"]').text("Please wait...");
+        $('[name="btnsubmitNewEnrol"]').text("Please wait...");
         return true;
         /* if(spec_fee == 0 || spec_fee == "")
         {
@@ -1131,11 +1137,45 @@ if(isset($files)){
     function valid_delete_form()
     {
         var formno = $('#txtformNo_search').val();
+        var matrno = $('#txtmatricRollno_search').val();
+        var year = $('#txtmatricYear_search').val();
+        var sess = $('#txtmatricSess_search').val();
+        var brd = $('#txtmatricBrd_search').val();
 
-        if(formno == "" || formno.length < 4 || formno.length > 10){
-            alertify.error("Please write Valid Form No.");
+        if((formno == "" || formno.length < 4 || formno.length > 10) && (matrno == ""))
+        {
+            alertify.error("Please write Valid Form No. OR Matric Detail");
             $('#txtformNo_search').focus();
             return false;
+        }
+        if(formno == "" || formno.length < 4 || formno.length > 10)
+        {
+          $('#txtformNo_search').val("");
+        if(matrno == "")
+        {
+         alertify.error("Please write Valid Form No. OR Matric Roll No.");
+            $('#txtmatricRollno_search').focus();
+            return false;
+        }
+        else if(year == 0)
+        {
+          alertify.error("Please Select Matric Year.");
+            $('#txtmatricYear_search').focus();
+            return false;
+        }
+        else if(sess == 0)
+        {
+            alertify.error("Please Select Matric Session.");
+            $('#txtmatricSess_search').focus();
+            return false;
+        }
+        else if(brd == 0)
+        {
+           alertify.error("Please Select Matric Board.");
+            $('#txtmatricBrd_search').focus();
+            return false;
+        }
+        
         }
     }
     function RevenueForm(Batch_ID)

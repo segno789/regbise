@@ -618,6 +618,21 @@ header("Pragma: no-cache");
                 <?php
             }
             
+             if($isselected == '11') { 
+                ?>
+                <ul >
+                    <li><a href="#"   data-original-title=""  class="<?php if($isselected == '11') {echo 'heading';}?>">Special Permission</a></li>
+
+                  
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th">
+                            9th Special Permission
+                        </a>
+                    </li>
+                </ul>
+                <?php
+            }
+            
             if($isselected == '10'){
                 ?>
                 <ul >
