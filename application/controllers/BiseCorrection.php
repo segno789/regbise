@@ -1447,7 +1447,7 @@ class BiseCorrection extends CI_Controller {
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
         $formno = $this->uri->segment(3);
-        if(isset($formno))
+        if($formno !=FALSE)
         {
         $matrno = "";
         $matyear = "";
