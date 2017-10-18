@@ -58,9 +58,9 @@
                                         <!-- <th style="width:4%" class="hidden-phone">
                                             Picture
                                         </th>  -->
-                                        <th style="width:18%" class="hidden-phone" >
+                                       <!-- <th style="width:18%" class="hidden-phone" >
                                             Download
-                                        </th>
+                                        </th>   -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,10 +103,11 @@
                                     <td>'.$vals["name"].'</td>
                                     <td>'.$vals["Fname"].'</td>
                                     ';  //<td><img id="previewImg" style="width:40px; height: 40px;" src="../../'.IMAGE_PATH.'colleges/'.$vals["coll_cd"].'/'.$vals['PicPath'].'?'.rand(10000,1000000).'" alt="Candidate Image"></td>
-                                    echo'<td>
-                                    <button type="button" class="btn btn-danger" value="'.$formno.'" onclick="delForm11('.$formno.')">Delete Form</button>
-                                    </td>
+                                    echo'
                                     </tr>';
+                                    //<td>
+                                    //<button type="button" class="btn btn-danger" value="'.$formno.'" onclick="delForm11('.$formno.')">Delete Form</button>
+                                    //</td>
                                     endforeach;
                                     
                                     //<td>'.date("d-m-Y", strtotime($vals["Dob"])).'</td>

@@ -139,7 +139,7 @@ class BiseCorrections_model extends CI_Model
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9"); 
+            $this->db->where("($table2.isdeleted = 0 or $table2.isdeleted is null) and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9"); 
         }
         if($class == 10)
         {
@@ -700,7 +700,7 @@ $RegGrp = 0;
     {
         //DebugBreak();
 
-        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
+        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2, 'iyear'=>YEAR));
         $result = $q2->result_array();
         return $result;
     }

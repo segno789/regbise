@@ -552,6 +552,7 @@ if(isset($files)){
         var regfee   = $("#Reg_fee").val();
         var Proc_fee = $("#Proc_Fee").val();
         var spec_fee = $("#Spec_Fee").val();
+        var ReAdm_Fee = $("#ReAdm_Fee").val();
         if(inst_cd == 0 )
         {
             alertify.error("Please Select Institute.");
@@ -580,6 +581,12 @@ if(isset($files)){
         {
         alertify.error("Please Write Special Fee.");
         $('#Spec_Fee').focus();
+        return false; 
+        } 
+        else if(ReAdm_Fee == "")
+        {
+        alertify.error("Please Write Re-Admission Fee.");
+        $('#ReAdm_Fee').focus();
         return false; 
         }  
        alertify.log("Please wait while your request has been processing.");

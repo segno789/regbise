@@ -877,7 +877,7 @@ class BiseCorrection extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-         //  DebugBreak();
+       // DebugBreak();
         if (!isset($kpo))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -892,7 +892,7 @@ class BiseCorrection extends CI_Controller {
             'RegFee'=>@$_POST['Reg_fee'],
             'ProcessingFee'=>@$_POST['Proc_Fee'],
             'SpecialFee'=>@$_POST['Spec_Fee'],
-            'readmfine'=>@$_POST['Spec_Fee'],
+            'readmfine'=>@$_POST['ReAdm_Fee'],
             'Isactive'=>@$_POST['IsActivated'],
             'Kpo'=>$kpo
 
@@ -915,7 +915,7 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '8',
         );
-        // DebugBreak();
+        // DebugBreak();                                  
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1439,15 +1439,15 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
       public function NewEnrolment_EditForm11()
-    {    
-       // DebugBreak();
+      {    
+        DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
         $formno = $this->uri->segment(3);
-        if($formno !=FALSE)
+        if($formno != FALSE)
         {
         $matrno = "";
         $matyear = "";

@@ -75,6 +75,11 @@
                 <div class='controls controls-row'>  <label class='control-label span1' >  SPECIAL FEE: </label>  <input class='span3'  type='number' id='Spec_Fee' name='Spec_Fee' placeholder='SPECIAL FEE'  required='required' value="" >
                 </div>
             </div>
+             <div class='control-group'>
+
+                <div class='controls controls-row'>  <label class='control-label span1' >  RE-ADMISSION FEE: </label>  <input class='span3'  type='number' id='ReAdm_Fee' name='ReAdm_Fee' placeholder='RE-ADMISSION FEE'  required='required' value="" >
+                </div>
+            </div>
             <div class='control-group'>
 
                 <div class='controls controls-row'>  <label class='control-label span1' style='text-transform: uppercase;' > FEEDING DATE:  </label> <input class='span3' type='text' id='txt_FeedingDate' style='text-transform: uppercase;' name='txt_FeedingDate' placeholder='FEEDING DATE' value="" required='required' readonly="readonly">
