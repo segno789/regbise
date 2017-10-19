@@ -21,7 +21,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+       
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -30,7 +30,7 @@ class BiseCorrection extends CI_Controller {
         else{
             $error['excep'] = '';
         }
-       // DebugBreak();
+       
         $data['migration'] = $this->BiseCorrections_model->getmigration(9);
         $data['migration1'] = $this->BiseCorrections_model->getmigrationonline(9);
         $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
@@ -50,7 +50,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-         //DebugBreak();
+         
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -77,7 +77,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -105,7 +105,7 @@ class BiseCorrection extends CI_Controller {
         
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -124,7 +124,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function listmigration9th()
     {
-        // DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -133,7 +133,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -152,7 +152,7 @@ class BiseCorrection extends CI_Controller {
     }
      public function listmigration11th()
     {
-        // DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '40',
@@ -162,7 +162,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -181,7 +181,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function listmigration10th()
     {
-        // DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -190,7 +190,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -207,7 +207,7 @@ class BiseCorrection extends CI_Controller {
     }
    public function listmigration12th()
     {
-        // DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '40',
@@ -217,7 +217,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        // DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -234,7 +234,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function migrate()
     {
-         //DebugBreak();
+         
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -246,7 +246,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-       //  DebugBreak();
+       
         if($isclass == 9)
         {
             if($migrateto != '')
@@ -442,7 +442,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        //DebugBreak();
+        
         if($isclass == 9)
         {
             if($migrateto != '')
@@ -838,7 +838,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function SpecPermison_9th()
     {
-        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '11',
@@ -846,7 +846,7 @@ class BiseCorrection extends CI_Controller {
 
         $spec_case_msg="";
         $this->load->library('session');
-        //  DebugBreak();
+        
         if(( $this->session->flashdata('msg'))){
 
             $msg = $this->session->flashdata('msg');
@@ -877,7 +877,7 @@ class BiseCorrection extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-       // DebugBreak();
+       
         if (!isset($kpo))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -915,13 +915,13 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '8',
         );
-        // DebugBreak();                                  
+        
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
@@ -945,13 +945,13 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '13',
         );
-//         DebugBreak();
+
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
@@ -971,7 +971,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_EditForm11th_manual_corr()
     {    
-        //DebugBreak();
+        
          $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -990,7 +990,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1009,7 +1009,7 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-            //DebugBreak();
+            
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data11(array('formno'=>$formno, 'matrno'=>'', 'year'=>'', 'sess'=>'', 'brd'=>''));
             $inst_name =  $this->BiseCorrections_model->GetInstbyId_11th_otherboard($datainfo[0]['coll_cd']);
             
@@ -1052,7 +1052,7 @@ class BiseCorrection extends CI_Controller {
         }
         $Inst_Id = @$_POST['inst_cd'];
         $error = array();
-        // DebugBreak();
+        
         $formno =  @$_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
         $sub1ap1 = 0;
         $sub2ap1 = 0;
@@ -1104,7 +1104,7 @@ class BiseCorrection extends CI_Controller {
             $sub8ap1 = 1;    
         }
        
-        // DebugBreak();
+        
         if(@$_POST['IsReAdm'] == '1')
         {
 
@@ -1118,7 +1118,7 @@ class BiseCorrection extends CI_Controller {
                 redirect('Registration/ReAdmission');
                 return;
             }
-            // DebugBreak();
+            
              $addre =  str_replace("'", "", @$_POST['address']);
             $allinputdata = array('CellNo'=>@$_POST['mob_number'],
                 'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
@@ -1154,7 +1154,7 @@ class BiseCorrection extends CI_Controller {
             $allinputdata['isreadm']= 1;
             $formno = $this->Registration_11th_model->GetFormNo($Inst_Id);
             $allinputdata['formNo']= $formno;
-            //DebugBreak();
+            
 
         }
         else{
@@ -1236,7 +1236,7 @@ class BiseCorrection extends CI_Controller {
         }*/
 
 
-        //DebugBreak();
+        
         // $this->frmvalidation('NewEnrolment_EditForm/'.$formno,$allinputdata,1);
 
         /*  $a = getimagesize($filepath);
@@ -1289,7 +1289,7 @@ class BiseCorrection extends CI_Controller {
             $sub8ap1 = 1;    
 
         }
-        // DebugBreak();   
+        
          $addre =  str_replace("'", "", $this->input->post('address'));
            $addre = preg_replace('/[[:^print:]]/', '', $addre);
        $data = array(
@@ -1346,7 +1346,7 @@ class BiseCorrection extends CI_Controller {
 
         );
         
-       //DebugBreak();
+       
         
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         
@@ -1440,7 +1440,7 @@ class BiseCorrection extends CI_Controller {
     }
       public function NewEnrolment_EditForm11()
       {    
-        DebugBreak();
+        
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1473,7 +1473,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1497,7 +1497,7 @@ class BiseCorrection extends CI_Controller {
             $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['coll_cd']);
             $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['coll_cd'],'grp_cd'=>$inst_name[0]);
         }
-        // DebugBreak();
+        
         if($RegStdData['data'] == FALSE)
         {
             $this->session->set_flashdata('NewEnrolment_error','error');
@@ -1514,7 +1514,7 @@ class BiseCorrection extends CI_Controller {
     
     public function NewEnrolment_EditForm()
     {    
-        //DebugBreak();
+        
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1531,7 +1531,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1597,7 +1597,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Delete_candidate_UPDATE11()
     {
-        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -1625,7 +1625,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Restore_form()
     {
-        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '8',
@@ -1649,7 +1649,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Restore_form11()
     {
-        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -1673,7 +1673,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Restore_form_UPDATE()
     {
-        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '8',
@@ -1693,8 +1693,7 @@ class BiseCorrection extends CI_Controller {
     }                 
     public function Restore_form_UPDATE11()
     {
-        //DebugBreak();
-        //DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -1718,13 +1717,13 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '15',
         );
-        // DebugBreak();
+        
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
@@ -1739,7 +1738,7 @@ class BiseCorrection extends CI_Controller {
             $error['excep'] = '';
         }
         if($this->session->flashdata('error_manualentry9th')){
-            //DebugBreak();
+            
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
 
@@ -1761,7 +1760,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_EditForm9th_manual_corr()
     {    
-        // DebugBreak();
+        
         $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1780,7 +1779,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            //DebugBreak();
+            
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1799,7 +1798,7 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-            //  DebugBreak();
+            
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data($formno);
             $inst_name =  $this->BiseCorrections_model->GetInstbyId($datainfo[0]['Sch_cd']);
 
@@ -1825,7 +1824,7 @@ class BiseCorrection extends CI_Controller {
     public function NewEnrolment_update()
     {
 
-        //          DebugBreak();
+        
         $this->load->model('Registration_model');
 
         $this->load->library('session');
@@ -1842,7 +1841,7 @@ class BiseCorrection extends CI_Controller {
         $error = array();
         $ckpo =$Inst_Id;
         $Inst_Id = @$_POST['Inst_Id'];
-        // DebugBreak();
+        
         $formno =  $_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
         $sub1ap1 = 0;
         $sub2ap1 = 0;
@@ -1891,7 +1890,7 @@ class BiseCorrection extends CI_Controller {
             mkdir($target_path);
         }
 
-        // DebugBreak();
+        
         if(@$_POST['IsReAdm'] == '1')
         {
 
@@ -1905,7 +1904,7 @@ class BiseCorrection extends CI_Controller {
                 redirect('BiseCorrection/NewEnrolment_EditForm');
                 return;
             }
-            // DebugBreak();
+            
             $allinputdata = array('CellNo'=>@$_POST['mob_number'],
                 'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
                 'speciality'=>@$_POST['speciality'],'markOfIden'=>@$_POST['MarkOfIden'],
@@ -1940,7 +1939,7 @@ class BiseCorrection extends CI_Controller {
             $allinputdata['isreadm']= 1;
             $formno = $this->Registration_model->GetFormNo($Inst_Id);
             $allinputdata['formNo']= $formno;
-            //DebugBreak();
+            
 
         }
         else{
@@ -2041,7 +2040,7 @@ class BiseCorrection extends CI_Controller {
 
 
 
-        //DebugBreak();
+        
         $this->frmvalidation9th('BiseCorrection/NewEnrolment_EditForm9th_manual_corr/'.$formno,$allinputdata,1);
 
         /*  $a = getimagesize($filepath);
@@ -2092,7 +2091,7 @@ class BiseCorrection extends CI_Controller {
         {
             $sub8ap1 = 1;    
         }
-        // DebugBreak();
+        
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -2174,7 +2173,7 @@ class BiseCorrection extends CI_Controller {
    
       if(!empty($_POST))
       {
-            // DebugBreak();
+            
        $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
       }
       
@@ -2199,7 +2198,7 @@ class BiseCorrection extends CI_Controller {
    
       if(!empty($_POST))
       {
-            // DebugBreak();
+            
        $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
       }
       
@@ -2223,7 +2222,7 @@ class BiseCorrection extends CI_Controller {
    
       if(!empty($_POST))
       {
-            // DebugBreak();
+            
        $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
       }
       
@@ -2370,7 +2369,7 @@ class BiseCorrection extends CI_Controller {
 
     public function BatchRelease()
     {
-        // DebugBreak();
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '0',
@@ -2457,7 +2456,7 @@ class BiseCorrection extends CI_Controller {
 
 
         $this->load->model('Registration_model');
-        // DebugBreak();
+        
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2661,7 +2660,7 @@ class BiseCorrection extends CI_Controller {
 
         );
         $logedIn = $this->Registration_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
-        //DebugBreak();
+        
         if($logedIn[0]['error'] != 'false')
         {  
             $allinputdata = "";
@@ -2689,7 +2688,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment()
     {    
-        // DebugBreak();
+        
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2697,7 +2696,7 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '0',
         );
-        //  DebugBreak();
+        
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');    
@@ -2763,7 +2762,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function correction_update($BatchId)
     {
-       //  DebugBreak();
+       
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2782,8 +2781,8 @@ class BiseCorrection extends CI_Controller {
         {
             $picPath =  $appdata[0]['PicPath'] ;
             $formNo =  $appdata[0]['formNo'] ;
-            $copy_path = CORR_IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
-            $target_path = IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
+            $copy_path = 'C:/xampp/htdocs/adminbise/'.CORR_IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
+            $target_path = 'C:/xampp/htdocs/adminbise/'.IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
 
             $oldPath = $target_path.$picPath;
             $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
@@ -2820,6 +2819,7 @@ class BiseCorrection extends CI_Controller {
       public function correction_update11($BatchId)
     {
 
+       
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2831,24 +2831,19 @@ class BiseCorrection extends CI_Controller {
         $fetchdata = array('AppNo'=>$BatchId,'ckpo'=>$ckpo);
 
         $appdata = $this->BiseCorrections_model->get11thCorrectionDataById($BatchId);
-       //   DebugBreak();
+          
 
         if($appdata[0]['PicFee']>0)
         {
             $picPath =  $appdata[0]['PicPath'] ;
             $formNo =  $appdata[0]['formNo'] ;
-            $copy_path = CORR_IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
-            $target_path = IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
-
+            $copy_path = 'C:/xampp/htdocs/Inter_Admission/'.CORR_IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
+            $target_path =  'C:/xampp/htdocs/Inter_Admission/'.IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
             $oldPath = $target_path.$picPath;
+            $newName = $formNo.'_'.date('d-m-Y').'.jpg';
             $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
-
-            rename($oldPath, $newPath)  ;
-
-            copy($copy_path.$picPath, $target_path.$picPath);
-
-           
-
+           $isrename = rename($oldPath, $newPath);
+           $iscopy =copy($copy_path.$picPath, $target_path.$picPath);
         }
             $appdata = $this->BiseCorrections_model->updateCorrectionStatus11($BatchId,$ckpo);
         $status = array('data'=>$this->BiseCorrections_model->reg11thCorrection_UPDATE($fetchdata));
@@ -2879,7 +2874,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        //  DebugBreak();
+        
         $data = array(
             'isselected' => '0',
         );
@@ -2911,7 +2906,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        //  DebugBreak();
+        
         $data = array(
             'isselected' => '0',
         );
@@ -3023,7 +3018,7 @@ class BiseCorrection extends CI_Controller {
             }
             /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
             {
-            // DebugBreak();
+            
             $allinputdata['excep'] = 'This Bay Form is already Feeded.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect($viewName);
@@ -3034,10 +3029,10 @@ class BiseCorrection extends CI_Controller {
             }*/
             else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
             {
-                // DebugBreak();
+                
                 if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true )
                 {
-                    // DebugBreak();
+                    
                     $allinputdata['excep'] = 'This Bay Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
@@ -3045,7 +3040,7 @@ class BiseCorrection extends CI_Controller {
                 }
                /* else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
                 {
-                    // DebugBreak();
+                    
                     $allinputdata['excep'] = 'This Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
@@ -3054,7 +3049,7 @@ class BiseCorrection extends CI_Controller {
             }
            /* else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
             {
-                // DebugBreak();
+                
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
@@ -3065,7 +3060,7 @@ class BiseCorrection extends CI_Controller {
             }
             else if($this->Registration_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0 )
             {
-                // DebugBreak();
+                
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
@@ -3428,7 +3423,7 @@ class BiseCorrection extends CI_Controller {
         $cnteight = substr_count(@$_POST['bay_form'],"8");
         $cntnine = substr_count(@$_POST['bay_form'],"9");
 
-       // DebugBreak();
+       
         if(@$_POST['dob'] != null || $allinputdata['Dob'] != null)
         {
             $date = new DateTime(@$_POST['dob']);
@@ -3492,7 +3487,7 @@ class BiseCorrection extends CI_Controller {
             }
             /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
             {
-            // DebugBreak();
+            
             $allinputdata['excep'] = 'This Bay Form is already Feeded.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect($viewName);
@@ -3503,10 +3498,10 @@ class BiseCorrection extends CI_Controller {
             }*/
             else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
             {
-                // DebugBreak();
+                
                 if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true )
                 {
-                    // DebugBreak();
+                    
                     $allinputdata['excep'] = 'This Bay Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
@@ -3514,7 +3509,7 @@ class BiseCorrection extends CI_Controller {
                 }
                 else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
                 {
-                    // DebugBreak();
+                    
                     $allinputdata['excep'] = 'This Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
@@ -3523,7 +3518,7 @@ class BiseCorrection extends CI_Controller {
             }
             else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
             {
-                // DebugBreak();
+                
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
@@ -3534,7 +3529,7 @@ class BiseCorrection extends CI_Controller {
             }
             else if($this->Registration_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0 )
             {
-                // DebugBreak();
+                
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
@@ -3893,7 +3888,7 @@ class BiseCorrection extends CI_Controller {
    
       if(!empty($_POST))
       {
-            // DebugBreak();
+            
        $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst($_POST['txtformNo_search']);
       }
       
@@ -3933,7 +3928,7 @@ class BiseCorrection extends CI_Controller {
     public function NewEnrolment_insert_OtherBoard10th(){
 
 
-        //DebugBreak();
+        
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -4109,12 +4104,12 @@ class BiseCorrection extends CI_Controller {
             $sub8 =  $_POST['sub8p2'];  
         }
 
-        //  DebugBreak();
+        
         $cattype = @$_POST['category'];
         $examtype = "";
         $marksImp = @$_POST['ddlMarksImproveoptions'];
 
-      //  DebugBreak();
+      
 
       if($is9th == 1)
       {
@@ -4172,7 +4167,7 @@ class BiseCorrection extends CI_Controller {
             'CSC/D'=>'93',
             'HPD/D'=>'94'
         );
-        // DebugBreak();
+        
         $ispractical = 0;
         if($per_grp == 1)
         {
@@ -4206,7 +4201,7 @@ class BiseCorrection extends CI_Controller {
            $AdmFeeCatWise = 0; 
         }
         $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
-        // DebugBreak();  */
+        */
 
         $oldsess = @$_POST['oldsess'];
         if($oldsess == 'Annual'){
@@ -4220,7 +4215,7 @@ class BiseCorrection extends CI_Controller {
      
         
         
-        //  DebugBreak();
+        
          $target_path = IMAGE_PATH_OTHER_BOARD_10TH.$Inst_Id_other.'/';
         if (!file_exists($target_path)){
 
@@ -4248,7 +4243,7 @@ class BiseCorrection extends CI_Controller {
         //$config['new_image']    = $formno.'.JPEG';
 
         $this->load->library('upload', $config);
-        // DebugBreak();
+        
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         $this->upload->initialize($config);
 
@@ -4359,7 +4354,7 @@ class BiseCorrection extends CI_Controller {
         
         
         $this->frmvalidation('BiseCorrection/otherboard10th',$data,0);       
-        //DebugBreak();*/
+        //*/
         $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
@@ -4409,7 +4404,7 @@ class BiseCorrection extends CI_Controller {
        {
 
 
-        //DebugBreak();
+        
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -4581,12 +4576,12 @@ class BiseCorrection extends CI_Controller {
             $sub8 =  $_POST['sub8p2'];  
         }   */
 
-        //  DebugBreak();
+        
         $cattype = @$_POST['category'];
         $examtype = "";
         $marksImp = @$_POST['ddlMarksImproveoptions'];
 
-      //  DebugBreak();
+      
 
       if($is11th == 1)
       {
@@ -4617,7 +4612,7 @@ class BiseCorrection extends CI_Controller {
      
         
         
-        //  DebugBreak();
+        
          $target_path = IMAGE_PATH_OTHER_BOARD_12TH.$Inst_Id_other;
         if (!file_exists($target_path)){
 
@@ -4645,7 +4640,7 @@ class BiseCorrection extends CI_Controller {
         //$config['new_image']    = $formno.'.JPEG';
 
         $this->load->library('upload', $config);
-        // DebugBreak();
+        
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         $this->upload->initialize($config);
 
@@ -4698,7 +4693,7 @@ class BiseCorrection extends CI_Controller {
         }  
        // echo $filepath;
 //die();
-//DebugBreak();
+
           $data = array(
             'soldrno' =>$this->input->post('soldrno'),
             'soldyear' =>$this->input->post('soldyear'),
@@ -4768,7 +4763,7 @@ class BiseCorrection extends CI_Controller {
         
     //   echo  '<pre>'; print_r($data);die;
         $this->frmvalidation('BiseCorrection/otherboard11th',$data,0);       
-        //DebugBreak();*/
+        
         $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement_11th($data);
         if($logedIn != false)
         {
@@ -4946,7 +4941,7 @@ public function regElegibility()
     }
      public function Correction11thReport()
     {
-       // DebugBreak();
+       
       $this->load->model('BiseCorrections_model');
       $info =    $this->BiseCorrections_model->getcorrection11th();
       $this->load->library('pdf_rotate');
@@ -4975,7 +4970,7 @@ public function regElegibility()
       $font = 9;
         for($i = 0 ; $i<count($info); $i++)
         {
-            //DebugBreak();
+            
 
             if($info[$i]['inst_cd'] != '399903')
             {
@@ -5094,7 +5089,7 @@ public function regElegibility()
     
      public function Correction9thReport()
     {
-       // DebugBreak();
+       
       $this->load->model('BiseCorrections_model');
       $info =    $this->BiseCorrections_model->getcorrection9th();
       $this->load->library('pdf_rotate');
@@ -5123,7 +5118,7 @@ public function regElegibility()
       $font = 9;
       for($i = 0 ; $i<count($info); $i++)
       {
-          //DebugBreak();
+          
           
           $falg = 0;
           $pdf->SetFont('Arial','',10);

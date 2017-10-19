@@ -51,7 +51,7 @@ define('YEAR','2017');
 
 
 //===========================================================
-define('IMAGE_PATH11', 'uploads/2016/colleges/');
+define('IMAGE_PATH11', 'uplaods/2017/reg/');
 define('IMAGE_PATH211', 'uploads/2016_backup/');
 define('BARCODE_PATH11', 'uploads/assets/pdfs/');
 define('SINGLE_LAST_DATE11', '2017-11-08');
@@ -62,7 +62,7 @@ define('Correction_Last_Date','2017-10-31');
 define('Corr_ApplicationNo','30000');
 define('Corr_ApplicationNo11','10000');
 define('CORR_IMAGE_PATH', 'uploads/correction/');
-define('CORR_IMAGE_PATH11', 'uploads/correction/colleges/');
+define('CORR_IMAGE_PATH11', 'uplaods/2017/correction//');
 
 define('session_year','2017-2019');
 define('corr_bank_chall_class','9TH');
