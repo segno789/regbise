@@ -1,6 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once(APPPATH.'controllers/Registration.php');
 class NinthCorrection extends CI_Controller {
     /**
     * Index Page for this controller.
@@ -23,10 +23,16 @@ class NinthCorrection extends CI_Controller {
         $this->load->helper('url');
         //this condition checks the existence of session if user is not accessing  
         //login method as it can be accessed without user session
+          $this->clear_cache();
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
             redirect('login');
         }
+    }
+     function clear_cache()
+    {
+        $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
     }
     public function index()
     {
@@ -204,7 +210,7 @@ class NinthCorrection extends CI_Controller {
         $userinfo = $Logged_In_Array['logged_in'];
         $this->load->view('common/header.php',$userinfo);
         $data = array(
-            'isselected' => '7',
+            'isselected' => '8',
 
         );
         $msg = $this->uri->segment(3);
@@ -230,7 +236,7 @@ class NinthCorrection extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('NinthCorrection/ApplyforCorrection.php',$RegStdData);
-        $this->load->view('common/footer.php');
+        $this->load->view('common/common_reg/footer.php');
 
 
 
@@ -269,7 +275,7 @@ class NinthCorrection extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('NinthCorrection/Applied.php',$RegStdData);
-        $this->load->view('common/footer.php');
+        $this->load->view('common/common_reg/footer.php');
 
 
 
@@ -308,7 +314,7 @@ class NinthCorrection extends CI_Controller {
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('NinthCorrection/Branch_corr.php',$RegStdData);
-        $this->load->view('common/footer.php');
+        $this->load->view('common/common_reg/footer.php');
 
 
 
@@ -332,7 +338,7 @@ class NinthCorrection extends CI_Controller {
 
         //$grp_cd = $this->uri->segment(3);
         $fetch_data = array('Inst_cd'=>$user['Inst_Id'],'formno'=>$formno);
-        //  DebugBreak();
+//          DebugBreak();
         $result = $this->NinthCorrection_model->Print_challan_Form($fetch_data);
         //   $result = array('data'=>$this->NinthCorrection_model->Print_challan_Form($fetch_data));
 
@@ -425,7 +431,7 @@ class NinthCorrection extends CI_Controller {
 
         //-------------------- PRINT BARCODE
         //  $pdf->SetDrawColor(0,0,0);
-        $temp = $challanNo.'@'.$result[0]['AppNo'].'@09@2016@1';
+        $temp = $challanNo.'@'.$result[0]['formNo'].'@09@'.regyear.'@1';
         //  $image =  $this->set_barcode($temp);
         //DebugBreak();
         $temp =  $this->set_barcode($temp);
@@ -445,13 +451,13 @@ class NinthCorrection extends CI_Controller {
                 if($turn==2){$dyy=2.65;} else  if($turn==3) {$dyy=5.2; } else {$dyy=7.75 ; $turn=0;}
             }
             $corcnt = 0;
-            $pdf->SetFont('Arial','BI',11);
+            $pdf->SetFont('Arial','B',11);
             $pdf->SetXY(1.0,$yy+$dyy);
             //   DebugBreak();
             $pdf->Cell(2.45, 0.4, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "L");
-            $pdf->Image(base_url()."assets/img/logo.jpg",0.30,$yy+$dyy, 0.50,0.50, "JPG", "http://www.bisegrw.com");
+            $pdf->Image(base_url()."assets/img/logo2.PNG",0.30,$yy+$dyy, 0.50,0.50, "PNG", "http://www.bisegrw.com");
             //  $pdf->Image(BARCODE_PATH.$Barcode,3.2, 1.15+$yy ,1.8,0.20,"PNG");
-            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,2.1,0.22,"PNG");
+            $pdf->Image(BARCODE_PATH.$temp,5.8, $yy+$dyy+0.30 ,1.8,0.20,"PNG");
             $challanTitle = $challanCopy[$j];
             $generatingpdf=true;
 
@@ -467,7 +473,7 @@ class NinthCorrection extends CI_Controller {
             //$pdf->Image(BARCODE_PATH.$image,3.2, 0.61  ,1.8,0.20,"PNG");
             //$pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
 
-            $pdf->SetFont('Arial','BI',9);
+            $pdf->SetFont('Arial','B',9);
             $pdf->SetXY(1.0,$y+$dy);
             $pdf->Cell(0.5, $y, $challanCopy[$j], 0.25, "L");
             $w = $pdf->GetStringWidth($challanCopy[$j]);
@@ -476,8 +482,8 @@ class NinthCorrection extends CI_Controller {
             $pdf->Cell(0, $y, $challanMSG[$j], 0.25, "L");
 
             $pdf->SetXY($w+1.4,$y+$dy+0.15);
-            $pdf->SetFont('Arial','I',7);
-            $pdf->Cell(0, $y, 'Registration Session '.session_year.' '.corr_bank_chall_class, 0.25, "L");
+            $pdf->SetFont('Arial','',7);
+            $pdf->Cell(0, $y, 'Registration Session '.sessReg.' '.corr_bank_chall_class, 0.25, "L");
 
             $y += 0.25;
             $pdf->SetFont('Arial','B',10);
@@ -489,7 +495,7 @@ class NinthCorrection extends CI_Controller {
             $pdf->SetXY(0.5,$y+$dy-0.01);
             $pdf->Cell(0, 0.25, "Due Date: ".$challanDueDate, 0.25, "C");
             $pdf->SetTextColor(0,0,0);
-            $pdf->SetFont('Arial','BI',8);
+            $pdf->SetFont('Arial','B',8);
             $pdf->SetXY(2.0,$y+$dy-0.04);
             $pdf->Cell(0, 0.25, "Printing Date: ".date("d/m/y",time())."  Account Title: BISE, GUJRANWALA   CMD Account No. 00427900072103", 0.25, "C");
             //CMD Account No. 00427900072103
@@ -512,7 +518,7 @@ class NinthCorrection extends CI_Controller {
             $pdf->Cell(0.5,0.25,$result[0]['Pre_Name'].'    '.$sodo.$result[0]['Pre_FName'],0,2,'L');
             // $pdf->Cell(0.5,0.25,,0,2,'L');
             $pdf->SetX(4);
-            $pdf->SetFont('Arial','I',6.5);
+            $pdf->SetFont('Arial','',6.5);
             // DebugBreak();
             //$pdf->Cell(0.5,0.3,"Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0,2,'L');
             $pdf->MultiCell(4, .1, "Institute Code: ".$user['Inst_Id'].'-'.$user['inst_Name'],0);
@@ -623,23 +629,33 @@ class NinthCorrection extends CI_Controller {
     }
     public function Correction_EditForm($formno)
     {    
-        //  DebugBreak();
+        // DebugBreak();
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        $Inst_Id = $userinfo['Inst_Id'];
+        $Inst_Id = substr($formno,0,6);//$userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
         $isReAdm = 0;
         $year = 0;
         $data = array(
-            'isselected' => '7',
+            'isselected' => '8',
         );
         $this->load->model('Registration_model');
         if($this->session->flashdata('NewEnrolment_error')){
             //DebugBreak();
-
-            //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
+              if($this->session->flashdata('IsReAdm')){
+                $isReAdm = 1;
+                $year = regyear-1;
+            }
+            else{
+                $isReAdm = 0;
+                $year = regyear;  
+                
+            }
+            $excep = $this->session->flashdata('NewEnrolment_error');
+             //  DebugBreak();
             $RegStdData = array('data'=>$this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
+             $RegStdData['data'][0]['excep'] = $excep['excep'];
             $isReAdm = 0;//$RegStdData['data'][0]['isreadm'];
             $RegStdData['isReAdm']=$isReAdm;
             $RegStdData['Oldrno']=0;
@@ -650,13 +666,14 @@ class NinthCorrection extends CI_Controller {
 
             if($this->session->flashdata('IsReAdm')){
                 $isReAdm = 1;
-                $year = 2015;
+                $year = regyear-1;
             }
             else{
                 $isReAdm = 0;
-                $year = 2016;    
+                $year = regyear;  
+                
             }
-
+              
             $RegStdData = array('data'=>$this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id),'isReAdm'=>$isReAdm,'Oldrno'=>0);
         }
 
@@ -673,10 +690,12 @@ class NinthCorrection extends CI_Controller {
     } 
     public function NewEnrolment_update()
     {
-        //DebugBreak();
 
+       
+         
         $this->load->model('NinthCorrection_model');
-
+        $this->load->model('Registration_model');
+       // $this->load->controller('Registration');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -689,6 +708,9 @@ class NinthCorrection extends CI_Controller {
             $this->load->view('login/login.php');
         }
         $error = array();
+         
+         //$reg = new Registration();
+         //$myval =  $reg->isExist();
         // DebugBreak();
         $formno =  $_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
 
@@ -711,6 +733,8 @@ class NinthCorrection extends CI_Controller {
             $lastdate  = date('Y-m-d',strtotime($rule_fee[0]['End_Date'] )) ;
         }
 
+    //    echo  '<pre>';print_r($rule_fee);echo  '</pre>';exit();
+        
         $corr_name ='';
         $corr_Fname = '';
         $corr_BForm = '';
@@ -737,6 +761,7 @@ class NinthCorrection extends CI_Controller {
         $corr_totalFee = 0;
 
          $isPic = 0;
+         //DebugBreak();
         // ======================= Name checkbox ======================
         if (isset($_POST['c'])){
 
@@ -813,15 +838,22 @@ class NinthCorrection extends CI_Controller {
 
                     // DebugBreak();
                     $this->load->model('Registration_model');
-                    $year = 2016;
+                    $year = regyear;
                     $RegStdData = $this->Registration_model->EditEnrolement_data($formno,$year,$Inst_Id);
                     $corr_grp_cd = $_POST['corr_std_group'];
-                    if($corr_grp_cd ==  8 || $corr_grp_cd ==  7)
-                    {
-                        $corr_grp_cd =    1;
-                    }
                     $pre_grp_cd = $RegStdData[0]['grp_cd'];
-                    if($corr_grp_cd != $pre_grp_cd)
+                    $tempgrp = $corr_grp_cd;
+                    $tempgrp1 = $pre_grp_cd;
+                    if($corr_grp_cd ==7 || $corr_grp_cd == 8)
+                    {
+                        $tempgrp =  1;
+                    }
+                    if($pre_grp_cd ==  7 || $pre_grp_cd ==8)
+                    {
+                        $tempgrp1 = 1;
+                    }
+                
+                    if($tempgrp != $tempgrp1)
                     {
                         $grpFee = $rule_fee[0]['GroupFee']; 
                         $corr_sub1 =  $_POST['corr_sub1'];
@@ -999,7 +1031,7 @@ class NinthCorrection extends CI_Controller {
         $grpFee ='';
         $subFee ='';
         $PicFee ='';*/
-           $corr_grp_cd = $_POST['corr_std_group'];
+
         $allinputdata = array('name'=>$corr_name,'Fname'=>$corr_Fname,
             'BForm'=>$corr_BForm,'FNIC'=>$corr_FNIC,
             'Dob'=>$corr_Dob,'RegGrp'=>$corr_grp_cd,
@@ -1063,6 +1095,118 @@ class NinthCorrection extends CI_Controller {
             'FormNo'=>$formno,
 
         );
+        // DebugBreak();
+        if($corr_name!='')
+        {
+        $_POST['cand_name']=$corr_name;
+        }
+        else
+        {
+        $_POST['cand_name']=$_POST['cand_name'];
+        }
+        
+        if($corr_Dob!='')
+        {
+        $_POST['dob']=$corr_Dob;
+         $date = new DateTime(@$_POST['dob']);
+        $convert_dob = $date->format('Y-m-d'); 
+        }
+        else
+        {
+        $_POST['dob']=$_POST['dob'];
+         $date = new DateTime(@$_POST['dob']);
+        $convert_dob = $date->format('Y-m-d'); 
+        }
+        
+        if($corr_FNIC!='')
+        {
+        $_POST['father_cnic']=$corr_FNIC;
+        }
+        else
+        {
+        $_POST['father_cnic']=$_POST['father_cnic'];
+        }
+        
+        if($corr_BForm!='')
+        {
+        $_POST['bay_form']=$corr_BForm;
+        }
+        else
+        {
+        $_POST['bay_form']=$_POST['bay_form'];
+        }
+        
+        // DebugBreak();
+        $cntzero = substr_count(@$_POST['bay_form'],"0");
+        $cntone = substr_count(@$_POST['bay_form'],"1");
+        $cnttwo = substr_count(@$_POST['bay_form'],"2");
+        $cntthr = substr_count(@$_POST['bay_form'],"3");
+        $cntfour = substr_count(@$_POST['bay_form'],"4");
+        $cntfive = substr_count(@$_POST['bay_form'],"5");
+        $cntsix = substr_count(@$_POST['bay_form'],"6");
+        $cntseven = substr_count(@$_POST['bay_form'],"7");
+        $cnteight = substr_count(@$_POST['bay_form'],"8");
+        $cntnine = substr_count(@$_POST['bay_form'],"9");
+         if(@$_POST['bay_form'] == ''   )
+        {
+            $allinputdata['excep'] = 'Please Enter Your Bay Form No.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+             redirect('NinthCorrection/Correction_EditForm/'.$formno);
+            return;
+
+
+        }
+        else if( (@$_POST['bay_form'] == '00000-0000000-0') || (@$_POST['bay_form'] == '11111-1111111-1') || (@$_POST['bay_form'] == '22222-2222222-2') || (@$_POST['bay_form'] == '33333-3333333-3') || (@$_POST['bay_form'] == '44444-4444444-4')
+            || (@$_POST['bay_form'] == '55555-5555555-5') || (@$_POST['bay_form'] == '66666-6666666-6') || (@$_POST['bay_form'] == '77777-7777777-7') || (@$_POST['bay_form'] == '88888-8888888-8') || (@$_POST['bay_form'] == '99999-9999999-9') ||
+            (@$_POST['bay_form'] == '00000-1111111-0') || (@$_POST['bay_form'] == '00000-1111111-1') || (@$_POST['bay_form'] == '00000-0000000-1' || $cntzero >7 || $cntone >7 || $cnttwo >7 || $cntfour >7 || $cntthr >8 || $cntfive >7 || $cntsix >7 || $cntseven >7 || $cnteight >7 || $cntnine >7)
+            )
+            {
+                $allinputdata['excep'] = 'Please Enter Your Correct Bay Form No.';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                 redirect('NinthCorrection/Correction_EditForm/'.$formno);
+                return;
+
+            }
+            else if(@$_POST['father_cnic'] == ''   )
+            {
+                $allinputdata['excep'] = 'Please Enter Your Father CNIC';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                  redirect('NinthCorrection/Correction_EditForm/'.$formno);
+                return;
+
+
+            }
+            else if((@$_POST['bay_form'] == @$_POST['father_cnic']) || (@$_POST['father_cnic'] == @$_POST['bay_form']) )
+            {
+                $allinputdata['excep'] = 'Your Bay Form and FNIC No. are not same';
+                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+                  redirect('NinthCorrection/Correction_EditForm/'.$formno);
+                return;
+
+            }
+       // $_POST['cand_name']=$corr_name;
+       // $_POST['dob']=$corr_Dob;
+       // $_POST['father_cnic']=$corr_FNIC;
+       // $_POST['bay_form']=$corr_BForm;
+        //DebugBreak();
+        
+        $aObj = new Registration();  //create object 
+        $reg = $aObj->isExist(); 
+
+        //  $reg = "322913,Annual,2015,AYEZA RUKHSAR,1";
+
+        if($reg !="SUCCESS")
+        {
+            //$reg =array($reg);
+            $comma_separated = explode(",", $reg);
+
+
+            $allinputdata['excep'] = 'This Candidate is already appeared in matric '.$comma_separated[1].' examination '.$comma_separated[2].' against roll no.'.$comma_separated[0];
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            //  echo '<pre>'; print_r($allinputdata['excep']);exit();
+            redirect('NinthCorrection/Correction_EditForm/'.$formno);
+            return;
+        }
         $logedIn = $this->NinthCorrection_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn[0]['error'] != 'false')
         {  
@@ -1086,11 +1230,11 @@ class NinthCorrection extends CI_Controller {
 
 
 
-        $this->load->view('common/footer.php');
+        $this->load->view('common/common_reg/footer.php');
     }
     public function commonfooter($data)
     {
-        $this->load->view('common/footer.php',$data);
+        $this->load->view('common/common_reg/footer.php',$data);
     }
     private function set_barcode($code)
     {
@@ -1168,18 +1312,18 @@ class NinthCorrection extends CI_Controller {
             $Y = 0.5;
             $pdf->SetFillColor(0,0,0);
             $pdf->SetDrawColor(0,0,0); 
-            $temp = $data['AppNo'].'@09@2016@1';
+            $temp = $data['formno'].'@09@2016@1';
             $image =  $this->set_barcode($temp);
             $pdf->Image(BARCODE_PATH.$image,6.0, 1.2  ,1.8,0.20,"PNG");
             $pdf->SetFont('Arial','U',16);
             $pdf->SetXY( 1.2,0.2);
             $pdf->Cell(0, 0.2, "Board Of Intermediate and Secondary Education,Gujranwala", 0.25, "C");
-            $pdf->Image(base_url()."assets/img/logo.jpg",0.35,0.2, 0.75,0.75, "JPG", "http://www.bisegrw.com");
+            $pdf->Image(base_url()."assets/img/logo2.PNG",0.35,0.2, 0.75,0.75, "PNG", "http://www.bisegrw.com");
 
 
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(1.7,0.4);
-            $pdf->Cell(0, 0.25, " CORRECTION FORM FOR CLASS ".corr_bank_chall_class." SESSION 2016-2018", 0.25, "C");
+            $pdf->Cell(0, 0.25, " CORRECTION FORM FOR CLASS ".corr_bank_chall_class." SESSION ".CURRENT_SESS, 0.25, "C");
             //$pdf->Image(base_url(). 'assets/img/PROOF_READ.jpg' ,1,3.5 , 6,4 , "JPG"); 
             //--------------- Proof Read
             $ProofReed = "Application No. ".$data['AppNo'];

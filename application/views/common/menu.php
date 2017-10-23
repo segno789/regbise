@@ -311,6 +311,12 @@ header("Pragma: no-cache");
                             Restore Candidate  
                         </a>
                     </li>
+                    <li><a href="<?php echo base_url(); ?>NinthCorrection/EditForms"   data-original-title="" >Apply for Correction </a></li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>NinthCorrection/Applied">
+                            Applications
+                        </a>
+                    </li>
                        <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/result9thcorrections">
                             9th Result Cards(2016)  
