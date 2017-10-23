@@ -139,12 +139,12 @@ header("Pragma: no-cache");
                           11th Migration
                         </a>
                     </li>
-                  <!--  <li>
+                    <li>
                         <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th" class="<?php if($isselected == '11') {echo 'selected';}?>" >
                             <div class="fs1" aria-hidden="true" data-icon="&#xe0b9;"></div>
                             Spec. Permission
                         </a>
-                    </li>      -->
+                    </li>      
             
                    <?php } ?>
             </ul>
@@ -624,7 +624,22 @@ header("Pragma: no-cache");
                 <?php
             }
             
-               if($isselected == '10'){
+             if($isselected == '11') { 
+                ?>
+                <ul >
+                    <li><a href="#"   data-original-title=""  class="<?php if($isselected == '11') {echo 'heading';}?>">Special Permission</a></li>
+
+                  
+                    <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_9th">
+                            9th Special Permission
+                        </a>
+                    </li>
+                </ul>
+                <?php
+            }
+            
+            if($isselected == '10'){
                 ?>
                 <ul >
                     <li><a href="<?php echo base_url(); ?>migration"   data-original-title="" >Migration</a></li>

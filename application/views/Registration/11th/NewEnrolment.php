@@ -67,7 +67,8 @@
                                 </label>
 
                                 <div class="controls controls-row">
-                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php if (($excep != "") && ($excep['excep'] != "success")){echo $excep['dob'];} else {echo '';} ?>" required="required" readonly="readonly" >
+                                    <input class="span3" type="text" id="dob" name="dob" placeholder="DOB" value="<?php if (($excep != "") && ($excep['excep'] != "success")){echo $excep['dob'];
+                                    } else {echo '';} ?>" required="required" readonly="readonly" >
 
                                     <label class="control-label span2" >
                                         Mobile Number :

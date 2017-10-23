@@ -10,7 +10,7 @@ class BiseCorrections_model extends CI_Model
         
         //  DebugBreak();
 
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('sch_cd' => $sch_cd,'class'=>9,'iyear'=>2016,'sess'=>1, 'isdeleted'=>0));     
+        $query = $this->db->get_where('Registration..tblreg9th',  array('sch_cd' => $sch_cd,'class'=>9,'iyear'=>YEAR,'sess'=>1, 'isdeleted'=>0));     
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -134,12 +134,12 @@ class BiseCorrections_model extends CI_Model
         if($class == 9)
         {
             $table1= TBLMIGRATION2;
-            $table2= 'Registration..MA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg9th';
             $this->db->select("$table2.RegGrp,$table2.formno,$table2.name,$table2.fname,$table2.Dob,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,'' app_no");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear =  2016 and $table1.class=9"); 
+            $this->db->where("($table2.isdeleted = 0 or $table2.isdeleted is null) and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9"); 
         }
         if($class == 10)
         {
@@ -154,18 +154,18 @@ class BiseCorrections_model extends CI_Model
             
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.ismigrated ,'' app_no");
             $this->db->from($table1);
-            $this->db->where("$table1.iyear =  2016 and $table1.class=9 and $table1.ismigrated is null  and $table1.rno NOT IN($where_clause) ");  
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=9 and $table1.ismigrated is null  and $table1.rno NOT IN($where_clause) ");  
         }
            if($class == 11)
         {
         //DebugBreak();
             $table1= TBLMIGRATION2;
-            $table2= 'Registration..IA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg11th';
             $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,'' app_no");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.Formno");
-            $this->db->where("$table2.isdeleted = 0 and ($table2.oldinst_cd = 0 or $table2.oldinst_cd is null) and $table1.iyear =  2016 and $table1.class=11"); 
+            $this->db->where("$table2.isdeleted = 0 and ($table2.oldinst_cd = 0 or $table2.oldinst_cd is null) and $table1.iyear = ".YEAR." and $table1.class=11"); 
         }
          if($class == 12)
         {
@@ -176,7 +176,7 @@ class BiseCorrections_model extends CI_Model
            // $this->db->select('rno');
            // $this->db->from($table2);
             //$this->db->where("$table2.iyear =  2016 and $table2.class=9 and $table2.ismigrated =1");  
-            $where_clause = "SELECT rno FROM $table2 WHERE $table2.iyear =  2016 and $table2.class=11 and $table2.ismigrated =1 and $table2.formno is null";
+            $where_clause = "SELECT rno FROM $table2 WHERE $table2.iyear = ".YEAR." and $table2.class=11 and $table2.ismigrated =1 and $table2.formno is null";
        
             
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.ismigrated ,'' app_no");
@@ -213,12 +213,12 @@ class BiseCorrections_model extends CI_Model
         if($class == 9)
         {
             $table1= TBLMIGRATION3;
-            $table2= 'Registration..MA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg9th';
             $this->db->select("$table2.RegGrp,$table2.formno,$table2.name,$table2.fname,$table2.Dob,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear =  2016 and $table1.class=9 and $table1.formno is not null and $table1.ismigrated is null"); 
+            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9 and $table1.formno is not null and $table1.ismigrated is null"); 
         }
         if($class == 10)
         {
@@ -228,18 +228,18 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.ismigrated, $table1.app_no");
             $this->db->from($table1);
             
-            $this->db->where("$table1.iyear =  2016 and $table1.class=9 and $table1.ismigrated is null and  $table1.formno is null and $table1.app_no is not null");  
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=9 and $table1.ismigrated is null and  $table1.formno is null and $table1.app_no is not null");  
         }
            if($class == 11)
         {
         //DebugBreak();
             $table1= TBLMIGRATION3;
-            $table2= 'Registration..IA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg11th';
             $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.Formno");
-            $this->db->where("$table2.isdeleted = 0 and ($table2.oldinst_cd = 0 or $table2.oldinst_cd is null) and $table1.iyear =  2016 and $table1.class=11 and $table1.formno is not null and $table1.ismigrated is null"); 
+            $this->db->where("$table2.isdeleted = 0 and ($table2.oldinst_cd = 0 or $table2.oldinst_cd is null) and $table1.iyear = ".YEAR." and $table1.class=11 and $table1.formno is not null and $table1.ismigrated is null"); 
         }
          if($class == 12)
         {
@@ -249,7 +249,7 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.ismigrated, $table1.app_no");
             $this->db->from($table1);
             
-            $this->db->where("$table1.iyear =  2016 and $table1.class=11 and $table1.ismigrated is null and  $table1.formno is null and $table1.app_no is not null");  
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=11 and $table1.ismigrated is null and  $table1.formno is null and $table1.app_no is not null");  
             }
 
         $query = $this->db->get();
@@ -268,7 +268,7 @@ class BiseCorrections_model extends CI_Model
     {
         if($class == 9)
         {
-            $table2= 'Registration..MA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg9th';
             $this->db->select("$table2.RegGrp,$table2.formno,$table2.name,$table2.fname,$table2.Dob,$table2.grp_cd,$table2.PicPath,$table2.sch_cd,$table2.oldinst_cd, '' app_no ");
             $this->db->from($table2);
 
@@ -280,7 +280,7 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no");
             $this->db->from($table1);
 
-            $this->db->where("$table1.iyear =  2016 and $table1.class=9 and $table1.ismigrated = 1 and $table1.formno is null ");     
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=9 and $table1.ismigrated = 1 and $table1.formno is null ");     
         }
         else  if($class == 12)
         {
@@ -288,17 +288,17 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no");
             $this->db->from($table1);
 
-            $this->db->where("$table1.iyear =  2016 and $table1.class=11 and $table1.ismigrated = 1 ");     
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=11 and $table1.ismigrated = 1 ");     
         }
         else if($class == 11)
         {
              $table1= TBLMIGRATION2;
-            $table2= 'Registration..IA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg11th';
             $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to as coll_cd,$table1.Migrated_From as oldinst_cd,'' app_no");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.Formno");
-            $this->db->where("$table2.isdeleted = 0 and ($table2.oldinst_cd <> 0 or $table2.oldinst_cd is not null) and $table1.iyear =  2016 and $table1.class=11"); 
+            $this->db->where("$table2.isdeleted = 0 and ($table2.oldinst_cd <> 0 or $table2.oldinst_cd is not null) and $table1.iyear = ".YEAR." and $table1.class=11"); 
         }
 
         $query = $this->db->get();
@@ -318,12 +318,12 @@ class BiseCorrections_model extends CI_Model
          if($class == 9)
         {
             $table1= TBLMIGRATION3;
-            $table2= 'Registration..MA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg9th';
             $this->db->select("$table2.RegGrp,$table2.formno,$table2.name,$table2.fname,$table2.Dob,$table2.grp_cd,$table2.PicPath,$table2.sch_cd,$table2.oldinst_cd, $table1.app_no ");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd <> 0 and $table1.iyear =  2016 and $table1.class=9 and $table1.formno is not null and $table1.app_no is not null and $table1.ismigrated =1"); 
+            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd <> 0 and $table1.iyear = ".YEAR." and $table1.class=9 and $table1.formno is not null and $table1.app_no is not null and $table1.ismigrated =1"); 
         }
         else  if($class == 10)
         {
@@ -331,7 +331,7 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From");
             $this->db->from($table1);
 
-            $this->db->where("$table1.iyear =  2016 and $table1.class=9 and $table1.ismigrated = 1 ");     
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=9 and $table1.ismigrated = 1 ");     
         }
         else  if($class == 12)
         {
@@ -339,17 +339,17 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From");
             $this->db->from($table1);
 
-            $this->db->where("$table1.iyear =  2016 and $table1.class=11 and $table1.ismigrated = 1 ");     
+            $this->db->where("$table1.iyear = ".YEAR." and $table1.class=11 and $table1.ismigrated = 1 ");     
         }
         else if($class == 11)
         {
              $table1= TBLMIGRATION3;
-            $table2= 'Registration..IA_P1_Reg_Adm2016';
+            $table2= 'Registration..tblreg11th';
             $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table2.coll_cd,$table2.oldinst_cd,$table1.app_no");
             $this->db->from($table2);
 
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd <> 0 and $table1.iyear =  2016 and $table1.class=11 and $table1.formno is not null and $table1.app_no is not null and $table1.ismigrated =1"); 
+            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd <> 0 and $table1.iyear = ".YEAR." and $table1.class=11 and $table1.formno is not null and $table1.app_no is not null and $table1.ismigrated =1"); 
 
         }
 
@@ -369,7 +369,7 @@ class BiseCorrections_model extends CI_Model
 
         //  DebugBreak();
 
-        $query = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>9,'iyear'=>2016,'sess'=>1));     
+        $query = $this->db->get_where('Registration..tblreg9th',  array('formNo' => $formno,'class'=>9,'iyear'=>YEAR,'sess'=>1));     
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -385,7 +385,7 @@ class BiseCorrections_model extends CI_Model
 
         //  DebugBreak();
 
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('coll_cd' => $sch_cd,'class'=>11,'iyear'=>2016,'sess'=>1, 'isdeleted'=>0));     
+        $query = $this->db->get_where('Registration..tblreg11th',  array('coll_cd' => $sch_cd,'class'=>11,'iyear'=>YEAR,'sess'=>1, 'isdeleted'=>0));     
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -465,7 +465,7 @@ class BiseCorrections_model extends CI_Model
          $soldsess = $data['soldsess'];
          $soldboard = $data['sscbrd'];
          $Brd_cd =  @$data['Brd_cd'];
-
+           $year = YEAR;
   
         //$old_class =  @$data['class'];
 
@@ -477,7 +477,7 @@ class BiseCorrections_model extends CI_Model
 $IsHafiz = 0;
 $RegGrp = 0;
           //DebugBreak();
-        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type,$soldrno,$soldsess,$soldyear,$soldboard");
+        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type,$soldrno,$soldsess,$soldyear,$soldboard");
         return true;
     }
       public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  IA_P1_Reg_Adm2016_sp_Update
@@ -541,17 +541,29 @@ $RegGrp = 0;
         $SSC_brd_cd = $data['SSC_brd_cd'];
         $IsBrdCrt = $data['IsBrdCrt'];
         $pic_base_64 = $data['Image'];
+        $year = YEAR;
         //DebugBreak();
-        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update_correction '$formno',11,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64','$SSC_RNo',$SSC_Year,$SSC_Sess,$SSC_brd_cd,$IsBrdCrt");
+        $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update_correction '$formno',11,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64','$SSC_RNo',$SSC_Year,$SSC_Sess,$SSC_brd_cd,$IsBrdCrt");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
     }
-      public function EditEnrolement_data11($formno)
+      public function EditEnrolement_data11($data)
     {
 
-         // DebugBreak();
+         //DebugBreak();
 
-        $query = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',  array('formNo' => $formno,'class'=>11,'iyear'=>2016,'sess'=>1));     
+          if($data['formno'] != "")
+          {
+        $query = $this->db->get_where('Registration..tblreg11th',  array('formNo' => $data['formno'],'class'=>11,'iyear'=>YEAR,'sess'=>1));   
+          }
+          else
+          {
+          $query = $this->db->get_where('Registration..tblreg11th',  array('matRno' => $data['matrno'],'yearOfPass'=>$data['year'],'sessOfPass'=>$data['sess'],'Brd_cd'=>$data['brd'],'class'=>11,'iyear'=>YEAR,'sess'=>1)); 
+          }
+        
+            
+        
+            
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -688,7 +700,7 @@ $RegGrp = 0;
     {
         //DebugBreak();
 
-        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
+        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2, 'iyear'=>YEAR));
         $result = $q2->result_array();
         return $result;
     }
@@ -784,7 +796,7 @@ $RegGrp = 0;
             'IsDeleted'=>$isDeleted,
         );
         $this->db->where('formNo',$formno);
-        $this->db->update("Registration..MA_P1_Reg_Adm2016", $data2);
+        $this->db->update("Registration..tblreg9th", $data2);
     }
        public function UpdateDeleteStatus11($formno,$kpo,$isDeleted){
 
@@ -795,19 +807,19 @@ $RegGrp = 0;
             'IsDeleted'=>$isDeleted,
         );
         $this->db->where('formNo',$formno);
-        $this->db->update("Registration..IA_P1_Reg_Adm2016", $data2);
+        $this->db->update("Registration..tblreg11th", $data2);
     }
 
     //Restore_Form_UPDATE
     public function Restore_candidate_list($ckpo)
     {
-        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Adm2016',array('IsDeleted'=>1,'ckpo'=>$ckpo));
+        $q2         = $this->db->get_where('Registration..tblreg9th',array('IsDeleted'=>1,'ckpo'=>$ckpo));
         $result = $q2->result_array();
         return $result;
     }
     public function Restore_candidate_list11($ckpo)
     {
-        $q2         = $this->db->get_where('Registration..IA_P1_Reg_Adm2016',array('IsDeleted'=>1,'ckpo'=>$ckpo));
+        $q2         = $this->db->get_where('Registration..tblreg11th',array('IsDeleted'=>1,'ckpo'=>$ckpo));
         $result = $q2->result_array();
         return $result;
     }
@@ -896,7 +908,7 @@ $RegGrp = 0;
            $stdinfo =  $this->getstdrecord($formno) ;
             $data2 = array(
                 'Rno'=>$formno,
-                'iyear'=>2016,
+                'iyear'=>YEAR,
                 'class'=>9,
                 'name'=>$stdinfo[0]->name,
                 'fname'=>$stdinfo[0]->fname,
@@ -918,7 +930,7 @@ $RegGrp = 0;
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
             
-            $this->db->where("rno = $formno AND class=9 and iyear=2016");
+            $this->db->where("rno = $formno AND class=9 and iyear=".YEAR);
             $res =  $this->db->update(TBLMIGRATION3, $data2);
         }
 
@@ -930,7 +942,7 @@ $RegGrp = 0;
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
             
-            $this->db->where("app_no = $formno AND class=9 and iyear=2016");
+            $this->db->where("app_no = $formno AND class=9 and iyear=".YEAR);
             $res =  $this->db->update(TBLMIGRATION3, $data2);
         }
         else if($isupdate == 4)
@@ -941,7 +953,7 @@ $RegGrp = 0;
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
             
-            $this->db->where("app_no = $formno AND class=9 and iyear=2016");
+            $this->db->where("app_no = $formno AND class=9 and iyear=".YEAR);
             $res =  $this->db->update(TBLMIGRATION3, $data2);
         }
         if ($res === FALSE) {
@@ -979,7 +991,7 @@ $RegGrp = 0;
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
             
-            $this->db->where("rno = $formno AND class=11 and iyear=2016");
+            $this->db->where("rno = $formno AND class=11 and iyear=".YEAR);
             $res =  $this->db->update(TBLMIGRATION3, $data2);
         }
          else if($isupdate == 3)
@@ -990,7 +1002,7 @@ $RegGrp = 0;
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
             
-            $this->db->where("app_no = $formno AND class=11 and iyear=2016");
+            $this->db->where("app_no = $formno AND class=11 and iyear=".YEAR);
             $res =  $this->db->update(TBLMIGRATION3, $data2);
         }
          else if($isupdate == 4)
@@ -1001,7 +1013,7 @@ $RegGrp = 0;
                 'cDate'=>date('Y-m-d H:i:s'),  
             );  
             
-            $this->db->where("app_no = $formno AND class=11 and iyear=2016");
+            $this->db->where("app_no = $formno AND class=11 and iyear=".YEAR);
             $res =  $this->db->update(TBLMIGRATION3, $data2);
         }
 
@@ -1105,8 +1117,8 @@ $RegGrp = 0;
         $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
 $IsHafiz = 0;
 $RegGrp = 0;
-        
-        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
+        $year = YEAR;
+        $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',9,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
         return true;
     }
      public function GetFormNo($inst_cd){
@@ -1147,7 +1159,7 @@ $RegGrp = 0;
     {
        // DebugBreak();
         $query = $this->db->query("SELECT   t1.formno,t1.name,t1.fname, CONVERT(varchar(10), t1.dob, 105) RegDob,t1.fnic,t1.                                      bform,t1.sch_cd,t3.name,t2.rno,t2.name,t2.fname,t2.dob,t2.fnic,t2.bform
-            from Registration..MA_P1_Reg_Adm2016 t1
+            from Registration..tblreg9th t1
             inner join matric_new..tblbiodata t2 on
             CONVERT(varchar(10), t1.dob, 105)= t2.dob AND 
             t1.name= t2.name AND
@@ -1182,7 +1194,7 @@ $RegGrp = 0;
             );  
             
             $this->db->where("formno = '$formno'");
-            $res =  $this->db->update('Registration..MA_P1_Reg_Adm2016', $data2);
+            $res =  $this->db->update('Registration..tblreg9th', $data2);
         
         if ($res === FALSE) {
             return -1; // Or do whatever you gotta do here to raise an error
@@ -1195,7 +1207,7 @@ $RegGrp = 0;
        // DebugBreak();
        $table1= 'Registration..tblElegibiltyReg11th';
 
-       $table2= 'Registration..IA_P1_Reg_Adm2016';
+       $table2= 'Registration..tblReg11th';
        $this->db->select("$table1.matRno, $table1.yearOfPass,$table1.sessOfPass,$table1.formno,$table1.name,$table1.fname,$table1.InstName,$table1.type,$table1.pkId,$table2.coll_cd");
        $this->db->from($table2);
        //join LEFT by default
@@ -1255,7 +1267,7 @@ $RegGrp = 0;
             'cdate'=>date('Y-m-d H:i:s'),
         );
         $this->db->where('formno',$formno);
-       $res= $this->db->update("Registration..IA_P1_Reg_Adm2016", $data2);
+       $res= $this->db->update("Registration..tblreg11th", $data2);
         
         $data2 = array(
             'active'=>0,

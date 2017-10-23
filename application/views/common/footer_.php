@@ -25,7 +25,7 @@ if(isset($files)){
     }
 }
 ?> 
-<script type="">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
