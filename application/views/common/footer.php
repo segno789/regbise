@@ -135,7 +135,7 @@ if(isset($files)){
     return false;
     }
     }*/
-    
+
     $(document).ready(function () {
 
         $(".chosen-single").chosen({no_results_text: "Oops, nothing found!"}); 
@@ -150,8 +150,8 @@ if(isset($files)){
             "bAutoWidth" : false,
             "cache": false
         });
-          
-        
+
+
         $("#c0").click(function(){
 
             if($(this).is(":checked")){
@@ -545,6 +545,54 @@ if(isset($files)){
         window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
     }
 
+    function stringToDate(_date,_format,_delimiter)
+    {
+        var formatLowerCase=_format.toLowerCase();
+        var formatItems=formatLowerCase.split(_delimiter);
+        var dateItems=_date.split(_delimiter);
+        var monthIndex=formatItems.indexOf("mm");
+        var dayIndex=formatItems.indexOf("dd");
+        var yearIndex=formatItems.indexOf("yyyy");
+        var month=parseInt(dateItems[monthIndex]);
+        month-=1;
+        var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+        return formatedDate;
+    }
+    $('.chosen-select').on('change', function(evt, params) {
+        var inst = $(this).val();
+        if(inst=="")
+        {
+            alertify.error("Please select Institute");
+            return false;
+        }
+
+        jQuery.ajax({
+
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "BiseCorrection/IsSpecPermission/",
+            dataType: 'html',
+            data: {inst_cd: inst},
+            beforeSend: function() {  $('.mPageloader').show(); },
+            complete: function() { $('.mPageloader').hide();},
+            success: function(data) {  
+            var obj = JSON.parse(data);
+            if(obj)
+            {
+                $("#Spec_Fee").val(parseInt(obj[0].SpecialFee));
+                $("#ReAdm_Fee").val(parseInt(obj[0].readmfine));
+                var j = obj[0].FeedingDate;
+                var is =j.split("-"); 
+                $("#txt_FeedingDate").val(is[2]+"-"+is['1']+"-"+is[0]);
+            }
+                
+            },
+            error: function(request, status, error){
+                alert(request.responseText);           
+            }
+        });
+
+    });
+
     function SpecPermission_INSERT()
     {
         var inst_cd  = $("#inst_cd").val();
@@ -559,19 +607,19 @@ if(isset($files)){
             $('#inst_cd').focus();
             return false; 
         }
-       else if(feeding_date == "")
+        else if(feeding_date == "")
         {
             alertify.error("Please write Feeding Date.");
             $('#txt_FeedingDate').focus();
             return false; 
         }
-       else if(regfee == 0 || regfee == "")
+        else if(regfee == 0 || regfee == "")
         {
             alertify.error("Please write Registration Fee.");
             $('#Reg_fee').focus();
             return false; 
         }
-       else if(Proc_fee == 0 || Proc_fee == "")
+        else if(Proc_fee == 0 || Proc_fee == "")
         {
             alertify.error("Please Processing Fee.");
             $('#Proc_Fee').focus();
@@ -579,17 +627,17 @@ if(isset($files)){
         }
         else if(spec_fee == "")
         {
-        alertify.error("Please Write Special Fee.");
-        $('#Spec_Fee').focus();
-        return false; 
+            alertify.error("Please Write Special Fee.");
+            $('#Spec_Fee').focus();
+            return false; 
         } 
         else if(ReAdm_Fee == "")
         {
-        alertify.error("Please Write Re-Admission Fee.");
-        $('#ReAdm_Fee').focus();
-        return false; 
+            alertify.error("Please Write Re-Admission Fee.");
+            $('#ReAdm_Fee').focus();
+            return false; 
         }  
-       alertify.log("Please wait while your request has been processing.");
+        alertify.log("Please wait while your request has been processing.");
         $("#SpecForm").submit();
         $('[name="btnsubmitNewEnrol"]').prop('disabled', true);
         $('[name="btnsubmitNewEnrol"]').text("Please wait...");
@@ -1157,32 +1205,32 @@ if(isset($files)){
         }
         if(formno == "" || formno.length < 4 || formno.length > 10)
         {
-          $('#txtformNo_search').val("");
-        if(matrno == "")
-        {
-         alertify.error("Please write Valid Form No. OR Matric Roll No.");
-            $('#txtmatricRollno_search').focus();
-            return false;
-        }
-        else if(year == 0)
-        {
-          alertify.error("Please Select Matric Year.");
-            $('#txtmatricYear_search').focus();
-            return false;
-        }
-        else if(sess == 0)
-        {
-            alertify.error("Please Select Matric Session.");
-            $('#txtmatricSess_search').focus();
-            return false;
-        }
-        else if(brd == 0)
-        {
-           alertify.error("Please Select Matric Board.");
-            $('#txtmatricBrd_search').focus();
-            return false;
-        }
-        
+            $('#txtformNo_search').val("");
+            if(matrno == "")
+            {
+                alertify.error("Please write Valid Form No. OR Matric Roll No.");
+                $('#txtmatricRollno_search').focus();
+                return false;
+            }
+            else if(year == 0)
+            {
+                alertify.error("Please Select Matric Year.");
+                $('#txtmatricYear_search').focus();
+                return false;
+            }
+            else if(sess == 0)
+            {
+                alertify.error("Please Select Matric Session.");
+                $('#txtmatricSess_search').focus();
+                return false;
+            }
+            else if(brd == 0)
+            {
+                alertify.error("Please Select Matric Board.");
+                $('#txtmatricBrd_search').focus();
+                return false;
+            }
+
         }
     }
     function RevenueForm(Batch_ID)
