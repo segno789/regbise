@@ -35,6 +35,35 @@
         $q2         = $this->db->get_where('Registration..RuleFee_Reg_Nineth_Correction',array('Rule_Fee_ID'=>$ruleID));
         return $resultarr = $q2->result_array();
     }
+       public function GetInstGrp($inst_cd)
+    {
+        // DebugBreak();
+        $this->db->select('allowed_mGrp,IsGovernment');
+        $grp_cd = $this->db->get_where('admission_online..tblInstitutes_all',array('inst_cd'=>$inst_cd));
+        
+        $rowcount = $grp_cd->num_rows();
+        if($rowcount >0 )
+        {
+            $resultarr  = $grp_cd->result_array();
+            
+            if($resultarr[0]['IsGovernment'] == 1)
+            {
+                $grp_cd ='1,2,5,7,8';
+            }
+            else
+            {
+                $grp_cd = $resultarr[0]['allowed_mGrp'];
+            }
+            return $grp_cd;
+            // $resultarr = $grp_cd->result_array();
+        }
+        else
+        {
+          
+            return '0';
+        }
+
+    }
      public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  MA_P1_Reg_Adm2016_sp_Update
     {
       //  DebugBreak();
@@ -107,9 +136,8 @@
         $AppNo = $data['AppNo'];
         $Pic = $data['Pic'];
         $PicPath = $data['PicPath'];
-       
-//       DebugBreak();
-        $query = $this->db->query("Registration..MA_P1_Reg_Correction_sp_insert '$formno',9,2016,1,'$name','$fname','$BForm','$FNIC','$Dob',$grp_cd,$sub1,$sub2,$sub3,$sub4,$sub5,$sub6,$sub7,$sub8,$Pic,$Inst_cd,$RegGrp,$NameFee,$FnameFee,$BFormFee,$DobFee,$FNICFee,$grpFee,$subFee,$picFee,$totalFee,$AppNo");
+         $year = regyear;
+        $query = $this->db->query("Registration..MA_P1_Reg_Correction_sp_insert '$formno',9,$year,1,'$name','$fname','$BForm','$FNIC','$Dob',$grp_cd,$sub1,$sub2,$sub3,$sub4,$sub5,$sub6,$sub7,$sub8,$Pic,$Inst_cd,$RegGrp,$NameFee,$FnameFee,$BFormFee,$DobFee,$FNICFee,$grpFee,$subFee,$picFee,$totalFee,$AppNo");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
          return $query->result_array();
        // return true;
@@ -117,11 +145,11 @@
       public function EditEnrolement($inst_cd)
     {
 
-        // DebugBreak();
+       //  DebugBreak();
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
         //sp_get_regInfo_spl_case
-
-        $query = $this->db->query("Registration..sp_get_regInfo_Correction $inst_cd,9,2016,1");    
+         $iyear =  regyear;
+        $query = $this->db->query("Registration..sp_get_regInfo_Correction $inst_cd,9,$iyear,1");    
 
 
 
@@ -152,8 +180,9 @@
         $Inst_cd = $fetch_data['Inst_cd'];
         $formno = $fetch_data['formno'];
       
-     // DebugBreak();
-        $query = $this->db->query("Registration..sp_get_regInfo_correction_challan $Inst_cd,9,2016,1,'$formno'");
+      //DebugBreak();
+     $year = regyear;
+        $query = $this->db->query("Registration..sp_get_regInfo_correction_challan $Inst_cd,9,$year,1,'$formno'");
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {
@@ -183,12 +212,9 @@
     }
     public function EditEnrolement_Applied($inst_cd)
     {
-
-        // DebugBreak();
-        //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
-        //sp_get_regInfo_spl_case
-
-        $query = $this->db->query("Registration..sp_get_regInfo_after_Correction $inst_cd,9,2016,1");    
+              $iyear =  regyear;
+       
+        $query = $this->db->query("Registration..sp_get_afterCorrection $inst_cd,9,$iyear,1");    
 
 
 
@@ -198,16 +224,7 @@
         if($rowcount > 0)
         {
             return $query->result_array();
-            // $q1 = array('stdinfo'=>$query->result_array()) ;
-            //            for($i= 0; $i<$rowcount; $i++){
-            //            $q1['stdinfo'][$i]['sub1'];
-            //            }
-            //            $q1['stdinfo']['sub1'];
-            //            $q2 = $this->db->query("select SUB_ABR from tblsubject_newschm where SUB_CD in (1,2,3,4,5)");
-            //            $q2 = array('stdinfo_sub'=>$q2->result_array()) ;
-            //            $query = array('stdinfo_reg'=>$q1,'stdinfo_sub'=>$q2);
-
-
+          
         }
         else
         {
@@ -220,8 +237,8 @@
        // DebugBreak();
         //$query = $this->db->get_where('matric_new..tblbiodata', array('sch_cd' => $inst_cd,'class' => 10, 'iyear' => 2016, 'regpvt'=>1,));
         //sp_get_regInfo_spl_case
-
-        $query = $this->db->query("Registration..sp_get_regInfo_after_Correction_Branch 9,2016,1");    
+                         $iyear =  regyear;
+        $query = $this->db->query("Registration..sp_get_regInfo_after_Correction_Branch 9,$iyear,1");    
 
 
 

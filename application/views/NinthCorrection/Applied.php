@@ -36,9 +36,7 @@
                                         <th style="width:5%" class="hidden-phone">
                                             DOB
                                         </th>
-                                    <th style="width:28%" class="hidden-phone" >
-                                            Download
-                                        </th>
+                                  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,13 +77,9 @@
                                     <td>'.$vals["Pre_Name"].'</td>
                                     <td>'.$vals["Pre_FName"].'</td>
                                     <td>'.date("d-m-Y", strtotime($vals["Pre_Dob"])).'</td>
-                                    <td><button type="button" class="btn btn-info" value="'.$vals['AppNo'].'" onclick="download_corr_form('.$vals['AppNo'].')">Download Correction Form</button>
-                                    <button type="button" class="btn btn-info" value="'.$vals['AppNo'].'" onclick="download_challan_form('.$vals['AppNo'].')">Download Challan Form</button>
-                                 
-                                    </td>
+                                   
                                     </tr>';
-                                     //  <button type="button" class="btn btn-danger" value="'.$vals['AppNo'].'" onclick="Corr_App_Delete('.$vals['AppNo'].')">Delete Application</button>
-                                     //<button type="button" class="btn btn-info" value="'.$formno.'" onclick="EditForm('.$formno.')">Edit Form</button>
+                                     // button type="button" class="btn btn-danger" value="'.$vals['AppNo'].'" onclick="Corr_App_Delete('.$vals['AppNo'].')">Delete Application</button>
                                     endforeach;
                                     }
                                     ?>

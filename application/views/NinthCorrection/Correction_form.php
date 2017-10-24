@@ -20,16 +20,16 @@
                     </div>
                     <div class="widget-body">
 
-                        <form class="form-horizontal no-margin" id="corr_form" action="<?php  echo base_url(); ?>/index.php/NinthCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" id="corr_form" action="<?php  echo base_url(); ?>/NinthCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
 
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>
                                 </br>
-                            <img src="../../assets/img/OnlineCorrectoin.jpg" alt="" style="width: 530px;">
+                            <img src="<?=base_url()?>assets/img/OnlineCorrectoin.jpg" alt="" style="width: 530px;">
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                    
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{ echo 'http://ssc.bisegrw.com/uploads/'.$data[0]['Iyear'].'/reg/'.$data[0]['Sch_cd'].'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
                                    
                                     <img id="corr_previewImg" name="corr_previewImg" style="width:80px; height: 80px; margin-right: 322px;    float: right; display: none;" class="span2" src="<?php echo base_url() ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>
@@ -504,20 +504,26 @@
                                         <option value="<?php echo $data[0]['sub3'] ?>" selected='selected'><?php
                                             echo array_search($data[0]['sub3'],$subarray);
                                         ?></option></select> 
-                                    <select id="sub4"  name="sub4" class="span3 dropdown" disabled="disabled">
-                                        <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
-                                            if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
-                                        ?></option></select>
+                                         <select id="sub8"  name="sub8" class="span3 dropdown" disabled="disabled">
+                                        <option value="<?php  if($isReAdm != 1) { echo $data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
+                                            // DebugBreak();
+                                            echo array_search($data[0]['sub8'],$subarray);}  else {echo "";};
+                                        ?></option>
+                                    </select>
+                                  
                                         
                                         <select id="corr_sub3" class="span3 dropdown" name="corr_sub3" style="display: none;">
 
                                         <option value="<?php echo $data[0]['sub3'] ?>" selected='selected'><?php
                                             echo array_search($data[0]['sub3'],$subarray);
                                         ?></option></select> 
-                                    <select id="corr_sub4"  name="corr_sub4" class="span3 dropdown" style="display: none;">
-                                        <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
-                                            if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
-                                        ?></option></select>
+                                        <select id="corr_sub8"  name="corr_sub8" class="span3 dropdown" style="display: none;">
+                                        <option value="<?php  if($isReAdm != 1) { echo $data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
+                                            // DebugBreak();
+                                            echo array_search($data[0]['sub8'],$subarray);}  else {echo "";};
+                                        ?></option>
+                                    </select>
+                                   
                                 </div>
                             </div>    
                             <div class="control-group">
@@ -525,6 +531,10 @@
 
                                 </label>
                                 <div class="controls controls-row">
+                                  <select id="sub4"  name="sub4" class="span3 dropdown" disabled="disabled">
+                                        <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
+                                            if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
+                                        ?></option></select>
                                     <select id="sub5" class="span3 dropdown" name="sub5" selected="selected" disabled="disabled">
                                         <?php  if($isReAdm != 1)
                                             { echo "";} ?>
@@ -532,12 +542,11 @@
 
                                         ?></option>
                                     </select> 
-                                    <select id="sub6"  name="sub6" class="span3 dropdown" selected="selected" disabled="disabled">
-                                        <option value="<?php  if($isReAdm != 1) {echo $data[0]['sub6'];} else{echo "";}  ?>"><?php  if($isReAdm != 1) {
-                                            echo array_search($data[0]['sub6'],$subarray);} else {echo "";};
-                                        ?></option>
-                                    </select>
-                                    
+                                   
+                                          <select id="corr_sub4"  name="corr_sub4" class="span3 dropdown" style="display: none;">
+                                        <option value="<?php if($isReAdm != 1) { echo $data[0]['sub4'];} else echo'4'; ?>" selected="selected"><?php
+                                            if($isReAdm != 1) {echo array_search($data[0]['sub4'],$subarray);} else echo"Pakistan Studies";      
+                                        ?></option></select>
                                      <select id="corr_sub5" class="span3 dropdown" name="corr_sub5" selected="selected" style="display: none;">
                                         <?php  if($isReAdm != 1)
                                             { echo "";} ?>
@@ -545,11 +554,7 @@
 
                                         ?></option>
                                     </select> 
-                                    <select id="corr_sub6"  name="corr_sub6" class="span3 dropdown" selected="selected" style="display: none;">
-                                        <option value="<?php  if($isReAdm != 1) {echo $data[0]['sub6'];} else{echo "";}  ?>"><?php  if($isReAdm != 1) {
-                                            echo array_search($data[0]['sub6'],$subarray);} else {echo "";};
-                                        ?></option>
-                                    </select>
+                                   
                                 </div>
                             </div>   
                             <div class="control-group">
@@ -557,16 +562,21 @@
 
                                 </label>
                                 <div class="controls controls-row">
+                                 <select id="sub6"  name="sub6" class="span3 dropdown" selected="selected" disabled="disabled">
+                                        <option value="<?php  if($isReAdm != 1) {echo $data[0]['sub6'];} else{echo "";}  ?>"><?php  if($isReAdm != 1) {
+                                            echo array_search($data[0]['sub6'],$subarray);} else {echo "";};
+                                        ?></option>
+                                    </select>
                                     <select id="sub7" class="span3 dropdown" name="sub7" selected="selected" disabled="disabled">
                                         <option value="<?php  if($isReAdm != 1) {echo $data[0]['sub7']; }  else{echo "";}   ?>"><?php if($isReAdm != 1) {
                                             // DebugBreak();
                                             echo array_search($data[0]['sub7'],$subarray);} else {echo "";};
                                         ?></option>
                                     </select> 
-                                    <select id="sub8"  name="sub8" class="span3 dropdown" disabled="disabled">
-                                        <option value="<?php  if($isReAdm != 1) { echo $data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
-                                            // DebugBreak();
-                                            echo array_search($data[0]['sub8'],$subarray);}  else {echo "";};
+                                   
+                                     <select id="corr_sub6"  name="corr_sub6" class="span3 dropdown" selected="selected" style="display: none;">
+                                        <option value="<?php  if($isReAdm != 1) {echo $data[0]['sub6'];} else{echo "";}  ?>"><?php  if($isReAdm != 1) {
+                                            echo array_search($data[0]['sub6'],$subarray);} else {echo "";};
                                         ?></option>
                                     </select>
                                      <select id="corr_sub7" class="span3 dropdown" name="corr_sub7" selected="selected" style="display: none;">
@@ -575,12 +585,7 @@
                                             echo array_search($data[0]['sub7'],$subarray);} else {echo "";};
                                         ?></option>
                                     </select> 
-                                    <select id="corr_sub8"  name="corr_sub8" class="span3 dropdown" style="display: none;">
-                                        <option value="<?php  if($isReAdm != 1) { echo $data[0]['sub8'];} else{echo "";}    ?>" selected="selected"><?php  if($isReAdm != 1) {
-                                            // DebugBreak();
-                                            echo array_search($data[0]['sub8'],$subarray);}  else {echo "";};
-                                        ?></option>
-                                    </select>
+                                    
                                 </div>
                             </div>
 

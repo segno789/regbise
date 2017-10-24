@@ -47,8 +47,8 @@ define('DOUBLE_LAST_DATE', '2016-09-30');
 define('RE_ADMISSION_TBL', 'matric_new..vw9th16');
 define('RE_ADMISSION_TBL11', 'matric_new..vwIA1P16');
 define('ISREADMISSION', '1');
-define('YEAR','2017');
-
+////9th registration correction
+define('regyear','2017');
 
 //===========================================================
 define('IMAGE_PATH11', 'uplaods/2017/reg/');
