@@ -8,7 +8,7 @@ class BiseCorrections_model extends CI_Model
       public function EditEnrolementByinst($sch_cd)
     {
         
-        //  DebugBreak();
+       
 
         $query = $this->db->get_where('Registration..tblreg9th',  array('sch_cd' => $sch_cd,'class'=>9,'iyear'=>YEAR,'sess'=>1, 'isdeleted'=>0));     
         $rowcount = $query->num_rows();
@@ -73,7 +73,7 @@ class BiseCorrections_model extends CI_Model
     }
     public function biseauth($username,$password) 
     {
-        //  DebugBreak();
+       
         //$query = $this->db->get_where('Admission_online..tblInstitutes_all', array('Inst_cd' => $username,'Inst_pwd' => $password));
         $query = $this->db->get_where('matric_new..tblEmployee', array('Emp_cd' => $username,'pass' => $password));
         $rowcount = $query->num_rows();
@@ -149,7 +149,7 @@ class BiseCorrections_model extends CI_Model
            // $this->db->select('rno');
            // $this->db->from($table2);
             //$this->db->where("$table2.iyear =  2016 and $table2.class=9 and $table2.ismigrated =1");  
-            $where_clause = "SELECT rno FROM $table2 WHERE $table2.iyear =  2016 and $table2.class=9 and $table2.ismigrated =1 and $table2.formno is null";
+            $where_clause = "SELECT rno FROM $table2 WHERE $table2.iyear = 2017 and $table2.class=9 and $table2.ismigrated =1 and $table2.formno is null";
            
             
             $this->db->select("$table1.rno,$table1.name,$table1.fname,$table1.strregno,$table1.Migrated_to,$table1.Migrated_From,$table1.ismigrated ,'' app_no");
@@ -158,7 +158,7 @@ class BiseCorrections_model extends CI_Model
         }
            if($class == 11)
         {
-        //DebugBreak();
+        
             $table1= TBLMIGRATION2;
             $table2= 'Registration..tblreg11th';
             $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,'' app_no");
@@ -232,7 +232,7 @@ class BiseCorrections_model extends CI_Model
         }
            if($class == 11)
         {
-        //DebugBreak();
+        
             $table1= TBLMIGRATION3;
             $table2= 'Registration..tblreg11th';
             $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no");
@@ -272,7 +272,7 @@ class BiseCorrections_model extends CI_Model
             $this->db->select("$table2.RegGrp,$table2.formno,$table2.name,$table2.fname,$table2.Dob,$table2.grp_cd,$table2.PicPath,$table2.sch_cd,$table2.oldinst_cd, '' app_no ");
             $this->db->from($table2);
 
-            $this->db->where("$table2.isdeleted = 0 AND $table2.oldinst_cd <>0 "); 
+            $this->db->where("($table2.isdeleted = 0 or $table2.isdeleted is null)AND  $table2.oldinst_cd <>0 "); 
         }
         else  if($class == 10)
         {
@@ -367,7 +367,7 @@ class BiseCorrections_model extends CI_Model
     public function EditEnrolement_data($formno)
     {
 
-        //  DebugBreak();
+        
 
         $query = $this->db->get_where('Registration..tblreg9th',  array('formNo' => $formno,'class'=>9,'iyear'=>YEAR,'sess'=>1));     
         $rowcount = $query->num_rows();
@@ -383,7 +383,7 @@ class BiseCorrections_model extends CI_Model
       public function EditEnrolementByinst11th($sch_cd)
     {
 
-        //  DebugBreak();
+        
 
         $query = $this->db->get_where('Registration..tblreg11th',  array('coll_cd' => $sch_cd,'class'=>11,'iyear'=>YEAR,'sess'=>1, 'isdeleted'=>0));     
         $rowcount = $query->num_rows();
@@ -476,13 +476,13 @@ class BiseCorrections_model extends CI_Model
         $TotalAdmFee =  $AdmFee + $AdmProcFee;  */
 $IsHafiz = 0;
 $RegGrp = 0;
-          //DebugBreak();
+          
         $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_11th '$formno',11,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type,$soldrno,$soldsess,$soldyear,$soldboard");
         return true;
     }
       public function Update_NewEnorlement($data)//$father_name,$bay_form,$father_cnic,$dob,$mob_number)  IA_P1_Reg_Adm2016_sp_Update
     {
-       // DebugBreak();
+       
         $name =strtoupper($data['name']) ;
         $fname =strtoupper($data['Fname']);
         $BForm = $data['BForm'];
@@ -542,7 +542,7 @@ $RegGrp = 0;
         $IsBrdCrt = $data['IsBrdCrt'];
         $pic_base_64 = $data['Image'];
         $year = YEAR;
-        //DebugBreak();
+        
         $query = $this->db->query("Registration..IA_P1_Reg_Adm2016_sp_Update_correction '$formno',11,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'$Inst_Rno','$MarkOfIden',$Speciality,$nat,$rel,'$addr',$RegGrp,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$IsHafiz,$Inst_cd,$UrbanRural,'$pic_base_64','$SSC_RNo',$SSC_Year,$SSC_Sess,$SSC_brd_cd,$IsBrdCrt");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
         return true;
@@ -550,7 +550,7 @@ $RegGrp = 0;
       public function EditEnrolement_data11($data)
     {
 
-         //DebugBreak();
+         
 
           if($data['formno'] != "")
           {
@@ -643,13 +643,13 @@ $RegGrp = 0;
     public function Insert_SpecPermison($data)
     {
         $query = $this->db->insert('Registration..inst_Special_Permission_9th', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));
-        //DebugBreak();
+        
         return $query;
     }
 
     public function Batch_List()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..fl_reg_batch_test',array('flag'=>1,'Is_Delete'=>0));
         $result = $q2->result_array();
@@ -657,7 +657,7 @@ $RegGrp = 0;
     }
     public function Batch_List_all()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..fl_reg_batch_test',array('flag is'=>null,'Is_Delete'=>0));
         $result = $q2->result_array();
@@ -665,7 +665,7 @@ $RegGrp = 0;
     }
     public function get9thCorrectionData()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1));
         $result = $q2->result_array();
@@ -674,7 +674,7 @@ $RegGrp = 0;
     
       public function get11thCorrectionData()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1));
         $result = $q2->result_array();
@@ -682,7 +682,7 @@ $RegGrp = 0;
     }
     public function get11thCorrectionDataById($app_id)
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1 , 'AppNo'=>$app_id));
         $result = $q2->result_array();
@@ -690,7 +690,7 @@ $RegGrp = 0;
     }
     public function get9thCorrectionDataById($app_id)
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>1 , 'AppNo'=>$app_id));
         $result = $q2->result_array();
@@ -698,7 +698,7 @@ $RegGrp = 0;
     }
      public function get11thCorrectionData_verified()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..IA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2, 'iyear'=>YEAR));
         $result = $q2->result_array();
@@ -707,7 +707,7 @@ $RegGrp = 0;
 
     public function get9thCorrectionData_verified()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
         $result = $q2->result_array();
@@ -716,7 +716,7 @@ $RegGrp = 0;
 
     public function Batch_List_Deleted()
     {
-        //DebugBreak();
+        
 
         $q2         = $this->db->get_where('Registration..fl_reg_batch_test',array('Is_Delete'=>1));
         $result = $q2->result_array();
@@ -738,7 +738,7 @@ $RegGrp = 0;
         // $Inst_cd = $fetch_data['Inst_Cd'];
         $AppNo = $fetch_data['AppNo'];
         $ckpo = $fetch_data['ckpo'];
-        //DebugBreak();
+        
         $query = $this->db->query("Registration..Update_corrections_new_1 $AppNo,$ckpo");
         $rowcount = $query->num_rows();
         return true;
@@ -750,7 +750,7 @@ $RegGrp = 0;
         // $Inst_cd = $fetch_data['Inst_Cd'];
         $AppNo = $fetch_data['AppNo'];
         $ckpo = $fetch_data['ckpo'];
-        //DebugBreak();
+        
         $query = $this->db->query("Registration..Update_corrections_new_11 $AppNo,$ckpo");
         $rowcount = $query->num_rows();
         return true;
@@ -789,7 +789,7 @@ $RegGrp = 0;
     }
     public function UpdateDeleteStatus($formno,$kpo,$isDeleted){
 
-        // DebugBreak();
+        
         $data2 = array(
             'ckpo'=>$kpo,
             'cDate'=>date('Y-m-d H:i:s'),
@@ -800,7 +800,7 @@ $RegGrp = 0;
     }
        public function UpdateDeleteStatus11($formno,$kpo,$isDeleted){
 
-        // DebugBreak();
+        
         $data2 = array(
             'ckpo'=>$kpo,
             'cDate'=>date('Y-m-d H:i:s'),
@@ -902,7 +902,7 @@ $RegGrp = 0;
         }
     }
     public function update10MigData($formno,$kpo,$isupdate,$newinst_cd){
-       //   DebugBreak();
+       
         if($isupdate == 1)
         {
            $stdinfo =  $this->getstdrecord($formno) ;
@@ -963,7 +963,7 @@ $RegGrp = 0;
         }
     }
    public function update12MigData($formno,$kpo,$isupdate,$newinst_cd){
-       //   DebugBreak();
+       
         if($isupdate == 1)
         {
            $stdinfo =  $this->getstdrecord($formno) ;
@@ -1122,7 +1122,7 @@ $RegGrp = 0;
         return true;
     }
      public function GetFormNo($inst_cd){
-       // DebugBreak();
+       
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno =$this->db->get_where('Admission_online..tblAdmissionDataForSSC_otherBoard',array('Sch_cd'=>$inst_cd)); //
@@ -1157,7 +1157,7 @@ $RegGrp = 0;
     }
       public function get9thcancel()
     {
-       // DebugBreak();
+       
         $query = $this->db->query("SELECT   t1.formno,t1.name,t1.fname, CONVERT(varchar(10), t1.dob, 105) RegDob,t1.fnic,t1.                                      bform,t1.sch_cd,t3.name,t2.rno,t2.name,t2.fname,t2.dob,t2.fnic,t2.bform
             from Registration..tblreg9th t1
             inner join matric_new..tblbiodata t2 on
@@ -1186,7 +1186,7 @@ $RegGrp = 0;
     }
     public function  updateReg9thData($formno,$kpo)
     {
-       // DebugBreak();
+       
             $data2 = array(
                 'isdeleted'=>0,
                 'ckpo'=>$kpo,
@@ -1204,7 +1204,7 @@ $RegGrp = 0;
     }
       public function get11thelegibility($isyes)
     {
-       // DebugBreak();
+       
        $table1= 'Registration..tblElegibiltyReg11th';
 
        $table2= 'Registration..tblReg11th';
@@ -1234,7 +1234,7 @@ $RegGrp = 0;
     }
      public function GetFormNo_11th($inst_cd)
      {
-        //DebugBreak();
+        
         $this->db->select('formno');
         $this->db->order_by("formno", "DESC");
         $formno =$this->db->get_where('Admission_online..tblAdmissionDataForHSSC_otherBoard',array('coll_cd'=>$inst_cd)); //

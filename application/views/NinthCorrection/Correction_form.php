@@ -29,7 +29,7 @@
                                 <div class="controls controls-row">
                                     <input type="hidden" class="span2 hidden" id="isReAdm" name="isReAdm" value="0">
                                    
-                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{echo base_url().IMAGE_PATH.$Inst_Id.'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
+                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if($isReAdm==1) {} else{ echo 'http://ssc.bisegrw.com/uploads/'.$data[0]['Iyear'].'/reg/'.$data[0]['Sch_cd'].'/'.$data[0]['PicPath']; } ?>" alt="Candidate Image">
                                    
                                     <img id="corr_previewImg" name="corr_previewImg" style="width:80px; height: 80px; margin-right: 322px;    float: right; display: none;" class="span2" src="<?php echo base_url() ?>assets/img/profile.png" alt="Candidate Image">
                                 </div>

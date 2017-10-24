@@ -2781,8 +2781,8 @@ class BiseCorrection extends CI_Controller {
         {
             $picPath =  $appdata[0]['PicPath'] ;
             $formNo =  $appdata[0]['formNo'] ;
-            $copy_path = 'C:/xampp/htdocs/adminbise/'.CORR_IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
-            $target_path = 'C:/xampp/htdocs/adminbise/'.IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
+            $copy_path = CORR_IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
+            $target_path = IMAGE_PATH.$appdata[0]['Sch_cd'].'/';
 
             $oldPath = $target_path.$picPath;
             $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
@@ -2837,8 +2837,8 @@ class BiseCorrection extends CI_Controller {
         {
             $picPath =  $appdata[0]['PicPath'] ;
             $formNo =  $appdata[0]['formNo'] ;
-            $copy_path = 'C:/xampp/htdocs/Inter_Admission/'.CORR_IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
-            $target_path =  'C:/xampp/htdocs/Inter_Admission/'.IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
+            $copy_path = CORR_IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
+            $target_path = IMAGE_PATH11.$appdata[0]['Inst_cd'].'/';
             $oldPath = $target_path.$picPath;
             $newName = $formNo.'_'.date('d-m-Y').'.jpg';
             $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';

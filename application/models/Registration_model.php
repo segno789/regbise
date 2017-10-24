@@ -321,7 +321,7 @@ class Registration_model extends CI_Model
         }
         else
         {
-            return  false;
+            return  -1;
         }
     }
     public function Delete_NewEnrolement($formno)
