@@ -218,7 +218,9 @@ class BiseCorrections_model extends CI_Model
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9 and $table1.formno is not null and $table1.ismigrated is null"); 
+            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9 and $table1.formno is not null and $table1.ismigrated is null and $table1.isother = 0"); 
+            
+            
         }
         if($class == 10)
         {
@@ -642,7 +644,7 @@ class BiseCorrections_model extends CI_Model
     }
     public function Insert_SpecPermison($data)
     {
-        // DebugBreak();
+        //DebugBreak();
         $isfeeded = $this->IsSpecPermison($data['Inst_cd']);
         if(isset($isfeeded[0]))
         {
@@ -837,9 +839,29 @@ class BiseCorrections_model extends CI_Model
         return $result;
     }
 
+    public function IsAdmission($formno)
+    {
+    $IsAdm = $this->db->query("select count(*) from ".TBLMIGRATION." where formno = '".$formno."' and (IsAdmission is not null or IsAdmission != 0)");
+    $rowcount = $IsAdm->num_rows();
+    if($rowcount>0)
+    {
+    
+    return true;
+    }
+    else
+    {
+    return false;
+    }
+    }
+    
     public function updateMigData($formno,$newInst,$oldInst,$kpo)
     {
-
+        //DebugBreak();
+        $isAdm = $this->IsAdmission($formno);
+         if($isAdm == true)
+         {
+         return -2;
+         }
         $data2 = array(
             'Sch_cd'=>$newInst,
             'oldinst_cd'=>$oldInst,
@@ -857,7 +879,12 @@ class BiseCorrections_model extends CI_Model
     }
     public function updateMigDataOnline($formno,$newInst,$oldInst,$kpo,$app_no,$ismigrated)
     {
-
+        //DebugBreak();
+        $isAdm = $this->IsAdmission($formno);
+         if($isAdm == true)
+         {
+         return -2;
+         }
         $data2 = array(
             'Sch_cd'=>$newInst,
             'oldinst_cd'=>$oldInst,
@@ -1146,7 +1173,7 @@ class BiseCorrections_model extends CI_Model
 
             $this->db->select('formno');
             $this->db->order_by("formno", "DESC");
-            $formno =$this->db->get_where('matric_new..vw9th16',array('Sch_cd'=>$inst_cd)); //tblAdmissionDataForSSC_otherBoard
+            $formno =$this->db->get_where('matric_new..vw9th17',array('Sch_cd'=>$inst_cd)); //tblAdmissionDataForSSC_otherBoard
             $rowcount = $formno->num_rows();
             $row  = $formno->result_array();
             $formno = $row[0]['formno']+1; //formnovalid+1;

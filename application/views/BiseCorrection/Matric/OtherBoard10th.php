@@ -374,14 +374,25 @@
                                     <label class="control-label span1" >
 
                                     </label>
+                                    <select id="sub8"  name="sub8" class="span3 dropdown">
+
+                                    </select>
+                                    <select id="sub8p2"  name="sub8p2" class="span3 dropdown">
+                                     </select>
+                                </div>
+
+                                <div class="control row controls-row">
+                                    <label class="control-label span1" >
+
+                                    </label>
                                     <select id="sub4"  name="sub4" class="span3 dropdown">
 
                                     </select>
                                     <select id="sub4p2" class="span3 dropdown" name="sub4p2">
 
                                     </select> 
+                                    
                                 </div>
-
                                 <div class="control row controls-row">
                                     <label class="control-label span1" >
 
@@ -392,6 +403,7 @@
                                     <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
 
                                     </select> 
+                                    
                                 </div>
                                 <div class="control row controls-row">
                                     <label class="control-label span1" >
@@ -403,27 +415,19 @@
                                     <select id="sub6p2"  name="sub6p2" class="span3 dropdown" selected="selected">
 
                                     </select>
-                                </div>
-                                <div class="control row controls-row">
-                                    <label class="control-label span1" >
-
-                                    </label>
-                                    <select id="sub7" class="span3 dropdown" name="sub7" selected="selected">
-
-                                    </select> 
-                                    <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
-
-                                    </select> 
+                                   
                                 </div> 
                                    <div class="control row controls-row">
                                     <label class="control-label span1" >
 
                                     </label>
-                                    <select id="sub8"  name="sub8" class="span3 dropdown">
+                                       <select id="sub7" class="span3 dropdown" name="sub7" selected="selected">
 
-                                    </select>
-                                    <select id="sub8p2"  name="sub8p2" class="span3 dropdown">
-                                    </select>
+                                    </select> 
+                                    <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
+
+                                    </select> 
+                                    
                                 </div>
                             </div>
                             <div>
@@ -950,7 +954,7 @@
                                 // sub 5 change event 
                                 $("#sub5").change(function(){
                                     var sel_sub =$("#sub5").val();
-                                    //   $("#sub5p2").val(sel_sub);
+                                       $("#sub5p2").val(sel_sub);
                                 });
                                 $("#sub5p2").change(function(){
                                     var sel_sub =$("#sub5p2").val();
@@ -1071,14 +1075,14 @@
                                     }   
 
 
-                                    if((sub7 == 20 && sub6 == 21)  (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
+                                    if((sub7 == 20 && sub6 == 21) || (sub7 == 19 && sub6 == 20) || (sub7 == 19 && sub6 == 21) || (sub7 == 20 && sub6 == 19) || (sub7 == 21 && sub6 == 19)|| (sub7p2 == 20 && sub6p2 == 21) || (sub7p2 == 21 && sub6p2 == 20)  || (sub7p2 == 19 && sub6p2 == 20) || (sub7p2 == 19 && sub6p2 == 21) || (sub7p2 == 20 && sub6p2 == 19) || (sub7p2 == 21 && sub6p2 == 19)){
                                         alertify.error("Please choose Different Subjects as Double History is not allowed" );
                                         $("#sub6").val('0');
                                         $("#sub6p2").val('0');
                                         $("#sub6").focus();
                                         return;
                                     }         
-                                    $("#sub6").val(sub6p2);
+                                  //  $("#sub6").val(sub6p2);
                                     // $("#sub6p2").append(new Option('COMPUTER SCIENCE',78));
                                     //   console.log('Hi i am sub6 dropdown :) ');
                                 })
@@ -2668,10 +2672,10 @@
                                                     // $("#sub7")
                                                     //$("#sub7 option[value='43']").remove();
                                                     //$("#sub8 option[value='43']").remove();
+                                                    $("#su67 option[value='43']").remove();
+                                                    $("#sub6p2 option[value='43']").remove();
                                                     $("#sub7 option[value='43']").remove();
                                                     $("#sub7p2 option[value='43']").remove();
-                                                    $("#sub8 option[value='43']").remove();
-                                                    $("#sub8p2 option[value='43']").remove();
                                                     // $("#sub7").find('option[value=43]').remove();
                                                     // alert("removed");
                                                 }  
@@ -2681,36 +2685,36 @@
                                             //console.log(Religion);
                                             if(Gender == "2")
                                             {
-                                                $("#sub8").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
-                                                $("#sub8p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                                                $("#sub6").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
+                                                $("#sub6p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
                                                 $("#sub7").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
                                                 $("#sub7p2").append(new Option('ELEMENTS OF HOME ECONOMICS',13));
                                             }
                                             else
                                             {
                                                 // alert('i am removed');
-                                                dropdownElement.find('sub8[value=13]').remove();
-                                                dropdownElement.find('sub8p2[value=13]').remove();
+                                                dropdownElement.find('sub7[value=13]').remove();
+                                                dropdownElement.find('sub7p2[value=13]').remove();
                                             }
                                         }
                                         else if(sel_group == "5")
                                         {
                                             Hum_Deaf_Subjects();
                                             $.each(sub5_Deaf,function(val,text){
+                                                $("#sub4").append(new Option(text,val));
+                                                $("#sub4p2").append(new Option(text,val));
+                                            });
+                                            $.each(sub6_Deaf,function(val,text){
                                                 $("#sub5").append(new Option(text,val));
                                                 $("#sub5p2").append(new Option(text,val));
                                             });
-                                            $.each(sub6_Deaf,function(val,text){
+                                            $.each(sub7_Deaf,function(val,text){
                                                 $("#sub6").append(new Option(text,val));
                                                 $("#sub6p2").append(new Option(text,val));
                                             });
-                                            $.each(sub7_Deaf,function(val,text){
+                                            $.each(sub8_Deaf,function(val,text){
                                                 $("#sub7").append(new Option(text,val));
                                                 $("#sub7p2").append(new Option(text,val));
-                                            });
-                                            $.each(sub8_Deaf,function(val,text){
-                                                $("#sub8").append(new Option(text,val));
-                                                $("#sub8p2").append(new Option(text,val));
                                             });
                                         }
                                         else if (sel_group == "0")

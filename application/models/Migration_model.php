@@ -12,8 +12,8 @@ class Migration_model extends CI_Model
     }
      public function std9thclass($inst_cd)
     {
-
-        $query = $this->db->query("Registration..[sp_get_regmigration] $inst_cd,9,2016,1");    
+        $year = YEAR;
+        $query = $this->db->query("Registration..[sp_get_regmigration] $inst_cd,9,$year,1");    
         $rowcount = $query->num_rows();
         if($rowcount > 0)
         {

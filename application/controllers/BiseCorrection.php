@@ -234,7 +234,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function migrate()
     {
-        DebugBreak();
+        //DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -285,9 +285,15 @@ class BiseCorrection extends CI_Controller {
                 }  
             }
 
-            else
+            else if($isupadte == -1)
             {
                 $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/migration9th/');
+            }
+            else if($isupadte == -2)
+            {
+                $data['excep'] = 'Can not Migrate as this candidate Admission confirmed. To proceed further, Please cancel Admission from this institute first.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/migration9th/');
             }
@@ -429,7 +435,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function migrateonline()
     {
-
+         //DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -481,10 +487,15 @@ class BiseCorrection extends CI_Controller {
                     redirect('BiseCorrection/migration9th/');
                 }  
             }
-
-            else
+            else if($isupadte == -1)
             {
                 $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/migration9th/');
+            }
+            else if($isupadte == -2)
+            {
+                $data['excep'] = 'Can not Migrate as this candidate Admission confirmed. To proceed further, Please cancel Admission from this institute first.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/migration9th/');
             }
@@ -646,9 +657,15 @@ class BiseCorrection extends CI_Controller {
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/listmigration9th/');
             }
-            else
+            else if($isupadte == -1)
             {
                 $data['excep'] = 'Update Query not execute.';
+                $this->session->set_flashdata('NewEnrolment_error',$data);
+                redirect('BiseCorrection/listmigration9th/');
+            }
+            else if($isupadte == -2)
+            {
+                $data['excep'] = 'Can not Migrate as this candidate Admission confirmed. To proceed further, Please cancel Admission from this institute first.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/listmigration9th/');
             }
@@ -1845,7 +1862,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-
+        DebugBreak();
 
         $this->load->model('Registration_model');
 
@@ -3950,7 +3967,7 @@ class BiseCorrection extends CI_Controller {
     public function NewEnrolment_insert_OtherBoard10th(){
 
 
-
+       // DebugBreak();
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
