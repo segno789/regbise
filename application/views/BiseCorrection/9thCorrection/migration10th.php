@@ -145,9 +145,9 @@
                                         <th style="width:10%">
                                             Father's Name
                                         </th>
-                                          <th style="width:5%">
+                                         <!-- <th style="width:5%">
                                             Picture
-                                        </th>
+                                        </th>  -->
                                       
                                         <th style="width:8%" class="hidden-phone" >
                                             Action
@@ -182,8 +182,8 @@
                                         <td>'.$app_no.'</td>
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["fname"].'</td>';
-
-                                        echo'<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"></td><td>
+                                                //<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"></td>
+                                        echo'<td>
                                         <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].','.$app_txt.')">Update Migrate</button>
                                         </td>
                                         </tr>';
@@ -228,6 +228,6 @@
   }
     function migrateto(formno,inst_cd,app_no)
     {
-        window.location.href ="<?php echo base_url(); ?>bisecorrection/migrate/10/"+formno+"/"+inst_cd+'/'+app_no; 
+        window.location.href ="<?php echo base_url(); ?>Bisecorrection/migrate/10/"+formno+"/"+inst_cd+'/'+app_no; 
     }
 </script>

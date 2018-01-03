@@ -36,8 +36,8 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('GET_PRIVATE_IMAGE_PATH_COPY','');
-define('IMAGE_PATH_OTHER_BOARD_10TH', 'uploads/2016/other/');
-define('IMAGE_PATH_OTHER_BOARD_11TH', 'uploads/2016/other/colleges/other/');
+define('IMAGE_PATH_OTHER_BOARD_10TH', 'uploads/2017/other/');
+define('IMAGE_PATH_OTHER_BOARD_11TH', 'uploads/2017/other/colleges/other/');
 
 define('IMAGE_PATH', 'uploads/2016/');
 define('IMAGE_PATH2', 'uploads/2016_backup/');
@@ -72,7 +72,7 @@ define('Reg_Cards_9th_Heading','SECONDARY SCHOOL');
 define('Reg_Cards_11th_Heading','HIGHER SECONDARY SCHOOL'); 
 define('TITLE','Online 11th/9th Registration'); 
 define('TITLE_Affiliation','Online Affiliation for SSC and HSSC'); 
-
+define('YEAR',2017);
    
 //===============11th challan varaible
 define('corr_bank_chall_class1','11th');
@@ -84,7 +84,7 @@ define('NOC_APP_NO','80000');
 define('MIGRATIONSESS','2016-18'); 
 define('MIGRATIONSESS2','2015-17'); 
 define('TBLMIGRATION','Registration..tblreg9th'); 
-define('TBLMIGRATION_11th','Registration..IA_P1_Reg_Adm2016'); 
+define('TBLMIGRATION_11th','Registration..tblreg11th'); 
 define('TBLMIGRATION1','matric_new..tblAdmMig'); 
 define('TBLMIGRATION2','matric_new..tblRegMig');
 define('TBLMIGRATION3','Registration..tblMig');  
@@ -92,7 +92,7 @@ define('TBLMIGRATIONTESTING3','Registration..tblMig');
 define('DIRPATH','C:\inetpub\vhosts\bisegrw.com\ssc.bisegrw.com\oldPics'); 
 define('DIRPATHMIG','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\2016\\'); 
 define('DIRPATHCOR','C:\inetpub\vhosts\bisegrw.com\registration.bisegrw.com\uploads\correction\\'); 
-define('TBLMIGRATION4','matric_new..vw9th16'); 
+define('TBLMIGRATION4','matric_new..vw9th17'); 
 
 
 

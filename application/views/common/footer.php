@@ -167,7 +167,7 @@ var otable ='';
     return false;
     }
     }*/
-    
+
     $(document).ready(function () {
 
         $(".chosen-single").chosen({no_results_text: "Oops, nothing found!"}); 
@@ -182,8 +182,8 @@ var otable ='';
             "bAutoWidth" : false,
             "cache": false
         });
-          
-        
+
+
         $("#c0").click(function(){
 
             if($(this).is(":checked")){
@@ -436,14 +436,14 @@ var otable ='';
         //  alert(corr_pic_src);
         $('#div_confirmation').html('');
         $('#div_confirmation').append(' <h3 class="welcome_note">View Your Correction Application Form</h3><br>  <div class="widget">                    <div class="widget-header" id="lblFormNo">                        <div class="title">   <h3>                      Form No.   <?php                                       echo @$data[0]['formNo'];                                       ?>                       </h3> </div>                    </div>                    <div class="widget-body"><div class="control-group">                                <h4 class="span4">Personal Information :</h4>                                <div class="controls controls-row">                                                                                                    </div>                            </div> '); 
-
+    });
 
         var chkBoxArray = [];
         $('.corr_check_box:checked').each(function() {
             chkBoxArray.push($(this).val());
             if($(this).val() == '7')
             {
-                $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
+                $("#div_confirmation").append(' <div class="control-group"><label class="control-label span2" >                                    Current Picture :<!-- MEDIUM:-->                 </label>                                <div class="controls controls-row">                                    <img id="previewImg" style="width:80px; height: 80px;" class="span2" src="<?php  //if(@$isReAdm==1) {} else{echo base_url().IMAGE_PATH.@$Inst_Id.'/'.@$data[0]['PicPath']; } ?>" alt="Candidate Image">                                                               <label class="control-label span1" >TO</label>                                     <img  name="corr_previewImg" style="width:80px; height: 80px; margin-right: 231px;    float: right;" class="span2" src="'+corr_pic_src+'" alt="Candidate Image">                               </div>                            </div>   ')            }
             if($(this).val() == '1')
             {
                 $("#div_confirmation").append(' <div class="control-group">                                <label class="control-label span2 " >                                    Candidate Name :                                </label>                          <div class="controls controls-row">                                    <input class="span2" readonly="readonly"  type="text" id="cand_name" style="text-transform: uppercase;    font-size: 10px;" name="cand_name" placeholder="Candidate Name" maxlength="60"  value="<?php  echo  @$data['0']['name']; ?>" <?php if(@$isReAdm==1) echo "readonly='readonly'";  ?>  >                                <label class="control-label span1 "> TO </label>     <input class="span2" name="corr_cand_name" style="text-transform: uppercase; " readonly="readonly" type="text" value="'+corr_cand_name+'" >                                </div>                            </div>');
@@ -477,14 +477,14 @@ var otable ='';
             // alert('called');
             $("#corr_form").submit();
         })
-        $.fancybox("#div_confirmation");
+        //$.fancybox("#div_confirmation");
         // alert(chkBoxArray);
         //  $.fancybox("#div_confirmation");
         // $("#div_confirmation").fancybox();
-    })
+   
 
 </script>
-<script type="">
+<script type="text/javascript">
     function isValidEmailAddress(emailAddress) {
         var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
         return pattern.test(emailAddress);
@@ -577,6 +577,54 @@ var otable ='';
         window.location.href = '<?=base_url()?>/Registration/Incomplete_inst_info_INSERT/';
     }
 
+    function stringToDate(_date,_format,_delimiter)
+    {
+        var formatLowerCase=_format.toLowerCase();
+        var formatItems=formatLowerCase.split(_delimiter);
+        var dateItems=_date.split(_delimiter);
+        var monthIndex=formatItems.indexOf("mm");
+        var dayIndex=formatItems.indexOf("dd");
+        var yearIndex=formatItems.indexOf("yyyy");
+        var month=parseInt(dateItems[monthIndex]);
+        month-=1;
+        var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+        return formatedDate;
+    }
+    $('.chosen-select').on('change', function(evt, params) {
+        var inst = $(this).val();
+        if(inst=="")
+        {
+            alertify.error("Please select Institute");
+            return false;
+        }
+
+        jQuery.ajax({
+
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "BiseCorrection/IsSpecPermission/",
+            dataType: 'html',
+            data: {inst_cd: inst},
+            beforeSend: function() {  $('.mPageloader').show(); },
+            complete: function() { $('.mPageloader').hide();},
+            success: function(data) {  
+            var obj = JSON.parse(data);
+            if(obj)
+            {
+                $("#Spec_Fee").val(parseInt(obj[0].SpecialFee));
+                $("#ReAdm_Fee").val(parseInt(obj[0].readmfine));
+                var j = obj[0].FeedingDate;
+                var is =j.split("-"); 
+                $("#txt_FeedingDate").val(is[2]+"-"+is['1']+"-"+is[0]);
+            }
+                
+            },
+            error: function(request, status, error){
+                alert(request.responseText);           
+            }
+        });
+
+    });
+
     function SpecPermission_INSERT()
     {
         var inst_cd  = $("#inst_cd").val();
@@ -591,19 +639,19 @@ var otable ='';
             $('#inst_cd').focus();
             return false; 
         }
-       else if(feeding_date == "")
+        else if(feeding_date == "")
         {
             alertify.error("Please write Feeding Date.");
             $('#txt_FeedingDate').focus();
             return false; 
         }
-       else if(regfee == 0 || regfee == "")
+        else if(regfee == 0 || regfee == "")
         {
             alertify.error("Please write Registration Fee.");
             $('#Reg_fee').focus();
             return false; 
         }
-       else if(Proc_fee == 0 || Proc_fee == "")
+        else if(Proc_fee == 0 || Proc_fee == "")
         {
             alertify.error("Please Processing Fee.");
             $('#Proc_Fee').focus();
@@ -611,17 +659,17 @@ var otable ='';
         }
         else if(spec_fee == "")
         {
-        alertify.error("Please Write Special Fee.");
-        $('#Spec_Fee').focus();
-        return false; 
+            alertify.error("Please Write Special Fee.");
+            $('#Spec_Fee').focus();
+            return false; 
         } 
         else if(ReAdm_Fee == "")
         {
-        alertify.error("Please Write Re-Admission Fee.");
-        $('#ReAdm_Fee').focus();
-        return false; 
+            alertify.error("Please Write Re-Admission Fee.");
+            $('#ReAdm_Fee').focus();
+            return false; 
         }  
-       alertify.log("Please wait while your request has been processing.");
+        alertify.log("Please wait while your request has been processing.");
         $("#SpecForm").submit();
         $('[name="btnsubmitNewEnrol"]').prop('disabled', true);
         $('[name="btnsubmitNewEnrol"]').text("Please wait...");
@@ -767,7 +815,7 @@ var otable ='';
     }
 </script>
 
-<script type="">
+<script type="text/javascript">
 
     var isReadm = "<?php  echo @$isReAdm; ?>";
 
@@ -1189,32 +1237,32 @@ var otable ='';
         }
         if(formno == "" || formno.length < 4 || formno.length > 10)
         {
-          $('#txtformNo_search').val("");
-        if(matrno == "")
-        {
-         alertify.error("Please write Valid Form No. OR Matric Roll No.");
-            $('#txtmatricRollno_search').focus();
-            return false;
-        }
-        else if(year == 0)
-        {
-          alertify.error("Please Select Matric Year.");
-            $('#txtmatricYear_search').focus();
-            return false;
-        }
-        else if(sess == 0)
-        {
-            alertify.error("Please Select Matric Session.");
-            $('#txtmatricSess_search').focus();
-            return false;
-        }
-        else if(brd == 0)
-        {
-           alertify.error("Please Select Matric Board.");
-            $('#txtmatricBrd_search').focus();
-            return false;
-        }
-        
+            $('#txtformNo_search').val("");
+            if(matrno == "")
+            {
+                alertify.error("Please write Valid Form No. OR Matric Roll No.");
+                $('#txtmatricRollno_search').focus();
+                return false;
+            }
+            else if(year == 0)
+            {
+                alertify.error("Please Select Matric Year.");
+                $('#txtmatricYear_search').focus();
+                return false;
+            }
+            else if(sess == 0)
+            {
+                alertify.error("Please Select Matric Session.");
+                $('#txtmatricSess_search').focus();
+                return false;
+            }
+            else if(brd == 0)
+            {
+                alertify.error("Please Select Matric Board.");
+                $('#txtmatricBrd_search').focus();
+                return false;
+            }
+
         }
     }
     function RevenueForm(Batch_ID)
