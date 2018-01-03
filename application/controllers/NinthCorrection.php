@@ -366,7 +366,7 @@ class NinthCorrection extends CI_Controller {
     {
 
        
-         
+         DebugBreak();
         $this->load->model('NinthCorrection_model');
         $this->load->model('Registration_model');
        // $this->load->controller('Registration');
@@ -742,7 +742,7 @@ class NinthCorrection extends CI_Controller {
         }
         }*/
         $corr_totalFee = $NameFee+$FnameFee+$DobFee+$FNICFee+$BFormFee+$grpFee+$subFee+$PicFee;
-        //DebugBreak();
+      //  DebugBreak();
         $AppNo = $this->NinthCorrection_model->GetAppNo();
         $data = array(
             'name'=>$corr_name,
@@ -766,7 +766,8 @@ class NinthCorrection extends CI_Controller {
             'sub8'=>$corr_sub8,'PicPath'=>$filename,'formNo'=>@$_POST['formNo'],
             'AppNo'=>$AppNo,
             'Pic'=>$isPic,
-            'Inst_cd'=>$userinfo['Inst_Id'],
+            'Inst_cd'=>$Inst_Id,
+            'ekpo'=>$userinfo['Inst_Id'],
            // 'sch_cd'=>$user['Inst_Id'],
             'FormNo'=>$formno,
 

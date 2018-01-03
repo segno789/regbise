@@ -136,6 +136,7 @@
         $AppNo = $data['AppNo'];
         $Pic = $data['Pic'];
         $PicPath = $data['PicPath'];
+       
          $year = regyear;
         $query = $this->db->query("Registration..MA_P1_Reg_Correction_sp_insert '$formno',9,$year,1,'$name','$fname','$BForm','$FNIC','$Dob',$grp_cd,$sub1,$sub2,$sub3,$sub4,$sub5,$sub6,$sub7,$sub8,$Pic,$Inst_cd,$RegGrp,$NameFee,$FnameFee,$BFormFee,$DobFee,$FNICFee,$grpFee,$subFee,$picFee,$totalFee,$AppNo");
         //$query = $this->db->insert('msadmissions2015', $data);//,'Fname' => $father_name,'BForm'=>$bay_form,'FNIC'=>$father_cnic,'Dob'=>$dob,'CellNo'=>$mob_number));

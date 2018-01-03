@@ -8,7 +8,7 @@ class BiseCorrection extends CI_Controller {
 
         $this->load->library('session');
         if( !$this->session->userdata('logged_in') && $this->router->method != 'login' ) {
-             redirect('login/biselogin');
+            redirect('login/biselogin');
         }
     }
     public function migration9th()
@@ -21,7 +21,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-       
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -30,7 +30,7 @@ class BiseCorrection extends CI_Controller {
         else{
             $error['excep'] = '';
         }
-       
+
         $data['migration'] = $this->BiseCorrections_model->getmigration(9);
         $data['migration1'] = $this->BiseCorrections_model->getmigrationonline(9);
         $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
@@ -39,18 +39,18 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/migration9th.php',$error);
         $this->load->view('common/footer.php');
     }
-   public function migration11th()
+    public function migration11th()
     {
         $this->load->helper('url');
         $data = array(
             'isselected' => '40',
         );
         $this->load->library('session');
-       // $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-         
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -77,7 +77,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -102,10 +102,10 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
-        
+
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -124,7 +124,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function listmigration9th()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -133,7 +133,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -144,25 +144,25 @@ class BiseCorrection extends CI_Controller {
         }
         $data['migration'] = $this->BiseCorrections_model->getlistmigration(9);
         $data['migration1'] = $this->BiseCorrections_model->getlistmigrationonline(9);
-          $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
+        $data['migration']  =  array_merge($data['migration'],$data['migration1'])   ;
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/9thCorrection/ListMir9th.php',$error);
         $this->load->view('common/footer.php');
     }
-     public function listmigration11th()
+    public function listmigration11th()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '40',
         );
-        
+
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -181,7 +181,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function listmigration10th()
     {
-        
+        // DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -190,7 +190,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -205,9 +205,9 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/ListMir10th.php',$error);
         $this->load->view('common/footer.php');
     }
-   public function listmigration12th()
+    public function listmigration12th()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '40',
@@ -217,7 +217,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');
@@ -234,7 +234,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function migrate()
     {
-         
+      //  DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -246,7 +246,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-       
+
         if($isclass == 9)
         {
             if($migrateto != '')
@@ -308,7 +308,7 @@ class BiseCorrection extends CI_Controller {
                 $formnopic = @$_POST['txtformNo_search'].'.jpg';
 
             }
-               $app_no = $this->uri->segment(6);
+            $app_no = $this->uri->segment(6);
             $isupadte = $this->BiseCorrections_model->update11MigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,1);
 
             if($isupadte >0)
@@ -339,7 +339,7 @@ class BiseCorrection extends CI_Controller {
         }
         else if($isclass == 10)
         {     
-             $app_no = $this->uri->segment(6);
+            $app_no = $this->uri->segment(6);
             if($migrateto != '')
             {
                 //$oldinst_cd = substr($formno, 0, 6);
@@ -354,15 +354,15 @@ class BiseCorrection extends CI_Controller {
                 $formnopic = @$_POST['txtformNo_search'].'.jpg';
 
             }
-              if($app_no > 0)
-              {
-                  $isupdate =  3;
-                  $formno = $app_no;
-              }
-              else
-              {
-                 $isupdate =  1;  
-              }
+            if($app_no > 0)
+            {
+                $isupdate =  3;
+                $formno = $app_no;
+            }
+            else
+            {
+                $isupdate =  1;  
+            }
             $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],$isupdate,$newinst_cd);
 
             if($isupadte >0)
@@ -383,7 +383,7 @@ class BiseCorrection extends CI_Controller {
         }
         else if($isclass == 12)
         {
-              $app_no = $this->uri->segment(6);
+            $app_no = $this->uri->segment(6);
             if($migrateto != '')
             {
                 //$oldinst_cd = substr($formno, 0, 6);
@@ -398,15 +398,15 @@ class BiseCorrection extends CI_Controller {
                 $formnopic = @$_POST['txtformNo_search'].'.jpg';
 
             }
-               if($app_no > 0)
-              {
-                  $isupdate =  3;
-                  $formno = $app_no;
-              }
-              else
-              {
-                 $isupdate =  1;  
-              }
+            if($app_no > 0)
+            {
+                $isupdate =  3;
+                $formno = $app_no;
+            }
+            else
+            {
+                $isupdate =  1;  
+            }
             $isupadte = $this->BiseCorrections_model->update12MigData($formno,$userinfo['Inst_Id'],$isupdate,$newinst_cd);
 
             if($isupadte >0)
@@ -442,7 +442,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         if($isclass == 9)
         {
             if($migrateto != '')
@@ -629,7 +629,7 @@ class BiseCorrection extends CI_Controller {
                 $oldinst_cd = 0;
                 $newinst_cd    = $migrateto;
             }               
-           
+
             if($app_no >0)
             {
                 $isupadte = $this->BiseCorrections_model->updateMigDataOnline($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,NULL);
@@ -656,7 +656,7 @@ class BiseCorrection extends CI_Controller {
         else if($isclass == 10)
         {
 
-            
+
             if($app_no >0)
             {
                 $isupadte = 4;
@@ -666,7 +666,7 @@ class BiseCorrection extends CI_Controller {
             {
                 $isupadte = 2;
             }
-            
+
             $isupadte = $this->BiseCorrections_model->update10MigData($formno,$userinfo['Inst_Id'],$isupadte,$migrateto);
 
             if($isupadte >0)
@@ -687,7 +687,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function restoreMigration11()
     {
-         
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '40',
@@ -699,7 +699,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-           $app_no = $this->uri->segment(6);
+        $app_no = $this->uri->segment(6);
         if($isclass == 11)
         {
             if($migrateto != '')
@@ -707,7 +707,7 @@ class BiseCorrection extends CI_Controller {
                 $oldinst_cd = 0;
                 $newinst_cd    = $migrateto;
             }
-            
+
             $isupadte = $this->BiseCorrections_model->update11MigData($formno,$newinst_cd,$oldinst_cd,$userinfo['Inst_Id'],$app_no,NULL);
 
             if($isupadte >0)
@@ -754,8 +754,8 @@ class BiseCorrection extends CI_Controller {
 
     }
 
-    
-  public function resultFinance9thcorrections()
+
+    public function resultFinance9thcorrections()
     {
         $this->load->helper('url');
         $data = array(
@@ -771,6 +771,47 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }    
+     public function reg9thEligibility()
+    {
+         //DebugBreak();
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9theligibilty());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/regEligibilty.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+        
+        
+    }
+    public function reg9thEligibilityActive()
+    {
+        //DebugBreak();
+        $this->load->helper('url');
+        $formno = $_POST['formno'];
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->active9theligibilty($formno,$userinfo['Inst_Id']));
+        
+        
+        if($NinthStdData['data'] ==  true)
+        {
+            echo  1;
+        }
+        else
+        {
+             echo  0;
+        }
+        exit();
+    }
     public function result9thcorrections()
     {
         $this->load->helper('url');
@@ -787,8 +828,8 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }
-    
-       public function result11thcorrections()
+
+    public function result11thcorrections()
     {
         $this->load->helper('url');
         $data = array(
@@ -838,7 +879,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function SpecPermison_9th()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '11',
@@ -846,7 +887,7 @@ class BiseCorrection extends CI_Controller {
 
         $spec_case_msg="";
         $this->load->library('session');
-        
+
         if(( $this->session->flashdata('msg'))){
 
             $msg = $this->session->flashdata('msg');
@@ -865,6 +906,35 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/SpecPermission.php',$NinthStdData);
         $this->load->view('common/footer.php',$spec_case_msg); 
     }
+     public function SpecPermison_11th()
+    {
+
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '11',
+        );
+
+        $spec_case_msg="";
+        $this->load->library('session');
+
+        if(( $this->session->flashdata('msg'))){
+
+            $msg = $this->session->flashdata('msg');
+            $spec_case_msg =array('msg'=>$msg);  
+        }
+        else{
+            $msg = '';
+            $spec_case_msg =array('msg'=>$msg);  
+        }
+        $this->load->model('BiseCorrections_model');
+        $EleventhStdData = array('Inst_data'=>$this->BiseCorrections_model->GetAllInstList_HSSC());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/SpecPermission11th.php',$EleventhStdData);
+        $this->load->view('common/footer.php',$spec_case_msg); 
+    }
     public function SpecPermison_9th_INSERT()
     {
         $this->load->model('BiseCorrections_model');
@@ -877,7 +947,7 @@ class BiseCorrection extends CI_Controller {
         $this->commonheader($userinfo);
         $error = array();
 
-       
+
         if (!isset($kpo))
         {
             //$error['excep'][1] = 'Please Login!';
@@ -909,19 +979,85 @@ class BiseCorrection extends CI_Controller {
             redirect('BiseCorrection/SpecPermison_9th');
         }
     }
+     public function SpecPermison_11th_INSERT()
+    {
+        $this->load->model('BiseCorrections_model');
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $userinfo['isselected'] = 11;
+        $kpo = $userinfo['Inst_Id'];
+        $this->commonheader($userinfo);
+        $error = array();
+
+
+        if (!isset($kpo))
+        {
+            //$error['excep'][1] = 'Please Login!';
+            $this->load->view('login/biselogin.php');
+            return;
+        }
+        $lastdate  = date('Y-m-d',strtotime(@$_POST['txt_FeedingDate'])) ;
+        $data = array(
+
+            'Inst_cd'=>@$_POST['inst_cd'],
+            'FeedingDate'=>$lastdate,
+            'RegFee'=>@$_POST['Reg_fee'],
+            'ProcessingFee'=>@$_POST['Proc_Fee'],
+            'SpecialFee'=>@$_POST['Spec_Fee'],
+            'readmfine'=>@$_POST['ReAdm_Fee'],
+            'Isactive'=>@$_POST['IsActivated'],
+            'Kpo'=>$kpo
+
+        );
+        $IsInserted = $this->BiseCorrections_model->Insert_SpecPermison($data);
+        if($IsInserted == true)
+        {
+            $this->session->set_flashdata('msg','Saved');
+            redirect('BiseCorrection/SpecPermison_11th');
+        }
+        else
+        {
+            $this->session->set_flashdata('msg','Not Saved');
+            redirect('BiseCorrection/SpecPermison_11th');
+        }
+    }
+    public function IsSpecPermission()
+    {
+    
+       // DebugBreak();
+        $this->load->model('BiseCorrections_model');
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $userinfo['isselected'] = 11;
+        $kpo = $userinfo['Inst_Id'];
+        $error = array();
+        $inst_cd = $_POST['inst_cd'];
+        $IsInserted = $this->BiseCorrections_model->IsSpecPermison($inst_cd);
+        if(!isset($IsInserted[0]))
+        {
+         $IsInserted = false;
+        }
+        echo json_encode($IsInserted);
+
+       // exit();
+
+    }
     public function Delete_Form()
     {
         $this->load->helper('url');
         $data = array(
             'isselected' => '8',
         );
-        
+
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
@@ -939,7 +1075,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/9thCorrection/Srch_Candidate_formno.php',$error);
         $this->load->view('common/footer.php');
     }
-      public function Delete_Form11()
+    public function Delete_Form11()
     {
         $this->load->helper('url');
         $data = array(
@@ -951,7 +1087,7 @@ class BiseCorrection extends CI_Controller {
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
@@ -971,17 +1107,17 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_EditForm11th_manual_corr()
     {    
-        
-         $this->load->helper('url');
+
+        $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $Inst_Id = $userinfo['Inst_Id'];
         $this->load->view('common/header.php',$userinfo);
         $formno = $_POST['txtformNo_search'];
-       // echo  $_POST['txtformNo_search'] ;exit();
+        // echo  $_POST['txtformNo_search'] ;exit();
         if($formno == ""){
-             $formno = $this->uri->segment(3);
+            $formno = $this->uri->segment(3);
         } 
         $isReAdm = 0;
         $year = 0;
@@ -990,7 +1126,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1009,15 +1145,15 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-            
+
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data11(array('formno'=>$formno, 'matrno'=>'', 'year'=>'', 'sess'=>'', 'brd'=>''));
             $inst_name =  $this->BiseCorrections_model->GetInstbyId_11th_otherboard($datainfo[0]['coll_cd']);
-            
+
             if($inst_name[0]->IsGovernment == 1)
             {
                 $inst_name[0]->allowed_iGrp = '1,2,3,4,5'  ;
             }
-            
+
             $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['coll_cd'],'grp_cd'=>$inst_name[0]->allowed_iGrp);
         }
         if($RegStdData['data'] == FALSE)
@@ -1033,9 +1169,9 @@ class BiseCorrection extends CI_Controller {
         //$this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
-      public function NewEnrolment_update11th()
+    public function NewEnrolment_update11th()
     {
-       
+
 
         $this->load->model('BiseCorrections_model');
 
@@ -1052,7 +1188,7 @@ class BiseCorrection extends CI_Controller {
         }
         $Inst_Id = @$_POST['inst_cd'];
         $error = array();
-        
+
         $formno =  @$_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
         $sub1ap1 = 0;
         $sub2ap1 = 0;
@@ -1095,16 +1231,16 @@ class BiseCorrection extends CI_Controller {
             $sub7 = @$_POST['sub7'];
             $sub7ap1 = 1;   
         }
-       /* if(@$_POST['sub7'] != -1)
+        /* if(@$_POST['sub7'] != -1)
         {
-            $sub7ap1 = 1;    
+        $sub7ap1 = 1;    
         }*/
         if(@$_POST['sub8'] != 0)
         {
             $sub8ap1 = 1;    
         }
-       
-        
+
+
         if(@$_POST['IsReAdm'] == '1')
         {
 
@@ -1118,8 +1254,8 @@ class BiseCorrection extends CI_Controller {
                 redirect('Registration/ReAdmission');
                 return;
             }
-            
-             $addre =  str_replace("'", "", @$_POST['address']);
+
+            $addre =  str_replace("'", "", @$_POST['address']);
             $allinputdata = array('CellNo'=>@$_POST['mob_number'],
                 'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
                 'speciality'=>@$_POST['speciality'],'markOfIden'=>@$_POST['MarkOfIden'],
@@ -1154,11 +1290,11 @@ class BiseCorrection extends CI_Controller {
             $allinputdata['isreadm']= 1;
             $formno = $this->Registration_11th_model->GetFormNo($Inst_Id);
             $allinputdata['formNo']= $formno;
-            
+
 
         }
         else{
-              $addre =  str_replace("'", "", @$_POST['address']);
+            $addre =  str_replace("'", "", @$_POST['address']);
             $allinputdata = array('name'=>@$_POST['cand_name'],'Fname'=>@$_POST['father_name'],
                 'BForm'=>@$_POST['bay_form'],'FNIC'=>@$_POST['father_cnic'],
                 'Dob'=>@$_POST['dob'],'CellNo'=>@$_POST['mob_number'],
@@ -1236,7 +1372,7 @@ class BiseCorrection extends CI_Controller {
         }*/
 
 
-        
+
         // $this->frmvalidation('NewEnrolment_EditForm/'.$formno,$allinputdata,1);
 
         /*  $a = getimagesize($filepath);
@@ -1289,10 +1425,10 @@ class BiseCorrection extends CI_Controller {
             $sub8ap1 = 1;    
 
         }
-        
-         $addre =  str_replace("'", "", $this->input->post('address'));
-           $addre = preg_replace('/[[:^print:]]/', '', $addre);
-       $data = array(
+
+        $addre =  str_replace("'", "", $this->input->post('address'));
+        $addre = preg_replace('/[[:^print:]]/', '', $addre);
+        $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
             'BForm' =>$this->input->post('bay_form'),
@@ -1329,14 +1465,14 @@ class BiseCorrection extends CI_Controller {
             'Inst_cd' =>($Inst_Id),
             'FormNo' =>($formno),
             'IsBrdCrt' =>(1),
-            
+
             'SSC_RNo'=>$this->input->post('OldRno'),
             'SSC_Year'=>$this->input->post('OldYear'),
             'SSC_Sess'=>$this->input->post('OldSess'),
             'SSC_brd_cd'=>$this->input->post('OldBrd'),
             'IsReAdm'=>$this->input->post('IsReAdm')   ,
             'Brd_cd'=>$this->input->post('Brd_cd'),
-           // 'Image'=>$encoded_image  ,
+            // 'Image'=>$encoded_image  ,
             'PicPath'=>$formno.".jpg"
             // 'spl_cd'=>$this->input->post('IsReAdm'),
 
@@ -1345,33 +1481,33 @@ class BiseCorrection extends CI_Controller {
 
 
         );
-        
-       
-        
+
+
+
         $check = getimagesize($_FILES["image"]["tmp_name"]);
-        
+
 
         if($check !== false)
-         {
+        {
 
             $target_path = IMAGE_PATH11.$Inst_Id.'/';
-        // $target_path = '../uploads2/'.$Inst_Id.'/';
-        if (!file_exists($target_path)){
+            // $target_path = '../uploads2/'.$Inst_Id.'/';
+            if (!file_exists($target_path)){
 
-            mkdir($target_path);
-        }
-        $target_path = IMAGE_PATH11.$Inst_Id.'/';
-        $config['upload_path']   = $target_path;
-        $config['allowed_types'] = 'jpg';
-        $config['max_size']      = '20';
-      /*  $config['max_width']     = '260';
-        $config['max_height']    = '290';*/
-        $config['overwrite']     = TRUE;
-        $config['file_name']     = $formno.'.jpg';
+                mkdir($target_path);
+            }
+            $target_path = IMAGE_PATH11.$Inst_Id.'/';
+            $config['upload_path']   = $target_path;
+            $config['allowed_types'] = 'jpg';
+            $config['max_size']      = '20';
+            /*  $config['max_width']     = '260';
+            $config['max_height']    = '290';*/
+            $config['overwrite']     = TRUE;
+            $config['file_name']     = $formno.'.jpg';
 
-        $filepath = $target_path. $config['file_name']  ;
-         $this->load->library('upload', $config);
-         
+            $filepath = $target_path. $config['file_name']  ;
+            $this->load->library('upload', $config);
+
             $file_size = round($_FILES['image']['size']/1024, 2);
             $this->upload->initialize($config);
             if($file_size<=20)
@@ -1400,27 +1536,27 @@ class BiseCorrection extends CI_Controller {
                 redirect('Registration_11th/NewEnrolment_EditForm/');
 
             }
-             $check = getimagesize($_FILES["image"]["tmp_name"]);
-        $a = getimagesize($filepath);
-        if($a[2]!=2)
-        {
-            $this->convertImage($filepath,$filepath,100,$a['mime']);
-        }
-        $type = pathinfo($filepath, PATHINFO_EXTENSION);
-        $pic_data = file_get_contents($filepath);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($pic_data);
-        $data['Image']=$base64;
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            $a = getimagesize($filepath);
+            if($a[2]!=2)
+            {
+                $this->convertImage($filepath,$filepath,100,$a['mime']);
+            }
+            $type = pathinfo($filepath, PATHINFO_EXTENSION);
+            $pic_data = file_get_contents($filepath);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($pic_data);
+            $data['Image']=$base64;
 
         }
         else
         {
-        $data['Image']='';    
+            $data['Image']='';    
         }
-    
+
         $data['isReAdm']=$isReAdm;
         $data['Oldrno']=0;
         //$data['Image'] = '';
-       // $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
+        // $this->frmvalidation11th('NewEnrolment_EditForm',$data,1);        
         $logedIn = $this->BiseCorrections_model->Update_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
         if($logedIn != false)
         {  
@@ -1438,9 +1574,9 @@ class BiseCorrection extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-      public function NewEnrolment_EditForm11()
-      {    
-        
+    public function NewEnrolment_EditForm11()
+    {    
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1449,18 +1585,18 @@ class BiseCorrection extends CI_Controller {
         $formno = $this->uri->segment(3);
         if($formno != FALSE)
         {
-        $matrno = "";
-        $matyear = "";
-        $sess = "";
-        $brd = "";
+            $matrno = "";
+            $matyear = "";
+            $sess = "";
+            $brd = "";
         }
         else
         {
-        $matrno = $_POST['txtmatricRollno_search'];
-        $matyear = $_POST['txtmatricYear_search'];
-        $sess = $_POST['txtmatricSess_search'];
-        $brd = $_POST['txtmatricBrd_search'];
-        $formno = $_POST['txtformNo_search'];
+            $matrno = $_POST['txtmatricRollno_search'];
+            $matyear = $_POST['txtmatricYear_search'];
+            $sess = $_POST['txtmatricSess_search'];
+            $brd = $_POST['txtmatricBrd_search'];
+            $formno = $_POST['txtformNo_search'];
         }
         if($formno == "" && $matrno == "")
         {
@@ -1473,7 +1609,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1492,12 +1628,12 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 1;
                 $year = 2016;    
             }
-           
+
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data11(array('formno'=>$formno, 'matrno'=>$matrno, 'year'=>$matyear, 'sess'=>$sess, 'brd'=>$brd ));
             $inst_name =  $this->BiseCorrections_model->GetInstNamebyId($datainfo[0]['coll_cd']);
             $RegStdData = array('data'=>$datainfo,'isReAdm'=>$isReAdm,'Oldrno'=>0,'inst_name' => $inst_name[0]->Name,'inst_cd' => $datainfo[0]['coll_cd'],'grp_cd'=>$inst_name[0]);
         }
-        
+
         if($RegStdData['data'] == FALSE)
         {
             $this->session->set_flashdata('NewEnrolment_error','error');
@@ -1510,11 +1646,11 @@ class BiseCorrection extends CI_Controller {
         $this->commonfooter(array("files"=>array("jquery.maskedinput.js","validate.NewEnrolment.js"))); 
 
     }
-    
-    
+
+
     public function NewEnrolment_EditForm()
     {    
-        
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -1531,7 +1667,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1597,7 +1733,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Delete_candidate_UPDATE11()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -1625,7 +1761,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Restore_form()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '8',
@@ -1649,7 +1785,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Restore_form11()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -1673,7 +1809,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function Restore_form_UPDATE()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '8',
@@ -1693,7 +1829,7 @@ class BiseCorrection extends CI_Controller {
     }                 
     public function Restore_form_UPDATE11()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -1717,13 +1853,13 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '15',
         );
-        
+
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
             $error['excep'] = 'Your Form No. is Invalid.';
@@ -1738,7 +1874,7 @@ class BiseCorrection extends CI_Controller {
             $error['excep'] = '';
         }
         if($this->session->flashdata('error_manualentry9th')){
-            
+
 
             //$RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error'); 
 
@@ -1760,7 +1896,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_EditForm9th_manual_corr()
     {    
-        
+
         $this->load->helper('url');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -1779,7 +1915,7 @@ class BiseCorrection extends CI_Controller {
         );
         $this->load->model('BiseCorrections_model');
         if($this->session->flashdata('NewEnrolment_error')){
-            
+
 
             $RegStdData['data'][0] = $this->session->flashdata('NewEnrolment_error');   
             $isReAdm = $RegStdData['data'][0]['isreadm'];
@@ -1798,7 +1934,7 @@ class BiseCorrection extends CI_Controller {
                 $isReAdm = 0;
                 $year = 2016;    
             }
-            
+
             $datainfo = $this->BiseCorrections_model->EditEnrolement_data($formno);
             $inst_name =  $this->BiseCorrections_model->GetInstbyId($datainfo[0]['Sch_cd']);
 
@@ -1824,7 +1960,7 @@ class BiseCorrection extends CI_Controller {
     public function NewEnrolment_update()
     {
 
-        
+
         $this->load->model('Registration_model');
 
         $this->load->library('session');
@@ -1841,7 +1977,7 @@ class BiseCorrection extends CI_Controller {
         $error = array();
         $ckpo =$Inst_Id;
         $Inst_Id = @$_POST['Inst_Id'];
-        
+
         $formno =  $_POST['formNo'];  //$this->Registration_model->GetFormNo($Inst_Id);//, $fname);//$_POST['username'],$_POST['password']);
         $sub1ap1 = 0;
         $sub2ap1 = 0;
@@ -1890,7 +2026,7 @@ class BiseCorrection extends CI_Controller {
             mkdir($target_path);
         }
 
-        
+
         if(@$_POST['IsReAdm'] == '1')
         {
 
@@ -1904,7 +2040,7 @@ class BiseCorrection extends CI_Controller {
                 redirect('BiseCorrection/NewEnrolment_EditForm');
                 return;
             }
-            
+
             $allinputdata = array('CellNo'=>@$_POST['mob_number'],
                 'med'=>@$_POST['medium'],'classRno'=>@$_POST['Inst_Rno'],
                 'speciality'=>@$_POST['speciality'],'markOfIden'=>@$_POST['MarkOfIden'],
@@ -1939,7 +2075,7 @@ class BiseCorrection extends CI_Controller {
             $allinputdata['isreadm']= 1;
             $formno = $this->Registration_model->GetFormNo($Inst_Id);
             $allinputdata['formNo']= $formno;
-            
+
 
         }
         else{
@@ -2040,7 +2176,7 @@ class BiseCorrection extends CI_Controller {
 
 
 
-        
+
         $this->frmvalidation9th('BiseCorrection/NewEnrolment_EditForm9th_manual_corr/'.$formno,$allinputdata,1);
 
         /*  $a = getimagesize($filepath);
@@ -2091,7 +2227,7 @@ class BiseCorrection extends CI_Controller {
         {
             $sub8ap1 = 1;    
         }
-        
+
         $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
@@ -2160,78 +2296,78 @@ class BiseCorrection extends CI_Controller {
 
         $this->load->view('common/footer.php');
     }
-   public function searchbyinst11th()
+    public function searchbyinst11th()
     {
-      $this->load->helper('url');
-      $data = array(
-          'isselected' => '13',
-      );
-      $this->load->library('session');
-      $this->load->model('BiseCorrections_model');
-      $Logged_In_Array = $this->session->all_userdata();
-      $userinfo = $Logged_In_Array['logged_in'];
-   
-      if(!empty($_POST))
-      {
-            
-       $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
-      }
-      
-      
-      //error_manualentry9th
-      $this->load->view('common/header.php',$userinfo);
-      $this->load->view('common/menu.php',$data);
-      $this->load->view('BiseCorrection/11thCorrection/SrchByInstCD.php',$error);
-      $this->load->view('common/footer.php');
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        if(!empty($_POST))
+        {
+
+            $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
+        }
+
+
+        //error_manualentry9th
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/SrchByInstCD.php',$error);
+        $this->load->view('common/footer.php');
     }
-    
-     public function searchbyinst11thcr()
+
+    public function searchbyinst11thcr()
     {
-      $this->load->helper('url');
-      $data = array(
-          'isselected' => '15',
-      );
-      $this->load->library('session');
-      $this->load->model('BiseCorrections_model');
-      $Logged_In_Array = $this->session->all_userdata();
-      $userinfo = $Logged_In_Array['logged_in'];
-   
-      if(!empty($_POST))
-      {
-            
-       $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
-      }
-      
-      
-      //error_manualentry9th
-      $this->load->view('common/header.php',$userinfo);
-      $this->load->view('common/menu.php',$data);
-      $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDCR.php',$error);
-      $this->load->view('common/footer.php');
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '15',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        if(!empty($_POST))
+        {
+
+            $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
+        }
+
+
+        //error_manualentry9th
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDCR.php',$error);
+        $this->load->view('common/footer.php');
     }
-     public function searchbyinst11thDelete_candidate()
+    public function searchbyinst11thDelete_candidate()
     {
-      $this->load->helper('url');
-      $data = array(
-          'isselected' => '13',
-      );
-      $this->load->library('session');
-      $this->load->model('BiseCorrections_model');
-      $Logged_In_Array = $this->session->all_userdata();
-      $userinfo = $Logged_In_Array['logged_in'];
-   
-      if(!empty($_POST))
-      {
-            
-       $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
-      }
-      
-      
-      //error_manualentry9th
-      $this->load->view('common/header.php',$userinfo);
-      $this->load->view('common/menu.php',$data);
-      $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDdelete.php',$error);
-      $this->load->view('common/footer.php');
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '13',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+
+        if(!empty($_POST))
+        {
+
+            $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst11th($_POST['txtformNo_search']);
+        }
+
+
+        //error_manualentry9th
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/11thCorrection/SrchByInstCDdelete.php',$error);
+        $this->load->view('common/footer.php');
     }
     public function reg9thcorrections()
     {
@@ -2369,7 +2505,7 @@ class BiseCorrection extends CI_Controller {
 
     public function BatchRelease()
     {
-        
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '0',
@@ -2456,7 +2592,7 @@ class BiseCorrection extends CI_Controller {
 
 
         $this->load->model('Registration_model');
-        
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2660,7 +2796,7 @@ class BiseCorrection extends CI_Controller {
 
         );
         $logedIn = $this->Registration_model->Insert_NewEnorlement($data);//, $fname);//$_POST['username'],$_POST['password']);
-        
+
         if($logedIn[0]['error'] != 'false')
         {  
             $allinputdata = "";
@@ -2688,7 +2824,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment()
     {    
-        
+
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
@@ -2696,7 +2832,7 @@ class BiseCorrection extends CI_Controller {
         $data = array(
             'isselected' => '0',
         );
-        
+
         if($this->session->flashdata('NewEnrolment_error')){
 
             $error['excep'] = $this->session->flashdata('NewEnrolment_error');    
@@ -2733,7 +2869,7 @@ class BiseCorrection extends CI_Controller {
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateslipData($rno,$userinfo['Inst_Id']));
         redirect('/BiseCorrection/slips9thcorrections');
     }
-     public function Res9thactive()
+    public function Res9thactive()
     {
         $rno = $this->uri->segment(3);
         $this->load->model('BiseCorrections_model');
@@ -2742,16 +2878,16 @@ class BiseCorrection extends CI_Controller {
         $NinthStdData = array('data'=>$this->BiseCorrections_model->updateResData($rno,$userinfo['Inst_Id']));
         if($userinfo['Inst_Id'] == 2182 || $userinfo['Inst_Id'] == 9100  || $userinfo['Inst_Id'] == 2303 || $userinfo['Inst_Id'] == 2181)
         {
-             redirect('/BiseCorrection/resultFinance9thcorrections');
-           
+            redirect('/BiseCorrection/resultFinance9thcorrections');
+
         }
         else
         {
-              redirect('/BiseCorrection/result9thcorrections');
+            redirect('/BiseCorrection/result9thcorrections');
         }
-        
+
     }
-     public function Res11thactive()
+    public function Res11thactive()
     {
         $rno = $this->uri->segment(3);
         $this->load->model('BiseCorrections_model');
@@ -2762,7 +2898,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function correction_update($BatchId)
     {
-       
+
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2775,7 +2911,7 @@ class BiseCorrection extends CI_Controller {
 
         $appdata = $this->BiseCorrections_model->get9thCorrectionDataById($BatchId);
 
-      
+
 
         if($appdata[0]['PicFee']>0)
         {
@@ -2797,7 +2933,7 @@ class BiseCorrection extends CI_Controller {
 
         $status = array('data'=>$this->BiseCorrections_model->reg9thCorrection_UPDATE($fetchdata));
 
-         $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
+        $appdata = $this->BiseCorrections_model->updateCorrectionStatus($BatchId,$ckpo);
         if($status == true){
 
             $error_msg= "success";
@@ -2816,10 +2952,10 @@ class BiseCorrection extends CI_Controller {
 
     }
 
-      public function correction_update11($BatchId)
+    public function correction_update11($BatchId)
     {
 
-       
+
         $this->load->library('session');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
@@ -2831,7 +2967,7 @@ class BiseCorrection extends CI_Controller {
         $fetchdata = array('AppNo'=>$BatchId,'ckpo'=>$ckpo);
 
         $appdata = $this->BiseCorrections_model->get11thCorrectionDataById($BatchId);
-          
+
 
         if($appdata[0]['PicFee']>0)
         {
@@ -2842,10 +2978,10 @@ class BiseCorrection extends CI_Controller {
             $oldPath = $target_path.$picPath;
             $newName = $formNo.'_'.date('d-m-Y').'.jpg';
             $newPath = $target_path.$formNo.'_'.date('d-m-Y').'.jpg';
-           $isrename = rename($oldPath, $newPath);
-           $iscopy =copy($copy_path.$picPath, $target_path.$picPath);
+            $isrename = rename($oldPath, $newPath);
+            $iscopy =copy($copy_path.$picPath, $target_path.$picPath);
         }
-            $appdata = $this->BiseCorrections_model->updateCorrectionStatus11($BatchId,$ckpo);
+        $appdata = $this->BiseCorrections_model->updateCorrectionStatus11($BatchId,$ckpo);
         $status = array('data'=>$this->BiseCorrections_model->reg11thCorrection_UPDATE($fetchdata));
 
 
@@ -2866,7 +3002,7 @@ class BiseCorrection extends CI_Controller {
 
 
     }
-    
+
     public function BatchRelease_update($BatchId, $Inst_Cd)
     {
 
@@ -2874,7 +3010,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         $data = array(
             'isselected' => '0',
         );
@@ -2906,7 +3042,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        
+
         $data = array(
             'isselected' => '0',
         );
@@ -2950,7 +3086,7 @@ class BiseCorrection extends CI_Controller {
 
         return 1;
     }
-     function frmvalidation($viewName,$allinputdata,$isupdate)
+    function frmvalidation($viewName,$allinputdata,$isupdate)
     {
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $subjectslang = array('22','23','36','34','35');
@@ -3018,7 +3154,7 @@ class BiseCorrection extends CI_Controller {
             }
             /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
             {
-            
+
             $allinputdata['excep'] = 'This Bay Form is already Feeded.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect($viewName);
@@ -3029,42 +3165,42 @@ class BiseCorrection extends CI_Controller {
             }*/
             else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
             {
-                
+
                 if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true )
                 {
-                    
+
                     $allinputdata['excep'] = 'This Bay Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
                     return;
                 }
-               /* else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
+                /* else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
                 {
-                    
-                    $allinputdata['excep'] = 'This Form is already Feeded.';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect($viewName);
-                    return;
-                }    */
-            }
-           /* else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
-            {
-                
+
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
                 return;
+                }    */
+            }
+            /* else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
+            {
+
+            $allinputdata['excep'] = 'This Form is already Feeded.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
 
 
             }
             else if($this->Registration_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0 )
             {
-                
-                $allinputdata['excep'] = 'This Form is already Feeded.';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+
+            $allinputdata['excep'] = 'This Form is already Feeded.';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
 
 
@@ -3112,12 +3248,12 @@ class BiseCorrection extends CI_Controller {
                 return;
 
             }
-           /* else if(@$_POST['Inst_Rno']== '')
+            /* else if(@$_POST['Inst_Rno']== '')
             { 
-                $allinputdata['excep'] = 'Please Enter Your Roll Number';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+            $allinputdata['excep'] = 'Please Enter Your Roll Number';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
             }  */
             else if(@$_POST['MarkOfIden']== '')
@@ -3198,215 +3334,215 @@ class BiseCorrection extends CI_Controller {
                 return;
 
             }
-           /* else if((@$_POST['std_group'] == 1) && ((@$_POST['sub4']!=5) || (@$_POST['sub5']!=6)||(@$_POST['sub6']!=7)|| (@$_POST['sub7']!=8)))
+            /* else if((@$_POST['std_group'] == 1) && ((@$_POST['sub4']!=5) || (@$_POST['sub5']!=6)||(@$_POST['sub6']!=7)|| (@$_POST['sub7']!=8)))
             {
 
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
             }
             else if((@$_POST['std_group'] == 7)&& ((@$_POST['sub4']!=5) || (@$_POST['sub5']!=6)||(@$_POST['sub6']!=7)|| (@$_POST['sub7']!=78)))
             {
 
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
             }
             else if((@$_POST['std_group'] == 8)&& ((@$_POST['sub4']!=5) || (@$_POST['sub5']!=6)||(@$_POST['sub6']!=7)|| (@$_POST['sub7']!=43)))
             {
 
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
             }
             else if((@$_POST['std_group'] == 2))
             {
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
             }
-                                        */
-          /*  else if((@$_POST['std_group'] == 5)&& ((@$_POST['sub5']==5) || (@$_POST['sub6']==6)||(@$_POST['sub7']==7)|| (@$_POST['sub8']==43) || (@$_POST['sub8']==8)))
+            */
+            /*  else if((@$_POST['std_group'] == 5)&& ((@$_POST['sub5']==5) || (@$_POST['sub6']==6)||(@$_POST['sub7']==7)|| (@$_POST['sub8']==43) || (@$_POST['sub8']==8)))
             {
-                $allinputdata['excep'] = 'Subjects not according to Group';
-                $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                redirect($viewName);
-                return;
+            $allinputdata['excep'] = 'Subjects not according to Group';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
             }         */
 
-/*            else if((@$_POST['sub1'] == @$_POST['sub2']) ||(@$_POST['sub1'] == @$_POST['sub3'])||(@$_POST['sub1'] == @$_POST['sub4'])||(@$_POST['sub1'] == @$_POST['sub5'])||(@$_POST['sub1'] == @$_POST['sub6'])||(@$_POST['sub1'] == @$_POST['sub7'])||
-                (@$_POST['sub1'] == @$_POST['sub8']))
-                {
-                    $allinputdata['excep'] = 'Please Select Different Subjects';
-                    $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                    redirect($viewName);
-                    return;
+            /*            else if((@$_POST['sub1'] == @$_POST['sub2']) ||(@$_POST['sub1'] == @$_POST['sub3'])||(@$_POST['sub1'] == @$_POST['sub4'])||(@$_POST['sub1'] == @$_POST['sub5'])||(@$_POST['sub1'] == @$_POST['sub6'])||(@$_POST['sub1'] == @$_POST['sub7'])||
+            (@$_POST['sub1'] == @$_POST['sub8']))
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                }
-                else if((@$_POST['sub2'] == @$_POST['sub1']) ||(@$_POST['sub2'] == @$_POST['sub3'])||(@$_POST['sub2'] == @$_POST['sub4'])||(@$_POST['sub2'] == @$_POST['sub5'])||(@$_POST['sub2'] == @$_POST['sub6'])||(@$_POST['sub2'] == @$_POST['sub7'])                         ||(@$_POST['sub2'] == @$_POST['sub8'])
-                    )
-                    {
-                        $allinputdata['excep'] = 'Please Select Different Subjects';
-                        $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                        redirect($viewName);
-                        return;
+            }
+            else if((@$_POST['sub2'] == @$_POST['sub1']) ||(@$_POST['sub2'] == @$_POST['sub3'])||(@$_POST['sub2'] == @$_POST['sub4'])||(@$_POST['sub2'] == @$_POST['sub5'])||(@$_POST['sub2'] == @$_POST['sub6'])||(@$_POST['sub2'] == @$_POST['sub7'])                         ||(@$_POST['sub2'] == @$_POST['sub8'])
+            )
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                    }
-                    else if((@$_POST['sub3'] == @$_POST['sub1']) ||(@$_POST['sub3'] == @$_POST['sub2'])||(@$_POST['sub3'] == @$_POST['sub4'])||(@$_POST['sub3'] == @$_POST['sub5'])||(@$_POST['sub3'] == @$_POST['sub6'])||(@$_POST['sub3'] == @$_POST['sub7'])||(@$_POST['sub3'] == @$_POST['sub8'])
-                        )
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if((@$_POST['sub3'] == @$_POST['sub1']) ||(@$_POST['sub3'] == @$_POST['sub2'])||(@$_POST['sub3'] == @$_POST['sub4'])||(@$_POST['sub3'] == @$_POST['sub5'])||(@$_POST['sub3'] == @$_POST['sub6'])||(@$_POST['sub3'] == @$_POST['sub7'])||(@$_POST['sub3'] == @$_POST['sub8'])
+            )
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if((@$_POST['sub4'] == @$_POST['sub1']) ||(@$_POST['sub4'] == @$_POST['sub3'])||(@$_POST['sub4'] == @$_POST['sub2'])||(@$_POST['sub4'] == @$_POST['sub5'])||(@$_POST['sub4'] == @$_POST['sub6'])||(@$_POST['sub4'] == @$_POST[                                 'sub7'])||(@$_POST['sub4'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if((@$_POST['sub4'] == @$_POST['sub1']) ||(@$_POST['sub4'] == @$_POST['sub3'])||(@$_POST['sub4'] == @$_POST['sub2'])||(@$_POST['sub4'] == @$_POST['sub5'])||(@$_POST['sub4'] == @$_POST['sub6'])||(@$_POST['sub4'] == @$_POST[                                 'sub7'])||(@$_POST['sub4'] == @$_POST['sub8']))
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if((@$_POST['sub5'] == @$_POST['sub1']) ||(@$_POST['sub5'] == @$_POST['sub3'])||(@$_POST['sub5'] == @$_POST['sub4'])||(@$_POST['sub5'] == @$_POST['sub2'])||(@$_POST['sub5'] == @$_POST['sub6'])||(@$_POST['sub5'] == @$_POST['sub7'])||(@$_POST['sub5'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if((@$_POST['sub5'] == @$_POST['sub1']) ||(@$_POST['sub5'] == @$_POST['sub3'])||(@$_POST['sub5'] == @$_POST['sub4'])||(@$_POST['sub5'] == @$_POST['sub2'])||(@$_POST['sub5'] == @$_POST['sub6'])||(@$_POST['sub5'] == @$_POST['sub7'])||(@$_POST['sub5'] == @$_POST['sub8']))
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if((@$_POST['sub6'] == @$_POST['sub1']) ||(@$_POST['sub6'] == @$_POST['sub3'])||(@$_POST['sub6'] == @$_POST['sub4'])||(@$_POST['sub6'] == @$_POST['sub5'])||(@$_POST['sub6'] == @$_POST['sub2'])||(@$_POST['sub6'] ==                                          @$_POST['sub7'])||(@$_POST['sub6'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if((@$_POST['sub6'] == @$_POST['sub1']) ||(@$_POST['sub6'] == @$_POST['sub3'])||(@$_POST['sub6'] == @$_POST['sub4'])||(@$_POST['sub6'] == @$_POST['sub5'])||(@$_POST['sub6'] == @$_POST['sub2'])||(@$_POST['sub6'] ==                                          @$_POST['sub7'])||(@$_POST['sub6'] == @$_POST['sub8']))
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if((@$_POST['sub7'] == @$_POST['sub1']) ||(@$_POST['sub7'] == @$_POST['sub3'])||(@$_POST['sub7'] == @$_POST['sub4'])||(@$_POST['sub7'] == @$_POST['sub5'])||(@$_POST['sub7'] == @$_POST['sub6'])||(@$_POST['sub7'] == @$_POST['sub2'])||(@$_POST['sub7'] == @$_POST['sub8']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if((@$_POST['sub7'] == @$_POST['sub1']) ||(@$_POST['sub7'] == @$_POST['sub3'])||(@$_POST['sub7'] == @$_POST['sub4'])||(@$_POST['sub7'] == @$_POST['sub5'])||(@$_POST['sub7'] == @$_POST['sub6'])||(@$_POST['sub7'] == @$_POST['sub2'])||(@$_POST['sub7'] == @$_POST['sub8']))
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if((@$_POST['sub8'] == @$_POST['sub1']) ||(@$_POST['sub8'] == @$_POST['sub3'])||(@$_POST['sub8'] == @$_POST['sub4'])||(@$_POST['sub8'] == @$_POST['sub5'])||(@$_POST['sub8'] == @$_POST['sub6'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if((@$_POST['sub8'] == @$_POST['sub1']) ||(@$_POST['sub8'] == @$_POST['sub3'])||(@$_POST['sub8'] == @$_POST['sub4'])||(@$_POST['sub8'] == @$_POST['sub5'])||(@$_POST['sub8'] == @$_POST['sub6'])||(@$_POST['                                                   sub8'] == @$_POST['sub7'])||(@$_POST['sub8'] == @$_POST['sub2']))
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if (in_array($_POST['sub8'], $subjectslang) && in_array($_POST['sub7'], $subjectslang))
-                        {
-                            $allinputdata['excep'] = 'Double Language is not Allowed Please choose a different Subject';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
-                        }
-                        else if (in_array($_POST['sub8'], $subjectshis) && in_array($_POST['sub7'], $subjectshis))
-                        {
-                            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
-                        }
-                        else if(@$_POST['sub6'] == @$_POST['sub8'])
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if (in_array($_POST['sub8'], $subjectslang) && in_array($_POST['sub7'], $subjectslang))
+            {
+            $allinputdata['excep'] = 'Double Language is not Allowed Please choose a different Subject';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
+            }
+            else if (in_array($_POST['sub8'], $subjectshis) && in_array($_POST['sub7'], $subjectshis))
+            {
+            $allinputdata['excep'] = 'Double History is not Allowed Please choose a different Subject';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
+            }
+            else if(@$_POST['sub6'] == @$_POST['sub8'])
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub7'] == @$_POST['sub8'])
-                        {
-                            $allinputdata['excep'] = 'Please Select Different Subjects';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if(@$_POST['sub7'] == @$_POST['sub8'])
+            {
+            $allinputdata['excep'] = 'Please Select Different Subjects';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }*/
+            }*/
 
-                      /*  else if(@$_POST['sub1'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 1';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            /*  else if(@$_POST['sub1'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 1';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub2'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 2';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
-                        }
-                        else if(@$_POST['sub3'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 3';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if(@$_POST['sub2'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 2';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
+            }
+            else if(@$_POST['sub3'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 3';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub4'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 4';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if(@$_POST['sub4'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 4';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
+            }
 
-                        else if(@$_POST['sub5'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 5';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            else if(@$_POST['sub5'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 5';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub6'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 6';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if(@$_POST['sub6'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 6';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub7'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 7';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if(@$_POST['sub7'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 7';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }
-                        else if(@$_POST['sub8'] == 0)
-                        {
-                            $allinputdata['excep'] = 'Please Select Subject 8';
-                            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                            redirect($viewName);
-                            return;
+            }
+            else if(@$_POST['sub8'] == 0)
+            {
+            $allinputdata['excep'] = 'Please Select Subject 8';
+            $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
+            redirect($viewName);
+            return;
 
-                        }                             */
+            }                             */
     }
-     function frmvalidation9th($viewName,$allinputdata,$isupdate)
+    function frmvalidation9th($viewName,$allinputdata,$isupdate)
     {
         $_POST['address']  = str_replace("'", "", $_POST['address'] );
         $subjectslang = array('22','23','36','34','35');
@@ -3423,7 +3559,7 @@ class BiseCorrection extends CI_Controller {
         $cnteight = substr_count(@$_POST['bay_form'],"8");
         $cntnine = substr_count(@$_POST['bay_form'],"9");
 
-       
+
         if(@$_POST['dob'] != null || $allinputdata['Dob'] != null)
         {
             $date = new DateTime(@$_POST['dob']);
@@ -3487,7 +3623,7 @@ class BiseCorrection extends CI_Controller {
             }
             /* else if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true && $isupdate ==0 )
             {
-            
+
             $allinputdata['excep'] = 'This Bay Form is already Feeded.';
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             redirect($viewName);
@@ -3498,10 +3634,10 @@ class BiseCorrection extends CI_Controller {
             }*/
             else if(@$_POST['oldbform'] !=  @$_POST['bay_form'] && $isupdate ==1 )
             {
-                
+
                 if($this->Registration_model->bay_form_comp(@$_POST['bay_form']) == true )
                 {
-                    
+
                     $allinputdata['excep'] = 'This Bay Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
@@ -3509,7 +3645,7 @@ class BiseCorrection extends CI_Controller {
                 }
                 else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true  )
                 {
-                    
+
                     $allinputdata['excep'] = 'This Form is already Feeded.';
                     $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                     redirect($viewName);
@@ -3518,7 +3654,7 @@ class BiseCorrection extends CI_Controller {
             }
             else if($this->Registration_model->bay_form_fnic(@$_POST['bay_form'],@$_POST['father_cnic']) == true && $isupdate ==0 )
             {
-                
+
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
@@ -3529,7 +3665,7 @@ class BiseCorrection extends CI_Controller {
             }
             else if($this->Registration_model->bay_form_fnic_dob_comp(@$_POST['bay_form'],@$_POST['father_cnic'],$convert_dob) == true && $isupdate == 0 )
             {
-                
+
                 $allinputdata['excep'] = 'This Form is already Feeded.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect($viewName);
@@ -3875,32 +4011,7 @@ class BiseCorrection extends CI_Controller {
 
                         }
     } 
-      public function searchbyinst()
-    {
-      $this->load->helper('url');
-      $data = array(
-          'isselected' => '15',
-      );
-      $this->load->library('session');
-      $this->load->model('BiseCorrections_model');
-      $Logged_In_Array = $this->session->all_userdata();
-      $userinfo = $Logged_In_Array['logged_in'];
-   
-      if(!empty($_POST))
-      {
-            
-       $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst($_POST['txtformNo_search']);
-      }
-      
-      
-      //error_manualentry9th
-      $this->load->view('common/header.php',$userinfo);
-      $this->load->view('common/menu.php',$data);
-      $this->load->view('BiseCorrection/9thCorrection/SrchByInstCD.php',$error);
-      $this->load->view('common/footer.php');
-    }
-    
-     public function otherboard10th()
+    public function searchbyinst()
     {
         $this->load->helper('url');
         $data = array(
@@ -3910,25 +4021,50 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-         if(!( $this->session->flashdata('NewEnrolment_error'))){
+
+        if(!empty($_POST))
+        {
+
+            $data['data'] = $this->BiseCorrections_model->EditEnrolementByinst($_POST['txtformNo_search']);
+        }
+
+
+        //error_manualentry9th
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/SrchByInstCD.php',$error);
+        $this->load->view('common/footer.php');
+    }
+
+public function otherboard10th()
+    {
+  //  DebugBreak();
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '15',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        if(!( $this->session->flashdata('NewEnrolment_error'))){
 
             $error_msg = '';  
         }
         else{
             $error_msg = $this->session->flashdata('NewEnrolment_error');
         }
-        
-        
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/Matric/OtherBoard10th.php',$error_msg);
         $this->load->view('common/Otherboard10thfooter.php');
     }
-    
-    public function NewEnrolment_insert_OtherBoard10th(){
+
+  public function NewEnrolment_insert_OtherBoard10th()
+    {
 
 
-        
+       // DebugBreak();
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -3987,7 +4123,7 @@ class BiseCorrection extends CI_Controller {
             'sub8p2'=>@$_POST['sub8p2'],
         );
 
-       
+
         $sub1 = 0;
         $sub2 = 0;
         $sub3 = 0;
@@ -4104,25 +4240,25 @@ class BiseCorrection extends CI_Controller {
             $sub8 =  $_POST['sub8p2'];  
         }
 
-        
+
         $cattype = @$_POST['category'];
         $examtype = "";
         $marksImp = @$_POST['ddlMarksImproveoptions'];
 
-      
 
-      if($is9th == 1)
-      {
-          $examtype = 3;
-          $cat09 = 2;
-          $cat10 = 1;
-      }
-      else
-      {
-          $examtype = 1;
-          $cat09 = 0;
-          $cat10 = 1;
-      }
+
+        if($is9th == 1)
+        {
+            $examtype = 3;
+            $cat09 = 2;
+            $cat10 = 1;
+        }
+        else
+        {
+            $examtype = 1;
+            $cat09 = 0;
+            $cat10 = 1;
+        }
 
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
@@ -4167,14 +4303,14 @@ class BiseCorrection extends CI_Controller {
             'CSC/D'=>'93',
             'HPD/D'=>'94'
         );
-        
+
         $ispractical = 0;
         if($per_grp == 1)
         {
             $ispractical =1;
         }
         if(array_search(@$_POST['sub5'],$practical_Sub) || array_search(@$_POST['sub6'],$practical_Sub) || array_search(@$_POST['sub7'],$practical_Sub) ||
-         array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub))
+            array_search(@$_POST['sub5p2'],$practical_Sub) || array_search(@$_POST['sub6p2'],$practical_Sub) || array_search(@$_POST['sub7p2'],$practical_Sub))
         {
             $ispractical =1;
         }
@@ -4185,20 +4321,20 @@ class BiseCorrection extends CI_Controller {
         $AdmFeeCatWise = '1300';
         if($cat09 != 0 && $cat10 != 0)
         {
-            $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
+        $AdmFeeCatWise = $AdmFee[0]['Comp_Pvt_Amount'];
         }
         else if(($cat09 == 0 && $cat10 != 0) || ($cat09 != 0 && $cat10 == 0))
         {
-            $AdmFeeCatWise = $AdmFee[0]['PVT_Amount'];
+        $AdmFeeCatWise = $AdmFee[0]['PVT_Amount'];
         }
         else if($cat09 == 0 && $cat10 == 0)
         {
-            return;
+        return;
         }
 
         if($Speciality > 0)
         {
-           $AdmFeeCatWise = 0; 
+        $AdmFeeCatWise = 0; 
         }
         $TotalAdmFee = $AdmFee[0]['Processing_Fee'] +$AdmFeeCatWise;
         */
@@ -4210,24 +4346,24 @@ class BiseCorrection extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        
-       $addre =  str_replace("'", "", $this->input->post('address'));
-     
-        
-        
-        
-         $target_path = IMAGE_PATH_OTHER_BOARD_10TH.$Inst_Id_other.'/';
+
+        $addre =  str_replace("'", "", $this->input->post('address'));
+
+
+
+
+        $target_path = IMAGE_PATH_OTHER_BOARD_10TH.$Inst_Id_other.'/';
         if (!file_exists($target_path)){
 
-        mkdir($target_path);
+            mkdir($target_path);
         }
 
-       // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
-      $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
+        // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
+        $base_path = GET_PRIVATE_IMAGE_PATH_COPY.@$_POST['pic'];
         //$copyimg = $target_path.$formno.'.jpg';
-       
-       
-      $config['upload_path']   = $target_path;
+
+
+        $config['upload_path']   = $target_path;
         $config['allowed_types'] = 'jpg|jpeg';
         $config['max_size']      = '20';
         $config['min_size']      = '4';
@@ -4243,7 +4379,7 @@ class BiseCorrection extends CI_Controller {
         //$config['new_image']    = $formno.'.JPEG';
 
         $this->load->library('upload', $config);
-        
+
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         $this->upload->initialize($config);
 
@@ -4288,8 +4424,8 @@ class BiseCorrection extends CI_Controller {
                 return;
             }
         }
-        
-          $data = array(
+
+        $data = array(
             'name' =>$this->input->post('cand_name'),
             'Fname' =>$this->input->post('father_name'),
             'BForm' =>$this->input->post('bay_form'),
@@ -4348,18 +4484,19 @@ class BiseCorrection extends CI_Controller {
             'spl_cd'=>@$data[0]['spl_cd'],
             'picpath'=>$filepath,
             'ckpo'=>@$ckpo
-           
+
 
         ); 
-        
-        
+
+
         $this->frmvalidation('BiseCorrection/otherboard10th',$data,0);       
-        //*/
+        //DebugBreak();
         $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
             $allinputdata = "";
             $allinputdata['excep'] = 'success';
+            $allinputdata['formno']=$logedIn[0]['formno'] ;
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             $msg = $formno;                                           
             redirect('BiseCorrection/otherboard10th');
@@ -4375,8 +4512,7 @@ class BiseCorrection extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-     
-      public function otherboard11th()
+    public function otherboard11th()
     {
         $this->load->helper('url');
         $data = array(
@@ -4386,25 +4522,25 @@ class BiseCorrection extends CI_Controller {
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-         if(!( $this->session->flashdata('NewEnrolment_error'))){
+        if(!( $this->session->flashdata('NewEnrolment_error'))){
 
             $error_msg = '';  
         }
         else{
             $error_msg = $this->session->flashdata('NewEnrolment_error');
         }
-        
-        
+
+
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/Inter/OtherBoard11th.php',$error_msg);
         $this->load->view('common/Otherboard11thfooter.php');
     }
-       public function NewEnrolment_insert_OtherBoard11th()
-       {
+    public function NewEnrolment_insert_OtherBoard11th()
+    {
 
 
-        
+
         $this->load->model('BiseCorrections_model');
         $this->load->library('session');
         $Logged_In_Array = $this->session->all_userdata();
@@ -4416,7 +4552,7 @@ class BiseCorrection extends CI_Controller {
         $error = array();
 
         $formno = $this->BiseCorrections_model->GetFormNo_11th($Inst_Id_other);
-          $inst_info = $this->BiseCorrections_model->GetInstbyId_11th_otherboard($Inst_Id_other);
+        $inst_info = $this->BiseCorrections_model->GetInstbyId_11th_otherboard($Inst_Id_other);
         $dob = @$_POST['dob'];
 
         $allinputdata = array('cand_name'=>@$_POST['cand_name'],
@@ -4460,10 +4596,10 @@ class BiseCorrection extends CI_Controller {
             'sub5p2'=>@$_POST['sub5p2'],
             'sub6p2'=>@$_POST['sub6p2'],
             'sub7p2'=>@$_POST['sub7p2'],
-           // 'sub8p2'=>@$_POST['sub8p2'],
+            // 'sub8p2'=>@$_POST['sub8p2'],
         );
 
-       
+
         $sub1 = 0;
         $sub2 = 0;
         $sub3 = 0;
@@ -4487,7 +4623,7 @@ class BiseCorrection extends CI_Controller {
         $sub5ap2 = 0;
         $sub6ap2 = 0;
         $sub7ap2 = 0;
-       // $sub8ap2 = 0;
+        // $sub8ap2 = 0;
 
         $is11th = 0;
         if(@$_POST['sub1'] != 0)
@@ -4549,7 +4685,7 @@ class BiseCorrection extends CI_Controller {
             $sub2ap2 = 1; 
             $sub2 =  $_POST['sub2p2'];    
         }
-       
+
         if(@$_POST['sub4p2'] != 0)
         {
             $sub4ap2 = 1; 
@@ -4570,36 +4706,36 @@ class BiseCorrection extends CI_Controller {
             $sub7ap2 = 1;    
             $sub7 =  $_POST['sub7p2'];  
         }
-       /* if(@$_POST['sub8p2'] != 0)
+        /* if(@$_POST['sub8p2'] != 0)
         {
-            $sub8ap2 = 1;    
-            $sub8 =  $_POST['sub8p2'];  
+        $sub8ap2 = 1;    
+        $sub8 =  $_POST['sub8p2'];  
         }   */
 
-        
+
         $cattype = @$_POST['category'];
         $examtype = "";
         $marksImp = @$_POST['ddlMarksImproveoptions'];
 
-      
 
-      if($is11th == 1)
-      {
-          $examtype = 3;
-          $cat09 = 2;
-          $cat10 = 1;
-      }
-      else
-      {
-          $examtype = 1;
-          $cat09 = 0;
-          $cat10 = 1;
-      }
+
+        if($is11th == 1)
+        {
+            $examtype = 3;
+            $cat09 = 2;
+            $cat10 = 1;
+        }
+        else
+        {
+            $examtype = 1;
+            $cat09 = 0;
+            $cat10 = 1;
+        }
 
         $Speciality = $this->input->post('speciality');
         $grp_cd = $this->input->post('std_group');
         $per_grp = $this->input->post('pergrp');
-        
+
         $oldsess = @$_POST['oldsess'];
         if($oldsess == 'Annual'){
             $oldsess =  1;    
@@ -4607,40 +4743,40 @@ class BiseCorrection extends CI_Controller {
         else if($oldsess == 'Supplementary'){
             $oldsess =  2;    
         }
-        
-       $addre =  str_replace("'", "", $this->input->post('address'));
-     
-        
-        
-        
-         $target_path = IMAGE_PATH_OTHER_BOARD_12TH.$Inst_Id_other;
+
+        $addre =  str_replace("'", "", $this->input->post('address'));
+
+
+
+
+        $target_path = IMAGE_PATH_OTHER_BOARD_12TH.$Inst_Id_other;
         if (!file_exists($target_path)){
 
-        mkdir($target_path);
+            mkdir($target_path);
         }
 
-       // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
-       $base_path = IMAGE_PATH_OTHER_BOARD_12TH.@$_POST['pic'];
-       //$copyimg = $target_path.$formno.'.jpg';
+        // $base_path =  base_url().GET_PRIVATE_IMAGE_PATH_COPY;
+        $base_path = IMAGE_PATH_OTHER_BOARD_12TH.@$_POST['pic'];
+        //$copyimg = $target_path.$formno.'.jpg';
 
-       $config['upload_path']   = $target_path;
-       $config['allowed_types'] = 'jpg|jpeg';
-       $config['max_size']      = '20';
-       $config['min_size']      = '4';
-       //  $config['max_width']     = '260';
-       // $config['max_height']    = '290';
-     //  $config['min_width']     = '110';
-     //  $config['min_height']    = '100';
-       $config['overwrite']     = TRUE;
-       $config['file_name']     = $formno.'.jpg';
+        $config['upload_path']   = $target_path;
+        $config['allowed_types'] = 'jpg|jpeg';
+        $config['max_size']      = '20';
+        $config['min_size']      = '4';
+        //  $config['max_width']     = '260';
+        // $config['max_height']    = '290';
+        //  $config['min_width']     = '110';
+        //  $config['min_height']    = '100';
+        $config['overwrite']     = TRUE;
+        $config['file_name']     = $formno.'.jpg';
 
-       $filepath = $target_path.'/'. $config['file_name']  ;
+        $filepath = $target_path.'/'. $config['file_name']  ;
 
 
         //$config['new_image']    = $formno.'.JPEG';
 
         $this->load->library('upload', $config);
-        
+
         $check = getimagesize($_FILES["pic"]["tmp_name"]);
         $this->upload->initialize($config);
 
@@ -4672,7 +4808,7 @@ class BiseCorrection extends CI_Controller {
                 $allinputdata['excep'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
                 $allinputdata['formno'] = 'The file you are attempting to upload size is between 4 to 20 Kb.';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
-                
+
                 //  echo '<pre>'; print_r($allinputdata['excep']);exit();
                 redirect('BiseCorrection/otherboard11th/');
 
@@ -4685,16 +4821,16 @@ class BiseCorrection extends CI_Controller {
             {   
                 $allinputdata = "";
                 $allinputdata['excep'] = 'Please Upload Your Picture';
-            $allinputdata['formno'] = 'Please Upload Your Picture';
+                $allinputdata['formno'] = 'Please Upload Your Picture';
                 $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
                 redirect('BiseCorrection/otherboard11th/');
                 return;
             }
         }  
-       // echo $filepath;
-//die();
+        // echo $filepath;
+        //die();
 
-          $data = array(
+        $data = array(
             'soldrno' =>$this->input->post('soldrno'),
             'soldyear' =>$this->input->post('soldyear'),
             'soldsess' =>$this->input->post('soldsess'),
@@ -4733,7 +4869,7 @@ class BiseCorrection extends CI_Controller {
             'sub8ap1' => ($sub8ap1),
             'sub1ap2' => ($sub1ap2),
             'sub2ap2' => ($sub2ap2),
-           // 'sub3ap2' => ($sub3ap2),
+            // 'sub3ap2' => ($sub3ap2),
             'sub4ap2' => ($sub4ap2),
             'sub5ap2' => ($sub5ap2),
             'sub6ap2' => ($sub6ap2),
@@ -4757,13 +4893,13 @@ class BiseCorrection extends CI_Controller {
             'spl_cd'=>@$data[0]['spl_cd'],
             'picpath'=>$filepath,
             'ckpo'=>@$ckpo
-           
+
 
         ); 
-        
-    //   echo  '<pre>'; print_r($data);die;
+
+        //   echo  '<pre>'; print_r($data);die;
         $this->frmvalidation('BiseCorrection/otherboard11th',$data,0);       
-        
+
         $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement_11th($data);
         if($logedIn != false)
         {
@@ -4785,7 +4921,7 @@ class BiseCorrection extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-       public function result9thCancel()
+    public function result9thCancel()
     {
         $this->load->helper('url');
         $data = array(
@@ -4819,7 +4955,7 @@ class BiseCorrection extends CI_Controller {
     {
         $this->load->view('common/footer.php',$data);
     }
-public function regElegibility()
+    public function regElegibility()
     {
         $this->load->helper('url');
         $data = array(
@@ -4851,135 +4987,281 @@ public function regElegibility()
         $this->load->view('BiseCorrection/Reg11thNOC.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }
-     public function Reg11thactive()
+    public function Reg11thactive()
     {
-        
+
         $formno = $this->input->post('formno');
         $pkid = $this->input->post('pkid');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
         $NinthStdData = $this->BiseCorrections_model->updateReg11Data($formno,$pkid,$userinfo['Inst_Id']);
-        
+
         if($NinthStdData == TRUE)
         {
             echo 1;
         }
         else{
-             echo -1;
+            echo -1;
         }
-        
-       // redirect('/BiseCorrection/result11thcorrections');
+
+        // redirect('/BiseCorrection/result11thcorrections');
     }
     private function generatepath($rno,$class,$year,$sess)
     {
-      $basepath = DIRPATHMIG2;
-      $clsvr = '';
-      $picyear= substr($year, -2);
-      $folderno = '';
-      if($class == 10  OR $class == 09)
-      {
-         $clsvr = 'MA'; 
-        
-      }
-      else if($class == 12  OR $class == 11)
-      {
-          $clsvr = 'IA';
-      }
+        $basepath = DIRPATHMIG2;
+        $clsvr = '';
+        $picyear= substr($year, -2);
+        $folderno = '';
+        if($class == 10  OR $class == 09)
+        {
+            $clsvr = 'MA'; 
 
-      if($rno>100001 && $rno<=150000)
-      {
-          $folderno = '1st';
-      }
-      else if($rno>150001 && $rno<=200000)
-      {
-          $folderno = '2nd';
-      }
-      else if($rno>200001 && $rno<=250000)
-      {
-          $folderno = '3rd';
-      }
-      else if($rno>250001 && $rno<=300000)
-      {
-          $folderno = '4th';
-      }
-      else if($rno>300001 && $rno<=350000)
-      {
-          $folderno = '5th';
-      }
-      else if($rno>350001 && $rno<400000)
-      {
-          $folderno = '6th';
-      }
-      else if($rno>400001 && $rno<=450000)
-      {
-          $folderno = '7th';
-      }
-      else if($rno>450001 && $rno<=450000)
-      {
-          $folderno = '8th';
-      }
-      else if($rno>450001 && $rno<500000)
-      {
-          $folderno = '9th';
-      }
-      else if($rno>500001 && $rno<550000)
-      {
-          $folderno = '10th';
-      }
-      else if($rno>550001 && $rno<600000)
-      {
-          $folderno = '11th';
-      }
-      
-      
-      $pic = 'Pic'.$clsvr.'-'.$picyear ;
-      
-      $foldername =   $clsvr.  $folderno .$picyear;
-      $basepath =  $basepath.'\\'.$pic.'\\'. $foldername;
-         
+        }
+        else if($class == 12  OR $class == 11)
+        {
+            $clsvr = 'IA';
+        }
+
+        if($rno>100001 && $rno<=150000)
+        {
+            $folderno = '1st';
+        }
+        else if($rno>150001 && $rno<=200000)
+        {
+            $folderno = '2nd';
+        }
+        else if($rno>200001 && $rno<=250000)
+        {
+            $folderno = '3rd';
+        }
+        else if($rno>250001 && $rno<=300000)
+        {
+            $folderno = '4th';
+        }
+        else if($rno>300001 && $rno<=350000)
+        {
+            $folderno = '5th';
+        }
+        else if($rno>350001 && $rno<400000)
+        {
+            $folderno = '6th';
+        }
+        else if($rno>400001 && $rno<=450000)
+        {
+            $folderno = '7th';
+        }
+        else if($rno>450001 && $rno<=450000)
+        {
+            $folderno = '8th';
+        }
+        else if($rno>450001 && $rno<500000)
+        {
+            $folderno = '9th';
+        }
+        else if($rno>500001 && $rno<550000)
+        {
+            $folderno = '10th';
+        }
+        else if($rno>550001 && $rno<600000)
+        {
+            $folderno = '11th';
+        }
+
+
+        $pic = 'Pic'.$clsvr.'-'.$picyear ;
+
+        $foldername =   $clsvr.  $folderno .$picyear;
+        $basepath =  $basepath.'\\'.$pic.'\\'. $foldername;
+
     }
-     public function Correction11thReport()
+    public function Correction11thReport()
     {
-       
-      $this->load->model('BiseCorrections_model');
-      $info =    $this->BiseCorrections_model->getcorrection11th();
-      $this->load->library('pdf_rotate');
-      $pdf = new pdf_rotate('P','in',"A4");
-      $lmargin =1.5;
-      $rmargin =7.3;
 
-      $pdf->AddPage();
-      $x = 0.55;
-      $Y = -0.2;
+        $this->load->model('BiseCorrections_model');
+        $info =    $this->BiseCorrections_model->getcorrection11th();
+        $this->load->library('pdf_rotate');
+        $pdf = new pdf_rotate('P','in',"A4");
+        $lmargin =1.5;
+        $rmargin =7.3;
 
-      // $pdf->SetAutoPageBreak(.5);
-      $pdf->SetAutoPageBreak(true,0);
-      $pdf->AliasNbPages();
-      $pdf->SetFont('Arial','BU',12);
-      $pdf->SetXY(1,0.2);
-      $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-     /* $pdf->SetFont('Arial','B',12);
-      $pdf->SetXY(2.0,0.4);
-      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");*/
+        $pdf->AddPage();
+        $x = 0.55;
+        $Y = -0.2;
 
-      $boxWidth = 150.0;
-      $pdf->SetFillColor(255,255,255);
-      //Table cell Global varibales;
-      $Y = .96;
-      $font = 9;
+        // $pdf->SetAutoPageBreak(.5);
+        $pdf->SetAutoPageBreak(true,0);
+        $pdf->AliasNbPages();
+        $pdf->SetFont('Arial','BU',12);
+        $pdf->SetXY(1,0.2);
+        $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+        /* $pdf->SetFont('Arial','B',12);
+        $pdf->SetXY(2.0,0.4);
+        $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");*/
+
+        $boxWidth = 150.0;
+        $pdf->SetFillColor(255,255,255);
+        //Table cell Global varibales;
+        $Y = .96;
+        $font = 9;
         for($i = 0 ; $i<count($info); $i++)
         {
-            
+
 
             if($info[$i]['inst_cd'] != '399903')
             {
+                $falg = 0;
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(.2,.6);
+                $pdf->MultiCell(8,0.2, "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'],0,'L'); 
+                //$pdf->Cell(0, 0.2,  , 0.25, "C"); 
+                $instwise =  $this->BiseCorrections_model->getcorrection11thbyinst($info[$i]['inst_cd']);
+
+                for($j = 0 ; $j <count($instwise); $j++)
+                {
+                    if($j == 0)
+                    {
+                        $Y = .96;
+                        $cellheight = .2;
+
+                        $pdf->SetFont('Arial','B',12);
+                        $pdf->SetXY(2.0,0.4);
+                        $pdf->Cell(0, 0.2,  "List of 11th Registration Corrcetion 2016-18 Session", 0.25, "C");
+
+                        $pdf->SetFont('Arial','B',$font);
+                        $pdf->SetXY(.2,$Y);
+                        $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
+
+                        $pdf->SetXY(.73,$Y);
+                        $pdf->Cell(1.1,$cellheight,'Rno-Bind-SrNo',1,0,'L',1);
+
+                        $pdf->SetXY(1.8,$Y);
+                        $pdf->Cell(.93,$cellheight,'Formno',1,0,'L',1);
+
+                        $pdf->SetXY(2.55,$Y);
+                        $pdf->Cell(1.67,$cellheight,'Correction Type',1,0,'L',1);
+
+                        $pdf->SetXY(3.8,$Y);
+                        $pdf->Cell(2.3,$cellheight,'Old Value',1,0,'L',1);
+
+                        $pdf->SetXY(6,$Y);
+                        $pdf->Cell(2.1,$cellheight,'New Value',1,0,'L',1);
+
+
+                    }
+                    //$cellheight = .3;
+                    $pdf->SetFont('Arial','',8);
+                    $corrtype = $this->correctiontype($instwise[$j]['columnName']);
+                    $Y += .2; 
+                    $falg = 0;
+                    $pdf->SetXY(.2,$Y);
+                    $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
+                    if($corrtype == 'Subject Change')
+                    {
+                        $perval = $this->GetiSubNameHere($instwise[$j]['PreviousValue']);
+                        $newval = $this->GetiSubNameHere($instwise[$j]['NewValue']);
+                    }
+                    else if($corrtype == 'Group Change')
+                    {
+                        $perval = $this->intergrp($instwise[$j]['PreviousValue']);
+                        $newval = $this->intergrp($instwise[$j]['NewValue']);
+                    }
+
+                    $pdf->SetXY(.73,$Y);
+                    $pdf->Cell(1.1,$cellheight,trim($instwise[$j]['rno']).'-'.$instwise[$j]['bindno'].'-'.$instwise[$j]['srno'],1,0,'L',1);
+
+                    $pdf->SetXY(1.8,$Y);
+                    $pdf->Cell(.93,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
+
+                    $pdf->SetXY(2.55,$Y);
+                    $pdf->Cell(1.67,$cellheight,$corrtype,1,0,'L',1);
+                    if($corrtype != 'Picture Correction')
+                    {
+                        $pdf->SetXY(3.8,$Y);
+                        $pdf->Cell(2.3,$cellheight,$perval,1,0,'L',1);
+
+                        $pdf->SetXY(6,$Y);
+                        $pdf->Cell(2.1,$cellheight,$newval,1,0,'L',1);  
+                    }
+
+
+                    if($j%50 == 0 && $j != 0 && count($instwise) >49)
+                    {
+                        $falg = 1;
+                        $pdf->AddPage();
+
+                        $Y = .25;
+                        $cellheight = .2;
+                        $pdf->SetFont('Arial','B',$font);
+                        $pdf->SetXY(.2,$Y);
+                        $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
+
+                        $pdf->SetXY(.73,$Y);
+                        $pdf->Cell(1.1,$cellheight,'Rno-Bind-Srno',1,0,'L',1);
+
+                        $pdf->SetXY(1.8,$Y);
+                        $pdf->Cell(.93,$cellheight,'Formno',1,0,'L',1);
+
+                        $pdf->SetXY(2.55,$Y);
+                        $pdf->Cell(1.67,$cellheight,'Correction Type',1,0,'L',1);
+
+                        $pdf->SetXY(3.8,$Y);
+                        $pdf->Cell(2.3,$cellheight,'Old Value',1,0,'L',1);
+
+                        $pdf->SetXY(6,$Y);
+                        $pdf->Cell(2.1,$cellheight,'New Value',1,0,'L',1);
+                    }
+                    //   break;
+                }
+
+                //   break; 
+                if($i<count($info)-1)
+                    $pdf->AddPage();
+            }
+        }
+
+        $pdf->Output('report.pdf', 'I');
+    }
+
+    public function Correction9thReport()
+    {
+
+        $this->load->model('BiseCorrections_model');
+        $info =    $this->BiseCorrections_model->getcorrection9th();
+        $this->load->library('pdf_rotate');
+        $pdf = new pdf_rotate('P','in',"A4");
+        $lmargin =1.5;
+        $rmargin =7.3;
+
+        $pdf->AddPage();
+        $x = 0.55;
+        $Y = -0.2;
+
+        // $pdf->SetAutoPageBreak(.5);
+        $pdf->SetAutoPageBreak(true,0);
+        $pdf->AliasNbPages();
+        $pdf->SetFont('Arial','BU',12);
+        $pdf->SetXY(1,0.2);
+        $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
+        /* $pdf->SetFont('Arial','B',12);
+        $pdf->SetXY(2.0,0.4);
+        $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");*/
+
+        $boxWidth = 150.0;
+        $pdf->SetFillColor(255,255,255);
+        //Table cell Global varibales;
+        $Y = .96;
+        $font = 9;
+        for($i = 0 ; $i<count($info); $i++)
+        {
+
+
             $falg = 0;
             $pdf->SetFont('Arial','',10);
             $pdf->SetXY(.2,.6);
             $pdf->MultiCell(8,0.2, "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'],0,'L'); 
             //$pdf->Cell(0, 0.2,  , 0.25, "C"); 
-            $instwise =  $this->BiseCorrections_model->getcorrection11thbyinst($info[$i]['inst_cd']);
+            $instwise =  $this->BiseCorrections_model->getcorrection9thbyinst($info[$i]['inst_cd']);
 
             for($j = 0 ; $j <count($instwise); $j++)
             {
@@ -4990,305 +5272,159 @@ public function regElegibility()
 
                     $pdf->SetFont('Arial','B',12);
                     $pdf->SetXY(2.0,0.4);
-                    $pdf->Cell(0, 0.2,  "List of 11th Registration Corrcetion 2016-18 Session", 0.25, "C");
+                    $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");
 
                     $pdf->SetFont('Arial','B',$font);
                     $pdf->SetXY(.2,$Y);
                     $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
-                    
                     $pdf->SetXY(.73,$Y);
-                    $pdf->Cell(1.1,$cellheight,'Rno-Bind-SrNo',1,0,'L',1);
-                    
-                    $pdf->SetXY(1.8,$Y);
-                    $pdf->Cell(.93,$cellheight,'Formno',1,0,'L',1);
-                    
-                    $pdf->SetXY(2.55,$Y);
-                    $pdf->Cell(1.67,$cellheight,'Correction Type',1,0,'L',1);
-                    
-                    $pdf->SetXY(3.8,$Y);
-                    $pdf->Cell(2.3,$cellheight,'Old Value',1,0,'L',1);
-                    
-                    $pdf->SetXY(6,$Y);
-                    $pdf->Cell(2.1,$cellheight,'New Value',1,0,'L',1);
-                    
-                    
+                    $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
+                    $pdf->SetXY(1.63,$Y);
+                    $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
+                    $pdf->SetXY(2.99,$Y);
+                    $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
+                    $pdf->SetXY(5.4,$Y);
+                    $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
+                    $pdf->SetXY(7.6,$Y);
+                    $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
                 }
                 //$cellheight = .3;
                 $pdf->SetFont('Arial','',8);
                 $corrtype = $this->correctiontype($instwise[$j]['columnName']);
-                $Y += .2; 
-                $falg = 0;
+                if($falg == 0)
+                {
+                    if($j ==  0)
+                    {
+                        if ($corrtype == 'Picture Correction')
+                        {
+                            $cellheight =  .6;
+                            $Y += .2; 
+                        }
+                        else
+                        {
+                            $cellheight = .3;
+                            $Y += .2; 
+                        }
+                    }
+                    else if ($corrtype == 'Picture Correction')
+                    {
+                        $cellheight =  .6;
+                        //  $Y += .6;
+                    }
+                    else
+                    {
+                        if($cellheight ==  .6 )
+                        {
+                            if ($corrtype != 'Picture Correction')
+                            {
+                                $cellheight =  .3;
+                            }
+                            $Y += .6;   
+                        }
+                        else
+                        {
+                            $cellheight =  .3;
+                            $Y += .3;   
+                        }
+
+                    }
+                }              
+                else
+                {
+
+                    $Y += .2; 
+                    $falg = 0;
+                }
                 $pdf->SetXY(.2,$Y);
                 $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
                 if($corrtype == 'Subject Change')
                 {
-                    $perval = $this->GetiSubNameHere($instwise[$j]['PreviousValue']);
-                    $newval = $this->GetiSubNameHere($instwise[$j]['NewValue']);
+                    $perval = $this->GetSubNameHere($instwise[$j]['PreviousValue']);
+                    $newval = $this->GetSubNameHere($instwise[$j]['NewValue']);
                 }
                 else if($corrtype == 'Group Change')
                 {
-                    $perval = $this->intergrp($instwise[$j]['PreviousValue']);
-                    $newval = $this->intergrp($instwise[$j]['NewValue']);
+                    $perval = $this->matricgrp($instwise[$j]['PreviousValue']);
+                    $newval = $this->matricgrp($instwise[$j]['NewValue']);
                 }
-                
+                else if($corrtype == 'Date of Birth')
+                {
+                    $date = new DateTime($instwise[$j]['PreviousValue']);
+                    $perval =  $date->format('d-m-Y'); 
+                    $date = new DateTime($instwise[$j]['NewValue']);
+                    $newval =  $date->format('d-m-Y'); 
+                }
+                else 
+                {
+                    $perval = $instwise[$j]['PreviousValue'];
+                    $newval = $instwise[$j]['NewValue'];
+                }
                 $pdf->SetXY(.73,$Y);
-                $pdf->Cell(1.1,$cellheight,trim($instwise[$j]['rno']).'-'.$instwise[$j]['bindno'].'-'.$instwise[$j]['srno'],1,0,'L',1);
+                $pdf->Cell(.95,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
 
-                $pdf->SetXY(1.8,$Y);
-                $pdf->Cell(.93,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
-
-                $pdf->SetXY(2.55,$Y);
-                $pdf->Cell(1.67,$cellheight,$corrtype,1,0,'L',1);
+                $pdf->SetXY(1.63,$Y);
+                $pdf->Cell(1.5,$cellheight,$corrtype,1,0,'L',1);
                 if($corrtype != 'Picture Correction')
                 {
-                    $pdf->SetXY(3.8,$Y);
-                    $pdf->Cell(2.3,$cellheight,$perval,1,0,'L',1);
+                    $pdf->SetXY(2.99,$Y);
+                    $pdf->Cell(2.8,$cellheight,$perval,1,0,'L',1);
 
-                    $pdf->SetXY(6,$Y);
-                    $pdf->Cell(2.1,$cellheight,$newval,1,0,'L',1);  
+                    $pdf->SetXY(5.4,$Y);
+                    $pdf->Cell(2.2,$cellheight,$newval,1,0,'L',1);  
                 }
+                else
+                {
+                    $pdf->SetXY(2.99,$Y);
+                    $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);
 
-              
-                if($j%50 == 0 && $j != 0 && count($instwise) >49)
+                    $pdf->SetXY(5.4,$Y);
+                    $pdf->Cell(2.2,$cellheight,'',1,0,'L',1);  
+
+                    //   $cdate = date('d-m-Y',strtotime($instwise[$j]['cdate']));
+                    $date = new DateTime($instwise[$j]['cdate']);
+                    $cdate =  $date->format('d-m-Y'); 
+                    $pdf->Image(DIRPATHMIG.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'_'.$cdate.'.jpg',3.2, $Y, 0.65, 0.58, "jpg"); 
+                    $pdf->Image(DIRPATHCOR.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'.jpg',5.8, $Y, 0.65, 0.58, "jpg"); 
+                }
+                $pdf->SetXY(7.6,$Y);
+                $pdf->Cell(.55,$cellheight,$instwise[$j]['bindno'],1,0,'L',1);
+                if($j%32 == 0 && $j != 0 && count($instwise) >33)
                 {
                     $falg = 1;
                     $pdf->AddPage();
 
                     $Y = .25;
                     $cellheight = .2;
+
+
+
                     $pdf->SetFont('Arial','B',$font);
                     $pdf->SetXY(.2,$Y);
                     $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
-
                     $pdf->SetXY(.73,$Y);
-                    $pdf->Cell(1.1,$cellheight,'Rno-Bind-Srno',1,0,'L',1);
-
-                    $pdf->SetXY(1.8,$Y);
-                    $pdf->Cell(.93,$cellheight,'Formno',1,0,'L',1);
-
-                    $pdf->SetXY(2.55,$Y);
-                    $pdf->Cell(1.67,$cellheight,'Correction Type',1,0,'L',1);
-
-                    $pdf->SetXY(3.8,$Y);
-                    $pdf->Cell(2.3,$cellheight,'Old Value',1,0,'L',1);
-
-                    $pdf->SetXY(6,$Y);
-                    $pdf->Cell(2.1,$cellheight,'New Value',1,0,'L',1);
+                    $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
+                    $pdf->SetXY(1.63,$Y);
+                    $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
+                    $pdf->SetXY(2.99,$Y);
+                    $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
+                    $pdf->SetXY(5.4,$Y);
+                    $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
+                    $pdf->SetXY(7.6,$Y);
+                    $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
                 }
-             //   break;
+                //  break;
             }
 
-          //   break; 
+            // break; 
             if($i<count($info)-1)
                 $pdf->AddPage();
-            }
         }
 
         $pdf->Output('report.pdf', 'I');
-    }
-    
-     public function Correction9thReport()
-    {
-       
-      $this->load->model('BiseCorrections_model');
-      $info =    $this->BiseCorrections_model->getcorrection9th();
-      $this->load->library('pdf_rotate');
-      $pdf = new pdf_rotate('P','in',"A4");
-      $lmargin =1.5;
-      $rmargin =7.3;
-
-      $pdf->AddPage();
-      $x = 0.55;
-      $Y = -0.2;
-
-      // $pdf->SetAutoPageBreak(.5);
-      $pdf->SetAutoPageBreak(true,0);
-      $pdf->AliasNbPages();
-      $pdf->SetFont('Arial','BU',12);
-      $pdf->SetXY(1,0.2);
-      $pdf->Cell(0, 0.2, "BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, GUJRANWALA", 0.25, "C");
-     /* $pdf->SetFont('Arial','B',12);
-      $pdf->SetXY(2.0,0.4);
-      $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");*/
-
-      $boxWidth = 150.0;
-      $pdf->SetFillColor(255,255,255);
-      //Table cell Global varibales;
-      $Y = .96;
-      $font = 9;
-      for($i = 0 ; $i<count($info); $i++)
-      {
-          
-          
-          $falg = 0;
-          $pdf->SetFont('Arial','',10);
-          $pdf->SetXY(.2,.6);
-           $pdf->MultiCell(8,0.2, "Institute Code/Name:  ".$info[$i]['inst_cd'].'-'.$info[$i]['name'],0,'L'); 
-          //$pdf->Cell(0, 0.2,  , 0.25, "C"); 
-          $instwise =  $this->BiseCorrections_model->getcorrection9thbyinst($info[$i]['inst_cd']);
-                
-          for($j = 0 ; $j <count($instwise); $j++)
-          {
-              if($j == 0)
-              {
-                  $Y = .96;
-                  $cellheight = .2;
-
-                  $pdf->SetFont('Arial','B',12);
-                  $pdf->SetXY(2.0,0.4);
-                  $pdf->Cell(0, 0.2,  "List of 9th Registration Corrcetion 2016-18 Session", 0.25, "C");
-                  
-                  $pdf->SetFont('Arial','B',$font);
-                  $pdf->SetXY(.2,$Y);
-                  $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
-                  $pdf->SetXY(.73,$Y);
-                  $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
-                  $pdf->SetXY(1.63,$Y);
-                  $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
-                  $pdf->SetXY(7.6,$Y);
-                  $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
-              }
-              //$cellheight = .3;
-              $pdf->SetFont('Arial','',8);
-              $corrtype = $this->correctiontype($instwise[$j]['columnName']);
-              if($falg == 0)
-              {
-                  if($j ==  0)
-                  {
-                      if ($corrtype == 'Picture Correction')
-                      {
-                          $cellheight =  .6;
-                          $Y += .2; 
-                      }
-                      else
-                      {
-                          $cellheight = .3;
-                          $Y += .2; 
-                      }
-                  }
-                  else if ($corrtype == 'Picture Correction')
-                  {
-                      $cellheight =  .6;
-                    //  $Y += .6;
-                  }
-                  else
-                  {
-                      if($cellheight ==  .6 )
-                      {
-                          if ($corrtype != 'Picture Correction')
-                          {
-                              $cellheight =  .3;
-                          }
-                          $Y += .6;   
-                      }
-                      else
-                      {
-                          $cellheight =  .3;
-                          $Y += .3;   
-                      }
-                     
-                  }
-              }              
-              else
-              {
-                  
-                  $Y += .2; 
-                  $falg = 0;
-              }
-              $pdf->SetXY(.2,$Y);
-              $pdf->Cell(.52,$cellheight,$j+1,1,0,'C',1);
-              if($corrtype == 'Subject Change')
-              {
-                  $perval = $this->GetSubNameHere($instwise[$j]['PreviousValue']);
-                  $newval = $this->GetSubNameHere($instwise[$j]['NewValue']);
-              }
-              else if($corrtype == 'Group Change')
-              {
-                  $perval = $this->matricgrp($instwise[$j]['PreviousValue']);
-                  $newval = $this->matricgrp($instwise[$j]['NewValue']);
-              }
-              else if($corrtype == 'Date of Birth')
-              {
-                  $date = new DateTime($instwise[$j]['PreviousValue']);
-                  $perval =  $date->format('d-m-Y'); 
-                  $date = new DateTime($instwise[$j]['NewValue']);
-                  $newval =  $date->format('d-m-Y'); 
-              }
-              else 
-              {
-                  $perval = $instwise[$j]['PreviousValue'];
-                  $newval = $instwise[$j]['NewValue'];
-              }
-              $pdf->SetXY(.73,$Y);
-              $pdf->Cell(.95,$cellheight,$instwise[$j]['formno'],1,0,'L',1);
-
-              $pdf->SetXY(1.63,$Y);
-              $pdf->Cell(1.5,$cellheight,$corrtype,1,0,'L',1);
-              if($corrtype != 'Picture Correction')
-              {
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,$perval,1,0,'L',1);
-
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.2,$cellheight,$newval,1,0,'L',1);  
-              }
-            else
-            {
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,'',1,0,'L',1);
-
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.2,$cellheight,'',1,0,'L',1);  
-
-                  //   $cdate = date('d-m-Y',strtotime($instwise[$j]['cdate']));
-                  $date = new DateTime($instwise[$j]['cdate']);
-                  $cdate =  $date->format('d-m-Y'); 
-                 $pdf->Image(DIRPATHMIG.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'_'.$cdate.'.jpg',3.2, $Y, 0.65, 0.58, "jpg"); 
-                  $pdf->Image(DIRPATHCOR.$info[$i]['inst_cd'].'/'.$instwise[$j]['formno'].'.jpg',5.8, $Y, 0.65, 0.58, "jpg"); 
-            }
-                 $pdf->SetXY(7.6,$Y);
-                  $pdf->Cell(.55,$cellheight,$instwise[$j]['bindno'],1,0,'L',1);
-              if($j%32 == 0 && $j != 0 && count($instwise) >33)
-              {
-                  $falg = 1;
-                  $pdf->AddPage();
-                  
-                  $Y = .25;
-                  $cellheight = .2;
-                  
-                
-                  
-                  $pdf->SetFont('Arial','B',$font);
-                  $pdf->SetXY(.2,$Y);
-                  $pdf->Cell(.52,$cellheight,'Sr. No.',1,0,'C',1);
-                  $pdf->SetXY(.73,$Y);
-                  $pdf->Cell(.95,$cellheight,'Formno',1,0,'L',1);
-                  $pdf->SetXY(1.63,$Y);
-                  $pdf->Cell(1.5,$cellheight,'Correction Type',1,0,'L',1);
-                  $pdf->SetXY(2.99,$Y);
-                  $pdf->Cell(2.8,$cellheight,'Old Value',1,0,'L',1);
-                  $pdf->SetXY(5.4,$Y);
-                  $pdf->Cell(2.2,$cellheight,'New Value',1,0,'L',1);
-                  $pdf->SetXY(7.6,$Y);
-                  $pdf->Cell(.55,$cellheight,'Bind No.',1,0,'L',1);
-              }
-           //  break;
-          }
-         
-         // break; 
-         if($i<count($info)-1)
-          $pdf->AddPage();
-      }
-
-       $pdf->Output('report.pdf', 'I');
     } 
     private function matricgrp($grp_cd)
     {
-         $ret_val = "";
+        $ret_val = "";
         if($grp_cd == 1)  
             $ret_val = 'SCIENCE'; 
         else if($grp_cd == 2) 
@@ -5297,215 +5433,215 @@ public function regElegibility()
                 $ret_val= 'DEAF & DEFECTIVE';
                 return $ret_val;
     }
-      private function intergrp($grp_cd)
+    private function intergrp($grp_cd)
     {
-         $ret_val = "";
+        $ret_val = "";
         if($grp_cd == 1)  
             $ret_val = 'PRE-MEDICAL'; 
         else if($grp_cd == 2) 
             $ret_val='PRE-ENGINEERING';
             else if($grp_cd == 3) 
                 $ret_val= 'HUMANITIES';
-                  else if($grp_cd == 4) 
-                $ret_val= 'GENERAL SCIENCE';
-                  else if($grp_cd == 5) 
-                $ret_val= 'COMMERCE';
-                  else if($grp_cd== 6) 
-                $ret_val= 'HOME ECONOMICS';
-                return $ret_val;
+                else if($grp_cd == 4) 
+                    $ret_val= 'GENERAL SCIENCE';
+                    else if($grp_cd == 5) 
+                        $ret_val= 'COMMERCE';
+                        else if($grp_cd== 6) 
+                            $ret_val= 'HOME ECONOMICS';
+                            return $ret_val;
     }
     function correctiontype($corr)
     {
-      $ret_val = "";
-      if($corr == 'name')  $ret_val = "Name";
-      else if($corr == 'Fname')  $ret_val = "Father Name";
-          else if($corr == 'grp_cd')  $ret_val = "Group Change";
-              else if($corr == 'Dob')  $ret_val = "Date of Birth";
-                  else if($corr == 'BForm')  $ret_val = "Bay Form";
-                      else if($corr == 'FNIC')  $ret_val = "Father CNIC";
-                          else if($corr == 'FNIC')  $ret_val = "Father CNIC";
-                              else if($corr == 'PicPath')  $ret_val = "Picture Correction";
-                                  else if($corr == 'sub1' || $corr == 'sub2' || $corr == 'sub3' || $corr == 'sub4' || $corr == 'sub5' ||  $corr == 'sub6' ||  $corr == 'sub7' ||  $corr == 'sub8')  $ret_val = "Subject Change";
-                                  
-                                  
-             return $ret_val;
+        $ret_val = "";
+        if($corr == 'name')  $ret_val = "Name";
+        else if($corr == 'Fname')  $ret_val = "Father Name";
+            else if($corr == 'grp_cd')  $ret_val = "Group Change";
+                else if($corr == 'Dob')  $ret_val = "Date of Birth";
+                    else if($corr == 'BForm')  $ret_val = "Bay Form";
+                        else if($corr == 'FNIC')  $ret_val = "Father CNIC";
+                            else if($corr == 'FNIC')  $ret_val = "Father CNIC";
+                                else if($corr == 'PicPath')  $ret_val = "Picture Correction";
+                                    else if($corr == 'sub1' || $corr == 'sub2' || $corr == 'sub3' || $corr == 'sub4' || $corr == 'sub5' ||  $corr == 'sub6' ||  $corr == 'sub7' ||  $corr == 'sub8')  $ret_val = "Subject Change";
+
+
+                                        return $ret_val;
     }
-      function  GetSubNameHere($_sub_cd)
+    function  GetSubNameHere($_sub_cd)
     {
-$ret_val = "";
-if($_sub_cd == 1)  $ret_val = "URDU";
-else if($_sub_cd == 2)  $ret_val = "ENGLISH";
-else if($_sub_cd == 3)  $ret_val = "ISLAMIYAT (COMPULSORY)";
-else if($_sub_cd == 4)  $ret_val = "PAKISTAN STUDIES";
-else if($_sub_cd == 5)  $ret_val = "MATHEMATICS";
-else if($_sub_cd == 6)  $ret_val = "PHYSICS";
-else if($_sub_cd == 7)  $ret_val = "CHEMISTRY";
-else if($_sub_cd == 8)  $ret_val = "BIOLOGY";
-else if($_sub_cd == 9)  $ret_val = "GENERAL SCIENCE";
-else if($_sub_cd == 11)  $ret_val = "GEOGRAPHY OF PAKISTAN";
-else if($_sub_cd == 18)  $ret_val = "ART/ART & MODEL DRAWING";
-else if($_sub_cd == 22)  $ret_val = "ARABIC";
-else if($_sub_cd == 23)  $ret_val = "PERSIAN";
-else if($_sub_cd == 36)  $ret_val = "PUNJABI";
-else if($_sub_cd == 20)  $ret_val = "ISLAMIC HISTORY";
-else if($_sub_cd == 21)  $ret_val = "HISTORY OF PAKISTAN/ HISTORY OF INDO PAK";
-else if($_sub_cd == 78)  $ret_val = "COMPUTER SCIENCE";
-else if($_sub_cd == 12)  $ret_val = "HOUSE HOLD ACCOUNTS & ITS RELATED PROBLEMS";
-else if($_sub_cd == 13)  $ret_val = "ELEMENTS OF HOME ECONOMICS";
-else if($_sub_cd == 14)  $ret_val = "PHYSIOLOGY & HYGIENE";
-else if($_sub_cd == 15)  $ret_val = "GEOMETRICAL & TECHNICAL DRAWING";
-else if($_sub_cd == 16)  $ret_val = "GEOLOGY";
-else if($_sub_cd == 17)  $ret_val = "ASTRONOMY & SPACE SCIENCE";
-else if($_sub_cd == 19)  $ret_val = "ISLAMIC STUDIES";
-else if($_sub_cd == 27)  $ret_val = "FOOD AND NUTRITION";
-else if($_sub_cd == 28)  $ret_val = "ART IN HOME ECONOMICS";
-else if($_sub_cd == 29)  $ret_val = "MANAGEMENT FOR BETTER HOME";
-else if($_sub_cd == 30)  $ret_val = "CLOTHING & TEXTILES";
-else if($_sub_cd == 31)  $ret_val = "CHILD DEVELOPMENT AND FAMILY LIVING";
-else if($_sub_cd == 32)  $ret_val = "MILITARY SCIENCE";
-else if($_sub_cd == 33)  $ret_val = "COMMERCIAL GEOGRAPHY";
-else if($_sub_cd == 34)  $ret_val = "URDU LITERATURE";
-else if($_sub_cd == 35)  $ret_val = "ENGLISH LITERATURE";
-else if($_sub_cd == 37)  $ret_val = "EDUCATION";
-else if($_sub_cd == 38)  $ret_val = "ELEMENTARY NURSING & FIRST AID";
-else if($_sub_cd == 39)  $ret_val = "PHOTOGRAPHY";
-else if($_sub_cd == 40)  $ret_val = "HEALTH & PHYSICAL EDUCATION";
-else if($_sub_cd == 41)  $ret_val = "CALIGRAPHY";
-else if($_sub_cd == 42)  $ret_val = "LOCAL (COMMUNITY) CRAFTS";
-else if($_sub_cd == 43)  $ret_val = "ELECTRICAL WIRING";
-else if($_sub_cd == 44)  $ret_val = "RADIO ELECTRONICS";
-else if($_sub_cd == 45)  $ret_val = "COMMERCE";
-else if($_sub_cd == 46)  $ret_val = "AGRICULTURE";
-else if($_sub_cd == 53)  $ret_val = "ANIMAL PRODUCTION";
-else if($_sub_cd == 54)  $ret_val = "PRODUCTIVE INSECTS AND FISH CULTURE";
-else if($_sub_cd == 55)  $ret_val = "HORTICULTURE";
-else if($_sub_cd == 56)  $ret_val = "PRINCIPLES OF HOME ECONOMICS";
-else if($_sub_cd == 57)  $ret_val = "RELATED ACT";
-else if($_sub_cd == 58)  $ret_val = "HAND AND MACHINE EMBROIDERY";
-else if($_sub_cd == 59)  $ret_val = "DRAFTING AND GARMENT MAKING";
-else if($_sub_cd == 60)  $ret_val = "HAND & MACHINE KNITTING & CROCHEING";
-else if($_sub_cd == 61)  $ret_val = "STUFFED TOYS AND DOLL MAKING";
-else if($_sub_cd == 62)  $ret_val = "CONFECTIONERY AND BAKERY";
-else if($_sub_cd == 63)  $ret_val = "PRESERVATION OF FRUITS,VEGETABLES & OTHER FOODS";
-else if($_sub_cd == 64)  $ret_val = "CARE AND GUIDENCE OF CHILDREN";
-else if($_sub_cd == 65)  $ret_val = "FARM HOUSE HOLD MANAGEMENT";
-else if($_sub_cd == 66)  $ret_val = "ARITHEMATIC";
-else if($_sub_cd == 67)  $ret_val = "BAKERY";
-else if($_sub_cd == 68)  $ret_val = "CARPET MAKING";
-else if($_sub_cd == 69)  $ret_val = "DRAWING";
-else if($_sub_cd == 70)  $ret_val = "EMBORIDERY";
-else if($_sub_cd == 71)  $ret_val = "HISTORY";
-else if($_sub_cd == 72)  $ret_val = "TAILORING";
-else if($_sub_cd == 24)  $ret_val = "GEOGRAPHY";
-else if($_sub_cd == 25)  $ret_val = "ECONOMICS";
-else if($_sub_cd == 26)  $ret_val = "CIVICS";
-else if($_sub_cd == 47)  $ret_val = "BOOK KEEPING & ACCOUNTANCY";
-else if($_sub_cd == 48)  $ret_val = "WOOD WORK (FURNITURE MAKING)";
-else if($_sub_cd == 49)  $ret_val = "GENERAL AGRICULTURE";
-else if($_sub_cd == 50)  $ret_val = "FARM ECONOMICS";
-else if($_sub_cd == 52)  $ret_val = "LIVE STOCK FARMING";
-else if($_sub_cd == 73)  $ret_val = "TYPE WRITING";
-else if($_sub_cd == 74)  $ret_val = "WEAVING";
-else if($_sub_cd == 75)  $ret_val = "SECRETARIAL PRACTICE";
-else if($_sub_cd == 76)  $ret_val = "CANDLE MAKING";
-else if($_sub_cd == 77)  $ret_val = "SECRETARIAL PRACTICE AND CORRESPONDANCE";
-else if($_sub_cd == 10)  $ret_val = "FOUNDATION OF EDUCATION";
-else if($_sub_cd == 51)  $ret_val = "ETHICS";
-else if($_sub_cd == 79)  $ret_val = "WOOD WORK (BOAT MAKING)";
-else if($_sub_cd == 80)  $ret_val = "PRINCIPLES OF ARITHMATIC";
-else if($_sub_cd == 81)  $ret_val = "SEERAT-E-RASOOL";
-else if($_sub_cd == 82)  $ret_val = "AL-QURAAN";
-else if($_sub_cd == 83)  $ret_val = "POULTRY FARMING";
-else if($_sub_cd == 84)  $ret_val = "ART & MODEL DRAWING";
-else if($_sub_cd == 85)  $ret_val = "BUSINESS STUDIES";
-else if($_sub_cd == 86)  $ret_val = "HADEES & FIQAH";
-else if($_sub_cd == 87)  $ret_val = "ENVIRONMENTAL STUDIES";
-else if($_sub_cd == 88)  $ret_val = "REFRIGERATION AND AIR CONDITIONING";
-else if($_sub_cd == 89)  $ret_val = "FISH FARMING";
-else if($_sub_cd == 90)  $ret_val = "COMPUTER HARDWARE";
-else if($_sub_cd == 91)  $ret_val = "BEAUTICIAN";
-else if($_sub_cd == 92)  $ret_val = "GENERAL MATH"; 
-else if($_sub_cd == 93)  $ret_val = "COMPUTER SCIENCES_DFD";    
-else if($_sub_cd == 94)  $ret_val = "HEALTH & PHYSICAL EDUCATION_DFD";   
-                                                                                                                                                                                                                                                                                                                return $ret_val ;             
+        $ret_val = "";
+        if($_sub_cd == 1)  $ret_val = "URDU";
+        else if($_sub_cd == 2)  $ret_val = "ENGLISH";
+            else if($_sub_cd == 3)  $ret_val = "ISLAMIYAT (COMPULSORY)";
+                else if($_sub_cd == 4)  $ret_val = "PAKISTAN STUDIES";
+                    else if($_sub_cd == 5)  $ret_val = "MATHEMATICS";
+                        else if($_sub_cd == 6)  $ret_val = "PHYSICS";
+                            else if($_sub_cd == 7)  $ret_val = "CHEMISTRY";
+                                else if($_sub_cd == 8)  $ret_val = "BIOLOGY";
+                                    else if($_sub_cd == 9)  $ret_val = "GENERAL SCIENCE";
+                                        else if($_sub_cd == 11)  $ret_val = "GEOGRAPHY OF PAKISTAN";
+                                            else if($_sub_cd == 18)  $ret_val = "ART/ART & MODEL DRAWING";
+                                                else if($_sub_cd == 22)  $ret_val = "ARABIC";
+                                                    else if($_sub_cd == 23)  $ret_val = "PERSIAN";
+                                                        else if($_sub_cd == 36)  $ret_val = "PUNJABI";
+                                                            else if($_sub_cd == 20)  $ret_val = "ISLAMIC HISTORY";
+                                                                else if($_sub_cd == 21)  $ret_val = "HISTORY OF PAKISTAN/ HISTORY OF INDO PAK";
+                                                                    else if($_sub_cd == 78)  $ret_val = "COMPUTER SCIENCE";
+                                                                        else if($_sub_cd == 12)  $ret_val = "HOUSE HOLD ACCOUNTS & ITS RELATED PROBLEMS";
+                                                                            else if($_sub_cd == 13)  $ret_val = "ELEMENTS OF HOME ECONOMICS";
+                                                                                else if($_sub_cd == 14)  $ret_val = "PHYSIOLOGY & HYGIENE";
+                                                                                    else if($_sub_cd == 15)  $ret_val = "GEOMETRICAL & TECHNICAL DRAWING";
+                                                                                        else if($_sub_cd == 16)  $ret_val = "GEOLOGY";
+                                                                                            else if($_sub_cd == 17)  $ret_val = "ASTRONOMY & SPACE SCIENCE";
+                                                                                                else if($_sub_cd == 19)  $ret_val = "ISLAMIC STUDIES";
+                                                                                                    else if($_sub_cd == 27)  $ret_val = "FOOD AND NUTRITION";
+                                                                                                        else if($_sub_cd == 28)  $ret_val = "ART IN HOME ECONOMICS";
+                                                                                                            else if($_sub_cd == 29)  $ret_val = "MANAGEMENT FOR BETTER HOME";
+                                                                                                                else if($_sub_cd == 30)  $ret_val = "CLOTHING & TEXTILES";
+                                                                                                                    else if($_sub_cd == 31)  $ret_val = "CHILD DEVELOPMENT AND FAMILY LIVING";
+                                                                                                                        else if($_sub_cd == 32)  $ret_val = "MILITARY SCIENCE";
+                                                                                                                            else if($_sub_cd == 33)  $ret_val = "COMMERCIAL GEOGRAPHY";
+                                                                                                                                else if($_sub_cd == 34)  $ret_val = "URDU LITERATURE";
+                                                                                                                                    else if($_sub_cd == 35)  $ret_val = "ENGLISH LITERATURE";
+                                                                                                                                        else if($_sub_cd == 37)  $ret_val = "EDUCATION";
+                                                                                                                                            else if($_sub_cd == 38)  $ret_val = "ELEMENTARY NURSING & FIRST AID";
+                                                                                                                                                else if($_sub_cd == 39)  $ret_val = "PHOTOGRAPHY";
+                                                                                                                                                    else if($_sub_cd == 40)  $ret_val = "HEALTH & PHYSICAL EDUCATION";
+                                                                                                                                                        else if($_sub_cd == 41)  $ret_val = "CALIGRAPHY";
+                                                                                                                                                            else if($_sub_cd == 42)  $ret_val = "LOCAL (COMMUNITY) CRAFTS";
+                                                                                                                                                                else if($_sub_cd == 43)  $ret_val = "ELECTRICAL WIRING";
+                                                                                                                                                                    else if($_sub_cd == 44)  $ret_val = "RADIO ELECTRONICS";
+                                                                                                                                                                        else if($_sub_cd == 45)  $ret_val = "COMMERCE";
+                                                                                                                                                                            else if($_sub_cd == 46)  $ret_val = "AGRICULTURE";
+                                                                                                                                                                                else if($_sub_cd == 53)  $ret_val = "ANIMAL PRODUCTION";
+                                                                                                                                                                                    else if($_sub_cd == 54)  $ret_val = "PRODUCTIVE INSECTS AND FISH CULTURE";
+                                                                                                                                                                                        else if($_sub_cd == 55)  $ret_val = "HORTICULTURE";
+                                                                                                                                                                                            else if($_sub_cd == 56)  $ret_val = "PRINCIPLES OF HOME ECONOMICS";
+                                                                                                                                                                                                else if($_sub_cd == 57)  $ret_val = "RELATED ACT";
+                                                                                                                                                                                                    else if($_sub_cd == 58)  $ret_val = "HAND AND MACHINE EMBROIDERY";
+                                                                                                                                                                                                        else if($_sub_cd == 59)  $ret_val = "DRAFTING AND GARMENT MAKING";
+                                                                                                                                                                                                            else if($_sub_cd == 60)  $ret_val = "HAND & MACHINE KNITTING & CROCHEING";
+                                                                                                                                                                                                                else if($_sub_cd == 61)  $ret_val = "STUFFED TOYS AND DOLL MAKING";
+                                                                                                                                                                                                                    else if($_sub_cd == 62)  $ret_val = "CONFECTIONERY AND BAKERY";
+                                                                                                                                                                                                                        else if($_sub_cd == 63)  $ret_val = "PRESERVATION OF FRUITS,VEGETABLES & OTHER FOODS";
+                                                                                                                                                                                                                            else if($_sub_cd == 64)  $ret_val = "CARE AND GUIDENCE OF CHILDREN";
+                                                                                                                                                                                                                                else if($_sub_cd == 65)  $ret_val = "FARM HOUSE HOLD MANAGEMENT";
+                                                                                                                                                                                                                                    else if($_sub_cd == 66)  $ret_val = "ARITHEMATIC";
+                                                                                                                                                                                                                                        else if($_sub_cd == 67)  $ret_val = "BAKERY";
+                                                                                                                                                                                                                                            else if($_sub_cd == 68)  $ret_val = "CARPET MAKING";
+                                                                                                                                                                                                                                                else if($_sub_cd == 69)  $ret_val = "DRAWING";
+                                                                                                                                                                                                                                                    else if($_sub_cd == 70)  $ret_val = "EMBORIDERY";
+                                                                                                                                                                                                                                                        else if($_sub_cd == 71)  $ret_val = "HISTORY";
+                                                                                                                                                                                                                                                            else if($_sub_cd == 72)  $ret_val = "TAILORING";
+                                                                                                                                                                                                                                                                else if($_sub_cd == 24)  $ret_val = "GEOGRAPHY";
+                                                                                                                                                                                                                                                                    else if($_sub_cd == 25)  $ret_val = "ECONOMICS";
+                                                                                                                                                                                                                                                                        else if($_sub_cd == 26)  $ret_val = "CIVICS";
+                                                                                                                                                                                                                                                                            else if($_sub_cd == 47)  $ret_val = "BOOK KEEPING & ACCOUNTANCY";
+                                                                                                                                                                                                                                                                                else if($_sub_cd == 48)  $ret_val = "WOOD WORK (FURNITURE MAKING)";
+                                                                                                                                                                                                                                                                                    else if($_sub_cd == 49)  $ret_val = "GENERAL AGRICULTURE";
+                                                                                                                                                                                                                                                                                        else if($_sub_cd == 50)  $ret_val = "FARM ECONOMICS";
+                                                                                                                                                                                                                                                                                            else if($_sub_cd == 52)  $ret_val = "LIVE STOCK FARMING";
+                                                                                                                                                                                                                                                                                                else if($_sub_cd == 73)  $ret_val = "TYPE WRITING";
+                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 74)  $ret_val = "WEAVING";
+                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 75)  $ret_val = "SECRETARIAL PRACTICE";
+                                                                                                                                                                                                                                                                                                            else if($_sub_cd == 76)  $ret_val = "CANDLE MAKING";
+                                                                                                                                                                                                                                                                                                                else if($_sub_cd == 77)  $ret_val = "SECRETARIAL PRACTICE AND CORRESPONDANCE";
+                                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 10)  $ret_val = "FOUNDATION OF EDUCATION";
+                                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 51)  $ret_val = "ETHICS";
+                                                                                                                                                                                                                                                                                                                            else if($_sub_cd == 79)  $ret_val = "WOOD WORK (BOAT MAKING)";
+                                                                                                                                                                                                                                                                                                                                else if($_sub_cd == 80)  $ret_val = "PRINCIPLES OF ARITHMATIC";
+                                                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 81)  $ret_val = "SEERAT-E-RASOOL";
+                                                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 82)  $ret_val = "AL-QURAAN";
+                                                                                                                                                                                                                                                                                                                                            else if($_sub_cd == 83)  $ret_val = "POULTRY FARMING";
+                                                                                                                                                                                                                                                                                                                                                else if($_sub_cd == 84)  $ret_val = "ART & MODEL DRAWING";
+                                                                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 85)  $ret_val = "BUSINESS STUDIES";
+                                                                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 86)  $ret_val = "HADEES & FIQAH";
+                                                                                                                                                                                                                                                                                                                                                            else if($_sub_cd == 87)  $ret_val = "ENVIRONMENTAL STUDIES";
+                                                                                                                                                                                                                                                                                                                                                                else if($_sub_cd == 88)  $ret_val = "REFRIGERATION AND AIR CONDITIONING";
+                                                                                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 89)  $ret_val = "FISH FARMING";
+                                                                                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 90)  $ret_val = "COMPUTER HARDWARE";
+                                                                                                                                                                                                                                                                                                                                                                            else if($_sub_cd == 91)  $ret_val = "BEAUTICIAN";
+                                                                                                                                                                                                                                                                                                                                                                                else if($_sub_cd == 92)  $ret_val = "GENERAL MATH"; 
+                                                                                                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 93)  $ret_val = "COMPUTER SCIENCES_DFD";    
+                                                                                                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 94)  $ret_val = "HEALTH & PHYSICAL EDUCATION_DFD";   
+                                                                                                                                                                                                                                                                                                                                                                                            return $ret_val ;             
     }
-     function  GetiSubNameHere($_sub_cd) {
-$ret_val = "";
-if($_sub_cd == 1)  $ret_val = "ENGLISH";
-else if($_sub_cd == 2)  $ret_val = "URDU";
-else if($_sub_cd == 3)  $ret_val = "BANGALI";
-else if($_sub_cd == 4)  $ret_val = "URDU(ALTERNATIVE EASY COURSE)";
-else if($_sub_cd == 5)  $ret_val = "BENGALI(ALTERNATE EASY COURSE)";
-else if($_sub_cd == 6)  $ret_val = "PAKISTANI CULTURE";
-else if($_sub_cd == 7)  $ret_val = "HISTORY";
-else if($_sub_cd == 8)  $ret_val = "LIBRARY SCIENCE";
-else if($_sub_cd == 9)  $ret_val = "ISLAMIC HISTORY & CULTURE";
-else if($_sub_cd == 10)  $ret_val = "FAZAL ARABIC";
-else if($_sub_cd == 11)  $ret_val = "ECONOMICS";
-else if($_sub_cd == 12)  $ret_val = "GEOGRAPHY";
-else if($_sub_cd == 13)  $ret_val = "MILITARY SCIENCE";
-else if($_sub_cd == 14)  $ret_val = "PHILOSOPHY";
-else if($_sub_cd == 15)  $ret_val = "ISLAMIC STUDIES(ISL-ST. GROUP)";
-else if($_sub_cd == 16)  $ret_val = "PSYCHOLOGY";
-else if($_sub_cd == 17)  $ret_val = "CIVICS";
-else if($_sub_cd == 18)  $ret_val = "STATISTICS";
-else if($_sub_cd == 19)  $ret_val = "MATHEMATICS";
-else if($_sub_cd == 20)  $ret_val = "ISLAMIC STUDIES";
-else if($_sub_cd == 21)  $ret_val = "OUTLINES OF HOME ECONOMICS";
-else if($_sub_cd == 22)  $ret_val = "MUSIC";
-else if($_sub_cd == 23)  $ret_val = "FINE ARTS";
-else if($_sub_cd == 24)  $ret_val = "ARABIC";
-else if($_sub_cd == 25)  $ret_val = "BENGALI";
-else if($_sub_cd == 26)  $ret_val = "BENGALI(ADVANCE)";
-else if($_sub_cd == 27)  $ret_val = "ENGLISH ELECTIVE";
-else if($_sub_cd == 28)  $ret_val = "FRENCH";
-else if($_sub_cd == 29)  $ret_val = "GERMAN";
-else if($_sub_cd == 30)  $ret_val = "LATIN";
-else if($_sub_cd == 32)  $ret_val = "PUNJABI";
-else if($_sub_cd == 33)  $ret_val = "PASHTO";
-else if($_sub_cd == 34)  $ret_val = "PERSIAN";
-else if($_sub_cd == 35)  $ret_val = "SANSKRIT";
-else if($_sub_cd == 36)  $ret_val = "SINDHI";
-else if($_sub_cd == 37)  $ret_val = "URDU (ADVANCE)";
-else if($_sub_cd == 38)  $ret_val = "COMMERCIAL PRACTICE";
-else if($_sub_cd == 39)  $ret_val = "PRINCIPLES OF COMMERCE";
-else if($_sub_cd == 42)  $ret_val = "HEALTH & PHYSICAL EDUCATION";
-else if($_sub_cd == 43)  $ret_val = "EDUCATION";
-else if($_sub_cd == 44)  $ret_val = "GEOLOGY";
-else if($_sub_cd == 45)  $ret_val = "SOCIOLOGY";
-else if($_sub_cd == 46)  $ret_val = "BIOLOGY";
-else if($_sub_cd == 47)  $ret_val = "PHYSICS";
-else if($_sub_cd == 48)  $ret_val = "CHEMISTRY";
-else if($_sub_cd == 52)  $ret_val = "ADEEB ARBI";
-else if($_sub_cd == 53)  $ret_val = "ADEEB URDU";
-else if($_sub_cd == 54)  $ret_val = "FAZAL URDU";
-else if($_sub_cd == 55)  $ret_val = "HISTORY OF PAKISTAN";
-else if($_sub_cd == 56)  $ret_val = "HISTORY OF ISLAM";
-else if($_sub_cd == 57)  $ret_val = "HISTORY OF INDO-PAK";
-else if($_sub_cd == 58)  $ret_val = "HISTORY OF MODREN WORLD";
-else if($_sub_cd == 59)  $ret_val = "APPLIED ART  (H-Eco Group)";
-else if($_sub_cd == 60)  $ret_val = "FOOD & NUTRITION (H-Eco Group)";
-else if($_sub_cd == 61)  $ret_val = "CHILD DEVELOPMENT AND FAMILY LIVING (H-Eco Group)";
-else if($_sub_cd == 70)  $ret_val = "PRINCIPLES OF ACCOUNTING";
-else if($_sub_cd == 71)  $ret_val = "PRINCIPLES OF ECONOMICS";
-else if($_sub_cd == 72)  $ret_val = "BIOLOGY (H-Eco Group)";
-else if($_sub_cd == 73)  $ret_val = "CHEMISTRY (H-Eco Group)";
-else if($_sub_cd == 75)  $ret_val = "CLOTHING & TEXTILE (H-Eco Group)";
-else if($_sub_cd == 76)  $ret_val = "HOME MANAGEMNET  (H-Eco Group)";
-else if($_sub_cd == 79)  $ret_val = "NURSING";
-else if($_sub_cd == 80)  $ret_val = "BUSINESS MATH";
-else if($_sub_cd == 83)  $ret_val = "COMPUTER SCIENCE";
-else if($_sub_cd == 90)  $ret_val = "AGRICULTURE";
-else if($_sub_cd == 91)  $ret_val = "PAKISTAN STUDIES";
-else if($_sub_cd == 92)  $ret_val = "ISLAMIC EDUCATION";
-else if($_sub_cd == 93)  $ret_val = "CIVICS FOR NON MUSLIM";
-else if($_sub_cd == 94)  $ret_val = "COMMERCIAL GEOGRAPHY";
-else if($_sub_cd == 95)  $ret_val = "BANKING";
-else if($_sub_cd == 96)  $ret_val = "TYPING";
-else if($_sub_cd == 97)  $ret_val = "BUSINESS STATISTICS";
-else if($_sub_cd == 98)  $ret_val = "COMPUTER STUDIES";
-else if($_sub_cd == 99)  $ret_val = "BOOK KEEPING & ACCOUNTANCY";
-return $ret_val ;         
+    function  GetiSubNameHere($_sub_cd) {
+        $ret_val = "";
+        if($_sub_cd == 1)  $ret_val = "ENGLISH";
+        else if($_sub_cd == 2)  $ret_val = "URDU";
+            else if($_sub_cd == 3)  $ret_val = "BANGALI";
+                else if($_sub_cd == 4)  $ret_val = "URDU(ALTERNATIVE EASY COURSE)";
+                    else if($_sub_cd == 5)  $ret_val = "BENGALI(ALTERNATE EASY COURSE)";
+                        else if($_sub_cd == 6)  $ret_val = "PAKISTANI CULTURE";
+                            else if($_sub_cd == 7)  $ret_val = "HISTORY";
+                                else if($_sub_cd == 8)  $ret_val = "LIBRARY SCIENCE";
+                                    else if($_sub_cd == 9)  $ret_val = "ISLAMIC HISTORY & CULTURE";
+                                        else if($_sub_cd == 10)  $ret_val = "FAZAL ARABIC";
+                                            else if($_sub_cd == 11)  $ret_val = "ECONOMICS";
+                                                else if($_sub_cd == 12)  $ret_val = "GEOGRAPHY";
+                                                    else if($_sub_cd == 13)  $ret_val = "MILITARY SCIENCE";
+                                                        else if($_sub_cd == 14)  $ret_val = "PHILOSOPHY";
+                                                            else if($_sub_cd == 15)  $ret_val = "ISLAMIC STUDIES(ISL-ST. GROUP)";
+                                                                else if($_sub_cd == 16)  $ret_val = "PSYCHOLOGY";
+                                                                    else if($_sub_cd == 17)  $ret_val = "CIVICS";
+                                                                        else if($_sub_cd == 18)  $ret_val = "STATISTICS";
+                                                                            else if($_sub_cd == 19)  $ret_val = "MATHEMATICS";
+                                                                                else if($_sub_cd == 20)  $ret_val = "ISLAMIC STUDIES";
+                                                                                    else if($_sub_cd == 21)  $ret_val = "OUTLINES OF HOME ECONOMICS";
+                                                                                        else if($_sub_cd == 22)  $ret_val = "MUSIC";
+                                                                                            else if($_sub_cd == 23)  $ret_val = "FINE ARTS";
+                                                                                                else if($_sub_cd == 24)  $ret_val = "ARABIC";
+                                                                                                    else if($_sub_cd == 25)  $ret_val = "BENGALI";
+                                                                                                        else if($_sub_cd == 26)  $ret_val = "BENGALI(ADVANCE)";
+                                                                                                            else if($_sub_cd == 27)  $ret_val = "ENGLISH ELECTIVE";
+                                                                                                                else if($_sub_cd == 28)  $ret_val = "FRENCH";
+                                                                                                                    else if($_sub_cd == 29)  $ret_val = "GERMAN";
+                                                                                                                        else if($_sub_cd == 30)  $ret_val = "LATIN";
+                                                                                                                            else if($_sub_cd == 32)  $ret_val = "PUNJABI";
+                                                                                                                                else if($_sub_cd == 33)  $ret_val = "PASHTO";
+                                                                                                                                    else if($_sub_cd == 34)  $ret_val = "PERSIAN";
+                                                                                                                                        else if($_sub_cd == 35)  $ret_val = "SANSKRIT";
+                                                                                                                                            else if($_sub_cd == 36)  $ret_val = "SINDHI";
+                                                                                                                                                else if($_sub_cd == 37)  $ret_val = "URDU (ADVANCE)";
+                                                                                                                                                    else if($_sub_cd == 38)  $ret_val = "COMMERCIAL PRACTICE";
+                                                                                                                                                        else if($_sub_cd == 39)  $ret_val = "PRINCIPLES OF COMMERCE";
+                                                                                                                                                            else if($_sub_cd == 42)  $ret_val = "HEALTH & PHYSICAL EDUCATION";
+                                                                                                                                                                else if($_sub_cd == 43)  $ret_val = "EDUCATION";
+                                                                                                                                                                    else if($_sub_cd == 44)  $ret_val = "GEOLOGY";
+                                                                                                                                                                        else if($_sub_cd == 45)  $ret_val = "SOCIOLOGY";
+                                                                                                                                                                            else if($_sub_cd == 46)  $ret_val = "BIOLOGY";
+                                                                                                                                                                                else if($_sub_cd == 47)  $ret_val = "PHYSICS";
+                                                                                                                                                                                    else if($_sub_cd == 48)  $ret_val = "CHEMISTRY";
+                                                                                                                                                                                        else if($_sub_cd == 52)  $ret_val = "ADEEB ARBI";
+                                                                                                                                                                                            else if($_sub_cd == 53)  $ret_val = "ADEEB URDU";
+                                                                                                                                                                                                else if($_sub_cd == 54)  $ret_val = "FAZAL URDU";
+                                                                                                                                                                                                    else if($_sub_cd == 55)  $ret_val = "HISTORY OF PAKISTAN";
+                                                                                                                                                                                                        else if($_sub_cd == 56)  $ret_val = "HISTORY OF ISLAM";
+                                                                                                                                                                                                            else if($_sub_cd == 57)  $ret_val = "HISTORY OF INDO-PAK";
+                                                                                                                                                                                                                else if($_sub_cd == 58)  $ret_val = "HISTORY OF MODREN WORLD";
+                                                                                                                                                                                                                    else if($_sub_cd == 59)  $ret_val = "APPLIED ART  (H-Eco Group)";
+                                                                                                                                                                                                                        else if($_sub_cd == 60)  $ret_val = "FOOD & NUTRITION (H-Eco Group)";
+                                                                                                                                                                                                                            else if($_sub_cd == 61)  $ret_val = "CHILD DEVELOPMENT AND FAMILY LIVING (H-Eco Group)";
+                                                                                                                                                                                                                                else if($_sub_cd == 70)  $ret_val = "PRINCIPLES OF ACCOUNTING";
+                                                                                                                                                                                                                                    else if($_sub_cd == 71)  $ret_val = "PRINCIPLES OF ECONOMICS";
+                                                                                                                                                                                                                                        else if($_sub_cd == 72)  $ret_val = "BIOLOGY (H-Eco Group)";
+                                                                                                                                                                                                                                            else if($_sub_cd == 73)  $ret_val = "CHEMISTRY (H-Eco Group)";
+                                                                                                                                                                                                                                                else if($_sub_cd == 75)  $ret_val = "CLOTHING & TEXTILE (H-Eco Group)";
+                                                                                                                                                                                                                                                    else if($_sub_cd == 76)  $ret_val = "HOME MANAGEMNET  (H-Eco Group)";
+                                                                                                                                                                                                                                                        else if($_sub_cd == 79)  $ret_val = "NURSING";
+                                                                                                                                                                                                                                                            else if($_sub_cd == 80)  $ret_val = "BUSINESS MATH";
+                                                                                                                                                                                                                                                                else if($_sub_cd == 83)  $ret_val = "COMPUTER SCIENCE";
+                                                                                                                                                                                                                                                                    else if($_sub_cd == 90)  $ret_val = "AGRICULTURE";
+                                                                                                                                                                                                                                                                        else if($_sub_cd == 91)  $ret_val = "PAKISTAN STUDIES";
+                                                                                                                                                                                                                                                                            else if($_sub_cd == 92)  $ret_val = "ISLAMIC EDUCATION";
+                                                                                                                                                                                                                                                                                else if($_sub_cd == 93)  $ret_val = "CIVICS FOR NON MUSLIM";
+                                                                                                                                                                                                                                                                                    else if($_sub_cd == 94)  $ret_val = "COMMERCIAL GEOGRAPHY";
+                                                                                                                                                                                                                                                                                        else if($_sub_cd == 95)  $ret_val = "BANKING";
+                                                                                                                                                                                                                                                                                            else if($_sub_cd == 96)  $ret_val = "TYPING";
+                                                                                                                                                                                                                                                                                                else if($_sub_cd == 97)  $ret_val = "BUSINESS STATISTICS";
+                                                                                                                                                                                                                                                                                                    else if($_sub_cd == 98)  $ret_val = "COMPUTER STUDIES";
+                                                                                                                                                                                                                                                                                                        else if($_sub_cd == 99)  $ret_val = "BOOK KEEPING & ACCOUNTANCY";
+                                                                                                                                                                                                                                                                                                            return $ret_val ;         
     }
 }
 

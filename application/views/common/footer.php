@@ -30,6 +30,38 @@ if(isset($files)){
 ?> 
 <script type="text/javascript">
 
+var otable ='';
+ function activeElig (rno)
+    {
+
+
+        $.ajax({
+            ////debugger;
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "BiseCorrection/reg9thEligibilityActive/",
+            dataType: 'json',
+            data: {formno: rno},
+            beforeSend: function() {  $('.mPageloader').show(); },
+            complete: function() { $('.mPageloader').hide();},
+            success: function(data) {
+                if($.trim(data) == 1)
+                {
+                    $("#"+rno).remove();
+                    
+                }
+
+                else
+                {
+                    alert("Error Not Update");
+                }
+
+            },
+            error: function(request, status, error){
+                alert(request.responseText);
+            }
+        });
+    }
+
 
     /* function preventBack(){window.history.forward();}
     setTimeout("preventBack()", 0);
@@ -140,7 +172,7 @@ if(isset($files)){
 
         $(".chosen-single").chosen({no_results_text: "Oops, nothing found!"}); 
 
-        $('#data-table').dataTable({
+       otable = $('#data-table').dataTable({
             "sPaginationType": "full_numbers",
             "bAutoWidth" : false,
             "cache": false
