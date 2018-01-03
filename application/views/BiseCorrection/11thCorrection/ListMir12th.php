@@ -120,10 +120,10 @@
                                             Father's Name
                                         </th>
                                        
-                                       <th style="width:5%">
+                                      <!-- <th style="width:5%">
                                             Picture
                                         </th>
-                                      
+                                                 -->
                                         <th style="width:8%" class="hidden-phone" >
                                             Action
                                         </th>
@@ -155,10 +155,24 @@
                                         <td>'.$app_no.'</td>
                                         <td>'.$vals["name"].'</td>
                                         <td>'.$vals["fname"].'</td>';
-                                        echo'<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"><td>
-                                        <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$app_txt.','.$vals['Migrated_From'].','.$vals['Migrated_to'].','.$app_txt.')">Restore</button>
+                                        //echo'<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image"><td>';
+                                         if(empty($vals["Formno"]))
+                                        {
+                                            echo'<td>
+                                            <div class="alert-danger" role="alert">
+                                            <strong>Migrated from One Window Operation</strong>
+                                            </div>
+                                            </td>
+                                            </tr>';   
+                                        }
+                                        else
+                                        {
+                                             echo '<button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$app_txt.','.$vals['Migrated_From'].','.$vals['Migrated_to'].','.$app_txt.')">Restore</button>
                                         </td>
-                                        </tr>';
+                                        </tr>';     
+                                        }
+                                        
+                                      
                                         endforeach;
                                     }
                                     ?>

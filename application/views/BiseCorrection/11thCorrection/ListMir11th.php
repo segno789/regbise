@@ -45,9 +45,9 @@
                                         <th style="width:10%" class="hidden-phone">
                                             Subject Group
                                         </th>
-                                         <th style="width:5%" class="hidden-phone">
+                                         <!--<th style="width:5%" class="hidden-phone">
                                             Picture
-                                        </th>
+                                        </th> -->
                                         <th style="width:8%" class="hidden-phone" >
                                             Action
                                         </th>
@@ -102,9 +102,9 @@
                                         <td>'.$vals["coll_cd"].'</td>
                                         <td>'.$vals["oldinst_cd"].'</td>
                                       
-                                        <td>'.$grp_name.'</td>
+                                        <td>'.$grp_name.'</td>';
 
-                                        <td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$vals['coll_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
+                                        //<td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$vals['coll_cd'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
 
                                         echo'<td>
                                         <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['oldinst_cd'].','.$vals['oldinst_cd'].','.$app_txt.')">Restore</button>

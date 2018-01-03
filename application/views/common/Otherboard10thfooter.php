@@ -63,7 +63,7 @@
             }   
 
         } 
-        var error_New_Enrolement ='<?php  if(@$excep != ""){echo @$excep;}  ?>';
+        var error_New_Enrolement ='<?php   if(@$excep != ""){echo @$excep;}  ?>';
         var  error_New_Enrolement_update ='<?php   if(@$data != ""){echo @$data[0]['excep'];}  ?>';
         if(error_New_Enrolement.length > 1)
         {

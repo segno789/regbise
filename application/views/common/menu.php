@@ -635,6 +635,11 @@ header("Pragma: no-cache");
                             9th Special Permission
                         </a>
                     </li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>BiseCorrection/SpecPermison_11th">
+                            11th Special Permission
+                        </a>
+                    </li>
                 </ul>
                 <?php
             }

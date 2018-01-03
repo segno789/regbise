@@ -882,6 +882,35 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/SpecPermission.php',$NinthStdData);
         $this->load->view('common/footer.php',$spec_case_msg); 
     }
+    public function SpecPermison_11th()
+    {
+
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '11',
+        );
+
+        $spec_case_msg="";
+        $this->load->library('session');
+
+        if(( $this->session->flashdata('msg'))){
+
+            $msg = $this->session->flashdata('msg');
+            $spec_case_msg =array('msg'=>$msg);  
+        }
+        else{
+            $msg = '';
+            $spec_case_msg =array('msg'=>$msg);  
+        }
+        $this->load->model('BiseCorrections_model');
+        $EleventhStdData = array('Inst_data'=>$this->BiseCorrections_model->GetAllInstList_HSSC());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/SpecPermission11th.php',$EleventhStdData);
+        $this->load->view('common/footer.php',$spec_case_msg); 
+    }
     public function SpecPermison_9th_INSERT()
     {
         $this->load->model('BiseCorrections_model');
@@ -924,6 +953,50 @@ class BiseCorrection extends CI_Controller {
         {
             $this->session->set_flashdata('msg','Not Saved');
             redirect('BiseCorrection/SpecPermison_9th');
+        }
+    }
+    public function SpecPermison_11th_INSERT()
+    {
+        $this->load->model('BiseCorrections_model');
+
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $userinfo['isselected'] = 11;
+        $kpo = $userinfo['Inst_Id'];
+        $this->commonheader($userinfo);
+        $error = array();
+
+
+        if (!isset($kpo))
+        {
+            //$error['excep'][1] = 'Please Login!';
+            $this->load->view('login/biselogin.php');
+            return;
+        }
+        $lastdate  = date('Y-m-d',strtotime(@$_POST['txt_FeedingDate'])) ;
+        $data = array(
+
+            'Inst_cd'=>@$_POST['inst_cd'],
+            'FeedingDate'=>$lastdate,
+            'RegFee'=>@$_POST['Reg_fee'],
+            'ProcessingFee'=>@$_POST['Proc_Fee'],
+            'SpecialFee'=>@$_POST['Spec_Fee'],
+            'readmfine'=>@$_POST['ReAdm_Fee'],
+            'Isactive'=>@$_POST['IsActivated'],
+            'Kpo'=>$kpo
+
+        );
+        $IsInserted = $this->BiseCorrections_model->Insert_SpecPermison($data);
+        if($IsInserted == true)
+        {
+            $this->session->set_flashdata('msg','Saved');
+            redirect('BiseCorrection/SpecPermison_11th');
+        }
+        else
+        {
+            $this->session->set_flashdata('msg','Not Saved');
+            redirect('BiseCorrection/SpecPermison_11th');
         }
     }
     public function IsSpecPermission()
@@ -3941,6 +4014,7 @@ class BiseCorrection extends CI_Controller {
 
     public function otherboard10th()
     {
+  //  DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '15',
@@ -3956,15 +4030,14 @@ class BiseCorrection extends CI_Controller {
         else{
             $error_msg = $this->session->flashdata('NewEnrolment_error');
         }
-
-
         $this->load->view('common/header.php',$userinfo);
         $this->load->view('common/menu.php',$data);
         $this->load->view('BiseCorrection/Matric/OtherBoard10th.php',$error_msg);
         $this->load->view('common/Otherboard10thfooter.php');
     }
 
-    public function NewEnrolment_insert_OtherBoard10th(){
+    public function NewEnrolment_insert_OtherBoard10th()
+    {
 
 
        // DebugBreak();
@@ -4393,12 +4466,13 @@ class BiseCorrection extends CI_Controller {
 
 
         $this->frmvalidation('BiseCorrection/otherboard10th',$data,0);       
-        //*/
+        //DebugBreak();
         $logedIn = $this->BiseCorrections_model->Insert_NewEnorlement($data);
         if($logedIn != false)
         {
             $allinputdata = "";
             $allinputdata['excep'] = 'success';
+            $allinputdata['formno']=$logedIn[0]['formno'] ;
             $this->session->set_flashdata('NewEnrolment_error',$allinputdata);
             $msg = $formno;                                           
             redirect('BiseCorrection/otherboard10th');

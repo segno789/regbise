@@ -12,6 +12,10 @@
 
                         <form class="form-horizontal no-margin" action="<?php  echo base_url(); ?>index.php/BiseCorrection/NewEnrolment_insert_OtherBoard10th" method="post" enctype="multipart/form-data" name="myform" id="myform">
                             <div class="control-group">
+                                <?php if(isset($formno)) { echo '<h4>Saved Form No: '.@$formno.'</h4>'; }?>
+
+
+
                                 <h4 class="span4">Personal Information :</h4>
                                 <div class="controls controls-row">
                                     <label class="control-label span4">
@@ -210,8 +214,8 @@
                                         Year:
                                     </label> 
                                     <select class="span3"  name="oldyear" id = "oldyear" >
+                                        <option value="2017">2017</option>
                                         <option value="2016">2016</option>
-                                        <option value="2015">2015</option>
                                     </select>
 
                                 </div>
@@ -270,12 +274,12 @@
                                     <input type="hidden" class="span3" id="oldboardid" name="oldboardid"  value="<?php  echo $data[0]['Brd_cd'];?>"/>     
                                 </div>
                             </div>
-                          
+
                             <div id="instruction" style="display:none; width:700px" >
                                 <!--  <img src="<?php // echo base_url(); ?>assets/img/admission_form.jpg" border="0" width="10000" height="840" alt="admission_form.jpg">
                                 <img src="<?php //echo base_url(); ?>assets/img/instructions.jpg" border="0" width="10000" height="840" alt="admission_form.jpg"> -->
                             </div>
-                            
+
                             <hr>
                             <div class="control-group">
                                 <h4 class="span4">Exam Information :</h4>
@@ -369,7 +373,7 @@
 
                                     </select> 
                                 </div>
-                              
+
                                 <div class="control row controls-row">
                                     <label class="control-label span1" >
 
@@ -378,7 +382,7 @@
 
                                     </select>
                                     <select id="sub8p2"  name="sub8p2" class="span3 dropdown">
-                                     </select>
+                                    </select>
                                 </div>
 
                                 <div class="control row controls-row">
@@ -391,7 +395,7 @@
                                     <select id="sub4p2" class="span3 dropdown" name="sub4p2">
 
                                     </select> 
-                                    
+
                                 </div>
                                 <div class="control row controls-row">
                                     <label class="control-label span1" >
@@ -403,7 +407,7 @@
                                     <select id="sub5p2" class="span3 dropdown" name="sub5p2" selected="selected">
 
                                     </select> 
-                                    
+
                                 </div>
                                 <div class="control row controls-row">
                                     <label class="control-label span1" >
@@ -415,19 +419,19 @@
                                     <select id="sub6p2"  name="sub6p2" class="span3 dropdown" selected="selected">
 
                                     </select>
-                                   
+
                                 </div> 
-                                   <div class="control row controls-row">
+                                <div class="control row controls-row">
                                     <label class="control-label span1" >
 
                                     </label>
-                                       <select id="sub7" class="span3 dropdown" name="sub7" selected="selected">
+                                    <select id="sub7" class="span3 dropdown" name="sub7" selected="selected">
 
                                     </select> 
                                     <select id="sub7p2" class="span3 dropdown" name="sub7p2" selected="selected">
 
                                     </select> 
-                                    
+
                                 </div>
                             </div>
                             <div>
@@ -801,6 +805,7 @@
                                     $("#sub2").prepend('<option selected="selected" value="2">ENGLISH</option>');
                                     $("#sub2").prepend('<option  value="0">NONE</option>');
                                     $("#sub2p2").prepend('<option selected="selected" value="2">ENGLISH</option>');
+
                                     // Check Religion and select sub........
                                     $("#sub3").empty();
                                     $("#sub3p2").empty();
@@ -822,13 +827,15 @@
                                             $("#sub3p2").append(new Option(text,val));
                                         });
                                     }
+
                                     $("#sub4").empty();
                                     $("#sub4p2").empty();
-                                      $("#sub8").empty();
+                                    $("#sub8").empty();
                                     $("#sub8p2").empty();
                                     $("#sub8").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
                                     $("#sub8").prepend('<option  value="0">NONE</option>');
                                     $("#sub8p2").prepend('<option selected="selected" value="4">PAKISTAN STUDIES</option>');
+                                    $("#sub8").val(0);
                                     // Subject 5 ,6 ,7 and 8
                                     $("#sub5").empty();
                                     $("#sub5p2").empty();
@@ -836,7 +843,7 @@
                                     $("#sub6p2").empty();
                                     $("#sub7").empty();
                                     $("#sub7p2").empty();
-                                  
+
                                     $("#sub4").append(new Option('MATHEMATICS',5));
                                     $("#sub4").append(new Option('NONE',0));
                                     $("#sub4p2").append(new Option('MATHEMATICS',5));
@@ -846,6 +853,12 @@
                                     $("#sub6").append(new Option('CHEMISTRY',7));
                                     $("#sub6").append(new Option('NONE',0));
                                     $("#sub6p2").append(new Option('CHEMISTRY',7));
+                                    $('#sub1').val(0);
+                                    $('#sub2').val(0);
+                                    $("#sub3").val(0);
+                                    $("#sub4").val(0);
+                                    $("#sub5").val(0);
+                                    $("#sub6").val(0);
                                 }
                                 function Hum_Deaf_Subjects()
                                 {
@@ -910,6 +923,12 @@
                                     $("#sub6p2").empty();
                                     $("#sub7").empty();
                                     $("#sub7p2").empty();
+                                    $('#sub1').val(0);
+                                    $('#sub2').val(0);
+                                    $("#sub3").val(0);
+                                    $("#sub4").val(0);
+                                    $("#sub5").val(0);
+                                    $("#sub6").val(0);
                                     // $("#sub8").empty();
                                     //  $("#sub8p2").empty();
                                 }
@@ -954,7 +973,7 @@
                                 // sub 5 change event 
                                 $("#sub5").change(function(){
                                     var sel_sub =$("#sub5").val();
-                                       $("#sub5p2").val(sel_sub);
+                                    $("#sub5p2").val(sel_sub);
                                 });
                                 $("#sub5p2").change(function(){
                                     var sel_sub =$("#sub5p2").val();
@@ -1082,7 +1101,7 @@
                                         $("#sub6").focus();
                                         return;
                                     }         
-                                  //  $("#sub6").val(sub6p2);
+                                    //  $("#sub6").val(sub6p2);
                                     // $("#sub6p2").append(new Option('COMPUTER SCIENCE',78));
                                     //   console.log('Hi i am sub6 dropdown :) ');
                                 })
@@ -2599,6 +2618,7 @@
                                             load_Bio_CS_Sub();
                                             $("#sub7").append(new Option('BIOLOGY',8));
                                             $("#sub7").append(new Option('NONE',0));
+                                            $("#sub7").val(0);
                                             $("#sub7p2").append(new Option('BIOLOGY',8));
                                         }
                                         else if(sel_group == "7")
@@ -2606,6 +2626,7 @@
                                             load_Bio_CS_Sub();
                                             $("#sub7").append(new Option('COMPUTER SCIENCE',78));
                                             $("#sub7").append(new Option('NONE',0));
+                                            $("#sub7").val(0);
                                             $("#sub7p2").append(new Option('COMPUTER SCIENCE',78));
                                         }
                                         else if (sel_group == "8")
@@ -2613,6 +2634,7 @@
                                             load_Bio_CS_Sub();
                                             $("#sub7").append(new Option('ELECTRICAL WIRING (OPT)',43));
                                             $("#sub7").append(new Option('NONE',0));
+                                            $("#sub7").val(0);
                                             $("#sub7p2").append(new Option('ELECTRICAL WIRING (OPT)',43));
                                             //ELECTRICAL WIRING (OPT)
                                         }
@@ -2693,9 +2715,18 @@
                                             else
                                             {
                                                 // alert('i am removed');
-                                                dropdownElement.find('sub7[value=13]').remove();
-                                                dropdownElement.find('sub7p2[value=13]').remove();
+                                                //dropdownElement.find('sub7[value=13]').remove();
+                                               // dropdownElement.find('sub7p2[value=13]').remove();
                                             }
+
+                                            $('#sub1').val(0);
+                                            $('#sub2').val(0);
+                                            $("#sub3").val(0);
+                                            $("#sub4").val(0);
+                                            $("#sub5").val(0);
+                                            $("#sub6").val(0);
+                                            $("#sub7").val(0);
+                                            $("#sub8").val(0);
                                         }
                                         else if(sel_group == "5")
                                         {
@@ -2716,6 +2747,14 @@
                                                 $("#sub7").append(new Option(text,val));
                                                 $("#sub7p2").append(new Option(text,val));
                                             });
+                                            $('#sub1').val(0);
+                                            $('#sub2').val(0);
+                                            $("#sub3").val(0);
+                                            $("#sub4").val(0);
+                                            $("#sub5").val(0);
+                                            $("#sub6").val(0);
+                                            $("#sub7").val(0);
+                                            $("#sub8").val(0);
                                         }
                                         else if (sel_group == "0")
                                         {

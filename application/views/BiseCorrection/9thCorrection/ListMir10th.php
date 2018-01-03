@@ -119,7 +119,12 @@
                                         <th style="width:10%">
                                             Father's Name
                                         </th>
-                                       
+                                          <th style="width:5%">
+                                            Old Inst. Code
+                                        </th>
+                                         <th style="width:5%">
+                                            New Inst. Code
+                                        </th>
                                       <!-- <th style="width:5%">
                                             Picture
                                         </th>    -->
@@ -131,7 +136,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-
+                                   // DebugBreak();
                                     if($migration != false)
                                     {
                                         $n=0;  
@@ -154,7 +159,9 @@
                                         <td>'.$formno.'</td>
                                         <td>'.$app_no.'</td>
                                         <td>'.$vals["name"].'</td>
-                                        <td>'.$vals["fname"].'</td>';
+                                        <td>'.$vals["fname"].'</td>
+                                        <td>'.$vals["Migrated_From"].'</td>
+                                        <td>'.$vals["Migrated_to"].'</td>';
                                         //<td><img id="previewImg" style="width:70px; height: 70px;" src="'.$base64.'" alt="Candidate Image">
                                         echo'<td>
                                         <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].','.$app_txt.')">Restore</button>

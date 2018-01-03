@@ -642,6 +642,17 @@ class BiseCorrections_model extends CI_Model
         $result_1 = $this->db->get()->result();
         return $result_1;
     }
+      public function GetAllInstList_HSSC(){
+        $this->db->select('Inst_cd, Name');
+        $this->db->from('Admission_Online..tblInstitutes_all');
+        $where = '(edu_lvl=2 or edu_lvl = 3)';
+        $this->db->where('IsActive', 1);
+        $this->db->where($where);
+
+
+        $result_1 = $this->db->get()->result();
+        return $result_1;
+    }
     public function Insert_SpecPermison($data)
     {
         //DebugBreak();
@@ -885,6 +896,9 @@ class BiseCorrections_model extends CI_Model
          {
          return -2;
          }
+         
+        
+         
         $data2 = array(
             'Sch_cd'=>$newInst,
             'oldinst_cd'=>$oldInst,
@@ -913,13 +927,21 @@ class BiseCorrections_model extends CI_Model
 
     public function update11MigData($formno,$newInst,$oldInst,$kpo,$app_no,$ismigrated)
     {
-
+   // DebugBreak();
+        $q = $this->db->get_where(TBLMIGRATION_11th,array('coll_cd'=>$newInst));
+        $result = $q->result_array();
+        $result;
         $data2 = array(
             'coll_cd'=>$newInst,
             'oldinst_cd'=>$oldInst,
             'ckpo'=>$kpo,
             'cDate'=>date('Y-m-d H:i:s'),
+            'dist_cd'=>$result[0]['dist_cd'],
+            'teh_cd'=>$result[0]['teh_cd'],
+            'zone_cd'=>$result[0]['zone_cd'],
         );
+        
+        
         $this->db->where('Formno',$formno);
         $res =  $this->db->update(TBLMIGRATION_11th, $data2);
 
@@ -1159,7 +1181,7 @@ class BiseCorrections_model extends CI_Model
         $RegGrp = 0;
         $year = YEAR;
         $query = $this->db->query("Admission_online..MSAdm2016_sp_insert_otherboard_9th '$formno',9,$year,1,'$name','$fname','$BForm','$FNIC','$Dob','$CellNo',$medium,'".$MarkOfIden."',$Speciality,$nat,$sex,$rel,'".$addr."',$grp_cd,$sub1,$sub1ap1,$sub2,$sub2ap1,$sub3,$sub3ap1,$sub4,$sub4ap1,$sub5,$sub5ap1,$sub6,$sub6ap1,$sub7,$sub7ap1,$sub8,$sub8ap1,1,$oldrno,$oldyear,$oldsess,$IsHafiz,$Inst_cd,$UrbanRural,$RegGrp,$cat09,$cat10,$sub1ap2,$sub2ap2,$sub3ap2,$sub4ap2,$sub5ap2,$sub6ap2,$sub7ap2,$sub8ap2,$dist_cd,$teh_cd,$zone_cd,$Brd_cd,'$prevresult',$ckpo,$exam_type");
-        return true;
+        return $query->result_array();
     }
     public function GetFormNo($inst_cd){
 

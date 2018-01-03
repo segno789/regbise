@@ -81,8 +81,8 @@ define('CURRENT_SESS1','2017-2019');
 //================ Migration variables ========================
 
 define('NOC_APP_NO','80000'); 
-define('MIGRATIONSESS','2016-18'); 
-define('MIGRATIONSESS2','2015-17'); 
+define('MIGRATIONSESS','2017-19'); 
+define('MIGRATIONSESS2','2016-18'); 
 define('TBLMIGRATION','Registration..tblreg9th'); 
 define('TBLMIGRATION_11th','Registration..tblreg11th'); 
 define('TBLMIGRATION1','matric_new..tblAdmMig'); 
