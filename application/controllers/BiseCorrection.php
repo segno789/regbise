@@ -313,7 +313,7 @@ class BiseCorrection extends CI_Controller {
 
             if($isupadte >0)
             {
-                $base_path = IMAGE_PATH11.$oldinst_cd.'/'.$formnopic;
+                /*$base_path = IMAGE_PATH11.$oldinst_cd.'/'.$formnopic;
                 $copyimg = IMAGE_PATH11.$newinst_cd.'/'.$formnopic;;
 
                 if (!(copy($base_path, $copyimg))) 
@@ -323,11 +323,11 @@ class BiseCorrection extends CI_Controller {
                     redirect('BiseCorrection/migration11th/');
                 }
                 else
-                {
+                { */
                     $data['excep'] = 'success';
                     $this->session->set_flashdata('NewEnrolment_error',$data);
                     redirect('BiseCorrection/migration11th/');
-                }  
+               // }  
             }
 
             else
@@ -4957,6 +4957,7 @@ public function otherboard10th()
     }
     public function regElegibility()
     {
+        
         $this->load->helper('url');
         $data = array(
             'isselected' => '13',
@@ -4990,12 +4991,14 @@ public function otherboard10th()
     public function Reg11thactive()
     {
 
+       // DebugBreak();
         $formno = $this->input->post('formno');
         $pkid = $this->input->post('pkid');
         $this->load->model('BiseCorrections_model');
         $Logged_In_Array = $this->session->all_userdata();
         $userinfo = $Logged_In_Array['logged_in'];
-        $NinthStdData = $this->BiseCorrections_model->updateReg11Data($formno,$pkid,$userinfo['Inst_Id']);
+        //$NinthStdData = $this->BiseCorrections_model->updateReg11Data($formno,$pkid,$userinfo['Inst_Id']);
+        $NinthStdData = true;
 
         if($NinthStdData == TRUE)
         {

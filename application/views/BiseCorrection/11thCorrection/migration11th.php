@@ -136,6 +136,7 @@
                                         else
                                         {
                                             echo'<td>
+                                          
                                             <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].','.$app_txt.')">Update Migrate</button>
                                             </td>
                                             </tr>';      

@@ -55,7 +55,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                   // DebugBreak();
+                                //   DebugBreak();
                                      $n=0;  
                                                              
                                     foreach($data as $key=>$vals):
@@ -163,26 +163,28 @@ function viewPic(inst_cd,picname)
     
      $.fancybox("#instruction");
 }
-function active11reg(formno,pkid)
+function active11reg(formno)
 {
      $.ajax({
          type: "POST",
          url: "<?php echo base_url(); ?>BiseCorrection/Reg11thactive/",
          dataType: 'json',
-         data: {'formno':formno,'pkid':pkid},
+         data: {'formno':formno},
          beforeSend: function() {  $('.mPageloader').show(); },
          complete: function() { $('.mPageloader').hide();},
          success: function(json) {
              //console.log(json)
              var str = json;
             // str = str.trim();
+            //alert(str);
              if(str ==  1)
              {
                  
                    var oTable = $('#data-table').DataTable();
-                    var target_row = $('#row_'+pkid).closest("tr").get(0); // this line did the trick
+                    var target_row = $('#'+formno).closest("tr").get(0); // this line did the trick
+                    //alert(target_row);
                     var aPos = oTable.fnGetPosition(target_row); 
-
+                    alertify.success("Form No."+formno + " Activated Successfully");
                     oTable.fnDeleteRow(aPos);
                  
                  //$('#row_'+pkid).remove();

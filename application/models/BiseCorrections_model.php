@@ -1321,9 +1321,11 @@ class BiseCorrections_model extends CI_Model
     }
     public function updateReg11Data($formno,$pkid,$kpo){
 
-        $data2 = array(
+        $data2 = array
+        (
             'IsDeleted'=>0,
             'ckpo'=>$kpo,
+            'spl_cd'=>0,
             'cdate'=>date('Y-m-d H:i:s'),
         );
         $this->db->where('formno',$formno);
