@@ -8,8 +8,8 @@
                         11th Migration by Form No.<a id="redgForm" data-original-title=""></a>
                     </div>
                 </div>
-                <div class="widget-body">
-                    <form class="form-horizontal no-margin" action="<?php echo base_url(); ?>BiseCorrection/migrate/11" method="post" enctype="multipart/form-data">
+          <!--      <div class="widget-body">
+                    <form class="form-horizontal no-margin" action="<?php //echo base_url(); ?>BiseCorrection/migrate/11" method="post" enctype="multipart/form-data">
                         <div class='control-group'>
                             <div class='controls controls-row'>
                                 <label class='control-label span2' >
@@ -34,7 +34,7 @@
                         </div>
 
                     </form>
-                </div>    
+                </div> -->   
 
                 <div class="widget-body">
                     <h4>
@@ -76,7 +76,7 @@
                             </thead>
                             <tbody>
                                 <?php
-
+                              //    DebugBreak();
                                 if($migration != false)
                                 {
                                     $n=0;  
@@ -124,15 +124,15 @@
                                         <td>'.$grp_name.'</td>  ';
 
                                         //<td><img id="previewImg" style="width:40px; height: 40px;" src="'.base_url().IMAGE_PATH11.$vals['Migrated_From'].'/'.$vals['PicPath'].'" alt="Candidate Image"></td>';
-                                        if(empty($vals["Formno"]))
+                                       /* if(empty($vals["Formno"]))
                                         {
-                                            echo'<td>
+                                       */     echo'<td>
                                             <div class="alert-danger" role="alert">
                                             <strong>Migrated from One Window Operation</strong>
                                             </div>
                                             </td>
                                             </tr>';   
-                                        }
+                                       /* }
                                         else
                                         {
                                             echo'<td>
@@ -140,7 +140,7 @@
                                             <button type="button" class="btn btn-info" value="'.$formno.'" onclick="migrateto('.$formno.','.$vals['Migrated_to'].','.$app_txt.')">Update Migrate</button>
                                             </td>
                                             </tr>';      
-                                        }
+                                        }  */
 
                                         endforeach;
                                 }

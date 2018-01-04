@@ -274,7 +274,7 @@ class BiseCorrections_model extends CI_Model
 
             $table1= TBLMIGRATION3;
             $table2= 'Registration..tblreg11th';
-            $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no");
+            $this->db->select("$table2.RegGrp,$table2.Formno,$table2.name,$table2.fname,$table2.grp_cd,$table2.PicPath,$table1.Migrated_to,$table1.Migrated_From,$table1.app_no,$table1.Serial_No");
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.Formno");

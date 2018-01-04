@@ -55,7 +55,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                //   DebugBreak();
+                                //  DebugBreak();
                                      $n=0;  
                                                              
                                     foreach($data as $key=>$vals):
@@ -92,9 +92,14 @@
                                         <td>'.$vals["formno"].'</td>
                                         <td>'.$grp_name.'</td>
                                       
-                                        <td>'.$vals["spl_name"].'</td>';
+                                        <td class="alert alert-danger " style="background-color:Red">'.$vals["spl_name"].'</td>';
 
-                                      echo '<td><button type="button" class="btn btn-info"  onclick="active11reg('.$vals["formno"].')">Active</button></td>';
+                                      echo '<td>
+                                      <button type="button" class="btn btn-info"  onclick="viewPic('.$vals['coll_cd'].$vals["formno"].')">view Picture</button>
+                                      <button type="button" class="btn btn-info"  onclick="active11reg('.$vals["formno"].')">Active</button>
+                                      
+                                      
+                                      </td>';
                                         echo  '</tr>';
                                         endforeach;
                                   /* 
@@ -199,5 +204,6 @@ function active11reg(formno)
          }
      });
 }
+
 </script>
 
