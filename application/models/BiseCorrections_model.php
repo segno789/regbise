@@ -87,6 +87,45 @@ class BiseCorrections_model extends CI_Model
             return  false;; 
         }
     }
+    
+    
+    public function get9theligibilty()
+    {
+
+
+
+        $table1= 'Registration..tblReg9th';
+        $table2= 'matric_new..tblSplCase';
+        $this->db->select("$table2.spl_name,$table1.sch_cd,$table1.fnic,$table1.name,$table1.formno,$table1.fname,$table1.dob,$table2.spl_cd,$table1.grp_cd,$table1.grp_cd,matric_new.dbo.MSubAbre(sub1)+','+matric_new.dbo.MSubAbre(sub2)+','+matric_new.dbo.MSubAbre(sub3)+','+matric_new.dbo.MSubAbre(sub4)+','+matric_new.dbo.MSubAbre(sub5)+','+matric_new.dbo.MSubAbre(sub6)+','+matric_new.dbo.MSubAbre(sub7)+','+matric_new.dbo.MSubAbre(sub8) as sub_abr");
+        $this->db->from($table2);
+        //join LEFT by default
+        $this->db->join($table1, "$table1.spl_cd=$table2.spl_cd");
+        $this->db->where("$table1.spl_cd is not null and $table1.spl_cd not in (77) AND ($table1.isdeleted =0 OR  $table1.isdeleted IS NULL) AND $table1.batch_id>0");
+        $query = $this->db->get();
+        $rowcount = $this->db->count_all_results();
+        if($rowcount > 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return  false;
+        }
+    }
+    public function active9theligibilty($formno,$kpo)
+    {
+
+        $data2 = array(
+            'spl_cd'=>NULL,
+            'ckpo'=>$kpo,
+            'cdate'=>date('Y-m-d H:i:s'),
+        );
+        $this->db->where('formno',$formno);
+        $res= $this->db->update("Registration..tblreg9th", $data2);
+
+
+        return $res;
+    }
     public function get9thDeactive($branch)
     {
 
@@ -218,9 +257,7 @@ class BiseCorrections_model extends CI_Model
             $this->db->from($table2);
             //join LEFT by default
             $this->db->join($table1, "$table1.formno=$table2.formno");
-            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9 and $table1.formno is not null and $table1.ismigrated is null and $table1.isother = 0"); 
-            
-            
+            $this->db->where("$table2.isdeleted = 0 and $table2.oldinst_cd = 0 and $table1.iyear = ".YEAR." and $table1.class=9 and $table1.formno is not null and $table1.ismigrated is null"); 
         }
         if($class == 10)
         {
@@ -642,7 +679,7 @@ class BiseCorrections_model extends CI_Model
         $result_1 = $this->db->get()->result();
         return $result_1;
     }
-      public function GetAllInstList_HSSC(){
+     public function GetAllInstList_HSSC(){
         $this->db->select('Inst_cd, Name');
         $this->db->from('Admission_Online..tblInstitutes_all');
         $where = '(edu_lvl=2 or edu_lvl = 3)';
@@ -735,7 +772,8 @@ class BiseCorrections_model extends CI_Model
     {
 
 
-        $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
+       // $q2         = $this->db->get_where('Registration..MA_P1_Reg_Correction',array('IsDeleted'=>0,'IsCorr'=>2));
+        $q2         = $this->db->query('select top 10 * from Registration..MA_P1_Reg_Correction where IsDeleted = 0 AND IsCorr = 2 order by edate desc');
         $result = $q2->result_array();
         return $result;
     }
@@ -850,29 +888,9 @@ class BiseCorrections_model extends CI_Model
         return $result;
     }
 
-    public function IsAdmission($formno)
-    {
-    $IsAdm = $this->db->query("select count(*) from ".TBLMIGRATION." where formno = '".$formno."' and (IsAdmission is not null or IsAdmission != 0)");
-    $rowcount = $IsAdm->num_rows();
-    if($rowcount>0)
-    {
-    
-    return true;
-    }
-    else
-    {
-    return false;
-    }
-    }
-    
     public function updateMigData($formno,$newInst,$oldInst,$kpo)
     {
-        //DebugBreak();
-        $isAdm = $this->IsAdmission($formno);
-         if($isAdm == true)
-         {
-         return -2;
-         }
+
         $data2 = array(
             'Sch_cd'=>$newInst,
             'oldinst_cd'=>$oldInst,
@@ -890,15 +908,7 @@ class BiseCorrections_model extends CI_Model
     }
     public function updateMigDataOnline($formno,$newInst,$oldInst,$kpo,$app_no,$ismigrated)
     {
-        //DebugBreak();
-        $isAdm = $this->IsAdmission($formno);
-         if($isAdm == true)
-         {
-         return -2;
-         }
-         
-        
-         
+
         $data2 = array(
             'Sch_cd'=>$newInst,
             'oldinst_cd'=>$oldInst,
@@ -927,7 +937,6 @@ class BiseCorrections_model extends CI_Model
 
     public function update11MigData($formno,$newInst,$oldInst,$kpo,$app_no,$ismigrated)
     {
-   // DebugBreak();
         $q = $this->db->get_where(TBLMIGRATION_11th,array('coll_cd'=>$newInst));
         $result = $q->result_array();
         $result;
@@ -940,8 +949,6 @@ class BiseCorrections_model extends CI_Model
             'teh_cd'=>$result[0]['teh_cd'],
             'zone_cd'=>$result[0]['zone_cd'],
         );
-        
-        
         $this->db->where('Formno',$formno);
         $res =  $this->db->update(TBLMIGRATION_11th, $data2);
 
@@ -1086,7 +1093,7 @@ class BiseCorrections_model extends CI_Model
         }
     }
 
-    public function Insert_NewEnorlement($data)
+  public function Insert_NewEnorlement($data)
     {    
 
         $name = strtoupper($data['name']);
@@ -1267,22 +1274,13 @@ class BiseCorrections_model extends CI_Model
     public function get11thelegibility($isyes)
     {
 
-        $table1= 'Registration..tblElegibiltyReg11th';
-
-        $table2= 'Registration..tblReg11th';
-        $this->db->select("$table1.matRno, $table1.yearOfPass,$table1.sessOfPass,$table1.formno,$table1.name,$table1.fname,$table1.InstName,$table1.type,$table1.pkId,$table2.coll_cd");
+        $table1= 'Registration..tblReg11th';
+        $table2= 'matric_new..tblSplCase';
+        $this->db->select("$table2.spl_name,$table1.coll_cd,$table1.fnic,$table1.name,$table1.formno,$table1.fname,$table1.dob,$table2.spl_cd,$table1.grp_cd,$table1.grp_cd,matric_new.dbo.ISubAbre(sub1)+','+matric_new.dbo.ISubAbre(sub2)+','+matric_new.dbo.ISubAbre(sub3)+','+matric_new.dbo.ISubAbre(sub4)+','+matric_new.dbo.ISubAbre(sub5)+','+matric_new.dbo.ISubAbre(sub6)+','+matric_new.dbo.ISubAbre(sub7)+','+matric_new.dbo.ISubAbre(sub8) as sub_abr");
         $this->db->from($table2);
         //join LEFT by default
-        $this->db->join($table1, "$table1.formno=$table2.formno");
-        if($isyes ==  'Yes')
-        {
-            $this->db->where("$table1.active = 1 and $table1.type = 'Other Board NOC' and $table2.coll_cd NOT IN  (399902,399903) and $table2.IsDeleted = 1"); 
-        }
-        else
-        {
-            $this->db->where("$table1.active = 1 and $table1.type <> 'Other Board NOC' and $table2.coll_cd NOT IN  (399902,399903) and $table2.IsDeleted = 1");  
-        }
-
+        $this->db->join($table1, "$table1.spl_cd=$table2.spl_cd");
+        $this->db->where("$table1.spl_cd is not null and $table1.spl_cd not in (80,77) AND ($table1.isdeleted =0 OR  $table1.isdeleted IS NULL) AND $table1.batch_id>0");
         $query = $this->db->get();
         $rowcount = $this->db->count_all_results();
         if($rowcount > 0)
@@ -1331,12 +1329,12 @@ class BiseCorrections_model extends CI_Model
         $this->db->where('formno',$formno);
         $res= $this->db->update("Registration..tblreg11th", $data2);
 
-        $data2 = array(
+       /* $data2 = array(
             'active'=>0,
 
-        );
-        $this->db->where('pkid',$pkid);
-        $res= $this->db->update("Registration..tblElegibiltyReg11th", $data2);
+        );   */
+       // $this->db->where('pkid',$pkid);
+      //  $res= true; //$this->db->update("Registration..tblElegibiltyReg11th", $data2);
         return $res;
     }
     public function getcorrection9th()

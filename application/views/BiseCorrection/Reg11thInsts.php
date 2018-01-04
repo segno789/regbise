@@ -20,51 +20,89 @@
 
                             <table class="table table-condensed table-striped table-hover table-bordered pull-left" id="data-table">
 
-                                <thead>
+                                  <thead>
                                     <tr>
                                         <th style="width: .3%;">
                                             Sr.No.
                                         </th>
 
-                                        <th style="width:.5%">
-                                            Matric Roll No.
+                                        <th style="width:2%">
+                                            Name
                                         </th>
-                                         <th style="width:.5%">
-                                            Matric Year of Pass.
+
+                                        <th style="width:2%">
+                                            Father's Name
                                         </th>
-                                         <th style="width:.5%">
-                                            Matric Session of Pass.
+                                        <th style="width:1%">
+                                            Father CNIC
                                         </th>
-                                        <th style="width:.5%">
-                                            Form No.
+                                       
+                                        <th style="width:1%">
+                                            FormNo.
                                         </th>
-                                        
-                                         <th style="width:7%">
-                                           Name
-                                        </th>
-                                        <th style="width:7%">
-                                         Father  Name
-                                        </th>
-                                        <th style="width:7%">
-                                           Inst. Name
-                                        </th>
-                                        <th style="width:5%">
-                                          Type
+                                      
+                                        <th style="width:1%">
+                                            Group Name.
                                         </th>
                                         
-                                        <th style="width:5%" class="hidden-phone">
+                                        <th style="width:1%">
+                                            Description.
+                                        </th>
+                                        <th style="width:2%" class="hidden-phone">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                   
+                                   // DebugBreak();
+                                     $n=0;  
+                                                             
+                                    foreach($data as $key=>$vals):
+                                        $n++;
+                                              $grp_name = $vals["grp_cd"]; 
+                                        switch ($grp_name) {
+                                                            case '1':
+                                                                $grp_name = 'Pre-Medical';
+                                                                break;
+                                                            case '2':
+                                                                $grp_name = 'Pre-Engineering';
+                                                                break;
+                                                            case '3':
+                                                                $grp_name = 'Humanities';
+                                                                break;
+                                                            case '4':
+                                                                $grp_name = 'General Science';
+                                                                break;
+                                                            case '5':
+                                                                $grp_name = 'Commerce';
+                                                                break;
+                                                            case '6':
+                                                                $grp_name = 'Home Economics';
+                                                                break;
+                                                            default:
+                                                                $grp_name = "No Group Selected.";
+                                                        }
+                                        echo '<tr id="'.$vals["formno"].'">
+                                        <td>'.$n.'</td>
+                                        <td>'.$vals["name"].'</td>
+                                        <td>'.$vals["fname"].'</td>
+                                        <td>'.$vals["fnic"].'</td>
+                                       
+                                        <td>'.$vals["formno"].'</td>
+                                        <td>'.$grp_name.'</td>
+                                      
+                                        <td>'.$vals["spl_name"].'</td>';
+
+                                      echo '<td><button type="button" class="btn btn-info"  onclick="active11reg('.$vals["formno"].')">Active</button></td>';
+                                        echo  '</tr>';
+                                        endforeach;
+                                  /* 
                                     $n=0;  
                                     $grp_name='';                             
                                     foreach($data as $key=>$vals):
                                         $n++;
-                                        // DebugBreak();
+                                         DebugBreak();
                                        $inst_cd =  $vals["coll_cd"];
                                         echo '<tr id="row_'.$vals["pkId"].'">
                                         <td>'.$n.'</td>
@@ -86,7 +124,7 @@
                                         </td>
                                         </tr>';
                                         //break;
-                                        endforeach;
+                                        endforeach;  */
 
                                     ?>
 

@@ -20,7 +20,7 @@
                     </div>
                     <div class="widget-body">
 
-                        <form class="form-horizontal no-margin" id="corr_form" action="<?php  echo base_url(); ?>/NinthCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal no-margin" id="corr_form" action="<?php  echo base_url(); ?>NinthCorrection/NewEnrolment_update" method="post" enctype="multipart/form-data">
 
                             <div class="control-group">
                                 <h4 class="span4">Personal Information :</h4>

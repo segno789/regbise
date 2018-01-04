@@ -234,7 +234,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function migrate()
     {
-        //DebugBreak();
+      //  DebugBreak();
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -285,15 +285,9 @@ class BiseCorrection extends CI_Controller {
                 }  
             }
 
-            else if($isupadte == -1)
+            else
             {
                 $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration9th/');
-            }
-            else if($isupadte == -2)
-            {
-                $data['excep'] = 'Can not Migrate as this candidate Admission confirmed. To proceed further, Please cancel Admission from this institute first.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/migration9th/');
             }
@@ -435,7 +429,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function migrateonline()
     {
-         //DebugBreak();
+
         $this->load->helper('url');
         $data = array(
             'isselected' => '4',
@@ -487,15 +481,10 @@ class BiseCorrection extends CI_Controller {
                     redirect('BiseCorrection/migration9th/');
                 }  
             }
-            else if($isupadte == -1)
+
+            else
             {
                 $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/migration9th/');
-            }
-            else if($isupadte == -2)
-            {
-                $data['excep'] = 'Can not Migrate as this candidate Admission confirmed. To proceed further, Please cancel Admission from this institute first.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/migration9th/');
             }
@@ -657,15 +646,9 @@ class BiseCorrection extends CI_Controller {
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/listmigration9th/');
             }
-            else if($isupadte == -1)
+            else
             {
                 $data['excep'] = 'Update Query not execute.';
-                $this->session->set_flashdata('NewEnrolment_error',$data);
-                redirect('BiseCorrection/listmigration9th/');
-            }
-            else if($isupadte == -2)
-            {
-                $data['excep'] = 'Can not Migrate as this candidate Admission confirmed. To proceed further, Please cancel Admission from this institute first.';
                 $this->session->set_flashdata('NewEnrolment_error',$data);
                 redirect('BiseCorrection/listmigration9th/');
             }
@@ -788,6 +771,47 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/Res9thInsts.php',$NinthStdData);
         $this->load->view('common/footer.php');
     }    
+     public function reg9thEligibility()
+    {
+         //DebugBreak();
+        $this->load->helper('url');
+        $data = array(
+            'isselected' => '8',
+        );
+        $this->load->library('session');
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->get9theligibilty());
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->view('common/header.php',$userinfo);
+        $this->load->view('common/menu.php',$data);
+        $this->load->view('BiseCorrection/9thCorrection/regEligibilty.php',$NinthStdData);
+        $this->load->view('common/footer.php');
+        
+        
+    }
+    public function reg9thEligibilityActive()
+    {
+        //DebugBreak();
+        $this->load->helper('url');
+        $formno = $_POST['formno'];
+        $this->load->library('session');
+        $Logged_In_Array = $this->session->all_userdata();
+        $userinfo = $Logged_In_Array['logged_in'];
+        $this->load->model('BiseCorrections_model');
+        $NinthStdData = array('data'=>$this->BiseCorrections_model->active9theligibilty($formno,$userinfo['Inst_Id']));
+        
+        
+        if($NinthStdData['data'] ==  true)
+        {
+            echo  1;
+        }
+        else
+        {
+             echo  0;
+        }
+        exit();
+    }
     public function result9thcorrections()
     {
         $this->load->helper('url');
@@ -882,7 +906,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('BiseCorrection/SpecPermission.php',$NinthStdData);
         $this->load->view('common/footer.php',$spec_case_msg); 
     }
-    public function SpecPermison_11th()
+     public function SpecPermison_11th()
     {
 
         $this->load->helper('url');
@@ -955,7 +979,7 @@ class BiseCorrection extends CI_Controller {
             redirect('BiseCorrection/SpecPermison_9th');
         }
     }
-    public function SpecPermison_11th_INSERT()
+     public function SpecPermison_11th_INSERT()
     {
         $this->load->model('BiseCorrections_model');
 
@@ -1935,7 +1959,7 @@ class BiseCorrection extends CI_Controller {
     }
     public function NewEnrolment_update()
     {
-        DebugBreak();
+
 
         $this->load->model('Registration_model');
 
@@ -4012,7 +4036,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/footer.php');
     }
 
-    public function otherboard10th()
+public function otherboard10th()
     {
   //  DebugBreak();
         $this->load->helper('url');
@@ -4036,7 +4060,7 @@ class BiseCorrection extends CI_Controller {
         $this->load->view('common/Otherboard10thfooter.php');
     }
 
-    public function NewEnrolment_insert_OtherBoard10th()
+  public function NewEnrolment_insert_OtherBoard10th()
     {
 
 
@@ -4488,7 +4512,6 @@ class BiseCorrection extends CI_Controller {
         } 
         $this->load->view('common/footer.php');
     }
-
     public function otherboard11th()
     {
         $this->load->helper('url');
